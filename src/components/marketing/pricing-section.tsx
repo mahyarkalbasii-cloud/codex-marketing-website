@@ -534,10 +534,10 @@ export function PricingSection() {
           />
         </div>
 
-        <div className="pricing-slider mt-10 rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-4 py-6 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8">
+        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
           <div
             ref={railRef}
-            className="relative mx-6 h-24 max-w-3xl touch-none md:mx-auto"
+            className="relative mx-3 h-24 max-w-3xl touch-none md:mx-auto"
             onPointerDown={handleRailPointer}
             onPointerMove={handleRailMove}
           >
@@ -609,7 +609,7 @@ export function PricingSection() {
         </div>
 
         <div className="pricing-duration mt-6 flex flex-col items-center gap-2">
-          <div className="grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.025]">
+          <div className="grid w-full max-w-xl grid-cols-3 gap-1.5 rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.025] md:gap-2 md:rounded-[1.4rem]">
             {durations.map((item) => {
               const active = item.id === duration;
 
@@ -620,7 +620,7 @@ export function PricingSection() {
                   data-duration-option={item.id}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "relative h-11 rounded-2xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25",
+                    "relative h-10 rounded-xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-11 md:rounded-2xl",
                     active
                       ? "bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/15"
                       : "text-[#2a241d] hover:bg-[#f5eadb]",

@@ -1372,4 +1372,58 @@ body {
       padding-bottom: 0;
     }
   }
+
+  @media (max-width: 767px) {
+    .home-sections {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 3.75rem);
+    }
+
+    .home-sections > section {
+      scroll-margin-bottom: calc(env(safe-area-inset-bottom) + 4rem);
+    }
+
+    .home-sections section [class*="blur-3xl"],
+    .home-sections section [class*="blur-2xl"] {
+      max-width: min(65vw, 14rem);
+    }
+
+    .how-layer-card,
+    .sales-flow-card,
+    .solution-card {
+      min-height: unset !important;
+      height: auto !important;
+    }
+
+    .sales-flow-card {
+      padding-top: 3.25rem !important;
+    }
+
+    .product-demo-root .product-demo-map-bg {
+      min-height: clamp(21rem, 68vw, 25rem);
+    }
+
+    .product-demo-root .product-demo-pin span + span {
+      display: none;
+    }
+
+    .pricing-cards .pricing-card {
+      width: min(86vw, 21rem);
+      min-height: auto;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  :lang(fa) {
+    line-break: anywhere;
+  }
+
+  p,
+  li,
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+  }
 }

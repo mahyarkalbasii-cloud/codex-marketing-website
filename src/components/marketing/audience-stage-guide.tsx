@@ -393,7 +393,7 @@ export function AudienceStageGuide() {
           aria-hidden="true"
         />
         <div className="relative grid gap-5 md:grid-cols-[11.5rem_minmax(0,1fr)] md:[direction:ltr]">
-          <div className="relative min-h-[24.5rem] rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:[direction:ltr]">
+          <div className="relative rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:min-h-[24.5rem] md:[direction:ltr]">
             <div className="absolute bottom-8 left-5 top-8 w-px rounded-full bg-[#d8c9b6]" aria-hidden="true" />
             <div className="relative z-10 grid h-full gap-1">
               {stages.map((stage, index) => {
@@ -493,7 +493,7 @@ export function AudienceStageGuide() {
               {activeStage.signals.map((signal, index) => (
                 <div
                   key={signal}
-                  className="flex min-h-[7.625rem] gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                  className="flex gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] md:min-h-[7.625rem] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"

@@ -570,7 +570,7 @@ export function ProductPreviewTheater() {
             </div>
           </div>
 
-          <div className="product-demo-map-bg relative min-h-[520px] flex-1 overflow-hidden bg-[#EDE6D7] md:min-h-[500px]">
+          <div className="product-demo-map-bg relative min-h-[340px] flex-1 overflow-hidden bg-[#EDE6D7] sm:min-h-[400px] md:min-h-[500px]">
             <div className="absolute inset-0 map-parcel-pattern opacity-90" />
             <div className="absolute right-[5%] top-[10%] h-20 w-32 rotate-[-4deg] rounded-[1.1rem] bg-[#D8C9B6]/42 ring-1 ring-[#E4D8C8]" />
             <div className="absolute right-[30%] top-[12%] h-24 w-36 rotate-[3deg] rounded-[1.1rem] bg-[#FBF9F3]/62 ring-1 ring-[#E4D8C8]" />
@@ -650,7 +650,7 @@ export function ProductPreviewTheater() {
 
             <ProjectDetailCard
               project={selectedProject}
-              className="absolute right-4 top-4 z-30 w-[calc(100%-2rem)] max-w-none md:left-auto md:max-w-[320px]"
+              className="absolute inset-x-3 top-3 z-30 w-auto max-w-none md:inset-x-auto md:right-4 md:top-4 md:w-[calc(100%-2rem)] md:max-w-[320px]"
             />
           </div>
         </section>
