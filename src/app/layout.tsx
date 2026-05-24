@@ -1,0 +1,111 @@
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { MobileActionBar } from "@/components/marketing/mobile-action-bar";
+import { StructuredData } from "@/components/marketing/structured-data";
+import { SiteFooter } from "@/components/marketing/site-footer";
+import { SiteHeader } from "@/components/marketing/site-header";
+import { site } from "@/lib/site-data";
+import "./globals.css";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: "پرشین‌سازه | اطلاعات به‌روز پروژه‌های ساختمانی برای فروش B2B",
+    template: "%s | پرشین‌سازه",
+  },
+  description: site.description,
+  applicationName: site.name,
+  keywords: [
+    "پرشین سازه",
+    "پروژه ساختمانی تهران",
+    "پروژه ساختمانی کرج",
+    "بانک اطلاعات ساختمان",
+    "فروش مصالح ساختمانی",
+    "CRM فروش ساختمان",
+    "داده پروژه ساختمانی",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fa_IR",
+    url: site.url,
+    siteName: site.name,
+    title: "پرشین‌سازه | پروژه درست، زمان درست، پیگیری منظم‌تر",
+    description: site.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    url: site.url,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+982175425000",
+      contactType: "sales",
+      areaServed: "IR",
+      availableLanguage: "fa",
+    },
+    sameAs: [`https://instagram.com/${site.handle.replace("@", "")}`],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url,
+    inLanguage: "fa-IR",
+  };
+
+  return (
+    <html
+      lang="fa"
+      dir="rtl"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <head />
+      <body
+        className="bg-background text-foreground antialiased"
+      >
+        <StructuredData data={[organizationSchema, websiteSchema]} />
+        <SiteHeader />
+        <div className="pb-24 lg:pb-0">
+          {children}
+          <SiteFooter />
+        </div>
+        <MobileActionBar />
+      </body>
+    </html>
+  );
+}

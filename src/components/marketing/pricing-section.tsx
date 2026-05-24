@@ -1,0 +1,653 @@
+"use client";
+
+import Link from "next/link";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
+import { ArrowLeft, BarChart3, Check } from "lucide-react";
+
+import { SectionHeader } from "@/components/marketing/section-header";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+type Duration = "3" | "6" | "12";
+type PlanId = "bonyan" | "royan" | "taban" | "taban-plus";
+
+type PricingPlan = {
+  id: PlanId;
+  name: string;
+  sliderLabel: string;
+  subtitle: string;
+  prices: Record<Duration, string>;
+  addon: string;
+  coverage: 1 | 2 | 3 | 4;
+  cta: string;
+  featured?: boolean;
+};
+
+const durations: Array<{
+  id: Duration;
+  label: string;
+  months: string;
+  note: string;
+}> = [
+  {
+    id: "3",
+    label: "۳ ماهه",
+    months: "۳ ماه",
+    note: "بدون تخفیف بلندمدت",
+  },
+  {
+    id: "6",
+    label: "۶ ماهه",
+    months: "۶ ماه",
+    note: "تخفیف کمتر نسبت به ۱۲ ماهه",
+  },
+  {
+    id: "12",
+    label: "۱۲ ماهه",
+    months: "۱۲ ماه",
+    note: "بیشترین صرفه‌جویی",
+  },
+];
+
+const durationById = durations.reduce(
+  (result, item) => ({ ...result, [item.id]: item }),
+  {} as Record<Duration, (typeof durations)[number]>,
+);
+
+const pricingPlans: PricingPlan[] = [
+  {
+    id: "bonyan",
+    name: "بنیان",
+    sliderLabel: "تا ۳۰۰ متر",
+    subtitle: "زمین تا ۳۰۰ متر، شامل ۳ مرحله ساخت",
+    prices: {
+      "3": "۷,۵۰۰,۰۰۰",
+      "6": "۱۱,۲۵۰,۰۰۰",
+      "12": "۱۳,۵۰۰,۰۰۰",
+    },
+    addon: "هر مرحله اضافه: ۲,۵۰۰,۰۰۰ تومان",
+    coverage: 1,
+    cta: "انتخاب بنیان",
+  },
+  {
+    id: "royan",
+    name: "رویان",
+    sliderLabel: "تا ۵۰۰ متر",
+    subtitle: "زمین تا ۵۰۰ متر، شامل ۳ مرحله ساخت",
+    prices: {
+      "3": "۹,۹۰۰,۰۰۰",
+      "6": "۱۳,۵۰۰,۰۰۰",
+      "12": "۱۸,۰۰۰,۰۰۰",
+    },
+    addon: "هر مرحله اضافه: ۳,۳۰۰,۰۰۰ تومان",
+    coverage: 2,
+    cta: "انتخاب رویان",
+  },
+  {
+    id: "taban",
+    name: "تابان",
+    sliderLabel: "تا ۷۰۰ متر",
+    subtitle: "زمین تا ۷۰۰ متر، شامل ۳ مرحله ساخت",
+    prices: {
+      "3": "۱۲,۳۰۰,۰۰۰",
+      "6": "۱۶,۰۰۰,۰۰۰",
+      "12": "۲۱,۰۰۰,۰۰۰",
+    },
+    addon: "هر مرحله اضافه: ۴,۱۰۰,۰۰۰ تومان",
+    coverage: 3,
+    cta: "انتخاب تابان",
+    featured: true,
+  },
+  {
+    id: "taban-plus",
+    name: "تابان پلاس",
+    sliderLabel: "بزرگ‌تر",
+    subtitle: "زمین‌های بزرگ‌تر و پوشش گسترده‌تر برای پروژه‌های انبوه‌سازی",
+    prices: {
+      "3": "۱۵,۰۰۰,۰۰۰",
+      "6": "۱۹,۰۰۰,۰۰۰",
+      "12": "۲۵,۵۰۰,۰۰۰",
+    },
+    addon: "هر مرحله اضافه: ۵,۰۰۰,۰۰۰ تومان",
+    coverage: 4,
+    cta: "انتخاب تابان پلاس",
+  },
+];
+
+const DEFAULT_PLAN_INDEX = 2;
+const FEATURES = ["شامل ۳ مرحله ساخت", "دسترسی بر اساس میدان فروش"];
+// TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
+const WHATSAPP_NUMBER = "98TODO";
+
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
+function clampPlanIndex(index: number) {
+  return Math.min(Math.max(index, 0), pricingPlans.length - 1);
+}
+
+function getWhatsappHref(plan: PricingPlan, duration: Duration) {
+  const message = `علاقمندم به پلن ${plan.name} (${durationById[duration].label}) پرشین‌سازه`;
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+function PricingCoverage({
+  coverage,
+  featured,
+}: {
+  coverage: PricingPlan["coverage"];
+  featured?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded-2xl border p-3",
+        featured
+          ? "border-white/10 bg-white/10 text-[#fffaf1]"
+          : "border-[#e4d8c8] bg-[#fbf6ed]/78 text-[#2a241d]",
+      )}
+    >
+      <div
+        className={cn(
+          "mb-3 flex items-center justify-between text-[11px] font-semibold",
+          featured ? "text-[#efe2d2]" : "text-[#6f6254]",
+        )}
+      >
+        <span>پوشش بازار</span>
+        <span className="flex items-center gap-1">
+          {coverage.toLocaleString("fa-IR")} از ۴
+          <BarChart3 className="h-3.5 w-3.5" />
+        </span>
+      </div>
+      <div
+        className="grid gap-1.5"
+        aria-label={`پوشش بازار ${coverage.toLocaleString("fa-IR")} از ۴`}
+      >
+        {[1, 2, 3, 4].map((item) => {
+          const filled = item <= coverage;
+
+          return (
+            <span
+              key={item}
+              className={cn(
+                "h-1.5 rounded-full transition-colors",
+                filled
+                  ? featured
+                    ? "bg-[#f5c842]"
+                    : "bg-[#CC785C]"
+                  : featured
+                    ? "bg-white/20"
+                    : "bg-[#e8dfd2]",
+              )}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function PricingPlanCard({
+  plan,
+  duration,
+  isActive,
+  isPulsing,
+  cardDelay,
+  setCardRef,
+}: {
+  plan: PricingPlan;
+  duration: Duration;
+  isActive: boolean;
+  isPulsing: boolean;
+  cardDelay: string;
+  setCardRef: (node: HTMLDivElement | null) => void;
+}) {
+  const featured = Boolean(plan.featured);
+
+  return (
+    <article
+      ref={setCardRef}
+      data-plan-card={plan.id}
+      data-active-plan={isActive ? "true" : "false"}
+      style={{ "--pricing-delay": cardDelay } as CSSProperties}
+      className={cn(
+        "pricing-card flex min-h-[34rem] w-[82vw] max-w-[22.5rem] shrink-0 snap-center flex-col overflow-hidden rounded-[1.6rem] border p-5 transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        featured
+          ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
+          : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
+        isPulsing && "pricing-card-pulse",
+      )}
+    >
+      <div className="relative">
+        <div
+          className={cn(
+            "absolute -left-12 -top-12 h-28 w-28 rounded-full blur-2xl",
+            featured ? "bg-[#CC785C]/20" : "bg-[#CC785C]/10",
+          )}
+          aria-hidden="true"
+        />
+        {featured ? (
+          <span className="absolute right-0 top-0 rounded-full border border-white/10 bg-white/12 px-3 py-1 text-xs font-bold text-[#fffaf1]">
+            پیشنهاد اصلی
+          </span>
+        ) : null}
+        <h3 className={cn("relative text-2xl font-bold", featured && "pt-8")}>
+          {plan.name}
+        </h3>
+        <p
+          className={cn(
+            "relative mt-3 min-h-[3.4rem] text-sm leading-7",
+            featured ? "text-[#efe2d2]" : "text-[#6f6254]",
+          )}
+        >
+          {plan.subtitle}
+        </p>
+      </div>
+
+      <div className="mt-5">
+        <div
+          key={`${plan.id}-${duration}`}
+          className={cn(
+            "pricing-price-change text-3xl font-black leading-tight tracking-normal md:text-[2rem]",
+            featured ? "text-white" : "text-[#2a241d]",
+          )}
+        >
+          {plan.prices[duration]} تومان
+        </div>
+        <div
+          className={cn(
+            "mt-2 text-xs font-semibold",
+            featured ? "text-[#efe2d2]" : "text-[#75695d]",
+          )}
+        >
+          برای {durationById[duration].months}
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          "my-5 h-px",
+          featured ? "bg-white/12" : "bg-[#e4d8c8]",
+        )}
+      />
+
+      <div className="space-y-3 text-sm font-semibold">
+        {FEATURES.map((feature) => (
+          <div key={feature} className="flex items-center gap-2">
+            <span
+              className={cn(
+                "grid h-5 w-5 shrink-0 place-items-center rounded-full",
+                featured ? "bg-white/10" : "bg-[#f5eadb]",
+              )}
+            >
+              <Check className="h-3.5 w-3.5" />
+            </span>
+            {feature}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-5">
+        <PricingCoverage coverage={plan.coverage} featured={featured} />
+      </div>
+
+      <div
+        className={cn(
+          "mt-5 border-t pt-4 text-xs font-semibold leading-6",
+          featured
+            ? "border-white/12 text-[#efe2d2]"
+            : "border-[#e4d8c8] text-[#6f6254]",
+        )}
+      >
+        {plan.addon}
+      </div>
+
+      <Link
+        href={getWhatsappHref(plan, duration)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          buttonVariants({ variant: featured ? "secondary" : "default" }),
+          "mt-auto w-full",
+          featured &&
+            "border-white bg-[#fffaf1] text-[#2a241d] hover:bg-[#f5eadb]",
+        )}
+      >
+        {plan.cta}
+        <ArrowLeft className="h-4 w-4" />
+      </Link>
+    </article>
+  );
+}
+
+export function PricingSection() {
+  const [duration, setDuration] = useState<Duration>("12");
+  const [activePlanIndex, setActivePlanIndex] = useState(DEFAULT_PLAN_INDEX);
+  const [pulsingPlan, setPulsingPlan] = useState<PlanId | null>(null);
+  const [hintVisible, setHintVisible] = useState(true);
+  const [isReady, setIsReady] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const railRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Partial<Record<PlanId, HTMLDivElement | null>>>({});
+  const pulseTimeoutRef = useRef<number | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const activePlan = pricingPlans[activePlanIndex];
+  const activeDuration = useMemo(() => durationById[duration], [duration]);
+  const activePercent = (activePlanIndex / (pricingPlans.length - 1)) * 100;
+
+  useEffect(() => {
+    setIsReady(true);
+
+    if (prefersReducedMotion) {
+      setIsRevealed(true);
+      return;
+    }
+
+    const section = sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+          window.setTimeout(() => {
+            cardRefs.current.taban?.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          }, 800);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    return () => {
+      if (pulseTimeoutRef.current) {
+        window.clearTimeout(pulseTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const scrollPlanIntoView = useCallback(
+    (planId: PlanId) => {
+      cardRefs.current[planId]?.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    },
+    [prefersReducedMotion],
+  );
+
+  const selectPlan = useCallback(
+    (nextIndex: number, options?: { userInitiated?: boolean }) => {
+      const clampedIndex = clampPlanIndex(nextIndex);
+      const nextPlan = pricingPlans[clampedIndex];
+
+      setActivePlanIndex(clampedIndex);
+      scrollPlanIntoView(nextPlan.id);
+
+      if (options?.userInitiated) {
+        setHintVisible(false);
+      }
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      setPulsingPlan(nextPlan.id);
+
+      if (pulseTimeoutRef.current) {
+        window.clearTimeout(pulseTimeoutRef.current);
+      }
+
+      pulseTimeoutRef.current = window.setTimeout(() => {
+        setPulsingPlan(null);
+      }, 1500);
+    },
+    [prefersReducedMotion, scrollPlanIntoView],
+  );
+
+  const getIndexFromPointer = useCallback((clientX: number) => {
+    const rail = railRef.current;
+
+    if (!rail) {
+      return activePlanIndex;
+    }
+
+    const rect = rail.getBoundingClientRect();
+    const ratio = Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
+
+    return Math.round(ratio * (pricingPlans.length - 1));
+  }, [activePlanIndex]);
+
+  const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    selectPlan(getIndexFromPointer(event.clientX), { userInitiated: true });
+  };
+
+  const handleRailMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.buttons !== 1) {
+      return;
+    }
+
+    selectPlan(getIndexFromPointer(event.clientX), { userInitiated: true });
+  };
+
+  const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectPlan(activePlanIndex + 1, { userInitiated: true });
+    }
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectPlan(activePlanIndex - 1, { userInitiated: true });
+    }
+
+    if (event.key === "Home") {
+      event.preventDefault();
+      selectPlan(0, { userInitiated: true });
+    }
+
+    if (event.key === "End") {
+      event.preventDefault();
+      selectPlan(pricingPlans.length - 1, { userInitiated: true });
+    }
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      id="plans"
+      data-pricing-ready={isReady ? "true" : undefined}
+      data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
+      className="relative overflow-hidden"
+    >
+      <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 md:px-6 md:py-20">
+        <div className="pricing-reveal-header">
+          <SectionHeader
+            eyebrow="پلن‌ها"
+            title="زمین بازی خود را انتخاب کنید"
+            description="در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد"
+          />
+        </div>
+
+        <div className="pricing-slider mt-10 rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-4 py-6 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8">
+          <p className="text-center text-sm font-bold text-[#2a241d] md:text-base">
+            زمین پروژه‌ی هدفت چه مقیاسیه؟
+          </p>
+          <div
+            ref={railRef}
+            className="relative mx-auto mt-12 h-10 max-w-3xl touch-none"
+            onPointerDown={handleRailPointer}
+            onPointerMove={handleRailMove}
+          >
+            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
+              <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
+            </div>
+            <span
+              className="absolute -top-10 z-10 rounded-full bg-[#CC785C] px-3 py-1 text-xs font-bold text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200"
+              style={{ right: `${activePercent}%`, transform: "translateX(50%)" }}
+            >
+              {activePlan.sliderLabel}
+            </span>
+            <button
+              type="button"
+              data-plan-slider-handle
+              role="slider"
+              aria-label="انتخاب مقیاس زمین پروژه"
+              aria-valuemin={0}
+              aria-valuemax={pricingPlans.length - 1}
+              aria-valuenow={activePlanIndex}
+              aria-valuetext={`${activePlan.sliderLabel}، ${activePlan.name}`}
+              onKeyDown={handleSliderKeyDown}
+              onPointerDown={(event) => {
+                event.stopPropagation();
+                event.currentTarget.setPointerCapture(event.pointerId);
+                selectPlan(getIndexFromPointer(event.clientX), {
+                  userInitiated: true,
+                });
+              }}
+              onPointerMove={(event) => {
+                if (event.buttons === 1) {
+                  selectPlan(getIndexFromPointer(event.clientX), {
+                    userInitiated: true,
+                  });
+                }
+              }}
+              className="absolute top-1/2 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
+              style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
+            >
+              <span className="h-2.5 w-2.5 rounded-full bg-white" />
+            </button>
+          </div>
+          <div className="mx-auto mt-4 grid max-w-3xl grid-cols-4 gap-1 text-center text-xs font-bold text-[#75695d]">
+            {pricingPlans.map((plan, index) => (
+              <button
+                key={plan.id}
+                type="button"
+                data-plan-tick={plan.id}
+                onClick={() => selectPlan(index, { userInitiated: true })}
+                className={cn(
+                  "rounded-2xl px-1 py-2 transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                  activePlanIndex === index && "text-[#2a241d]",
+                )}
+              >
+                <span
+                  className={cn(
+                    "mx-auto mb-2 block h-2 w-2 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
+                    activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
+                  )}
+                />
+                {plan.sliderLabel}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="pricing-duration mt-6 flex flex-col items-center gap-2">
+          <div className="grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.025]">
+            {durations.map((item) => {
+              const active = item.id === duration;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  data-duration-option={item.id}
+                  onClick={() => setDuration(item.id)}
+                  className={cn(
+                    "relative h-11 rounded-2xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                    active
+                      ? "bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/20"
+                      : "text-[#2a241d] hover:bg-[#f5eadb]",
+                  )}
+                >
+                  {item.id === "12" ? (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e4d8c8] bg-[#fffaf1] px-2 py-0.5 text-[10px] font-bold text-[#CC785C]">
+                      بهترین ارزش
+                    </span>
+                  ) : null}
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+          <p
+            key={duration}
+            className="pricing-price-change text-center text-xs font-semibold text-[#75695d]"
+          >
+            {activeDuration.note}
+          </p>
+        </div>
+
+        <div
+          className="pricing-cards mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+          onPointerDown={() => setHintVisible(false)}
+          onKeyDown={() => setHintVisible(false)}
+        >
+          {pricingPlans.map((plan, index) => (
+            <PricingPlanCard
+              key={plan.id}
+              plan={plan}
+              duration={duration}
+              isActive={activePlanIndex === index}
+              isPulsing={pulsingPlan === plan.id}
+              cardDelay={plan.featured ? "1120ms" : `${760 + index * 120}ms`}
+              setCardRef={(node) => {
+                cardRefs.current[plan.id] = node;
+              }}
+            />
+          ))}
+        </div>
+
+        {hintVisible ? (
+          <p className="mt-1 text-center text-xs font-semibold text-[#75695d] md:hidden">
+            اسلاید برای دیدن بقیه پلن‌ها →
+          </p>
+        ) : null}
+
+        <p className="mx-auto mt-6 max-w-3xl text-center text-xs font-semibold leading-6 text-[#75695d] md:text-sm">
+          مرحله اضافه = یک فاز ساختمانی فراتر از ۳ مرحله پایه (مثلاً نازک‌کاری،
+          تأسیسات یا تجهیز نهایی)
+        </p>
+      </div>
+    </section>
+  );
+}

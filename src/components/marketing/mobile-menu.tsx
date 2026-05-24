@@ -1,0 +1,175 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { createPortal } from "react-dom";
+import { LogIn, Menu, PhoneCall, UserPlus, X } from "lucide-react";
+
+import { buttonVariants } from "@/components/ui/button";
+import { authLinks, navItems, site } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
+
+export function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
+  const closeAndFocusTrigger = useCallback(() => {
+    setOpen(false);
+    window.requestAnimationFrame(() => triggerRef.current?.focus());
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeAndFocusTrigger();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusableElements = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+
+      if (!focusableElements?.length) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeAndFocusTrigger, open]);
+
+  return (
+    <div className="relative xl:hidden">
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-label={open ? "بستن منوی موبایل" : "باز کردن منوی موبایل"}
+        aria-expanded={open}
+        aria-controls="mobile-menu-panel"
+        onClick={() => setOpen((current) => !current)}
+        className="grid h-10 w-10 place-items-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] transition hover:border-[#d2bca2] hover:bg-[#f8efe2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/35 active:translate-y-px"
+      >
+        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </button>
+
+      {open && typeof document !== "undefined"
+        ? createPortal(
+        <div
+          ref={panelRef}
+          id="mobile-menu-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-menu-title"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-[#fbf6ed] text-[#2a241d] xl:hidden"
+        >
+          <div className="absolute inset-0 map-parcel-pattern opacity-25" aria-hidden="true" />
+          <div className="relative mx-auto flex min-h-dvh max-w-md flex-col px-4 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
+            <div className="flex items-start justify-between gap-4 border-b border-[#e4d8c8] pb-5">
+              <div className="min-w-0">
+                <div id="mobile-menu-title" className="text-lg font-bold">
+                  {site.name}
+                </div>
+                <div className="mt-1 text-sm leading-6 text-[#6f6254]">
+                  زیرساخت فروش پروژه‌محور برای بازار ساختمان
+                </div>
+              </div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                aria-label="بستن منوی موبایل"
+                onClick={closeAndFocusTrigger}
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/35 active:translate-y-px"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <nav className="grid gap-2 py-5" aria-label="منوی موبایل">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  className="rounded-[1.15rem] border border-[#eadfce] bg-[#fffaf1] px-4 py-3.5 text-base font-semibold text-[#4b4036] shadow-sm shadow-[#2a241d]/[0.025] transition hover:border-[#d2bca2] hover:bg-[#f5eadb] hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 active:translate-y-px"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mt-auto grid gap-3 border-t border-[#e4d8c8] pt-5">
+              <a
+                href="tel:+982175425000"
+                dir="ltr"
+                onClick={close}
+                className="flex min-h-12 items-center justify-between gap-3 rounded-[1.15rem] border border-[#eadfce] bg-[#fffaf1] px-4 py-3 text-right text-sm font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.025] transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30"
+              >
+                <span>{site.phones[0]}</span>
+                <PhoneCall className="h-4 w-4 text-[#8a6a41]" aria-hidden="true" />
+              </a>
+
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href={authLinks.login}
+                  onClick={close}
+                  className="flex h-12 items-center justify-center gap-2 rounded-[1.15rem] border border-[#eadfce] bg-[#fffaf1] px-3 text-sm font-semibold text-[#5f5348] transition hover:bg-[#f5eadb] hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30"
+                >
+                  <LogIn className="h-4 w-4" aria-hidden="true" />
+                  ورود
+                </Link>
+                <Link
+                  href={authLinks.signup}
+                  onClick={close}
+                  className="flex h-12 items-center justify-center gap-2 rounded-[1.15rem] border border-[#d2bca2] bg-[#f5eadb] px-3 text-sm font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:bg-[#f0dfca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30"
+                >
+                  <UserPlus className="h-4 w-4" aria-hidden="true" />
+                  ثبت‌نام
+                </Link>
+              </div>
+
+              <Link
+                href="/#demo"
+                onClick={close}
+                className={cn(buttonVariants({ size: "lg" }), "w-full")}
+              >
+                درخواست دمو
+              </Link>
+            </div>
+          </div>
+        </div>,
+          document.body,
+        )
+        : null}
+    </div>
+  );
+}

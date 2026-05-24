@@ -1,0 +1,71 @@
+import Link from "next/link";
+import { Building2 } from "lucide-react";
+
+import { buttonVariants } from "@/components/ui/button";
+import { MobileMenu } from "@/components/marketing/mobile-menu";
+import { navItems, site } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
+
+const desktopNavItems = navItems.filter((item) =>
+  ["/#solution", "/#product", "/#audiences", "/#plans", "/#faq"].includes(
+    item.href,
+  ),
+);
+
+export function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-[60] border-b border-[#e4d8c8]/80 bg-[#fbf6ed]/88 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/84">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between pl-4 pr-5 md:h-[68px] md:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/10 dark:bg-white dark:text-zinc-950">
+            <Building2 className="h-[18px] w-[18px]" />
+          </span>
+          <span className="leading-tight">
+            <span className="block text-base font-bold">
+              {site.name}
+            </span>
+            <span className="hidden text-[11px] text-zinc-500 sm:block">
+              زیرساخت فروش پروژه‌محور
+            </span>
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 lg:flex">
+          {desktopNavItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-2xl px-3 py-2 text-[13px] font-medium text-[#65594e] transition hover:bg-[#fffaf1] hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href="tel:+982175425000"
+            dir="ltr"
+            className="text-xs font-semibold text-[#7a6a59] hover:text-[#2a241d] dark:text-zinc-400 dark:hover:text-white"
+          >
+            {site.phones[0]}
+          </a>
+          <Link href="/#demo" className={cn(buttonVariants({ size: "sm" }))}>
+            درخواست دمو
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          <a
+            href="tel:+982175425000"
+            dir="ltr"
+            className="rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 py-2 text-xs font-semibold text-[#4b4036] shadow-sm shadow-[#2a241d]/[0.04] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
+          >
+            {site.phones[0]}
+          </a>
+          <MobileMenu />
+        </div>
+      </div>
+    </header>
+  );
+}
