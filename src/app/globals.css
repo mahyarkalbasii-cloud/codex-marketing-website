@@ -192,6 +192,7 @@ body {
 .hero-map-pin:hover,
 .hero-map-pin:focus-visible,
 .hero-map-pin-active {
+  z-index: 32;
   transform: translate(-50%, -50%) scale(1.09);
 }
 
@@ -203,20 +204,24 @@ body {
 .hero-map-pin-ring {
   position: absolute;
   inset: -7px;
-  border: 1px solid hsl(var(--ring) / 0.3);
+  border: 1px solid rgba(204, 120, 92, 0.3);
   border-radius: 9999px;
   opacity: 0;
   transform: scale(0.82);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.hero-map-pin:hover .hero-map-pin-ring,
+.hero-map-pin:focus-visible .hero-map-pin-ring,
+.hero-map-pin-active .hero-map-pin-ring,
+.hero-map-pin-selected .hero-map-pin-ring {
+  opacity: 1;
+  transform: scale(1);
   animation: hero-pin-ring 2.8s ease-out infinite;
 }
 
-.hero-map-pin-active .hero-map-pin-ring,
 .hero-map-pin-selected .hero-map-pin-ring {
-  opacity: 0.8;
-}
-
-.hero-map-pin-selected .hero-map-pin-ring {
-  border-color: rgb(252 211 77 / 0.75);
+  border-color: rgba(204, 120, 92, 0.3);
   animation-duration: 1.7s;
 }
 
@@ -242,6 +247,7 @@ body {
 .mpv-line,
 .mpv-report-row,
 .mpv-axis-line,
+.mpv-axis-progress,
 .mpv-axis-tick,
 .mpv-axis-point,
 .mpv-axis-label,
@@ -269,10 +275,20 @@ body {
   transform-origin: right;
 }
 
+.mpv-axis-progress {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: width 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .mpv-axis-tick,
 .mpv-axis-point,
 .mpv-axis-label {
   transform: translateY(4px);
+}
+
+.mpv-axis-tick {
+  transform: translateX(50%) translateY(4px);
 }
 
 .mpv-axis-center-point,
@@ -309,10 +325,19 @@ body {
   animation-delay: 1480ms;
 }
 
-.market-problem-presentation-visual[data-revealed="true"] .mpv-axis-tick,
+.market-problem-presentation-visual[data-revealed="true"] .mpv-axis-progress {
+  animation: mpv-axis-draw 360ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1510ms;
+}
+
 .market-problem-presentation-visual[data-revealed="true"] .mpv-axis-point,
 .market-problem-presentation-visual[data-revealed="true"] .mpv-axis-label {
   animation: mpv-axis-detail-in 260ms ease-out forwards;
+  animation-delay: var(--mpv-delay, 1540ms);
+}
+
+.market-problem-presentation-visual[data-revealed="true"] .mpv-axis-tick {
+  animation: mpv-axis-tick-in 260ms ease-out forwards;
   animation-delay: var(--mpv-delay, 1540ms);
 }
 
@@ -320,6 +345,42 @@ body {
 .market-problem-presentation-visual[data-revealed="true"] .mpv-axis-pill {
   animation: mpv-axis-center-in 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: 1690ms;
+}
+
+.market-problem-presentation-visual[data-revealed="true"] .mpv-mark[data-active="true"] {
+  color: #CC785C;
+  filter: drop-shadow(0 0 8px rgba(204, 120, 92, 0.22));
+  opacity: 1 !important;
+  scale: 1.08;
+  transition: color 320ms ease, filter 320ms ease, opacity 320ms ease, scale 320ms ease;
+}
+
+.market-problem-presentation-visual[data-revealed="true"] .mpv-mark[data-active="false"] {
+  filter: none;
+  opacity: 0.22 !important;
+  scale: 0.94;
+  transition: color 320ms ease, filter 320ms ease, opacity 320ms ease, scale 320ms ease;
+}
+
+.market-problem-presentation-visual[data-revealed="true"] .mpv-mark[data-fit="true"] {
+  filter: drop-shadow(0 0 10px rgba(204, 120, 92, 0.34));
+  scale: 1.16;
+}
+
+.mpv-axis-center-point,
+.mpv-axis-pill {
+  transition: right 720ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease, scale 260ms ease;
+}
+
+.mpv-axis-tick {
+  transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.mpv-axis-fit-stop,
+.mpv-axis-center-fit,
+.mpv-axis-pill-fit {
+  box-shadow: 0 0 0 4px rgba(204, 120, 92, 0.12);
+  scale: 1.08;
 }
 
 @media (max-width: 767px) {
@@ -414,12 +475,12 @@ body {
 
 @keyframes hero-live-dot {
   0% {
-    box-shadow: 0 0 0 0 rgb(252 211 77 / 0.46);
+    box-shadow: 0 0 0 0 rgba(204, 120, 92, 0.46);
   }
 
   72%,
   100% {
-    box-shadow: 0 0 0 8px rgb(252 211 77 / 0);
+    box-shadow: 0 0 0 8px rgba(204, 120, 92, 0);
   }
 }
 
@@ -517,6 +578,18 @@ body {
   }
 }
 
+@keyframes mpv-axis-tick-in {
+  0% {
+    opacity: 0;
+    transform: translateX(50%) translateY(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+  }
+}
+
 @keyframes mpv-axis-center-in {
   0% {
     opacity: 0;
@@ -543,18 +616,6 @@ body {
     translate: 0 8px;
   }
 
-  #solution[data-solution-ready="true"][data-solution-revealed="false"] .solution-progress-line {
-    opacity: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-  }
-
-  #solution[data-solution-ready="true"][data-solution-revealed="false"] .solution-progress-line-mobile {
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-
   #solution[data-solution-ready="true"][data-solution-revealed="false"] .solution-lesson-progress > span {
     transform: scaleX(0);
   }
@@ -563,34 +624,24 @@ body {
     animation: solution-fade-up 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-progress-line {
-    animation: solution-line-draw-x 320ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
-    transform-origin: right;
-  }
-
-  #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-progress-line-mobile {
-    animation: solution-line-draw-y 320ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
-    transform-origin: top;
-  }
-
   #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-card {
     animation: solution-card-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(320ms + var(--solution-delay, 0ms));
+    animation-delay: var(--solution-delay, 200ms);
   }
 
   #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-data-live {
     animation: solution-soft-pulse 620ms ease-out both;
-    animation-delay: calc(760ms + var(--solution-delay, 0ms));
+    animation-delay: calc(var(--solution-delay, 200ms) + 440ms);
   }
 
   #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-tool-highlight {
     animation: solution-chip-flash 640ms ease-out both;
-    animation-delay: calc(760ms + var(--solution-delay, 0ms));
+    animation-delay: calc(var(--solution-delay, 200ms) + 440ms);
   }
 
   #solution[data-solution-ready="true"][data-solution-revealed="true"] .solution-lesson-progress > span {
     animation: solution-progress-fill 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(760ms + var(--solution-delay, 0ms));
+    animation-delay: calc(var(--solution-delay, 200ms) + 440ms);
   }
 }
 
@@ -634,30 +685,6 @@ body {
   }
 }
 
-@keyframes solution-line-draw-x {
-  from {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
-
-@keyframes solution-line-draw-y {
-  from {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-}
-
 @keyframes solution-soft-pulse {
   0%,
   100% {
@@ -687,6 +714,48 @@ body {
 
   to {
     transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #how-it-works[data-how-works-ready="true"] .how-works-reveal-header {
+    transition:
+      opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #how-it-works[data-how-works-ready="true"] .how-layer-card,
+  #how-it-works[data-how-works-ready="true"] .how-layer-arrow {
+    transition:
+      opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--how-delay, 200ms);
+  }
+
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="false"] .how-works-reveal-header,
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="false"] .how-layer-card,
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="false"] .how-layer-arrow {
+    opacity: 0;
+    translate: 0 8px;
+  }
+
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="true"] .how-works-reveal-header {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="true"] .how-layer-card,
+  #how-it-works[data-how-works-ready="true"][data-how-works-revealed="true"] .how-layer-arrow {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  #how-it-works[data-how-works-settled="true"] .how-works-reveal-header,
+  #how-it-works[data-how-works-settled="true"] .how-layer-card,
+  #how-it-works[data-how-works-settled="true"] .how-layer-arrow {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
   }
 }
 
@@ -918,10 +987,6 @@ body {
   }
 }
 
-.product-route-path {
-  opacity: 0.72;
-}
-
 .product-demo-selected-pin::before,
 .product-demo-selected-pin::after {
   position: absolute;
@@ -959,16 +1024,6 @@ body {
     transform: translateX(10px);
   }
 
-  .product-demo-root[data-product-revealed="false"] .product-demo-breadcrumb,
-  .product-demo-root[data-product-revealed="false"] .product-demo-actions {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  .product-demo-root[data-product-revealed="false"] .product-demo-breadcrumb-step {
-    opacity: 0;
-  }
-
   .product-demo-root[data-product-revealed="true"] .product-demo-filter {
     animation: product-filter-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
@@ -997,19 +1052,6 @@ body {
   .product-demo-root[data-product-revealed="true"] .product-demo-list-row {
     animation: product-row-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--product-row-delay, 1500ms);
-  }
-
-  .product-demo-root[data-product-revealed="true"] .product-demo-breadcrumb {
-    animation: product-row-in 260ms cubic-bezier(0.22, 1, 0.36, 1) 1740ms both;
-  }
-
-  .product-demo-root[data-product-revealed="true"] .product-demo-breadcrumb-step {
-    animation: product-step-in 220ms ease-out both;
-    animation-delay: var(--product-step-delay, 1780ms);
-  }
-
-  .product-demo-root[data-product-revealed="true"] .product-demo-actions {
-    animation: product-row-in 300ms ease-out 2300ms both;
   }
 }
 
@@ -1108,18 +1150,6 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes product-step-in {
-  from {
-    opacity: 0;
-    filter: saturate(0.82);
-  }
-
-  to {
-    opacity: 1;
-    filter: saturate(1);
   }
 }
 
@@ -1259,6 +1289,7 @@ body {
   .mpv-halo-ring,
   .mpv-report-row,
   .mpv-axis-line,
+  .mpv-axis-progress,
   .mpv-axis-tick,
   .mpv-axis-point,
   .mpv-axis-label,
@@ -1279,6 +1310,7 @@ body {
   .mpv-line,
   .mpv-report-row,
   .mpv-axis-line,
+  .mpv-axis-progress,
   .mpv-axis-tick,
   .mpv-axis-point,
   .mpv-axis-label,
@@ -1300,6 +1332,10 @@ body {
   .mpv-axis-center-point,
   .mpv-axis-pill {
     transform: translateX(50%) scale(1);
+  }
+
+  .mpv-axis-tick {
+    transform: translateX(50%);
   }
 
   .mpv-halo-ring {

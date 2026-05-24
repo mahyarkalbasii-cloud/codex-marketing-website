@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/features", "/pricing", "/faq"];
   const cityRoutes = cities.map((city) => `/cities/${city.slug}`);

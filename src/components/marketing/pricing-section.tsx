@@ -24,7 +24,8 @@ type PricingPlan = {
   id: PlanId;
   name: string;
   sliderLabel: string;
-  subtitle: string;
+  sliderInsight: string;
+  highlights: string[];
   prices: Record<Duration, string>;
   addon: string;
   coverage: 1 | 2 | 3 | 4;
@@ -67,42 +68,57 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "bonyan",
     name: "بنیان",
-    sliderLabel: "تا ۳۰۰ متر",
-    subtitle: "زمین تا ۳۰۰ متر، شامل ۳ مرحله ساخت",
+    sliderLabel: "زمین تا ۳۰۰ متر",
+    sliderInsight: "حدود ۱۸٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    highlights: [
+      "شروع سبک برای تیم‌های فروش کوچک",
+      "تمرکز روی فرصت‌های نزدیک‌تر و قابل پیگیری",
+      "مناسب برای تست بازار بدون هزینه سنگین",
+    ],
     prices: {
-      "3": "۷,۵۰۰,۰۰۰",
-      "6": "۱۱,۲۵۰,۰۰۰",
-      "12": "۱۳,۵۰۰,۰۰۰",
+      "3": "۹,۰۰۰,۰۰۰",
+      "6": "۱۳,۵۰۰,۰۰۰",
+      "12": "۱۸,۰۰۰,۰۰۰",
     },
-    addon: "هر مرحله اضافه: ۲,۵۰۰,۰۰۰ تومان",
+    addon: "هر مرحله اضافه: ۳,۰۰۰,۰۰۰ تومان",
     coverage: 1,
     cta: "انتخاب بنیان",
   },
   {
     id: "royan",
     name: "رویان",
-    sliderLabel: "تا ۵۰۰ متر",
-    subtitle: "زمین تا ۵۰۰ متر، شامل ۳ مرحله ساخت",
+    sliderLabel: "زمین تا ۵۰۰ متر",
+    sliderInsight: "تا ۲۰٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    highlights: [
+      "برای تیمی که تماس‌های منظم‌تری می‌سازد",
+      "دامنه بهتر برای کشف پروژه‌های در حال رشد",
+      "مناسب برای تبدیل پیگیری پراکنده به برنامه فروش",
+    ],
     prices: {
-      "3": "۹,۹۰۰,۰۰۰",
-      "6": "۱۳,۵۰۰,۰۰۰",
-      "12": "۱۸,۰۰۰,۰۰۰",
+      "3": "۱۲,۰۰۰,۰۰۰",
+      "6": "۱۸,۰۰۰,۰۰۰",
+      "12": "۲۴,۰۰۰,۰۰۰",
     },
-    addon: "هر مرحله اضافه: ۳,۳۰۰,۰۰۰ تومان",
+    addon: "هر مرحله اضافه: ۴,۰۰۰,۰۰۰ تومان",
     coverage: 2,
     cta: "انتخاب رویان",
   },
   {
     id: "taban",
     name: "تابان",
-    sliderLabel: "تا ۷۰۰ متر",
-    subtitle: "زمین تا ۷۰۰ متر، شامل ۳ مرحله ساخت",
+    sliderLabel: "زمین تا ۷۰۰ متر",
+    sliderInsight: "تا ۲۳٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    highlights: [
+      "برای فروش جدی‌تر با پوشش میدانی گسترده‌تر",
+      "اولویت‌دهی بهتر بین پروژه‌های داغ و قابل مذاکره",
+      "انتخاب مناسب برای تیم‌هایی که سهم بیشتری می‌خواهند",
+    ],
     prices: {
-      "3": "۱۲,۳۰۰,۰۰۰",
-      "6": "۱۶,۰۰۰,۰۰۰",
-      "12": "۲۱,۰۰۰,۰۰۰",
+      "3": "۱۵,۰۰۰,۰۰۰",
+      "6": "۲۲,۵۰۰,۰۰۰",
+      "12": "۳۰,۰۰۰,۰۰۰",
     },
-    addon: "هر مرحله اضافه: ۴,۱۰۰,۰۰۰ تومان",
+    addon: "هر مرحله اضافه: ۵,۰۰۰,۰۰۰ تومان",
     coverage: 3,
     cta: "انتخاب تابان",
     featured: true,
@@ -110,21 +126,25 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "taban-plus",
     name: "تابان پلاس",
-    sliderLabel: "بزرگ‌تر",
-    subtitle: "زمین‌های بزرگ‌تر و پوشش گسترده‌تر برای پروژه‌های انبوه‌سازی",
+    sliderLabel: "زمین بزرگ‌تر",
+    sliderInsight: "تا ۲۵٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    highlights: [
+      "برای تیم‌هایی که چند منطقه را هم‌زمان پوشش می‌دهند",
+      "دید وسیع‌تر روی پروژه‌های بزرگ و تصمیم‌ساز",
+      "مناسب برای ساختن قیف فروش سنگین‌تر و پایدارتر",
+    ],
     prices: {
-      "3": "۱۵,۰۰۰,۰۰۰",
-      "6": "۱۹,۰۰۰,۰۰۰",
-      "12": "۲۵,۵۰۰,۰۰۰",
+      "3": "۱۸,۰۰۰,۰۰۰",
+      "6": "۲۷,۰۰۰,۰۰۰",
+      "12": "۳۶,۰۰۰,۰۰۰",
     },
-    addon: "هر مرحله اضافه: ۵,۰۰۰,۰۰۰ تومان",
+    addon: "هر مرحله اضافه: ۶,۰۰۰,۰۰۰ تومان",
     coverage: 4,
     cta: "انتخاب تابان پلاس",
   },
 ];
 
 const DEFAULT_PLAN_INDEX = 2;
-const FEATURES = ["شامل ۳ مرحله ساخت", "دسترسی بر اساس میدان فروش"];
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
 
@@ -225,7 +245,8 @@ function PricingPlanCard({
   cardDelay: string;
   setCardRef: (node: HTMLDivElement | null) => void;
 }) {
-  const featured = Boolean(plan.featured);
+  const featured = isActive;
+  const recommended = Boolean(plan.featured);
 
   return (
     <article
@@ -234,7 +255,7 @@ function PricingPlanCard({
       data-active-plan={isActive ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
-        "pricing-card flex min-h-[34rem] w-[82vw] max-w-[22.5rem] shrink-0 snap-center flex-col overflow-hidden rounded-[1.6rem] border p-5 transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        "pricing-card flex min-h-[34rem] w-[82vw] max-w-[22.5rem] shrink-0 snap-center flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
@@ -249,22 +270,21 @@ function PricingPlanCard({
           )}
           aria-hidden="true"
         />
-        {featured ? (
-          <span className="absolute right-0 top-0 rounded-full border border-white/10 bg-white/12 px-3 py-1 text-xs font-bold text-[#fffaf1]">
+        {recommended ? (
+          <span
+            className={cn(
+              "absolute right-0 top-0 rounded-full border px-3 py-1 text-xs font-bold",
+              featured
+                ? "border-white/10 bg-white/12 text-[#fffaf1]"
+                : "border-[#e4d8c8] bg-[#fbf6ed] text-[#CC785C]",
+            )}
+          >
             پیشنهاد اصلی
           </span>
         ) : null}
-        <h3 className={cn("relative text-2xl font-bold", featured && "pt-8")}>
+        <h3 className={cn("relative text-2xl font-bold", recommended && "pt-8")}>
           {plan.name}
         </h3>
-        <p
-          className={cn(
-            "relative mt-3 min-h-[3.4rem] text-sm leading-7",
-            featured ? "text-[#efe2d2]" : "text-[#6f6254]",
-          )}
-        >
-          {plan.subtitle}
-        </p>
       </div>
 
       <div className="mt-5">
@@ -283,7 +303,7 @@ function PricingPlanCard({
             featured ? "text-[#efe2d2]" : "text-[#75695d]",
           )}
         >
-          برای {durationById[duration].months}
+          ۳ مرحله ساخت
         </div>
       </div>
 
@@ -294,8 +314,8 @@ function PricingPlanCard({
         )}
       />
 
-      <div className="space-y-3 text-sm font-semibold">
-        {FEATURES.map((feature) => (
+      <div className="space-y-3 text-right text-sm font-semibold leading-7">
+        {plan.highlights.map((feature) => (
           <div key={feature} className="flex items-center gap-2">
             <span
               className={cn(
@@ -358,6 +378,12 @@ export function PricingSection() {
   const activePlan = pricingPlans[activePlanIndex];
   const activeDuration = useMemo(() => durationById[duration], [duration]);
   const activePercent = (activePlanIndex / (pricingPlans.length - 1)) * 100;
+  const activeBubbleTransform =
+    activePlanIndex === 0
+      ? "translateX(0)"
+      : activePlanIndex === pricingPlans.length - 1
+        ? "translateX(100%)"
+        : "translateX(50%)";
 
   useEffect(() => {
     setIsReady(true);
@@ -509,23 +535,20 @@ export function PricingSection() {
         </div>
 
         <div className="pricing-slider mt-10 rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-4 py-6 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8">
-          <p className="text-center text-sm font-bold text-[#2a241d] md:text-base">
-            زمین پروژه‌ی هدفت چه مقیاسیه؟
-          </p>
           <div
             ref={railRef}
-            className="relative mx-auto mt-12 h-10 max-w-3xl touch-none"
+            className="relative mx-6 h-24 max-w-3xl touch-none md:mx-auto"
             onPointerDown={handleRailPointer}
             onPointerMove={handleRailMove}
           >
-            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
+            <div className="absolute left-0 right-0 top-12 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
               <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
             </div>
             <span
-              className="absolute -top-10 z-10 rounded-full bg-[#CC785C] px-3 py-1 text-xs font-bold text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200"
-              style={{ right: `${activePercent}%`, transform: "translateX(50%)" }}
+              className="absolute top-0 z-10 max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-[11px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 md:whitespace-nowrap md:text-xs"
+              style={{ right: `${activePercent}%`, transform: activeBubbleTransform }}
             >
-              {activePlan.sliderLabel}
+              {activePlan.sliderInsight}
             </span>
             <button
               type="button"
@@ -535,7 +558,7 @@ export function PricingSection() {
               aria-valuemin={0}
               aria-valuemax={pricingPlans.length - 1}
               aria-valuenow={activePlanIndex}
-              aria-valuetext={`${activePlan.sliderLabel}، ${activePlan.name}`}
+              aria-valuetext={`${activePlan.name}، ${activePlan.sliderInsight}`}
               onKeyDown={handleSliderKeyDown}
               onPointerDown={(event) => {
                 event.stopPropagation();
@@ -551,31 +574,35 @@ export function PricingSection() {
                   });
                 }
               }}
-              className="absolute top-1/2 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
+              className="absolute top-12 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
               style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
             >
               <span className="h-2.5 w-2.5 rounded-full bg-white" />
             </button>
-          </div>
-          <div className="mx-auto mt-4 grid max-w-3xl grid-cols-4 gap-1 text-center text-xs font-bold text-[#75695d]">
             {pricingPlans.map((plan, index) => (
               <button
                 key={plan.id}
                 type="button"
                 data-plan-tick={plan.id}
                 onClick={() => selectPlan(index, { userInitiated: true })}
+                style={{
+                  right: `${(index / (pricingPlans.length - 1)) * 100}%`,
+                  transform: "translateX(50%)",
+                }}
                 className={cn(
-                  "rounded-2xl px-1 py-2 transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                  "absolute top-12 z-10 h-14 w-24 rounded-2xl text-center text-xs font-bold text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:w-28",
                   activePlanIndex === index && "text-[#2a241d]",
                 )}
               >
                 <span
                   className={cn(
-                    "mx-auto mb-2 block h-2 w-2 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
+                    "absolute left-1/2 top-0 block h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
                     activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
                   )}
                 />
-                {plan.sliderLabel}
+                <span className="absolute left-1/2 top-5 w-full -translate-x-1/2">
+                  {plan.sliderLabel}
+                </span>
               </button>
             ))}
           </div>
@@ -593,14 +620,21 @@ export function PricingSection() {
                   data-duration-option={item.id}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "relative h-11 rounded-2xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                    "relative h-11 rounded-2xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25",
                     active
-                      ? "bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/20"
+                      ? "bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/15"
                       : "text-[#2a241d] hover:bg-[#f5eadb]",
                   )}
                 >
                   {item.id === "12" ? (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e4d8c8] bg-[#fffaf1] px-2 py-0.5 text-[10px] font-bold text-[#CC785C]">
+                    <span
+                      className={cn(
+                        "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold transition duration-200",
+                        active
+                          ? "border-[#2a241d] bg-[#fffaf1] text-[#2a241d]"
+                          : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
+                      )}
+                    >
                       بهترین ارزش
                     </span>
                   ) : null}
@@ -643,10 +677,6 @@ export function PricingSection() {
           </p>
         ) : null}
 
-        <p className="mx-auto mt-6 max-w-3xl text-center text-xs font-semibold leading-6 text-[#75695d] md:text-sm">
-          مرحله اضافه = یک فاز ساختمانی فراتر از ۳ مرحله پایه (مثلاً نازک‌کاری،
-          تأسیسات یا تجهیز نهایی)
-        </p>
       </div>
     </section>
   );

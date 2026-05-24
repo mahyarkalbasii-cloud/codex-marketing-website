@@ -1,16 +1,12 @@
 import Link from "next/link";
-import { Building2 } from "lucide-react";
+import { Building2, LogIn, PhoneCall } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { MobileMenu } from "@/components/marketing/mobile-menu";
-import { navItems, site } from "@/lib/site-data";
+import { authLinks, navItems, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
-const desktopNavItems = navItems.filter((item) =>
-  ["/#solution", "/#product", "/#audiences", "/#plans", "/#faq"].includes(
-    item.href,
-  ),
-);
+const desktopNavItems = navItems;
 
 export function SiteHeader() {
   return (
@@ -30,32 +26,48 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 xl:flex">
           {desktopNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-2xl px-3 py-2 text-[13px] font-medium text-[#65594e] transition hover:bg-[#fffaf1] hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+              className="rounded-2xl px-2.5 py-2 text-[12.5px] font-semibold text-[#65594e] transition hover:bg-[#fffaf1] hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <a
             href="tel:+982175425000"
-            dir="ltr"
-            className="text-xs font-semibold text-[#7a6a59] hover:text-[#2a241d] dark:text-zinc-400 dark:hover:text-white"
+            className="inline-flex h-10 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 px-3 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
           >
-            {site.phones[0]}
+            <PhoneCall className="h-4 w-4 text-[#cc785c]" aria-hidden="true" />
+            <span className="text-[11px] font-semibold text-[#7a6a59] dark:text-zinc-400">
+              تماس فروش
+            </span>
+            <span dir="ltr">{site.phones[0]}</span>
           </a>
-          <Link href="/#demo" className={cn(buttonVariants({ size: "sm" }))}>
+          <Link
+            href={authLinks.login}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "h-10 px-3.5 text-[13px]",
+            )}
+          >
+            <LogIn className="h-4 w-4" aria-hidden="true" />
+            ورود
+          </Link>
+          <Link
+            href="/#demo"
+            className={cn(buttonVariants({ size: "sm" }), "h-10 px-4")}
+          >
             درخواست دمو
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <a
             href="tel:+982175425000"
             dir="ltr"

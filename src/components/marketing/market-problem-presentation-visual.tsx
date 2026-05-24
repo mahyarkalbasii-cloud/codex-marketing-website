@@ -9,11 +9,22 @@
 
 import {
   AlertTriangle,
+  Check,
   Clock3,
   RefreshCcw,
+  X,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -46,9 +57,19 @@ type ReportRow = {
   status: string;
 };
 
+type TimingStop = {
+  id: string;
+  label: string;
+  position: number;
+  activeMarks: string[];
+  rows: [string, string, string];
+  rowSignals: [boolean, boolean, boolean];
+};
+
 type RevealStyle = CSSProperties & {
   "--mpv-delay"?: string;
   "--mpv-opacity"?: string;
+  "--mpv-axis-position"?: string;
 };
 
 const dataMarks: DataMark[] = [
@@ -124,7 +145,50 @@ const reportRows: ReportRow[] = [
   { project: "پروژه C", status: "به‌روزرسانی نشده", Icon: RefreshCcw },
 ];
 
-const axisTicks = ["right-[18%]", "right-[30%]", "right-[42%]", "right-[58%]", "right-[70%]", "right-[82%]"] as const;
+const timingStops: TimingStop[] = [
+  {
+    id: "early",
+    label: "زود",
+    position: 0,
+    activeMarks: ["m1", "m5", "m13", "m31"],
+    rows: ["تماس زودهنگام", "نیاز هنوز قطعی نیست", "پیگیری بعدی نامشخص"],
+    rowSignals: [false, false, false],
+  },
+  {
+    id: "early-to-fit",
+    label: "بین زود و زمان مناسب",
+    position: 25,
+    activeMarks: ["m8", "m15", "m24", "m35"],
+    rows: ["در حال نزدیک شدن", "اطلاعات تکمیل می‌شود", "آماده پیگیری اولیه"],
+    rowSignals: [false, true, true],
+  },
+  {
+    id: "fit",
+    label: "زمان مناسب",
+    position: 50,
+    activeMarks: ["m20", "m30", "m8", "m38"],
+    rows: ["زمان تماس مناسب", "اطلاعات کافی", "فرصت فعال"],
+    rowSignals: [true, true, true],
+  },
+  {
+    id: "fit-to-late",
+    label: "بین زمان مناسب و دیر",
+    position: 75,
+    activeMarks: ["m17", "m27", "m29", "m43"],
+    rows: ["نیاز در حال سرد شدن", "پیگیری عقب افتاده", "ریسک از دست رفتن"],
+    rowSignals: [false, false, false],
+  },
+  {
+    id: "late",
+    label: "دیر",
+    position: 100,
+    activeMarks: ["m2", "m11", "m19", "m45"],
+    rows: ["تماس دیرهنگام", "فرصت فرسوده شده", "به‌روزرسانی دیر شده"],
+    rowSignals: [false, false, false],
+  },
+];
+
+const axisTicks = ["right-[0%]", "right-[25%]", "right-[50%]", "right-[75%]", "right-[100%]"] as const;
 
 function usePrefersReducedMotion() {
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -200,10 +264,18 @@ function DataMarkShape({ mark }: { mark: DataMark }) {
   );
 }
 
-function ReportTableRow({ Icon, index, project, status }: ReportRow & { index: number }) {
+function ReportTableRow({
+  Icon,
+  index,
+  project,
+  signal,
+  status,
+}: ReportRow & { index: number; signal: boolean }) {
+  const SignalIcon = signal ? Check : X;
+
   return (
     <div
-      className="mpv-report-row grid grid-cols-[4.25rem_1.5rem_minmax(5.25rem,1fr)_2.4rem_1.15rem_auto] items-center gap-2 px-1 py-2 text-right md:grid-cols-[4.9rem_1.75rem_minmax(7.5rem,1fr)_3.2rem_1.4rem_auto] md:gap-3"
+      className="mpv-report-row grid grid-cols-[4.25rem_1.5rem_minmax(5.25rem,1fr)_2.5rem] items-center gap-2 px-1 py-2 text-right md:grid-cols-[4.9rem_1.75rem_minmax(7.5rem,1fr)_2.75rem] md:gap-3"
       style={{ "--mpv-delay": `${1080 + index * 150}ms` } as RevealStyle}
     >
       <span className="text-xs font-bold text-foreground md:text-sm">{project}</span>
@@ -213,21 +285,137 @@ function ReportTableRow({ Icon, index, project, status }: ReportRow & { index: n
       <span className="truncate text-[11px] font-semibold text-muted-foreground md:text-xs">
         {status}
       </span>
-      <span className="grid h-7 place-items-center rounded-full border border-border bg-transparent text-xs font-semibold text-muted-foreground">
-        —
-      </span>
-      <span className="text-center text-xs font-semibold text-muted-foreground">—</span>
-      <span className="text-left text-xs font-bold tracking-[0.08em] text-muted-foreground/75">
-        ...
+      <span
+        className={cn(
+          "grid h-7 w-10 place-items-center justify-self-start rounded-full border transition duration-200 md:w-11",
+          signal
+            ? "border-[#CC785C]/45 bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/20"
+            : "border-[#D8C9B6] bg-[#FFFAF1] text-[#7A6A59]",
+        )}
+        aria-label={signal ? "مناسب" : "نامناسب"}
+      >
+        <SignalIcon className="h-3.5 w-3.5" aria-hidden="true" />
       </span>
     </div>
   );
 }
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function nearestStopIndex(position: number) {
+  return timingStops.reduce((nearest, stop, index) => {
+    const currentDistance = Math.abs(stop.position - position);
+    const nearestDistance = Math.abs(timingStops[nearest].position - position);
+
+    return currentDistance < nearestDistance ? index : nearest;
+  }, 0);
+}
+
 export function MarketProblemPresentationVisual() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const axisTrackRef = useRef<HTMLDivElement>(null);
+  const resumeTimerRef = useRef<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [activeStopIndex, setActiveStopIndex] = useState(0);
+  const [manualHold, setManualHold] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
+  const activeStop = timingStops[activeStopIndex];
+  const activeMarkIds = useMemo(
+    () => new Set(activeStop.activeMarks),
+    [activeStop],
+  );
+  const activeRows = useMemo(
+    () =>
+      reportRows.map((row, index) => ({
+        ...row,
+        signal: activeStop.rowSignals[index] ?? false,
+        status: activeStop.rows[index] ?? row.status,
+      })),
+    [activeStop],
+  );
+
+  const setManualStop = useCallback((index: number) => {
+    setActiveStopIndex(index);
+    setManualHold(true);
+
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+    }
+
+    resumeTimerRef.current = window.setTimeout(() => {
+      setManualHold(false);
+      resumeTimerRef.current = null;
+    }, 5200);
+  }, []);
+
+  const updateStopFromClientX = useCallback(
+    (clientX: number) => {
+      const track = axisTrackRef.current;
+
+      if (!track) {
+        return;
+      }
+
+      const rect = track.getBoundingClientRect();
+      const position = clamp(((rect.right - clientX) / rect.width) * 100, 0, 100);
+
+      setManualStop(nearestStopIndex(position));
+    },
+    [setManualStop],
+  );
+
+  const handleAxisPointerDown = useCallback(
+    (event: PointerEvent<HTMLDivElement>) => {
+      event.currentTarget.setPointerCapture(event.pointerId);
+      setDragging(true);
+      updateStopFromClientX(event.clientX);
+    },
+    [updateStopFromClientX],
+  );
+
+  const handleAxisPointerMove = useCallback(
+    (event: PointerEvent<HTMLDivElement>) => {
+      if (!dragging) {
+        return;
+      }
+
+      updateStopFromClientX(event.clientX);
+    },
+    [dragging, updateStopFromClientX],
+  );
+
+  const handleAxisPointerUp = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.releasePointerCapture(event.pointerId);
+    setDragging(false);
+  }, []);
+
+  const handleAxisKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setManualStop(clamp(activeStopIndex - 1, 0, timingStops.length - 1));
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setManualStop(clamp(activeStopIndex + 1, 0, timingStops.length - 1));
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        setManualStop(0);
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+        setManualStop(timingStops.length - 1);
+      }
+    },
+    [activeStopIndex, setManualStop],
+  );
 
   useEffect(() => {
     const node = rootRef.current;
@@ -251,6 +439,26 @@ export function MarketProblemPresentationVisual() {
 
     return () => observer.disconnect();
   }, [reducedMotion]);
+
+  useEffect(() => {
+    if (!revealed || reducedMotion || manualHold || dragging) {
+      return;
+    }
+
+      const interval = window.setInterval(() => {
+      setActiveStopIndex((current) => (current + 1) % timingStops.length);
+    }, 3800);
+
+    return () => window.clearInterval(interval);
+  }, [dragging, manualHold, reducedMotion, revealed]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) {
+        window.clearTimeout(resumeTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -296,6 +504,8 @@ export function MarketProblemPresentationVisual() {
             <g
               key={mark.id}
               className={cn("mpv-mark", toneClass(mark.tone))}
+              data-active={activeMarkIds.has(mark.id) ? "true" : "false"}
+              data-fit={activeStop.id === "fit" && activeMarkIds.has(mark.id) ? "true" : "false"}
               data-mobile={mark.mobile ? "true" : "false"}
               style={
                 {
@@ -311,35 +521,79 @@ export function MarketProblemPresentationVisual() {
       </section>
 
       <section className="mt-4 divide-y divide-border/70 border-y border-border/70" aria-label="گزارش پروژه‌های دارای داده پوشانده‌شده">
-        {reportRows.map((row, index) => (
+        {activeRows.map((row, index) => (
           <ReportTableRow key={row.project} index={index} {...row} />
         ))}
       </section>
 
       <section className="mpv-axis-layer mt-4 px-2 pb-1 pt-2" aria-label="محور زمان تماس">
-        <div className="relative h-14">
-          <div className="mpv-axis-line absolute left-2 right-2 top-5 h-px bg-muted-foreground/35" />
-          {axisTicks.map((tick, index) => (
-            <span
-              key={tick}
-              className={cn("mpv-axis-tick absolute top-[1.05rem] h-2 w-px bg-muted-foreground/25", tick)}
-              style={{ "--mpv-delay": `${1590 + index * 35}ms` } as RevealStyle}
+        <div
+          className={cn(
+            "relative h-16 touch-none select-none",
+            dragging ? "cursor-grabbing" : "cursor-grab",
+          )}
+          role="slider"
+          tabIndex={0}
+          aria-valuemin={0}
+          aria-valuemax={timingStops.length - 1}
+          aria-valuenow={activeStopIndex}
+          aria-valuetext={activeStop.label}
+          onKeyDown={handleAxisKeyDown}
+          onPointerDown={handleAxisPointerDown}
+          onPointerMove={handleAxisPointerMove}
+          onPointerUp={handleAxisPointerUp}
+        >
+          <div ref={axisTrackRef} className="absolute left-2 right-2 top-0 h-full">
+            <div className="mpv-axis-line absolute left-0 right-0 top-5 h-px bg-muted-foreground/35" />
+            <div
+              className="mpv-axis-progress absolute right-0 top-5 h-px bg-[#CC785C]/45"
+              style={{ width: `${activeStop.position}%` }}
               aria-hidden="true"
             />
-          ))}
+            {axisTicks.map((tick, index) => (
+              <button
+                key={tick}
+                type="button"
+                className={cn(
+                  "mpv-axis-tick absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full border border-border bg-card transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                  tick,
+                  index === activeStopIndex && "border-transparent bg-transparent",
+                  index === 2 && activeStop.id === "fit" && "mpv-axis-fit-stop",
+                )}
+                style={{ "--mpv-delay": `${1590 + index * 35}ms` } as RevealStyle}
+                aria-label={timingStops[index].label}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setManualStop(index);
+                }}
+              >
+                <span className="sr-only">{timingStops[index].label}</span>
+              </button>
+            ))}
 
-          <span className="mpv-axis-point absolute right-2 top-[0.82rem] h-2.5 w-2.5 rounded-full border border-border bg-card" />
-          <span className="mpv-axis-label absolute right-0 top-8 text-[11px] font-semibold text-muted-foreground">
+            <span
+              className={cn(
+                "mpv-axis-center-point absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full bg-[#CC785C]",
+                activeStop.id === "fit" && "mpv-axis-center-fit",
+              )}
+              style={{ right: `${activeStop.position}%` }}
+            />
+          </div>
+
+          <span className="mpv-axis-label absolute right-0 top-10 text-[11px] font-semibold text-muted-foreground">
             زود
           </span>
 
-          <span className="mpv-axis-center-point absolute right-1/2 top-[0.76rem] h-3 w-3 translate-x-1/2 rounded-full bg-[#CC785C]" />
-          <span className="mpv-axis-pill absolute right-1/2 top-8 translate-x-1/2 rounded-full bg-[#CC785C] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-primary/[0.08]">
+          <span
+            className={cn(
+              "mpv-axis-pill absolute right-1/2 top-9 translate-x-1/2 rounded-full bg-[#CC785C] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-primary/[0.08]",
+              activeStop.id === "fit" && "mpv-axis-pill-fit",
+            )}
+          >
             زمان مناسب
           </span>
 
-          <span className="mpv-axis-point absolute left-2 top-[0.82rem] h-2.5 w-2.5 rounded-full border border-border bg-card" />
-          <span className="mpv-axis-label absolute left-0 top-8 text-[11px] font-semibold text-muted-foreground">
+          <span className="mpv-axis-label absolute left-0 top-10 text-[11px] font-semibold text-muted-foreground">
             دیر
           </span>
         </div>
