@@ -586,7 +586,7 @@ export function MarketProblemPresentationVisual() {
 
           <span
             className={cn(
-              "mpv-axis-pill absolute right-1/2 top-9 translate-x-1/2 rounded-full bg-[#CC785C] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-primary/[0.08]",
+              "mpv-axis-pill absolute right-1/2 top-9 translate-x-1/2 rounded-full bg-[#CC785C] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-primary/[0.08] dark:bg-amber-300 dark:text-zinc-950",
               activeStop.id === "fit" && "mpv-axis-pill-fit",
             )}
           >

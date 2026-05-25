@@ -728,8 +728,8 @@ function SalesFlowSection() {
               </div>
               <h3
                 className={cn(
-                  "mt-4 text-lg font-bold leading-8 text-[#2a241d]",
-                  index >= 2 && "text-[#4b2c12]",
+                  "mt-4 text-lg font-bold leading-8 text-[#2a241d] dark:text-white",
+                  index >= 2 && "text-[#4b2c12] dark:text-white",
                 )}
               >
                 {step.title}

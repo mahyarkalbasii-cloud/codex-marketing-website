@@ -44,7 +44,8 @@ export function PricingTabs() {
             key={plan.name}
             className={cn(
               "relative overflow-hidden p-6",
-              plan.featured && "border-zinc-950 bg-zinc-950 text-white shadow-xl shadow-zinc-950/15 dark:border-white dark:bg-white dark:text-zinc-950",
+              plan.featured &&
+                "border-zinc-950 bg-zinc-950 text-white shadow-xl shadow-zinc-950/15 dark:border-amber-300/35 dark:bg-zinc-900 dark:text-white",
             )}
           >
             {plan.featured ? (

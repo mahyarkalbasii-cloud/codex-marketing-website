@@ -43,7 +43,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-9 md:grid-cols-[1.2fr_2fr] md:gap-10 md:px-6 md:py-12">
         <div className="space-y-5">
           <Link href="/" className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl border border-[#6b5542] bg-[#fffaf1] text-sm font-black text-[#241f1a]">
+            <span className="grid h-10 w-10 place-items-center rounded-2xl border border-[#6b5542] bg-white text-sm font-black text-[#241f1a]">
               PS
             </span>
             <span className="text-lg font-bold">{site.name}</span>

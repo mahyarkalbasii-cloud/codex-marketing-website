@@ -3,6 +3,7 @@ import { Building2, LogIn, PhoneCall } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { MobileMenu } from "@/components/marketing/mobile-menu";
+import { ThemeToggle } from "@/components/marketing/theme-toggle";
 import { authLinks, navItems, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,7 @@ export function SiteHeader() {
             <span className="block text-base font-bold">
               {site.name}
             </span>
-            <span className="hidden text-[11px] text-zinc-500 sm:block">
+            <span className="hidden text-[11px] text-zinc-500 sm:block dark:text-zinc-300">
               زیرساخت فروش پروژه‌محور
             </span>
           </span>
@@ -39,6 +40,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 xl:flex">
+          <ThemeToggle className="h-10 w-10 rounded-2xl" />
           <a
             href="tel:+982175425000"
             className="inline-flex h-10 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 px-3 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
@@ -68,6 +70,7 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2 xl:hidden">
+          <ThemeToggle className="h-10 w-10 rounded-2xl" />
           <a
             href="tel:+982175425000"
             dir="ltr"

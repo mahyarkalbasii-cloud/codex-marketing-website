@@ -543,12 +543,12 @@ export function PricingSection() {
               strokeWidth={3}
             />
             <span
-              className="absolute left-1/2 top-0 z-10 block w-max max-w-[calc(100%-1rem)] -translate-x-1/2 whitespace-nowrap rounded-full bg-[#CC785C] px-3 py-1 text-center text-[10.5px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 md:hidden"
+              className="absolute left-1/2 top-0 z-10 block w-max max-w-[calc(100%-1rem)] -translate-x-1/2 whitespace-nowrap rounded-full bg-[#CC785C] px-3 py-1 text-center text-[10.5px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 dark:bg-amber-300 dark:text-zinc-950 md:hidden"
             >
               {activePlan.sliderInsight}
             </span>
             <span
-              className="absolute top-0 z-10 hidden max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-xs font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 md:block md:whitespace-nowrap"
+              className="absolute top-0 z-10 hidden max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-xs font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 dark:bg-amber-300 dark:text-zinc-950 md:block md:whitespace-nowrap"
               style={{ right: `${activePercent}%`, transform: activeBubbleTransform }}
             >
               {activePlan.sliderInsight}
