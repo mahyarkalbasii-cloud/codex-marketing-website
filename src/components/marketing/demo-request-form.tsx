@@ -4,7 +4,7 @@ import { useMemo, useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { suppliers } from "@/lib/site-data";
+import { getSiteContent, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type DemoFormState = {
@@ -51,10 +51,34 @@ function persistLocalRequest(request: DemoFormState) {
   );
 }
 
-export function DemoRequestForm() {
+export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
+  const copy = locale === "fa"
+    ? {
+        name: "نام",
+        phone: "تلفن",
+        company: "نام شرکت",
+        supplier: "حوزه فعالیت",
+        choose: "انتخاب کنید",
+        submit: "ثبت درخواست دمو",
+        success:
+          "درخواست دمو ثبت شد. تیم فروش برای هماهنگی زمان دمو پیام تأیید ارسال می‌کند.",
+        error: "لطفاً هر چهار فیلد فرم را کامل کنید.",
+      }
+    : {
+        name: "Name",
+        phone: "Phone",
+        company: "Company",
+        supplier: "Business area",
+        choose: "Select one",
+        submit: "Request demo",
+        success:
+          "Your demo request has been saved. Sales will follow up to coordinate a time.",
+        error: "Please complete all four fields.",
+      };
+  const { suppliers } = getSiteContent(locale);
   const supplierOptions = useMemo(
     () => suppliers.map((supplier) => supplier.name),
-    [],
+    [suppliers],
   );
   const [form, setForm] = useState<DemoFormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -105,7 +129,7 @@ export function DemoRequestForm() {
     <form className="mt-6 grid gap-3" onSubmit={handleSubmit}>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
-          نام
+          {copy.name}
           <input
             name="name"
             value={form.name}
@@ -115,7 +139,7 @@ export function DemoRequestForm() {
           />
         </label>
         <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
-          تلفن
+          {copy.phone}
           <input
             name="phone"
             value={form.phone}
@@ -129,7 +153,7 @@ export function DemoRequestForm() {
       </div>
 
       <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
-        نام شرکت
+        {copy.company}
         <input
           name="company"
           value={form.company}
@@ -140,14 +164,14 @@ export function DemoRequestForm() {
       </label>
 
       <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
-        حوزه فعالیت
+        {copy.supplier}
         <select
           name="supplier"
           value={form.supplier}
           onChange={(event) => updateField("supplier", event.target.value)}
           className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/20 dark:border-zinc-800 dark:bg-zinc-900"
         >
-          <option value="">انتخاب کنید</option>
+          <option value="">{copy.choose}</option>
           {supplierOptions.map((supplier) => (
             <option key={supplier} value={supplier}>
               {supplier}
@@ -168,18 +192,18 @@ export function DemoRequestForm() {
         ) : (
           <Send className="h-4 w-4" />
         )}
-        ثبت درخواست دمو
+        {copy.submit}
       </button>
 
       {status === "success" ? (
         <p className="rounded-2xl border border-[#c9792b]/25 bg-[#f6d6a8]/35 px-3 py-2 text-xs font-semibold leading-6 text-[#5a3515]">
-          درخواست دمو ثبت شد. تیم فروش برای هماهنگی زمان دمو پیام تأیید ارسال می‌کند.
+          {copy.success}
         </p>
       ) : null}
 
       {status === "error" ? (
         <p className="rounded-2xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold leading-6 text-red-700">
-          لطفاً هر چهار فیلد فرم را کامل کنید.
+          {copy.error}
         </p>
       ) : null}
     </form>

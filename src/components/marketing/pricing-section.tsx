@@ -15,6 +15,7 @@ import { ArrowLeft, BarChart3, Check } from "lucide-react";
 
 import { SectionHeader } from "@/components/marketing/section-header";
 import { buttonVariants } from "@/components/ui/button";
+import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type Duration = "3" | "6" | "12";
@@ -60,10 +61,26 @@ const durations: Array<{
   },
 ];
 
-const durationById = durations.reduce(
-  (result, item) => ({ ...result, [item.id]: item }),
-  {} as Record<Duration, (typeof durations)[number]>,
-);
+const durationsEn: typeof durations = [
+  {
+    id: "3",
+    label: "3 months",
+    months: "3 months",
+    note: "No long-term discount",
+  },
+  {
+    id: "6",
+    label: "6 months",
+    months: "6 months",
+    note: "Less discount than 12 months",
+  },
+  {
+    id: "12",
+    label: "12 months",
+    months: "12 months",
+    note: "Highest savings",
+  },
+];
 
 const pricingPlans: PricingPlan[] = [
   {
@@ -149,12 +166,137 @@ const pricingPlans: PricingPlan[] = [
   },
 ];
 
+const pricingPlansEn: PricingPlan[] = [
+  {
+    id: "bonyan",
+    name: "Bonyan",
+    sliderLabel: "Land up to 300 m2",
+    sliderInsight: "Up to 18,000 projects across 8 stages",
+    selectorMotto: "A lighter start for testing the market and building follow-up rhythm",
+    highlights: [
+      "A lighter start for smaller sales teams",
+      "Focus on closer and easier-to-follow opportunities",
+      "Good for market testing without a heavy upfront cost",
+    ],
+    prices: {
+      "3": "9,000,000",
+      "6": "13,500,000",
+      "12": "18,000,000",
+    },
+    addon: "Each additional stage: 3,000,000 toman",
+    coverage: 1,
+    cta: "Choose Bonyan",
+  },
+  {
+    id: "royan",
+    name: "Royan",
+    sliderLabel: "Land up to 500 m2",
+    sliderInsight: "Up to 20,000 projects across 8 stages",
+    selectorMotto: "Balanced coverage for teams that want more consistent calls",
+    highlights: [
+      "For teams building more consistent sales calls",
+      "A wider range for discovering growing projects",
+      "Good for turning scattered follow-up into a sales plan",
+    ],
+    prices: {
+      "3": "12,000,000",
+      "6": "18,000,000",
+      "12": "24,000,000",
+    },
+    addon: "Each additional stage: 4,000,000 toman",
+    coverage: 2,
+    cta: "Choose Royan",
+  },
+  {
+    id: "taban",
+    name: "Taban",
+    sliderLabel: "Land up to 700 m2",
+    sliderInsight: "Up to 23,000 projects across 8 stages",
+    selectorMotto: "The core recommendation for serious sales and meaningful coverage",
+    highlights: [
+      "For serious sales with wider field coverage",
+      "Better prioritization between hot and negotiable projects",
+      "A strong fit for teams that want more market share",
+    ],
+    prices: {
+      "3": "15,000,000",
+      "6": "22,500,000",
+      "12": "30,000,000",
+    },
+    addon: "Each additional stage: 5,000,000 toman",
+    coverage: 3,
+    cta: "Choose Taban",
+    featured: true,
+  },
+  {
+    id: "taban-plus",
+    name: "Taban Plus",
+    sliderLabel: "Larger land",
+    sliderInsight: "Up to 25,000 projects across 8 stages",
+    selectorMotto: "Wide coverage for multi-area teams and heavier sales motions",
+    highlights: [
+      "For teams covering several areas at once",
+      "Wider visibility into large decision-shaping projects",
+      "Good for building a heavier and more durable sales funnel",
+    ],
+    prices: {
+      "3": "18,000,000",
+      "6": "27,000,000",
+      "12": "36,000,000",
+    },
+    addon: "Each additional stage: 6,000,000 toman",
+    coverage: 4,
+    cta: "Choose Taban Plus",
+  },
+];
+
+const pricingCopy = {
+  fa: {
+    eyebrow: "پلن‌ها",
+    title: "زمین بازی خود را انتخاب کنید",
+    description:
+      "در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد",
+    axisLabel: "متراژ زمین",
+    sliderAria: "انتخاب مقیاس زمین پروژه",
+    recommended: "پیشنهاد اصلی",
+    bestValue: "بهترین ارزش",
+    stagesIncluded: "۳ مرحله ساخت",
+    coverage: "پوشش بازار",
+    from: "از",
+    currency: "تومان",
+    whatsappMessage: (plan: string, duration: string) =>
+      `علاقمندم به پلن ${plan} (${duration}) پرشین‌سازه`,
+  },
+  en: {
+    eyebrow: "Plans",
+    title: "Choose your playing field",
+    description:
+      "In a data market, cheap access often means crowded competition and burned opportunities. PersianSaze keeps subscriptions structured so competition stays more balanced and profitable.",
+    axisLabel: "Land size",
+    sliderAria: "Choose project land-size segment",
+    recommended: "Recommended",
+    bestValue: "Best value",
+    stagesIncluded: "3 construction stages",
+    coverage: "Market coverage",
+    from: "of",
+    currency: "toman",
+    whatsappMessage: (plan: string, duration: string) =>
+      `I am interested in the ${plan} plan (${duration}) on PersianSaze`,
+  },
+} as const;
+
 const DEFAULT_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
   bonyan: "۳۰۰",
   royan: "۵۰۰",
   taban: "۷۰۰",
   "taban-plus": "+۷۰۰",
+};
+const axisTickLabelsEn: Record<PlanId, string> = {
+  bonyan: "300",
+  royan: "500",
+  taban: "700",
+  "taban-plus": "+700",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
@@ -175,24 +317,32 @@ function usePrefersReducedMotion() {
   return prefersReducedMotion;
 }
 
-function clampPlanIndex(index: number) {
-  return Math.min(Math.max(index, 0), pricingPlans.length - 1);
+function clampPlanIndex(index: number, planCount: number) {
+  return Math.min(Math.max(index, 0), planCount - 1);
 }
 
-function getAxisItemTransform(index: number) {
+function getAxisItemTransform(index: number, planCount: number) {
   if (index === 0) {
     return "translateX(0)";
   }
 
-  if (index === pricingPlans.length - 1) {
+  if (index === planCount - 1) {
     return "translateX(100%)";
   }
 
   return "translateX(50%)";
 }
 
-function getWhatsappHref(plan: PricingPlan, duration: Duration) {
-  const message = `علاقمندم به پلن ${plan.name} (${durationById[duration].label}) پرشین‌سازه`;
+function getWhatsappHref(
+  plan: PricingPlan,
+  duration: Duration,
+  durationById: Record<Duration, (typeof durations)[number]>,
+  locale: Locale,
+) {
+  const message = pricingCopy[locale].whatsappMessage(
+    plan.name,
+    durationById[duration].label,
+  );
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
@@ -200,10 +350,15 @@ function getWhatsappHref(plan: PricingPlan, duration: Duration) {
 function PricingCoverage({
   coverage,
   featured,
+  locale,
 }: {
   coverage: PricingPlan["coverage"];
   featured?: boolean;
+  locale: Locale;
 }) {
+  const copy = pricingCopy[locale];
+  const formatter = locale === "fa" ? "fa-IR" : "en-US";
+
   return (
     <div
       className={cn(
@@ -219,15 +374,15 @@ function PricingCoverage({
           featured ? "text-[#efe2d2]" : "text-[#6f6254]",
         )}
       >
-        <span>پوشش بازار</span>
+        <span>{copy.coverage}</span>
         <span className="flex items-center gap-1">
-          {coverage.toLocaleString("fa-IR")} از ۴
+          {coverage.toLocaleString(formatter)} {copy.from} {Number(4).toLocaleString(formatter)}
           <BarChart3 className="h-3.5 w-3.5" />
         </span>
       </div>
       <div
         className="grid gap-1.5"
-        aria-label={`پوشش بازار ${coverage.toLocaleString("fa-IR")} از ۴`}
+        aria-label={`${copy.coverage} ${coverage.toLocaleString(formatter)} ${copy.from} ${Number(4).toLocaleString(formatter)}`}
       >
         {[1, 2, 3, 4].map((item) => {
           const filled = item <= coverage;
@@ -256,18 +411,23 @@ function PricingCoverage({
 function PricingPlanCard({
   plan,
   duration,
+  durationById,
   isActive,
   isPulsing,
   cardDelay,
+  locale,
 }: {
   plan: PricingPlan;
   duration: Duration;
+  durationById: Record<Duration, (typeof durations)[number]>;
   isActive: boolean;
   isPulsing: boolean;
   cardDelay: string;
+  locale: Locale;
 }) {
   const featured = isActive;
   const recommended = Boolean(plan.featured);
+  const copy = pricingCopy[locale];
 
   return (
     <article
@@ -299,7 +459,7 @@ function PricingPlanCard({
                 : "border-[#e4d8c8] bg-[#fbf6ed] text-[#CC785C]",
             )}
           >
-            پیشنهاد اصلی
+            {copy.recommended}
           </span>
         ) : null}
         <h3 className={cn("relative text-2xl font-bold", recommended && "pt-8")}>
@@ -315,7 +475,7 @@ function PricingPlanCard({
             featured ? "text-white" : "text-[#2a241d]",
           )}
         >
-          {plan.prices[duration]} تومان
+          {plan.prices[duration]} {copy.currency}
         </div>
         <div
           className={cn(
@@ -323,7 +483,7 @@ function PricingPlanCard({
             featured ? "text-[#efe2d2]" : "text-[#75695d]",
           )}
         >
-          ۳ مرحله ساخت
+          {copy.stagesIncluded}
         </div>
       </div>
 
@@ -334,7 +494,12 @@ function PricingPlanCard({
         )}
       />
 
-      <div className="space-y-3 text-right text-sm font-semibold leading-7">
+      <div
+        className={cn(
+          "space-y-3 text-sm font-semibold leading-7",
+          locale === "fa" ? "text-right" : "text-left",
+        )}
+      >
         {plan.highlights.map((feature) => (
           <div key={feature} className="flex items-center gap-2">
             <span
@@ -351,7 +516,7 @@ function PricingPlanCard({
       </div>
 
       <div className="mt-5">
-        <PricingCoverage coverage={plan.coverage} featured={featured} />
+        <PricingCoverage coverage={plan.coverage} featured={featured} locale={locale} />
       </div>
 
       <div
@@ -366,7 +531,7 @@ function PricingPlanCard({
       </div>
 
       <Link
-        href={getWhatsappHref(plan, duration)}
+        href={getWhatsappHref(plan, duration, durationById, locale)}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
@@ -383,7 +548,19 @@ function PricingPlanCard({
   );
 }
 
-export function PricingSection() {
+export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
+  const plans = locale === "fa" ? pricingPlans : pricingPlansEn;
+  const durationOptions = locale === "fa" ? durations : durationsEn;
+  const tickLabels = locale === "fa" ? axisTickLabels : axisTickLabelsEn;
+  const durationById = useMemo(
+    () =>
+      durationOptions.reduce(
+        (result, item) => ({ ...result, [item.id]: item }),
+        {} as Record<Duration, (typeof durations)[number]>,
+      ),
+    [durationOptions],
+  );
+  const copy = pricingCopy[locale];
   const [duration, setDuration] = useState<Duration>("12");
   const [activePlanIndex, setActivePlanIndex] = useState(DEFAULT_PLAN_INDEX);
   const [pulsingPlan, setPulsingPlan] = useState<PlanId | null>(null);
@@ -393,10 +570,10 @@ export function PricingSection() {
   const railRef = useRef<HTMLDivElement | null>(null);
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const activePlan = pricingPlans[activePlanIndex];
-  const activeDuration = useMemo(() => durationById[duration], [duration]);
-  const activePercent = (activePlanIndex / (pricingPlans.length - 1)) * 100;
-  const activeBubbleTransform = getAxisItemTransform(activePlanIndex);
+  const activePlan = plans[activePlanIndex];
+  const activeDuration = useMemo(() => durationById[duration], [duration, durationById]);
+  const activePercent = (activePlanIndex / (plans.length - 1)) * 100;
+  const activeBubbleTransform = getAxisItemTransform(activePlanIndex, plans.length);
 
   useEffect(() => {
     setIsReady(true);
@@ -437,8 +614,8 @@ export function PricingSection() {
 
   const selectPlan = useCallback(
     (nextIndex: number) => {
-      const clampedIndex = clampPlanIndex(nextIndex);
-      const nextPlan = pricingPlans[clampedIndex];
+      const clampedIndex = clampPlanIndex(nextIndex, plans.length);
+      const nextPlan = plans[clampedIndex];
 
       setActivePlanIndex(clampedIndex);
 
@@ -456,7 +633,7 @@ export function PricingSection() {
         setPulsingPlan(null);
       }, 1500);
     },
-    [prefersReducedMotion],
+    [plans, prefersReducedMotion],
   );
 
   const getIndexFromPointer = useCallback((clientX: number) => {
@@ -469,8 +646,8 @@ export function PricingSection() {
     const rect = rail.getBoundingClientRect();
     const ratio = Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
 
-    return Math.round(ratio * (pricingPlans.length - 1));
-  }, [activePlanIndex]);
+    return Math.round(ratio * (plans.length - 1));
+  }, [activePlanIndex, plans.length]);
 
   const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -503,7 +680,7 @@ export function PricingSection() {
 
     if (event.key === "End") {
       event.preventDefault();
-      selectPlan(pricingPlans.length - 1);
+      selectPlan(plans.length - 1);
     }
   };
 
@@ -511,6 +688,7 @@ export function PricingSection() {
     <section
       ref={sectionRef}
       id="plans"
+      dir={locale === "fa" ? "rtl" : "ltr"}
       data-pricing-ready={isReady ? "true" : undefined}
       data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
       className="relative overflow-hidden"
@@ -518,9 +696,9 @@ export function PricingSection() {
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 md:px-6 md:py-20">
         <div className="pricing-reveal-header">
           <SectionHeader
-            eyebrow="پلن‌ها"
-            title="زمین بازی خود را انتخاب کنید"
-            description="در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد"
+            eyebrow={copy.eyebrow}
+            title={copy.title}
+            description={copy.description}
           />
         </div>
 
@@ -532,7 +710,7 @@ export function PricingSection() {
             onPointerMove={handleRailMove}
           >
             <span className="absolute right-0 top-9 text-[11px] font-bold leading-5 text-[#75695d] md:right-1 md:top-8 md:text-xs">
-              متراژ زمین
+              {copy.axisLabel}
             </span>
             <div className="absolute left-0 right-0 top-16 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2] md:top-14">
               <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
@@ -557,11 +735,11 @@ export function PricingSection() {
               type="button"
               data-plan-slider-handle
               role="slider"
-              aria-label="انتخاب مقیاس زمین پروژه"
+              aria-label={copy.sliderAria}
               aria-valuemin={0}
-              aria-valuemax={pricingPlans.length - 1}
+              aria-valuemax={plans.length - 1}
               aria-valuenow={activePlanIndex}
-              aria-valuetext={`${activePlan.name}، ${activePlan.sliderInsight}`}
+              aria-valuetext={`${activePlan.name}, ${activePlan.sliderInsight}`}
               onKeyDown={handleSliderKeyDown}
               onPointerDown={(event) => {
                 event.stopPropagation();
@@ -578,8 +756,8 @@ export function PricingSection() {
             >
               <span className="h-2.5 w-2.5 rounded-full bg-white" />
             </button>
-            {pricingPlans.map((plan, index) => {
-              const tickPercent = (index / (pricingPlans.length - 1)) * 100;
+            {plans.map((plan, index) => {
+              const tickPercent = (index / (plans.length - 1)) * 100;
 
               return (
                 <div key={plan.id}>
@@ -601,7 +779,7 @@ export function PricingSection() {
                     onClick={() => selectPlan(index)}
                     style={{
                       right: `${tickPercent}%`,
-                      transform: getAxisItemTransform(index),
+                      transform: getAxisItemTransform(index, plans.length),
                     }}
                     className={cn(
                       "absolute top-16 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:top-14 md:h-14 md:w-20 md:text-xs",
@@ -609,7 +787,7 @@ export function PricingSection() {
                     )}
                   >
                     <span dir="ltr" className="absolute left-1/2 top-5 w-full -translate-x-1/2">
-                      {axisTickLabels[plan.id]}
+                      {tickLabels[plan.id]}
                     </span>
                   </button>
                 </div>
@@ -624,7 +802,7 @@ export function PricingSection() {
 
         <div className="pricing-duration mt-6 flex flex-col items-center gap-2">
           <div className="grid w-full max-w-xl grid-cols-3 gap-1.5 rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.025] md:gap-2 md:rounded-[1.4rem]">
-            {durations.map((item) => {
+            {durationOptions.map((item) => {
               const active = item.id === duration;
 
               return (
@@ -649,7 +827,7 @@ export function PricingSection() {
                           : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
                       )}
                     >
-                      بهترین ارزش
+                      {copy.bestValue}
                     </span>
                   ) : null}
                   <span className={cn("block", item.id === "12" && "pt-2")}>
@@ -668,14 +846,16 @@ export function PricingSection() {
         </div>
 
         <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-4">
-          {pricingPlans.map((plan, index) => (
+          {plans.map((plan, index) => (
             <PricingPlanCard
               key={plan.id}
               plan={plan}
               duration={duration}
+              durationById={durationById}
               isActive={activePlanIndex === index}
               isPulsing={pulsingPlan === plan.id}
               cardDelay={plan.featured ? "1120ms" : `${760 + index * 120}ms`}
+              locale={locale}
             />
           ))}
         </div>

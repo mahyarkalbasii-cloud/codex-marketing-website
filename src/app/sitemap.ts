@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
+import { citiesEn, stagesEn, suppliersEn } from "@/lib/site-data.en";
 
 export const dynamic = "force-static";
 
@@ -9,13 +10,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cityRoutes = cities.map((city) => `/cities/${city.slug}`);
   const supplierRoutes = suppliers.map((supplier) => `/suppliers/${supplier.slug}`);
   const stageRoutes = stages.map((stage) => `/construction-stages/${stage.slug}`);
+  const englishStaticRoutes = ["/en", "/en/features", "/en/pricing", "/en/faq"];
+  const englishCityRoutes = citiesEn.map((city) => `/en/cities/${city.slug}`);
+  const englishSupplierRoutes = suppliersEn.map(
+    (supplier) => `/en/suppliers/${supplier.slug}`,
+  );
+  const englishStageRoutes = stagesEn.map(
+    (stage) => `/en/construction-stages/${stage.slug}`,
+  );
 
-  return [...staticRoutes, ...cityRoutes, ...supplierRoutes, ...stageRoutes].map(
-    (route) => ({
+  return [
+    ...staticRoutes,
+    ...cityRoutes,
+    ...supplierRoutes,
+    ...stageRoutes,
+    ...englishStaticRoutes,
+    ...englishCityRoutes,
+    ...englishSupplierRoutes,
+    ...englishStageRoutes,
+  ].map((route) => ({
       url: absoluteUrl(route),
       lastModified: new Date(),
-      changeFrequency: route === "" ? "weekly" : "monthly",
-      priority: route === "" ? 1 : 0.75,
-    }),
-  );
+      changeFrequency: route === "" || route === "/en" ? "weekly" : "monthly",
+      priority: route === "" || route === "/en" ? 1 : 0.75,
+    }));
 }

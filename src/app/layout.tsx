@@ -37,6 +37,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
+    languages: {
+      fa: "/",
+      en: "/en",
+    },
   },
   openGraph: {
     type: "website",
@@ -77,7 +81,7 @@ export default function RootLayout({
       telephone: "+982175425000",
       contactType: "sales",
       areaServed: "IR",
-      availableLanguage: "fa",
+      availableLanguage: ["fa", "en"],
     },
     sameAs: site.sameAs,
   };
@@ -107,7 +111,7 @@ export default function RootLayout({
     "@type": "WebSite",
     name: site.name,
     url: site.url,
-    inLanguage: "fa-IR",
+    inLanguage: ["fa-IR", "en-US"],
   };
 
   return (

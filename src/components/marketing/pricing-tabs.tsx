@@ -7,12 +7,24 @@ import { CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { karajAddon, pricingGroups } from "@/lib/site-data";
+import { getSiteContent, localizeHref, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-export function PricingTabs() {
+export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
+  const { karajAddon, pricingGroups } = getSiteContent(locale);
   const [active, setActive] = useState(pricingGroups[0].id);
   const group = pricingGroups.find((item) => item.id === active) ?? pricingGroups[0];
+  const copy = locale === "fa"
+    ? {
+        featured: "پیشنهاد جدی‌تر",
+        demo: "درخواست دمو و انتخاب پلن",
+        addon: "افزودنی جغرافیایی",
+      }
+    : {
+        featured: "Stronger option",
+        demo: "Request demo and choose plan",
+        addon: "Geographic add-on",
+      };
 
   return (
     <div className="space-y-6">
@@ -50,7 +62,7 @@ export function PricingTabs() {
           >
             {plan.featured ? (
               <Badge variant="signal" className="absolute left-5 top-5">
-                پیشنهاد جدی‌تر
+                {copy.featured}
               </Badge>
             ) : null}
             <div className="space-y-2">
@@ -75,13 +87,13 @@ export function PricingTabs() {
               {plan.extra}
             </div>
             <Link
-              href="/#demo"
+              href={localizeHref("/#demo", locale)}
               className={cn(
                 buttonVariants({ variant: plan.featured ? "default" : "outline" }),
                 "mt-6 w-full",
               )}
             >
-              درخواست دمو و انتخاب پلن
+              {copy.demo}
             </Link>
           </Card>
         ))}
@@ -89,7 +101,7 @@ export function PricingTabs() {
 
       <Card className="grid gap-5 p-6 md:grid-cols-[1fr_1.4fr] md:items-center">
         <div>
-          <Badge variant="outline">افزودنی جغرافیایی</Badge>
+          <Badge variant="outline">{copy.addon}</Badge>
           <h3 className="mt-3 text-xl font-bold">{karajAddon.title}</h3>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">
             {karajAddon.description}
