@@ -2,6 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 import {
+  ArrowLeft,
   CircleDot,
   Compass,
   Handshake,
@@ -310,18 +311,15 @@ const salesTypes = [
 
 function SalesTypeCard({
   activeStage,
+  exampleFields,
   type,
 }: {
   activeStage: Stage;
+  exampleFields: string[];
   type: (typeof salesTypes)[number];
 }) {
   const focus = activeStage.sales[type.id];
-  const fitLabel =
-    focus.score >= 82
-      ? "تناسب بالا"
-      : focus.score >= 68
-        ? "تناسب متوسط"
-        : "تناسب محدود";
+  const sampleFields = Array.from(new Set([...focus.products, ...exampleFields])).slice(0, 7);
 
   return (
     <Card className="group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-xl hover:shadow-zinc-950/[0.06] md:p-5 dark:hover:border-zinc-700">
@@ -352,36 +350,46 @@ function SalesTypeCard({
 
       <div className="relative mt-3 rounded-2xl border border-[#e4d8c8] bg-[#faf9f6] p-3 dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mb-2 flex items-center justify-between gap-3 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
-          <span>تناسب با {activeStage.label}</span>
-          <span>{fitLabel}</span>
-        </div>
-        <div className="h-1.5 overflow-hidden rounded-full bg-[#e4d8c8] dark:bg-zinc-800">
-          <span
-            className="block h-full rounded-full transition-[width,background-color] duration-300"
-            style={{ width: `${focus.score}%`, backgroundColor: activeStage.color }}
-          />
+          <span>برای مرحله {activeStage.label}</span>
+          <span>نمونه کاربرد</span>
         </div>
         <p className="mt-3 text-xs font-semibold leading-6 text-[#6f6254] dark:text-zinc-300">
           {focus.note}
         </p>
       </div>
 
-      <div className="relative mt-3 flex flex-wrap gap-2">
-        {focus.products.map((product, index) => (
-          <Badge
-            key={product}
-            variant="secondary"
-            className="bg-[#f5eadb]/82"
-            style={
-              {
-                borderColor: index === 0 ? `${activeStage.color}55` : undefined,
-                color: index === 0 ? activeStage.color : undefined,
-              } as CSSProperties
-            }
-          >
-            {product}
-          </Badge>
-        ))}
+      <div className="relative mt-4">
+        <div className="mb-2 flex items-center justify-between gap-3 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
+          <span>نمونه زمینه‌های کاری و محصولات</span>
+          <span>نمونه‌اند، نه همه موارد</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {sampleFields.map((product, index) => (
+            <Badge
+              key={product}
+              variant="secondary"
+              className="bg-[#f5eadb]/82"
+              style={
+                {
+                  borderColor: index === 0 ? `${activeStage.color}55` : undefined,
+                  color: index === 0 ? activeStage.color : undefined,
+                } as CSSProperties
+              }
+            >
+              {product}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative mt-4">
+        <button
+          type="button"
+          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#2a241d] px-4 text-sm font-black text-white shadow-lg shadow-[#2a241d]/15 transition hover:bg-[#18130f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/40"
+        >
+          توضیحات بیشتر
+          <ArrowLeft className="h-4 w-4" strokeWidth={2} />
+        </button>
       </div>
     </Card>
   );
@@ -417,7 +425,12 @@ export function AudienceStageGuide() {
     <div className="relative mt-8 grid gap-5 lg:mt-10">
       <div className="grid gap-4 md:grid-cols-2 lg:[direction:rtl]">
         {salesTypes.map((type) => (
-          <SalesTypeCard key={type.id} type={type} activeStage={activeStage} />
+          <SalesTypeCard
+            key={type.id}
+            type={type}
+            activeStage={activeStage}
+            exampleFields={activeFields}
+          />
         ))}
       </div>
 
