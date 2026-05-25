@@ -255,7 +255,7 @@ function PricingPlanCard({
       data-active-plan={isActive ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
-        "pricing-card flex min-h-[34rem] w-[82vw] max-w-[22.5rem] shrink-0 snap-center flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        "pricing-card flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
@@ -685,19 +685,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        <div className="mt-8 flex justify-center md:hidden">
-          <PricingPlanCard
-            key={`${activePlan.id}-${duration}`}
-            plan={activePlan}
-            duration={duration}
-            isActive
-            isPulsing={pulsingPlan === activePlan.id}
-            cardDelay="0ms"
-            setCardRef={() => undefined}
-          />
-        </div>
-
-        <div className="pricing-cards mt-8 hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-4">
+        <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch xl:grid-cols-4">
           {pricingPlans.map((plan, index) => (
             <PricingPlanCard
               key={plan.id}
