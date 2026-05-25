@@ -514,24 +514,21 @@ function ProductPreviewSection() {
       aria-labelledby="product-title"
     >
       <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 md:px-6 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 pb-14 pt-12 md:px-6 md:py-16">
         <header className="relative grid gap-4 text-center md:grid-cols-[1fr_.85fr] md:items-end md:text-right">
           <div>
             <h2
               id="product-title"
               className="text-2xl font-bold leading-[1.32] text-foreground md:text-4xl md:leading-[1.28] lg:text-[2.35rem]"
             >
-              نقشه‌ی پروژه‌های ساختمانی تهران، کرج و لواسان — همه روی یک صفحه
+              از نقشه تا پیگیری فروش، در یک نمای واحد
             </h2>
           </div>
           <p className="mx-auto max-w-3xl text-base leading-8 text-muted-foreground md:hidden">
-            نمایی ساده از نقشه پروژه‌ها و اطلاعات هر پروژه. در نسخه واقعی،
-            داده‌ها زنده و راستی‌آزمایی‌شده هستند.
+            پروژه‌ها را فیلتر کنید، جزئیات را ببینید و مسیر پیگیری را از همان‌جا شروع کنید.
           </p>
           <p className="mx-auto hidden max-w-3xl text-base leading-8 text-muted-foreground md:mx-0 md:block md:text-lg md:leading-9">
-            پروژه‌های در حال ساخت تهران، کرج و لواسان را با فیلتر مرحله ساخت و
-            منطقه محدود کنید، روی نقشه ببینید و اطلاعات هر پروژه را
-            بررسی کنید. در نسخه‌ی واقعی، داده‌ها زنده و راستی‌آزمایی‌شده هستند.
+            یک نمای فشرده از محصول: جست‌وجوی پروژه، فیلتر مرحله ساخت، انتخاب فرصت مناسب و اقدام فروش بعدی، بدون شلوغی یک نقشه‌ی بزرگ.
           </p>
         </header>
 
