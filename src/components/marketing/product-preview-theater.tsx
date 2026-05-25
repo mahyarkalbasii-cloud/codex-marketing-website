@@ -62,14 +62,12 @@ const productViews: Array<{
 
 const filterSummary = [
   {
-    label: "مرحله ساخت",
+    label: "مرحله",
     value: "نازک‌کاری",
-    helper: "زمان مناسب برای پیشنهاد متریال داخلی",
   },
   {
     label: "منطقه",
     value: "شمال تهران",
-    helper: "ولنجک، نیاوران، زعفرانیه و اطراف",
   },
 ];
 
@@ -278,18 +276,13 @@ function MetricPill({
   );
 }
 
-function StaticFilterSummary({ compact = false }: { compact?: boolean }) {
+function StaticFilterSummary() {
   return (
-    <div
-      className={cn(
-        "grid gap-2",
-        compact ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-1",
-      )}
-    >
+    <div className="grid grid-cols-2 gap-2">
       {filterSummary.map((filter) => (
         <div
           key={filter.label}
-          className="rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/88 px-3 py-3"
+          className="flex h-[4.65rem] flex-col justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/88 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,250,241,0.9)]"
         >
           <span className="block text-[10px] font-bold text-[#8a7b6c]">
             {filter.label}
@@ -297,13 +290,19 @@ function StaticFilterSummary({ compact = false }: { compact?: boolean }) {
           <span className="mt-1 block text-sm font-black text-[#2a241d]">
             {filter.value}
           </span>
-          {!compact && (
-            <span className="mt-1 block text-[11px] font-semibold leading-5 text-[#7a6a59]">
-              {filter.helper}
-            </span>
-          )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function FilterSearchField({ label }: { label: string }) {
+  return (
+    <div className="flex h-12 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 shadow-[inset_0_1px_0_rgba(255,250,241,0.95),0_8px_18px_rgba(42,36,29,0.035)]">
+      <span className="inline-flex min-w-0 items-center gap-2 text-sm font-black text-[#2a241d]">
+        <Search className="h-4 w-4 shrink-0 text-[#c9792b]" />
+        <span className="truncate">{label}</span>
+      </span>
     </div>
   );
 }
@@ -311,11 +310,9 @@ function StaticFilterSummary({ compact = false }: { compact?: boolean }) {
 function ProductMapPanel({
   selectedProject,
   onSelectProject,
-  onOpenFilters,
 }: {
   selectedProject: SampleProject;
   onSelectProject: (project: SampleProject) => void;
-  onOpenFilters: () => void;
 }) {
   return (
     <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_16rem]">
@@ -393,21 +390,7 @@ function ProductMapPanel({
               نمای نمونه
             </span>
           </div>
-          <StaticFilterSummary compact />
-        </div>
-
-        <div className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fffaf1] p-3">
-          <p className="text-sm font-black leading-6 text-[#2a241d]">
-            نقشه فقط محل فرصت‌ها را نشان می‌دهد؛ تصمیم فروش در فیلترها دقیق‌تر می‌شود.
-          </p>
-          <button
-            type="button"
-            onClick={onOpenFilters}
-            className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-2xl bg-[#2a241d] px-3 text-xs font-bold text-[#fffaf1] transition hover:bg-[#3a3027] active:translate-y-px"
-          >
-            دیدن فیلترها
-            <ArrowLeft className="h-4 w-4" />
-          </button>
+          <StaticFilterSummary />
         </div>
       </aside>
     </div>
@@ -424,23 +407,13 @@ function ProductFiltersPanel({
   const visibleProjects = projects.length > 0 ? projects : sampleProjects.slice(0, 4);
 
   return (
-    <div className="grid gap-3 lg:grid-cols-[17rem_minmax(0,1fr)]">
-      <aside className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-bold text-[#8a7b6c]">فیلتر فعال</p>
-            <h3 className="mt-1 text-sm font-black text-[#2a241d]">
-              محدودسازی فرصت‌ها
-            </h3>
-          </div>
-          <SlidersHorizontal className="h-4 w-4 text-[#c9792b]" />
+    <div className="grid gap-3">
+      <div className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
+        <div className="grid grid-cols-2 gap-2">
+          <FilterSearchField label="مرحله" />
+          <FilterSearchField label="منطقه" />
         </div>
-        <StaticFilterSummary compact />
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          <MetricPill label="نتیجه" value={`${visibleProjects.length.toLocaleString("fa-IR")} پروژه`} />
-          <MetricPill label="اولویت" value="تماس فروش" tone="dark" />
-        </div>
-      </aside>
+      </div>
 
       <section className="overflow-hidden rounded-[1.15rem] border border-[#e4d8c8] bg-[#fffaf1]">
         <div className="flex items-center justify-between gap-3 border-b border-[#e4d8c8] px-3 py-3">
@@ -448,12 +421,9 @@ function ProductFiltersPanel({
             <h3 className="text-sm font-black text-[#2a241d]">
               پروژه‌های پیشنهادی
             </h3>
-            <p className="mt-1 text-[11px] font-semibold leading-5 text-[#7a6a59]">
-              فهرست کوتاه پروژه‌هایی که با مرحله و منطقه انتخابی هم‌خوانی دارند.
-            </p>
           </div>
           <span className="rounded-full border border-[#e4d8c8] bg-[#fbf6ed] px-2.5 py-1 text-[10.5px] font-black text-[#6f6254]">
-            به‌روزرسانی زنده
+            {visibleProjects.length.toLocaleString("fa-IR")} پروژه
           </span>
         </div>
 
@@ -467,14 +437,14 @@ function ProductFiltersPanel({
             </p>
           </div>
         ) : (
-          <ul className="max-h-[20rem] divide-y divide-[#eadfce] overflow-y-auto">
+          <ul className="grid max-h-[18.5rem] gap-2 overflow-y-auto p-2 sm:grid-cols-2">
             {visibleProjects.map((project) => (
               <li key={project.id}>
                 <button
                   type="button"
                   data-product-row={project.id}
                   onClick={() => onSelectProject(project)}
-                  className="grid w-full gap-2 px-3 py-3 text-right transition hover:bg-[#fbf6ed] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#c9792b]/25 active:translate-y-px"
+                  className="flex h-[7.5rem] w-full flex-col justify-between rounded-[1rem] border border-[#eadfce] bg-[#fbf6ed]/62 px-3 py-3 text-right transition hover:border-[#d8c9b6] hover:bg-[#fbf6ed] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#c9792b]/25 active:translate-y-px"
                 >
                   <span className="flex items-start justify-between gap-3">
                     <span className="min-w-0">
@@ -485,11 +455,11 @@ function ProductFiltersPanel({
                         {project.neighborhood}، {project.district} · {project.landArea}
                       </span>
                     </span>
-                    <span className="shrink-0 rounded-full border border-[#e4d8c8] bg-[#fbf6ed] px-2.5 py-1 text-[10.5px] font-black text-[#6f6254]">
+                    <span className="shrink-0 rounded-full border border-[#e4d8c8] bg-[#fffaf1] px-2.5 py-1 text-[10.5px] font-black text-[#6f6254]">
                       {project.fit}
                     </span>
                   </span>
-                  <span className="text-[11px] font-semibold leading-5 text-[#6f6254]">
+                  <span className="block truncate text-[11px] font-semibold leading-5 text-[#6f6254]">
                     نیاز احتمالی: {project.need}
                   </span>
                 </button>
@@ -522,7 +492,7 @@ function ProductFollowupPanel({ project }: { project: SampleProject }) {
   ];
 
   return (
-    <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_17rem]">
+    <div className="grid max-h-[27.5rem] gap-3 overflow-y-auto pr-1 lg:max-h-none lg:grid-cols-[minmax(0,1fr)_17rem] lg:overflow-visible lg:pr-0">
       <section className="overflow-hidden rounded-[1.15rem] border border-[#e4d8c8] bg-[#fffaf1]">
         <div className="border-b border-[#e4d8c8] bg-[#fbf6ed] p-3">
           <div className="flex items-start justify-between gap-3">
@@ -543,7 +513,7 @@ function ProductFollowupPanel({ project }: { project: SampleProject }) {
             <div
               key={step.title}
               className={cn(
-                "rounded-[1rem] border p-3",
+                "flex h-[5.35rem] flex-col justify-between rounded-[1rem] border p-3",
                 step.active
                   ? "border-[#c9792b]/35 bg-[#f6d6a8]/42"
                   : "border-[#eadfce] bg-[#fbf6ed]/72",
@@ -674,26 +644,45 @@ export function ProductPreviewTheater() {
                 role="tablist"
                 aria-label="نمای محصول"
               >
-                {productViews.map((view) => (
-                  <button
-                    key={view.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={activeView === view.id}
-                    onClick={() => setActiveView(view.id)}
-                    className={cn(
-                      "min-h-10 rounded-xl px-3 text-xs font-bold leading-5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/25 active:translate-y-px",
-                      activeView === view.id
-                        ? "bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/10"
-                        : "text-[#6f6254] hover:bg-[#fffaf1]",
-                    )}
-                  >
-                    <span className="block">{view.label}</span>
-                    <span className="hidden text-[10px] font-semibold opacity-70 lg:block">
-                      {view.description}
-                    </span>
-                  </button>
-                ))}
+                {productViews.map((view) => {
+                  const ViewIcon =
+                    view.id === "map"
+                      ? MapPinned
+                      : view.id === "filters"
+                        ? SlidersHorizontal
+                        : MessageSquareText;
+
+                  return (
+                    <button
+                      key={view.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeView === view.id}
+                      onClick={() => setActiveView(view.id)}
+                      className={cn(
+                        "group min-h-11 rounded-xl px-2 text-xs font-bold leading-5 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/25 active:translate-y-px",
+                        activeView === view.id
+                          ? "bg-[#2a241d] text-[#fffaf1] shadow-[inset_0_1px_0_rgba(255,250,241,0.14),0_9px_20px_rgba(42,36,29,0.12)]"
+                          : "bg-[#fffaf1]/45 text-[#6f6254] hover:bg-[#fffaf1]",
+                      )}
+                    >
+                      <span className="inline-flex items-center justify-center gap-1.5">
+                        <ViewIcon
+                          className={cn(
+                            "h-3.5 w-3.5",
+                            activeView === view.id
+                              ? "text-[#f1c98f]"
+                              : "text-[#c9792b]/72",
+                          )}
+                        />
+                        <span>{view.label}</span>
+                      </span>
+                      <span className="hidden text-[10px] font-semibold opacity-70 lg:block">
+                        {view.description}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -705,7 +694,6 @@ export function ProductPreviewTheater() {
                 onSelectProject={(project) => {
                   setSelectedId(project.id);
                 }}
-                onOpenFilters={() => setActiveView("filters")}
               />
             )}
 
