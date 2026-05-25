@@ -54,7 +54,7 @@ export function SiteFooter() {
           </p>
           <div className="space-y-2 text-sm text-[#cfc0af]">
             <p>
-              کارشناس فروش: {site.salesExpert} | داخلی {site.extension}
+              {site.salesExpert} | داخلی {site.extension}
             </p>
             <p>
               <a href="tel:+982175425000" dir="ltr" className="transition hover:text-[#fffaf1]">
@@ -66,6 +66,13 @@ export function SiteFooter() {
               </a>
             </p>
             <p>
+              {site.address}
+            </p>
+            <p>
+              <a href={`mailto:${site.email}`} dir="ltr" className="transition hover:text-[#fffaf1]">
+                {site.email}
+              </a>
+              {" | "}
               persiansaze.com | {site.handle}
             </p>
           </div>

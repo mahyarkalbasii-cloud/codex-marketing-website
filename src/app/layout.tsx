@@ -4,7 +4,7 @@ import { MobileActionBar } from "@/components/marketing/mobile-action-bar";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
-import { site } from "@/lib/site-data";
+import { absoluteUrl, site } from "@/lib/site-data";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -69,6 +69,9 @@ export default function RootLayout({
     "@type": "Organization",
     name: site.name,
     url: site.url,
+    logo: absoluteUrl(site.logoPath),
+    email: site.email,
+    telephone: "+982175425000",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+982175425000",
@@ -76,7 +79,27 @@ export default function RootLayout({
       areaServed: "IR",
       availableLanguage: "fa",
     },
-    sameAs: [`https://instagram.com/${site.handle.replace("@", "")}`],
+    sameAs: site.sameAs,
+  };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: site.url,
+    image: absoluteUrl(site.logoPath),
+    logo: absoluteUrl(site.logoPath),
+    telephone: "+982175425000",
+    email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address,
+      addressLocality: "تهران",
+      addressCountry: "IR",
+    },
+    openingHours: site.openingHours,
+    priceRange: "$$",
+    sameAs: site.sameAs,
   };
 
   const websiteSchema = {
@@ -98,7 +121,7 @@ export default function RootLayout({
       <body
         className="bg-background text-foreground antialiased"
       >
-        <StructuredData data={[organizationSchema, websiteSchema]} />
+        <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
         <SiteHeader />
         <div className="pb-24 lg:pb-0">
           {children}

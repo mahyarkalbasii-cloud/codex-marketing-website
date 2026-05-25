@@ -315,6 +315,12 @@ function SalesTypeCard({
   type: (typeof salesTypes)[number];
 }) {
   const focus = activeStage.sales[type.id];
+  const fitLabel =
+    focus.score >= 82
+      ? "تناسب بالا"
+      : focus.score >= 68
+        ? "تناسب متوسط"
+        : "تناسب محدود";
 
   return (
     <Card className="group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-xl hover:shadow-zinc-950/[0.06] md:p-5 dark:hover:border-zinc-700">
@@ -346,7 +352,7 @@ function SalesTypeCard({
       <div className="relative mt-3 rounded-2xl border border-[#e4d8c8] bg-[#faf9f6] p-3 dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mb-2 flex items-center justify-between gap-3 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
           <span>تناسب با {activeStage.label}</span>
-          <span>{focus.score.toLocaleString("fa-IR")}٪</span>
+          <span>{fitLabel}</span>
         </div>
         <div className="h-1.5 overflow-hidden rounded-full bg-[#e4d8c8] dark:bg-zinc-800">
           <span

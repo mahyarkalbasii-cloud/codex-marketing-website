@@ -8,8 +8,6 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type KeyboardEvent,
-  type PointerEvent as ReactPointerEvent,
 } from "react";
 import { ArrowLeft, BarChart3, Check } from "lucide-react";
 
@@ -69,7 +67,7 @@ const pricingPlans: PricingPlan[] = [
     id: "bonyan",
     name: "بنیان",
     sliderLabel: "زمین تا ۳۰۰ متر",
-    sliderInsight: "حدود ۱۸٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    sliderInsight: "پوشش سبک برای شروع فروش پروژه‌محور",
     highlights: [
       "شروع سبک برای تیم‌های فروش کوچک",
       "تمرکز روی فرصت‌های نزدیک‌تر و قابل پیگیری",
@@ -88,7 +86,7 @@ const pricingPlans: PricingPlan[] = [
     id: "royan",
     name: "رویان",
     sliderLabel: "زمین تا ۵۰۰ متر",
-    sliderInsight: "تا ۲۰٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    sliderInsight: "پوشش متعادل برای تیم فروش در حال رشد",
     highlights: [
       "برای تیمی که تماس‌های منظم‌تری می‌سازد",
       "دامنه بهتر برای کشف پروژه‌های در حال رشد",
@@ -107,7 +105,7 @@ const pricingPlans: PricingPlan[] = [
     id: "taban",
     name: "تابان",
     sliderLabel: "زمین تا ۷۰۰ متر",
-    sliderInsight: "تا ۲۳٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    sliderInsight: "پیشنهاد اصلی برای پوشش جدی‌تر بازار",
     highlights: [
       "برای فروش جدی‌تر با پوشش میدانی گسترده‌تر",
       "اولویت‌دهی بهتر بین پروژه‌های داغ و قابل مذاکره",
@@ -127,7 +125,7 @@ const pricingPlans: PricingPlan[] = [
     id: "taban-plus",
     name: "تابان پلاس",
     sliderLabel: "زمین بزرگ‌تر",
-    sliderInsight: "تا ۲۵٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    sliderInsight: "پوشش گسترده برای تیم‌های چندمنطقه‌ای",
     highlights: [
       "برای تیم‌هایی که چند منطقه را هم‌زمان پوشش می‌دهند",
       "دید وسیع‌تر روی پروژه‌های بزرگ و تصمیم‌ساز",
@@ -145,6 +143,18 @@ const pricingPlans: PricingPlan[] = [
 ];
 
 const DEFAULT_PLAN_INDEX = 2;
+const mobilePricingPlans = [
+  { plan: pricingPlans[2], index: 2 },
+  { plan: pricingPlans[1], index: 1 },
+  { plan: pricingPlans[0], index: 0 },
+  { plan: pricingPlans[3], index: 3 },
+];
+const mobilePlanOrder: Record<PlanId, string> = {
+  taban: "max-md:order-1",
+  royan: "max-md:order-2",
+  bonyan: "max-md:order-3",
+  "taban-plus": "max-md:order-4",
+};
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
 
@@ -256,6 +266,7 @@ function PricingPlanCard({
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
         "pricing-card flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        mobilePlanOrder[plan.id],
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
@@ -370,19 +381,11 @@ export function PricingSection() {
   const [isReady, setIsReady] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const railRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Partial<Record<PlanId, HTMLDivElement | null>>>({});
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const activePlan = pricingPlans[activePlanIndex];
   const activeDuration = useMemo(() => durationById[duration], [duration]);
-  const activePercent = (activePlanIndex / (pricingPlans.length - 1)) * 100;
-  const activeBubbleTransform =
-    activePlanIndex === 0
-      ? "translateX(0)"
-      : activePlanIndex === pricingPlans.length - 1
-        ? "translateX(100%)"
-        : "translateX(50%)";
 
   useEffect(() => {
     setIsReady(true);
@@ -464,54 +467,6 @@ export function PricingSection() {
     [prefersReducedMotion, scrollPlanIntoView],
   );
 
-  const getIndexFromPointer = useCallback((clientX: number) => {
-    const rail = railRef.current;
-
-    if (!rail) {
-      return activePlanIndex;
-    }
-
-    const rect = rail.getBoundingClientRect();
-    const ratio = Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
-
-    return Math.round(ratio * (pricingPlans.length - 1));
-  }, [activePlanIndex]);
-
-  const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    selectPlan(getIndexFromPointer(event.clientX));
-  };
-
-  const handleRailMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.buttons !== 1) {
-      return;
-    }
-
-    selectPlan(getIndexFromPointer(event.clientX));
-  };
-
-  const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-      event.preventDefault();
-      selectPlan(activePlanIndex + 1);
-    }
-
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-      event.preventDefault();
-      selectPlan(activePlanIndex - 1);
-    }
-
-    if (event.key === "Home") {
-      event.preventDefault();
-      selectPlan(0);
-    }
-
-    if (event.key === "End") {
-      event.preventDefault();
-      selectPlan(pricingPlans.length - 1);
-    }
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -524,18 +479,18 @@ export function PricingSection() {
         <div className="pricing-reveal-header">
           <SectionHeader
             eyebrow="پلن‌ها"
-            title="زمین بازی خود را انتخاب کنید"
+            title="اشتراک متناسب با ابعاد فروش خود را انتخاب کنید"
             description="در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد"
           />
         </div>
 
-        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-3 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
+        <div className="pricing-mobile-selector mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-3 shadow-sm shadow-[#2a241d]/[0.03] md:hidden">
           <div
-            className="grid grid-cols-2 gap-2 md:hidden"
+            className="grid grid-cols-2 gap-2"
             role="radiogroup"
-            aria-label="انتخاب مقیاس زمین پروژه"
+            aria-label="انتخاب پلن"
           >
-            {pricingPlans.map((plan, index) => {
+            {mobilePricingPlans.map(({ plan, index }) => {
               const active = activePlanIndex === index;
 
               return (
@@ -569,77 +524,9 @@ export function PricingSection() {
             })}
           </div>
 
-          <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254] md:hidden">
+          <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]">
             {activePlan.sliderInsight}
           </p>
-
-          <div
-            ref={railRef}
-            className="relative mx-3 hidden h-24 max-w-3xl touch-none md:mx-auto md:block"
-            onPointerDown={handleRailPointer}
-            onPointerMove={handleRailMove}
-          >
-            <div className="absolute left-0 right-0 top-12 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
-              <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
-            </div>
-            <span
-              className="absolute top-0 z-10 max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-[11px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 md:whitespace-nowrap md:text-xs"
-              style={{ right: `${activePercent}%`, transform: activeBubbleTransform }}
-            >
-              {activePlan.sliderInsight}
-            </span>
-            <button
-              type="button"
-              data-plan-slider-handle
-              role="slider"
-              aria-label="انتخاب مقیاس زمین پروژه"
-              aria-valuemin={0}
-              aria-valuemax={pricingPlans.length - 1}
-              aria-valuenow={activePlanIndex}
-              aria-valuetext={`${activePlan.name}، ${activePlan.sliderInsight}`}
-              onKeyDown={handleSliderKeyDown}
-              onPointerDown={(event) => {
-                event.stopPropagation();
-                event.currentTarget.setPointerCapture(event.pointerId);
-                selectPlan(getIndexFromPointer(event.clientX));
-              }}
-              onPointerMove={(event) => {
-                if (event.buttons === 1) {
-                  selectPlan(getIndexFromPointer(event.clientX));
-                }
-              }}
-              className="absolute top-12 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
-              style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
-            >
-              <span className="h-2.5 w-2.5 rounded-full bg-white" />
-            </button>
-            {pricingPlans.map((plan, index) => (
-              <button
-                key={plan.id}
-                type="button"
-                data-plan-tick={plan.id}
-                onClick={() => selectPlan(index)}
-                style={{
-                  right: `${(index / (pricingPlans.length - 1)) * 100}%`,
-                  transform: "translateX(50%)",
-                }}
-                className={cn(
-                  "absolute top-12 z-10 h-14 w-24 rounded-2xl text-center text-xs font-bold text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:w-28",
-                  activePlanIndex === index && "text-[#2a241d]",
-                )}
-              >
-                <span
-                  className={cn(
-                    "absolute left-1/2 top-0 block h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
-                    activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
-                  )}
-                />
-                <span className="absolute left-1/2 top-5 w-full -translate-x-1/2">
-                  {plan.sliderLabel}
-                </span>
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="pricing-duration mt-6 flex flex-col items-center gap-2">

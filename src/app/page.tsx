@@ -8,9 +8,7 @@ import {
   BarChart3,
   CheckCircle2,
   Clock3,
-  ClipboardList,
   Database,
-  Filter,
   GraduationCap,
   Layers,
   MapPin,
@@ -24,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { HeroMapVisual } from "@/components/hero/HeroMapVisual";
+import { DemoRequestForm } from "@/components/marketing/demo-request-form";
 import { HowItWorksRevealController } from "@/components/marketing/how-it-works-reveal-controller";
 import { AudienceStageGuide } from "@/components/marketing/audience-stage-guide";
 import { FaqList } from "@/components/marketing/faq-list";
@@ -95,19 +94,19 @@ const solutionCards = [
 
 const heroProofCards = [
   {
-    value: "داده پروژه",
-    label: "۳ شهر، هزاران پروژه فعال",
+    value: "۳ شهر",
+    label: "تهران، کرج و لواسان",
     icon: MapPin,
   },
   {
-    value: "ابزار پیگیری",
-    label: "CRM، پیامک و یادآوری روی همان پروژه",
-    icon: MessageSquareText,
+    value: "۸ مرحله",
+    label: "از گودبرداری تا پایان کار",
+    icon: Layers,
   },
   {
-    value: "آموزش فروش",
-    label: "متن تماس، پیگیری و راهنمای کاربردی",
-    icon: GraduationCap,
+    value: "پیگیری منظم",
+    label: "تماس، پیامک و یادآوری فروش",
+    icon: MessageSquareText,
   },
 ] as const;
 
@@ -377,7 +376,7 @@ function MarketProblemSection() {
     >
       <div className="absolute inset-0 map-parcel-pattern opacity-35" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[.9fr_1.1fr] md:items-center md:gap-10 md:px-6 md:py-20">
-        <div className="relative order-2 max-w-3xl text-center md:order-none md:text-right">
+        <div className="relative order-1 max-w-3xl text-center md:order-none md:text-right">
           <h2
             id="market-problem-title"
             className="text-3xl font-bold leading-[1.3] text-foreground md:text-[2.85rem] md:leading-[1.24] lg:text-5xl"
@@ -394,7 +393,7 @@ function MarketProblemSection() {
             href="#solution"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "mt-6 h-11 rounded-xl bg-white/80 px-5 shadow-sm dark:bg-zinc-900/80",
+              "mt-6 hidden h-11 rounded-xl bg-white/80 px-5 shadow-sm md:inline-flex dark:bg-zinc-900/80",
             )}
           >
             آشنایی با راه‌حل پرشین‌سازه
@@ -402,7 +401,7 @@ function MarketProblemSection() {
           </Link>
         </div>
 
-        <Card className="relative order-1 overflow-hidden p-0 shadow-lg shadow-[#2a241d]/[0.045] md:order-none">
+        <Card className="relative order-2 overflow-hidden p-0 shadow-lg shadow-[#2a241d]/[0.045] md:order-none">
           <article aria-label="نمای انتزاعی مشکل فروش در بازار ساختمان">
             <MarketProblemPresentationVisual />
 
@@ -428,6 +427,17 @@ function MarketProblemSection() {
             </div>
           </article>
         </Card>
+
+        <Link
+          href="#solution"
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "order-3 h-11 rounded-xl bg-white/80 px-5 shadow-sm md:hidden dark:bg-zinc-900/80",
+          )}
+        >
+          آشنایی با راه‌حل پرشین‌سازه
+          <ArrowLeft className="h-4 w-4" />
+        </Link>
       </div>
     </section>
   );
@@ -663,13 +673,11 @@ function SalesFlowSection() {
               id="sales-flow-title"
               className="mx-auto max-w-4xl text-2xl font-bold leading-[1.32] text-foreground md:text-4xl md:leading-[1.28] lg:text-[2.35rem]"
             >
-              فروش در بازار ساختمان، فقط به قیمت و کیفیت محصول بستگی ندارد؛ به دید بهتر، زمان‌بندی بهتر و پیگیری بهتر هم وابسته است.
+              فروش پروژه‌محور یک مسیر چهارمرحله‌ای دارد
             </h2>
           </div>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
-            پرشین‌سازه به شما کمک می‌کند پروژه مناسب را پیدا کنید، فرصت‌ها را
-            بهتر بسنجید، ارتباط مؤثرتری شروع کنید و پیگیری فروش را منظم‌تر جلو
-            ببرید.
+            از شناسایی فرصت تا قرارداد، در یک مسیر مشخص و قابل پیگیری.
           </p>
         </header>
 
@@ -772,44 +780,25 @@ function DemoRequestSection() {
                 در دمو، مسیر پیدا کردن پروژه، بررسی فیلترها و مرحله ساخت و
                 مرور پیگیری فروش را با هم جلو می‌بریم.
               </p>
-              <div className="mt-6 hidden max-w-lg grid-cols-3 gap-3 md:grid">
-                {[
-                  { label: "مشاهده مسیر پیدا کردن پروژه", icon: MapPinned },
-                  { label: "بررسی فیلترها و مرحله ساخت", icon: Filter },
-                  { label: "مرور پیگیری فروش", icon: ClipboardList },
-                ].map((item) => {
-                  const Icon = item.icon;
-
-                  return (
-                  <div key={item.label} className="rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-3 text-sm font-semibold dark:border-zinc-800 dark:bg-zinc-950">
-                    <Icon className="mb-2 h-4 w-4 text-zinc-500" />
-                    {item.label}
-                  </div>
-                  );
-                })}
+              <div className="mt-6">
+                <DemoClosingVisual />
               </div>
             </div>
             <div className="relative grid gap-4">
-              <DemoClosingVisual />
               <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
                 <div className="text-sm text-zinc-500">تماس فروش</div>
                 <div className="mt-3 text-2xl font-bold">{site.phones[0]}</div>
                 <div className="mt-2 text-sm text-zinc-500">
                   {site.salesExpert} | داخلی {site.extension}
                 </div>
-                <div className="mt-6 grid gap-3">
+                <DemoRequestForm />
+                <div className="mt-5 grid gap-3">
                   <a
                     href="tel:+982175425000"
-                    className={cn(buttonVariants(), "w-full")}
+                    className={cn(buttonVariants({ variant: "outline" }), "w-full")}
                   >
                     تماس با فروش
                   </a>
-                  <Link
-                    href="#product"
-                    className={cn(buttonVariants({ variant: "outline" }), "w-full")}
-                  >
-                    مشاهده نمونه محصول
-                  </Link>
                 </div>
               </div>
             </div>
@@ -900,7 +889,10 @@ export default function Home() {
                   دیدن قابلیت‌ها
                 </Link>
               </div>
-              <div className="mx-auto grid w-full max-w-[21rem] grid-cols-1 gap-3 pt-2 sm:max-w-xl sm:grid-cols-3 lg:mx-0">
+              <div className="mx-auto max-w-[21rem] rounded-2xl border border-[#D8C9B6] bg-[#FFFAF1]/86 px-4 py-3 text-center text-xs font-bold leading-6 text-[#5f5348] shadow-sm shadow-[#2A241D]/[0.035] sm:hidden">
+                ۳ شهر | هزاران پروژه فعال | ۸ مرحله ساخت
+              </div>
+              <div className="mx-auto hidden w-full max-w-[21rem] grid-cols-1 gap-3 pt-2 sm:grid sm:max-w-xl sm:grid-cols-3 lg:mx-0">
                 {heroProofCards.map((item) => (
                   <div
                     key={item.label}
@@ -936,8 +928,6 @@ export default function Home() {
 
       <ProductPreviewSection />
 
-      <SalesFlowSection />
-
       <section id="audiences" className="relative overflow-hidden border-y border-zinc-200 bg-white/35 dark:border-zinc-800 dark:bg-zinc-950">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(242,182,49,0.10),transparent_28%)]" aria-hidden="true" />
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
@@ -946,21 +936,41 @@ export default function Home() {
             title="برای چه نوع تأمین‌کنندگانی مناسب است؟"
             description="پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی مناسب است که فروش پروژه‌محورشان به شناخت پروژه‌های ساختمانی، زمان مناسب تماس و پیگیری منظم وابسته است."
           />
+          <div className="mx-auto mt-6 grid max-w-4xl gap-2 rounded-[1.25rem] border border-[#e4d8c8] bg-[#fffaf1]/74 p-2 shadow-sm shadow-[#2a241d]/[0.025] sm:grid-cols-4">
+            {["تا ۳۰۰ متر", "تا ۵۰۰ متر", "تا ۷۰۰ متر", "بزرگ‌تر"].map((item, index) => (
+              <div
+                key={item}
+                className={cn(
+                  "rounded-2xl px-3 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]",
+                  index === 2 && "bg-[#2a241d] text-[#fffaf1]",
+                )}
+              >
+                {item}
+                <span className="mt-1 block text-[11px] font-semibold opacity-75">
+                  ۸ مرحله ساخت
+                </span>
+              </div>
+            ))}
+          </div>
           <AudienceStageGuide />
         </div>
       </section>
 
+      <SalesFlowSection />
+
       <PricingSection />
 
       <section id="faq">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-[.8fr_1.2fr] md:items-start md:gap-10 md:px-6 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="سوالات رایج"
             title="پرسش‌هایی که قبل از خرید باید شفاف شوند."
             description="پاسخ به پرسش‌هایی که معمولاً قبل از خرید اشتراک پرشین‌سازه مطرح می‌شود."
-            className="md:mx-0 md:text-right"
+            className="mx-auto max-w-2xl text-center"
           />
-          <FaqList limit={6} />
+          <div className="mx-auto mt-8 max-w-4xl">
+            <FaqList limit={6} />
+          </div>
         </div>
       </section>
 
