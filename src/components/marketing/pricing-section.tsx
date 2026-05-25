@@ -23,6 +23,7 @@ type PricingPlan = {
   name: string;
   sliderLabel: string;
   sliderInsight: string;
+  selectorMotto: string;
   highlights: string[];
   prices: Record<Duration, string>;
   addon: string;
@@ -68,6 +69,7 @@ const pricingPlans: PricingPlan[] = [
     name: "بنیان",
     sliderLabel: "زمین تا ۳۰۰ متر",
     sliderInsight: "تا ۱۸٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "شروع سبک برای تست بازار و ساختن ریتم پیگیری",
     highlights: [
       "شروع سبک برای تیم‌های فروش کوچک",
       "تمرکز روی فرصت‌های نزدیک‌تر و قابل پیگیری",
@@ -87,6 +89,7 @@ const pricingPlans: PricingPlan[] = [
     name: "رویان",
     sliderLabel: "زمین تا ۵۰۰ متر",
     sliderInsight: "تا ۲۰٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پوشش متعادل برای تیمی که تماس منظم‌تر می‌خواهد",
     highlights: [
       "برای تیمی که تماس‌های منظم‌تری می‌سازد",
       "دامنه بهتر برای کشف پروژه‌های در حال رشد",
@@ -106,6 +109,7 @@ const pricingPlans: PricingPlan[] = [
     name: "تابان",
     sliderLabel: "زمین تا ۷۰۰ متر",
     sliderInsight: "تا ۲۳٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پیشنهاد اصلی برای فروش جدی‌تر و پوشش مؤثر بازار",
     highlights: [
       "برای فروش جدی‌تر با پوشش میدانی گسترده‌تر",
       "اولویت‌دهی بهتر بین پروژه‌های داغ و قابل مذاکره",
@@ -126,6 +130,7 @@ const pricingPlans: PricingPlan[] = [
     name: "تابان پلاس",
     sliderLabel: "زمین بزرگ‌تر",
     sliderInsight: "تا ۲۵٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پوشش گسترده برای تیم‌های چندمنطقه‌ای و فروش سنگین‌تر",
     highlights: [
       "برای تیم‌هایی که چند منطقه را هم‌زمان پوشش می‌دهند",
       "دید وسیع‌تر روی پروژه‌های بزرگ و تصمیم‌ساز",
@@ -533,7 +538,7 @@ export function PricingSection() {
           </div>
 
           <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]">
-            {activePlan.sliderInsight}
+            {activePlan.selectorMotto}
           </p>
         </div>
 
