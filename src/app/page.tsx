@@ -123,6 +123,7 @@ const howItWorksLayers = [
       "تأیید و راستی‌آزمایی",
       "تصویر زنده از بازار",
     ],
+    outcome: "خروجی این لایه: پروفایل پروژه‌ی راستی‌آزمایی‌شده",
   },
   {
     title: "تحلیل، امتیازدهی و پیشنهاد اقدام برای تیم فروش",
@@ -136,6 +137,7 @@ const howItWorksLayers = [
       "امتیازدهی پروژه",
       "پیشنهاد اقدام",
     ],
+    outcome: "خروجی این لایه: پیشنهاد اقدام برای تیم فروش",
   },
 ] as const;
 
@@ -573,7 +575,120 @@ function HowItWorksSection() {
           </p>
         </header>
 
-        <div className="relative mx-auto mt-8 flex max-w-[880px] flex-col items-stretch md:mt-10">
+        {/* Sample Project Strip */}
+        <div
+          style={
+            {
+              "--how-delay": "280ms",
+            } as CSSProperties & Record<"--how-delay", string>
+          }
+          className="how-layer-card mx-auto mt-8 max-w-[880px] rounded-2xl border border-[#1B1916]/[0.08] bg-[#F5EFE2] p-5 md:mt-12 md:p-6"
+          aria-label="نمونه جریان پردازش پروژه"
+        >
+          <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center">
+
+            {/* Node 1 — Project */}
+            <div className="min-w-0 flex-1">
+              {/* PLACEHOLDER: replace with real project sample before deploy. Do NOT publish with fake data. */}
+              <p className="text-xs font-semibold leading-5 text-[#CC785C]">نمونه پروژه</p>
+              <div className="mt-2 space-y-1">
+                <p className="text-sm font-semibold leading-6 text-[#1B1916]">ساختمان مسکونی، منطقه نمونه</p>
+                <p className="text-sm leading-6 text-[#1B1916]/65">۸ طبقه، در حال سفت‌کاری</p>
+                <p className="text-sm leading-6 text-[#1B1916]/65">ثبت‌شده در بازدید میدانی، ۱۲ روز پیش</p>
+              </div>
+            </div>
+
+            {/* Connector: down on mobile, left-pointing on desktop (RTL flow) */}
+            <div className="flex justify-center" aria-hidden="true">
+              <svg
+                className="h-8 w-5 shrink-0 text-[#CC785C] md:hidden"
+                viewBox="0 0 20 32"
+                fill="none"
+              >
+                <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
+              </svg>
+              <svg
+                className="hidden h-5 w-8 shrink-0 text-[#CC785C] md:block"
+                viewBox="0 0 32 20"
+                fill="none"
+              >
+                <path d="M28 10H8" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M11 5L2 10L11 15Z" fill="currentColor" />
+              </svg>
+            </div>
+
+            {/* Node 2 — AI processing */}
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#1B1916]/[0.08] bg-[#F5EFE2]"
+                aria-hidden="true"
+              >
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="text-[#CC785C]">
+                  <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="16" cy="16" r="8" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.65" />
+                  <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.35" />
+                </svg>
+              </div>
+              <p className="text-xs leading-5 text-[#1B1916]/65">پردازش هوش مصنوعی</p>
+            </div>
+
+            {/* Connector: down on mobile, left-pointing on desktop (RTL flow) */}
+            <div className="flex justify-center" aria-hidden="true">
+              <svg
+                className="h-8 w-5 shrink-0 text-[#CC785C] md:hidden"
+                viewBox="0 0 20 32"
+                fill="none"
+              >
+                <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
+              </svg>
+              <svg
+                className="hidden h-5 w-8 shrink-0 text-[#CC785C] md:block"
+                viewBox="0 0 32 20"
+                fill="none"
+              >
+                <path d="M28 10H8" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M11 5L2 10L11 15Z" fill="currentColor" />
+              </svg>
+            </div>
+
+            {/* Node 3 — Action */}
+            <div className="min-w-0 flex-1">
+              {/* PLACEHOLDER: replace with real project sample before deploy. Do NOT publish with fake data. */}
+              <p className="text-xs font-semibold leading-5 text-[#CC785C]">خروجی برای تیم فروش</p>
+              <div className="mt-2 space-y-1">
+                <p className="text-sm font-semibold leading-6 text-[#1B1916]">امتیاز فرصت: بالا</p>
+                <p className="text-sm leading-6 text-[#1B1916]/65">محصول پیشنهادی: کاشی و سرامیک نما</p>
+                <p className="text-sm leading-6 text-[#1B1916]/65">بازه‌ی پیشنهادی تماس: تا ۳ روز</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Connector between Sample Strip and the two layer cards */}
+        <div
+          style={
+            {
+              "--how-delay": "330ms",
+            } as CSSProperties & Record<"--how-delay", string>
+          }
+          className="how-layer-arrow mx-auto my-6 flex max-w-[880px] flex-col items-center justify-center gap-2 text-center text-sm leading-6 text-[#6F6254] md:flex-row md:gap-3 md:text-right"
+        >
+          <svg
+            className="h-8 w-5 shrink-0 text-[#CC785C]"
+            viewBox="0 0 20 32"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
+          </svg>
+          <span>این دقیقاً همان جریانی است که در دو لایه‌ی زیر اتفاق می‌افتد</span>
+        </div>
+
+        <div className="relative mx-auto flex max-w-[880px] flex-col items-stretch">
           {howItWorksLayers.map((layer, index) => (
             <Fragment key={layer.title}>
               <article
@@ -600,7 +715,9 @@ function HowItWorksSection() {
                   {layer.body}
                 </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-2">
+                <hr className="my-4 border-t border-[#1B1916]/[0.08]" />
+
+                <div className="flex flex-wrap items-center gap-2">
                   {layer.steps.map((step, stepIndex) => (
                     <div key={step} className="flex items-center gap-2">
                       <span className="rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
@@ -616,6 +733,17 @@ function HowItWorksSection() {
                       ) : null}
                     </div>
                   ))}
+                </div>
+
+                <div className="mt-4 flex items-start gap-0">
+                  <span
+                    className="me-2 mt-[0.35rem] inline-block shrink-0 bg-[#CC785C]"
+                    style={{ width: 4, height: 4 }}
+                    aria-hidden="true"
+                  />
+                  <p className="text-sm leading-6 text-[#1B1916]/65">
+                    {layer.outcome}
+                  </p>
                 </div>
               </article>
 
