@@ -302,7 +302,7 @@ const salesTypes = [
   {
     id: "consultative",
     label: "ورود زودتر به تصمیم",
-    title: "فروش مشاوره‌ای و تصمیم‌ساز",
+    title: "فروش مشاوره‌ای",
     text: "برای فروش‌هایی که اعتمادسازی، بررسی فنی یا مذاکره قبل از خرید لازم دارند.",
     Icon: Handshake,
   },
@@ -398,18 +398,11 @@ export function AudienceStageGuide() {
   const signalCards = activeTaxonomy
     ? [
         {
-          label: "عامل کلیدی خرید",
-          text: activeTaxonomy.buyerSignal,
-          Icon: Compass,
+          label: salesTaxonomyMeta.strategicColumnTitle,
+          text: activeTaxonomy.strategicFactors,
+          Icon: Layers3,
           color: activeStage.color,
           soft: activeStage.soft,
-        },
-        {
-          label: "حرکت پیشنهادی فروش",
-          text: activeTaxonomy.sellerAction,
-          Icon: Layers3,
-          color: "#C9792B",
-          soft: "#F6D6A8",
         },
       ]
     : activeStage.signals.map((signal, index) => ({
@@ -421,7 +414,13 @@ export function AudienceStageGuide() {
       }));
 
   return (
-    <div className="relative mt-8 grid gap-5 lg:mt-10 lg:grid-cols-[1.08fr_.92fr] lg:[direction:ltr]">
+    <div className="relative mt-8 grid gap-5 lg:mt-10">
+      <div className="grid gap-4 md:grid-cols-2 lg:[direction:rtl]">
+        {salesTypes.map((type) => (
+          <SalesTypeCard key={type.id} type={type} activeStage={activeStage} />
+        ))}
+      </div>
+
       <Card className="relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem] lg:[direction:rtl]">
         <div
           className="pointer-events-none absolute -right-16 top-10 h-40 w-40 rounded-full blur-3xl"
@@ -515,11 +514,12 @@ export function AudienceStageGuide() {
 
             {activeTaxonomy ? (
               <div className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
-                <div className="grid gap-2 sm:grid-cols-3">
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   {[
                     ["نوع فروش غالب", activeTaxonomy.dominantSaleType],
-                    ["پنجره ورود", activeTaxonomy.decisionWindow],
-                    ["دسته‌های پرتکرار", activeTaxonomy.categories.slice(0, 2).join("، ")],
+                    ["مرحله مناسب مذاکره", activeTaxonomy.timing.negotiation],
+                    ["مرحله مناسب خرید", activeTaxonomy.timing.purchase],
+                    ["مرحله مناسب اجرا", activeTaxonomy.timing.execution],
                   ].map(([label, value]) => (
                     <div
                       key={label}
@@ -588,11 +588,6 @@ export function AudienceStageGuide() {
         </div>
       </Card>
 
-      <div className="grid gap-4 lg:[direction:rtl]">
-        {salesTypes.map((type) => (
-          <SalesTypeCard key={type.id} type={type} activeStage={activeStage} />
-        ))}
-      </div>
     </div>
   );
 }
