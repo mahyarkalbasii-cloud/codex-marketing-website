@@ -904,23 +904,23 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       dir={locale === "fa" ? "rtl" : "ltr"}
       aria-label={copy.aria}
       className={cn(
-        "hero-map-visual product-theater relative isolate w-full rounded-[1.6rem] border border-[#d8c7b2] bg-[#fffaf1]/82 shadow-xl shadow-primary/[0.07] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/82",
+        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.5rem]",
         compact
-          ? "aspect-[4/3] min-h-[320px] p-3 sm:min-h-[360px]"
-          : "aspect-[9/10] min-h-[440px] p-4 sm:aspect-[4/5] sm:min-h-[500px] lg:aspect-auto lg:min-h-[560px] lg:p-5 xl:min-h-[580px]",
+          ? "aspect-[10/11] min-h-[380px] sm:min-h-[420px]"
+          : "aspect-[10/11] min-h-[500px] sm:aspect-[4/5] sm:min-h-[560px] lg:aspect-[5/6] lg:min-h-[620px] xl:min-h-[660px]",
       )}
       data-mode={mode}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handleVisualPointerDown}
     >
-      <div className="absolute inset-0 bg-grid product-grid opacity-60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid product-grid opacity-45" aria-hidden="true" />
 
       <div
         ref={parallaxRef}
         className="relative h-full transition-transform duration-300 ease-out will-change-transform"
       >
-        <div className="absolute inset-0 overflow-hidden rounded-[1.35rem] border border-[#e4d8c8] bg-[#f3eadb] shadow-inner shadow-[#2a241d]/[0.025] dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="absolute inset-0 overflow-hidden bg-[#f3eadb] dark:bg-zinc-950">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_42%,rgba(204,120,92,0.18),transparent_31%),radial-gradient(circle_at_72%_24%,rgba(42,36,29,0.10),transparent_25%)]" aria-hidden="true" />
           <div className="absolute inset-0 bg-grid product-grid opacity-40" aria-hidden="true" />
           <HeroMapArtwork interactive={interactiveDesktop} />
