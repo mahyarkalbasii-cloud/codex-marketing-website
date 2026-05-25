@@ -28,7 +28,16 @@ function persistLocalRequest(request: DemoFormState) {
 
   const key = "persiansaze-demo-requests";
   const current = window.localStorage.getItem(key);
-  const parsed = current ? (JSON.parse(current) as unknown[]) : [];
+  let parsed: unknown[] = [];
+
+  if (current) {
+    try {
+      const stored = JSON.parse(current);
+      parsed = Array.isArray(stored) ? stored : [];
+    } catch {
+      parsed = [];
+    }
+  }
 
   window.localStorage.setItem(
     key,
