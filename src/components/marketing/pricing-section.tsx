@@ -67,7 +67,7 @@ const pricingPlans: PricingPlan[] = [
     id: "bonyan",
     name: "بنیان",
     sliderLabel: "زمین تا ۳۰۰ متر",
-    sliderInsight: "پوشش سبک برای شروع فروش پروژه‌محور",
+    sliderInsight: "تا ۱۸٬۰۰۰ پروژه در ۸ مرحله ساخت",
     highlights: [
       "شروع سبک برای تیم‌های فروش کوچک",
       "تمرکز روی فرصت‌های نزدیک‌تر و قابل پیگیری",
@@ -86,7 +86,7 @@ const pricingPlans: PricingPlan[] = [
     id: "royan",
     name: "رویان",
     sliderLabel: "زمین تا ۵۰۰ متر",
-    sliderInsight: "پوشش متعادل برای تیم فروش در حال رشد",
+    sliderInsight: "تا ۲۰٬۰۰۰ پروژه در ۸ مرحله ساخت",
     highlights: [
       "برای تیمی که تماس‌های منظم‌تری می‌سازد",
       "دامنه بهتر برای کشف پروژه‌های در حال رشد",
@@ -105,7 +105,7 @@ const pricingPlans: PricingPlan[] = [
     id: "taban",
     name: "تابان",
     sliderLabel: "زمین تا ۷۰۰ متر",
-    sliderInsight: "پیشنهاد اصلی برای پوشش جدی‌تر بازار",
+    sliderInsight: "تا ۲۳٬۰۰۰ پروژه در ۸ مرحله ساخت",
     highlights: [
       "برای فروش جدی‌تر با پوشش میدانی گسترده‌تر",
       "اولویت‌دهی بهتر بین پروژه‌های داغ و قابل مذاکره",
@@ -125,7 +125,7 @@ const pricingPlans: PricingPlan[] = [
     id: "taban-plus",
     name: "تابان پلاس",
     sliderLabel: "زمین بزرگ‌تر",
-    sliderInsight: "پوشش گسترده برای تیم‌های چندمنطقه‌ای",
+    sliderInsight: "تا ۲۵٬۰۰۰ پروژه در ۸ مرحله ساخت",
     highlights: [
       "برای تیم‌هایی که چند منطقه را هم‌زمان پوشش می‌دهند",
       "دید وسیع‌تر روی پروژه‌های بزرگ و تصمیم‌ساز",
@@ -479,7 +479,7 @@ export function PricingSection() {
         <div className="pricing-reveal-header">
           <SectionHeader
             eyebrow="پلن‌ها"
-            title="اشتراک متناسب با ابعاد فروش خود را انتخاب کنید"
+            title="زمین بازی خود را انتخاب کنید"
             description="در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد"
           />
         </div>
@@ -518,6 +518,14 @@ export function PricingSection() {
                     )}
                   >
                     {plan.sliderLabel}
+                  </span>
+                  <span
+                    className={cn(
+                      "mt-1 block text-[10.5px] font-semibold leading-5",
+                      active ? "text-[#f4eadc]" : "text-[#8a7b6c]",
+                    )}
+                  >
+                    {plan.sliderInsight}
                   </span>
                 </button>
               );
