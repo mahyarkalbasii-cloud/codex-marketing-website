@@ -23,6 +23,7 @@ type PricingPlan = {
   name: string;
   sliderLabel: string;
   sliderInsight: string;
+  selectorMotto: string;
   highlights: string[];
   prices: Record<Duration, string>;
   addon: string;
@@ -67,7 +68,8 @@ const pricingPlans: PricingPlan[] = [
     id: "bonyan",
     name: "بنیان",
     sliderLabel: "زمین تا ۳۰۰ متر",
-    sliderInsight: "پوشش سبک برای شروع فروش پروژه‌محور",
+    sliderInsight: "تا ۱۸٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "شروع سبک برای تست بازار و ساختن ریتم پیگیری",
     highlights: [
       "شروع سبک برای تیم‌های فروش کوچک",
       "تمرکز روی فرصت‌های نزدیک‌تر و قابل پیگیری",
@@ -86,7 +88,8 @@ const pricingPlans: PricingPlan[] = [
     id: "royan",
     name: "رویان",
     sliderLabel: "زمین تا ۵۰۰ متر",
-    sliderInsight: "پوشش متعادل برای تیم فروش در حال رشد",
+    sliderInsight: "تا ۲۰٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پوشش متعادل برای تیمی که تماس منظم‌تر می‌خواهد",
     highlights: [
       "برای تیمی که تماس‌های منظم‌تری می‌سازد",
       "دامنه بهتر برای کشف پروژه‌های در حال رشد",
@@ -105,7 +108,8 @@ const pricingPlans: PricingPlan[] = [
     id: "taban",
     name: "تابان",
     sliderLabel: "زمین تا ۷۰۰ متر",
-    sliderInsight: "پیشنهاد اصلی برای پوشش جدی‌تر بازار",
+    sliderInsight: "تا ۲۳٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پیشنهاد اصلی برای فروش جدی‌تر و پوشش مؤثر بازار",
     highlights: [
       "برای فروش جدی‌تر با پوشش میدانی گسترده‌تر",
       "اولویت‌دهی بهتر بین پروژه‌های داغ و قابل مذاکره",
@@ -125,7 +129,8 @@ const pricingPlans: PricingPlan[] = [
     id: "taban-plus",
     name: "تابان پلاس",
     sliderLabel: "زمین بزرگ‌تر",
-    sliderInsight: "پوشش گسترده برای تیم‌های چندمنطقه‌ای",
+    sliderInsight: "تا ۲۵٬۰۰۰ پروژه در ۸ مرحله ساخت",
+    selectorMotto: "پوشش گسترده برای تیم‌های چندمنطقه‌ای و فروش سنگین‌تر",
     highlights: [
       "برای تیم‌هایی که چند منطقه را هم‌زمان پوشش می‌دهند",
       "دید وسیع‌تر روی پروژه‌های بزرگ و تصمیم‌ساز",
@@ -144,9 +149,9 @@ const pricingPlans: PricingPlan[] = [
 
 const DEFAULT_PLAN_INDEX = 2;
 const mobilePricingPlans = [
-  { plan: pricingPlans[2], index: 2 },
-  { plan: pricingPlans[1], index: 1 },
   { plan: pricingPlans[0], index: 0 },
+  { plan: pricingPlans[1], index: 1 },
+  { plan: pricingPlans[2], index: 2 },
   { plan: pricingPlans[3], index: 3 },
 ];
 const mobilePlanOrder: Record<PlanId, string> = {
@@ -479,7 +484,7 @@ export function PricingSection() {
         <div className="pricing-reveal-header">
           <SectionHeader
             eyebrow="پلن‌ها"
-            title="اشتراک متناسب با ابعاد فروش خود را انتخاب کنید"
+            title="زمین بازی خود را انتخاب کنید"
             description="در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد"
           />
         </div>
@@ -519,13 +524,21 @@ export function PricingSection() {
                   >
                     {plan.sliderLabel}
                   </span>
+                  <span
+                    className={cn(
+                      "mt-1 block text-[10.5px] font-semibold leading-5",
+                      active ? "text-[#f4eadc]" : "text-[#8a7b6c]",
+                    )}
+                  >
+                    {plan.sliderInsight}
+                  </span>
                 </button>
               );
             })}
           </div>
 
           <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]">
-            {activePlan.sliderInsight}
+            {activePlan.selectorMotto}
           </p>
         </div>
 

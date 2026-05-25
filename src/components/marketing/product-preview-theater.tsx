@@ -1,706 +1,768 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { CSSProperties } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import {
+  ArrowLeft,
   Building2,
   Check,
-  ChevronDown,
-  Filter,
-  Radar,
+  Clock3,
+  ListFilter,
+  MapPinned,
+  MessageSquareText,
+  PhoneCall,
+  Search,
+  SlidersHorizontal,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-type FilterGroupId = "stage" | "region" | "land";
+type ProductViewId = "map" | "filters" | "followup";
 
 type SampleProject = {
   id: string;
   title: string;
   stage: string;
-  subline: string;
   neighborhood: string;
   city: string;
   district: string;
+  region: string;
   landArea: string;
   floors: string;
-  usage: string;
   updatedAt: string;
-  pinPosition: string;
-  showLabel?: boolean;
-  filters: string[];
+  need: string;
+  nextAction: string;
+  fit: string;
+  crmStatus: string;
+  owner: string;
+  x: number;
+  y: number;
 };
 
-const constructionStageOptions = [
-  "گودبرداری",
-  "اسکلت",
-  "گچ و خاک",
-  "نازک‌کاری",
-  "پایان کار",
-];
-
-const regionOptions = [
-  "ولنجک",
-  "زعفرانیه",
-  "اقدسیه",
-  "سعادت‌آباد",
-  "فرمانیه",
-  "پاسداران",
-  "نیاوران",
-  "شهرک غرب",
-  "کرج",
-  "لواسان",
-];
-
-const landAreaOptions = [
-  "تا ۴۰۰ متر",
-  "۴۰۰ تا ۶۰۰ متر",
-  "۶۰۰ متر به بالا",
-];
-
-const filterGroups: {
-  id: FilterGroupId;
+const productViews: Array<{
+  id: ProductViewId;
   label: string;
-  allLabel: string;
-  options: string[];
-}[] = [
+  description: string;
+}> = [
   {
-    id: "stage",
-    label: "مرحله ساخت",
-    allLabel: "همه مراحل",
-    options: constructionStageOptions,
+    id: "map",
+    label: "نقشه",
+    description: "نمای مکانی پروژه‌ها",
   },
   {
-    id: "region",
-    label: "منطقه",
-    allLabel: "همه مناطق",
-    options: regionOptions,
+    id: "filters",
+    label: "فیلترها",
+    description: "محدود کردن فرصت‌ها",
   },
   {
-    id: "land",
-    label: "متراژ زمین",
-    allLabel: "همه متراژها",
-    options: landAreaOptions,
+    id: "followup",
+    label: "پیگیری",
+    description: "اقدام فروش بعدی",
   },
 ];
 
-const defaultFilterState: Record<FilterGroupId, string> = {
-  stage: "",
-  region: "",
-  land: "",
-};
+const filterSummary = [
+  {
+    label: "مرحله",
+    value: "نازک‌کاری",
+  },
+  {
+    label: "منطقه",
+    value: "شمال تهران",
+  },
+];
 
 const sampleProjects: SampleProject[] = [
   {
     id: "velenjak-finishing",
-    title: "پروژه‌ی نازک‌کاری · ولنجک",
+    title: "پروژه نازک‌کاری ولنجک",
     stage: "نازک‌کاری",
-    subline: "۴۲۰ متر زمین · ۷ طبقه",
     neighborhood: "ولنجک",
     city: "تهران",
     district: "منطقه ۱",
+    region: "شمال تهران",
     landArea: "۴۲۰ متر",
     floors: "۷ طبقه",
-    usage: "مسکونی",
     updatedAt: "۲ روز پیش",
-    pinPosition: "right-[36%] top-[34%]",
-    showLabel: true,
-    filters: ["نازک‌کاری", "ولنجک", "۴۰۰ تا ۶۰۰ متر"],
+    need: "کاشی، شیرآلات، درب داخلی",
+    nextAction: "تماس معرفی + ارسال کاتالوگ",
+    fit: "آماده تماس",
+    crmStatus: "تماس اول",
+    owner: "کارشناس فروش",
+    x: 31,
+    y: 35,
   },
   {
     id: "zaferanieh-structure",
-    title: "پروژه‌ی اسکلت · زعفرانیه",
+    title: "پروژه اسکلت زعفرانیه",
     stage: "اسکلت",
-    subline: "۶۸۰ متر زمین · ۹ طبقه",
     neighborhood: "زعفرانیه",
     city: "تهران",
     district: "منطقه ۱",
+    region: "شمال تهران",
     landArea: "۶۸۰ متر",
     floors: "۹ طبقه",
-    usage: "مسکونی",
     updatedAt: "۴ روز پیش",
-    pinPosition: "right-[23%] top-[24%]",
-    filters: ["اسکلت", "زعفرانیه", "۶۰۰ متر به بالا"],
-  },
-  {
-    id: "aghdasieh-excavation",
-    title: "پروژه‌ی گودبرداری · اقدسیه",
-    stage: "گودبرداری",
-    subline: "۳۲۰ متر زمین · ۵ طبقه",
-    neighborhood: "اقدسیه",
-    city: "تهران",
-    district: "منطقه ۱",
-    landArea: "۳۲۰ متر",
-    floors: "۵ طبقه",
-    usage: "مسکونی",
-    updatedAt: "امروز",
-    pinPosition: "right-[68%] top-[28%]",
-    filters: ["گودبرداری", "اقدسیه", "تا ۴۰۰ متر"],
-  },
-  {
-    id: "saadatabad-finishing",
-    title: "پروژه‌ی نازک‌کاری · سعادت‌آباد",
-    stage: "نازک‌کاری",
-    subline: "۴۸۰ متر زمین · ۸ طبقه",
-    neighborhood: "سعادت‌آباد",
-    city: "تهران",
-    district: "منطقه ۲",
-    landArea: "۴۸۰ متر",
-    floors: "۸ طبقه",
-    usage: "مسکونی",
-    updatedAt: "۳ روز پیش",
-    pinPosition: "right-[48%] top-[58%]",
-    showLabel: true,
-    filters: ["نازک‌کاری", "سعادت‌آباد", "۴۰۰ تا ۶۰۰ متر"],
-  },
-  {
-    id: "farmanieh-structure",
-    title: "پروژه‌ی اسکلت · فرمانیه",
-    stage: "اسکلت",
-    subline: "۷۵۰ متر زمین · ۱۰ طبقه",
-    neighborhood: "فرمانیه",
-    city: "تهران",
-    district: "منطقه ۱",
-    landArea: "۷۵۰ متر",
-    floors: "۱۰ طبقه",
-    usage: "مسکونی",
-    updatedAt: "۵ روز پیش",
-    pinPosition: "right-[78%] top-[18%]",
-    filters: ["اسکلت", "فرمانیه", "۶۰۰ متر به بالا"],
-  },
-  {
-    id: "pasdaran-plaster",
-    title: "پروژه‌ی گچ و خاک · پاسداران",
-    stage: "گچ و خاک",
-    subline: "۳۸۰ متر زمین · ۶ طبقه",
-    neighborhood: "پاسداران",
-    city: "تهران",
-    district: "منطقه ۴",
-    landArea: "۳۸۰ متر",
-    floors: "۶ طبقه",
-    usage: "مسکونی",
-    updatedAt: "۶ روز پیش",
-    pinPosition: "right-[12%] top-[46%]",
-    filters: ["گچ و خاک", "پاسداران", "تا ۴۰۰ متر"],
+    need: "آسانسور، سقف، اتصالات تخصصی",
+    nextAction: "ثبت یادآوری مذاکره فنی",
+    fit: "نیاز نزدیک",
+    crmStatus: "بررسی فنی",
+    owner: "مدیر حساب",
+    x: 62,
+    y: 28,
   },
   {
     id: "niavaran-finishing",
-    title: "پروژه‌ی نازک‌کاری · نیاوران",
+    title: "پروژه نازک‌کاری نیاوران",
     stage: "نازک‌کاری",
-    subline: "۵۲۰ متر زمین · ۸ طبقه",
     neighborhood: "نیاوران",
     city: "تهران",
     district: "منطقه ۱",
+    region: "شمال تهران",
     landArea: "۵۲۰ متر",
     floors: "۸ طبقه",
-    usage: "مسکونی",
-    updatedAt: "۲ روز پیش",
-    pinPosition: "right-[64%] top-[70%]",
-    showLabel: true,
-    filters: ["نازک‌کاری", "نیاوران", "۴۰۰ تا ۶۰۰ متر"],
+    updatedAt: "امروز",
+    need: "نما، پنجره، تجهیزات داخلی",
+    nextAction: "ارسال پیام هدفمند",
+    fit: "فرصت داغ",
+    crmStatus: "ارسال پیشنهاد",
+    owner: "کارشناس فروش",
+    x: 76,
+    y: 58,
   },
   {
-    id: "shahrakgharb-handover",
-    title: "پروژه‌ی پایان کار · شهرک غرب",
-    stage: "پایان کار",
-    subline: "۴۴۰ متر زمین · ۷ طبقه",
-    neighborhood: "شهرک غرب",
+    id: "pasdaran-plaster",
+    title: "پروژه گچ و خاک پاسداران",
+    stage: "گچ و خاک",
+    neighborhood: "پاسداران",
+    city: "تهران",
+    district: "منطقه ۴",
+    region: "شمال شرق تهران",
+    landArea: "۳۸۰ متر",
+    floors: "۶ طبقه",
+    updatedAt: "۶ روز پیش",
+    need: "برق، مکانیک، سقف کاذب",
+    nextAction: "بررسی نیاز قبل از نازک‌کاری",
+    fit: "در حال شکل‌گیری",
+    crmStatus: "رصد",
+    owner: "توسعه بازار",
+    x: 44,
+    y: 68,
+  },
+  {
+    id: "kamraniyeh-finishing",
+    title: "پروژه نازک‌کاری کامرانیه",
+    stage: "نازک‌کاری",
+    neighborhood: "کامرانیه",
+    city: "تهران",
+    district: "منطقه ۱",
+    region: "شمال تهران",
+    landArea: "۴۹۰ متر",
+    floors: "۸ طبقه",
+    updatedAt: "امروز",
+    need: "سرامیک، چوب، نورپردازی",
+    nextAction: "هماهنگی جلسه با سازنده",
+    fit: "پوشش بالا",
+    crmStatus: "جلسه",
+    owner: "کارشناس فروش",
+    x: 53,
+    y: 46,
+  },
+  {
+    id: "saadatabad-facade",
+    title: "پروژه نمای سعادت‌آباد",
+    stage: "نما",
+    neighborhood: "سعادت‌آباد",
     city: "تهران",
     district: "منطقه ۲",
-    landArea: "۴۴۰ متر",
-    floors: "۷ طبقه",
-    usage: "مسکونی",
-    updatedAt: "۱ روز پیش",
-    pinPosition: "right-[30%] top-[76%]",
-    filters: ["پایان کار", "شهرک غرب", "۴۰۰ تا ۶۰۰ متر"],
+    region: "غرب تهران",
+    landArea: "۶۱۰ متر",
+    floors: "۱۰ طبقه",
+    updatedAt: "۳ روز پیش",
+    need: "سنگ، شیشه، زیرسازی نما",
+    nextAction: "پیگیری تامین‌کننده نما",
+    fit: "مذاکره باز",
+    crmStatus: "تماس دوم",
+    owner: "مدیر حساب",
+    x: 20,
+    y: 61,
+  },
+  {
+    id: "lavasan-villa",
+    title: "پروژه ویلایی لواسان",
+    stage: "نازک‌کاری",
+    neighborhood: "لواسان",
+    city: "لواسان",
+    district: "بلوار اصلی",
+    region: "لواسان",
+    landArea: "۹۲۰ متر",
+    floors: "۳ طبقه",
+    updatedAt: "۵ روز پیش",
+    need: "محوطه، نور، شیرآلات لوکس",
+    nextAction: "ارسال پیشنهاد محصول ممتاز",
+    fit: "ارزش بالا",
+    crmStatus: "پیشنهاد قیمت",
+    owner: "مدیر فروش",
+    x: 85,
+    y: 38,
+  },
+  {
+    id: "karaj-tower",
+    title: "پروژه برج کرج",
+    stage: "اسکلت",
+    neighborhood: "عظیمیه",
+    city: "کرج",
+    district: "عظیمیه",
+    region: "کرج",
+    landArea: "۱۲۰۰ متر",
+    floors: "۱۴ طبقه",
+    updatedAt: "هفته قبل",
+    need: "سقف، تاسیسات، آسانسور",
+    nextAction: "تماس اولیه با دفتر فنی",
+    fit: "در صف بررسی",
+    crmStatus: "رصد",
+    owner: "توسعه بازار",
+    x: 14,
+    y: 40,
   },
 ];
 
-function FilterDropdown({
-  group,
+function projectMatches(project: SampleProject, query: string) {
+  const normalizedQuery = query.trim();
+
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  const searchable = [
+    project.title,
+    project.stage,
+    project.neighborhood,
+    project.city,
+    project.region,
+    project.need,
+  ].join(" ");
+
+  return searchable.includes(normalizedQuery);
+}
+
+function MetricPill({
+  label,
   value,
-  open,
-  onToggle,
-  onSelect,
+  tone = "light",
 }: {
-  group: (typeof filterGroups)[number];
+  label: string;
   value: string;
-  open: boolean;
-  onToggle: () => void;
-  onSelect: (value: string) => void;
+  tone?: "light" | "dark";
 }) {
-  const selectedLabel = value || group.allLabel;
-
   return (
-    <div className="min-w-0 overflow-hidden rounded-2xl border border-[#E4D8C8] bg-[#FBF9F3]/88 p-2">
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={`product-filter-${group.id}`}
-        onClick={onToggle}
-        className="flex w-full min-w-0 items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-right transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 active:translate-y-px"
+    <div
+      className={cn(
+        "rounded-2xl border px-3 py-2",
+        tone === "dark"
+          ? "border-[#3c332a] bg-[#2a241d] text-[#fffaf1]"
+          : "border-[#eadfce] bg-[#fffaf1] text-[#2a241d]",
+      )}
+    >
+      <span
+        className={cn(
+          "block text-[10px] font-semibold",
+          tone === "dark" ? "text-[#d9c7ae]" : "text-[#8a7b6c]",
+        )}
       >
-        <span className="min-w-0 flex-1">
-          <span className="block text-[11px] font-medium text-[#7A6A59]">
-            {group.label}
-          </span>
-          <span className="mt-0.5 block truncate text-sm font-bold text-[#2A241D]">
-            {selectedLabel}
-          </span>
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 shrink-0 text-[#7A6A59] transition duration-200",
-            open ? "rotate-180" : "",
-          )}
-        />
-      </button>
-
-      {open ? (
-        <div
-          id={`product-filter-${group.id}`}
-          className="mt-2 grid max-h-44 gap-1 overflow-y-auto rounded-xl border border-[#E4D8C8] bg-[#FFFAF1]/95 p-1.5"
-        >
-          {[group.allLabel, ...group.options].map((optionLabel, index) => {
-            const optionValue = index === 0 ? "" : optionLabel;
-            const selected = optionValue === value;
-
-            return (
-              <button
-                key={optionLabel}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => onSelect(optionValue)}
-                className={cn(
-                  "flex min-w-0 items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-right text-xs font-semibold transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
-                  selected ? "bg-[#F6D6A8] text-[#5A3515]" : "text-[#6F6254]",
-                )}
-              >
-                <span className="min-w-0 truncate">{optionLabel}</span>
-                {selected ? <Check className="h-3.5 w-3.5" /> : null}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
+        {label}
+      </span>
+      <span className="mt-1 block truncate text-xs font-black">{value}</span>
     </div>
   );
 }
 
-function ProjectDetailCard({
-  project,
-  className,
-  compact = false,
+function StaticFilterSummary() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {filterSummary.map((filter) => (
+        <div
+          key={filter.label}
+          className="flex h-[4.65rem] flex-col justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/88 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,250,241,0.9)]"
+        >
+          <span className="block text-[10px] font-bold text-[#8a7b6c]">
+            {filter.label}
+          </span>
+          <span className="mt-1 block text-sm font-black text-[#2a241d]">
+            {filter.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FilterSearchField({ label }: { label: string }) {
+  return (
+    <div className="flex h-12 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 shadow-[inset_0_1px_0_rgba(255,250,241,0.95),0_8px_18px_rgba(42,36,29,0.035)]">
+      <span className="inline-flex min-w-0 items-center gap-2 text-sm font-black text-[#2a241d]">
+        <Search className="h-4 w-4 shrink-0 text-[#c9792b]" />
+        <span className="truncate">{label}</span>
+      </span>
+    </div>
+  );
+}
+
+function ProductMapPanel({
+  selectedProject,
+  onSelectProject,
 }: {
-  compact?: boolean;
-  project: SampleProject;
-  className?: string;
+  selectedProject: SampleProject;
+  onSelectProject: (project: SampleProject) => void;
 }) {
-  const metadata = [
-    ["متراژ زمین", project.landArea],
-    ["تعداد طبقه", project.floors],
-    ["نوع کاربری", project.usage],
-    ["آخرین به‌روزرسانی", project.updatedAt],
-  ] as const;
+  return (
+    <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_16rem]">
+      <div className="relative min-h-[17rem] overflow-hidden rounded-[1.15rem] border border-[#e4d8c8] bg-[#e8dfd2] sm:min-h-[21rem] lg:min-h-[31rem]">
+        <div className="absolute inset-0 map-parcel-pattern opacity-65" aria-hidden="true" />
+        <div className="absolute inset-x-4 top-4 z-[1] flex items-center justify-between rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/92 px-3 py-2 shadow-sm backdrop-blur">
+          <span className="inline-flex items-center gap-2 text-xs font-black text-[#2a241d]">
+            <MapPinned className="h-4 w-4 text-[#c9792b]" />
+            نقشه پروژه‌ها
+          </span>
+          <span className="rounded-full bg-[#2a241d] px-2.5 py-1 text-[10.5px] font-black text-[#fffaf1]">
+            {sampleProjects.length.toLocaleString("fa-IR")} پین فعال
+          </span>
+        </div>
+
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox="0 0 640 520"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <g fill="none" strokeLinecap="round">
+            <path d="M-40 146 C132 108 264 138 398 112 S552 94 684 124" stroke="#d1bfaa" strokeWidth="22" />
+            <path d="M-46 304 C130 278 278 316 418 286 S548 246 690 264" stroke="#d1bfaa" strokeWidth="22" />
+            <path d="M80 560 C114 370 156 196 232 -42" stroke="#fffaf1" strokeWidth="13" />
+            <path d="M522 560 C500 374 526 174 608 -42" stroke="#fffaf1" strokeWidth="13" />
+            <path d="M-40 222 C132 244 270 230 402 194 S560 148 682 174" stroke="#fffaf1" strokeWidth="15" />
+            <path d="M-30 396 C130 370 244 390 390 350 S572 326 692 350" stroke="#fffaf1" strokeWidth="12" opacity=".84" />
+          </g>
+        </svg>
+
+        {sampleProjects.map((project, index) => {
+          const selected = project.id === selectedProject.id;
+
+          return (
+            <button
+              key={project.id}
+              type="button"
+              data-product-pin={project.id}
+              onClick={() => onSelectProject(project)}
+              style={
+                {
+                  right: `${project.x}%`,
+                  top: `${project.y}%`,
+                  "--pin-delay": `${index * 70}ms`,
+                } as CSSProperties & Record<"--pin-delay", string>
+              }
+              aria-label={`انتخاب ${project.title}`}
+              aria-pressed={selected}
+              className={cn(
+                "absolute z-[2] grid h-8 w-8 -translate-y-1/2 translate-x-1/2 place-items-center rounded-full border-2 border-[#fffaf1] shadow-md shadow-[#2a241d]/18 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/35 sm:h-9 sm:w-9",
+                selected
+                  ? "scale-110 bg-[#c9792b] text-[#fffaf1]"
+                  : "bg-[#24384a] text-[#fffaf1] hover:scale-105",
+              )}
+            >
+              {selected ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Building2 className="h-4 w-4" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <aside className="grid gap-3 lg:content-start">
+        <div className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-sm font-black text-[#2a241d]">
+              <ListFilter className="h-4 w-4 text-[#c9792b]" />
+              فیلتر سریع
+            </div>
+            <span className="text-[11px] font-bold text-[#8a7b6c]">
+              نمای نمونه
+            </span>
+          </div>
+          <StaticFilterSummary />
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+function ProductFiltersPanel({
+  projects,
+  onSelectProject,
+}: {
+  projects: SampleProject[];
+  onSelectProject: (project: SampleProject) => void;
+}) {
+  const visibleProjects = projects.length > 0 ? projects : sampleProjects.slice(0, 4);
 
   return (
-    <article
-      className={cn(
-        "product-demo-card rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] shadow-sm shadow-[#2A241D]/[0.055]",
-        compact ? "px-4 py-4" : "px-5 py-[18px]",
-        className,
-      )}
-      aria-label={`کارت اطلاعات ${project.title}`}
-    >
-      <div className="text-xs font-semibold leading-5 text-[#6F6254]">
-        {project.neighborhood}، {project.city} · {project.district}
+    <div className="grid gap-3">
+      <div className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
+        <div className="grid grid-cols-2 gap-2">
+          <FilterSearchField label="مرحله" />
+          <FilterSearchField label="منطقه" />
+        </div>
       </div>
-      <h3 className="mt-1 text-base font-bold leading-7 text-[#2A241D] md:text-xl">
-        پروژه ساختمانی فعال
-      </h3>
-      <span className="mt-2 inline-flex rounded-full border border-[#C9792B]/35 bg-[#F6D6A8] px-3 py-1 text-xs font-bold leading-5 text-[#5A3515]">
-        مرحله: {project.stage}
-      </span>
 
-      <dl className="mt-4 grid grid-cols-2 gap-2">
-        {metadata.map(([label, value]) => (
-          <div
-            key={label}
-            className={cn(
-              "rounded-2xl border border-[#E4D8C8] bg-[#FBF9F3]",
-              compact ? "p-2.5" : "p-3",
-            )}
-          >
-            <dt className="text-[10.5px] font-medium leading-5 text-[#7A6A59]">
-              {label}
-            </dt>
-            <dd className="mt-1 flex items-center gap-1.5 text-xs font-bold leading-6 text-[#2A241D]">
-              {label === "آخرین به‌روزرسانی" ? (
-                <span
-                  className="product-timestamp-dot h-2 w-2 shrink-0 rounded-full bg-[#C9792B]"
-                  aria-hidden="true"
-                />
-              ) : null}
-              {value}
-            </dd>
+      <section className="overflow-hidden rounded-[1.15rem] border border-[#e4d8c8] bg-[#fffaf1]">
+        <div className="flex items-center justify-between gap-3 border-b border-[#e4d8c8] px-3 py-3">
+          <div>
+            <h3 className="text-sm font-black text-[#2a241d]">
+              پروژه‌های پیشنهادی
+            </h3>
           </div>
-        ))}
-      </dl>
+          <span className="rounded-full border border-[#e4d8c8] bg-[#fbf6ed] px-2.5 py-1 text-[10.5px] font-black text-[#6f6254]">
+            {visibleProjects.length.toLocaleString("fa-IR")} پروژه
+          </span>
+        </div>
 
-      <p className={cn("mt-3 text-xs leading-6 text-[#6F6254]", compact && "hidden")}>
-        اطلاعات تماس فقط در نسخه‌ی واقعی نمایش داده می‌شود
-      </p>
-    </article>
+        {projects.length === 0 ? (
+          <div className="p-4 text-center">
+            <p className="text-sm font-bold text-[#2a241d]">
+              نتیجه‌ای برای این جست‌وجو پیدا نشد.
+            </p>
+            <p className="mt-1 text-[11px] font-semibold leading-5 text-[#7a6a59]">
+              متن جست‌وجو را کوتاه‌تر کنید یا تب نقشه را ببینید.
+            </p>
+          </div>
+        ) : (
+          <ul className="grid max-h-[18.5rem] gap-2 overflow-y-auto p-2 sm:grid-cols-2">
+            {visibleProjects.map((project) => (
+              <li key={project.id}>
+                <button
+                  type="button"
+                  data-product-row={project.id}
+                  onClick={() => onSelectProject(project)}
+                  className="flex h-[7.5rem] w-full flex-col justify-between rounded-[1rem] border border-[#eadfce] bg-[#fbf6ed]/62 px-3 py-3 text-right transition hover:border-[#d8c9b6] hover:bg-[#fbf6ed] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#c9792b]/25 active:translate-y-px"
+                >
+                  <span className="flex items-start justify-between gap-3">
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-black text-[#2a241d]">
+                        {project.title}
+                      </span>
+                      <span className="mt-1 block text-[11px] font-semibold leading-5 text-[#7a6a59]">
+                        {project.neighborhood}، {project.district} · {project.landArea}
+                      </span>
+                    </span>
+                    <span className="shrink-0 rounded-full border border-[#e4d8c8] bg-[#fffaf1] px-2.5 py-1 text-[10.5px] font-black text-[#6f6254]">
+                      {project.fit}
+                    </span>
+                  </span>
+                  <span className="block truncate text-[11px] font-semibold leading-5 text-[#6f6254]">
+                    نیاز احتمالی: {project.need}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
+  );
+}
+
+function ProductFollowupPanel({ project }: { project: SampleProject }) {
+  const crmSteps = [
+    {
+      title: "تماس اول",
+      value: project.crmStatus === "تماس اول" ? "در جریان" : "ثبت شده",
+      active: project.crmStatus === "تماس اول",
+    },
+    {
+      title: "ارسال پیشنهاد",
+      value: project.crmStatus === "ارسال پیشنهاد" ? "فعال" : "مرحله بعد",
+      active: project.crmStatus === "ارسال پیشنهاد" || project.crmStatus === "پیشنهاد قیمت",
+    },
+    {
+      title: "یادآوری",
+      value: "۴۸ ساعت آینده",
+      active: project.crmStatus === "جلسه",
+    },
+  ];
+
+  return (
+    <div className="grid max-h-[27.5rem] gap-3 overflow-y-auto pr-1 lg:max-h-none lg:grid-cols-[minmax(0,1fr)_17rem] lg:overflow-visible lg:pr-0">
+      <section className="overflow-hidden rounded-[1.15rem] border border-[#e4d8c8] bg-[#fffaf1]">
+        <div className="border-b border-[#e4d8c8] bg-[#fbf6ed] p-3">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-[#8a7b6c]">CRM فروش پروژه</p>
+              <h3 className="mt-1 truncate text-lg font-black text-[#2a241d]">
+                {project.title}
+              </h3>
+            </div>
+            <span className="shrink-0 rounded-full bg-[#2a241d] px-3 py-1.5 text-[11px] font-black text-[#fffaf1]">
+              {project.crmStatus}
+            </span>
+          </div>
+        </div>
+
+        <div className="grid gap-3 p-3 md:grid-cols-3">
+          {crmSteps.map((step, index) => (
+            <div
+              key={step.title}
+              className={cn(
+                "flex h-[5.35rem] flex-col justify-between rounded-[1rem] border p-3",
+                step.active
+                  ? "border-[#c9792b]/35 bg-[#f6d6a8]/42"
+                  : "border-[#eadfce] bg-[#fbf6ed]/72",
+              )}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="grid h-7 w-7 place-items-center rounded-xl bg-[#fffaf1] text-xs font-black text-[#2a241d]">
+                  {(index + 1).toLocaleString("fa-IR")}
+                </span>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-1 text-[10px] font-black",
+                    step.active
+                      ? "bg-[#2a241d] text-[#fffaf1]"
+                      : "bg-[#fffaf1] text-[#8a7b6c]",
+                  )}
+                >
+                  {step.value}
+                </span>
+              </div>
+              <p className="mt-3 text-sm font-black text-[#2a241d]">
+                {step.title}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-3 border-t border-[#eadfce] p-3 md:grid-cols-[minmax(0,1fr)_14rem]">
+          <div className="rounded-[1rem] border border-[#eadfce] bg-[#fbf6ed] p-3">
+            <p className="text-xs font-black text-[#2a241d]">اقدام پیشنهادی</p>
+            <p className="mt-2 text-sm font-black leading-7 text-[#2a241d]">
+              {project.nextAction}
+            </p>
+            <p className="mt-2 text-[11px] font-semibold leading-5 text-[#6f6254]">
+              تماس با اشاره به مرحله ساخت، محله، و نیاز احتمالی پروژه شروع می‌شود.
+            </p>
+          </div>
+
+          <div className="grid gap-2">
+            <MetricPill label="مسئول" value={project.owner} />
+            <MetricPill label="به‌روزرسانی" value={project.updatedAt} />
+            <MetricPill label="تناسب" value={project.fit} tone="dark" />
+          </div>
+        </div>
+      </section>
+
+      <aside className="rounded-[1.15rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
+        <p className="text-[11px] font-bold text-[#8a7b6c]">پرونده پروژه</p>
+        <div className="mt-3 grid gap-2">
+          {[
+            ["محله", `${project.city}، ${project.neighborhood}`],
+            ["مرحله", project.stage],
+            ["ابعاد", `${project.landArea} · ${project.floors}`],
+            ["نیاز", project.need],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 py-2"
+            >
+              <span className="block text-[10px] font-semibold text-[#8a7b6c]">
+                {label}
+              </span>
+              <span className="mt-1 block text-xs font-black leading-5 text-[#2a241d]">
+                {value}
+              </span>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </div>
   );
 }
 
 export function ProductPreviewTheater() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [activeView, setActiveView] = useState<ProductViewId>("map");
   const [selectedId, setSelectedId] = useState(sampleProjects[0].id);
-  const [openFilter, setOpenFilter] = useState<FilterGroupId | null>(null);
-  const [selectedFilters, setSelectedFilters] =
-    useState<Record<FilterGroupId, string>>(defaultFilterState);
+  const [query, setQuery] = useState("");
 
-  const activeFilterValues = useMemo(
-    () => Object.values(selectedFilters).filter(Boolean),
-    [selectedFilters],
+  const matchingProjects = useMemo(
+    () => sampleProjects.filter((project) => projectMatches(project, query)),
+    [query],
   );
 
-  const matchingProjects = useMemo(() => {
-    if (activeFilterValues.length === 0) {
-      return sampleProjects;
-    }
-
-    return sampleProjects.filter((project) =>
-      activeFilterValues.every((filter) => project.filters.includes(filter)),
+  const suggestedProjects = useMemo(() => {
+    const filtered = matchingProjects.filter(
+      (project) =>
+        project.stage === "نازک‌کاری" || project.region === "شمال تهران",
     );
-  }, [activeFilterValues]);
+
+    return filtered.length > 0 ? filtered : matchingProjects;
+  }, [matchingProjects]);
 
   const selectedProject = useMemo(
     () =>
-      matchingProjects.find((project) => project.id === selectedId) ??
-      matchingProjects[0],
-    [matchingProjects, selectedId],
+      sampleProjects.find((project) => project.id === selectedId) ??
+      sampleProjects[0],
+    [selectedId],
   );
 
-  useEffect(() => {
-    if (
-      matchingProjects.length === 0 ||
-      matchingProjects.some((project) => project.id === selectedId)
-    ) {
-      return;
-    }
-
-    setSelectedId(matchingProjects[0].id);
-  }, [matchingProjects, selectedId]);
-
-  useEffect(() => {
-    const root = rootRef.current;
-
-    if (!root) {
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
-      setRevealed(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) {
-          return;
-        }
-
-        setRevealed(true);
-        observer.disconnect();
-      },
-      { threshold: 0.06 },
-    );
-
-    observer.observe(root);
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!openFilter) {
-      return;
-    }
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpenFilter(null);
-      }
-    };
-
-    window.addEventListener("keydown", closeOnEscape);
-
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [openFilter]);
-
-  const selectFilter = (filterId: FilterGroupId, value: string) => {
-    setSelectedFilters((current) => ({ ...current, [filterId]: value }));
-    setOpenFilter(null);
-  };
-
-  const resetFilters = () => {
-    setSelectedFilters(defaultFilterState);
-    setOpenFilter(null);
+  const selectProject = (project: SampleProject) => {
+    setSelectedId(project.id);
+    setActiveView("followup");
   };
 
   return (
     <div
-      ref={rootRef}
-      data-product-revealed={revealed ? "true" : "false"}
-      className="product-demo-root relative mt-4 overflow-hidden rounded-[1.6rem] border border-[#D8C9B6]/80 bg-[#FBF9F3]/92 p-3 shadow-[0_8px_24px_rgba(42,36,29,0.04)] md:p-4"
+      className="relative mt-6 overflow-hidden rounded-[1.45rem] border border-[#d8c9b6] bg-[#fffaf1]/88 p-3 shadow-[0_18px_44px_rgba(42,36,29,0.07)] md:p-4"
       role="region"
-      aria-label="پیش‌نمایش نقشه و فیلتر پروژه‌های پرشین‌سازه"
+      aria-label="نمای محصول پرشین‌سازه برای جست‌وجو، فیلتر و پیگیری پروژه‌ها"
     >
-      <div className="relative grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_380px] xl:[direction:ltr]">
-        <aside className="contents min-w-0 content-start gap-4 overflow-hidden xl:col-start-2 xl:row-start-1 xl:grid xl:[direction:rtl]">
-          <article className="product-demo-filter order-2 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/88 p-3 shadow-sm shadow-[#2A241D]/[0.03] md:p-4 xl:order-none">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <h3 className="text-base font-bold text-[#2A241D]">
-                  فیلتر پروژه‌ها
-                </h3>
-                <p className="mt-1 text-xs leading-6 text-[#6F6254]">
-                  مرحله ساخت، منطقه و متراژ زمین را برای محدود کردن پروژه‌ها بررسی کنید.
-                </p>
-              </div>
-              <Filter className="h-5 w-5 text-[#7A6A59]" />
-            </div>
-
-            <div className="mt-5 grid gap-3" aria-label="فیلترها">
-              {filterGroups.map((group) => (
-                <FilterDropdown
-                  key={group.id}
-                  group={group}
-                  value={selectedFilters[group.id]}
-                  open={openFilter === group.id}
-                  onToggle={() =>
-                    setOpenFilter((current) =>
-                      current === group.id ? null : group.id,
-                    )
-                  }
-                  onSelect={(value) => selectFilter(group.id, value)}
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <section className="min-w-0 overflow-hidden rounded-[1.25rem] border border-[#e4d8c8] bg-[#fbf6ed]">
+          <div className="border-b border-[#e4d8c8] bg-[#fffaf1] p-3 md:p-4">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center">
+              <label className="relative block min-w-0 flex-1">
+                <span className="sr-only">جست‌وجوی پروژه</span>
+                <Search className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8a7b6c]" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="جست‌وجوی پروژه، محله یا مرحله ساخت"
+                  className="h-11 w-full rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] pr-10 pl-3 text-sm font-semibold text-[#2a241d] outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/18"
                 />
-              ))}
-            </div>
+              </label>
 
-            <div className="mt-3 flex min-w-0 flex-wrap gap-2 text-[11px] font-semibold text-[#6F6254]">
-              {activeFilterValues.length > 0 ? (
-                activeFilterValues.map((filter) => (
-                  <span
-                    key={filter}
-                    className="max-w-full truncate rounded-full border border-[#E4D8C8] bg-[#FFFAF1]/84 px-2.5 py-1"
-                  >
-                    {filter}
-                  </span>
-                ))
-              ) : (
-                <span className="max-w-full truncate rounded-full border border-[#E4D8C8] bg-[#FBF9F3]/72 px-2.5 py-1">
-                  همه پروژه‌ها
-                </span>
-              )}
-            </div>
-
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="mt-4 flex h-10 w-full items-center justify-center rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-3 text-xs font-bold text-[#2A241D] transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30"
-            >
-              همه پروژه‌ها
-            </button>
-          </article>
-
-          <article className="product-demo-list order-3 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/90 p-4 shadow-sm shadow-[#2A241D]/[0.03] xl:order-none">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="min-w-0 text-base font-bold text-[#2A241D]">
-                پروژه‌های منطبق
-              </h3>
-              <span className="shrink-0 text-xs font-medium text-[#7A6A59]">
-                {matchingProjects.length.toLocaleString("fa-IR")} پروژه
-              </span>
-            </div>
-            {matchingProjects.length > 0 ? (
-              <ul className="mt-3 max-h-[260px] space-y-2.5 overflow-y-auto pr-1 md:max-h-[330px]">
-                {matchingProjects.map((project, index) => {
-                  const selected = project.id === selectedProject?.id;
+              <div
+                className="grid grid-cols-3 rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-1"
+                role="tablist"
+                aria-label="نمای محصول"
+              >
+                {productViews.map((view) => {
+                  const ViewIcon =
+                    view.id === "map"
+                      ? MapPinned
+                      : view.id === "filters"
+                        ? SlidersHorizontal
+                        : MessageSquareText;
 
                   return (
-                    <li key={project.id}>
-                      <button
-                        type="button"
-                        data-product-row={project.id}
-                        aria-label={`انتخاب ${project.title}`}
-                        aria-pressed={selected}
-                        onClick={() => setSelectedId(project.id)}
-                        style={
-                          { "--product-row-delay": `${1500 + index * 60}ms` } as CSSProperties
-                        }
-                        className={cn(
-                          "product-demo-list-row flex w-full min-w-0 items-center gap-3 overflow-hidden rounded-[1.15rem] border p-3 text-right transition duration-200 hover:bg-[#FBF9F3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 active:translate-y-px",
-                          selected
-                            ? "border-[#CC785C]/65 bg-[#F6D6A8]/58 shadow-sm shadow-[#2A241D]/[0.06]"
-                            : "border-[#E4D8C8] bg-[#FBF9F3]/88",
-                        )}
-                      >
-                        <span
+                    <button
+                      key={view.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeView === view.id}
+                      onClick={() => setActiveView(view.id)}
+                      className={cn(
+                        "group min-h-11 rounded-xl px-2 text-xs font-bold leading-5 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/25 active:translate-y-px",
+                        activeView === view.id
+                          ? "bg-[#2a241d] text-[#fffaf1] shadow-[inset_0_1px_0_rgba(255,250,241,0.14),0_9px_20px_rgba(42,36,29,0.12)]"
+                          : "bg-[#fffaf1]/45 text-[#6f6254] hover:bg-[#fffaf1]",
+                      )}
+                    >
+                      <span className="inline-flex items-center justify-center gap-1.5">
+                        <ViewIcon
                           className={cn(
-                            "h-2.5 w-2.5 shrink-0 rounded-full",
-                            selected ? "bg-[#CC785C]" : "bg-[#D8C9B6]",
+                            "h-3.5 w-3.5",
+                            activeView === view.id
+                              ? "text-[#f1c98f]"
+                              : "text-[#c9792b]/72",
                           )}
                         />
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-bold text-[#2A241D]">
-                            {project.title}
-                          </span>
-                          <span className="block truncate text-xs leading-5 text-[#7A6A59]">
-                            {project.subline}
-                          </span>
-                        </span>
-                        <span
-                          className={cn(
-                            "max-w-[104px] shrink-0 truncate whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-semibold",
-                            selected
-                              ? "border-[#C9792B]/35 bg-[#FFFAF1] text-[#5A3515]"
-                              : "border-[#E4D8C8] bg-[#FFFAF1] text-[#6F6254]",
-                          )}
-                        >
-                          {project.stage}
-                        </span>
-                      </button>
-                    </li>
+                        <span>{view.label}</span>
+                      </span>
+                      <span className="hidden text-[10px] font-semibold opacity-70 lg:block">
+                        {view.description}
+                      </span>
+                    </button>
                   );
                 })}
-              </ul>
-            ) : (
-              <div className="mt-3 rounded-2xl border border-dashed border-[#D8C9B6] bg-[#FBF9F3]/70 p-4 text-center text-sm font-semibold leading-7 text-[#6F6254]">
-                نتیجه‌ای برای این ترکیب پیدا نشد.
               </div>
-            )}
-          </article>
-        </aside>
-
-        <section className="product-demo-map-shell order-1 flex min-w-0 flex-col overflow-hidden rounded-[1.45rem] border border-[#E4D8C8] bg-[#FFFAF1]/92 shadow-sm shadow-[#2A241D]/[0.03] xl:col-start-1 xl:row-start-1 xl:order-none xl:[direction:rtl]">
-          <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#E4D8C8] px-4 py-4">
-            <div>
-              <h3 className="text-base font-bold text-[#2A241D] md:text-lg">
-                نقشه پروژه‌های ساختمانی تهران
-              </h3>
-              <p className="mt-1 text-xs leading-5 text-[#6F6254] md:text-sm">
-                پروژه‌ها بر اساس محله، مرحله ساخت و متراژ زمین
-              </p>
             </div>
           </div>
 
-          <div className="product-demo-map-bg relative min-h-[260px] flex-1 overflow-hidden bg-[#EDE6D7] sm:min-h-[320px] md:min-h-[500px]">
-            <div className="absolute inset-0 map-parcel-pattern opacity-90" />
-            <div className="absolute right-[5%] top-[10%] h-20 w-32 rotate-[-4deg] rounded-[1.1rem] bg-[#D8C9B6]/42 ring-1 ring-[#E4D8C8]" />
-            <div className="absolute right-[30%] top-[12%] h-24 w-36 rotate-[3deg] rounded-[1.1rem] bg-[#FBF9F3]/62 ring-1 ring-[#E4D8C8]" />
-            <div className="absolute right-[58%] top-[15%] h-20 w-32 rotate-[-3deg] rounded-[1.1rem] bg-[#D8C9B6]/38 ring-1 ring-[#E4D8C8]" />
-            <div className="absolute right-[8%] top-[68%] h-20 w-36 rotate-[3deg] rounded-[1.1rem] bg-[#FBF9F3]/64 ring-1 ring-[#E4D8C8]" />
-            <div className="absolute right-[42%] top-[70%] h-16 w-28 rotate-[-2deg] rounded-[1.1rem] bg-[#D8C9B6]/36 ring-1 ring-[#E4D8C8]" />
-            <div className="absolute right-[70%] top-[61%] h-20 w-32 rotate-[-4deg] rounded-[1.1rem] bg-[#FBF9F3]/64 ring-1 ring-[#E4D8C8]" />
-
-            <svg
-              className="absolute inset-0 h-full w-full"
-              viewBox="0 0 760 460"
-              aria-hidden="true"
-            >
-              <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M-34 126 C168 92 320 116 492 92 S650 72 812 102" stroke="#D8C9B6" strokeWidth="18" />
-                <path d="M-28 330 C180 302 330 332 504 302 S648 272 810 290" stroke="#D8C9B6" strokeWidth="18" />
-                <path d="M-20 218 C152 240 282 228 408 196 S610 150 806 174" stroke="#D8C9B6" strokeWidth="24" />
-                <path d="M-20 218 C152 240 282 228 408 196 S610 150 806 174" stroke="#FFFAF1" strokeWidth="16" />
-                <path d="M116 482 C152 330 188 202 262 -28" stroke="#D8C9B6" strokeWidth="20" />
-                <path d="M116 482 C152 330 188 202 262 -28" stroke="#FFFAF1" strokeWidth="13" />
-                <path d="M626 482 C596 324 630 164 720 -34" stroke="#D8C9B6" strokeWidth="20" />
-                <path d="M626 482 C596 324 630 164 720 -34" stroke="#FFFAF1" strokeWidth="13" />
-              </g>
-            </svg>
-
-            {matchingProjects.map((project, index) => {
-              const selected = project.id === selectedProject?.id;
-
-              return (
-                <button
-                  key={project.id}
-                  type="button"
-                  data-product-pin={project.id}
-                  aria-label={`انتخاب ${project.title}`}
-                  aria-pressed={selected}
-                  onClick={() => setSelectedId(project.id)}
-                  style={
-                    {
-                      "--product-pin-delay": `${560 + index * 80}ms`,
-                    } as CSSProperties
-                  }
-                  className={cn(
-                    "product-demo-pin absolute z-20 flex -translate-x-1/2 -translate-y-full items-center justify-center transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/40",
-                    project.pinPosition,
-                    selected ? "scale-[1.12]" : "opacity-78 hover:opacity-100",
-                  )}
-                >
-                  <span
-                    className={cn(
-                      "relative grid h-8 w-8 place-items-center rounded-full shadow-md shadow-[#2A241D]/20 transition",
-                      selected
-                        ? "product-demo-selected-pin h-9 w-9 bg-[#CC785C] text-[#FFFAF1] ring-4 ring-[#CC785C]/25"
-                        : "bg-[#1B1916] text-[#7A6A59] ring-2 ring-[#FFFAF1]/65 hover:ring-[#CC785C]/30",
-                    )}
-                  >
-                    {selected ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <Building2 className="h-3.5 w-3.5" />
-                    )}
-                    <span className="absolute -bottom-1.5 h-3 w-3 rotate-45 rounded-[0.18rem] bg-inherit" />
-                  </span>
-                  {project.showLabel ? (
-                    <span className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-xs font-semibold leading-none text-[#7A6A59]/70 md:block">
-                      {project.neighborhood}
-                    </span>
-                  ) : null}
-                </button>
-              );
-            })}
-
-            <div className="absolute left-4 top-4 hidden items-center gap-2 rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1]/92 px-3 py-2 text-xs font-bold text-[#6F6254] shadow-sm backdrop-blur md:flex">
-              <Radar className="h-3.5 w-3.5 text-[#7A6A59]" />
-              {selectedFilters.region || "همه مناطق"} ·{" "}
-              {selectedFilters.stage || "همه مراحل"}
-            </div>
-
-            {matchingProjects.length === 0 ? (
-              <div className="absolute inset-x-4 top-1/2 z-20 -translate-y-1/2 rounded-2xl border border-dashed border-[#D8C9B6] bg-[#FFFAF1]/90 p-4 text-center text-sm font-semibold leading-7 text-[#6F6254] shadow-sm backdrop-blur">
-                پروژه‌ای با این فیلترها پیدا نشد.
-              </div>
-            ) : null}
-
-            {selectedProject ? (
-              <ProjectDetailCard
-                project={selectedProject}
-                className="hidden md:absolute md:right-4 md:top-4 md:z-30 md:block md:w-[calc(100%-2rem)] md:max-w-[320px]"
+          <div className="p-3 md:p-4">
+            {activeView === "map" && (
+              <ProductMapPanel
+                selectedProject={selectedProject}
+                onSelectProject={(project) => {
+                  setSelectedId(project.id);
+                }}
               />
-            ) : null}
+            )}
+
+            {activeView === "filters" && (
+              <ProductFiltersPanel
+                projects={suggestedProjects}
+                onSelectProject={selectProject}
+              />
+            )}
+
+            {activeView === "followup" && (
+              <ProductFollowupPanel project={selectedProject} />
+            )}
+          </div>
+        </section>
+
+        <aside className="hidden min-w-0 rounded-[1.25rem] border border-[#e4d8c8] bg-[#fffaf1] p-4 lg:block">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold text-[#8a7b6c]">مسیر فروش</p>
+              <h3 className="mt-1 text-xl font-black text-[#2a241d]">
+                از انتخاب تا پیگیری
+              </h3>
+            </div>
+            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-[#2a241d] text-[#fffaf1]">
+              <MessageSquareText className="h-5 w-5" />
+            </span>
           </div>
 
-          {selectedProject ? (
-            <ProjectDetailCard
-              project={selectedProject}
-              compact
-              className="m-3 mt-0 md:hidden"
-            />
-          ) : null}
-        </section>
+          <div className="mt-5 rounded-[1.05rem] border border-[#e4d8c8] bg-[#fbf6ed] p-3">
+            <p className="text-sm font-black leading-6 text-[#2a241d]">
+              {selectedProject.nextAction}
+            </p>
+            <p className="mt-2 text-xs font-semibold leading-6 text-[#6f6254]">
+              برای {selectedProject.need}، تماس باید با اشاره به مرحله ساخت و نیاز احتمالی شروع شود.
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-3">
+            {[
+              ["انتخاب پروژه", selectedProject.fit, Check],
+              ["تماس هدفمند", selectedProject.stage, PhoneCall],
+              ["یادآوری بعدی", "۴۸ ساعت آینده", Clock3],
+            ].map(([title, value, Icon]) => (
+              <div key={title as string} className="flex items-center gap-3 rounded-2xl border border-[#eadfce] bg-[#fbf6ed]/72 p-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#fffaf1] text-[#c9792b]">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs font-black text-[#2a241d]">
+                    {title as string}
+                  </span>
+                  <span className="mt-1 block truncate text-[11px] font-semibold text-[#7a6a59]">
+                    {value as string}
+                  </span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setActiveView("followup")}
+            className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#2a241d] px-4 text-sm font-bold text-[#fffaf1] transition hover:bg-[#3a3027] active:translate-y-px"
+          >
+            شروع پیگیری
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+        </aside>
       </div>
     </div>
   );
