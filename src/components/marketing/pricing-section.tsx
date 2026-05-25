@@ -255,7 +255,7 @@ function PricingPlanCard({
       data-active-plan={isActive ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
-        "pricing-card flex min-h-[34rem] w-[82vw] max-w-[22.5rem] shrink-0 snap-center flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        "pricing-card flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
@@ -367,7 +367,6 @@ export function PricingSection() {
   const [duration, setDuration] = useState<Duration>("12");
   const [activePlanIndex, setActivePlanIndex] = useState(DEFAULT_PLAN_INDEX);
   const [pulsingPlan, setPulsingPlan] = useState<PlanId | null>(null);
-  const [hintVisible, setHintVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -441,16 +440,12 @@ export function PricingSection() {
   );
 
   const selectPlan = useCallback(
-    (nextIndex: number, options?: { userInitiated?: boolean }) => {
+    (nextIndex: number) => {
       const clampedIndex = clampPlanIndex(nextIndex);
       const nextPlan = pricingPlans[clampedIndex];
 
       setActivePlanIndex(clampedIndex);
       scrollPlanIntoView(nextPlan.id);
-
-      if (options?.userInitiated) {
-        setHintVisible(false);
-      }
 
       if (prefersReducedMotion) {
         return;
@@ -484,7 +479,7 @@ export function PricingSection() {
 
   const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
-    selectPlan(getIndexFromPointer(event.clientX), { userInitiated: true });
+    selectPlan(getIndexFromPointer(event.clientX));
   };
 
   const handleRailMove = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -492,28 +487,28 @@ export function PricingSection() {
       return;
     }
 
-    selectPlan(getIndexFromPointer(event.clientX), { userInitiated: true });
+    selectPlan(getIndexFromPointer(event.clientX));
   };
 
   const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
       event.preventDefault();
-      selectPlan(activePlanIndex + 1, { userInitiated: true });
+      selectPlan(activePlanIndex + 1);
     }
 
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
       event.preventDefault();
-      selectPlan(activePlanIndex - 1, { userInitiated: true });
+      selectPlan(activePlanIndex - 1);
     }
 
     if (event.key === "Home") {
       event.preventDefault();
-      selectPlan(0, { userInitiated: true });
+      selectPlan(0);
     }
 
     if (event.key === "End") {
       event.preventDefault();
-      selectPlan(pricingPlans.length - 1, { userInitiated: true });
+      selectPlan(pricingPlans.length - 1);
     }
   };
 
@@ -534,10 +529,53 @@ export function PricingSection() {
           />
         </div>
 
-        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
+        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-3 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
+          <div
+            className="grid grid-cols-2 gap-2 md:hidden"
+            role="radiogroup"
+            aria-label="انتخاب مقیاس زمین پروژه"
+          >
+            {pricingPlans.map((plan, index) => {
+              const active = activePlanIndex === index;
+
+              return (
+                <button
+                  key={plan.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  data-plan-mobile-option={plan.id}
+                  onClick={() => selectPlan(index)}
+                  className={cn(
+                    "min-h-20 rounded-[1.1rem] border px-3 py-3 text-right transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                    active
+                      ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/10"
+                      : "border-[#e4d8c8] bg-[#fbf6ed]/72 text-[#2a241d]",
+                  )}
+                >
+                  <span className="block text-sm font-black leading-6">
+                    {plan.name}
+                  </span>
+                  <span
+                    className={cn(
+                      "mt-1 block text-[11px] font-bold leading-5",
+                      active ? "text-[#efe2d2]" : "text-[#75695d]",
+                    )}
+                  >
+                    {plan.sliderLabel}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254] md:hidden">
+            {activePlan.sliderInsight}
+          </p>
+
           <div
             ref={railRef}
-            className="relative mx-3 h-24 max-w-3xl touch-none md:mx-auto"
+            className="relative mx-3 hidden h-24 max-w-3xl touch-none md:mx-auto md:block"
             onPointerDown={handleRailPointer}
             onPointerMove={handleRailMove}
           >
@@ -563,15 +601,11 @@ export function PricingSection() {
               onPointerDown={(event) => {
                 event.stopPropagation();
                 event.currentTarget.setPointerCapture(event.pointerId);
-                selectPlan(getIndexFromPointer(event.clientX), {
-                  userInitiated: true,
-                });
+                selectPlan(getIndexFromPointer(event.clientX));
               }}
               onPointerMove={(event) => {
                 if (event.buttons === 1) {
-                  selectPlan(getIndexFromPointer(event.clientX), {
-                    userInitiated: true,
-                  });
+                  selectPlan(getIndexFromPointer(event.clientX));
                 }
               }}
               className="absolute top-12 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
@@ -584,7 +618,7 @@ export function PricingSection() {
                 key={plan.id}
                 type="button"
                 data-plan-tick={plan.id}
-                onClick={() => selectPlan(index, { userInitiated: true })}
+                onClick={() => selectPlan(index)}
                 style={{
                   right: `${(index / (pricingPlans.length - 1)) * 100}%`,
                   transform: "translateX(50%)",
@@ -651,11 +685,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        <div
-          className="pricing-cards mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden"
-          onPointerDown={() => setHintVisible(false)}
-          onKeyDown={() => setHintVisible(false)}
-        >
+        <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch xl:grid-cols-4">
           {pricingPlans.map((plan, index) => (
             <PricingPlanCard
               key={plan.id}
@@ -670,12 +700,6 @@ export function PricingSection() {
             />
           ))}
         </div>
-
-        {hintVisible ? (
-          <p className="mt-1 text-center text-xs font-semibold text-[#75695d] md:hidden">
-            اسلاید برای دیدن بقیه پلن‌ها →
-          </p>
-        ) : null}
 
       </div>
     </section>
