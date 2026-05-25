@@ -904,8 +904,10 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       dir={locale === "fa" ? "rtl" : "ltr"}
       aria-label={copy.aria}
       className={cn(
-        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.6rem] border border-[#d8c7b2] bg-[#fffaf1]/82 shadow-xl shadow-primary/[0.07] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/82",
-        compact ? "aspect-[4/3] p-3" : "aspect-square max-h-[540px] p-4 lg:p-5",
+        "hero-map-visual product-theater relative isolate w-full rounded-[1.6rem] border border-[#d8c7b2] bg-[#fffaf1]/82 shadow-xl shadow-primary/[0.07] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/82",
+        compact
+          ? "aspect-[4/3] min-h-[320px] p-3 sm:min-h-[360px]"
+          : "aspect-[9/10] min-h-[440px] p-4 sm:aspect-[4/5] sm:min-h-[500px] lg:aspect-auto lg:min-h-[560px] lg:p-5 xl:min-h-[580px]",
       )}
       data-mode={mode}
       onPointerMove={handlePointerMove}
