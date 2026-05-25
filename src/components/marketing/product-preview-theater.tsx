@@ -464,8 +464,8 @@ export function ProductPreviewTheater() {
     >
       <div className="relative grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_380px] xl:[direction:ltr]">
         <aside className="contents min-w-0 content-start gap-4 overflow-hidden xl:col-start-2 xl:row-start-1 xl:grid xl:[direction:rtl]">
-          <article className="product-demo-filter order-1 hidden min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/88 p-3 shadow-sm shadow-[#2A241D]/[0.03] md:block md:p-4 xl:order-none">
-            <div className="hidden items-start justify-between gap-3 md:flex">
+          <article className="product-demo-filter order-2 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/88 p-3 shadow-sm shadow-[#2A241D]/[0.03] md:p-4 xl:order-none">
+            <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <h3 className="text-base font-bold text-[#2A241D]">
                   فیلتر پروژه‌ها
@@ -477,7 +477,7 @@ export function ProductPreviewTheater() {
               <Filter className="h-5 w-5 text-[#7A6A59]" />
             </div>
 
-            <div className="mt-5 hidden gap-3 md:grid" aria-label="فیلترها">
+            <div className="mt-5 grid gap-3" aria-label="فیلترها">
               {filterGroups.map((group) => (
                 <FilterDropdown
                   key={group.id}
@@ -494,7 +494,7 @@ export function ProductPreviewTheater() {
               ))}
             </div>
 
-            <div className="mt-3 hidden min-w-0 flex-wrap gap-2 text-[11px] font-semibold text-[#6F6254] md:flex">
+            <div className="mt-3 flex min-w-0 flex-wrap gap-2 text-[11px] font-semibold text-[#6F6254]">
               {activeFilterValues.length > 0 ? (
                 activeFilterValues.map((filter) => (
                   <span
@@ -514,13 +514,13 @@ export function ProductPreviewTheater() {
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-4 hidden h-10 w-full items-center justify-center rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-3 text-xs font-bold text-[#2A241D] transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:flex"
+              className="mt-4 flex h-10 w-full items-center justify-center rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-3 text-xs font-bold text-[#2A241D] transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30"
             >
               همه پروژه‌ها
             </button>
           </article>
 
-          <article className="product-demo-list order-3 hidden min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/90 p-4 shadow-sm shadow-[#2A241D]/[0.03] md:block xl:order-none">
+          <article className="product-demo-list order-3 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/90 p-4 shadow-sm shadow-[#2A241D]/[0.03] xl:order-none">
             <div className="flex items-center justify-between gap-3">
               <h3 className="min-w-0 text-base font-bold text-[#2A241D]">
                 پروژه‌های منطبق
@@ -530,7 +530,7 @@ export function ProductPreviewTheater() {
               </span>
             </div>
             {matchingProjects.length > 0 ? (
-              <ul className="mt-3 max-h-none space-y-2.5 overflow-visible pr-0 md:max-h-[330px] md:overflow-y-auto md:pr-1">
+              <ul className="mt-3 max-h-[260px] space-y-2.5 overflow-y-auto pr-1 md:max-h-[330px]">
                 {matchingProjects.map((project, index) => {
                   const selected = project.id === selectedProject?.id;
 
@@ -589,7 +589,7 @@ export function ProductPreviewTheater() {
           </article>
         </aside>
 
-        <section className="product-demo-map-shell order-2 flex min-w-0 flex-col overflow-hidden rounded-[1.45rem] border border-[#E4D8C8] bg-[#FFFAF1]/92 shadow-sm shadow-[#2A241D]/[0.03] xl:col-start-1 xl:row-start-1 xl:order-none xl:[direction:rtl]">
+        <section className="product-demo-map-shell order-1 flex min-w-0 flex-col overflow-hidden rounded-[1.45rem] border border-[#E4D8C8] bg-[#FFFAF1]/92 shadow-sm shadow-[#2A241D]/[0.03] xl:col-start-1 xl:row-start-1 xl:order-none xl:[direction:rtl]">
           <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#E4D8C8] px-4 py-4">
             <div>
               <h3 className="text-base font-bold text-[#2A241D] md:text-lg">

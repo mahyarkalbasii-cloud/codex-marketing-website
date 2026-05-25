@@ -250,9 +250,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
   const prefersReducedMotion = useMediaState("(prefers-reduced-motion: reduce)");
   const activeFilter = filterStages[filterIndex] ?? filterStages[0];
   const projectCardsEnabled = !compact && !isMobile;
+  const visiblePins = useMemo(
+    () => (compact || isMobile ? heroProjectPins.slice(0, 5) : heroProjectPins),
+    [compact, isMobile],
+  );
   const selectedPin = useMemo(
-    () => heroProjectPins.find((pin) => pin.id === selectedPinId) ?? null,
-    [selectedPinId],
+    () => visiblePins.find((pin) => pin.id === selectedPinId) ?? null,
+    [selectedPinId, visiblePins],
   );
   const shouldRunLoop = inView && pageVisible && !isMobile && !prefersReducedMotion && !manualPaused;
 
@@ -455,7 +459,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
         ) : null}
 
         <div key={loopSerial} className="absolute inset-0 z-20">
-          {heroProjectPins.map((pin, index) => {
+          {visiblePins.map((pin, index) => {
             const matches = activeFilter === filterStages[0] || pin.stage === activeFilter;
             const selected = pin.id === selectedPinId;
 
