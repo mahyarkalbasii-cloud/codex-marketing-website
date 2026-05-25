@@ -144,9 +144,9 @@ const pricingPlans: PricingPlan[] = [
 
 const DEFAULT_PLAN_INDEX = 2;
 const mobilePricingPlans = [
-  { plan: pricingPlans[2], index: 2 },
-  { plan: pricingPlans[1], index: 1 },
   { plan: pricingPlans[0], index: 0 },
+  { plan: pricingPlans[1], index: 1 },
+  { plan: pricingPlans[2], index: 2 },
   { plan: pricingPlans[3], index: 3 },
 ];
 const mobilePlanOrder: Record<PlanId, string> = {
