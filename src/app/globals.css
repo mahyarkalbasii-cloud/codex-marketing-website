@@ -1410,6 +1410,10 @@ body {
       height: auto !important;
     }
 
+    .pricing-card[data-active-plan="true"] {
+      order: -1;
+    }
+
     .product-demo-root .product-demo-map-bg {
       min-height: clamp(21rem, 68vw, 25rem);
     }
