@@ -1,60 +1,80 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import {
-  cities,
-  featurePages,
-  seoPages,
-  site,
-  stages,
-  suppliers,
-} from "@/lib/site-data";
-
-const footerGroups = [
-  {
-    title: "صفحات اصلی",
-    links: seoPages,
-  },
-  {
-    title: "شهرها",
-    links: cities.map((city) => ({
-      title: `پروژه‌های ${city.name}`,
-      href: `/cities/${city.slug}`,
-    })),
-  },
-  {
-    title: "دسته‌های فروش",
-    links: suppliers.slice(0, 6).map((supplier) => ({
-      title: supplier.name,
-      href: `/suppliers/${supplier.slug}`,
-    })),
-  },
-  {
-    title: "مراحل ساخت",
-    links: stages.slice(0, 6).map((stage) => ({
-      title: stage.name,
-      href: `/construction-stages/${stage.slug}`,
-    })),
-  },
-];
+import { getDirection, getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
 
 export function SiteFooter() {
+  const pathname = usePathname() || "/";
+  const locale = getLocaleFromPathname(pathname);
+  const direction = getDirection(locale);
+  const { cities, featurePages, seoPages, site, stages, suppliers } = getSiteContent(locale);
+  const footerCopy = locale === "fa"
+    ? {
+        mainPages: "صفحات اصلی",
+        cities: "شهرها",
+        suppliers: "دسته‌های فروش",
+        stages: "مراحل ساخت",
+        cityTitle: (name: string) => `پروژه‌های ${name}`,
+        description:
+          "منبع واحد حقیقت برای فروش پروژه‌محور در بازار ساختمان؛ از اطلاعات به‌روز تا نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار.",
+        extension: "داخلی",
+      }
+    : {
+        mainPages: "Main pages",
+        cities: "Cities",
+        suppliers: "Sales categories",
+        stages: "Construction stages",
+        cityTitle: (name: string) => `${name} construction projects`,
+        description:
+          "The single source of truth for project-based construction sales: updated data, maps, filters, CRM, messaging, and AI sales assistance.",
+        extension: "ext.",
+      };
+  const footerGroups = [
+    {
+      title: footerCopy.mainPages,
+      links: seoPages,
+    },
+    {
+      title: footerCopy.cities,
+      links: cities.map((city) => ({
+        title: footerCopy.cityTitle(city.name),
+        href: `/cities/${city.slug}`,
+      })),
+    },
+    {
+      title: footerCopy.suppliers,
+      links: suppliers.slice(0, 6).map((supplier) => ({
+        title: supplier.name,
+        href: `/suppliers/${supplier.slug}`,
+      })),
+    },
+    {
+      title: footerCopy.stages,
+      links: stages.slice(0, 6).map((stage) => ({
+        title: stage.name,
+        href: `/construction-stages/${stage.slug}`,
+      })),
+    },
+  ];
+
   return (
-    <footer className="border-t border-[#3b3128] bg-[#241f1a] text-[#fffaf1] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
+    <footer dir={direction} className="border-t border-[#3b3128] bg-[#241f1a] text-[#fffaf1] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-9 md:grid-cols-[1.2fr_2fr] md:gap-10 md:px-6 md:py-12">
         <div className="space-y-5">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href={localizeHref("/", locale)} className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl border border-[#6b5542] bg-white text-sm font-black text-[#241f1a]">
               PS
             </span>
             <span className="text-lg font-bold">{site.name}</span>
           </Link>
           <p className="max-w-md text-sm leading-8 text-[#cfc0af]">
-            منبع واحد حقیقت برای فروش پروژه‌محور در بازار ساختمان؛ از اطلاعات
-            به‌روز تا نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار.
+            {footerCopy.description}
           </p>
           <div className="space-y-2 text-sm text-[#cfc0af]">
             <p>
-              {site.salesExpert} | داخلی {site.extension}
+              {site.salesExpert} | {footerCopy.extension} {site.extension}
             </p>
             <p>
               <a href="tel:+982175425000" dir="ltr" className="transition hover:text-[#fffaf1]">
@@ -87,7 +107,7 @@ export function SiteFooter() {
                 {group.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={link.href}
+                      href={localizeHref(link.href, locale)}
                       className="text-xs leading-6 text-[#cfc0af] transition hover:text-[#fffaf1] sm:text-sm"
                     >
                       {link.title}
@@ -104,7 +124,7 @@ export function SiteFooter() {
           <span>© {new Date().getFullYear()} {site.name}</span>
           <div className="flex flex-wrap gap-4">
             {featurePages.map((feature) => (
-              <Link key={feature.href} href={feature.href}>
+              <Link key={feature.href} href={localizeHref(feature.href, locale)}>
                 {feature.title}
               </Link>
             ))}

@@ -8,10 +8,12 @@ import {
   Handshake,
   Layers3,
   Timer,
+  type LucideIcon,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import type { Locale } from "@/lib/i18n";
 import { salesTaxonomyMeta, taxonomyStageInsights } from "@/lib/sales-taxonomy";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +33,17 @@ type Stage = {
   fields: string[];
   signals: string[];
   sales: Record<SalesKind, SalesFocus>;
+};
+
+type SalesTypeCardData = {
+  id: SalesKind;
+  label: string;
+  title: string;
+  text: string;
+  accent: string;
+  soft: string;
+  sampleFields: readonly string[];
+  Icon: LucideIcon;
 };
 
 const stages: Stage[] = [
@@ -292,7 +305,7 @@ const stages: Stage[] = [
   },
 ];
 
-const salesTypes = [
+const salesTypes: readonly SalesTypeCardData[] = [
   {
     id: "fast",
     label: "نیاز نزدیک به خرید",
@@ -333,7 +346,348 @@ const salesTypes = [
   },
 ] as const;
 
-function SalesTypeCard({ type }: { type: (typeof salesTypes)[number] }) {
+const stagesEn: Stage[] = [
+  {
+    label: "Demolition and excavation",
+    cue: "Early entry",
+    color: "#CC785C",
+    soft: "#F5EADB",
+    fields: [
+      "Demolition contractor",
+      "Earthmoving machinery",
+      "Excavation stabilization",
+      "Site safety and setup",
+      "Debris removal",
+      "Geotechnical testing",
+    ],
+    signals: [
+      "Needs are still being shaped",
+      "Sales are more consultative",
+      "Owners and engineers influence the decision",
+      "The first contact should be problem-led",
+    ],
+    sales: {
+      fast: {
+        note: "For urgent site services and earthwork operations with shorter purchase decisions.",
+        products: ["Machinery", "Debris removal", "Site setup"],
+        score: 42,
+      },
+      consultative: {
+        note: "For sales that should enter the technical conversation before execution begins.",
+        products: ["Stabilization", "Geotechnical", "Safety"],
+        score: 86,
+      },
+    },
+  },
+  {
+    label: "Foundation",
+    cue: "Structural purchase",
+    color: "#D99A35",
+    soft: "#F6D6A8",
+    fields: [
+      "Ready-mix concrete",
+      "Rebar and reinforcement",
+      "Formwork",
+      "Concrete additives",
+      "Waterstop and waterproofing",
+      "Concrete testing",
+    ],
+    signals: [
+      "Structural drawings drive purchase",
+      "Supply delays are expensive",
+      "Quality control matters",
+      "Supplier trust affects the decision",
+    ],
+    sales: {
+      fast: {
+        note: "For materials that must be ready alongside concrete pouring and reinforcement.",
+        products: ["Concrete", "Rebar", "Formwork"],
+        score: 76,
+      },
+      consultative: {
+        note: "For products that require technical approval, tests, or engineer coordination.",
+        products: ["Additives", "Waterproofing", "Testing"],
+        score: 72,
+      },
+    },
+  },
+  {
+    label: "Structure",
+    cue: "Heavy decisions",
+    color: "#8A6048",
+    soft: "#EFE0D4",
+    fields: [
+      "Steel and beams",
+      "Connections and bolts",
+      "Structural concrete",
+      "Roofing and deck",
+      "Crane and tower crane",
+      "Elevator early coordination",
+    ],
+    signals: [
+      "Heavy purchases become active",
+      "Execution coordination matters",
+      "Elevator decisions start before final installation",
+      "Delay risk is high",
+    ],
+    sales: {
+      fast: {
+        note: "For structural supply and execution equipment that can stop the project if delayed.",
+        products: ["Steel", "Concrete", "Crane"],
+        score: 82,
+      },
+      consultative: {
+        note: "For decisions that must be reflected in drawings and contracts before finishing.",
+        products: ["Elevator", "Deck", "Special connections"],
+        score: 78,
+      },
+    },
+  },
+  {
+    label: "Masonry",
+    cue: "Spaces become fixed",
+    color: "#6F6254",
+    soft: "#E8DFD2",
+    fields: [
+      "Brick and blocks",
+      "AAC and lightweight blocks",
+      "Dry mortar and cement",
+      "Wall posts and anchors",
+      "Thermal and acoustic insulation",
+      "Door and window measurement",
+    ],
+    signals: [
+      "Spaces and openings become fixed",
+      "Recurring purchases are common",
+      "MEP routes are being prepared",
+      "A strong time for quotations",
+    ],
+    sales: {
+      fast: {
+        note: "For materials consumed quickly during wall and partition execution.",
+        products: ["Block", "Mortar", "Cement"],
+        score: 80,
+      },
+      consultative: {
+        note: "For products that fit better after openings and routes are fixed.",
+        products: ["Windows", "Insulation", "Wall posts"],
+        score: 68,
+      },
+    },
+  },
+  {
+    label: "Plaster",
+    cue: "Between shell and finishing",
+    color: "#9A6B7A",
+    soft: "#F0DDE3",
+    fields: [
+      "Concealed electrical work",
+      "Plumbing",
+      "Switch and outlet boxes",
+      "Plaster",
+      "False-ceiling substrate",
+      "Bathroom cement work",
+    ],
+    signals: [
+      "This is the bridge into finishing",
+      "Hidden systems must be placed correctly",
+      "Errors create rework",
+      "Facade and interior decisions are getting closer",
+    ],
+    sales: {
+      fast: {
+        note: "For items consumed quickly in surface preparation and concealed routes.",
+        products: ["Plaster", "Cement", "Boxes and pipes"],
+        score: 78,
+      },
+      consultative: {
+        note: "For work that needs drawing, execution, and timing coordination.",
+        products: ["Electrical", "Mechanical", "False ceiling"],
+        score: 82,
+      },
+    },
+  },
+  {
+    label: "Early finishing",
+    cue: "Several purchases open",
+    color: "#4F6F8A",
+    soft: "#DCE7ED",
+    fields: [
+      "Facade substrate",
+      "UPVC/aluminum windows",
+      "Bathroom waterproofing",
+      "Floor leveling",
+      "Cooling and heating equipment",
+      "Elevator rail, door, and machine room",
+    ],
+    signals: [
+      "Several purchases open at once",
+      "Execution quality and delivery time both matter",
+      "Facade work starts after shell work",
+      "Technical negotiation becomes serious",
+    ],
+    sales: {
+      fast: {
+        note: "For items that enter execution as soon as surfaces and service areas are ready.",
+        products: ["Waterproofing", "Flooring prep", "Windows"],
+        score: 74,
+      },
+      consultative: {
+        note: "For sales that still have room for design, samples, and technical negotiation.",
+        products: ["Facade", "Elevator", "MEP"],
+        score: 90,
+      },
+    },
+  },
+  {
+    label: "Finishing",
+    cue: "Active sales",
+    color: "#C9792B",
+    soft: "#F2D4B7",
+    fields: [
+      "Tile and ceramic",
+      "Flooring and parquet",
+      "Interior and security doors",
+      "Paint and coating",
+      "Cabinets and closets",
+      "Faucets and sanitary ware",
+    ],
+    signals: [
+      "Needs are clearer",
+      "Samples and availability matter",
+      "Delay can lose the purchase",
+      "Decision-makers want executable options",
+    ],
+    sales: {
+      fast: {
+        note: "For products the project is ready to choose and buy directly.",
+        products: ["Tile", "Flooring", "Paint", "Faucets"],
+        score: 90,
+      },
+      consultative: {
+        note: "For options where samples, measurement, or design affect the decision.",
+        products: ["Cabinets", "Doors", "Interior design"],
+        score: 74,
+      },
+    },
+  },
+  {
+    label: "Final work",
+    cue: "Handover and punch list",
+    color: "#7B6BA8",
+    soft: "#E5E0F0",
+    fields: [
+      "Final switches and outlets",
+      "Lighting",
+      "Hardware",
+      "Smart systems/intercom/CCTV",
+      "Industrial cleaning and landscape",
+      "Punch-list and completion services",
+    ],
+    signals: [
+      "Treat this as one combined stage",
+      "Purchases are smaller but more urgent",
+      "Detail quality affects handover",
+      "The offer should be ready to execute",
+    ],
+    sales: {
+      fast: {
+        note: "For final purchases that must be installed, replaced, or completed quickly.",
+        products: ["Switches", "Lighting", "Cleaning"],
+        score: 76,
+      },
+      consultative: {
+        note: "For services that improve final quality, security, or handover experience.",
+        products: ["Smart systems", "Lighting design", "Completion services"],
+        score: 72,
+      },
+    },
+  },
+];
+
+const salesTypesEn: readonly SalesTypeCardData[] = [
+  {
+    id: "fast",
+    label: "Near-purchase need",
+    title: "Fast transactional sales",
+    text: "For goods and services that need to reach active, purchase-ready projects quickly.",
+    accent: "#CC785C",
+    soft: "#F5EADB",
+    sampleFields: [
+      "Machinery",
+      "Debris removal",
+      "Ready-mix concrete",
+      "Rebar",
+      "Lightweight blocks",
+      "Switches",
+      "Faucets",
+      "Site cleaning",
+    ],
+    Icon: Timer,
+  },
+  {
+    id: "consultative",
+    label: "Earlier decision entry",
+    title: "Consultative sales",
+    text: "For sales that require trust-building, technical review, or negotiation before purchase.",
+    accent: "#7B6BA8",
+    soft: "#E5E0F0",
+    sampleFields: [
+      "Excavation stabilization",
+      "Geotechnical testing",
+      "Facade design",
+      "Smart building systems",
+      "Lighting design",
+      "Elevators",
+      "Decorative coatings",
+      "After-sales service",
+    ],
+    Icon: Handshake,
+  },
+] as const;
+
+const audienceCopy = {
+  fa: {
+    sampleFields: "نمونه زمینه‌های کاری و محصولات",
+    more: "توضیحات بیشتر",
+    selectedStage: "مرحله انتخاب‌شده",
+    matchedRows: (matched: string, total: string) =>
+      `${matched} ردیف مرتبط از ${total} زمینه کاری`,
+    stageBody:
+      "وقتی پروژه در این مرحله است، این زمینه‌های کاری زودتر معنا پیدا می‌کنند و بهتر می‌شود تماس فروش را به نیاز واقعی پروژه وصل کرد.",
+    dominantSaleType: "نوع فروش غالب",
+    negotiation: "مرحله مناسب مذاکره",
+    purchase: "مرحله مناسب خرید",
+    execution: "مرحله مناسب اجرا",
+    decisionSignal: "سیگنال تصمیم",
+    followupNote: "نکته پیگیری",
+    dir: "rtl" as const,
+  },
+  en: {
+    sampleFields: "Sample work areas and products",
+    more: "More details",
+    selectedStage: "Selected stage",
+    matchedRows: (matched: string, total: string) =>
+      `${matched} related rows from ${total} work areas`,
+    stageBody:
+      "When a project reaches this stage, these work areas become more relevant and the sales conversation can be tied to a real project need.",
+    dominantSaleType: "Dominant sales type",
+    negotiation: "Best negotiation stage",
+    purchase: "Best purchase stage",
+    execution: "Best execution stage",
+    decisionSignal: "Decision signal",
+    followupNote: "Follow-up note",
+    dir: "ltr" as const,
+  },
+};
+
+function SalesTypeCard({
+  copy,
+  type,
+}: {
+  copy: (typeof audienceCopy)[Locale];
+  type: SalesTypeCardData;
+}) {
   return (
     <Card className="group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-xl hover:shadow-zinc-950/[0.06] md:p-5 dark:hover:border-zinc-700">
       <div
@@ -363,7 +717,7 @@ function SalesTypeCard({ type }: { type: (typeof salesTypes)[number] }) {
 
       <div className="relative mt-4">
         <div className="mb-2 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
-          نمونه زمینه‌های کاری و محصولات
+          {copy.sampleFields}
         </div>
         <div className="flex flex-wrap gap-2">
           {type.sampleFields.map((product, index) => (
@@ -389,7 +743,7 @@ function SalesTypeCard({ type }: { type: (typeof salesTypes)[number] }) {
           type="button"
           className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#2a241d] px-4 text-sm font-black text-white shadow-lg shadow-[#2a241d]/15 transition hover:bg-[#18130f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/40"
         >
-          توضیحات بیشتر
+          {copy.more}
           <ArrowLeft className="h-4 w-4" strokeWidth={2} />
         </button>
       </div>
@@ -397,12 +751,17 @@ function SalesTypeCard({ type }: { type: (typeof salesTypes)[number] }) {
   );
 }
 
-export function AudienceStageGuide() {
+export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
+  const localizedStages = locale === "fa" ? stages : stagesEn;
+  const localizedSalesTypes = locale === "fa" ? salesTypes : salesTypesEn;
+  const copy = audienceCopy[locale];
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US";
   const [activeIndex, setActiveIndex] = useState(6);
-  const activeStage = stages[activeIndex];
-  const activeTaxonomy = taxonomyStageInsights[activeStage.label];
-  const matchedRowsLabel = activeTaxonomy?.matchedRows.toLocaleString("fa-IR");
-  const totalRowsLabel = salesTaxonomyMeta.totalRows.toLocaleString("fa-IR");
+  const activeStage = localizedStages[activeIndex];
+  const activeTaxonomy =
+    locale === "fa" ? taxonomyStageInsights[activeStage.label] : undefined;
+  const matchedRowsLabel = activeTaxonomy?.matchedRows.toLocaleString(numberLocale);
+  const totalRowsLabel = salesTaxonomyMeta.totalRows.toLocaleString(numberLocale);
   const activeFields = activeTaxonomy?.exampleFields ?? activeStage.fields;
   const signalCards = activeTaxonomy
     ? [
@@ -415,7 +774,7 @@ export function AudienceStageGuide() {
         },
       ]
     : activeStage.signals.map((signal, index) => ({
-        label: index % 2 === 0 ? "سیگنال تصمیم" : "نکته پیگیری",
+        label: index % 2 === 0 ? copy.decisionSignal : copy.followupNote,
         text: signal,
         Icon: index % 2 === 0 ? Compass : Layers3,
         color: index % 2 === 0 ? activeStage.color : "#C9792B",
@@ -424,13 +783,24 @@ export function AudienceStageGuide() {
 
   return (
     <div className="relative mt-8 grid gap-5 lg:mt-10">
-      <div className="grid gap-4 md:grid-cols-2 lg:[direction:rtl]">
-        {salesTypes.map((type) => (
-          <SalesTypeCard key={type.id} type={type} />
+      <div
+        className={cn(
+          "grid gap-4 md:grid-cols-2",
+          locale === "fa" ? "lg:[direction:rtl]" : "lg:[direction:ltr]",
+        )}
+      >
+        {localizedSalesTypes.map((type) => (
+          <SalesTypeCard key={type.id} copy={copy} type={type} />
         ))}
       </div>
 
-      <Card className="relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem] lg:[direction:rtl]">
+      <Card
+        dir={copy.dir}
+        className={cn(
+          "relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem]",
+          locale === "fa" ? "lg:[direction:rtl]" : "lg:[direction:ltr]",
+        )}
+      >
         <div
           className="pointer-events-none absolute -right-16 top-10 h-40 w-40 rounded-full blur-3xl"
           style={{ backgroundColor: activeStage.soft, opacity: 0.54 }}
@@ -443,7 +813,7 @@ export function AudienceStageGuide() {
               aria-hidden="true"
             />
             <div className="relative z-10 grid h-full gap-1">
-              {stages.map((stage, index) => {
+              {localizedStages.map((stage, index) => {
                 const active = index === activeIndex;
 
                 return (
@@ -455,7 +825,8 @@ export function AudienceStageGuide() {
                     onFocus={() => setActiveIndex(index)}
                     aria-pressed={active}
                     className={cn(
-                      "grid h-10 grid-cols-[2rem_1fr] items-center gap-2 rounded-2xl px-1.5 py-0.5 text-right transition-[background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                      "grid h-10 grid-cols-[2rem_1fr] items-center gap-2 rounded-2xl px-1.5 py-0.5 transition-[background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                      locale === "fa" ? "text-right" : "text-left",
                       active
                         ? "bg-white shadow-sm shadow-[#2a241d]/[0.04] dark:bg-zinc-900"
                         : "hover:bg-white/70 dark:hover:bg-zinc-900/70",
@@ -479,7 +850,7 @@ export function AudienceStageGuide() {
                       />
                     </span>
                     <span
-                      dir="rtl"
+                      dir={copy.dir}
                       className={cn(
                         "text-[11px] font-bold leading-5 text-[#75695d] dark:text-zinc-300",
                         active && "text-[#2a241d] dark:text-white",
@@ -509,9 +880,9 @@ export function AudienceStageGuide() {
                 {activeStage.cue}
               </span>
               <span className="text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-                {activeTaxonomy
-                  ? `${matchedRowsLabel} ردیف مرتبط از ${totalRowsLabel} زمینه کاری`
-                  : "مرحله انتخاب‌شده"}
+                {activeTaxonomy && matchedRowsLabel
+                  ? copy.matchedRows(matchedRowsLabel, totalRowsLabel)
+                  : copy.selectedStage}
               </span>
             </div>
 
@@ -519,18 +890,17 @@ export function AudienceStageGuide() {
               {activeStage.label}
             </h3>
             <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
-              وقتی پروژه در این مرحله است، این زمینه‌های کاری زودتر معنا پیدا
-              می‌کنند و بهتر می‌شود تماس فروش را به نیاز واقعی پروژه وصل کرد.
+              {copy.stageBody}
             </p>
 
             {activeTaxonomy ? (
               <div className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   {[
-                    ["نوع فروش غالب", activeTaxonomy.dominantSaleType],
-                    ["مرحله مناسب مذاکره", activeTaxonomy.timing.negotiation],
-                    ["مرحله مناسب خرید", activeTaxonomy.timing.purchase],
-                    ["مرحله مناسب اجرا", activeTaxonomy.timing.execution],
+                    [copy.dominantSaleType, activeTaxonomy.dominantSaleType],
+                    [copy.negotiation, activeTaxonomy.timing.negotiation],
+                    [copy.purchase, activeTaxonomy.timing.purchase],
+                    [copy.execution, activeTaxonomy.timing.execution],
                   ].map(([label, value]) => (
                     <div
                       key={label}
@@ -549,7 +919,7 @@ export function AudienceStageGuide() {
             ) : null}
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-              <span>نمونه زمینه‌های کاری و محصولات</span>
+              <span>{copy.sampleFields}</span>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               {activeFields.map((field, index) => (
@@ -571,7 +941,7 @@ export function AudienceStageGuide() {
             <div className="mt-4 grid auto-rows-fr gap-3 sm:grid-cols-2">
               {signalCards.map(({ label, text, Icon, color, soft }) => (
                 <div
-                  key={label}
+                  key={`${label}-${text}`}
                   className="flex gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <span

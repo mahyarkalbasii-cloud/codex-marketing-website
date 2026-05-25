@@ -5,8 +5,17 @@ import { Plus } from "lucide-react";
 
 import { faqs } from "@/lib/site-data";
 
-export function FaqList({ limit }: { limit?: number }) {
-  const items = limit ? faqs.slice(0, limit) : faqs;
+type FaqItem = (typeof faqs)[number];
+
+export function FaqList({
+  items: providedItems,
+  limit,
+}: {
+  items?: FaqItem[];
+  limit?: number;
+}) {
+  const sourceItems = providedItems ?? faqs;
+  const items = limit ? sourceItems.slice(0, limit) : sourceItems;
 
   const toggleWithKeyboard = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key !== "Enter" && event.key !== " ") {

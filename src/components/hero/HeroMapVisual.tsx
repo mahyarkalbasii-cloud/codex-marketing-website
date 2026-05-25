@@ -13,12 +13,21 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, 
 import { Building } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n";
 
-import { defaultSelectedPinId, filterStages, heroProjectPins, type HeroProjectPin } from "./data";
+import {
+  defaultSelectedPinId,
+  filterStages,
+  heroProjectPins,
+  type ConstructionStage,
+  type FilterStage,
+  type HeroProjectPin,
+} from "./data";
 import { heroLoop, type HeroLoopMode } from "./animations";
 
 type HeroMapVisualProps = {
   compact?: boolean;
+  locale?: Locale;
 };
 
 type PinStyle = CSSProperties & {
@@ -32,9 +41,109 @@ type CardStyle = CSSProperties & {
   "--card-y": string;
 };
 
+const numberFormatters = {
+  fa: new Intl.NumberFormat("fa-IR", {
+    useGrouping: false,
+  }),
+  en: new Intl.NumberFormat("en-US", {
+    useGrouping: false,
+  }),
+};
+
 const persianDigits = new Intl.NumberFormat("fa-IR", {
   useGrouping: false,
 });
+
+const heroCopy = {
+  fa: {
+    aria: "نقشه تعاملی نمونه پرشین‌سازه برای کشف پروژه‌های ساختمانی فعال",
+    opportunity: (count: number) => `${persianDigits.format(count || 3)} فرصت مناسب امروز`,
+    projectSample: "پروژه نمونه",
+    stage: "مرحله",
+    height: "ارتفاع",
+    updated: "آخرین بروزرسانی: ۲ روز پیش",
+    stagePrefix: "مرحله",
+    filters: {
+      "همه مراحل": "همه مراحل",
+      گودبرداری: "گودبرداری",
+      اسکلت: "اسکلت",
+      "نازک‌کاری": "نازک‌کاری",
+    } as Record<FilterStage, string>,
+    areas: {
+      velenjak: "ولنجک",
+      zaferanieh: "زعفرانیه",
+      niavaran: "نیاوران",
+      aghdasieh: "اقدسیه",
+      farmanieh: "فرمانیه",
+      pasdaran: "پاسداران",
+      jordan: "جردن",
+      saadatabad: "سعادت‌آباد",
+      vanak: "ونک",
+      ekbatan: "اکباتان",
+    } as Record<string, string>,
+    floors: {
+      velenjak: "۶ طبقه",
+      zaferanieh: "۸ طبقه",
+      niavaran: "۹ طبقه",
+      aghdasieh: "۶ طبقه",
+      farmanieh: "۸ طبقه",
+      pasdaran: "۱۰ طبقه",
+      jordan: "۶ طبقه",
+      saadatabad: "۷ طبقه",
+      vanak: "۴ طبقه",
+      ekbatan: "۵ طبقه",
+    } as Record<string, string>,
+    stages: {
+      گودبرداری: "گودبرداری",
+      اسکلت: "اسکلت",
+      "نازک‌کاری": "نازک‌کاری",
+    } as Record<ConstructionStage, string>,
+  },
+  en: {
+    aria: "Sample PersianSaze interactive map for discovering active construction projects",
+    opportunity: (count: number) => `${numberFormatters.en.format(count || 3)} good-fit opportunities today`,
+    projectSample: "Sample project",
+    stage: "Stage",
+    height: "Height",
+    updated: "Last updated: 2 days ago",
+    stagePrefix: "stage",
+    filters: {
+      "همه مراحل": "All stages",
+      گودبرداری: "Excavation",
+      اسکلت: "Structure",
+      "نازک‌کاری": "Finishing",
+    } as Record<FilterStage, string>,
+    areas: {
+      velenjak: "Velenjak",
+      zaferanieh: "Zaferanieh",
+      niavaran: "Niavaran",
+      aghdasieh: "Aghdasieh",
+      farmanieh: "Farmanieh",
+      pasdaran: "Pasdaran",
+      jordan: "Jordan",
+      saadatabad: "Saadatabad",
+      vanak: "Vanak",
+      ekbatan: "Ekbatan",
+    } as Record<string, string>,
+    floors: {
+      velenjak: "6 floors",
+      zaferanieh: "8 floors",
+      niavaran: "9 floors",
+      aghdasieh: "6 floors",
+      farmanieh: "8 floors",
+      pasdaran: "10 floors",
+      jordan: "6 floors",
+      saadatabad: "7 floors",
+      vanak: "4 floors",
+      ekbatan: "5 floors",
+    } as Record<string, string>,
+    stages: {
+      گودبرداری: "Excavation",
+      اسکلت: "Structure",
+      "نازک‌کاری": "Finishing",
+    } as Record<ConstructionStage, string>,
+  },
+};
 
 const mobilePinPositions: Record<string, Pick<HeroProjectPin, "x" | "y">> = {
   velenjak: { x: 18, y: 28 },
@@ -158,6 +267,7 @@ function ProjectPin({
   pin,
   selected,
   showLabel,
+  locale,
 }: {
   active: boolean;
   animate: boolean;
@@ -167,7 +277,9 @@ function ProjectPin({
   pin: HeroProjectPin;
   selected: boolean;
   showLabel: boolean;
+  locale: Locale;
 }) {
+  const copy = heroCopy[locale];
   const style: PinStyle = {
     "--pin-x": `${pin.x}%`,
     "--pin-y": `${pin.y}%`,
@@ -185,7 +297,7 @@ function ProjectPin({
         event.stopPropagation();
         onClick(pin);
       }}
-      aria-label={`${pin.area}، مرحله ${pin.stage}، ${pin.floors}`}
+      aria-label={`${copy.areas[pin.id]}, ${copy.stagePrefix} ${copy.stages[pin.stage]}, ${copy.floors[pin.id]}`}
       className={cn(
         "hero-map-pin group absolute z-20 grid h-7 w-7 place-items-center rounded-full transition duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/45",
         active && "hero-map-pin-active",
@@ -199,14 +311,15 @@ function ProjectPin({
         <span
           className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium leading-none text-[#7A6A59]/70"
         >
-          {pin.area}
+          {copy.areas[pin.id]}
         </span>
       ) : null}
     </button>
   );
 }
 
-function ProjectCard({ pin }: { pin: HeroProjectPin }) {
+function ProjectCard({ locale, pin }: { locale: Locale; pin: HeroProjectPin }) {
+  const copy = heroCopy[locale];
   const edgeAware = pin.x > 54;
   const cardStyle: CardStyle = {
     "--card-y": `${Math.min(Math.max(pin.y - 15, 12), 62)}%`,
@@ -226,29 +339,29 @@ function ProjectCard({ pin }: { pin: HeroProjectPin }) {
     >
       <div className="flex items-start justify-between gap-3">
         <span className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
-          پروژه نمونه
+          {copy.projectSample}
         </span>
         <span className="mt-1 h-2 w-2 rounded-full bg-[#CC785C]" />
       </div>
-      <div className="mt-2.5 text-sm font-bold text-foreground">{pin.area}</div>
+      <div className="mt-2.5 text-sm font-bold text-foreground">{copy.areas[pin.id]}</div>
       <div className="mt-2.5 grid grid-cols-2 gap-2 text-[10px] leading-5 text-muted-foreground">
         <div className="rounded-xl border border-border bg-background/70 p-2">
-          <span className="block text-foreground">مرحله</span>
-          {pin.stage}
+          <span className="block text-foreground">{copy.stage}</span>
+          {copy.stages[pin.stage]}
         </div>
         <div className="rounded-xl border border-border bg-background/70 p-2">
-          <span className="block text-foreground">ارتفاع</span>
-          {pin.floors}
+          <span className="block text-foreground">{copy.height}</span>
+          {copy.floors[pin.id]}
         </div>
       </div>
       <div className="mt-2.5 rounded-xl border border-border bg-secondary/70 px-3 py-2 text-[10px] font-semibold text-foreground">
-        آخرین بروزرسانی: ۲ روز پیش
+        {copy.updated}
       </div>
     </div>
   );
 }
 
-export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
+export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<HeroLoopMode>("showing-card");
@@ -262,6 +375,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
   const isMobile = useMediaState("(max-width: 767px)");
   const prefersReducedMotion = useMediaState("(prefers-reduced-motion: reduce)");
   const activeFilter = filterStages[filterIndex] ?? filterStages[0];
+  const copy = heroCopy[locale];
   const projectCardsEnabled = !compact && !isMobile;
   const visiblePins = useMemo(
     () => {
@@ -483,8 +597,8 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
   return (
     <div
       ref={rootRef}
-      dir="rtl"
-      aria-label="نقشه تعاملی نمونه پرشین‌سازه برای کشف پروژه‌های ساختمانی فعال"
+      dir={locale === "fa" ? "rtl" : "ltr"}
+      aria-label={copy.aria}
       className={cn(
         "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.6rem] border border-border bg-card/80 shadow-xl shadow-primary/[0.07] backdrop-blur",
         compact ? "aspect-[4/3] p-3" : "aspect-square max-h-[540px] p-4 lg:p-5",
@@ -507,13 +621,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
 
         <div className="absolute left-3 top-3 z-30 flex items-center gap-1.5 rounded-full border border-border bg-card/92 px-2.5 py-1.5 text-[10px] font-bold text-foreground shadow-sm shadow-primary/[0.04] backdrop-blur lg:left-4 lg:top-4">
           <span className="h-1.5 w-1.5 rounded-full bg-[#CC785C] hero-live-dot" aria-hidden="true" />
-          <span>{persianDigits.format(counter || 3)} فرصت مناسب امروز</span>
+          <span>{copy.opportunity(counter || 3)}</span>
         </div>
 
         {!compact ? (
           <div className="absolute bottom-3 left-3 z-30 overflow-hidden rounded-full border border-border bg-card/88 px-2.5 py-1.5 text-[10px] font-semibold text-muted-foreground shadow-sm shadow-primary/[0.04] backdrop-blur lg:bottom-4 lg:left-4">
             <span key={activeFilter} className="hero-filter-text block">
-              {activeFilter}
+              {copy.filters[activeFilter]}
             </span>
           </div>
         ) : null}
@@ -534,12 +648,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
                 pin={pin}
                 selected={selected}
                 showLabel={!compact && !isMobile}
+                locale={locale}
               />
             );
           })}
         </div>
 
-        {projectCardsEnabled && selectedPin ? <ProjectCard pin={selectedPin} /> : null}
+        {projectCardsEnabled && selectedPin ? <ProjectCard locale={locale} pin={selectedPin} /> : null}
 
       </div>
     </div>
