@@ -298,6 +298,18 @@ const salesTypes = [
     label: "نیاز نزدیک به خرید",
     title: "فروش سریع و تراکنشی",
     text: "برای کالاها و خدماتی که باید سریع به پروژه فعال و آماده خرید برسند.",
+    accent: "#CC785C",
+    soft: "#F5EADB",
+    sampleFields: [
+      "ماشین‌آلات",
+      "حمل نخاله",
+      "بتن آماده",
+      "میلگرد و آرماتور",
+      "بلوک سبک",
+      "کلید و پریز",
+      "شیرآلات",
+      "نظافت کارگاهی",
+    ],
     Icon: Timer,
   },
   {
@@ -305,27 +317,28 @@ const salesTypes = [
     label: "ورود زودتر به تصمیم",
     title: "فروش مشاوره‌ای",
     text: "برای فروش‌هایی که اعتمادسازی، بررسی فنی یا مذاکره قبل از خرید لازم دارند.",
+    accent: "#7B6BA8",
+    soft: "#E5E0F0",
+    sampleFields: [
+      "پایدارسازی گود",
+      "ژئوتکنیک و آزمایش خاک",
+      "طراحی نما",
+      "هوشمندسازی",
+      "نورپردازی",
+      "آسانسور",
+      "میکروسمنت و پوشش دکوراتیو",
+      "خدمات پس از فروش",
+    ],
     Icon: Handshake,
   },
 ] as const;
 
-function SalesTypeCard({
-  activeStage,
-  exampleFields,
-  type,
-}: {
-  activeStage: Stage;
-  exampleFields: string[];
-  type: (typeof salesTypes)[number];
-}) {
-  const focus = activeStage.sales[type.id];
-  const sampleFields = Array.from(new Set([...focus.products, ...exampleFields])).slice(0, 7);
-
+function SalesTypeCard({ type }: { type: (typeof salesTypes)[number] }) {
   return (
     <Card className="group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-xl hover:shadow-zinc-950/[0.06] md:p-5 dark:hover:border-zinc-700">
       <div
         className="absolute -left-14 -top-14 h-32 w-32 rounded-full blur-2xl"
-        style={{ backgroundColor: activeStage.soft, opacity: 0.58 }}
+        style={{ backgroundColor: type.soft, opacity: 0.58 }}
         aria-hidden="true"
       />
       <div className="relative flex items-center justify-between gap-3">
@@ -334,8 +347,8 @@ function SalesTypeCard({
           className="grid h-11 w-11 place-items-center rounded-2xl border bg-[#faf9f6] dark:border-zinc-800 dark:bg-zinc-950"
           style={
             {
-              borderColor: `${activeStage.color}55`,
-              color: activeStage.color,
+              borderColor: `${type.accent}55`,
+              color: type.accent,
             } as CSSProperties
           }
         >
@@ -348,31 +361,20 @@ function SalesTypeCard({
         {type.text}
       </p>
 
-      <div className="relative mt-3 rounded-2xl border border-[#e4d8c8] bg-[#faf9f6] p-3 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mb-2 flex items-center justify-between gap-3 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
-          <span>برای مرحله {activeStage.label}</span>
-          <span>نمونه کاربرد</span>
-        </div>
-        <p className="mt-3 text-xs font-semibold leading-6 text-[#6f6254] dark:text-zinc-300">
-          {focus.note}
-        </p>
-      </div>
-
       <div className="relative mt-4">
-        <div className="mb-2 flex items-center justify-between gap-3 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
-          <span>نمونه زمینه‌های کاری و محصولات</span>
-          <span>نمونه‌اند، نه همه موارد</span>
+        <div className="mb-2 text-[11px] font-bold text-[#6f6254] dark:text-zinc-300">
+          نمونه زمینه‌های کاری و محصولات
         </div>
         <div className="flex flex-wrap gap-2">
-          {sampleFields.map((product, index) => (
+          {type.sampleFields.map((product, index) => (
             <Badge
               key={product}
               variant="secondary"
               className="bg-[#f5eadb]/82"
               style={
                 {
-                  borderColor: index === 0 ? `${activeStage.color}55` : undefined,
-                  color: index === 0 ? activeStage.color : undefined,
+                  borderColor: index === 0 ? `${type.accent}55` : undefined,
+                  color: index === 0 ? type.accent : undefined,
                 } as CSSProperties
               }
             >
@@ -401,7 +403,6 @@ export function AudienceStageGuide() {
   const activeTaxonomy = taxonomyStageInsights[activeStage.label];
   const matchedRowsLabel = activeTaxonomy?.matchedRows.toLocaleString("fa-IR");
   const totalRowsLabel = salesTaxonomyMeta.totalRows.toLocaleString("fa-IR");
-  const categoryCountLabel = salesTaxonomyMeta.categoryCount.toLocaleString("fa-IR");
   const activeFields = activeTaxonomy?.exampleFields ?? activeStage.fields;
   const signalCards = activeTaxonomy
     ? [
@@ -425,12 +426,7 @@ export function AudienceStageGuide() {
     <div className="relative mt-8 grid gap-5 lg:mt-10">
       <div className="grid gap-4 md:grid-cols-2 lg:[direction:rtl]">
         {salesTypes.map((type) => (
-          <SalesTypeCard
-            key={type.id}
-            type={type}
-            activeStage={activeStage}
-            exampleFields={activeFields}
-          />
+          <SalesTypeCard key={type.id} type={type} />
         ))}
       </div>
 
@@ -551,10 +547,7 @@ export function AudienceStageGuide() {
             ) : null}
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-              <span>زمینه‌های کاری مرتبط</span>
-              {activeTaxonomy ? (
-                <span>{categoryCountLabel} دسته اصلی در دیتاست ۱۴۰۵</span>
-              ) : null}
+              <span>نمونه زمینه‌های کاری و محصولات</span>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               {activeFields.map((field, index) => (
