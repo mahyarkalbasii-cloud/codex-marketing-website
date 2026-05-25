@@ -514,24 +514,18 @@ function ProductPreviewSection() {
               نقشه‌ی پروژه‌های ساختمانی تهران، کرج و لواسان — همه روی یک صفحه
             </h2>
           </div>
-          <p className="mx-auto max-w-3xl text-base leading-8 text-muted-foreground md:mx-0 md:text-lg md:leading-9">
+          <p className="mx-auto max-w-3xl text-base leading-8 text-muted-foreground md:hidden">
+            نمایی ساده از نقشه پروژه‌ها و اطلاعات هر پروژه. در نسخه واقعی،
+            داده‌ها زنده و راستی‌آزمایی‌شده هستند.
+          </p>
+          <p className="mx-auto hidden max-w-3xl text-base leading-8 text-muted-foreground md:mx-0 md:block md:text-lg md:leading-9">
             پروژه‌های در حال ساخت تهران، کرج و لواسان را با فیلتر مرحله ساخت و
-            منطقه محدود کنید، روی نقشه ببینید و اطلاعات نمونه‌ی هر پروژه را
+            منطقه محدود کنید، روی نقشه ببینید و اطلاعات هر پروژه را
             بررسی کنید. در نسخه‌ی واقعی، داده‌ها زنده و راستی‌آزمایی‌شده هستند.
           </p>
         </header>
 
-        <div className="mt-8 flex justify-center">
-          <span className="rounded-full border border-[#e4d8c8] bg-[#fbf6ed]/84 px-3 py-1 text-xs font-semibold leading-5 text-[#7a6a59]">
-            نمایش نمونه، بدون داده واقعی · تهران، کرج، لواسان
-          </span>
-        </div>
-
         <ProductPreviewTheater />
-
-        <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-7 text-[#7a6a59]">
-          این نمایی نمونه است. در نسخه واقعی، داده‌ها زنده و کنترل‌شده هستند.
-        </p>
 
         <div className="mt-7 flex justify-center">
           <Link
@@ -873,7 +867,7 @@ export default function Home() {
 
       <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">
         <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-10 md:px-6 md:pb-14 md:pt-12 lg:pb-16 lg:pt-12">
+        <div className="mx-auto max-w-7xl px-5 pb-12 pt-10 md:px-6 md:pb-14 md:pt-12 lg:pb-16 lg:pt-12">
           <div className="grid gap-8 lg:grid-cols-[.96fr_1.04fr] lg:[direction:ltr] lg:items-center">
             <div className="relative hidden md:order-2 md:block lg:order-1 lg:[direction:rtl]">
               <HeroMapVisual />
@@ -881,8 +875,9 @@ export default function Home() {
 
             <div className="relative max-w-4xl space-y-4 text-center md:space-y-6 lg:order-2 lg:mr-auto lg:text-right lg:[direction:rtl]">
               <div className="space-y-5">
-                <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-[1.22] text-zinc-950 md:text-5xl md:leading-[1.18] lg:mx-0 xl:text-[3.45rem] dark:text-white">
-                  پروژه‌های ساختمانی فعال را زودتر پیدا کنید
+                <h1 className="hero-title mx-auto max-w-[22rem] text-[2rem] font-bold leading-[1.34] text-zinc-950 sm:max-w-3xl sm:text-4xl sm:leading-[1.22] md:text-5xl md:leading-[1.18] lg:mx-0 xl:text-[3.45rem] dark:text-white">
+                  <span className="block sm:inline">پروژه‌های ساختمانی فعال</span>{" "}
+                  <span className="block sm:inline">را زودتر پیدا کنید</span>
                 </h1>
                 <p className="mx-auto max-w-2xl text-base leading-9 text-zinc-600 md:text-lg lg:mx-0 dark:text-zinc-400">
                   در بازار محصولات و خدمات ساختمانی، فروش موفق از رسیدن به پروژه
@@ -892,32 +887,34 @@ export default function Home() {
                   سریع‌تر بررسی و پیگیری کنند.
                 </p>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
-                <Link href="#product" className={cn(buttonVariants({ size: "lg" }))}>
+              <div className="mx-auto flex w-full max-w-[21rem] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
+                <Link href="#product" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
                   مشاهده دمو
                   <ArrowLeft className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#solution"
-                  className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+                  className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}
                 >
                   دیدن قابلیت‌ها
                 </Link>
               </div>
-              <div className="mx-auto grid max-w-xl grid-cols-3 gap-3 pt-2 lg:mx-0">
+              <div className="mx-auto grid w-full max-w-[21rem] grid-cols-1 gap-3 pt-2 sm:max-w-xl sm:grid-cols-3 lg:mx-0">
                 {heroProofCards.map((item) => (
                   <div
                     key={item.label}
-                    className="group relative overflow-hidden rounded-2xl border border-[#D8C9B6] bg-[#FFFAF1]/95 p-3 text-center shadow-sm shadow-[#2A241D]/[0.05] transition duration-200 hover:-translate-y-0.5 hover:border-[#CC785C]/45 hover:shadow-md hover:shadow-[#2A241D]/[0.07] md:p-4 dark:border-zinc-800 dark:bg-zinc-900"
+                    className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-[#D8C9B6] bg-[#FFFAF1]/95 p-3 text-right shadow-sm shadow-[#2A241D]/[0.05] transition duration-200 hover:-translate-y-0.5 hover:border-[#CC785C]/45 hover:shadow-md hover:shadow-[#2A241D]/[0.07] sm:block sm:text-center md:p-4 dark:border-zinc-800 dark:bg-zinc-900"
                   >
-                    <span className="mx-auto mb-2 grid h-11 w-11 place-items-center rounded-[14px] bg-[#1B1916] text-[#CC785C]">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#1B1916] text-[#CC785C] sm:mx-auto sm:mb-2">
                       <item.icon className="h-5 w-5" />
                     </span>
-                    <div className="text-center text-sm font-bold leading-6 md:text-base">
-                      {item.value}
-                    </div>
-                    <div className="mt-1 text-center text-[11px] leading-5 text-zinc-500 md:text-xs dark:text-zinc-400">
-                      {item.label}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-bold leading-6 md:text-base">
+                        {item.value}
+                      </div>
+                      <div className="mt-1 text-[12px] leading-6 text-zinc-500 sm:text-[11px] sm:leading-5 md:text-xs dark:text-zinc-400">
+                        {item.label}
+                      </div>
                     </div>
                   </div>
                 ))}

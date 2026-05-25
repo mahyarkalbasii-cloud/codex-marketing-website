@@ -144,6 +144,7 @@ function ProjectPin({
   onClick,
   pin,
   selected,
+  showLabel,
 }: {
   active: boolean;
   animate: boolean;
@@ -152,6 +153,7 @@ function ProjectPin({
   onClick: (pin: HeroProjectPin) => void;
   pin: HeroProjectPin;
   selected: boolean;
+  showLabel: boolean;
 }) {
   const style: PinStyle = {
     "--pin-x": `${pin.x}%`,
@@ -180,11 +182,13 @@ function ProjectPin({
     >
       <span className="hero-map-pin-ring" aria-hidden="true" />
       <PinMarker stage={pin.stage} />
-      <span
-        className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium leading-none text-[#7A6A59]/70"
-      >
-        {pin.area}
-      </span>
+      {showLabel ? (
+        <span
+          className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium leading-none text-[#7A6A59]/70"
+        >
+          {pin.area}
+        </span>
+      ) : null}
     </button>
   );
 }
@@ -245,6 +249,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
   const isMobile = useMediaState("(max-width: 767px)");
   const prefersReducedMotion = useMediaState("(prefers-reduced-motion: reduce)");
   const activeFilter = filterStages[filterIndex] ?? filterStages[0];
+  const projectCardsEnabled = !compact && !isMobile;
   const selectedPin = useMemo(
     () => heroProjectPins.find((pin) => pin.id === selectedPinId) ?? null,
     [selectedPinId],
@@ -395,13 +400,21 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
     [manualPaused],
   );
 
-  const handlePinClick = useCallback((pin: HeroProjectPin) => {
-    setManualPaused(true);
-    setMode("showing-card");
-    setFilterIndex(getFilterIndex(pin.stage));
-    setSelectedPinId(pin.id);
-    setCounter(3);
-  }, []);
+  const handlePinClick = useCallback(
+    (pin: HeroProjectPin) => {
+      setFilterIndex(getFilterIndex(pin.stage));
+      setSelectedPinId(pin.id);
+      setCounter(3);
+
+      if (!projectCardsEnabled) {
+        return;
+      }
+
+      setManualPaused(true);
+      setMode("showing-card");
+    },
+    [projectCardsEnabled],
+  );
 
   return (
     <div
@@ -433,11 +446,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
           <span>{persianDigits.format(counter || 3)} فرصت مناسب امروز</span>
         </div>
 
-        <div className="absolute bottom-3 left-3 z-30 overflow-hidden rounded-full border border-border bg-card/88 px-2.5 py-1.5 text-[10px] font-semibold text-muted-foreground shadow-sm shadow-primary/[0.04] backdrop-blur lg:bottom-4 lg:left-4">
-          <span key={activeFilter} className="hero-filter-text block">
-            {activeFilter}
-          </span>
-        </div>
+        {!compact ? (
+          <div className="absolute bottom-3 left-3 z-30 overflow-hidden rounded-full border border-border bg-card/88 px-2.5 py-1.5 text-[10px] font-semibold text-muted-foreground shadow-sm shadow-primary/[0.04] backdrop-blur lg:bottom-4 lg:left-4">
+            <span key={activeFilter} className="hero-filter-text block">
+              {activeFilter}
+            </span>
+          </div>
+        ) : null}
 
         <div key={loopSerial} className="absolute inset-0 z-20">
           {heroProjectPins.map((pin, index) => {
@@ -454,12 +469,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
                 onClick={handlePinClick}
                 pin={pin}
                 selected={selected}
+                showLabel={!compact}
               />
             );
           })}
         </div>
 
-        {selectedPin ? <ProjectCard pin={selectedPin} /> : null}
+        {projectCardsEnabled && selectedPin ? <ProjectCard pin={selectedPin} /> : null}
 
       </div>
     </div>

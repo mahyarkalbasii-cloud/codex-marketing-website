@@ -90,6 +90,13 @@ body {
     linear-gradient(180deg, #09090b 0%, #0f0f12 100%);
 }
 
+.hero-title {
+  hyphens: manual;
+  overflow-wrap: normal;
+  text-wrap: balance;
+  word-break: normal;
+}
+
 .bg-grid {
   background-image:
     linear-gradient(to right, rgba(42, 36, 29, 0.055) 1px, transparent 1px),
@@ -1049,6 +1056,12 @@ body {
     animation: product-card-in 340ms cubic-bezier(0.22, 1, 0.36, 1) 1260ms both;
   }
 
+  @media (max-width: 767px) {
+    .product-demo-root[data-product-revealed="true"] .product-demo-map-shell > .product-demo-card {
+      animation-delay: 560ms;
+    }
+  }
+
   .product-demo-root[data-product-revealed="true"] .product-demo-list-row {
     animation: product-row-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--product-row-delay, 1500ms);
@@ -1415,7 +1428,7 @@ body {
 
 @media (max-width: 767px) {
   :lang(fa) {
-    line-break: anywhere;
+    line-break: auto;
   }
 
   p,
@@ -1423,7 +1436,9 @@ body {
   h1,
   h2,
   h3 {
-    overflow-wrap: anywhere;
+    hyphens: manual;
+    overflow-wrap: normal;
     text-wrap: pretty;
+    word-break: normal;
   }
 }

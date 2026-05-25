@@ -21,6 +21,7 @@ type SampleProject = {
   subline: string;
   neighborhood: string;
   city: string;
+  district: string;
   landArea: string;
   floors: string;
   usage: string;
@@ -97,6 +98,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۴۲۰ متر زمین · ۷ طبقه",
     neighborhood: "ولنجک",
     city: "تهران",
+    district: "منطقه ۱",
     landArea: "۴۲۰ متر",
     floors: "۷ طبقه",
     usage: "مسکونی",
@@ -112,6 +114,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۶۸۰ متر زمین · ۹ طبقه",
     neighborhood: "زعفرانیه",
     city: "تهران",
+    district: "منطقه ۱",
     landArea: "۶۸۰ متر",
     floors: "۹ طبقه",
     usage: "مسکونی",
@@ -126,6 +129,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۳۲۰ متر زمین · ۵ طبقه",
     neighborhood: "اقدسیه",
     city: "تهران",
+    district: "منطقه ۱",
     landArea: "۳۲۰ متر",
     floors: "۵ طبقه",
     usage: "مسکونی",
@@ -140,6 +144,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۴۸۰ متر زمین · ۸ طبقه",
     neighborhood: "سعادت‌آباد",
     city: "تهران",
+    district: "منطقه ۲",
     landArea: "۴۸۰ متر",
     floors: "۸ طبقه",
     usage: "مسکونی",
@@ -155,6 +160,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۷۵۰ متر زمین · ۱۰ طبقه",
     neighborhood: "فرمانیه",
     city: "تهران",
+    district: "منطقه ۱",
     landArea: "۷۵۰ متر",
     floors: "۱۰ طبقه",
     usage: "مسکونی",
@@ -169,6 +175,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۳۸۰ متر زمین · ۶ طبقه",
     neighborhood: "پاسداران",
     city: "تهران",
+    district: "منطقه ۴",
     landArea: "۳۸۰ متر",
     floors: "۶ طبقه",
     usage: "مسکونی",
@@ -183,6 +190,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۵۲۰ متر زمین · ۸ طبقه",
     neighborhood: "نیاوران",
     city: "تهران",
+    district: "منطقه ۱",
     landArea: "۵۲۰ متر",
     floors: "۸ طبقه",
     usage: "مسکونی",
@@ -198,6 +206,7 @@ const sampleProjects: SampleProject[] = [
     subline: "۴۴۰ متر زمین · ۷ طبقه",
     neighborhood: "شهرک غرب",
     city: "تهران",
+    district: "منطقه ۲",
     landArea: "۴۴۰ متر",
     floors: "۷ طبقه",
     usage: "مسکونی",
@@ -281,7 +290,9 @@ function FilterDropdown({
 function ProjectDetailCard({
   project,
   className,
+  compact = false,
 }: {
+  compact?: boolean;
   project: SampleProject;
   className?: string;
 }) {
@@ -295,16 +306,17 @@ function ProjectDetailCard({
   return (
     <article
       className={cn(
-        "product-demo-card rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-5 py-[18px] shadow-sm shadow-[#2A241D]/[0.055]",
+        "product-demo-card rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] shadow-sm shadow-[#2A241D]/[0.055]",
+        compact ? "px-4 py-4" : "px-5 py-[18px]",
         className,
       )}
-      aria-label={`کارت اطلاعات نمونه ${project.title}`}
+      aria-label={`کارت اطلاعات ${project.title}`}
     >
       <div className="text-xs font-semibold leading-5 text-[#6F6254]">
-        نمونه · {project.neighborhood}، {project.city}
+        {project.neighborhood}، {project.city} · {project.district}
       </div>
       <h3 className="mt-1 text-base font-bold leading-7 text-[#2A241D] md:text-xl">
-        پروژه‌ی {project.stage}
+        پروژه ساختمانی فعال
       </h3>
       <span className="mt-2 inline-flex rounded-full border border-[#C9792B]/35 bg-[#F6D6A8] px-3 py-1 text-xs font-bold leading-5 text-[#5A3515]">
         مرحله: {project.stage}
@@ -314,7 +326,10 @@ function ProjectDetailCard({
         {metadata.map(([label, value]) => (
           <div
             key={label}
-            className="rounded-2xl border border-[#E4D8C8] bg-[#FBF9F3] p-3"
+            className={cn(
+              "rounded-2xl border border-[#E4D8C8] bg-[#FBF9F3]",
+              compact ? "p-2.5" : "p-3",
+            )}
           >
             <dt className="text-[10.5px] font-medium leading-5 text-[#7A6A59]">
               {label}
@@ -332,7 +347,7 @@ function ProjectDetailCard({
         ))}
       </dl>
 
-      <p className="mt-3 text-xs leading-6 text-[#6F6254]">
+      <p className={cn("mt-3 text-xs leading-6 text-[#6F6254]", compact && "hidden")}>
         اطلاعات تماس فقط در نسخه‌ی واقعی نمایش داده می‌شود
       </p>
     </article>
@@ -347,17 +362,38 @@ export function ProductPreviewTheater() {
   const [selectedFilters, setSelectedFilters] =
     useState<Record<FilterGroupId, string>>(defaultFilterState);
 
-  const selectedProject = useMemo(
-    () =>
-      sampleProjects.find((project) => project.id === selectedId) ??
-      sampleProjects[0],
-    [selectedId],
-  );
-
   const activeFilterValues = useMemo(
     () => Object.values(selectedFilters).filter(Boolean),
     [selectedFilters],
   );
+
+  const matchingProjects = useMemo(() => {
+    if (activeFilterValues.length === 0) {
+      return sampleProjects;
+    }
+
+    return sampleProjects.filter((project) =>
+      activeFilterValues.every((filter) => project.filters.includes(filter)),
+    );
+  }, [activeFilterValues]);
+
+  const selectedProject = useMemo(
+    () =>
+      matchingProjects.find((project) => project.id === selectedId) ??
+      matchingProjects[0],
+    [matchingProjects, selectedId],
+  );
+
+  useEffect(() => {
+    if (
+      matchingProjects.length === 0 ||
+      matchingProjects.some((project) => project.id === selectedId)
+    ) {
+      return;
+    }
+
+    setSelectedId(matchingProjects[0].id);
+  }, [matchingProjects, selectedId]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -428,31 +464,20 @@ export function ProductPreviewTheater() {
     >
       <div className="relative grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_380px] xl:[direction:ltr]">
         <aside className="contents min-w-0 content-start gap-4 overflow-hidden xl:col-start-2 xl:row-start-1 xl:grid xl:[direction:rtl]">
-          <article className="product-demo-filter order-1 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/88 p-3 shadow-sm shadow-[#2A241D]/[0.03] md:p-4 xl:order-none">
-            <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap text-[11px] font-bold text-[#6F6254] [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
-              {filterGroups.map((group) => (
-                <span
-                  key={group.id}
-                  className="shrink-0 rounded-full border border-[#E4D8C8] bg-[#FBF9F3]/84 px-3 py-1.5"
-                >
-                  {group.label}
-                </span>
-              ))}
-            </div>
-
+          <article className="product-demo-filter order-1 hidden min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/88 p-3 shadow-sm shadow-[#2A241D]/[0.03] md:block md:p-4 xl:order-none">
             <div className="hidden items-start justify-between gap-3 md:flex">
               <div className="min-w-0">
                 <h3 className="text-base font-bold text-[#2A241D]">
                   فیلتر پروژه‌ها
                 </h3>
                 <p className="mt-1 text-xs leading-6 text-[#6F6254]">
-                  مرحله ساخت، منطقه و متراژ زمین را برای محدود کردن پروژه‌های نمونه بررسی کنید.
+                  مرحله ساخت، منطقه و متراژ زمین را برای محدود کردن پروژه‌ها بررسی کنید.
                 </p>
               </div>
               <Filter className="h-5 w-5 text-[#7A6A59]" />
             </div>
 
-            <div className="mt-5 hidden gap-3 md:grid" aria-label="فیلترهای نمونه">
+            <div className="mt-5 hidden gap-3 md:grid" aria-label="فیلترها">
               {filterGroups.map((group) => (
                 <FilterDropdown
                   key={group.id}
@@ -481,7 +506,7 @@ export function ProductPreviewTheater() {
                 ))
               ) : (
                 <span className="max-w-full truncate rounded-full border border-[#E4D8C8] bg-[#FBF9F3]/72 px-2.5 py-1">
-                  همه پروژه‌های نمونه
+                  همه پروژه‌ها
                 </span>
               )}
             </div>
@@ -491,70 +516,76 @@ export function ProductPreviewTheater() {
               onClick={resetFilters}
               className="mt-4 hidden h-10 w-full items-center justify-center rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-3 text-xs font-bold text-[#2A241D] transition hover:bg-[#EDE6D7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:flex"
             >
-              همه پروژه‌های نمونه
+              همه پروژه‌ها
             </button>
           </article>
 
-          <article className="product-demo-list order-3 min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/90 p-4 shadow-sm shadow-[#2A241D]/[0.03] xl:order-none">
+          <article className="product-demo-list order-3 hidden min-w-0 overflow-hidden rounded-[1.35rem] border border-[#E4D8C8] bg-[#FFFAF1]/90 p-4 shadow-sm shadow-[#2A241D]/[0.03] md:block xl:order-none">
             <div className="flex items-center justify-between gap-3">
               <h3 className="min-w-0 text-base font-bold text-[#2A241D]">
                 پروژه‌های منطبق
               </h3>
               <span className="shrink-0 text-xs font-medium text-[#7A6A59]">
-                {sampleProjects.length.toLocaleString("fa-IR")} مورد نمونه
+                {matchingProjects.length.toLocaleString("fa-IR")} پروژه
               </span>
             </div>
-            <ul className="mt-3 max-h-none space-y-2.5 overflow-visible pr-0 md:max-h-[330px] md:overflow-y-auto md:pr-1">
-              {sampleProjects.map((project, index) => {
-                const selected = project.id === selectedProject.id;
+            {matchingProjects.length > 0 ? (
+              <ul className="mt-3 max-h-none space-y-2.5 overflow-visible pr-0 md:max-h-[330px] md:overflow-y-auto md:pr-1">
+                {matchingProjects.map((project, index) => {
+                  const selected = project.id === selectedProject?.id;
 
-                return (
-                  <li key={project.id}>
-                    <button
-                      type="button"
-                      data-product-row={project.id}
-                      aria-label={`انتخاب ${project.title}`}
-                      aria-pressed={selected}
-                      onClick={() => setSelectedId(project.id)}
-                      style={
-                        { "--product-row-delay": `${1500 + index * 60}ms` } as CSSProperties
-                      }
-                      className={cn(
-                        "product-demo-list-row flex w-full min-w-0 items-center gap-3 overflow-hidden rounded-[1.15rem] border p-3 text-right transition duration-200 hover:bg-[#FBF9F3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 active:translate-y-px",
-                        selected
-                          ? "border-[#CC785C]/65 bg-[#F6D6A8]/58 shadow-sm shadow-[#2A241D]/[0.06]"
-                          : "border-[#E4D8C8] bg-[#FBF9F3]/88",
-                      )}
-                    >
-                      <span
+                  return (
+                    <li key={project.id}>
+                      <button
+                        type="button"
+                        data-product-row={project.id}
+                        aria-label={`انتخاب ${project.title}`}
+                        aria-pressed={selected}
+                        onClick={() => setSelectedId(project.id)}
+                        style={
+                          { "--product-row-delay": `${1500 + index * 60}ms` } as CSSProperties
+                        }
                         className={cn(
-                          "h-2.5 w-2.5 shrink-0 rounded-full",
-                          selected ? "bg-[#CC785C]" : "bg-[#D8C9B6]",
-                        )}
-                      />
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-bold text-[#2A241D]">
-                          {project.title}
-                        </span>
-                        <span className="block truncate text-xs leading-5 text-[#7A6A59]">
-                          {project.subline}
-                        </span>
-                      </span>
-                      <span
-                        className={cn(
-                          "max-w-[104px] shrink-0 truncate whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-semibold",
+                          "product-demo-list-row flex w-full min-w-0 items-center gap-3 overflow-hidden rounded-[1.15rem] border p-3 text-right transition duration-200 hover:bg-[#FBF9F3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 active:translate-y-px",
                           selected
-                            ? "border-[#C9792B]/35 bg-[#FFFAF1] text-[#5A3515]"
-                            : "border-[#E4D8C8] bg-[#FFFAF1] text-[#6F6254]",
+                            ? "border-[#CC785C]/65 bg-[#F6D6A8]/58 shadow-sm shadow-[#2A241D]/[0.06]"
+                            : "border-[#E4D8C8] bg-[#FBF9F3]/88",
                         )}
                       >
-                        {project.stage}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+                        <span
+                          className={cn(
+                            "h-2.5 w-2.5 shrink-0 rounded-full",
+                            selected ? "bg-[#CC785C]" : "bg-[#D8C9B6]",
+                          )}
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-bold text-[#2A241D]">
+                            {project.title}
+                          </span>
+                          <span className="block truncate text-xs leading-5 text-[#7A6A59]">
+                            {project.subline}
+                          </span>
+                        </span>
+                        <span
+                          className={cn(
+                            "max-w-[104px] shrink-0 truncate whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-semibold",
+                            selected
+                              ? "border-[#C9792B]/35 bg-[#FFFAF1] text-[#5A3515]"
+                              : "border-[#E4D8C8] bg-[#FFFAF1] text-[#6F6254]",
+                          )}
+                        >
+                          {project.stage}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className="mt-3 rounded-2xl border border-dashed border-[#D8C9B6] bg-[#FBF9F3]/70 p-4 text-center text-sm font-semibold leading-7 text-[#6F6254]">
+                نتیجه‌ای برای این ترکیب پیدا نشد.
+              </div>
+            )}
           </article>
         </aside>
 
@@ -565,12 +596,12 @@ export function ProductPreviewTheater() {
                 نقشه پروژه‌های ساختمانی تهران
               </h3>
               <p className="mt-1 text-xs leading-5 text-[#6F6254] md:text-sm">
-                پروژه‌های نمونه بر اساس محله، مرحله ساخت و متراژ زمین
+                پروژه‌ها بر اساس محله، مرحله ساخت و متراژ زمین
               </p>
             </div>
           </div>
 
-          <div className="product-demo-map-bg relative min-h-[340px] flex-1 overflow-hidden bg-[#EDE6D7] sm:min-h-[400px] md:min-h-[500px]">
+          <div className="product-demo-map-bg relative min-h-[260px] flex-1 overflow-hidden bg-[#EDE6D7] sm:min-h-[320px] md:min-h-[500px]">
             <div className="absolute inset-0 map-parcel-pattern opacity-90" />
             <div className="absolute right-[5%] top-[10%] h-20 w-32 rotate-[-4deg] rounded-[1.1rem] bg-[#D8C9B6]/42 ring-1 ring-[#E4D8C8]" />
             <div className="absolute right-[30%] top-[12%] h-24 w-36 rotate-[3deg] rounded-[1.1rem] bg-[#FBF9F3]/62 ring-1 ring-[#E4D8C8]" />
@@ -596,8 +627,8 @@ export function ProductPreviewTheater() {
               </g>
             </svg>
 
-            {sampleProjects.map((project, index) => {
-              const selected = project.id === selectedProject.id;
+            {matchingProjects.map((project, index) => {
+              const selected = project.id === selectedProject?.id;
 
               return (
                 <button
@@ -634,7 +665,7 @@ export function ProductPreviewTheater() {
                     <span className="absolute -bottom-1.5 h-3 w-3 rotate-45 rounded-[0.18rem] bg-inherit" />
                   </span>
                   {project.showLabel ? (
-                    <span className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 -translate-y-1/2 whitespace-nowrap text-xs font-semibold leading-none text-[#7A6A59]/70">
+                    <span className="pointer-events-none absolute start-[calc(100%+6px)] top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-xs font-semibold leading-none text-[#7A6A59]/70 md:block">
                       {project.neighborhood}
                     </span>
                   ) : null}
@@ -648,11 +679,27 @@ export function ProductPreviewTheater() {
               {selectedFilters.stage || "همه مراحل"}
             </div>
 
+            {matchingProjects.length === 0 ? (
+              <div className="absolute inset-x-4 top-1/2 z-20 -translate-y-1/2 rounded-2xl border border-dashed border-[#D8C9B6] bg-[#FFFAF1]/90 p-4 text-center text-sm font-semibold leading-7 text-[#6F6254] shadow-sm backdrop-blur">
+                پروژه‌ای با این فیلترها پیدا نشد.
+              </div>
+            ) : null}
+
+            {selectedProject ? (
+              <ProjectDetailCard
+                project={selectedProject}
+                className="hidden md:absolute md:right-4 md:top-4 md:z-30 md:block md:w-[calc(100%-2rem)] md:max-w-[320px]"
+              />
+            ) : null}
+          </div>
+
+          {selectedProject ? (
             <ProjectDetailCard
               project={selectedProject}
-              className="absolute inset-x-3 top-3 z-30 w-auto max-w-none md:inset-x-auto md:right-4 md:top-4 md:w-[calc(100%-2rem)] md:max-w-[320px]"
+              compact
+              className="m-3 mt-0 md:hidden"
             />
-          </div>
+          ) : null}
         </section>
       </div>
     </div>
