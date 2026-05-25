@@ -883,11 +883,17 @@ export default function Home() {
                   href="#solution"
                   className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}
                 >
-                  دیدن قابلیت‌ها
+                  چرا پرشین‌سازه؟
                 </Link>
               </div>
-              <div className="mx-auto max-w-[21rem] rounded-2xl border border-[#D8C9B6] bg-[#FFFAF1]/86 px-4 py-3 text-center text-xs font-bold leading-6 text-[#5f5348] shadow-sm shadow-[#2A241D]/[0.035] sm:hidden">
-                ۳ شهر | هزاران پروژه فعال | ۸ مرحله ساخت
+              <div className="mx-auto flex max-w-[22rem] flex-wrap items-center justify-center gap-x-2 gap-y-1 px-2 pt-1 text-center text-xs font-medium leading-6 text-[#6c6258] sm:hidden">
+                <span className="after:mr-2 after:text-[#c27a61] after:content-['•']">
+                  تهران، کرج و لواسان
+                </span>
+                <span className="after:mr-2 after:text-[#c27a61] after:content-['•']">
+                  هزاران پروژه فعال
+                </span>
+                <span>۸ مرحله ساخت</span>
               </div>
               <div className="mx-auto hidden w-full max-w-[21rem] grid-cols-1 gap-3 pt-2 sm:grid sm:max-w-xl sm:grid-cols-3 lg:mx-0">
                 {heroProofCards.map((item) => (
@@ -933,22 +939,6 @@ export default function Home() {
             title="برای چه نوع تأمین‌کنندگانی مناسب است؟"
             description="پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی مناسب است که فروش پروژه‌محورشان به شناخت پروژه‌های ساختمانی، زمان مناسب تماس و پیگیری منظم وابسته است."
           />
-          <div className="mx-auto mt-6 grid max-w-4xl gap-2 rounded-[1.25rem] border border-[#e4d8c8] bg-[#fffaf1]/74 p-2 shadow-sm shadow-[#2a241d]/[0.025] sm:grid-cols-4">
-            {["تا ۳۰۰ متر", "تا ۵۰۰ متر", "تا ۷۰۰ متر", "بزرگ‌تر"].map((item, index) => (
-              <div
-                key={item}
-                className={cn(
-                  "rounded-2xl px-3 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]",
-                  index === 2 && "bg-[#2a241d] text-[#fffaf1]",
-                )}
-              >
-                {item}
-                <span className="mt-1 block text-[11px] font-semibold opacity-75">
-                  ۸ مرحله ساخت
-                </span>
-              </div>
-            ))}
-          </div>
           <AudienceStageGuide />
         </div>
       </section>

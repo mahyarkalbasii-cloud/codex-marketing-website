@@ -225,11 +225,13 @@ body {
   opacity: 1;
   transform: scale(1);
   animation: hero-pin-ring 2.8s ease-out infinite;
+  animation-delay: var(--pin-delay);
 }
 
 .hero-map-pin-selected .hero-map-pin-ring {
   border-color: rgba(204, 120, 92, 0.3);
   animation-duration: 1.7s;
+  animation-delay: 0ms;
 }
 
 .hero-filter-text {

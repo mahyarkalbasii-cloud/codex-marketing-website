@@ -5,7 +5,7 @@
  * idle -> loading -> filtering -> selecting -> showing-card -> resetting -> loading.
  * The loop runs only while the hero visual is in view and the tab is visible. Desktop/tablet
  * get the full cycling filter, selected pin, project card, parallax and live counter. Mobile
- * keeps the same safe mock map with one-time pin entry only. Framer Motion was not present in
+ * keeps the card closed and runs a lighter beacon cycle across the map pins. Framer Motion was not present in
  * this project, so the orchestration uses React state plus CSS/Web Animations-friendly classes.
  */
 
@@ -35,6 +35,19 @@ type CardStyle = CSSProperties & {
 const persianDigits = new Intl.NumberFormat("fa-IR", {
   useGrouping: false,
 });
+
+const mobilePinPositions: Record<string, Pick<HeroProjectPin, "x" | "y">> = {
+  velenjak: { x: 18, y: 28 },
+  zaferanieh: { x: 36, y: 20 },
+  niavaran: { x: 64, y: 26 },
+  aghdasieh: { x: 86, y: 36 },
+  farmanieh: { x: 48, y: 42 },
+  pasdaran: { x: 74, y: 56 },
+  jordan: { x: 54, y: 66 },
+  saadatabad: { x: 27, y: 57 },
+  vanak: { x: 38, y: 78 },
+  ekbatan: { x: 14, y: 72 },
+};
 
 function useMediaState(query: string) {
   const [matches, setMatches] = useState(false);
@@ -251,7 +264,18 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
   const activeFilter = filterStages[filterIndex] ?? filterStages[0];
   const projectCardsEnabled = !compact && !isMobile;
   const visiblePins = useMemo(
-    () => (compact || isMobile ? heroProjectPins.slice(0, 5) : heroProjectPins),
+    () => {
+      const pins = compact && !isMobile ? heroProjectPins.slice(0, 5) : heroProjectPins;
+
+      if (!isMobile) {
+        return pins;
+      }
+
+      return pins.map((pin) => ({
+        ...pin,
+        ...(mobilePinPositions[pin.id] ?? {}),
+      }));
+    },
     [compact, isMobile],
   );
   const selectedPin = useMemo(
@@ -259,6 +283,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
     [selectedPinId, visiblePins],
   );
   const shouldRunLoop = inView && pageVisible && !isMobile && !prefersReducedMotion && !manualPaused;
+  const shouldRunMobileBeacon = pageVisible && isMobile && !prefersReducedMotion;
 
   useEffect(() => {
     const node = rootRef.current;
@@ -291,12 +316,40 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
       return;
     }
 
-    setMode("showing-card");
-    setFilterIndex(getFilterIndex("گودبرداری"));
+    if (prefersReducedMotion) {
+      setMode("showing-card");
+      setFilterIndex(getFilterIndex("گودبرداری"));
+      setSelectedPinId(defaultSelectedPinId);
+      setCounter(3);
+      setManualPaused(true);
+      return;
+    }
+
+    setMode("filtering");
+    setFilterIndex(0);
     setSelectedPinId(defaultSelectedPinId);
-    setCounter(3);
-    setManualPaused(true);
+    setCounter(7);
+    setManualPaused(false);
   }, [isMobile, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!shouldRunMobileBeacon) {
+      return;
+    }
+
+    const beaconPins = heroProjectPins;
+    let index = Math.max(0, beaconPins.findIndex((pin) => pin.id === selectedPinId));
+
+    const cycleBeacon = () => {
+      index = (index + 1) % beaconPins.length;
+      setSelectedPinId(beaconPins[index].id);
+      setCounter(6 + (index % 3));
+    };
+
+    const interval = window.setInterval(cycleBeacon, 1600);
+
+    return () => window.clearInterval(interval);
+  }, [selectedPinId, shouldRunMobileBeacon]);
 
   useEffect(() => {
     if (!shouldRunLoop) {
@@ -406,6 +459,13 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
 
   const handlePinClick = useCallback(
     (pin: HeroProjectPin) => {
+      if (isMobile) {
+        setFilterIndex(0);
+        setSelectedPinId(pin.id);
+        setCounter((current) => Math.max(current, 7));
+        return;
+      }
+
       setFilterIndex(getFilterIndex(pin.stage));
       setSelectedPinId(pin.id);
       setCounter(3);
@@ -417,7 +477,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
       setManualPaused(true);
       setMode("showing-card");
     },
-    [projectCardsEnabled],
+    [isMobile, projectCardsEnabled],
   );
 
   return (
@@ -460,7 +520,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
 
         <div key={loopSerial} className="absolute inset-0 z-20">
           {visiblePins.map((pin, index) => {
-            const matches = activeFilter === filterStages[0] || pin.stage === activeFilter;
+            const matches = isMobile || activeFilter === filterStages[0] || pin.stage === activeFilter;
             const selected = pin.id === selectedPinId;
 
             return (
@@ -473,7 +533,7 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
                 onClick={handlePinClick}
                 pin={pin}
                 selected={selected}
-                showLabel={!compact}
+                showLabel={!compact && !isMobile}
               />
             );
           })}
