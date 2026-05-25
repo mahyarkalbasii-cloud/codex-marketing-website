@@ -11,6 +11,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { salesTaxonomyMeta, taxonomyStageInsights } from "@/lib/sales-taxonomy";
 import { cn } from "@/lib/utils";
 
 type SalesKind = "fast" | "consultative";
@@ -301,7 +302,7 @@ const salesTypes = [
   {
     id: "consultative",
     label: "ورود زودتر به تصمیم",
-    title: "فروش مشاوره‌ای و تصمیم‌ساز",
+    title: "فروش مشاوره‌ای",
     text: "برای فروش‌هایی که اعتمادسازی، بررسی فنی یا مذاکره قبل از خرید لازم دارند.",
     Icon: Handshake,
   },
@@ -389,18 +390,49 @@ function SalesTypeCard({
 export function AudienceStageGuide() {
   const [activeIndex, setActiveIndex] = useState(6);
   const activeStage = stages[activeIndex];
+  const activeTaxonomy = taxonomyStageInsights[activeStage.label];
+  const matchedRowsLabel = activeTaxonomy?.matchedRows.toLocaleString("fa-IR");
+  const totalRowsLabel = salesTaxonomyMeta.totalRows.toLocaleString("fa-IR");
+  const categoryCountLabel = salesTaxonomyMeta.categoryCount.toLocaleString("fa-IR");
+  const activeFields = activeTaxonomy?.exampleFields ?? activeStage.fields;
+  const signalCards = activeTaxonomy
+    ? [
+        {
+          label: salesTaxonomyMeta.strategicColumnTitle,
+          text: activeTaxonomy.strategicFactors,
+          Icon: Layers3,
+          color: activeStage.color,
+          soft: activeStage.soft,
+        },
+      ]
+    : activeStage.signals.map((signal, index) => ({
+        label: index % 2 === 0 ? "سیگنال تصمیم" : "نکته پیگیری",
+        text: signal,
+        Icon: index % 2 === 0 ? Compass : Layers3,
+        color: index % 2 === 0 ? activeStage.color : "#C9792B",
+        soft: index % 2 === 0 ? activeStage.soft : "#F6D6A8",
+      }));
 
   return (
-    <div className="relative mt-8 grid gap-5 lg:mt-10 lg:grid-cols-[1.08fr_.92fr] lg:[direction:ltr]">
+    <div className="relative mt-8 grid gap-5 lg:mt-10">
+      <div className="grid gap-4 md:grid-cols-2 lg:[direction:rtl]">
+        {salesTypes.map((type) => (
+          <SalesTypeCard key={type.id} type={type} activeStage={activeStage} />
+        ))}
+      </div>
+
       <Card className="relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem] lg:[direction:rtl]">
         <div
-          className="absolute -right-16 top-10 h-40 w-40 rounded-full blur-3xl"
+          className="pointer-events-none absolute -right-16 top-10 h-40 w-40 rounded-full blur-3xl"
           style={{ backgroundColor: activeStage.soft, opacity: 0.54 }}
           aria-hidden="true"
         />
         <div className="relative grid gap-5 md:grid-cols-[11.5rem_minmax(0,1fr)] md:[direction:ltr]">
           <div className="relative rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:min-h-[24.5rem] md:[direction:ltr]">
-            <div className="absolute bottom-8 left-5 top-8 w-px rounded-full bg-[#d8c9b6]" aria-hidden="true" />
+            <div
+              className="pointer-events-none absolute bottom-8 left-5 top-8 w-px rounded-full bg-[#d8c9b6]"
+              aria-hidden="true"
+            />
             <div className="relative z-10 grid h-full gap-1">
               {stages.map((stage, index) => {
                 const active = index === activeIndex;
@@ -409,8 +441,8 @@ export function AudienceStageGuide() {
                   <button
                     key={stage.label}
                     type="button"
+                    data-stage-option={stage.label}
                     onClick={() => setActiveIndex(index)}
-                    onPointerEnter={() => setActiveIndex(index)}
                     onFocus={() => setActiveIndex(index)}
                     aria-pressed={active}
                     className={cn(
@@ -466,7 +498,9 @@ export function AudienceStageGuide() {
                 {activeStage.cue}
               </span>
               <span className="text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-                مرحله انتخاب‌شده
+                {activeTaxonomy
+                  ? `${matchedRowsLabel} ردیف مرتبط از ${totalRowsLabel} زمینه کاری`
+                  : "مرحله انتخاب‌شده"}
               </span>
             </div>
 
@@ -478,8 +512,39 @@ export function AudienceStageGuide() {
               می‌کنند و بهتر می‌شود تماس فروش را به نیاز واقعی پروژه وصل کرد.
             </p>
 
+            {activeTaxonomy ? (
+              <div className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    ["نوع فروش غالب", activeTaxonomy.dominantSaleType],
+                    ["مرحله مناسب مذاکره", activeTaxonomy.timing.negotiation],
+                    ["مرحله مناسب خرید", activeTaxonomy.timing.purchase],
+                    ["مرحله مناسب اجرا", activeTaxonomy.timing.execution],
+                  ].map(([label, value]) => (
+                    <div
+                      key={label}
+                      className="rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/78 p-3 dark:border-zinc-800 dark:bg-zinc-950"
+                    >
+                      <div className="text-[10px] font-bold text-[#8a7a69] dark:text-zinc-500">
+                        {label}
+                      </div>
+                      <div className="mt-1 text-xs font-black leading-6 text-[#2a241d] dark:text-white">
+                        {value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
+              <span>زمینه‌های کاری مرتبط</span>
+              {activeTaxonomy ? (
+                <span>{categoryCountLabel} دسته اصلی در دیتاست ۱۴۰۵</span>
+              ) : null}
+            </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              {activeStage.fields.map((field, index) => (
+              {activeFields.map((field, index) => (
                 <span
                   key={field}
                   className="inline-flex min-h-9 items-center gap-2 rounded-full border border-[#e4d8c8] bg-[#fffaf1]/88 px-3 py-1.5 text-xs font-bold leading-5 text-[#2a241d] dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
@@ -496,25 +561,26 @@ export function AudienceStageGuide() {
             </div>
 
             <div className="mt-4 grid auto-rows-fr gap-3 sm:grid-cols-2">
-              {activeStage.signals.map((signal, index) => (
+              {signalCards.map(({ label, text, Icon, color, soft }) => (
                 <div
-                  key={signal}
-                  className="flex gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] md:min-h-[7.625rem] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                  key={label}
+                  className="flex gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
                     style={{
-                      backgroundColor: index % 2 === 0 ? activeStage.soft : "#F6D6A8",
-                      color: index % 2 === 0 ? activeStage.color : "#C9792B",
+                      backgroundColor: soft,
+                      color,
                     }}
                   >
-                    {index % 2 === 0 ? (
-                      <Compass className="h-4 w-4" />
-                    ) : (
-                      <Layers3 className="h-4 w-4" />
-                    )}
+                    <Icon className="h-4 w-4" />
                   </span>
-                  <span>{signal}</span>
+                  <span>
+                    <span className="block text-[10px] font-black text-[#2a241d] dark:text-white">
+                      {label}
+                    </span>
+                    {text}
+                  </span>
                 </div>
               ))}
             </div>
@@ -522,11 +588,6 @@ export function AudienceStageGuide() {
         </div>
       </Card>
 
-      <div className="grid gap-4 lg:[direction:rtl]">
-        {salesTypes.map((type) => (
-          <SalesTypeCard key={type.id} type={type} activeStage={activeStage} />
-        ))}
-      </div>
     </div>
   );
 }

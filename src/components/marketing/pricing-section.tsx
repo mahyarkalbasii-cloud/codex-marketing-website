@@ -8,6 +8,8 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import { ArrowLeft, BarChart3, Check } from "lucide-react";
 
@@ -148,17 +150,11 @@ const pricingPlans: PricingPlan[] = [
 ];
 
 const DEFAULT_PLAN_INDEX = 2;
-const mobilePricingPlans = [
-  { plan: pricingPlans[0], index: 0 },
-  { plan: pricingPlans[1], index: 1 },
-  { plan: pricingPlans[2], index: 2 },
-  { plan: pricingPlans[3], index: 3 },
-];
-const mobilePlanOrder: Record<PlanId, string> = {
-  taban: "max-md:order-1",
-  royan: "max-md:order-2",
-  bonyan: "max-md:order-3",
-  "taban-plus": "max-md:order-4",
+const axisTickLabels: Record<PlanId, string> = {
+  bonyan: "۳۰۰",
+  royan: "۵۰۰",
+  taban: "۷۰۰",
+  "taban-plus": "+۷۰۰",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
@@ -181,6 +177,18 @@ function usePrefersReducedMotion() {
 
 function clampPlanIndex(index: number) {
   return Math.min(Math.max(index, 0), pricingPlans.length - 1);
+}
+
+function getAxisItemTransform(index: number) {
+  if (index === 0) {
+    return "translateX(0)";
+  }
+
+  if (index === pricingPlans.length - 1) {
+    return "translateX(100%)";
+  }
+
+  return "translateX(50%)";
 }
 
 function getWhatsappHref(plan: PricingPlan, duration: Duration) {
@@ -251,27 +259,23 @@ function PricingPlanCard({
   isActive,
   isPulsing,
   cardDelay,
-  setCardRef,
 }: {
   plan: PricingPlan;
   duration: Duration;
   isActive: boolean;
   isPulsing: boolean;
   cardDelay: string;
-  setCardRef: (node: HTMLDivElement | null) => void;
 }) {
   const featured = isActive;
   const recommended = Boolean(plan.featured);
 
   return (
     <article
-      ref={setCardRef}
       data-plan-card={plan.id}
       data-active-plan={isActive ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
         "pricing-card flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
-        mobilePlanOrder[plan.id],
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
@@ -386,11 +390,13 @@ export function PricingSection() {
   const [isReady, setIsReady] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const cardRefs = useRef<Partial<Record<PlanId, HTMLDivElement | null>>>({});
+  const railRef = useRef<HTMLDivElement | null>(null);
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const activePlan = pricingPlans[activePlanIndex];
   const activeDuration = useMemo(() => durationById[duration], [duration]);
+  const activePercent = (activePlanIndex / (pricingPlans.length - 1)) * 100;
+  const activeBubbleTransform = getAxisItemTransform(activePlanIndex);
 
   useEffect(() => {
     setIsReady(true);
@@ -410,13 +416,6 @@ export function PricingSection() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsRevealed(true);
-          window.setTimeout(() => {
-            cardRefs.current.taban?.scrollIntoView({
-              behavior: "smooth",
-              block: "nearest",
-              inline: "center",
-            });
-          }, 800);
           observer.disconnect();
         }
       },
@@ -436,24 +435,12 @@ export function PricingSection() {
     };
   }, []);
 
-  const scrollPlanIntoView = useCallback(
-    (planId: PlanId) => {
-      cardRefs.current[planId]?.scrollIntoView({
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    },
-    [prefersReducedMotion],
-  );
-
   const selectPlan = useCallback(
     (nextIndex: number) => {
       const clampedIndex = clampPlanIndex(nextIndex);
       const nextPlan = pricingPlans[clampedIndex];
 
       setActivePlanIndex(clampedIndex);
-      scrollPlanIntoView(nextPlan.id);
 
       if (prefersReducedMotion) {
         return;
@@ -469,8 +456,56 @@ export function PricingSection() {
         setPulsingPlan(null);
       }, 1500);
     },
-    [prefersReducedMotion, scrollPlanIntoView],
+    [prefersReducedMotion],
   );
+
+  const getIndexFromPointer = useCallback((clientX: number) => {
+    const rail = railRef.current;
+
+    if (!rail) {
+      return activePlanIndex;
+    }
+
+    const rect = rail.getBoundingClientRect();
+    const ratio = Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
+
+    return Math.round(ratio * (pricingPlans.length - 1));
+  }, [activePlanIndex]);
+
+  const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    selectPlan(getIndexFromPointer(event.clientX));
+  };
+
+  const handleRailMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.buttons !== 1) {
+      return;
+    }
+
+    selectPlan(getIndexFromPointer(event.clientX));
+  };
+
+  const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectPlan(activePlanIndex + 1);
+    }
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectPlan(activePlanIndex - 1);
+    }
+
+    if (event.key === "Home") {
+      event.preventDefault();
+      selectPlan(0);
+    }
+
+    if (event.key === "End") {
+      event.preventDefault();
+      selectPlan(pricingPlans.length - 1);
+    }
+  };
 
   return (
     <section
@@ -489,55 +524,100 @@ export function PricingSection() {
           />
         </div>
 
-        <div className="pricing-mobile-selector mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-3 shadow-sm shadow-[#2a241d]/[0.03] md:hidden">
+        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
           <div
-            className="grid grid-cols-2 gap-2"
-            role="radiogroup"
-            aria-label="انتخاب پلن"
+            ref={railRef}
+            className="relative mx-2 h-32 max-w-3xl touch-none md:mx-auto md:h-28"
+            onPointerDown={handleRailPointer}
+            onPointerMove={handleRailMove}
           >
-            {mobilePricingPlans.map(({ plan, index }) => {
-              const active = activePlanIndex === index;
+            <span className="absolute right-0 top-9 text-[11px] font-bold leading-5 text-[#75695d] md:right-1 md:top-8 md:text-xs">
+              متراژ زمین
+            </span>
+            <div className="absolute left-0 right-0 top-16 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2] md:top-14">
+              <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
+            </div>
+            <ArrowLeft
+              aria-hidden="true"
+              className="absolute left-[-0.1rem] top-16 h-4 w-4 -translate-y-1/2 text-[#CC785C] md:top-14"
+              strokeWidth={2.2}
+            />
+            <span
+              className="absolute left-1/2 top-0 z-10 block w-max max-w-[calc(100%-1rem)] -translate-x-1/2 whitespace-nowrap rounded-full bg-[#CC785C] px-3 py-1 text-center text-[10.5px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 md:hidden"
+            >
+              {activePlan.sliderInsight}
+            </span>
+            <span
+              className="absolute top-0 z-10 hidden max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-xs font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 md:block md:whitespace-nowrap"
+              style={{ right: `${activePercent}%`, transform: activeBubbleTransform }}
+            >
+              {activePlan.sliderInsight}
+            </span>
+            <button
+              type="button"
+              data-plan-slider-handle
+              role="slider"
+              aria-label="انتخاب مقیاس زمین پروژه"
+              aria-valuemin={0}
+              aria-valuemax={pricingPlans.length - 1}
+              aria-valuenow={activePlanIndex}
+              aria-valuetext={`${activePlan.name}، ${activePlan.sliderInsight}`}
+              onKeyDown={handleSliderKeyDown}
+              onPointerDown={(event) => {
+                event.stopPropagation();
+                event.currentTarget.setPointerCapture(event.pointerId);
+                selectPlan(getIndexFromPointer(event.clientX));
+              }}
+              onPointerMove={(event) => {
+                if (event.buttons === 1) {
+                  selectPlan(getIndexFromPointer(event.clientX));
+                }
+              }}
+              className="absolute top-16 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed] md:top-14"
+              style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
+            >
+              <span className="h-2.5 w-2.5 rounded-full bg-white" />
+            </button>
+            {pricingPlans.map((plan, index) => {
+              const tickPercent = (index / (pricingPlans.length - 1)) * 100;
 
               return (
-                <button
-                  key={plan.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={active}
-                  data-plan-mobile-option={plan.id}
-                  onClick={() => selectPlan(index)}
-                  className={cn(
-                    "min-h-20 rounded-[1.1rem] border px-3 py-3 text-right transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
-                    active
-                      ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/10"
-                      : "border-[#e4d8c8] bg-[#fbf6ed]/72 text-[#2a241d]",
-                  )}
-                >
-                  <span className="block text-sm font-black leading-6">
-                    {plan.name}
-                  </span>
+                <div key={plan.id}>
                   <span
+                    aria-hidden="true"
+                    data-plan-stopper={plan.id}
+                    style={{
+                      right: `${tickPercent}%`,
+                      transform: "translate(50%, -50%)",
+                    }}
                     className={cn(
-                      "mt-1 block text-[11px] font-bold leading-5",
-                      active ? "text-[#efe2d2]" : "text-[#75695d]",
+                      "absolute top-16 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1] md:top-14",
+                      activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
+                    )}
+                  />
+                  <button
+                    type="button"
+                    data-plan-tick={plan.id}
+                    onClick={() => selectPlan(index)}
+                    style={{
+                      right: `${tickPercent}%`,
+                      transform: getAxisItemTransform(index),
+                    }}
+                    className={cn(
+                      "absolute top-16 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:top-14 md:h-14 md:w-20 md:text-xs",
+                      activePlanIndex === index && "text-[#2a241d]",
                     )}
                   >
-                    {plan.sliderLabel}
-                  </span>
-                  <span
-                    className={cn(
-                      "mt-1 block text-[10.5px] font-semibold leading-5",
-                      active ? "text-[#f4eadc]" : "text-[#8a7b6c]",
-                    )}
-                  >
-                    {plan.sliderInsight}
-                  </span>
-                </button>
+                    <span dir="ltr" className="absolute left-1/2 top-5 w-full -translate-x-1/2">
+                      {axisTickLabels[plan.id]}
+                    </span>
+                  </button>
+                </div>
               );
             })}
           </div>
 
-          <p className="mt-3 rounded-2xl bg-[#fbf6ed] px-4 py-3 text-center text-xs font-bold leading-6 text-[#6f6254]">
+          <p className="mx-auto mt-2 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
             {activePlan.selectorMotto}
           </p>
         </div>
@@ -554,7 +634,7 @@ export function PricingSection() {
                   data-duration-option={item.id}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "relative h-10 rounded-xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-11 md:rounded-2xl",
+                    "relative h-12 rounded-xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-12 md:rounded-2xl",
                     active
                       ? "bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/15"
                       : "text-[#2a241d] hover:bg-[#f5eadb]",
@@ -563,7 +643,7 @@ export function PricingSection() {
                   {item.id === "12" ? (
                     <span
                       className={cn(
-                        "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold transition duration-200",
+                        "absolute -top-4 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
                         active
                           ? "border-[#2a241d] bg-[#fffaf1] text-[#2a241d]"
                           : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
@@ -572,7 +652,9 @@ export function PricingSection() {
                       بهترین ارزش
                     </span>
                   ) : null}
-                  {item.label}
+                  <span className={cn("block", item.id === "12" && "pt-2")}>
+                    {item.label}
+                  </span>
                 </button>
               );
             })}
@@ -585,7 +667,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch xl:grid-cols-4">
+        <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-4">
           {pricingPlans.map((plan, index) => (
             <PricingPlanCard
               key={plan.id}
@@ -594,9 +676,6 @@ export function PricingSection() {
               isActive={activePlanIndex === index}
               isPulsing={pulsingPlan === plan.id}
               cardDelay={plan.featured ? "1120ms" : `${760 + index * 120}ms`}
-              setCardRef={(node) => {
-                cardRefs.current[plan.id] = node;
-              }}
             />
           ))}
         </div>
