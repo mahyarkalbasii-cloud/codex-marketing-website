@@ -539,8 +539,8 @@ export function PricingSection() {
             </div>
             <ArrowLeft
               aria-hidden="true"
-              className="absolute left-[-0.1rem] top-16 h-4 w-4 -translate-y-1/2 text-[#CC785C] md:top-14"
-              strokeWidth={2.2}
+              className="pointer-events-none absolute left-[-0.8rem] top-16 z-30 h-5 w-5 -translate-y-1/2 text-[#CC785C] drop-shadow-[0_1px_0_rgba(255,250,241,0.95)] md:top-14"
+              strokeWidth={3}
             />
             <span
               className="absolute left-1/2 top-0 z-10 block w-max max-w-[calc(100%-1rem)] -translate-x-1/2 whitespace-nowrap rounded-full bg-[#CC785C] px-3 py-1 text-center text-[10.5px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 md:hidden"
