@@ -904,8 +904,10 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       dir={locale === "fa" ? "rtl" : "ltr"}
       aria-label={copy.aria}
       className={cn(
-        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.6rem] border border-[#d8c7b2] bg-[#fffaf1]/82 shadow-xl shadow-primary/[0.07] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/82",
-        compact ? "aspect-[4/3] p-3" : "aspect-square max-h-[540px] p-4 lg:p-5",
+        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.6rem] bg-[#fffaf1]/82 shadow-xl shadow-primary/[0.07] backdrop-blur dark:bg-zinc-900/82",
+        compact
+          ? "aspect-[4/3] min-h-[320px] sm:min-h-[360px]"
+          : "aspect-[9/10] min-h-[440px] sm:aspect-[4/5] sm:min-h-[500px] lg:aspect-auto lg:min-h-[560px] xl:min-h-[580px]",
       )}
       data-mode={mode}
       onPointerMove={handlePointerMove}
@@ -918,7 +920,7 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
         ref={parallaxRef}
         className="relative h-full transition-transform duration-300 ease-out will-change-transform"
       >
-        <div className="absolute inset-0 overflow-hidden rounded-[1.35rem] border border-[#e4d8c8] bg-[#f3eadb] shadow-inner shadow-[#2a241d]/[0.025] dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="absolute inset-0 overflow-hidden rounded-[1.6rem] bg-[#f3eadb] shadow-inner shadow-[#2a241d]/[0.025] dark:bg-zinc-950">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_42%,rgba(204,120,92,0.18),transparent_31%),radial-gradient(circle_at_72%_24%,rgba(42,36,29,0.10),transparent_25%)]" aria-hidden="true" />
           <div className="absolute inset-0 bg-grid product-grid opacity-40" aria-hidden="true" />
           <HeroMapArtwork interactive={interactiveDesktop} />
