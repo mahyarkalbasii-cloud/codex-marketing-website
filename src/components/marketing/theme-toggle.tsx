@@ -7,23 +7,38 @@ import { cn } from "@/lib/utils";
 
 type Theme = "light" | "dark";
 
+function getPreferredTheme(): Theme {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
+  const savedTheme = window.localStorage.getItem("theme");
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    return savedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme: Theme) {
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  document.documentElement.style.colorScheme = theme;
+}
+
 export function ThemeToggle({ className }: { className?: string }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const savedTheme =
-      typeof window !== "undefined"
-        ? (window.localStorage.getItem("theme") as Theme | null)
-        : null;
-    const nextTheme = savedTheme === "dark" ? "dark" : "light";
+    const nextTheme = getPreferredTheme();
     setTheme(nextTheme);
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    applyTheme(nextTheme);
   }, []);
 
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    applyTheme(nextTheme);
     window.localStorage.setItem("theme", nextTheme);
   }
 
@@ -34,6 +49,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "فعال‌سازی تم روشن" : "فعال‌سازی تم تاریک"}
+      aria-pressed={isDark}
       title={isDark ? "تم روشن" : "تم تاریک"}
       className={cn(
         "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-950 transition hover:bg-zinc-50 active:translate-y-px dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900",

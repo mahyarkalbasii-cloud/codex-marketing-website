@@ -496,14 +496,16 @@ export function AudienceStageGuide() {
           <div className="relative rounded-[1.35rem] border border-[#e4d8c8] bg-[#faf9f6]/78 p-5 dark:border-zinc-800 dark:bg-zinc-950 md:[direction:rtl]">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <span
-                className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold"
+                className="inline-flex items-center gap-2 rounded-full border bg-[#fffaf1] px-3 py-1 text-xs font-bold text-[#2a241d] dark:bg-zinc-900 dark:text-white"
                 style={{
                   borderColor: `${activeStage.color}55`,
-                  backgroundColor: activeStage.soft,
-                  color: activeStage.color,
                 }}
               >
-                <CircleDot className="h-3.5 w-3.5" strokeWidth={2} />
+                <CircleDot
+                  className="h-3.5 w-3.5"
+                  style={{ color: activeStage.color }}
+                  strokeWidth={2}
+                />
                 {activeStage.cue}
               </span>
               <span className="text-xs font-bold text-[#7a6a59] dark:text-zinc-400">

@@ -50,6 +50,7 @@
   --border: 240 4% 16%;
   --input: 240 4% 16%;
   --ring: 240 5% 65%;
+  color-scheme: dark;
 }
 
 * {
@@ -90,6 +91,55 @@ body {
     linear-gradient(180deg, #09090b 0%, #0f0f12 100%);
 }
 
+.dark [class*="bg-[#fbf6ed]"],
+.dark [class*="bg-[#FBF6ED]"],
+.dark [class*="bg-[#faf9f6]"],
+.dark [class*="bg-[#FAF9F6]"],
+.dark [class*="bg-[#fffaf1]"],
+.dark [class*="bg-[#FFFAF1]"],
+.dark [class*="bg-[#FBF9F3]"],
+.dark [class*="bg-[#EDE6D7]"] {
+  background-color: rgb(24 24 27 / 0.9);
+}
+
+.dark [class*="bg-[#f5eadb]"],
+.dark [class*="bg-[#F5EADB]"],
+.dark [class*="bg-[#f6d6a8]"],
+.dark [class*="bg-[#F6D6A8]"] {
+  background-color: rgb(146 64 14 / 0.24);
+}
+
+.dark [class*="border-[#e4d8c8]"],
+.dark [class*="border-[#E4D8C8]"],
+.dark [class*="border-[#eadfce]"],
+.dark [class*="border-[#EADFCE]"],
+.dark [class*="border-[#d8c7b2]"],
+.dark [class*="border-[#D8C7B2]"],
+.dark [class*="border-[#d2bca2]"],
+.dark [class*="border-[#D2BCA2]"] {
+  border-color: rgb(39 39 42 / 0.95);
+}
+
+.dark [class*="text-[#2a241d]"]:not([class*="dark:text"]),
+.dark [class*="text-[#2A241D]"]:not([class*="dark:text"]),
+.dark [class*="text-zinc-950"]:not([class*="dark:text"]) {
+  color: rgb(244 244 245);
+}
+
+.dark [class*="text-[#4b4036]"]:not([class*="dark:text"]),
+.dark [class*="text-[#5f5348]"]:not([class*="dark:text"]),
+.dark [class*="text-[#5F5348]"]:not([class*="dark:text"]),
+.dark [class*="text-[#65594e]"]:not([class*="dark:text"]),
+.dark [class*="text-[#6f6254]"]:not([class*="dark:text"]),
+.dark [class*="text-[#6F6254]"]:not([class*="dark:text"]),
+.dark [class*="text-[#75695d]"]:not([class*="dark:text"]),
+.dark [class*="text-[#7a6a59]"]:not([class*="dark:text"]),
+.dark [class*="text-[#7A6A59]"]:not([class*="dark:text"]),
+.dark [class*="text-[#8a7a69]"]:not([class*="dark:text"]),
+.dark [class*="text-[#6c6258]"]:not([class*="dark:text"]) {
+  color: rgb(212 212 216);
+}
+
 .hero-title {
   hyphens: manual;
   overflow-wrap: normal;
@@ -111,11 +161,24 @@ body {
   background-size: 44px 44px;
 }
 
+.dark .bg-grid,
+.dark .product-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 244, 245, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 244, 245, 0.055) 1px, transparent 1px);
+}
+
 .map-parcel-pattern {
   background-image:
     linear-gradient(22deg, rgba(89, 76, 61, 0.05) 1px, transparent 1px),
     linear-gradient(112deg, rgba(89, 76, 61, 0.04) 1px, transparent 1px);
   background-size: 64px 64px, 92px 92px;
+}
+
+.dark .map-parcel-pattern {
+  background-image:
+    linear-gradient(22deg, rgba(244, 244, 245, 0.055) 1px, transparent 1px),
+    linear-gradient(112deg, rgba(244, 244, 245, 0.04) 1px, transparent 1px);
 }
 
 .route-dash {
@@ -616,6 +679,12 @@ body {
     linear-gradient(to right, rgba(42, 36, 29, 0.045) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(42, 36, 29, 0.045) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+.dark .solution-illustration-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 244, 245, 0.052) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 244, 245, 0.052) 1px, transparent 1px);
 }
 
 @media (prefers-reduced-motion: no-preference) {
