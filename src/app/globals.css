@@ -254,21 +254,81 @@ body {
   stroke-width: 1;
 }
 
-.hero-map-pin[data-animate="true"] {
+.hero-map-pin[data-entry="legacy"][data-animate="true"] {
   animation: hero-pin-drop 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
   animation-delay: var(--pin-delay);
 }
 
-.hero-map-pin:hover,
-.hero-map-pin:focus-visible,
-.hero-map-pin-active {
+.hero-map-pin[data-entry="desktop"][data-animate="true"] {
+  animation: hero-pin-enter 300ms cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  animation-delay: var(--pin-entry-delay);
+}
+
+.hero-map-pin[data-entry="legacy"]:hover,
+.hero-map-pin[data-entry="legacy"]:focus-visible,
+.hero-map-pin[data-entry="legacy"].hero-map-pin-active {
   z-index: 32;
   transform: translate(-50%, -50%) scale(1.09);
+}
+
+.hero-map-pin[data-entry="desktop"]:hover,
+.hero-map-pin[data-entry="desktop"]:focus-visible {
+  z-index: 32;
+  transform: translate(-50%, -50%) scale(1.15);
 }
 
 .hero-map-pin-selected {
   z-index: 34;
   transform: translate(-50%, -50%) scale(1.24);
+}
+
+.hero-map-pin-marker {
+  position: relative;
+  display: grid;
+  height: 1rem;
+  width: 1rem;
+  place-items: center;
+}
+
+.hero-map-dormant-dot,
+.hero-map-solid-dot {
+  grid-area: 1 / 1;
+  transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-map-dormant-dot {
+  height: 0.72rem;
+  width: 0.72rem;
+  border: 1px solid rgba(113, 113, 122, 0.48);
+  border-radius: 9999px;
+  opacity: 0;
+}
+
+.hero-map-solid-dot {
+  display: grid;
+  height: 1rem;
+  width: 1rem;
+  place-items: center;
+  border-radius: 5px;
+  background: #cc785c;
+  color: #fffaf1;
+  opacity: 1;
+}
+
+.hero-map-pin[data-pin-kind="regular"] .hero-map-solid-dot {
+  background: #9e6357;
+}
+
+.hero-map-pin[data-pin-kind="dormant"] .hero-map-dormant-dot {
+  opacity: 1;
+}
+
+.hero-map-pin[data-pin-kind="dormant"] .hero-map-solid-dot {
+  opacity: 0;
+}
+
+.hero-map-pin[data-entry="desktop"][data-pin-kind="active"] {
+  z-index: 28;
 }
 
 .hero-map-pin-ring {
@@ -281,14 +341,31 @@ body {
   transition: opacity 200ms ease, transform 200ms ease;
 }
 
-.hero-map-pin:hover .hero-map-pin-ring,
-.hero-map-pin:focus-visible .hero-map-pin-ring,
-.hero-map-pin-active .hero-map-pin-ring,
+.hero-map-pin[data-entry="legacy"]:hover .hero-map-pin-ring,
+.hero-map-pin[data-entry="legacy"]:focus-visible .hero-map-pin-ring,
+.hero-map-pin[data-entry="legacy"].hero-map-pin-active .hero-map-pin-ring,
 .hero-map-pin-selected .hero-map-pin-ring {
   opacity: 1;
   transform: scale(1);
   animation: hero-pin-ring 2.8s ease-out infinite;
   animation-delay: var(--pin-delay);
+}
+
+.hero-map-pin[data-entry="desktop"][data-pin-kind="active"] .hero-map-pin-ring {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-map-pin-pulse {
+  position: absolute;
+  inset: 5px;
+  border-radius: 9999px;
+  background: rgba(204, 120, 92, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1);
+  animation: hero-active-pin-pulse 3s linear infinite;
+  animation-delay: var(--pin-pulse-delay);
 }
 
 .hero-map-pin-selected .hero-map-pin-ring {
@@ -297,21 +374,35 @@ body {
   animation-delay: 0ms;
 }
 
-.hero-filter-text {
-  animation: hero-filter-text 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero-live-dot {
-  animation: hero-live-dot 1.8s ease-out infinite;
-}
-
 .hero-project-card {
   top: var(--card-y);
   animation: hero-card-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.hero-project-card-exiting {
+  animation: hero-card-hide 150ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
 .hero-route-dash {
   animation: route-dash 7.5s linear infinite;
+}
+
+.hero-signal-orbit {
+  opacity: 0.9;
+}
+
+.hero-signal-sweep {
+  transform-box: view-box;
+  transform-origin: 350px 250px;
+  animation: hero-signal-sweep 5.8s linear infinite;
+}
+
+.hero-answer-card {
+  animation: hero-answer-card-in 540ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-score-bar {
+  animation: hero-score-fill 1100ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both;
 }
 
 .mpv-grid,
@@ -520,6 +611,18 @@ body {
   }
 }
 
+@keyframes hero-pin-enter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @keyframes hero-pin-ring {
   0% {
     opacity: 0.62;
@@ -533,26 +636,30 @@ body {
   }
 }
 
-@keyframes hero-filter-text {
+@keyframes hero-active-pin-pulse {
   0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  66.667% {
     opacity: 0;
-    transform: translateY(6px);
+    transform: scale(2.5);
   }
 
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0;
+    transform: scale(2.5);
   }
 }
 
-@keyframes hero-live-dot {
+@keyframes hero-card-hide {
   0% {
-    box-shadow: 0 0 0 0 rgba(204, 120, 92, 0.46);
+    opacity: 1;
   }
 
-  72%,
   100% {
-    box-shadow: 0 0 0 8px rgba(204, 120, 92, 0);
+    opacity: 0;
   }
 }
 
@@ -565,6 +672,38 @@ body {
   100% {
     opacity: 1;
     transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-signal-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-answer-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-score-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -1365,9 +1504,11 @@ body {
   .selected-pin-pulse::after,
   .hero-map-pin,
   .hero-map-pin-ring,
-  .hero-filter-text,
-  .hero-live-dot,
+  .hero-map-pin-pulse,
   .hero-project-card,
+  .hero-signal-sweep,
+  .hero-answer-card,
+  .hero-score-bar,
   .mpv-grid,
   .mpv-mark,
   .mpv-line,
@@ -1388,6 +1529,14 @@ body {
   .pricing-price-change,
   .pricing-card-pulse {
     animation: none;
+  }
+
+  .hero-map-pin,
+  .hero-map-pin-ring,
+  .hero-map-dormant-dot,
+  .hero-map-solid-dot,
+  .hero-project-card {
+    transition: none;
   }
 
   .mpv-grid,

@@ -47,7 +47,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 xl:flex">
+        <nav className="hidden items-center gap-0.5 min-[1120px]:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -59,7 +59,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 xl:flex">
+        <div className="hidden items-center gap-2 min-[1120px]:flex">
           <LanguageSwitcher />
           <ThemeToggle className="h-10 w-10 rounded-2xl" />
           <a
@@ -90,7 +90,7 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex items-center gap-2 min-[1120px]:hidden">
           <LanguageSwitcher className="hidden sm:inline-flex" />
           <ThemeToggle className="h-10 w-10 rounded-2xl" />
           <a
