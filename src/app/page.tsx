@@ -686,7 +686,7 @@ function SalesFlowSection() {
                 { "--sales-flow-delay": `${index * 150}ms` } as CSSProperties
               }
               className={cn(
-                "sales-flow-card relative z-[1] flex h-full min-h-[260px] flex-col overflow-hidden rounded-[1.35rem] border bg-[#fffaf1]/56 p-5 pt-14 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[318px] md:pt-16 dark:border-zinc-800 dark:bg-zinc-900/82",
+                "sales-flow-card relative z-[1] flex h-full min-h-[260px] flex-col overflow-hidden rounded-[1.35rem] border bg-[#fffaf1]/56 p-6 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[318px] md:p-5 md:pt-16 dark:border-zinc-800 dark:bg-zinc-900/82",
                 index === 0 && "sales-flow-card-neutral border-[#e4d8c8]",
                 index === 1 && "sales-flow-card-soft border-[#e4d8c8]",
                 index === 2 && "sales-flow-card-warm border-[#e0c7ad]",
@@ -695,8 +695,9 @@ function SalesFlowSection() {
               )}
             >
               <span
+                aria-hidden="true"
                 className={cn(
-                  "sales-flow-station absolute right-0 top-0 z-[2] grid h-11 w-11 place-items-center rounded-full border border-[#e4d8c8] bg-[#fbf6ed] text-sm font-bold text-[#2a241d] md:right-1/2 md:h-12 md:w-12 md:translate-x-1/2",
+                  "sales-flow-station absolute right-0 top-0 z-[2] hidden h-11 w-11 place-items-center rounded-full border border-[#e4d8c8] bg-[#fbf6ed] text-sm font-bold text-[#2a241d] md:right-1/2 md:grid md:h-12 md:w-12 md:translate-x-1/2",
                   index === 3 && "border-[#c9792b]/35 text-[#5a3515]",
                 )}
               >

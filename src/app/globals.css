@@ -767,6 +767,7 @@ body {
 }
 
 .sales-flow-journey::before {
+  display: none;
   position: absolute;
   top: 22px;
   right: 21px;
@@ -1405,10 +1406,6 @@ body {
     .solution-card {
       min-height: unset !important;
       height: auto !important;
-    }
-
-    .sales-flow-card {
-      padding-top: 3.25rem !important;
     }
 
     .product-demo-root .product-demo-map-bg {
