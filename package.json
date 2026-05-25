@@ -8,7 +8,6 @@
     "preview:cloudflare": "npm run build && npx wrangler pages dev out",
     "deploy:cloudflare": "npm run build && npx wrangler pages deploy out --project-name codex-marketing-website",
     "start": "next start",
-    "handoff": "node scripts/handoff-screenshots.mjs",
     "lint": "eslint"
   },
   "engines": {
