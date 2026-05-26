@@ -45,16 +45,22 @@ export function SiteFooter() {
     },
     {
       title: footerCopy.suppliers,
-      links: suppliers.slice(0, 6).map((supplier) => ({
-        title: supplier.name,
-        href: `/suppliers/${supplier.slug}`,
-      })),
+      links: [
+        { title: "همه تأمین‌کنندگان و محصولات", href: "/suppliers" },
+        { title: "فروش سریع و تراکنشی", href: "/suppliers/fast-sales" },
+        { title: "فروش مشاوره‌ای و تصمیم‌ساز", href: "/suppliers/consultative-sales" },
+        { title: "فروش ترکیبی", href: "/suppliers/hybrid-sales" },
+        ...suppliers.slice(0, 6).map((supplier) => ({
+          title: supplier.name,
+          href: `/suppliers/${supplier.slug}`,
+        })),
+      ],
     },
     {
       title: footerCopy.stages,
       links: stages.slice(0, 6).map((stage) => ({
         title: stage.name,
-        href: `/construction-stages/${stage.slug}`,
+        href: `/stages/${stage.slug}`,
       })),
     },
   ];
