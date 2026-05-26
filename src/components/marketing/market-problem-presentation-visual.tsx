@@ -208,14 +208,14 @@ function usePrefersReducedMotion() {
 
 function toneClass(tone: MarkTone) {
   if (tone === "accent") {
-    return "text-[#CC785C]";
+    return "text-[#C66A5A]";
   }
 
   if (tone === "dark") {
-    return "text-foreground";
+    return "text-[#2a241d]";
   }
 
-  return "text-muted-foreground";
+  return "text-[#7f8a90]";
 }
 
 function DataMarkShape({ mark }: { mark: DataMark }) {
@@ -275,7 +275,7 @@ function ReportTableRow({
 
   return (
     <div
-      className="mpv-report-row grid grid-cols-[4.25rem_1.5rem_minmax(5.25rem,1fr)_2.5rem] items-center gap-2 px-1 py-2 text-right md:grid-cols-[4.9rem_1.75rem_minmax(7.5rem,1fr)_2.75rem] md:gap-3"
+      className="mpv-report-row grid grid-cols-[4.25rem_1.5rem_minmax(5.25rem,1fr)_2.5rem] items-center gap-2 px-1 py-2 text-right [direction:rtl] md:grid-cols-[4.9rem_1.75rem_minmax(7.5rem,1fr)_2.75rem] md:gap-3"
       style={{ "--mpv-delay": `${1080 + index * 150}ms` } as RevealStyle}
     >
       <span className="text-xs font-bold text-foreground md:text-sm">{project}</span>
@@ -287,10 +287,10 @@ function ReportTableRow({
       </span>
       <span
         className={cn(
-          "grid h-7 w-10 place-items-center justify-self-start rounded-full border transition duration-200 md:w-11",
+          "grid h-7 w-10 place-items-center justify-self-end rounded-full border transition duration-200 md:w-11",
           signal
-            ? "border-[#CC785C]/45 bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/20"
-            : "border-[#D8C9B6] bg-[#FFFAF1] text-[#7A6A59]",
+            ? "border-[#C66A5A]/45 bg-[#C66A5A] text-white shadow-sm shadow-[#C66A5A]/20"
+            : "border-[#f5dfc7] bg-[#FFFAF1]/75 text-[#7A6A59]",
         )}
         aria-label={signal ? "مناسب" : "نامناسب"}
       >
@@ -464,11 +464,11 @@ export function MarketProblemPresentationVisual() {
     <div
       ref={rootRef}
       data-revealed={revealed ? "true" : "false"}
-      className="market-problem-presentation-visual overflow-hidden border-b border-border bg-card/70 px-4 py-5 md:px-6"
+      className="market-problem-presentation-visual flex min-h-0 flex-1 flex-col overflow-hidden border-b border-[#f5dfc7] bg-[#FFF4E7]/80 px-4 py-4 md:px-5"
       aria-label="نمای انتزاعی از پراکندگی داده، اطلاعات ناقص و زمان نامشخص تماس"
     >
-      <section className="relative overflow-hidden rounded-2xl border border-border/70 bg-background/45 p-3 md:p-4" aria-label="داده‌های پراکنده و ناقص">
-        <div className="mpv-grid absolute inset-0 bg-grid opacity-20" aria-hidden="true" />
+      <section className="relative overflow-hidden rounded-2xl border border-white/60 bg-[linear-gradient(135deg,rgba(255,255,255,0.66),rgba(229,241,237,0.56)_48%,rgba(248,235,227,0.44))] p-3 shadow-sm shadow-[#2a241d]/[0.025] backdrop-blur md:p-4" aria-label="داده‌های پراکنده و ناقص">
+        <div className="mpv-grid absolute inset-0 bg-grid opacity-25" aria-hidden="true" />
         <svg
           className="relative z-10 aspect-[4/1] w-full overflow-visible"
           viewBox="0 0 680 170"
@@ -479,7 +479,7 @@ export function MarketProblemPresentationVisual() {
             {connections.map((connection, index) => (
               <line
                 key={connection.id}
-                className="mpv-line text-muted-foreground"
+                className="mpv-line text-[#7f8a90]"
                 data-mobile={connection.mobile ? "true" : "false"}
                 pathLength="1"
                 stroke="currentColor"
@@ -520,7 +520,7 @@ export function MarketProblemPresentationVisual() {
         </svg>
       </section>
 
-      <section className="mt-4 divide-y divide-border/70 border-y border-border/70" aria-label="گزارش پروژه‌های دارای داده پوشانده‌شده">
+      <section className="mt-3 divide-y divide-[#f5dfc7] border-y border-[#f5dfc7]" aria-label="گزارش پروژه‌های دارای داده پوشانده‌شده">
         {activeRows.map((row, index) => (
           <ReportTableRow key={row.project} index={index} {...row} />
         ))}
@@ -544,9 +544,9 @@ export function MarketProblemPresentationVisual() {
           onPointerUp={handleAxisPointerUp}
         >
           <div ref={axisTrackRef} className="absolute left-2 right-2 top-0 h-full">
-            <div className="mpv-axis-line absolute left-0 right-0 top-5 h-px bg-muted-foreground/35" />
+            <div className="mpv-axis-line absolute left-0 right-0 top-5 h-px bg-[#2F6F67]/25" />
             <div
-              className="mpv-axis-progress absolute right-0 top-5 h-px bg-[#CC785C]/45"
+              className="mpv-axis-progress absolute right-0 top-5 h-px bg-[#C66A5A]/55"
               style={{ width: `${activeStop.position}%` }}
               aria-hidden="true"
             />
@@ -555,7 +555,7 @@ export function MarketProblemPresentationVisual() {
                 key={tick}
                 type="button"
                 className={cn(
-                  "mpv-axis-tick absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full border border-border bg-card transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
+                  "mpv-axis-tick absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full border border-[#f5dfc7] bg-[#fffaf1] transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F6F67]/30",
                   tick,
                   index === activeStopIndex && "border-transparent bg-transparent",
                   index === 2 && activeStop.id === "fit" && "mpv-axis-fit-stop",
@@ -573,7 +573,7 @@ export function MarketProblemPresentationVisual() {
 
             <span
               className={cn(
-                "mpv-axis-center-point absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full bg-[#CC785C]",
+                "mpv-axis-center-point absolute top-[0.91rem] h-4 w-4 translate-x-1/2 rounded-full bg-[#C66A5A]",
                 activeStop.id === "fit" && "mpv-axis-center-fit",
               )}
               style={{ right: `${activeStop.position}%` }}
@@ -586,7 +586,7 @@ export function MarketProblemPresentationVisual() {
 
           <span
             className={cn(
-              "mpv-axis-pill absolute right-1/2 top-9 translate-x-1/2 rounded-full bg-[#CC785C] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-primary/[0.08] dark:bg-amber-300 dark:text-zinc-950",
+              "mpv-axis-pill absolute right-1/2 top-9 translate-x-1/2 rounded-full bg-[#C66A5A] px-3 py-1 text-[11px] font-bold text-white shadow-sm shadow-[#C66A5A]/20 dark:bg-amber-300 dark:text-zinc-950",
               activeStop.id === "fit" && "mpv-axis-pill-fit",
             )}
           >

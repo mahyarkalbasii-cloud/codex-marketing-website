@@ -114,7 +114,7 @@ function ProblemSection() {
   return (
     <section
       id="problem"
-      className="border-b border-[#e4d8c8] bg-[#fffaf1]/45 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-problem border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[.9fr_1.1fr] md:items-center md:px-6 md:py-20">
         <div>
@@ -152,7 +152,7 @@ function SolutionSection() {
   return (
     <section
       id="solution"
-      className="border-b border-[#e4d8c8] bg-[#fbf6ed]/55 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-solution border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
         <SectionHeader
@@ -180,7 +180,7 @@ function ProductSection() {
   return (
     <section
       id="product"
-      className="border-b border-[#e4d8c8] bg-white/35 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-product border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
         <SectionHeader
@@ -212,7 +212,7 @@ function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="border-b border-[#e4d8c8] bg-[#fffaf1]/50 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-how border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
         <SectionHeader
@@ -243,7 +243,8 @@ function HowItWorksSection() {
 
 function DemoSection() {
   return (
-    <section id="demo" className="relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
+    <section id="demo" className="section-gradient section-gradient-demo relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
+      <div className="absolute inset-0 map-parcel-pattern opacity-10" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
         <div className="overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
           <div className="grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
@@ -288,11 +289,11 @@ export default function EnglishHome() {
   };
 
   return (
-    <main className="home-sections min-h-screen overflow-hidden bg-transparent text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
+    <main className="behance-background home-sections min-h-screen text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
       <StructuredData data={faqSchema} />
 
       <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">
-        <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
         <div className="mx-auto max-w-7xl px-5 pb-12 pt-10 md:px-6 md:pb-14 md:pt-12 lg:pb-16">
           <div className="grid gap-8 lg:grid-cols-[.96fr_1.04fr] lg:items-center">
             <div className="relative hidden md:block">
@@ -310,7 +311,7 @@ export default function EnglishHome() {
                 can evaluate and follow up with more clarity.
               </p>
               <div className="mx-auto flex w-full max-w-[21rem] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
-                <Link href="#product" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
+                <Link href="#demo" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
                   View product
                   <ArrowLeft className="h-4 w-4" />
                 </Link>
@@ -350,7 +351,7 @@ export default function EnglishHome() {
       <ProductSection />
       <HowItWorksSection />
 
-      <section id="audiences" className="relative overflow-hidden border-y border-zinc-200 bg-white/35 dark:border-zinc-800 dark:bg-zinc-950">
+      <section id="audiences" className="section-gradient section-gradient-audience relative overflow-hidden border-y border-[#e4d8c8] dark:border-zinc-800">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="Audience"
@@ -363,7 +364,7 @@ export default function EnglishHome() {
 
       <PricingSection locale="en" />
 
-      <section id="faq">
+      <section id="faq" className="section-gradient section-gradient-faq relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="FAQ"
