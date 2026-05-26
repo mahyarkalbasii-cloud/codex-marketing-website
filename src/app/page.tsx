@@ -786,7 +786,7 @@ function SalesFlowSection() {
   return (
     <section
       id="sales-flow"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[#fbf6ed] dark:border-zinc-800 dark:bg-zinc-950"
+      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[#fbf6ed]/55 dark:border-zinc-800 dark:bg-zinc-950"
       aria-labelledby="sales-flow-title"
     >
       <SalesFlowRevealController />
@@ -977,7 +977,7 @@ export default function Home() {
   };
 
   return (
-    <main className="home-sections min-h-screen overflow-hidden bg-[#fbf6ed] text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
+    <main className="home-sections min-h-screen overflow-hidden bg-transparent text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
       <StructuredData data={[faqSchema, softwareSchema, webPageSchema]} />
 
       <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">

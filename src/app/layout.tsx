@@ -139,6 +139,7 @@ export default function RootLayout({
       <body
         className="bg-background text-foreground antialiased"
       >
+        <div className="site-atmosphere" aria-hidden="true" />
         <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
         <SiteHeader />
         <div className="pb-24 lg:pb-0">

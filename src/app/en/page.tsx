@@ -152,7 +152,7 @@ function SolutionSection() {
   return (
     <section
       id="solution"
-      className="border-b border-[#e4d8c8] bg-[#fbf6ed] dark:border-zinc-800 dark:bg-zinc-950"
+      className="border-b border-[#e4d8c8] bg-[#fbf6ed]/55 dark:border-zinc-800 dark:bg-zinc-950"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
         <SectionHeader
@@ -288,7 +288,7 @@ export default function EnglishHome() {
   };
 
   return (
-    <main className="home-sections min-h-screen overflow-hidden bg-[#fbf6ed] text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
+    <main className="home-sections min-h-screen overflow-hidden bg-transparent text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
       <StructuredData data={faqSchema} />
 
       <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">
