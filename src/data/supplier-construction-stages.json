@@ -1,0 +1,204 @@
+[
+  {
+    "slug": "land-acquisition",
+    "title": "قبل از خرید زمین",
+    "aliases": [
+      "قبل از خرید زمین"
+    ]
+  },
+  {
+    "slug": "phase-zero",
+    "title": "فاز صفر",
+    "aliases": [
+      "فاز صفر"
+    ]
+  },
+  {
+    "slug": "pre-permit",
+    "title": "قبل از جواز",
+    "aliases": [
+      "قبل از جواز",
+      "زمان اخذ دستور نقشه"
+    ]
+  },
+  {
+    "slug": "permit",
+    "title": "جواز",
+    "aliases": [
+      "جواز",
+      "زمان صدور پروانه ساختمان"
+    ]
+  },
+  {
+    "slug": "pre-project",
+    "title": "قبل از شروع پروژه",
+    "aliases": [
+      "قبل از شروع پروژه",
+      "قبل از شروع"
+    ]
+  },
+  {
+    "slug": "partnership-contract",
+    "title": "تنظیم قرارداد مشارکت",
+    "aliases": [
+      "زمان تنظیم قرارداد مشارکت"
+    ]
+  },
+  {
+    "slug": "phase-2-design",
+    "title": "طراحی فاز ۲",
+    "aliases": [
+      "زمان طراحی فاز ۲"
+    ]
+  },
+  {
+    "slug": "demolition-excavation",
+    "title": "تخریب و گودبرداری",
+    "aliases": [
+      "تخریب",
+      "تخریب و گودبرداری"
+    ]
+  },
+  {
+    "slug": "site-mobilization",
+    "title": "تجهیز کارگاه",
+    "aliases": [
+      "تجهیز کارگاه"
+    ]
+  },
+  {
+    "slug": "foundation",
+    "title": "فونداسیون",
+    "aliases": [
+      "فونداسیون"
+    ]
+  },
+  {
+    "slug": "structure",
+    "title": "اسکلت‌بندی",
+    "aliases": [
+      "اسکلت",
+      "اسکلت‌بندی",
+      "حین اجرای اسکلت",
+      "اسکلت بتنی"
+    ]
+  },
+  {
+    "slug": "masonry",
+    "title": "دیوارچینی",
+    "aliases": [
+      "دیوارچینی"
+    ]
+  },
+  {
+    "slug": "shell-work",
+    "title": "سفت‌کاری",
+    "aliases": [
+      "سفت‌کاری"
+    ]
+  },
+  {
+    "slug": "plaster",
+    "title": "گچ و خاک",
+    "aliases": [
+      "گچ و خاک"
+    ]
+  },
+  {
+    "slug": "early-finishing",
+    "title": "ابتدای نازک‌کاری",
+    "aliases": [
+      "ابتدای نازک‌کاری"
+    ]
+  },
+  {
+    "slug": "finishing",
+    "title": "نازک‌کاری",
+    "aliases": [
+      "نازک‌کاری",
+      "ناک‌کاری"
+    ]
+  },
+  {
+    "slug": "final-finishing",
+    "title": "ظریف‌کاری",
+    "aliases": [
+      "ظریف‌کاری",
+      "ظریفک‌کاری",
+      "ظریفات‌کاری"
+    ]
+  },
+  {
+    "slug": "completion",
+    "title": "پایان کار",
+    "aliases": [
+      "پایان کار"
+    ]
+  },
+  {
+    "slug": "post-completion",
+    "title": "بعد از پایان کار",
+    "aliases": [
+      "بعد از پایان کار"
+    ]
+  },
+  {
+    "slug": "renovation",
+    "title": "بازسازی",
+    "aliases": [
+      "حین بازسازی",
+      "کل دوره بازسازی"
+    ]
+  },
+  {
+    "slug": "entire-project",
+    "title": "در طول پروژه",
+    "aliases": [
+      "در طول کل پروژه",
+      "در طول پروژه",
+      "در طول کل پروژه تا پایان‌کار"
+    ]
+  },
+  {
+    "slug": "pre-execution",
+    "title": "قبل از شروع اجرا",
+    "aliases": [
+      "قبل از شروع اجرا"
+    ]
+  },
+  {
+    "slug": "product-dependent",
+    "title": "بر اساس محصول",
+    "aliases": [
+      "بر اساس محصول"
+    ]
+  },
+  {
+    "slug": "need-based",
+    "title": "بر اساس نیاز",
+    "aliases": [
+      "بر اساس نیاز"
+    ]
+  },
+  {
+    "slug": "structure-dependent",
+    "title": "بر اساس نوع سازه",
+    "aliases": [
+      "بر اساس نوع سازه"
+    ]
+  },
+  {
+    "slug": "issue-response",
+    "title": "در صورت بروز خطای کارگاهی",
+    "aliases": [
+      "در صورت بروز خطای کارگاهی"
+    ]
+  },
+  {
+    "slug": "event-planning",
+    "title": "قبل از رویداد",
+    "aliases": [
+      "قبل از رویداد"
+    ]
+  }
+]
