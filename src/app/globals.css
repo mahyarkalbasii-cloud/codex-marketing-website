@@ -76,12 +76,38 @@ body {
   background: hsl(var(--primary) / 0.18);
 }
 
+/*
+ * Fixed atmospheric gradient layer (v3).
+ * Three soft radial blobs in warm brand tones, anchored to the viewport so the
+ * background stays consistent across long scrolled pages. Falloff is built into
+ * the gradient stops (no filter: blur) for smooth mobile scrolling. Sits behind
+ * all content via z-index and never intercepts pointer events.
+ */
+.site-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #fbfaf7;
+  background-image:
+    radial-gradient(42vw 42vw at 8% 6%, rgba(246, 214, 168, 0.42) 0%, rgba(246, 214, 168, 0) 72%),
+    radial-gradient(52vw 52vw at 90% 84%, rgba(224, 199, 173, 0.38) 0%, rgba(224, 199, 173, 0) 70%),
+    radial-gradient(32vw 32vw at 80% 42%, rgba(241, 201, 143, 0.22) 0%, rgba(241, 201, 143, 0) 70%);
+  background-repeat: no-repeat;
+}
+
+/* Dark mode: keep the existing dark surfaces; suppress the warm blobs. */
+.dark .site-atmosphere {
+  background-color: transparent;
+  background-image: none;
+}
+
 .hero-surface {
   background:
-    radial-gradient(circle at 50% 0%, rgba(226, 210, 188, 0.58), transparent 36%),
-    radial-gradient(circle at 15% 30%, rgba(201, 121, 43, 0.12), transparent 25%),
-    radial-gradient(circle at 85% 20%, rgba(68, 57, 47, 0.08), transparent 24%),
-    linear-gradient(180deg, #fbf6ed 0%, #f8f0e4 100%);
+    radial-gradient(circle at 50% 0%, rgba(226, 210, 188, 0.42), transparent 36%),
+    radial-gradient(circle at 15% 30%, rgba(201, 121, 43, 0.10), transparent 25%),
+    radial-gradient(circle at 85% 20%, rgba(68, 57, 47, 0.07), transparent 24%),
+    linear-gradient(180deg, rgba(251, 246, 237, 0.45) 0%, rgba(248, 240, 228, 0.55) 100%);
 }
 
 .dark .hero-surface {
