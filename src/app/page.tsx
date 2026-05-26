@@ -373,7 +373,7 @@ function MarketProblemSection() {
   return (
     <section
       id="problem"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.10),transparent_30%)] dark:border-zinc-800 dark:bg-none"
+      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.20),transparent_30%)] dark:border-zinc-800 dark:bg-none"
       aria-labelledby="market-problem-title"
     >
       <div className="absolute inset-0 map-parcel-pattern opacity-35" aria-hidden="true" />
@@ -512,7 +512,7 @@ function ProductPreviewSection() {
   return (
     <section
       id="product"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_82%_12%,rgba(201,121,43,0.10),transparent_28%),radial-gradient(circle_at_18%_40%,rgba(93,105,83,0.08),transparent_32%)] dark:border-zinc-800 dark:bg-zinc-950"
+      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_82%_12%,rgba(201,121,43,0.20),transparent_28%),radial-gradient(circle_at_18%_40%,rgba(246,214,168,0.30),transparent_32%)] dark:border-zinc-800 dark:bg-zinc-950"
       aria-labelledby="product-title"
     >
       <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
@@ -561,7 +561,7 @@ function HowItWorksSection() {
       aria-labelledby="how-it-works-title"
     >
       <HowItWorksRevealController />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.09),transparent_28%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.20),transparent_28%)]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
         <header className="how-works-reveal-header relative mx-auto max-w-4xl text-center">
           <h2
@@ -790,7 +790,7 @@ function SalesFlowSection() {
       aria-labelledby="sales-flow-title"
     >
       <SalesFlowRevealController />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.09),transparent_28%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.20),transparent_28%)]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
         <header className="sales-flow-reveal-header relative mx-auto max-w-5xl text-center">
           <div>
@@ -892,7 +892,7 @@ function SalesFlowSection() {
 function DemoRequestSection() {
   return (
     <section id="demo" className="relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.14),transparent_30%),radial-gradient(circle_at_72%_70%,rgba(93,105,83,0.07),transparent_28%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.28),transparent_30%),radial-gradient(circle_at_72%_70%,rgba(246,214,168,0.30),transparent_28%)]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
         <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
           <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
@@ -1060,7 +1060,7 @@ export default function Home() {
       <ProductPreviewSection />
 
       <section id="audiences" className="relative overflow-hidden border-y border-zinc-200 bg-white/35 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(242,182,49,0.10),transparent_28%)]" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(242,182,49,0.20),transparent_28%)]" aria-hidden="true" />
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="مخاطبان"
