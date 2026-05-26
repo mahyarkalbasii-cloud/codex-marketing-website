@@ -589,6 +589,11 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       return;
     }
 
+    if (typeof IntersectionObserver === "undefined") {
+      setIsRevealed(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -596,7 +601,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 },
+      { threshold: 0.1 },
     );
 
     observer.observe(section);
