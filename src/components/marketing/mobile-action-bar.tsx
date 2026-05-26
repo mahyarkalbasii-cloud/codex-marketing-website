@@ -53,9 +53,9 @@ export function MobileActionBar() {
     <nav
       dir={direction}
       aria-label={locale === "fa" ? "اقدام‌های سریع موبایل" : "Quick mobile actions"}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e4d8c8]/80 bg-[#fbf6ed]/98 px-2 pb-[calc(env(safe-area-inset-bottom)+0.35rem)] pt-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/96 lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e4d8c8]/80 bg-[#fbf6ed]/98 px-2 pb-[calc(env(safe-area-inset-bottom)+0.35rem)] pt-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/98 lg:hidden"
     >
-      <div className="mx-auto grid max-w-[23.25rem] grid-cols-3 gap-1.5 rounded-[1.1rem] border border-[#e4d8c8] bg-[#fffaf1] p-1.5 shadow-sm shadow-[#2a241d]/[0.04] dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="mx-auto grid max-w-[23.25rem] grid-cols-3 gap-1.5 rounded-[1.1rem] border border-[#e4d8c8] bg-white/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.04] dark:border-zinc-800 dark:bg-zinc-950">
         {actions.map((action) => (
           <Link
             key={action.label}

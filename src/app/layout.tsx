@@ -137,12 +137,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="bg-background text-foreground antialiased"
+        className="flex flex-col overflow-hidden bg-background text-foreground antialiased [height:100dvh]"
       >
-        <div className="site-atmosphere" aria-hidden="true" />
         <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
         <SiteHeader />
-        <div className="pb-24 lg:pb-0">
+        <div className="site-scroll-root min-h-0 flex-1 overflow-x-hidden overflow-y-auto pb-24 lg:pb-0">
           {children}
           <SiteFooter />
         </div>

@@ -39,11 +39,11 @@ export const authLinks = {
 };
 
 export const navItems = [
-  { label: "راه‌حل", href: "/#solution" },
-  { label: "محصول", href: "/#product" },
-  { label: "نحوه کار", href: "/#how-it-works" },
-  { label: "پلن‌ها", href: "/#plans" },
-  { label: "سوالات", href: "/#faq" },
+  { label: "محصول", href: "/features" },
+  { label: "اشتراک‌ها", href: "/#plans" },
+  { label: "آموزش", href: "/#how-it-works" },
+  { label: "درباره ما", href: "/#solution" },
+  { label: "تماس با ما", href: "/#demo" },
 ];
 
 export const seoPages = [

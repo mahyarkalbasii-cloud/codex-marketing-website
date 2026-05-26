@@ -10,7 +10,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from "react";
-import { Building, Route, Search, Sparkles } from "lucide-react";
+import { Building, Route, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n";
@@ -40,6 +40,8 @@ type PinStyle = CSSProperties & {
 
 type CardStyle = CSSProperties & {
   "--card-y": string;
+  left?: string;
+  right?: string;
 };
 
 type DesktopPinKind = "active" | "regular" | "dormant";
@@ -146,25 +148,21 @@ const heroCopy = {
 };
 
 const desktopPinKinds: Record<string, DesktopPinKind> = {
-  velenjak: "active",
-  zaferanieh: "active",
-  saadatabad: "active",
+  velenjak: "regular",
+  zaferanieh: "regular",
   niavaran: "regular",
   farmanieh: "regular",
   pasdaran: "regular",
   jordan: "regular",
+  saadatabad: "active",
   aghdasieh: "dormant",
   vanak: "dormant",
   ekbatan: "dormant",
 };
 
 const activePulseDelays: Record<string, number> = {
-  velenjak: 0,
-  zaferanieh: 0.8,
-  saadatabad: 1.6,
+  saadatabad: 0,
 };
-
-const dormantPinIds = ["aghdasieh", "vanak", "ekbatan"];
 
 const desktopEntryOrder = [...heroProjectPins]
   .sort((first, second) => second.y - first.y)
@@ -237,7 +235,7 @@ function LegacyPinMarker({ stage }: { stage: HeroProjectPin["stage"] }) {
   if (stage === "گودبرداری") {
     return (
       <span
-        className="relative h-2 w-2 rounded-full border-[1.5px] border-[#CC785C]/50 bg-[#FBF9F3]"
+        className="hero-legacy-pin-dot relative h-2 w-2 rounded-full border-[1.5px] border-[rgba(42,33,27,0.10)] bg-[rgba(42,33,27,0.38)]"
         aria-hidden="true"
       />
     );
@@ -246,7 +244,7 @@ function LegacyPinMarker({ stage }: { stage: HeroProjectPin["stage"] }) {
   if (stage === "اسکلت") {
     return (
       <span
-        className="relative grid h-4 w-4 place-items-center rounded-[5px] border border-[#CC785C] bg-[#FFFAF1] text-[#CC785C]"
+        className="hero-legacy-pin-outline relative grid h-4 w-4 place-items-center rounded-[5px] border border-[rgba(42,33,27,0.10)] bg-[rgba(255,252,246,0.78)] text-[#6FA7D8]"
         aria-hidden="true"
       >
         <Building className="h-2.5 w-2.5" strokeWidth={2} />
@@ -256,7 +254,7 @@ function LegacyPinMarker({ stage }: { stage: HeroProjectPin["stage"] }) {
 
   return (
     <span
-      className="relative grid h-4 w-4 place-items-center rounded-[5px] bg-[#CC785C] text-[#FFFAF1]"
+      className="hero-legacy-pin-solid relative grid h-4 w-4 place-items-center rounded-[5px] border border-[rgba(42,33,27,0.10)] bg-[rgba(255,252,246,0.78)] text-[#6FA7D8]"
       aria-hidden="true"
     >
       <Building className="h-2.5 w-2.5" strokeWidth={2} />
@@ -289,17 +287,17 @@ function HeroMapArtwork({ interactive = false }: { interactive?: boolean }) {
             d="M40 0H0V40"
             fill="none"
             stroke="#2A241D"
-            strokeOpacity="0.08"
+            strokeOpacity="0.055"
             strokeWidth="0.5"
           />
         </pattern>
         <radialGradient id="hero-signal-radar" cx="50%" cy="50%" r="58%">
-          <stop offset="0%" stopColor="#CC785C" stopOpacity="0.22" />
-          <stop offset="38%" stopColor="#CC785C" stopOpacity="0.075" />
-          <stop offset="100%" stopColor="#FFF8EC" stopOpacity="0" />
+          <stop offset="0%" stopColor="#CC785C" stopOpacity="0.14" />
+          <stop offset="40%" stopColor="#CC785C" stopOpacity="0.045" />
+          <stop offset="100%" stopColor="#CC785C" stopOpacity="0" />
         </radialGradient>
         <linearGradient id="hero-signal-sweep" x1="350" y1="75" x2="350" y2="250" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#CC785C" stopOpacity="0.34" />
+          <stop offset="0%" stopColor="#CC785C" />
           <stop offset="100%" stopColor="#CC785C" stopOpacity="0" />
         </linearGradient>
       </defs>
@@ -313,36 +311,36 @@ function HeroMapArtwork({ interactive = false }: { interactive?: boolean }) {
           <>
             <path
               d="M42 116C124 82 203 138 286 108C376 75 462 126 548 94C604 73 651 82 684 66"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.105"
               strokeWidth="1"
               strokeDasharray="5 8"
             />
             <path
               d="M28 336C106 296 188 352 276 318C372 282 458 335 550 304C612 283 656 294 686 273"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.105"
               strokeWidth="1"
               strokeDasharray="5 8"
             />
             <path
               d="M230 34C204 112 244 183 218 258C194 327 229 386 207 474"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.095"
               strokeWidth="1"
               strokeDasharray="5 8"
             />
             <path
               d="M570 38C532 105 568 178 532 248C496 318 528 386 492 478"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.095"
               strokeWidth="1"
               strokeDasharray="5 8"
             />
             <path
               d="M72 438C174 360 244 342 352 274C459 207 537 138 663 72"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.095"
               strokeWidth="1"
               strokeDasharray="5 8"
             />
@@ -350,7 +348,7 @@ function HeroMapArtwork({ interactive = false }: { interactive?: boolean }) {
               className="hero-route-dash"
               d="M98 366C166 320 224 338 286 286C353 230 430 256 501 190C548 146 599 132 646 96"
               stroke="#2A241D"
-              strokeOpacity="0.18"
+              strokeOpacity="0.12"
               strokeWidth="1.4"
               strokeDasharray="8 12"
             />
@@ -359,21 +357,21 @@ function HeroMapArtwork({ interactive = false }: { interactive?: boolean }) {
           <>
             <path
               d="M38 92C86 58 124 74 169 46C209 22 250 52 292 35C340 15 384 47 427 33C482 14 522 54 566 38C614 20 652 50 682 34"
-              stroke="#CC785C"
-              strokeOpacity="0.15"
+              stroke="#2A211B"
+              strokeOpacity="0.095"
               strokeWidth="1.5"
             />
             <path
               d="M318 30C300 84 326 126 309 178C291 232 318 279 300 336C285 382 301 426 284 474"
-              stroke="#CC785C"
-              strokeOpacity="0.2"
+              stroke="#2A211B"
+              strokeOpacity="0.095"
               strokeWidth="1.5"
               strokeDasharray="4 6"
             />
             <path
               d="M508 38C478 94 500 146 472 203C444 260 461 318 432 375C414 411 417 447 397 486"
-              stroke="#CC785C"
-              strokeOpacity="0.18"
+              stroke="#2A211B"
+              strokeOpacity="0.09"
               strokeWidth="1.5"
               strokeDasharray="4 6"
             />
@@ -388,11 +386,11 @@ function HeroMapArtwork({ interactive = false }: { interactive?: boolean }) {
       </g>
 
       <g className="hero-signal-sweep">
-        <path d="M350 250L314 80A174 174 0 0 1 426 94Z" fill="url(#hero-signal-sweep)" opacity="0.72" />
-        <line x1="350" y1="250" x2="420" y2="90" stroke="#CC785C" strokeOpacity="0.34" strokeWidth="1" />
+        <path d="M350 250L314 80A174 174 0 0 1 426 94Z" fill="url(#hero-signal-sweep)" fillOpacity="0.16" />
+        <line x1="350" y1="250" x2="420" y2="90" stroke="#CC785C" strokeOpacity="0.16" strokeWidth="1" />
       </g>
 
-      <g fill="#2A241D" opacity="0.22">
+      <g fill="#2A211B" opacity="0.18">
         <circle cx="126" cy="374" r="3.2" />
         <circle cx="224" cy="144" r="2.6" />
         <circle cx="544" cy="112" r="2.4" />
@@ -487,7 +485,7 @@ function ProjectPin({
       }}
       aria-label={`${copy.areas[pin.id]}, ${copy.stagePrefix} ${copy.stages[pin.stage]}, ${copy.floors[pin.id]}`}
       className={cn(
-        "hero-map-pin group absolute z-20 grid h-7 w-7 place-items-center rounded-full transition duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/45",
+        "hero-map-pin group absolute z-20 grid h-7 w-7 place-items-center rounded-full transition duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35",
         active && "hero-map-pin-active",
         dimmed && !selected && "opacity-35",
         selected && "hero-map-pin-selected",
@@ -515,8 +513,8 @@ function ProjectCard({ closing, locale, pin }: { closing: boolean; locale: Local
   const cardStyle: CardStyle = {
     "--card-y": `clamp(12px, calc(${pin.y}% - 3rem), calc(100% - 9rem))`,
     ...(edgeAware
-      ? { right: `calc(${100 - pin.x}% + 12px)` }
-      : { left: `calc(${pin.x}% + 12px)` }),
+      ? { right: `calc(${100 - pin.x}% + 12px)`, left: "auto" }
+      : { left: `calc(${pin.x}% + 12px)`, right: "auto" }),
   };
   const details = pinPopupDetails[locale][pin.id as keyof (typeof pinPopupDetails)[typeof locale]];
 
@@ -525,29 +523,28 @@ function ProjectCard({ closing, locale, pin }: { closing: boolean; locale: Local
       data-project-card
       style={cardStyle}
       className={cn(
-        "hero-project-card absolute z-30 w-[12.5rem] max-w-[calc(100%-2rem)] rounded-[1.1rem] border border-border bg-card/95 p-3 text-right shadow-xl shadow-primary/[0.10] backdrop-blur",
-        edgeAware && "left-auto",
+        "hero-project-card absolute z-30 w-[12.5rem] max-w-[calc(100%-2rem)] rounded-[1.1rem] border border-white/35 bg-[rgba(255,252,246,0.46)] p-3 text-right shadow-[0_18px_50px_rgba(42,33,27,0.10)] backdrop-blur-[18px]",
         closing && "hero-project-card-exiting",
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <span className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
+        <span className="rounded-full border border-[rgba(42,33,27,0.08)] bg-[rgba(255,252,246,0.66)] px-2.5 py-1 text-[11px] font-semibold text-[rgba(42,33,27,0.62)]">
           {copy.projectSample}
         </span>
         <span className="mt-1 h-2 w-2 rounded-full bg-[#CC785C]" />
       </div>
-      <div className="mt-2.5 text-sm font-bold leading-6 text-foreground">{details}</div>
-      <div className="mt-2.5 grid grid-cols-2 gap-2 text-[10px] leading-5 text-muted-foreground">
-        <div className="rounded-xl border border-border bg-background/70 p-2">
-          <span className="block text-foreground">{copy.stage}</span>
+      <div className="mt-2.5 text-sm font-bold leading-6 text-[#2A211B]">{details}</div>
+      <div className="mt-2.5 grid grid-cols-2 gap-2 text-[10px] leading-5 text-[rgba(42,33,27,0.62)]">
+        <div className="rounded-xl border border-[rgba(42,33,27,0.08)] bg-[rgba(255,252,246,0.62)] p-2">
+          <span className="block text-[#2A211B]">{copy.stage}</span>
           {copy.stages[pin.stage]}
         </div>
-        <div className="rounded-xl border border-border bg-background/70 p-2">
-          <span className="block text-foreground">{copy.height}</span>
+        <div className="rounded-xl border border-[rgba(42,33,27,0.08)] bg-[rgba(255,252,246,0.62)] p-2">
+          <span className="block text-[#2A211B]">{copy.height}</span>
           {copy.floors[pin.id]}
         </div>
       </div>
-      <div className="mt-2.5 rounded-xl border border-border bg-secondary/70 px-3 py-2 text-[10px] font-semibold text-foreground">
+      <div className="mt-2.5 rounded-xl border border-[rgba(204,120,92,0.18)] bg-[rgba(204,120,92,0.12)] px-3 py-2 text-[10px] font-semibold text-[#9E4F38]">
         {copy.updated}
       </div>
     </div>
@@ -565,8 +562,6 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
   const [hasEnteredView, setHasEnteredView] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [manualPaused, setManualPaused] = useState(false);
-  const [awakenedDormantPinId, setAwakenedDormantPinId] = useState<string | null>(null);
-  const [hoveredPinId, setHoveredPinId] = useState<string | null>(null);
   const [popupPinId, setPopupPinId] = useState<string | null>(null);
   const [popupClosing, setPopupClosing] = useState(false);
   const popupCloseTimerRef = useRef<number | null>(null);
@@ -599,25 +594,16 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
     () => visiblePins.find((pin) => pin.id === popupPinId) ?? null,
     [popupPinId, visiblePins],
   );
+  const anchorPin = useMemo(
+    () => visiblePins.find((pin) => pin.id === defaultSelectedPinId) ?? visiblePins[0] ?? null,
+    [visiblePins],
+  );
   const spotlightPin = useMemo(
-    () =>
-      popupPin ??
-      selectedPin ??
-      visiblePins.find((pin) => pin.id === defaultSelectedPinId) ??
-      visiblePins[0] ??
-      null,
-    [popupPin, selectedPin, visiblePins],
+    () => (interactiveDesktop ? anchorPin : popupPin ?? selectedPin ?? anchorPin),
+    [anchorPin, interactiveDesktop, popupPin, selectedPin],
   );
   const shouldRunLoop = inView && pageVisible && !interactiveDesktop && !isMobile && !prefersReducedMotion && !manualPaused;
   const shouldRunMobileBeacon = pageVisible && isMobile && !prefersReducedMotion;
-  const shouldRunDesktopIdle =
-    inView &&
-    pageVisible &&
-    interactiveDesktop &&
-    !prefersReducedMotion &&
-    !hoveredPinId &&
-    !popupPinId;
-
   useEffect(() => {
     const node = rootRef.current;
 
@@ -686,49 +672,6 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
 
     return () => window.clearInterval(interval);
   }, [selectedPinId, shouldRunMobileBeacon]);
-
-  useEffect(() => {
-    if (!shouldRunDesktopIdle) {
-      setAwakenedDormantPinId(null);
-      return;
-    }
-
-    let cancelled = false;
-    let index = 0;
-    const timers: number[] = [];
-
-    const schedule = (callback: () => void, delay: number) => {
-      timers.push(window.setTimeout(callback, delay));
-    };
-
-    const runCycle = () => {
-      schedule(() => {
-        if (cancelled) {
-          return;
-        }
-
-        const nextPinId = dormantPinIds[index % dormantPinIds.length];
-        index += 1;
-        setAwakenedDormantPinId(nextPinId);
-
-        schedule(() => {
-          if (cancelled) {
-            return;
-          }
-
-          setAwakenedDormantPinId(null);
-          runCycle();
-        }, 6000);
-      }, 8000);
-    };
-
-    runCycle();
-
-    return () => {
-      cancelled = true;
-      timers.forEach((timer) => window.clearTimeout(timer));
-    };
-  }, [interactiveDesktop, shouldRunDesktopIdle]);
 
   useEffect(() => {
     return () => {
@@ -866,14 +809,14 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       if (!interactiveDesktop) {
         return;
       }
+      void pin;
 
       if (popupCloseTimerRef.current) {
         window.clearTimeout(popupCloseTimerRef.current);
         popupCloseTimerRef.current = null;
       }
 
-      setHoveredPinId(pin.id);
-      setPopupPinId(pin.id);
+      setPopupPinId(null);
       setPopupClosing(false);
     },
     [interactiveDesktop],
@@ -884,18 +827,13 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       return;
     }
 
-    setHoveredPinId(null);
-    setPopupClosing(true);
-
     if (popupCloseTimerRef.current) {
       window.clearTimeout(popupCloseTimerRef.current);
+      popupCloseTimerRef.current = null;
     }
 
-    popupCloseTimerRef.current = window.setTimeout(() => {
-      setPopupPinId(null);
-      setPopupClosing(false);
-      popupCloseTimerRef.current = null;
-    }, 150);
+    setPopupPinId(null);
+    setPopupClosing(false);
   }, [interactiveDesktop]);
 
   return (
@@ -904,54 +842,36 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       dir={locale === "fa" ? "rtl" : "ltr"}
       aria-label={copy.aria}
       className={cn(
-        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.5rem]",
-        compact
-          ? "aspect-[10/11] min-h-[380px] sm:min-h-[420px]"
-          : "aspect-[10/11] min-h-[500px] sm:aspect-[4/5] sm:min-h-[560px] lg:aspect-[5/6] lg:min-h-[620px] xl:min-h-[660px]",
+        "hero-map-visual product-theater relative isolate w-full overflow-hidden rounded-[1.6rem] border border-[rgba(42,33,27,0.10)] bg-[rgba(255,252,246,0.72)] shadow-[0_18px_48px_rgba(42,33,27,0.08)] backdrop-blur-[10px] dark:border-zinc-800 dark:bg-zinc-900/82",
+        compact ? "aspect-[4/3] p-3" : "aspect-square max-h-[540px] p-4 lg:p-5",
       )}
       data-mode={mode}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handleVisualPointerDown}
     >
-      <div className="absolute inset-0 bg-grid product-grid opacity-45" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid product-grid opacity-[0.05]" aria-hidden="true" />
 
       <div
         ref={parallaxRef}
         className="relative h-full transition-transform duration-300 ease-out will-change-transform"
       >
-        <div className="absolute inset-0 overflow-hidden bg-[#f3eadb] dark:bg-zinc-950">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_42%,rgba(204,120,92,0.18),transparent_31%),radial-gradient(circle_at_72%_24%,rgba(42,36,29,0.10),transparent_25%)]" aria-hidden="true" />
-          <div className="absolute inset-0 bg-grid product-grid opacity-40" aria-hidden="true" />
+        <div className="hero-radar-panel absolute inset-0 overflow-hidden rounded-[1.35rem] border border-[rgba(42,33,27,0.08)] bg-[#F1E8D8] shadow-inner shadow-[#2A211B]/[0.035] backdrop-blur-[8px] dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_42%_42%,rgba(204,120,92,0.07),transparent_32%),radial-gradient(circle_at_78%_22%,rgba(111,167,216,0.07),transparent_30%)]" aria-hidden="true" />
+          <div className="absolute inset-0 bg-grid product-grid opacity-[0.05]" aria-hidden="true" />
           <HeroMapArtwork interactive={interactiveDesktop} />
-        </div>
-
-        <div
-          className={cn(
-            "absolute start-3 top-3 z-30 flex min-w-0 items-center gap-2 rounded-2xl border border-[#d8c7b2] bg-[#fffaf1]/92 px-3 py-2 text-right shadow-sm shadow-[#2a241d]/[0.045] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/92",
-            compact ? "end-3" : "w-[min(23rem,calc(100%-2rem))] lg:start-4 lg:top-4",
-          )}
-        >
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#1b1916] text-[#cc785c]">
-            <Search className="h-4 w-4" strokeWidth={2} />
-          </span>
-          <span className="min-w-0 flex-1 truncate text-[11px] font-bold leading-5 text-[#2a241d] dark:text-zinc-100">
-            {copy.command}
-          </span>
         </div>
 
         <div key={loopSerial} className="absolute inset-0 z-20">
           {visiblePins.map((pin, index) => {
             const matches = interactiveDesktop || isMobile || activeFilter === filterStages[0] || pin.stage === activeFilter;
             const selected = !interactiveDesktop && pin.id === selectedPinId;
-            const kind = interactiveDesktop && pin.id === awakenedDormantPinId
-              ? "active"
-              : desktopPinKinds[pin.id] ?? "regular";
+            const kind = desktopPinKinds[pin.id] ?? "regular";
 
             return (
               <ProjectPin
                 key={pin.id}
-                active={interactiveDesktop ? kind === "active" : matches}
+                active={interactiveDesktop ? kind === "active" : pin.id === selectedPinId}
                 animate={interactiveDesktop ? hasEnteredView && !prefersReducedMotion : !prefersReducedMotion}
                 dimmed={!matches}
                 index={index}
@@ -975,57 +895,57 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
         {spotlightPin ? (
           <div
             className={cn(
-              "hero-answer-card absolute bottom-3 start-3 z-30 overflow-hidden rounded-[1.2rem] border border-[#d8c7b2] bg-[#fffaf1]/92 p-3 text-right shadow-lg shadow-[#2a241d]/[0.055] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/92",
-              compact ? "end-3" : "w-[min(18.5rem,calc(100%-2rem))] lg:bottom-4 lg:start-4",
+              "hero-answer-card absolute bottom-3 start-3 z-30 overflow-hidden rounded-[1rem] p-2.5 text-right backdrop-blur-[18px]",
+              compact ? "end-3" : "w-[min(15.75rem,calc(100%-2rem))] lg:bottom-4 lg:start-4",
             )}
           >
-            <div className="flex items-start justify-between gap-3">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[14px] bg-[#1b1916] text-[#cc785c]">
-                <Sparkles className="h-4 w-4" strokeWidth={2} />
+            <div className="flex items-start justify-between gap-2">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-[11px] bg-[rgba(204,120,92,0.12)] text-[#B86449] shadow-[inset_0_1px_0_rgba(255,255,255,0.42)]">
+                <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[10px] font-bold leading-5 text-[#8a7a69]">
+                <div className="text-[9px] font-bold leading-4 text-[rgba(42,33,27,0.62)]">
                   {copy.answerLabel}
                 </div>
-                <div className="truncate text-sm font-bold leading-6 text-[#2a241d] dark:text-zinc-100">
+                <div className="truncate text-[12px] font-bold leading-5 text-[#1B1916] dark:text-zinc-100">
                   {copy.answerTitle}
                 </div>
               </div>
             </div>
             {!compact ? (
-              <p className="mt-2 line-clamp-2 text-[11px] font-medium leading-6 text-[#6f6254]">
+              <p className="mt-1.5 line-clamp-1 text-[10px] font-medium leading-5 text-[rgba(42,33,27,0.62)]">
                 {copy.answerBody}
               </p>
             ) : null}
-            <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
+            <div className="mt-2 grid grid-cols-[1fr_auto] items-end gap-2">
               <div className="min-w-0">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-[#6f6254]">
-                  <Route className="h-3.5 w-3.5 text-[#cc785c]" strokeWidth={2} />
+                <div className="flex items-center gap-1.5 text-[9px] font-bold text-[rgba(42,33,27,0.62)]">
+                  <Route className="h-3 w-3 text-[#6FA7D8]" strokeWidth={2} />
                   <span className="truncate">
                     {copy.areas[spotlightPin.id]} · {copy.stages[spotlightPin.stage]}
                   </span>
                 </div>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#e4d8c8]">
-                  <span className="hero-score-bar block h-full w-[82%] origin-right rounded-full bg-[#cc785c]" />
+                <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-[rgba(42,33,27,0.10)]">
+                  <span className="hero-score-bar block h-full w-[82%] origin-right rounded-full bg-[#CC785C]" />
                 </div>
               </div>
-              <div className="rounded-2xl border border-[#d8c7b2] bg-[#fbf6ed] px-2.5 py-1.5 text-center dark:border-zinc-800 dark:bg-zinc-950">
-                <div className="text-[9px] font-bold leading-4 text-[#8a7a69]">{copy.scoreLabel}</div>
-                <div className="text-sm font-bold leading-5 text-[#2a241d] dark:text-zinc-100">
+              <div className="rounded-xl border border-[rgba(204,120,92,0.18)] bg-[rgba(204,120,92,0.12)] px-2 py-1 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.32)] backdrop-blur-[14px] dark:border-white/10 dark:bg-zinc-950/35">
+                <div className="text-[8px] font-bold leading-3 text-[rgba(42,33,27,0.62)]">{copy.scoreLabel}</div>
+                <div className="text-xs font-bold leading-4 text-[#9E4F38] dark:text-zinc-100">
                   {locale === "fa" ? "۸۲" : "82"}
                 </div>
               </div>
             </div>
             {!compact ? (
-              <div className="mt-3 flex items-center gap-1.5">
+              <div className="mt-2 flex items-center gap-1">
                 {copy.pipeline.map((step, index) => (
                   <span
                     key={step}
                     className={cn(
-                      "rounded-full border px-2 py-1 text-[9px] font-bold leading-4",
+                      "rounded-full border px-1.5 py-0.5 text-[8px] font-bold leading-3",
                       index === 1
-                        ? "border-[#cc785c]/35 bg-[#f6d6a8]/70 text-[#2a241d]"
-                        : "border-[#e4d8c8] bg-[#fbf6ed] text-[#7a6a59]",
+                        ? "border-[rgba(204,120,92,0.22)] bg-[rgba(204,120,92,0.12)] text-[#9E4F38]"
+                        : "border-transparent bg-[rgba(42,33,27,0.045)] text-[rgba(42,33,27,0.58)]",
                     )}
                   >
                     {step}

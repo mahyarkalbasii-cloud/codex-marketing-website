@@ -15,11 +15,11 @@ export const siteEn = {
 };
 
 export const navItemsEn = [
-  { label: "Solution", href: "/#solution" },
-  { label: "Product", href: "/#product" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "Plans", href: "/#plans" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Product", href: "/features" },
+  { label: "Subscriptions", href: "/#plans" },
+  { label: "Training", href: "/#how-it-works" },
+  { label: "About us", href: "/#solution" },
+  { label: "Contact us", href: "/#demo" },
 ];
 
 export const seoPagesEn = [

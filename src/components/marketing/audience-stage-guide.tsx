@@ -649,6 +649,7 @@ const salesTypesEn: readonly SalesTypeCardData[] = [
 const audienceCopy = {
   fa: {
     sampleFields: "نمونه زمینه‌های کاری و محصولات",
+    stageProductsLabel: "نمونه محصولات و خدمات در این مرحله",
     more: "توضیحات بیشتر",
     selectedStage: "مرحله انتخاب‌شده",
     matchedRows: (matched: string, total: string) =>
@@ -665,6 +666,7 @@ const audienceCopy = {
   },
   en: {
     sampleFields: "Sample work areas and products",
+    stageProductsLabel: "Sample products and services at this stage",
     more: "More details",
     selectedStage: "Selected stage",
     matchedRows: (matched: string, total: string) =>
@@ -688,11 +690,18 @@ function SalesTypeCard({
   copy: (typeof audienceCopy)[Locale];
   type: SalesTypeCardData;
 }) {
+  const cardTone =
+    type.id === "fast" ? "audience-sales-card-fast" : "audience-sales-card-consultative";
+
   return (
-    <Card className="group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-xl hover:shadow-zinc-950/[0.06] md:p-5 dark:hover:border-zinc-700">
+    <Card
+      className={cn(
+        "audience-sales-card group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 md:p-5",
+        cardTone,
+      )}
+    >
       <div
-        className="absolute -left-14 -top-14 h-32 w-32 rounded-full blur-2xl"
-        style={{ backgroundColor: type.soft, opacity: 0.58 }}
+        className="audience-sales-card-glow absolute -left-14 -top-14 h-32 w-32 rounded-full blur-2xl"
         aria-hidden="true"
       />
       <div className="relative flex items-center justify-between gap-3">
@@ -797,7 +806,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
       <Card
         dir={copy.dir}
         className={cn(
-          "relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem]",
+          "audience-stage-card relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem]",
           locale === "fa" ? "lg:[direction:rtl]" : "lg:[direction:ltr]",
         )}
       >
@@ -807,7 +816,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
           aria-hidden="true"
         />
         <div className="relative grid gap-5 md:grid-cols-[11.5rem_minmax(0,1fr)] md:[direction:ltr]">
-          <div className="relative rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:min-h-[24.5rem] md:[direction:ltr]">
+          <div className="audience-stage-rail relative rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:min-h-[24.5rem] md:[direction:ltr]">
             <div
               className="pointer-events-none absolute bottom-8 left-5 top-8 w-px rounded-full bg-[#d8c9b6]"
               aria-hidden="true"
@@ -864,7 +873,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
             </div>
           </div>
 
-          <div className="relative rounded-[1.35rem] border border-[#e4d8c8] bg-[#faf9f6]/78 p-5 dark:border-zinc-800 dark:bg-zinc-950 md:[direction:rtl]">
+          <div className="audience-stage-detail relative rounded-[1.35rem] border border-[#e4d8c8] bg-[#faf9f6]/78 p-5 dark:border-zinc-800 dark:bg-zinc-950 md:[direction:rtl]">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <span
                 className="inline-flex items-center gap-2 rounded-full border bg-[#fffaf1] px-3 py-1 text-xs font-bold text-[#2a241d] dark:bg-zinc-900 dark:text-white"
@@ -893,35 +902,10 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
               {copy.stageBody}
             </p>
 
-            {activeTaxonomy ? (
-              <div className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
-                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    [copy.dominantSaleType, activeTaxonomy.dominantSaleType],
-                    [copy.negotiation, activeTaxonomy.timing.negotiation],
-                    [copy.purchase, activeTaxonomy.timing.purchase],
-                    [copy.execution, activeTaxonomy.timing.execution],
-                  ].map(([label, value]) => (
-                    <div
-                      key={label}
-                      className="rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/78 p-3 dark:border-zinc-800 dark:bg-zinc-950"
-                    >
-                      <div className="text-[10px] font-bold text-[#8a7a69] dark:text-zinc-500">
-                        {label}
-                      </div>
-                      <div className="mt-1 text-xs font-black leading-6 text-[#2a241d] dark:text-white">
-                        {value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-
             <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-              <span>{copy.sampleFields}</span>
+              <span>{copy.stageProductsLabel}</span>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               {activeFields.map((field, index) => (
                 <span
                   key={field}
@@ -938,11 +922,41 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
               ))}
             </div>
 
-            <div className="mt-4 grid auto-rows-fr gap-3 sm:grid-cols-2">
+            {activeTaxonomy ? (
+              <div className="audience-stage-timing mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    [copy.dominantSaleType, activeTaxonomy.dominantSaleType],
+                    [copy.negotiation, activeTaxonomy.timing.negotiation],
+                    [copy.purchase, activeTaxonomy.timing.purchase],
+                    [copy.execution, activeTaxonomy.timing.execution],
+                  ].map(([label, value]) => (
+                    <div
+                      key={label}
+                      className="audience-stage-timing-box rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/78 p-3 dark:border-zinc-800 dark:bg-zinc-950"
+                    >
+                      <div className="text-[10px] font-bold text-[#8a7a69] dark:text-zinc-500">
+                        {label}
+                      </div>
+                      <div className="mt-1 text-xs font-black leading-6 text-[#2a241d] dark:text-white">
+                        {value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            <div
+              className={cn(
+                "mt-4 grid auto-rows-fr gap-3",
+                signalCards.length > 1 && "sm:grid-cols-2",
+              )}
+            >
               {signalCards.map(({ label, text, Icon, color, soft }) => (
                 <div
                   key={`${label}-${text}`}
-                  className="flex gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-xs font-semibold leading-6 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                  className="audience-stage-signal-card flex min-w-0 gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-[13px] font-semibold leading-7 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
@@ -953,8 +967,8 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
                   >
                     <Icon className="h-4 w-4" />
                   </span>
-                  <span>
-                    <span className="block text-[10px] font-black text-[#2a241d] dark:text-white">
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[11px] font-black leading-5 text-[#2a241d] dark:text-white">
                       {label}
                     </span>
                     {text}

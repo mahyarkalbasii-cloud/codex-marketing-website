@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowLeft,
   AlertCircle,
-  BarChart3,
   CheckCircle2,
   Clock3,
   Database,
@@ -16,7 +15,6 @@ import {
   MessageSquareText,
   Play,
   Route,
-  Search,
   Send,
   Sparkles,
 } from "lucide-react";
@@ -28,7 +26,6 @@ import { AudienceStageGuide } from "@/components/marketing/audience-stage-guide"
 import { FaqList } from "@/components/marketing/faq-list";
 import { MarketProblemPresentationVisual } from "@/components/marketing/market-problem-presentation-visual";
 import { PricingSection } from "@/components/marketing/pricing-section";
-import { ProductPreviewTheater } from "@/components/marketing/product-preview-theater";
 import { SalesFlowRevealController } from "@/components/marketing/sales-flow-reveal-controller";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { SolutionRevealController } from "@/components/marketing/solution-reveal-controller";
@@ -92,24 +89,6 @@ const solutionCards = [
   },
 ] as const;
 
-const heroProofCards = [
-  {
-    value: "۳ شهر",
-    label: "تهران، کرج و لواسان",
-    icon: MapPin,
-  },
-  {
-    value: "۸ مرحله",
-    label: "از گودبرداری تا پایان کار",
-    icon: Layers,
-  },
-  {
-    value: "پیگیری منظم",
-    label: "تماس، پیامک و یادآوری فروش",
-    icon: MessageSquareText,
-  },
-] as const;
-
 const howItWorksLayers = [
   {
     title: "جمع‌آوری و به‌روزرسانی میدانی پروژه‌های ساختمانی",
@@ -123,7 +102,6 @@ const howItWorksLayers = [
       "تأیید و راستی‌آزمایی",
       "تصویر زنده از بازار",
     ],
-    outcome: "خروجی این لایه: پروفایل پروژه‌ی راستی‌آزمایی‌شده",
   },
   {
     title: "تحلیل، امتیازدهی و پیشنهاد اقدام برای تیم فروش",
@@ -137,7 +115,6 @@ const howItWorksLayers = [
       "امتیازدهی پروژه",
       "پیشنهاد اقدام",
     ],
-    outcome: "خروجی این لایه: پیشنهاد اقدام برای تیم فروش",
   },
 ] as const;
 
@@ -145,25 +122,21 @@ const salesFlowSteps = [
   {
     title: "شناسایی فرصت",
     body: "پروژه‌هایی را پیدا کنید که از نظر موقعیت، مرحله ساخت، مقیاس و نوع نیاز به محصول یا خدمت شما هم‌خوانی دارند.",
-    icon: Search,
     outcome: "نتیجه: لیست کوتاه پروژه‌های هم‌خوان",
   },
   {
     title: "ارزیابی و اولویت‌بندی",
     body: "همه پروژه‌ها ارزش یکسان ندارند. باید بتوان تشخیص داد کدام پروژه زنده‌تر است، کدام متوقف نیست و کدام به زمان مناسب اقدام نزدیک‌تر است.",
-    icon: BarChart3,
     outcome: "نتیجه: اولویت‌بندی فرصت‌ها بر اساس آمادگی",
   },
   {
     title: "ارتباط و مذاکره",
     body: "پس از انتخاب فرصت مناسب، ارتباط اولیه باید نه تصادفی و بی‌ربط باشد، نه تهاجمی و بدون زمینه. کیفیت و زمان تماس تعیین‌کننده است.",
-    icon: MessageSquareText,
     outcome: "نتیجه: تماس و مذاکره با زمینه روشن",
   },
   {
     title: "پیگیری و تبدیل",
     body: "بخش مهمی از ارزش فروش، نه در تماس اول، بلکه در پیگیری منظم و شبکه‌ای ساخته می‌شود. اینجاست که فرصت به قرارداد نزدیک می‌شود.",
-    icon: CheckCircle2,
     outcome: "نتیجه: قرارداد و رابطه پایدار",
   },
 ] as const;
@@ -373,19 +346,19 @@ function MarketProblemSection() {
   return (
     <section
       id="problem"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.20),transparent_30%)] dark:border-zinc-800 dark:bg-none"
+      className="section-gradient section-gradient-problem relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
       aria-labelledby="market-problem-title"
     >
-      <div className="absolute inset-0 map-parcel-pattern opacity-35" aria-hidden="true" />
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[.9fr_1.1fr] md:items-center md:gap-10 md:px-6 md:py-20">
-        <div className="relative order-1 max-w-3xl text-center md:order-none md:text-right">
+      <div className="absolute inset-0 map-parcel-pattern opacity-20" aria-hidden="true" />
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:px-6 md:py-14 lg:grid-cols-2 lg:[direction:ltr] lg:items-center lg:gap-8 lg:py-16">
+        <div className="relative order-1 mx-auto min-w-0 max-w-3xl text-center lg:order-2 lg:ml-auto lg:mr-0 lg:max-w-[38rem] lg:text-right lg:[direction:rtl]">
           <h2
             id="market-problem-title"
-            className="text-3xl font-bold leading-[1.3] text-foreground md:text-[2.85rem] md:leading-[1.24] lg:text-5xl"
+            className="mx-auto max-w-[23rem] text-3xl font-bold leading-[1.3] text-foreground md:max-w-3xl md:text-[2.85rem] md:leading-[1.24] lg:mx-0 lg:max-w-full lg:text-5xl"
           >
             فروش در بازار ساختمان، فقط به داشتن محصول خوب بستگی ندارد
           </h2>
-          <p className="mt-4 text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg md:leading-9 lg:mx-0 lg:max-w-full">
             پروژه‌ها پراکنده‌اند، اطلاعات بازار همیشه دقیق و به‌روز نیست و اگر
             تماس زود یا دیر انجام شود، فرصت فروش از بین می‌رود. برای همین پیدا
             کردن پروژه مناسب، هنوز برای خیلی از تأمین‌کنندگان محصولات و خدمات
@@ -403,17 +376,17 @@ function MarketProblemSection() {
           </Link>
         </div>
 
-        <Card className="relative order-2 overflow-hidden p-0 shadow-lg shadow-[#2a241d]/[0.045] md:order-none">
-          <article aria-label="نمای انتزاعی مشکل فروش در بازار ساختمان">
+        <Card className="relative order-2 mx-auto flex w-full max-w-[620px] overflow-hidden border-[#f5dfc7] bg-[#FFF4E7]/90 p-0 shadow-lg shadow-[#2a241d]/[0.04] md:order-none lg:order-1 lg:aspect-[1.06/1] lg:max-h-[590px] lg:self-center">
+          <article className="flex min-h-0 w-full flex-col" aria-label="نمای انتزاعی مشکل فروش در بازار ساختمان">
             <MarketProblemPresentationVisual />
 
-            <div className="grid gap-3 p-4 md:grid-cols-3">
+            <div className="grid gap-3 border-t border-[#f5dfc7] bg-[#fffaf1]/50 p-3 md:grid-cols-3">
               {marketProblemRows.map(([project, problem, Icon]) => (
                 <div
                   key={project}
-                  className="group flex items-center gap-3 rounded-2xl border border-zinc-200 bg-[#faf9f6] p-3 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700"
+                  className="group flex items-center gap-2.5 rounded-2xl border border-white/60 bg-[linear-gradient(135deg,rgba(255,255,255,0.62),rgba(236,244,241,0.52))] p-3 shadow-sm shadow-[#2a241d]/[0.025] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-[#2F6F67]/25 hover:bg-white/60 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-zinc-500 shadow-sm dark:bg-zinc-900">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/60 text-[#2F6F67] shadow-sm dark:bg-zinc-900">
                     <Icon className="h-4 w-4" />
                   </span>
                   <div className="min-w-0 flex-1">
@@ -449,11 +422,11 @@ function SolutionOverviewSection() {
   return (
     <section
       id="solution"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[#fffaf1]/42 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-solution relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
       aria-labelledby="solution-title"
     >
       <SolutionRevealController />
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#faf9f6] to-transparent dark:from-zinc-950" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#f8f8f4] to-transparent dark:from-zinc-950" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
         <header className="solution-reveal-header relative mx-auto max-w-3xl text-center">
           <h2
@@ -481,15 +454,18 @@ function SolutionOverviewSection() {
               }
               className={cn(
                 "solution-card group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[#E4D8C8] bg-[#fffaf1] p-5 shadow-sm shadow-[#2a241d]/[0.025] dark:border-zinc-800 dark:bg-zinc-900/82",
+                card.motif === "data" && "solution-card-data",
+                card.motif === "workflow" && "solution-card-workflow",
+                card.motif === "training" && "solution-card-training",
                 index === 0 && "md:row-span-2 md:p-6",
               )}
             >
               <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254]">
+                <span className="solution-card-eyebrow inline-flex items-center gap-1.5 rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254]">
                   <card.icon className="h-3.5 w-3.5" />
                   {card.eyebrow}
                 </span>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#1B1916] text-[#CC785C]">
+                <span className="solution-card-icon grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#1B1916] text-[#CC785C]">
                   <card.icon className="h-5 w-5" />
                 </span>
               </div>
@@ -508,60 +484,14 @@ function SolutionOverviewSection() {
   );
 }
 
-function ProductPreviewSection() {
-  return (
-    <section
-      id="product"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[radial-gradient(circle_at_82%_12%,rgba(201,121,43,0.20),transparent_28%),radial-gradient(circle_at_18%_40%,rgba(246,214,168,0.30),transparent_32%)] dark:border-zinc-800 dark:bg-zinc-950"
-      aria-labelledby="product-title"
-    >
-      <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl px-4 pb-14 pt-12 md:px-6 md:py-16">
-        <header className="relative grid gap-4 text-center md:grid-cols-[1fr_.85fr] md:items-end md:text-right">
-          <div>
-            <h2
-              id="product-title"
-              className="text-2xl font-bold leading-[1.32] text-foreground md:text-4xl md:leading-[1.28] lg:text-[2.35rem]"
-            >
-              از نقشه تا پیگیری فروش، در یک نمای واحد
-            </h2>
-          </div>
-          <p className="mx-auto max-w-3xl text-base leading-8 text-muted-foreground md:hidden">
-            پروژه‌ها را فیلتر کنید، جزئیات را ببینید و مسیر پیگیری را از همان‌جا شروع کنید.
-          </p>
-          <p className="mx-auto hidden max-w-3xl text-base leading-8 text-muted-foreground md:mx-0 md:block md:text-lg md:leading-9">
-            یک نمای فشرده از محصول: جست‌وجوی پروژه، فیلتر مرحله ساخت، انتخاب فرصت مناسب و اقدام فروش بعدی، بدون شلوغی یک نقشه‌ی بزرگ.
-          </p>
-        </header>
-
-        <ProductPreviewTheater />
-
-        <div className="mt-7 flex justify-center">
-          <Link
-            href="#demo"
-            className={cn(
-              buttonVariants(),
-              "h-11 rounded-2xl px-6 shadow-sm",
-            )}
-          >
-            درخواست دمو
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[#fffaf1]/48 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-how relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
       aria-labelledby="how-it-works-title"
     >
       <HowItWorksRevealController />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.20),transparent_28%)]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
         <header className="how-works-reveal-header relative mx-auto max-w-4xl text-center">
           <h2
@@ -575,120 +505,7 @@ function HowItWorksSection() {
           </p>
         </header>
 
-        {/* Sample Project Strip */}
-        <div
-          style={
-            {
-              "--how-delay": "280ms",
-            } as CSSProperties & Record<"--how-delay", string>
-          }
-          className="how-layer-card mx-auto mt-8 max-w-[880px] rounded-2xl border border-[#1B1916]/[0.08] bg-[#F5EFE2] p-5 md:mt-12 md:p-6"
-          aria-label="نمونه جریان پردازش پروژه"
-        >
-          <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center">
-
-            {/* Node 1 — Project */}
-            <div className="min-w-0 flex-1">
-              {/* PLACEHOLDER: replace with real project sample before deploy. Do NOT publish with fake data. */}
-              <p className="text-xs font-semibold leading-5 text-[#CC785C]">نمونه پروژه</p>
-              <div className="mt-2 space-y-1">
-                <p className="text-sm font-semibold leading-6 text-[#1B1916]">ساختمان مسکونی، منطقه نمونه</p>
-                <p className="text-sm leading-6 text-[#1B1916]/65">۸ طبقه، در حال سفت‌کاری</p>
-                <p className="text-sm leading-6 text-[#1B1916]/65">ثبت‌شده در بازدید میدانی، ۱۲ روز پیش</p>
-              </div>
-            </div>
-
-            {/* Connector: down on mobile, left-pointing on desktop (RTL flow) */}
-            <div className="flex justify-center" aria-hidden="true">
-              <svg
-                className="h-8 w-5 shrink-0 text-[#CC785C] md:hidden"
-                viewBox="0 0 20 32"
-                fill="none"
-              >
-                <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
-              </svg>
-              <svg
-                className="hidden h-5 w-8 shrink-0 text-[#CC785C] md:block"
-                viewBox="0 0 32 20"
-                fill="none"
-              >
-                <path d="M28 10H8" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M11 5L2 10L11 15Z" fill="currentColor" />
-              </svg>
-            </div>
-
-            {/* Node 2 — AI processing */}
-            <div className="flex flex-col items-center gap-2">
-              <div
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#1B1916]/[0.08] bg-[#F5EFE2]"
-                aria-hidden="true"
-              >
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="text-[#CC785C]">
-                  <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="1.5" />
-                  <circle cx="16" cy="16" r="8" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.65" />
-                  <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.35" />
-                </svg>
-              </div>
-              <p className="text-xs leading-5 text-[#1B1916]/65">پردازش هوش مصنوعی</p>
-            </div>
-
-            {/* Connector: down on mobile, left-pointing on desktop (RTL flow) */}
-            <div className="flex justify-center" aria-hidden="true">
-              <svg
-                className="h-8 w-5 shrink-0 text-[#CC785C] md:hidden"
-                viewBox="0 0 20 32"
-                fill="none"
-              >
-                <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
-              </svg>
-              <svg
-                className="hidden h-5 w-8 shrink-0 text-[#CC785C] md:block"
-                viewBox="0 0 32 20"
-                fill="none"
-              >
-                <path d="M28 10H8" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M11 5L2 10L11 15Z" fill="currentColor" />
-              </svg>
-            </div>
-
-            {/* Node 3 — Action */}
-            <div className="min-w-0 flex-1">
-              {/* PLACEHOLDER: replace with real project sample before deploy. Do NOT publish with fake data. */}
-              <p className="text-xs font-semibold leading-5 text-[#CC785C]">خروجی برای تیم فروش</p>
-              <div className="mt-2 space-y-1">
-                <p className="text-sm font-semibold leading-6 text-[#1B1916]">امتیاز فرصت: بالا</p>
-                <p className="text-sm leading-6 text-[#1B1916]/65">محصول پیشنهادی: کاشی و سرامیک نما</p>
-                <p className="text-sm leading-6 text-[#1B1916]/65">بازه‌ی پیشنهادی تماس: تا ۳ روز</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Connector between Sample Strip and the two layer cards */}
-        <div
-          style={
-            {
-              "--how-delay": "330ms",
-            } as CSSProperties & Record<"--how-delay", string>
-          }
-          className="how-layer-arrow mx-auto my-6 flex max-w-[880px] flex-col items-center justify-center gap-2 text-center text-sm leading-6 text-[#6F6254] md:flex-row md:gap-3 md:text-right"
-        >
-          <svg
-            className="h-8 w-5 shrink-0 text-[#CC785C]"
-            viewBox="0 0 20 32"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path d="M10 4V22" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M5 19L10 28L15 19H5Z" fill="currentColor" />
-          </svg>
-          <span>این دقیقاً همان جریانی است که در دو لایه‌ی زیر اتفاق می‌افتد</span>
-        </div>
-
-        <div className="relative mx-auto flex max-w-[880px] flex-col items-stretch">
+        <div className="relative mx-auto mt-8 flex max-w-[880px] flex-col items-stretch md:mt-10">
           {howItWorksLayers.map((layer, index) => (
             <Fragment key={layer.title}>
               <article
@@ -697,7 +514,12 @@ function HowItWorksSection() {
                     "--how-delay": `${index === 0 ? 200 : 500}ms`,
                   } as CSSProperties & Record<"--how-delay", string>
                 }
-                className="how-layer-card min-w-0 overflow-hidden rounded-[1.5rem] border border-[#E4D8C8] bg-[#FFFAF1]/84 p-5 shadow-md shadow-[#2a241d]/[0.04] md:p-7 dark:border-zinc-800 dark:bg-zinc-900/82"
+                className={cn(
+                  "how-layer-card min-w-0 overflow-hidden rounded-[1.5rem] border p-5 shadow-md shadow-[#2a241d]/[0.04] md:p-7 dark:border-zinc-800 dark:bg-zinc-900/82",
+                  index === 0
+                    ? "border-[#F4DDC6] bg-[#FFF4EA]"
+                    : "border-[#D9EAF8] bg-[#EEF7FF]",
+                )}
               >
                 <div className="flex items-center justify-between gap-3">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#1B1916] text-[#CC785C]">
@@ -715,9 +537,7 @@ function HowItWorksSection() {
                   {layer.body}
                 </p>
 
-                <hr className="my-4 border-t border-[#1B1916]/[0.08]" />
-
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="mt-6 flex flex-wrap items-center gap-2">
                   {layer.steps.map((step, stepIndex) => (
                     <div key={step} className="flex items-center gap-2">
                       <span className="rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
@@ -733,17 +553,6 @@ function HowItWorksSection() {
                       ) : null}
                     </div>
                   ))}
-                </div>
-
-                <div className="mt-4 flex items-start gap-0">
-                  <span
-                    className="me-2 mt-[0.35rem] inline-block shrink-0 bg-[#CC785C]"
-                    style={{ width: 4, height: 4 }}
-                    aria-hidden="true"
-                  />
-                  <p className="text-sm leading-6 text-[#1B1916]/65">
-                    {layer.outcome}
-                  </p>
                 </div>
               </article>
 
@@ -786,11 +595,10 @@ function SalesFlowSection() {
   return (
     <section
       id="sales-flow"
-      className="relative overflow-hidden border-b border-[#e4d8c8] bg-[#fbf6ed]/55 dark:border-zinc-800 dark:bg-zinc-950"
+      className="section-gradient section-gradient-sales relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
       aria-labelledby="sales-flow-title"
     >
       <SalesFlowRevealController />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(201,121,43,0.20),transparent_28%)]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
         <header className="sales-flow-reveal-header relative mx-auto max-w-5xl text-center">
           <div>
@@ -819,7 +627,7 @@ function SalesFlowSection() {
                 { "--sales-flow-delay": `${index * 150}ms` } as CSSProperties
               }
               className={cn(
-                "sales-flow-card relative z-[1] flex h-full min-h-[260px] flex-col overflow-hidden rounded-[1.35rem] border bg-[#fffaf1]/56 p-6 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[318px] md:p-5 md:pt-16 dark:border-zinc-800 dark:bg-zinc-900/82",
+                "sales-flow-card relative z-[1] flex h-full min-h-[250px] flex-col overflow-hidden rounded-[1.35rem] border bg-[#fffaf1]/56 p-6 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[292px] md:p-6 dark:border-zinc-800 dark:bg-zinc-900/82",
                 index === 0 && "sales-flow-card-neutral border-[#e4d8c8]",
                 index === 1 && "sales-flow-card-soft border-[#e4d8c8]",
                 index === 2 && "sales-flow-card-warm border-[#e0c7ad]",
@@ -827,45 +635,18 @@ function SalesFlowSection() {
                   "sales-flow-card-destination border-[#c9792b]/30 bg-[#fffaf1]/68",
               )}
             >
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "sales-flow-station absolute right-0 top-0 z-[2] hidden h-11 w-11 place-items-center rounded-full border border-[#e4d8c8] bg-[#fbf6ed] text-sm font-bold text-[#2a241d] md:right-1/2 md:grid md:h-12 md:w-12 md:translate-x-1/2",
-                  index === 3 && "border-[#c9792b]/35 text-[#5a3515]",
-                )}
-              >
-                {(index + 1).toLocaleString("fa-IR")}
-              </span>
-
-              <div className="flex items-center justify-between gap-3">
-                <span
-                  className={cn(
-                    "grid h-11 w-11 place-items-center rounded-2xl border text-[#2a241d]",
-                    index === 0 &&
-                      "border-[#e4d8c8] bg-[#fbf6ed] text-[#5f5348]",
-                    index === 1 &&
-                      "border-[#e4d8c8] bg-[#f6d6a8]/20 text-[#5f5348]",
-                    index === 2 &&
-                      "border-[#d99a35]/28 bg-[#f6d6a8]/52 text-[#6f3e18]",
-                    index === 3 &&
-                      "border-[#c9792b] bg-[#c9792b] text-[#fffaf1]",
-                  )}
-                >
-                  <step.icon className="h-5 w-5" strokeWidth={1.8} />
-                </span>
-              </div>
               <h3
                 className={cn(
-                  "mt-4 text-lg font-bold leading-8 text-[#2a241d] dark:text-white",
+                  "sales-flow-title text-xl font-bold leading-9 text-[#2a241d] dark:text-white",
                   index >= 2 && "text-[#4b2c12] dark:text-white",
                 )}
               >
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm leading-7 text-[#6f6254]">
+              <p className="sales-flow-body mt-3 text-[15px] leading-8 text-[#6f6254]">
                 {step.body}
               </p>
-              <p className="sales-flow-outcome mt-auto border-t border-[#eadfce] pt-3 text-xs font-medium leading-6 text-[#7a6a59]">
+              <p className="sales-flow-outcome mt-auto border-t border-[#eadfce] pt-4 text-sm font-semibold leading-7 text-[#7a6a59]">
                 {step.outcome}
               </p>
             </li>
@@ -891,12 +672,12 @@ function SalesFlowSection() {
 
 function DemoRequestSection() {
   return (
-    <section id="demo" className="relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(201,121,43,0.28),transparent_30%),radial-gradient(circle_at_72%_70%,rgba(246,214,168,0.30),transparent_28%)]" aria-hidden="true" />
+    <section id="demo" className="section-gradient section-gradient-demo relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
+      <div className="absolute inset-0 map-parcel-pattern opacity-10" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
         <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
           <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
-            <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(198,106,90,0.08),transparent_42%,rgba(47,111,103,0.08))]" aria-hidden="true" />
             <div className="relative">
               <h2 className="text-3xl font-semibold md:text-5xl">
                 برای دیدن نمونه اطلاعات پروژه‌ها، دمو بگیرید
@@ -977,11 +758,11 @@ export default function Home() {
   };
 
   return (
-    <main className="home-sections min-h-screen overflow-hidden bg-transparent text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
+    <main className="behance-background home-sections min-h-screen text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
       <StructuredData data={[faqSchema, softwareSchema, webPageSchema]} />
 
       <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">
-        <div className="absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
         <div className="mx-auto max-w-7xl px-5 pb-12 pt-10 md:px-6 md:pb-14 md:pt-12 lg:pb-16 lg:pt-12">
           <div className="grid gap-8 lg:grid-cols-[.96fr_1.04fr] lg:[direction:ltr] lg:items-center">
             <div className="relative hidden md:order-2 md:block lg:order-1 lg:[direction:rtl]">
@@ -1002,14 +783,23 @@ export default function Home() {
                   سریع‌تر بررسی و پیگیری کنند.
                 </p>
               </div>
-              <div className="mx-auto flex w-full max-w-[21rem] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
-                <Link href="#product" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
+              <div className="mx-auto flex w-full max-w-[24rem] flex-col gap-3.5 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4 lg:mx-0 lg:justify-start">
+                <Link
+                  href="#demo"
+                  className={cn(
+                    buttonVariants({ size: "lg" }),
+                    "h-14 w-full rounded-[1.15rem] bg-[#2A211B] px-8 text-base text-[#FFF9F0] shadow-[0_10px_26px_rgba(204,120,92,0.18),inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#3A2C24] sm:w-auto sm:min-w-[10.75rem] [&_svg]:h-5 [&_svg]:w-5 [&_svg]:text-[#E6A38B]",
+                  )}
+                >
                   مشاهده دمو
                   <ArrowLeft className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#solution"
-                  className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "h-14 w-full rounded-[1.15rem] border-[rgba(42,33,27,0.14)] bg-[rgba(255,252,246,0.58)] px-8 text-base text-[#2A211B] shadow-sm shadow-[#2A211B]/[0.04] hover:border-[rgba(204,120,92,0.34)] hover:bg-[rgba(255,252,246,0.86)] sm:w-auto sm:min-w-[10.75rem]",
+                  )}
                 >
                   چرا پرشین‌سازه؟
                 </Link>
@@ -1022,26 +812,6 @@ export default function Home() {
                   هزاران پروژه فعال
                 </span>
                 <span>۸ مرحله ساخت</span>
-              </div>
-              <div className="mx-auto hidden w-full max-w-[21rem] grid-cols-1 gap-3 pt-2 sm:grid sm:max-w-xl sm:grid-cols-3 lg:mx-0">
-                {heroProofCards.map((item) => (
-                  <div
-                    key={item.label}
-                    className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-[#D8C9B6] bg-[#FFFAF1]/95 p-3 text-right shadow-sm shadow-[#2A241D]/[0.05] transition duration-200 hover:-translate-y-0.5 hover:border-[#CC785C]/45 hover:shadow-md hover:shadow-[#2A241D]/[0.07] sm:block sm:text-center md:p-4 dark:border-zinc-800 dark:bg-zinc-900"
-                  >
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#1B1916] text-[#CC785C] sm:mx-auto sm:mb-2">
-                      <item.icon className="h-5 w-5" />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-sm font-bold leading-6 md:text-base">
-                        {item.value}
-                      </div>
-                      <div className="mt-1 text-[12px] leading-6 text-zinc-500 sm:text-[11px] sm:leading-5 md:text-xs dark:text-zinc-400">
-                        {item.label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
               <div className="md:hidden">
                 <HeroMapVisual compact />
@@ -1057,10 +827,7 @@ export default function Home() {
 
       <HowItWorksSection />
 
-      <ProductPreviewSection />
-
-      <section id="audiences" className="relative overflow-hidden border-y border-zinc-200 bg-white/35 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(242,182,49,0.20),transparent_28%)]" aria-hidden="true" />
+      <section id="audiences" className="section-gradient section-gradient-audience relative overflow-hidden border-y border-[#e4d8c8] dark:border-zinc-800">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="مخاطبان"
@@ -1075,7 +842,7 @@ export default function Home() {
 
       <PricingSection />
 
-      <section id="faq">
+      <section id="faq" className="section-gradient section-gradient-faq relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
           <SectionHeader
             eyebrow="سوالات رایج"

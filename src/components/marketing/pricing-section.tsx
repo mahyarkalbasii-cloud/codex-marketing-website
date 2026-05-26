@@ -691,7 +691,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       dir={locale === "fa" ? "rtl" : "ltr"}
       data-pricing-ready={isReady ? "true" : undefined}
       data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
-      className="relative overflow-hidden"
+      className="section-gradient section-gradient-pricing relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 md:px-6 md:py-20">
         <div className="pricing-reveal-header">
@@ -702,7 +702,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="pricing-slider mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
+        <div className="pricing-slider pricing-slider-labs mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
           <div
             ref={railRef}
             className="relative mx-2 h-32 max-w-3xl touch-none md:mx-auto md:h-28"
