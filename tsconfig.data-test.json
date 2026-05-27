@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "outDir": ".data-test-cache",
+    "rootDir": ".",
+    "tsBuildInfoFile": ".data-test-cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/data/**/*.ts"]
+}

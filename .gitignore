@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+/.data-test-cache
 
 # next.js
 /.next/

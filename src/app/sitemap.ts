@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
+import { STAGES } from "@/data/stages";
+import { absoluteUrl, cities, suppliers } from "@/lib/site-data";
 import { citiesEn, stagesEn, suppliersEn } from "@/lib/site-data.en";
 
 export const dynamic = "force-static";
@@ -9,7 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/features", "/pricing", "/faq"];
   const cityRoutes = cities.map((city) => `/cities/${city.slug}`);
   const supplierRoutes = suppliers.map((supplier) => `/suppliers/${supplier.slug}`);
-  const stageRoutes = stages.map((stage) => `/construction-stages/${stage.slug}`);
+  const stageRoutes = STAGES.filter((stage) => stage.isMain).map(
+    (stage) => `/stages/${stage.slug}`,
+  );
   const englishStaticRoutes = ["/en", "/en/features", "/en/pricing", "/en/faq"];
   const englishCityRoutes = citiesEn.map((city) => `/en/cities/${city.slug}`);
   const englishSupplierRoutes = suppliersEn.map(

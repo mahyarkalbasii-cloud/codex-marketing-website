@@ -1,195 +1,255 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { Building2, Clock3, Target } from "lucide-react";
 
+import { ActiveSubcategoriesInStage } from "@/components/stage/ActiveSubcategoriesInStage";
+import { DominantSaleStyle } from "@/components/stage/DominantSaleStyle";
+import { RelatedStagesNav } from "@/components/stage/RelatedStagesNav";
+import { RelevantCategories } from "@/components/stage/RelevantCategories";
 import { AnswerBox } from "@/components/marketing/answer-box";
+import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
 import { StructuredData } from "@/components/marketing/structured-data";
 import {
   FinalCTA,
   GradientSection,
   SupplierFAQ,
 } from "@/components/marketing/suppliers/shared";
-import { absoluteUrl } from "@/lib/site-data";
+import { buttonVariants } from "@/components/ui/button";
+import { STAGE_COPY, getStageMetaDescription } from "@/data/stage-copy";
 import {
-  getCategoriesByStageSlug,
-  getConstructionStageBySlug,
-  getConstructionStages,
-} from "@/lib/supplier-pages-data";
+  getActiveParentGroupsForStage,
+  getActiveSubcategoriesForStage,
+  getDominantSaleStyleForStage,
+  getRelatedStages,
+  getStageByRouteSlug,
+  getStageStaticParams,
+  type MainStageId,
+} from "@/data/stage-insights";
+import { absoluteUrl } from "@/lib/site-data";
+import { getStageHref } from "@/lib/stage-routes";
+import { cn } from "@/lib/utils";
+
+type PageProps = {
+  params: Promise<{ stageSlug: string }>;
+};
+
+const actionIcons = {
+  immediate: Target,
+  monitoring: Clock3,
+  negotiation: Building2,
+};
 
 export function generateStaticParams() {
-  return getConstructionStages().map((stage) => ({ stageSlug: stage.slug }));
+  return getStageStaticParams();
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ stageSlug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { stageSlug } = await params;
-  const stage = getConstructionStageBySlug(stageSlug);
+  const { stage } = getStageByRouteSlug(stageSlug);
 
   if (!stage) {
     return {};
   }
 
+  const copy = STAGE_COPY[stage.id];
+
   return {
-    title: `${stage.name} | مرحله ساخت`,
-    description: stage.description,
-    alternates: { canonical: `/stages/${stage.slug}` },
+    title: { absolute: `${stage.faLabel} | مرحله ساخت در پرشین‌سازه` },
+    description: getStageMetaDescription(stage.id),
+    alternates: { canonical: getStageHref(stage) },
     openGraph: {
-      title: stage.title,
-      description: stage.description,
-      url: absoluteUrl(`/stages/${stage.slug}`),
+      title: copy.heroTitle,
+      description: copy.heroSubtitle,
+      url: absoluteUrl(getStageHref(stage)),
       locale: "fa_IR",
       type: "article",
     },
   };
 }
 
-export default async function StagePage({
-  params,
-}: {
-  params: Promise<{ stageSlug: string }>;
-}) {
+export default async function StagePage({ params }: PageProps) {
   const { stageSlug } = await params;
-  const stages = getConstructionStages();
-  const stage = getConstructionStageBySlug(stageSlug);
+  const { isAlias, stage } = getStageByRouteSlug(stageSlug);
 
   if (!stage) {
     notFound();
   }
 
-  const index = stages.findIndex((item) => item.slug === stage.slug);
-  const previousStage = stages[index - 1];
-  const nextStage = stages[index + 1];
-  const relatedCategories = getCategoriesByStageSlug(stage.slug).slice(0, 6);
-  const faqs = [
-    {
-      question: "در این مرحله باید مذاکره کنیم یا فقط رصد؟",
-      answer:
-        "بسته به دسته محصول، این مرحله می‌تواند زمان مذاکره، خرید یا اجرای پیگیری باشد. مهم این است که مرحله ساخت را به اقدام فروش مشخص تبدیل کنید.",
-    },
-    {
-      question: "خرید در این مرحله رخ می‌دهد؟",
-      answer:
-        "برای برخی دسته‌ها بله، اما برای بسیاری از فروشندگان این مرحله بیشتر نقطه آماده‌سازی تصمیم خرید یا پیگیری جدی است.",
-    },
-    {
-      question: "پرشین‌سازه در این مرحله چه کمکی می‌کند؟",
-      answer:
-        "پرشین‌سازه با نمایش پروژه‌های هم‌مرحله، فیلتر، ثبت فرصت و یادآوری پیگیری کمک می‌کند تیم فروش دیر یا زود وارد نشود.",
-    },
-  ];
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "تأمین‌کنندگان",
-        item: absoluteUrl("/suppliers"),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: stage.name,
-        item: absoluteUrl(`/stages/${stage.slug}`),
-      },
-    ],
-  };
+  if (isAlias) {
+    permanentRedirect(getStageHref(stage));
+  }
+
+  const copy = STAGE_COPY[stage.id];
+  const activeSubcategories = getActiveSubcategoriesForStage(stage.id);
+  const activeGroups = getActiveParentGroupsForStage(stage.id);
+  const dominantSaleStyle = getDominantSaleStyleForStage(activeSubcategories);
+  const relatedStages = getRelatedStages(stage.id as MainStageId);
+  const canonicalUrl = absoluteUrl(getStageHref(stage));
+  const faqItems = copy.faqItems.map((item) => ({
+    answer: item.a,
+    question: item.q,
+  }));
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: copy.faqItems.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
     })),
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: copy.heroTitle,
+    url: canonicalUrl,
+    inLanguage: "fa-IR",
+    about: {
+      "@type": "Thing",
+      name: stage.faLabel,
+    },
+  };
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `چطور در مرحله ${stage.faLabel} فروش را پیگیری کنیم؟`,
+    step: [
+      {
+        "@type": "HowToStep",
+        name: copy.threeActions.monitoring.title,
+        text: copy.threeActions.monitoring.body,
+      },
+      {
+        "@type": "HowToStep",
+        name: copy.threeActions.negotiation.title,
+        text: copy.threeActions.negotiation.body,
+      },
+      {
+        "@type": "HowToStep",
+        name: copy.threeActions.immediate.title,
+        text: copy.threeActions.immediate.body,
+      },
+    ],
   };
 
   return (
     <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 md:px-6 md:py-16">
-      <StructuredData data={breadcrumb} />
-      <StructuredData data={faqSchema} />
+      <StructuredData data={[faqSchema, webPageSchema, howToSchema]} />
+      <Breadcrumbs
+        items={[
+          { label: "خانه", href: "/" },
+          { label: "مراحل ساخت", href: "/stages/foundation/" },
+          { label: stage.faLabel, href: getStageHref(stage) },
+        ]}
+      />
 
       <GradientSection>
-        <p className="text-sm font-bold text-muted-foreground">مرحله ساخت</p>
-        <h1 className="mt-3 text-4xl font-black md:text-6xl">{stage.title}</h1>
+        <p className="text-sm font-bold text-muted-foreground">صفحه مرحله ساخت</p>
+        <h1 className="mt-3 text-4xl font-black md:text-6xl">
+          {copy.heroTitle}
+        </h1>
         <p className="mt-4 max-w-4xl leading-8 text-muted-foreground">
-          {stage.description}
+          {copy.heroSubtitle}
         </p>
-        <div className="mt-6">
-          <AnswerBox>
-            مرحله {stage.name} باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید
-            یا اجرای پیگیری.
-          </AnswerBox>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Link href="/#demo" className={cn(buttonVariants({ size: "lg" }))}>
+            درخواست دمو
+          </Link>
+          <Link
+            href="/pricing/"
+            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          >
+            مشاهده پلن‌ها
+          </Link>
+        </div>
+        <div
+          className="mt-7"
+          itemScope
+          itemType="https://schema.org/Question"
+        >
+          <meta
+            itemProp="name"
+            content={`در مرحله ${stage.faLabel} چه اقدام فروشی باید انجام شود؟`}
+          />
+          <div
+            itemProp="acceptedAnswer"
+            itemScope
+            itemType="https://schema.org/Answer"
+          >
+            <AnswerBox>
+              <span itemProp="text">{copy.shortAnswer}</span>
+            </AnswerBox>
+          </div>
         </div>
       </GradientSection>
 
       <GradientSection>
         <h2 className="text-2xl font-black">تعریف مرحله</h2>
-        <p className="mt-3 leading-8 text-muted-foreground">{stage.definition}</p>
+        <p className="mt-3 leading-8 text-muted-foreground">{copy.definition}</p>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">پنجره فروش در این مرحله</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
+          دیدن مرحله کافی نیست. تیم فروش باید بداند تماس بگیرد، پیامک بفرستد،
+          رصد کند یا پیگیری بعدی بگذارد.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {(["monitoring", "negotiation", "immediate"] as const).map((key) => {
+            const Icon = actionIcons[key];
+            const action = copy.threeActions[key];
+
+            return (
+              <div
+                key={key}
+                className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+              >
+                <Icon className="h-6 w-6 text-[#7a4a22] dark:text-zinc-200" />
+                <h3 className="mt-5 text-xl font-bold">{action.title}</h3>
+                <p className="mt-3 text-sm leading-8 text-muted-foreground">
+                  {action.body}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </GradientSection>
 
       <GradientSection>
         <h2 className="text-2xl font-black">زمان‌بندی مذاکره / خرید / اجرا</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
-          <div className="rounded-3xl border bg-white/70 p-4">
-            <h3 className="font-extrabold">مذاکره</h3>
-            <p className="mt-2 text-sm leading-7 text-muted-foreground">
-              {stage.timing.negotiation}
-            </p>
-          </div>
-          <div className="rounded-3xl border bg-white/70 p-4">
-            <h3 className="font-extrabold">خرید</h3>
-            <p className="mt-2 text-sm leading-7 text-muted-foreground">
-              {stage.timing.purchase}
-            </p>
-          </div>
-          <div className="rounded-3xl border bg-white/70 p-4">
-            <h3 className="font-extrabold">اجرا</h3>
-            <p className="mt-2 text-sm leading-7 text-muted-foreground">
-              {stage.timing.execution}
-            </p>
-          </div>
-        </div>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">دسته‌های مرتبط</h2>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          {relatedCategories.map((category) => (
-            <Link
-              key={category.slug}
-              href={`/suppliers/${category.slug}`}
-              className="rounded-3xl border bg-white/70 p-4"
+          {[
+            ["مذاکره", copy.timing.negotiation],
+            ["خرید", copy.timing.purchase],
+            ["اجرا", copy.timing.execution],
+          ].map(([title, body]) => (
+            <div
+              key={title}
+              className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
             >
-              <h3 className="font-bold">{category.name}</h3>
+              <h3 className="font-extrabold">{title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                {category.description}
+                {body}
               </p>
-            </Link>
+            </div>
           ))}
         </div>
       </GradientSection>
 
-      <GradientSection>
-        <h2 className="text-2xl font-black">مرحله قبل / بعد</h2>
-        <div className="mt-4 flex flex-wrap gap-3">
-          {previousStage ? (
-            <Link href={`/stages/${previousStage.slug}`} className="rounded-full border px-4 py-2 text-sm">
-              مرحله قبل: {previousStage.name}
-            </Link>
-          ) : null}
-          {nextStage ? (
-            <Link href={`/stages/${nextStage.slug}`} className="rounded-full border px-4 py-2 text-sm">
-              مرحله بعد: {nextStage.name}
-            </Link>
-          ) : null}
-        </div>
-      </GradientSection>
+      <ActiveSubcategoriesInStage
+        groups={activeGroups}
+        stageLabel={stage.faLabel}
+        totalActive={activeSubcategories.length}
+      />
+      <DominantSaleStyle
+        consultativeCount={dominantSaleStyle.consultativeCount}
+        copy={copy}
+        fastCount={dominantSaleStyle.fastCount}
+        style={dominantSaleStyle.style}
+      />
+      <RelevantCategories groups={activeGroups} />
+      <RelatedStagesNav stages={relatedStages} />
 
       <GradientSection>
         <h2 className="text-2xl font-black">پرشین‌سازه در این مرحله</h2>
@@ -200,11 +260,8 @@ export default async function StagePage({
         </ul>
       </GradientSection>
 
-      <SupplierFAQ title="FAQ مرحله" items={faqs} />
-      <FinalCTA
-        title="این مرحله را به فروش تبدیل کنید"
-        description="با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید."
-      />
+      <SupplierFAQ title={`FAQ مرحله ${stage.faLabel}`} items={faqItems} />
+      <FinalCTA title={copy.ctaTitle} description={copy.ctaDescription} />
     </main>
   );
 }

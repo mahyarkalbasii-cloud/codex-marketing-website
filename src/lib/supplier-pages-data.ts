@@ -33,12 +33,32 @@ export type ConstructionStage = {
 const parentCategories = parentCategoriesData as ParentCategory[];
 const constructionStages = constructionStagesData as ConstructionStage[];
 
+const parentCategorySlugAliases: Record<string, string> = {
+  "cement-and-basic-materials": "building-materials",
+  elevator: "elevators-escalators",
+  facade: "doors-windows-facade",
+  "doors-windows": "doors-windows-facade",
+  "mechanical-electrical": "mechanical-installations",
+  "interior-finishing": "interior-decoration",
+};
+
+export function getParentCategoryStaticSlugs() {
+  return Array.from(
+    new Set([
+      ...parentCategories.map((category) => category.slug),
+      ...Object.keys(parentCategorySlugAliases),
+    ]),
+  );
+}
+
 export function getParentCategories() {
   return parentCategories;
 }
 
 export function getParentCategoryBySlug(slug: string) {
-  return parentCategories.find((category) => category.slug === slug);
+  const normalizedSlug = parentCategorySlugAliases[slug] ?? slug;
+
+  return parentCategories.find((category) => category.slug === normalizedSlug);
 }
 
 export function getConstructionStages() {

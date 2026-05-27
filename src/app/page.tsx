@@ -627,12 +627,12 @@ function SalesFlowSection() {
                 { "--sales-flow-delay": `${index * 150}ms` } as CSSProperties
               }
               className={cn(
-                "sales-flow-card relative z-[1] flex h-full min-h-[250px] flex-col overflow-hidden rounded-[1.35rem] border bg-[#fffaf1]/56 p-6 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[292px] md:p-6 dark:border-zinc-800 dark:bg-zinc-900/82",
+                "sales-flow-card relative z-[1] isolate flex h-full min-h-[250px] flex-col overflow-hidden rounded-[1.6rem] border p-5 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[292px] md:p-6 dark:border-zinc-800",
                 index === 0 && "sales-flow-card-neutral border-[#e4d8c8]",
                 index === 1 && "sales-flow-card-soft border-[#e4d8c8]",
                 index === 2 && "sales-flow-card-warm border-[#e0c7ad]",
                 index === 3 &&
-                  "sales-flow-card-destination border-[#c9792b]/30 bg-[#fffaf1]/68",
+                  "sales-flow-card-destination border-[#c9792b]/30",
               )}
             >
               <h3

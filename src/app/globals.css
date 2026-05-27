@@ -1505,40 +1505,66 @@ body {
   content: "";
 }
 
-.sales-flow-card-neutral {
+.sales-flow-card {
   background:
-    radial-gradient(circle at 86% 10%, rgba(89, 151, 246, 0.26), transparent 35%),
-    radial-gradient(circle at 10% 86%, rgba(198, 220, 255, 0.26), transparent 34%),
-    linear-gradient(145deg, rgba(246, 250, 255, 0.94), rgba(232, 242, 255, 0.78));
-  border-color: rgba(89, 151, 246, 0.28);
-  box-shadow: 0 14px 34px rgba(65, 114, 187, 0.055);
+    linear-gradient(180deg, rgba(255, 252, 246, 0.52), rgba(255, 250, 241, 0.24)),
+    var(--sales-flow-surface);
+  border-color: var(--sales-flow-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 16px 42px rgba(42, 33, 27, 0.052);
+  -webkit-backdrop-filter: blur(10px) saturate(1.08);
+  backdrop-filter: blur(10px) saturate(1.08);
+}
+
+.sales-flow-card::before {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: calc(1.6rem - 1px);
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.42), transparent 54%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.36), transparent 38%);
+  content: "";
+  pointer-events: none;
+}
+
+.sales-flow-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sales-flow-card-neutral {
+  --sales-flow-surface:
+    radial-gradient(circle at 88% 12%, rgba(111, 167, 216, 0.19), transparent 34%),
+    radial-gradient(circle at 8% 88%, rgba(198, 220, 255, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(238, 248, 254, 0.9), rgba(224, 240, 250, 0.74));
+  --sales-flow-border: rgba(111, 167, 216, 0.24);
 }
 
 .sales-flow-card-soft {
-  background:
-    radial-gradient(circle at 18% 10%, rgba(252, 220, 83, 0.3), transparent 35%),
-    radial-gradient(circle at 86% 84%, rgba(255, 244, 158, 0.26), transparent 34%),
-    linear-gradient(145deg, rgba(255, 252, 232, 0.94), rgba(248, 241, 190, 0.74));
-  border-color: rgba(226, 189, 46, 0.26);
-  box-shadow: 0 14px 34px rgba(158, 132, 36, 0.052);
+  --sales-flow-surface:
+    radial-gradient(circle at 16% 12%, rgba(217, 154, 53, 0.17), transparent 34%),
+    radial-gradient(circle at 86% 84%, rgba(246, 214, 168, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(255, 246, 233, 0.92), rgba(248, 235, 213, 0.74));
+  --sales-flow-border: rgba(201, 121, 43, 0.22);
 }
 
 .sales-flow-card-warm {
-  background:
-    radial-gradient(circle at 84% 12%, rgba(64, 222, 128, 0.26), transparent 35%),
-    radial-gradient(circle at 12% 82%, rgba(190, 248, 211, 0.28), transparent 34%),
-    linear-gradient(145deg, rgba(242, 255, 247, 0.94), rgba(222, 247, 231, 0.74));
-  border-color: rgba(72, 196, 116, 0.25);
-  box-shadow: 0 14px 34px rgba(46, 139, 84, 0.052);
+  --sales-flow-surface:
+    radial-gradient(circle at 84% 12%, rgba(104, 151, 135, 0.18), transparent 34%),
+    radial-gradient(circle at 10% 86%, rgba(190, 224, 211, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(239, 249, 244, 0.9), rgba(225, 240, 233, 0.74));
+  --sales-flow-border: rgba(104, 151, 135, 0.24);
 }
 
 .sales-flow-card-destination {
-  background:
-    radial-gradient(circle at 16% 10%, rgba(255, 126, 88, 0.27), transparent 35%),
-    radial-gradient(circle at 88% 82%, rgba(214, 169, 255, 0.2), transparent 34%),
-    linear-gradient(145deg, rgba(255, 248, 243, 0.94), rgba(255, 230, 219, 0.74));
-  border-color: rgba(232, 113, 78, 0.26);
-  box-shadow: 0 14px 34px rgba(160, 76, 51, 0.052);
+  --sales-flow-surface:
+    radial-gradient(circle at 14% 12%, rgba(218, 145, 105, 0.2), transparent 34%),
+    radial-gradient(circle at 88% 82%, rgba(151, 132, 175, 0.13), transparent 34%),
+    linear-gradient(145deg, rgba(255, 244, 236, 0.92), rgba(250, 229, 213, 0.74));
+  --sales-flow-border: rgba(205, 137, 96, 0.25);
 }
 
 .sales-flow-card .sales-flow-step-icon,
@@ -1590,37 +1616,50 @@ body {
 }
 
 .dark .sales-flow-card-neutral {
-  background:
+  --sales-flow-surface:
     radial-gradient(circle at 86% 10%, rgba(89, 151, 246, 0.14), transparent 35%),
     linear-gradient(145deg, rgba(24, 35, 52, 0.92), rgba(22, 27, 36, 0.9));
-  border-color: rgba(89, 151, 246, 0.2);
+  --sales-flow-border: rgba(89, 151, 246, 0.2);
 }
 
 .dark .sales-flow-card-soft {
-  background:
-    radial-gradient(circle at 18% 10%, rgba(252, 220, 83, 0.14), transparent 35%),
-    linear-gradient(145deg, rgba(42, 38, 24, 0.92), rgba(31, 29, 22, 0.9));
-  border-color: rgba(226, 189, 46, 0.2);
+  --sales-flow-surface:
+    radial-gradient(circle at 18% 10%, rgba(217, 154, 53, 0.13), transparent 35%),
+    linear-gradient(145deg, rgba(43, 34, 27, 0.92), rgba(31, 28, 25, 0.9));
+  --sales-flow-border: rgba(201, 121, 43, 0.2);
 }
 
 .dark .sales-flow-card-warm {
-  background:
-    radial-gradient(circle at 84% 12%, rgba(64, 222, 128, 0.14), transparent 35%),
+  --sales-flow-surface:
+    radial-gradient(circle at 84% 12%, rgba(104, 151, 135, 0.13), transparent 35%),
     linear-gradient(145deg, rgba(22, 41, 31, 0.92), rgba(22, 31, 25, 0.9));
-  border-color: rgba(72, 196, 116, 0.2);
+  --sales-flow-border: rgba(104, 151, 135, 0.2);
 }
 
 .dark .sales-flow-card-destination {
-  background:
-    radial-gradient(circle at 16% 10%, rgba(255, 126, 88, 0.15), transparent 35%),
-    radial-gradient(circle at 88% 82%, rgba(214, 169, 255, 0.1), transparent 34%),
+  --sales-flow-surface:
+    radial-gradient(circle at 16% 10%, rgba(218, 145, 105, 0.13), transparent 35%),
+    radial-gradient(circle at 88% 82%, rgba(151, 132, 175, 0.08), transparent 34%),
     linear-gradient(145deg, rgba(44, 31, 27, 0.92), rgba(31, 27, 25, 0.9));
-  border-color: rgba(232, 113, 78, 0.21);
+  --sales-flow-border: rgba(205, 137, 96, 0.2);
 }
 
 .dark .sales-flow-card .sales-flow-body,
 .dark .sales-flow-card .sales-flow-outcome {
   color: rgba(244, 244, 245, 0.68);
+}
+
+.dark .sales-flow-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 16px 42px rgba(0, 0, 0, 0.18);
+}
+
+.dark .sales-flow-card::before {
+  border-color: rgba(255, 255, 255, 0.06);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 54%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 38%);
 }
 
 .pricing-slider-labs {
@@ -1644,6 +1683,7 @@ body {
 .sales-flow-card-destination::after {
   position: absolute;
   inset: 0;
+  z-index: 2;
   border: 1px solid rgba(232, 113, 78, 0.24);
   border-radius: inherit;
   content: "";
@@ -1753,20 +1793,10 @@ body {
 @media (hover: hover) and (pointer: fine) {
   .sales-flow-card:hover {
     transform: translateY(-2px);
-  }
-
-  .sales-flow-card-neutral:hover,
-  .sales-flow-card-soft:hover {
     box-shadow:
-      inset 0 0 0 1px rgba(139, 121, 181, 0.12),
-      0 12px 28px rgba(78, 70, 48, 0.045);
-  }
-
-  .sales-flow-card-warm:hover,
-  .sales-flow-card-destination:hover {
-    box-shadow:
-      inset 0 0 0 1px rgba(88, 106, 143, 0.14),
-      0 12px 28px rgba(64, 54, 70, 0.045);
+      inset 0 1px 0 rgba(255, 255, 255, 0.58),
+      inset 0 0 0 1px rgba(201, 121, 43, 0.1),
+      0 18px 44px rgba(42, 33, 27, 0.07);
   }
 }
 
@@ -2056,6 +2086,218 @@ body {
 }
 
 @layer components {
+  .category-section {
+    border: 1px solid rgba(217, 119, 6, 0.24);
+    border-radius: 2rem;
+    background:
+      linear-gradient(135deg, rgba(255, 251, 235, 0.9), rgba(255, 255, 255, 0.96) 48%, rgba(255, 247, 237, 0.82));
+    box-shadow: 0 20px 45px rgba(42, 33, 27, 0.06);
+    padding: 1.5rem;
+  }
+
+  .category-card {
+    border: 1px solid #e4d8c8;
+    border-radius: 1.5rem;
+    background: rgba(255, 250, 241, 0.84);
+    color: #2a241d;
+    box-shadow: 0 1px 2px rgba(42, 33, 27, 0.035);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .category-badge {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid #e4d8c8;
+    border-radius: 9999px;
+    background: rgba(255, 250, 241, 0.78);
+    box-shadow: 0 1px 2px rgba(42, 33, 27, 0.03);
+    color: #5f5348;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.25rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .category-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4d8c8;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    color: #9a5b22;
+  }
+
+  .category-pill {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border: 1px solid #e4d8c8;
+    border-radius: 1rem;
+    background: rgba(255, 250, 241, 0.82);
+    box-shadow: 0 1px 2px rgba(42, 33, 27, 0.025);
+    color: #2a241d;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .sales-style-toc {
+    position: sticky;
+    top: 64px;
+    z-index: 30;
+    border: 1px solid rgba(228, 216, 200, 0.9);
+    border-radius: 1.5rem;
+    background: rgba(255, 250, 241, 0.88);
+    box-shadow: 0 14px 32px rgba(42, 33, 27, 0.07);
+    -webkit-backdrop-filter: blur(14px) saturate(1.08);
+    backdrop-filter: blur(14px) saturate(1.08);
+  }
+
+  .sales-style-sub-card {
+    display: flex;
+    min-height: 13.25rem;
+    flex-direction: column;
+    border: 1px solid #e4d8c8;
+    border-radius: 1.35rem;
+    background: rgba(255, 250, 241, 0.84);
+    box-shadow: 0 1px 2px rgba(42, 33, 27, 0.03);
+    color: #2a241d;
+    padding: 1rem;
+    transition:
+      background-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .sales-style-sub-card:hover {
+    background: rgba(255, 255, 255, 0.96);
+    transform: translateY(-1px);
+  }
+
+  .ssc-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .ssc-title {
+    font-weight: 900;
+    line-height: 2rem;
+  }
+
+  .ssc-badge {
+    flex-shrink: 0;
+    border: 1px solid #e4d8c8;
+    border-radius: 999px;
+    background: rgba(255, 250, 241, 0.82);
+    color: #7a4a22;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    line-height: 1rem;
+    padding: 0.125rem 0.5rem;
+  }
+
+  .ssc-stage {
+    margin-top: 0.75rem;
+    color: #766b60;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .ssc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    color: #7a4a22;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .sales-style-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid #e4d8c8;
+    border-radius: 1.5rem;
+    background: rgba(255, 250, 241, 0.72);
+  }
+
+  .sales-style-table :is(th, td) {
+    border-bottom: 1px solid #e4d8c8;
+    padding: 1rem;
+    text-align: right;
+    vertical-align: top;
+  }
+
+  .sales-style-table tr:last-child :is(th, td) {
+    border-bottom: 0;
+  }
+
+  .dark .category-section {
+    border-color: rgb(39 39 42 / 0.95);
+    background: linear-gradient(135deg, rgb(24 24 27 / 0.92), rgb(9 9 11 / 0.96), rgb(24 24 27 / 0.88));
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+  }
+
+  .dark .category-card,
+  .dark .category-pill {
+    border-color: rgb(39 39 42 / 0.95);
+    background: rgb(24 24 27 / 0.76);
+    color: rgb(244 244 245);
+  }
+
+  .dark .category-badge,
+  .dark .category-icon-box {
+    border-color: rgb(39 39 42 / 0.95);
+    background: rgb(255 255 255 / 0.1);
+    color: rgb(212 212 216);
+  }
+
+  .dark .sales-style-toc,
+  .dark .sales-style-sub-card,
+  .dark .sales-style-table {
+    border-color: rgb(39 39 42 / 0.95);
+    background: rgb(24 24 27 / 0.82);
+    color: rgb(244 244 245);
+  }
+
+  .dark .sales-style-sub-card:hover {
+    background: rgb(39 39 42 / 0.88);
+  }
+
+  .dark .ssc-badge {
+    border-color: rgb(39 39 42 / 0.95);
+    background: rgb(255 255 255 / 0.1);
+    color: rgb(212 212 216);
+  }
+
+  .dark .ssc-stage {
+    color: rgb(161 161 170);
+  }
+
+  .dark .ssc-link {
+    color: rgb(228 228 231);
+  }
+
+  .dark .sales-style-table :is(th, td) {
+    border-color: rgb(39 39 42 / 0.95);
+  }
+
+  @media (min-width: 768px) {
+    .category-section {
+      padding: 2.5rem;
+    }
+  }
+
   .home-sections {
     padding-bottom: calc(env(safe-area-inset-bottom) + 4.25rem);
   }

@@ -1,24 +1,51 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { AnswerBox } from "@/components/marketing/answer-box";
+import { CTABanner } from "@/components/category/CTABanner";
+import { FAQ } from "@/components/category/FAQ";
+import { Hero } from "@/components/category/Hero";
+import { HowWeHelp } from "@/components/category/HowWeHelp";
+import { RelatedStages } from "@/components/category/RelatedStages";
+import { SalesPathLink } from "@/components/category/SalesPathLink";
+import { ShortAnswer } from "@/components/category/ShortAnswer";
+import { StrategicAdvice } from "@/components/category/StrategicAdvice";
+import { SubcategoryGrid } from "@/components/category/SubcategoryGrid";
+import { TimingInsight } from "@/components/category/TimingInsight";
+import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
 import { StructuredData } from "@/components/marketing/structured-data";
 import {
-  FinalCTA,
-  GradientSection,
-  SupplierFAQ,
-} from "@/components/marketing/suppliers/shared";
+  getFaqItemsForCategory,
+  getMostCommonBuyStage,
+  getRelatedBuyStages,
+  getSaleMotionSummary,
+  getSaleTypeSplit,
+  getStrategicAdviceHighlights,
+} from "@/data/category-insights";
+import { CATEGORY_COPY } from "@/data/category-copy";
+import { CATEGORIES } from "@/data/categories";
+import { getCategoryBySlug } from "@/data/queries";
+import type { Category } from "@/data/types";
+import { CategoryLayout } from "@/layouts/CategoryLayout";
 import { absoluteUrl } from "@/lib/site-data";
-import {
-  getConstructionStages,
-  getParentCategories,
-  getParentCategoryBySlug,
-  salesMotions,
-} from "@/lib/supplier-pages-data";
+
+function getVisibleCategory(slug: string): Category | undefined {
+  const category = getCategoryBySlug(slug);
+
+  if (!category || category.excludeFromPages) {
+    return undefined;
+  }
+
+  return category;
+}
+
+function truncateDescription(text: string, limit = 155) {
+  return text.length <= limit ? text : `${text.slice(0, limit - 1).trim()}…`;
+}
 
 export function generateStaticParams() {
-  return getParentCategories().map((category) => ({ slug: category.slug }));
+  return CATEGORIES.filter((category) => !category.excludeFromPages).map(
+    (category) => ({ slug: category.slug }),
+  );
 }
 
 export async function generateMetadata({
@@ -27,171 +54,101 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const category = getParentCategoryBySlug(slug);
+  const category = getVisibleCategory(slug);
 
   if (!category) {
     return {};
   }
 
+  const copy = CATEGORY_COPY[category.slug];
+  const description = truncateDescription(copy.shortAnswer);
+  const canonicalPath = `/suppliers/${category.slug}/`;
+
   return {
-    title: `${category.name} | تأمین‌کنندگان ساختمانی`,
-    description: category.description,
-    alternates: { canonical: `/suppliers/${category.slug}` },
+    title: `${category.faTitle} | فروش پروژه‌محور با پرشین‌سازه`,
+    description,
+    alternates: { canonical: canonicalPath },
     openGraph: {
-      title: category.title,
-      description: category.description,
-      url: absoluteUrl(`/suppliers/${category.slug}`),
+      title: `${category.faTitle} برای پروژه‌های در حال ساخت`,
+      description,
+      url: absoluteUrl(canonicalPath),
       locale: "fa_IR",
       type: "article",
     },
   };
 }
 
-export default async function SupplierCategoryPage({
+export default async function CategoryPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const category = getParentCategoryBySlug(slug);
+  const category = getVisibleCategory(slug);
 
   if (!category) {
     notFound();
   }
 
-  const relatedStages = getConstructionStages().filter((stage) =>
-    category.stageSlugs.includes(stage.slug),
-  );
-  const motion = salesMotions[category.saleType];
-  const faqs = [
-    {
-      question: `بهترین زمان تماس برای ${category.name} چه زمانی است؟`,
-      answer: category.timingHint,
-    },
-    {
-      question: "اولویت‌بندی پروژه‌ها چگونه انجام شود؟",
-      answer:
-        "پروژه‌ها را با سه شاخص مرحله ساخت، مقیاس پروژه و کیفیت مسیر ارتباطی امتیازدهی کنید و پیگیری بعدی را در CRM ثبت کنید.",
-    },
-    {
-      question: "پرشین‌سازه برای این دسته فقط شماره تماس می‌دهد؟",
-      answer:
-        "خیر. ارزش اصلی در ترکیب داده پروژه، مرحله ساخت، موقعیت، فیلتر، CRM و پیگیری زمان‌مند است؛ شماره تماس فقط بخشی از مسیر اقدام است.",
-    },
-  ];
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "تأمین‌کنندگان",
-        item: absoluteUrl("/suppliers"),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: category.name,
-        item: absoluteUrl(`/suppliers/${category.slug}`),
-      },
-    ],
-  };
+  const copy = CATEGORY_COPY[category.slug];
+  const saleMotion = getSaleMotionSummary(category);
+  const split = getSaleTypeSplit(category);
+  const timingStage = getMostCommonBuyStage(category);
+  const relatedStages = getRelatedBuyStages(category);
+  const adviceHighlights = getStrategicAdviceHighlights(category);
+  const faqItems = getFaqItemsForCategory(category, copy.faqItems);
+  const shortAnswerQuestion = `چه زمانی پرشین‌سازه برای فروشندگان ${category.faTitle} ارزشمند است؟`;
+  const canonicalUrl = absoluteUrl(`/suppliers/${category.slug}/`);
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqItems.map((item) => ({
       "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
     })),
   };
 
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${category.faTitle} برای پروژه‌های در حال ساخت`,
+    url: canonicalUrl,
+    inLanguage: "fa-IR",
+    about: {
+      "@type": "Thing",
+      name: category.faTitle,
+    },
+  };
+
   return (
-    <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 md:px-6 md:py-16">
-      <StructuredData data={breadcrumb} />
-      <StructuredData data={faqSchema} />
-
-      <GradientSection>
-        <p className="text-sm font-bold text-muted-foreground">{motion.name}</p>
-        <h1 className="mt-3 text-4xl font-black md:text-6xl">{category.title}</h1>
-        <p className="mt-4 max-w-4xl leading-8 text-muted-foreground">
-          {category.description}
-        </p>
-        <div className="mt-6">
-          <AnswerBox>{category.answer}</AnswerBox>
-        </div>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">نمونه محصولات و کاربردها</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {category.examples.map((example) => (
-            <span
-              key={example}
-              className="rounded-full border border-white/70 bg-white/75 px-4 py-2 text-sm font-semibold"
-            >
-              {example}
-            </span>
-          ))}
-        </div>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">بینش زمان‌بندی این دسته</h2>
-        <p className="mt-3 leading-8 text-muted-foreground">{category.timingHint}</p>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">پرشین‌سازه چطور کمک می‌کند؟</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          {[
-            "شناسایی پروژه‌های فعال و مرتبط",
-            "اولویت‌بندی بر اساس مرحله ساخت",
-            "ثبت تاریخچه تماس و پیامک در CRM",
-            "تعریف پیگیری بعدی تا زمان مناسب خرید",
-          ].map((item) => (
-            <div key={item} className="rounded-3xl border bg-white/70 p-4">
-              {item}
-            </div>
-          ))}
-        </div>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">مسیر فروش مرتبط</h2>
-        <p className="mt-2 text-sm leading-7 text-muted-foreground">
-          {motion.description}
-        </p>
-        <Link
-          href={`/suppliers/motions/${category.saleType}`}
-          className="mt-4 inline-flex items-center gap-2 text-sm font-bold"
-        >
-          مشاهده مسیر فروش این دسته
-        </Link>
-      </GradientSection>
-
-      <GradientSection>
-        <h2 className="text-2xl font-black">مراحل ساخت مرتبط</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {relatedStages.map((stage) => (
-            <Link
-              className="rounded-full border border-white/70 bg-white/70 px-3 py-2 text-sm"
-              key={stage.slug}
-              href={`/stages/${stage.slug}`}
-            >
-              {stage.name}
-            </Link>
-          ))}
-        </div>
-      </GradientSection>
-
-      <SupplierFAQ items={faqs} />
-      <FinalCTA
-        title={`برای رشد فروش ${category.name} آماده‌اید؟`}
-        description="با یک جلسه دمو، پنجره زمانی و مسیر پیگیری اختصاصی همین دسته را طراحی کنید."
+    <CategoryLayout>
+      <StructuredData data={[faqSchema, webPageSchema]} />
+      <Breadcrumbs
+        items={[
+          { label: "خانه", href: "/" },
+          { label: "زمینه‌های کاری", href: "/suppliers/" },
+          {
+            label: category.faTitle,
+            href: `/suppliers/${category.slug}/`,
+          },
+        ]}
       />
-    </main>
+      <Hero category={category} saleMotion={saleMotion} subtitle={copy.heroSubtitle} />
+      <ShortAnswer question={shortAnswerQuestion} answer={copy.shortAnswer} />
+      <SubcategoryGrid split={split} />
+      <TimingInsight
+        category={category}
+        stage={timingStage}
+        override={copy.timingInsight}
+      />
+      <HowWeHelp />
+      <SalesPathLink motion={saleMotion.motion} />
+      <RelatedStages stages={relatedStages} />
+      <StrategicAdvice items={adviceHighlights} />
+      <FAQ items={faqItems} />
+      <CTABanner category={category} />
+    </CategoryLayout>
   );
 }

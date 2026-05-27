@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:categories": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/parse-excel.ts",
     "preview:cloudflare": "npm run build && npx wrangler pages dev out",
     "deploy:cloudflare": "npm run build && npx wrangler pages deploy out --project-name codex-marketing-website",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:data": "tsc -p tsconfig.data-test.json && node --test .data-test-cache/src/data/queries.test.js",
+    "typecheck": "tsc --noEmit"
   },
   "engines": {
     "node": ">=22"
@@ -33,6 +36,7 @@
     "playwright": "^1.60.0",
     "postcss": "8.5.14",
     "tailwindcss": "3.4.19",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "xlsx": "^0.18.5"
   }
 }

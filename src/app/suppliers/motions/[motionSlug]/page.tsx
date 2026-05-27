@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
 import { StructuredData } from "@/components/marketing/structured-data";
 import {
   FinalCTA,
@@ -83,30 +84,16 @@ export default async function SalesMotionPage({
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
     })),
   };
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "تأمین‌کنندگان",
-        item: absoluteUrl("/suppliers"),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: motion.name,
-        item: absoluteUrl(`/suppliers/motions/${motionSlug}`),
-      },
-    ],
-  };
-
   return (
     <main className="mx-auto max-w-6xl space-y-8 px-4 py-12 md:px-6">
-      <StructuredData data={breadcrumb} />
       <StructuredData data={faqSchema} />
+      <Breadcrumbs
+        items={[
+          { label: "خانه", href: "/" },
+          { label: "زمینه‌های کاری", href: "/suppliers/" },
+          { label: motion.name, href: `/suppliers/motions/${motionSlug}/` },
+        ]}
+      />
 
       <GradientSection>
         <p className="text-sm font-bold text-muted-foreground">مدل فروش</p>

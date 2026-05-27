@@ -1,2 +1,5 @@
-import { redirect } from "next/navigation";
-export default function Page(){redirect('/suppliers/motions/consultative-sales');}
+import { permanentRedirect } from "next/navigation";
+
+export default function LegacyConsultativeSalesPage() {
+  permanentRedirect("/sales-style/consultative/");
+}

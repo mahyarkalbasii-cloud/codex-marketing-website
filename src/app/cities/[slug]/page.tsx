@@ -9,7 +9,9 @@ import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { getStageByRouteSlug } from "@/data/stage-insights";
 import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
+import { getStageHref } from "@/lib/stage-routes";
 import { cn } from "@/lib/utils";
 
 type PageProps = {
@@ -51,6 +53,15 @@ export default async function CityPage({ params }: PageProps) {
   if (!city) {
     notFound();
   }
+
+  const importantStages = stages.slice(1, 5).map((stage) => {
+    const canonicalStage = getStageByRouteSlug(stage.slug).stage;
+
+    return {
+      ...stage,
+      href: canonicalStage ? getStageHref(canonicalStage) : `/stages/${stage.slug}/`,
+    };
+  });
 
   const schema = {
     "@context": "https://schema.org",
@@ -136,10 +147,10 @@ export default async function CityPage({ params }: PageProps) {
               <Target className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
               <h3 className="mt-5 text-xl font-bold">مراحل ساخت مهم</h3>
               <div className="mt-5 grid gap-3">
-                {stages.slice(1, 5).map((stage) => (
+                {importantStages.map((stage) => (
                   <Link
                     key={stage.slug}
-                    href={`/construction-stages/${stage.slug}`}
+                    href={stage.href}
                     className="flex items-center justify-between rounded-md border border-border bg-background px-4 py-3 text-sm hover:bg-muted"
                   >
                     {stage.name}

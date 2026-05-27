@@ -71,38 +71,26 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${site.url}/#organization`,
     name: site.name,
+    alternateName: "PersianSaze",
     url: site.url,
     logo: absoluteUrl(site.logoPath),
-    email: site.email,
-    telephone: "+982175425000",
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+982175425000",
-      contactType: "sales",
-      areaServed: "IR",
-      availableLanguage: ["fa", "en"],
-    },
-    sameAs: site.sameAs,
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: site.name,
-    url: site.url,
-    image: absoluteUrl(site.logoPath),
-    logo: absoluteUrl(site.logoPath),
-    telephone: "+982175425000",
+    description: "زیرساخت فروش پروژه‌محور برای تامین‌کنندگان صنعت ساختمان",
     email: site.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address,
+      streetAddress: "میدان شهید حسن تهرانی مقدم",
       addressLocality: "تهران",
       addressCountry: "IR",
     },
-    openingHours: site.openingHours,
-    priceRange: "$$",
+    contactPoint: [{
+      "@type": "ContactPoint",
+      telephone: "+98-21-75425000",
+      contactType: "sales",
+      areaServed: "IR",
+      availableLanguage: "Persian",
+    }],
     sameAs: site.sameAs,
   };
 
@@ -111,13 +99,15 @@ export default function RootLayout({
     "@type": "WebSite",
     name: site.name,
     url: site.url,
-    inLanguage: ["fa-IR", "en-US"],
+    inLanguage: "fa-IR",
+    publisher: { "@id": `${site.url}/#organization` },
   };
 
   return (
     <html
       lang="fa"
       dir="rtl"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
@@ -135,11 +125,11 @@ export default function RootLayout({
 })();`,
           }}
         />
+        <StructuredData data={[organizationSchema, websiteSchema]} />
       </head>
       <body
         className="flex flex-col overflow-hidden bg-background text-foreground antialiased [height:100dvh]"
       >
-        <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
         <SiteHeader />
         <div className="site-scroll-root min-h-0 flex-1 overflow-x-hidden overflow-y-auto pb-24 lg:pb-0">
           {children}

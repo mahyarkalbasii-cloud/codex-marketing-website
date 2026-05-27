@@ -1,2 +1,5 @@
-import { redirect } from "next/navigation";
-export default function Page(){redirect('/suppliers/motions/fast-sales');}
+import { permanentRedirect } from "next/navigation";
+
+export default function LegacyFastSalesPage() {
+  permanentRedirect("/sales-style/fast/");
+}
