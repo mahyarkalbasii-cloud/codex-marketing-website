@@ -1,0 +1,12 @@
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+
+export function SalesMotionCards({ items }: { items: { slug: string; title: string; text: string }[] }) {
+  return <section className="grid gap-4 md:grid-cols-3">{items.map((i)=><Card key={i.slug} className="rounded-3xl border-white/40 bg-white/60 p-6 shadow-sm"><h3 className="font-bold">{i.title}</h3><p className="mt-2 text-sm text-muted-foreground">{i.text}</p><Link className="mt-3 inline-block text-sm" href={`/suppliers/motions/${i.slug}`}>مشاهده مسیر</Link></Card>)}</section>;
+}
+export function SupplierCategoryFinder({ categories }: { categories: {slug:string;name:string;examples:string[]}[] }) { return <section className="rounded-3xl border bg-gradient-to-b from-amber-50 to-white p-6"><h2 className="text-2xl font-bold">Finder دسته تأمین‌کننده</h2><div className="mt-4 grid gap-3 md:grid-cols-2">{categories.slice(0,8).map(c=><Card key={c.slug} className="p-4"><p className="font-semibold">{c.name}</p><p className="text-xs text-muted-foreground">{c.examples.join("، ")}</p></Card>)}</div></section>; }
+export const SupplierTimingExplainer = ({ text }: { text: string }) => <Card className="rounded-3xl p-6"><h3 className="font-bold">Golden timing</h3><p className="mt-2 text-sm text-muted-foreground">{text}</p></Card>;
+export const ConstructionStageTimeline = ({stages}:{stages:{slug:string;name:string}[]}) => <div className="grid gap-3 md:grid-cols-4">{stages.map((s,idx)=><Card key={s.slug} className="p-4"><p className="text-xs text-muted-foreground">مرحله {idx+1}</p><p className="font-semibold">{s.name}</p></Card>)}</div>;
+export const SupplierWorkflow = ({steps}:{steps:string[]}) => <section><h2 className="text-2xl font-bold">Workflow فروش پروژه‌ای</h2><ol className="mt-4 grid gap-3">{steps.map((s,i)=><Card key={s} className="rounded-3xl p-4">{i+1}. {s}</Card>)}</ol></section>;
+export const SummaryCard = ({title,text}:{title:string;text:string}) => <Card className="rounded-3xl p-6"><h3 className="font-bold">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{text}</p></Card>;
+export const RelatedLinks = ({title,links}:{title:string;links:{href:string;label:string}[]}) => <Card className="rounded-3xl p-6"><h3 className="font-bold">{title}</h3><div className="mt-3 grid gap-2">{links.map(l=><Link key={l.href} className="rounded-xl border px-3 py-2 text-sm hover:bg-muted" href={l.href}>{l.label}</Link>)}</div></Card>;

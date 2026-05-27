@@ -1,0 +1,308 @@
+[
+  {
+    "slug": "cement-and-basic-materials",
+    "name": "مصالح پایه",
+    "title": "فروش مصالح پایه به پروژه‌های ساختمانی",
+    "description": "...",
+    "answer": "...",
+    "examples": [
+      "سیمان",
+      "آجر"
+    ],
+    "timingHint": "فونداسیون تا دیوارچینی",
+    "relatedMotionSlug": "early-awareness",
+    "stageSlugs": [
+      "foundation",
+      "structure",
+      "masonry"
+    ]
+  },
+  {
+    "slug": "rebar-steel",
+    "name": "rebar-steel",
+    "title": "فروش rebar-steel",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "concrete-chemicals",
+    "name": "concrete-chemicals",
+    "title": "فروش concrete-chemicals",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "mechanical-installations",
+    "name": "mechanical-installations",
+    "title": "فروش mechanical-installations",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "electrical-installations",
+    "name": "electrical-installations",
+    "title": "فروش electrical-installations",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "facade-and-cladding",
+    "name": "facade-and-cladding",
+    "title": "فروش facade-and-cladding",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "doors-windows",
+    "name": "doors-windows",
+    "title": "فروش doors-windows",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "elevator",
+    "name": "elevator",
+    "title": "فروش elevator",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "hvac",
+    "name": "hvac",
+    "title": "فروش hvac",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "sanitary",
+    "name": "sanitary",
+    "title": "فروش sanitary",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "tiles-ceramics",
+    "name": "tiles-ceramics",
+    "title": "فروش tiles-ceramics",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "paint-coatings",
+    "name": "paint-coatings",
+    "title": "فروش paint-coatings",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "flooring",
+    "name": "flooring",
+    "title": "فروش flooring",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "kitchen-cabinet",
+    "name": "kitchen-cabinet",
+    "title": "فروش kitchen-cabinet",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "lighting",
+    "name": "lighting",
+    "title": "فروش lighting",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "smart-home-security",
+    "name": "smart-home-security",
+    "title": "فروش smart-home-security",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  },
+  {
+    "slug": "services-contractors",
+    "name": "services-contractors",
+    "title": "فروش services-contractors",
+    "description": "توضیح دسته تأمین‌کننده.",
+    "answer": "پاسخ مستقیم برای این دسته.",
+    "examples": [
+      "نمونه ۱",
+      "نمونه ۲"
+    ],
+    "timingHint": "بازه زمانی مرتبط با این دسته.",
+    "relatedMotionSlug": "timing-based-followup",
+    "stageSlugs": [
+      "masonry",
+      "plaster",
+      "finishing"
+    ]
+  }
+]
