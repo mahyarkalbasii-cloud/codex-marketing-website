@@ -1,0 +1,11 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { FinalCTA, GradientSection, SupplierFAQ } from "@/components/marketing/suppliers/shared";
+import { StructuredData } from "@/components/marketing/structured-data";
+import { absoluteUrl } from "@/lib/site-data";
+const motions={"fast-sales":{name:"فروش سریع",desc:"مناسب محصولاتی که خریدشان نزدیک و تصمیم سریع است."},"consultative-sales":{name:"فروش مشاوره‌ای",desc:"برای محصولاتی که نیاز به معرفی فنی، اعتمادسازی و مذاکره چندمرحله‌ای دارند."},"hybrid-sales":{name:"فروش ترکیبی",desc:"ترکیب فرصت‌های سریع و مشاوره‌ای در یک تیم."}} as const;
+export function generateStaticParams(){return Object.keys(motions).map((motionSlug)=>({motionSlug}));}
+export async function generateMetadata({params}:{params:Promise<{motionSlug:string}>}):Promise<Metadata>{const {motionSlug}=await params; const m=motions[motionSlug as keyof typeof motions]; if(!m)return{}; return{title:`${m.name} | پرشین‌سازه`,description:m.desc,alternates:{canonical:`/suppliers/motions/${motionSlug}`},openGraph:{title:m.name,description:m.desc,url:absoluteUrl(`/suppliers/motions/${motionSlug}`)}}}
+export default async function Page({params}:{params:Promise<{motionSlug:string}>}){const {motionSlug}=await params; const m=motions[motionSlug as keyof typeof motions]; if(!m)notFound(); const faqs=[{question:"این مود برای چه تیمی مناسب است؟",answer:m.desc},{question:"گام بعدی چیست؟",answer:"فیلتر مرحله ساخت را بر اساس این مود تنظیم کنید و پیگیری‌ها را در CRM زمان‌بندی کنید."}];
+return <main className="mx-auto max-w-5xl space-y-8 px-4 py-12"><StructuredData data={{"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqs.map(f=>({"@type":"Question",name:f.question,acceptedAnswer:{"@type":"Answer",text:f.answer}}))}}/><GradientSection><h1 className="text-4xl font-black">{m.name}</h1><p className="mt-3 text-muted-foreground">{m.desc}</p><Link href="/suppliers" className="mt-4 inline-block">بازگشت به دسته‌بندی‌ها</Link></GradientSection><SupplierFAQ items={faqs}/><FinalCTA title="مود فروش تیم خود را نهایی کنید" description="با دمو، تنظیمات مود فروش و KPI پیگیری را متناسب با بازار خود دریافت کنید."/></main>}
