@@ -7,8 +7,7 @@ import { createPortal } from "react-dom";
 import { LogIn, Menu, PhoneCall, UserPlus, X } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { LanguageSwitcher } from "@/components/marketing/language-switcher";
-import { ThemeToggle } from "@/components/marketing/theme-toggle";
+import { HeaderPreferencesMenu } from "@/components/marketing/header-preferences-menu";
 import { getDirection, getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -131,8 +130,7 @@ export function MobileMenu() {
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-2">
-                <LanguageSwitcher className="h-11 min-w-11 rounded-2xl" />
-                <ThemeToggle className="h-11 w-11 rounded-2xl" />
+                <HeaderPreferencesMenu compact />
                 <button
                   ref={closeButtonRef}
                   type="button"

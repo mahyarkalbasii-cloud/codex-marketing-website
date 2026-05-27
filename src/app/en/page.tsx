@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   description:
     "PersianSaze helps construction suppliers discover active projects, filter by construction stage, and follow up through a project-based sales workflow.",
   alternates: {
-    canonical: "/en",
+    canonical: "/en/",
     languages: {
       fa: "/",
-      en: "/en",
+      en: "/en/",
     },
   },
   openGraph: {

@@ -13,6 +13,17 @@ export const metadata: Metadata = {
     absolute: "Login | PersianSaze",
   },
   description: "Login page for PersianSaze project-based sales users.",
+  alternates: {
+    canonical: "/en/login/",
+  },
+  openGraph: {
+    title: "Login | PersianSaze",
+    description: "Login page for PersianSaze project-based sales users.",
+    url: `${siteEn.url}/en/login/`,
+    siteName: siteEn.name,
+    locale: "en_US",
+    type: "website",
+  },
   robots: {
     index: false,
     follow: false,

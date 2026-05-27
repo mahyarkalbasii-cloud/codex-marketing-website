@@ -36,10 +36,9 @@ export const metadata: Metadata = {
     "داده پروژه ساختمانی",
   ],
   alternates: {
-    canonical: "/",
     languages: {
       fa: "/",
-      en: "/en",
+      en: "/en/",
     },
   },
   openGraph: {
@@ -49,6 +48,18 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "پرشین‌سازه | پروژه درست، زمان درست، پیگیری منظم‌تر",
     description: site.description,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "پرشین‌سازه | فروش پروژه‌محور برای بازار ساختمان",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/twitter-image.png"],
   },
   robots: {
     index: true,
@@ -105,7 +116,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="fa"
+      lang="fa-IR"
       dir="rtl"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
@@ -118,9 +129,15 @@ export default function RootLayout({
   try {
     const savedTheme = window.localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
-    document.documentElement.classList.toggle("dark", isDark);
-    document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+    const theme = savedTheme === "dark" || savedTheme === "light" || savedTheme === "a"
+      ? savedTheme
+      : prefersDark
+        ? "dark"
+        : "light";
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.classList.toggle("theme-a", theme === "a");
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme === "dark" ? "dark" : "light";
   } catch {}
 })();`,
           }}

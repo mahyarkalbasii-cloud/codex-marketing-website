@@ -7,7 +7,9 @@ import { Moon, Sun } from "lucide-react";
 import { getLocaleFromPathname } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "a";
+
+const themes: Theme[] = ["light", "dark", "a"];
 
 function getPreferredTheme(): Theme {
   if (typeof window === "undefined") {
@@ -16,7 +18,7 @@ function getPreferredTheme(): Theme {
 
   const savedTheme = window.localStorage.getItem("theme");
 
-  if (savedTheme === "dark" || savedTheme === "light") {
+  if (savedTheme === "dark" || savedTheme === "light" || savedTheme === "a") {
     return savedTheme;
   }
 
@@ -24,8 +26,12 @@ function getPreferredTheme(): Theme {
 }
 
 function applyTheme(theme: Theme) {
-  document.documentElement.classList.toggle("dark", theme === "dark");
-  document.documentElement.style.colorScheme = theme;
+  const root = document.documentElement;
+
+  root.classList.toggle("dark", theme === "dark");
+  root.classList.toggle("theme-a", theme === "a");
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme === "dark" ? "dark" : "light";
 }
 
 export function ThemeToggle({ className }: { className?: string }) {
@@ -38,41 +44,77 @@ export function ThemeToggle({ className }: { className?: string }) {
     applyTheme(nextTheme);
   }, []);
 
-  function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+  function selectTheme(nextTheme: Theme) {
     setTheme(nextTheme);
     applyTheme(nextTheme);
     window.localStorage.setItem("theme", nextTheme);
   }
 
-  const isDark = theme === "dark";
   const labels = locale === "fa"
     ? {
-        light: "فعال‌سازی تم روشن",
-        dark: "فعال‌سازی تم تاریک",
+        light: "تم روشن",
+        dark: "تم تاریک",
+        a: "تم A",
         lightTitle: "تم روشن",
         darkTitle: "تم تاریک",
+        aTitle: "تم A",
+        group: "انتخاب تم",
       }
     : {
-        light: "Switch to light theme",
-        dark: "Switch to dark theme",
+        light: "Light theme",
+        dark: "Dark theme",
+        a: "Theme A",
         lightTitle: "Light theme",
         darkTitle: "Dark theme",
+        aTitle: "Theme A",
+        group: "Theme selector",
       };
 
   return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      aria-label={isDark ? labels.light : labels.dark}
-      aria-pressed={isDark}
-      title={isDark ? labels.lightTitle : labels.darkTitle}
+    <div
+      role="group"
+      aria-label={labels.group}
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-950 transition hover:bg-zinc-50 active:translate-y-px dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900",
+        "theme-toggle-root inline-flex h-9 items-center gap-0.5 rounded-xl border border-zinc-200 bg-white p-0.5 text-zinc-950 shadow-sm shadow-[#2a241d]/[0.035] transition dark:border-zinc-800 dark:bg-zinc-950 dark:text-white",
         className,
       )}
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-    </button>
+      {themes.map((item) => {
+        const isSelected = theme === item;
+        const title = item === "light"
+          ? labels.lightTitle
+          : item === "dark"
+            ? labels.darkTitle
+            : labels.aTitle;
+        const ariaLabel = item === "light"
+          ? labels.light
+          : item === "dark"
+            ? labels.dark
+            : labels.a;
+
+        return (
+          <button
+            key={item}
+            type="button"
+            onClick={() => selectTheme(item)}
+            aria-label={ariaLabel}
+            aria-pressed={isSelected}
+            title={title}
+            data-active={isSelected}
+            className="theme-toggle-button inline-flex h-8 w-8 items-center justify-center rounded-[0.75rem] text-[#6f6254] transition hover:bg-[#f5eadb] hover:text-[#2a241d] active:translate-y-px data-[active=true]:bg-[#2a241d] data-[active=true]:text-[#fffaf1] dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white dark:data-[active=true]:bg-white dark:data-[active=true]:text-zinc-950"
+          >
+            {item === "light" ? (
+              <Sun className="h-4 w-4" aria-hidden="true" />
+            ) : item === "dark" ? (
+              <Moon className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <span className="theme-toggle-letter text-[13px] font-black leading-none">
+                A
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
   );
 }

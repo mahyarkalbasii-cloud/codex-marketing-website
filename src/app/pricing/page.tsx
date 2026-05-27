@@ -4,14 +4,30 @@ import { AnswerBox } from "@/components/marketing/answer-box";
 import { PricingTabs } from "@/components/marketing/pricing-tabs";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
-import { absoluteUrl, pricingGroups } from "@/lib/site-data";
+import { absoluteUrl, pricingGroups, site } from "@/lib/site-data";
+
+const canonicalPath = "/pricing/";
+const pageTitle = "قیمت‌گذاری پرشین‌سازه";
+const pageDescription =
+  "پلن‌های بنیان، رویان، تابان و تابان پلاس برای دسترسی به پروژه‌های ساختمانی بر اساس متراژ، مراحل ساخت و مدت اشتراک.";
 
 export const metadata: Metadata = {
-  title: "قیمت‌گذاری پرشین‌سازه",
-  description:
-    "پلن‌های بنیان، رویان، تابان و تابان پلاس برای دسترسی به پروژه‌های ساختمانی بر اساس متراژ، مراحل ساخت و مدت اشتراک.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
-    canonical: "/pricing",
+    canonical: canonicalPath,
+    languages: {
+      fa: canonicalPath,
+      en: "/en/pricing/",
+    },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: absoluteUrl(canonicalPath),
+    siteName: site.name,
+    locale: "fa_IR",
+    type: "website",
   },
 };
 
@@ -22,7 +38,7 @@ export default function PricingPage() {
     name: "اشتراک پرشین‌سازه",
     description:
       "اشتراک اطلاعات به‌روز پروژه‌های ساختمانی، نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار برای تأمین‌کنندگان صنعت ساختمان.",
-    url: absoluteUrl("/pricing"),
+    url: absoluteUrl(canonicalPath),
     offers: pricingGroups.flatMap((group) =>
       group.plans.map((plan) => ({
         "@type": "Offer",

@@ -5,18 +5,30 @@ import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { faqsEn, siteEn } from "@/lib/site-data.en";
 
+const canonicalPath = "/en/faq/";
+const pageTitle = "PersianSaze FAQ";
+const pageDescription =
+  "Answers to common questions about PersianSaze, project data, plan selection, AI, and current coverage in Tehran, Karaj, and Lavasan.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "PersianSaze FAQ",
+    absolute: pageTitle,
   },
-  description:
-    "Answers to common questions about PersianSaze, project data, plan selection, AI, and current coverage in Tehran, Karaj, and Lavasan.",
+  description: pageDescription,
   alternates: {
-    canonical: "/en/faq",
+    canonical: canonicalPath,
     languages: {
-      fa: "/faq",
-      en: "/en/faq",
+      fa: "/faq/",
+      en: canonicalPath,
     },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteEn.url}${canonicalPath}`,
+    siteName: siteEn.name,
+    locale: "en_US",
+    type: "website",
   },
 };
 
@@ -24,7 +36,7 @@ export default function EnglishFaqPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    url: `${siteEn.url}/en/faq`,
+    url: `${siteEn.url}${canonicalPath}`,
     mainEntity: faqsEn.map((item) => ({
       "@type": "Question",
       name: item.question,
