@@ -369,99 +369,99 @@ body {
 }
 
 .audience-stage-tone-apricot {
-  --solution-card-shell: #f6ece2;
-  --solution-card-visual: #efd8c7;
-  --solution-card-visual-soft: #fff4ea;
+  --solution-card-shell: #f4ede6;
+  --solution-card-visual: #eadfd5;
+  --solution-card-visual-soft: #fbf6ef;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(209, 158, 126, 0.34);
-  --solution-card-line: rgba(194, 124, 82, 0.16);
+  --solution-card-border: rgba(203, 169, 145, 0.25);
+  --solution-card-line: rgba(174, 126, 96, 0.11);
   --solution-card-ink: #171716;
   --solution-card-muted: #66584f;
-  --solution-card-accent: #c47a55;
+  --solution-card-accent: #aa755d;
 }
 
 .audience-stage-tone-sand {
-  --solution-card-shell: #f4ede1;
-  --solution-card-visual: #e9ddc2;
-  --solution-card-visual-soft: #fff7e8;
+  --solution-card-shell: #f2ede4;
+  --solution-card-visual: #e7decd;
+  --solution-card-visual-soft: #fbf6ed;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(202, 181, 144, 0.38);
-  --solution-card-line: rgba(158, 126, 83, 0.15);
+  --solution-card-border: rgba(197, 181, 153, 0.25);
+  --solution-card-line: rgba(151, 126, 88, 0.1);
   --solution-card-ink: #171716;
   --solution-card-muted: #5f584f;
-  --solution-card-accent: #9f7a52;
+  --solution-card-accent: #8f7659;
 }
 
 .audience-stage-tone-rose {
-  --solution-card-shell: #f6e9e7;
-  --solution-card-visual: #eccfca;
-  --solution-card-visual-soft: #fff2ef;
+  --solution-card-shell: #f3ebe7;
+  --solution-card-visual: #eadbd7;
+  --solution-card-visual-soft: #fbf3ef;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(204, 156, 149, 0.34);
-  --solution-card-line: rgba(173, 109, 86, 0.14);
+  --solution-card-border: rgba(198, 166, 159, 0.24);
+  --solution-card-line: rgba(160, 112, 96, 0.1);
   --solution-card-ink: #171716;
   --solution-card-muted: #625750;
-  --solution-card-accent: #b56e63;
+  --solution-card-accent: #9f7068;
 }
 
 .audience-stage-tone-sage {
-  --solution-card-shell: #edf4ec;
-  --solution-card-visual: #dcece2;
+  --solution-card-shell: #eef3ed;
+  --solution-card-visual: #e1ebe3;
   --solution-card-visual-soft: #fbf6ed;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(126, 161, 141, 0.28);
-  --solution-card-line: rgba(89, 132, 109, 0.14);
+  --solution-card-border: rgba(134, 161, 143, 0.2);
+  --solution-card-line: rgba(91, 129, 110, 0.09);
   --solution-card-ink: #171716;
   --solution-card-muted: #586258;
-  --solution-card-accent: #6d8d79;
+  --solution-card-accent: #748b7b;
 }
 
 .audience-stage-tone-honey {
-  --solution-card-shell: #f6f0da;
-  --solution-card-visual: #f0e5b5;
-  --solution-card-visual-soft: #fff9dd;
+  --solution-card-shell: #f4efe0;
+  --solution-card-visual: #e9e0c3;
+  --solution-card-visual-soft: #fbf6e8;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(209, 186, 99, 0.36);
-  --solution-card-line: rgba(174, 138, 47, 0.15);
+  --solution-card-border: rgba(198, 180, 120, 0.24);
+  --solution-card-line: rgba(151, 127, 64, 0.09);
   --solution-card-ink: #171716;
   --solution-card-muted: #605b4a;
-  --solution-card-accent: #aa843a;
+  --solution-card-accent: #907d58;
 }
 
 .audience-stage-tone-mint {
-  --solution-card-shell: #edf4ef;
-  --solution-card-visual: #d9eadf;
+  --solution-card-shell: #eef3ef;
+  --solution-card-visual: #e0e9e1;
   --solution-card-visual-soft: #fbf6ed;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(117, 156, 132, 0.28);
-  --solution-card-line: rgba(74, 130, 96, 0.14);
+  --solution-card-border: rgba(126, 156, 136, 0.2);
+  --solution-card-line: rgba(79, 126, 96, 0.09);
   --solution-card-ink: #171716;
   --solution-card-muted: #566258;
-  --solution-card-accent: #658b72;
+  --solution-card-accent: #718976;
 }
 
 .audience-stage-tone-clay {
-  --solution-card-shell: #f3e7de;
-  --solution-card-visual: #e7d1c4;
-  --solution-card-visual-soft: #fff2e8;
+  --solution-card-shell: #f2ebe4;
+  --solution-card-visual: #e7dad1;
+  --solution-card-visual-soft: #fbf3ed;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(199, 161, 138, 0.34);
-  --solution-card-line: rgba(165, 98, 68, 0.14);
+  --solution-card-border: rgba(194, 164, 145, 0.24);
+  --solution-card-line: rgba(153, 107, 82, 0.09);
   --solution-card-ink: #171716;
   --solution-card-muted: #62564f;
-  --solution-card-accent: #a66a52;
+  --solution-card-accent: #93705f;
 }
 
 .audience-stage-tone-sky {
-  --solution-card-shell: #eef4f5;
-  --solution-card-visual: #dce9f0;
+  --solution-card-shell: #eef3f3;
+  --solution-card-visual: #e0e8eb;
   --solution-card-visual-soft: #fbf6ed;
   --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(132, 161, 177, 0.28);
-  --solution-card-line: rgba(91, 128, 149, 0.14);
+  --solution-card-border: rgba(137, 160, 172, 0.2);
+  --solution-card-line: rgba(91, 127, 146, 0.09);
   --solution-card-ink: #171716;
   --solution-card-muted: #566063;
-  --solution-card-accent: #6d8d9e;
+  --solution-card-accent: #758a94;
 }
 
 .dark .audience-stage-tone-apricot,
@@ -484,7 +484,7 @@ body {
 }
 
 .audience-stage-card {
-  background: color-mix(in srgb, var(--solution-card-shell) 86%, #fffaf1);
+  background: color-mix(in srgb, var(--solution-card-shell) 78%, #fffaf1);
   border-color: var(--solution-card-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.62),
@@ -547,8 +547,8 @@ body {
   grid-template-rows: 4.75rem 1fr;
   min-height: 13.2rem;
   background:
-    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 68%, white), transparent 37%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 10%, transparent), transparent 34%),
+    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 54%, white), transparent 37%),
+    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 6%, transparent), transparent 34%),
     linear-gradient(145deg, var(--solution-card-visual-soft), var(--solution-card-visual));
   border-color: var(--solution-card-border);
 }
@@ -571,7 +571,7 @@ body {
   flex-direction: column;
   min-height: 14.9rem;
   background:
-    linear-gradient(180deg, color-mix(in srgb, rgb(242 235 225 / 0.62) 86%, var(--solution-card-visual) 14%), rgb(242 235 225 / 0.46));
+    linear-gradient(180deg, color-mix(in srgb, rgb(242 235 225 / 0.58) 92%, var(--solution-card-visual) 8%), rgb(242 235 225 / 0.42));
   border-color: var(--solution-card-border);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
 }
@@ -667,14 +667,49 @@ body {
 
 @media (max-width: 767px) {
   .audience-stage-deck {
-    --stage-card-step: calc(var(--stage-card-width) + 0.75rem);
-    --stage-card-width: min(21.5rem, 84vw);
-    min-height: 33.25rem;
+    display: grid;
+    gap: 1rem;
+    min-height: 0;
+    overflow: visible;
+    padding-block: 0.25rem 0;
   }
 
   .audience-stage-card,
   .audience-stage-card:hover {
-    transform: translateX(calc(-50% + var(--stage-card-x, 0px))) rotate(var(--stage-card-rotate, 0deg)) scale(var(--stage-card-scale, 1)) translateZ(0);
+    left: auto;
+    min-height: 0;
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    transform: none;
+    visibility: visible;
+    width: 100%;
+  }
+
+  .audience-stage-card-main {
+    grid-template-rows: auto 1fr;
+    min-height: 11rem;
+  }
+
+  .audience-stage-card h3 {
+    min-height: 0;
+  }
+
+  .audience-stage-fields-panel,
+  .audience-stage-fields-panel ul {
+    min-height: 0;
+  }
+
+  .audience-stage-controls {
+    display: none;
+  }
+
+  .solution-card-strip {
+    overflow: visible;
+  }
+
+  .solution-card {
+    min-height: 0;
   }
 }
 
@@ -4309,7 +4344,7 @@ html.theme-a #solution .solution-card-title {
 }
 
 html.theme-a #audiences .audience-stage-card {
-  background: color-mix(in srgb, var(--solution-card-shell) 86%, #fffaf1) !important;
+  background: color-mix(in srgb, var(--solution-card-shell) 78%, #fffaf1) !important;
   border-color: var(--solution-card-border) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.62),
@@ -4324,15 +4359,15 @@ html.theme-a #audiences .audience-stage-card:hover {
 
 html.theme-a #audiences .audience-stage-card-main {
   background:
-    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 68%, white), transparent 37%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 10%, transparent), transparent 34%),
+    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 54%, white), transparent 37%),
+    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 6%, transparent), transparent 34%),
     linear-gradient(145deg, var(--solution-card-visual-soft), var(--solution-card-visual)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
 html.theme-a #audiences .audience-stage-fields-panel {
   background:
-    linear-gradient(180deg, rgb(242 235 225 / 0.58), rgb(242 235 225 / 0.46)) !important;
+    linear-gradient(180deg, color-mix(in srgb, rgb(242 235 225 / 0.58) 92%, var(--solution-card-visual) 8%), rgb(242 235 225 / 0.42)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
