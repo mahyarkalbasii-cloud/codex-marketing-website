@@ -12,12 +12,15 @@ export type FAQItem = { question: string; answer: string };
 export function GradientSection({
   children,
   className,
+  id,
 }: {
   children: ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
     <section
+      id={id}
       className={cn(
         "rounded-[2rem] border border-amber-200/60 bg-gradient-to-br from-amber-50/90 via-white to-orange-50/80 p-6 shadow-xl shadow-amber-100/40 md:p-10 dark:border-zinc-800 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800",
         className,
