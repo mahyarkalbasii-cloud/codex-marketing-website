@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import {
   ArrowLeft,
   ChevronLeft,
@@ -735,15 +735,25 @@ const stageSummaries: Record<Locale, string[]> = {
 };
 
 const stageToneClasses = [
-  "solution-card-workflow",
-  "solution-card-data",
-  "solution-card-training",
-  "solution-card-workflow",
-  "solution-card-data",
-  "solution-card-training",
-  "solution-card-workflow",
-  "solution-card-data",
+  "audience-stage-tone-apricot",
+  "audience-stage-tone-sand",
+  "audience-stage-tone-rose",
+  "audience-stage-tone-sage",
+  "audience-stage-tone-honey",
+  "audience-stage-tone-mint",
+  "audience-stage-tone-clay",
+  "audience-stage-tone-sky",
 ] as const;
+
+const INITIAL_CENTER_STAGE_INDEX = 2;
+
+const stageOffsetClasses: Record<number, string> = {
+  "-2": "audience-stage-card-slot-before-far",
+  "-1": "audience-stage-card-slot-before-near",
+  0: "audience-stage-card-slot-center",
+  1: "audience-stage-card-slot-after-near",
+  2: "audience-stage-card-slot-after-far",
+};
 
 function SalesTypeCard({
   copy,
@@ -826,30 +836,57 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
   const localizedStages = locale === "fa" ? stages : stagesEn;
   const localizedSalesTypes = locale === "fa" ? salesTypes : salesTypesEn;
   const copy = audienceCopy[locale];
-  const stageTrackRef = useRef<HTMLDivElement>(null);
+  const [activeStageIndex, setActiveStageIndex] = useState(() =>
+    Math.min(INITIAL_CENTER_STAGE_INDEX, localizedStages.length - 1),
+  );
+  const totalStages = localizedStages.length;
+  const isRtl = copy.dir === "rtl";
 
-  function scrollStageCards(direction: "left" | "right") {
-    const track = stageTrackRef.current;
+  const circularStageOffsets = useMemo(
+    () =>
+      localizedStages.map((_, index) => {
+        let offset = index - activeStageIndex;
+        const half = totalStages / 2;
 
-    if (!track) {
-      return;
+        if (offset > half) {
+          offset -= totalStages;
+        }
+
+        if (offset < -half) {
+          offset += totalStages;
+        }
+
+        return offset;
+      }),
+    [activeStageIndex, localizedStages, totalStages],
+  );
+
+  const moveStageCards = useCallback(
+    (delta: number) => {
+      setActiveStageIndex((currentIndex) => (currentIndex + delta + totalStages) % totalStages);
+    },
+    [totalStages],
+  );
+
+  useEffect(() => {
+    setActiveStageIndex((currentIndex) => currentIndex % totalStages);
+  }, [totalStages]);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      return undefined;
     }
 
-    const distance = Math.max(track.clientWidth * 0.72, 280);
-    const signedDistance =
-      copy.dir === "rtl"
-        ? direction === "right"
-          ? -distance
-          : distance
-        : direction === "left"
-          ? -distance
-          : distance;
+    const autoAdvanceTimer = window.setInterval(() => {
+      moveStageCards(1);
+    }, 10000);
 
-    track.scrollBy({
-      left: signedDistance,
-      behavior: "smooth",
-    });
-  }
+    return () => {
+      window.clearInterval(autoAdvanceTimer);
+    };
+  }, [moveStageCards]);
 
   return (
     <div className="relative mt-8 grid gap-5 lg:mt-10">
@@ -866,12 +903,21 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
 
       <div className="audience-stage-carousel" dir={copy.dir}>
         <div
-          ref={stageTrackRef}
-          className="audience-stage-track"
+          className="audience-stage-deck"
           aria-label={copy.stageProductsLabel}
         >
           {localizedStages.map((stage, index) => {
             const visibleFields = stage.fields.slice(0, 4);
+            const stageOffset = circularStageOffsets[index] ?? 0;
+            const stageVisualOffset = isRtl ? -stageOffset : stageOffset;
+            const absoluteStageOffset = Math.abs(stageOffset);
+            const isVisibleStage = absoluteStageOffset <= 2;
+            const stageRotation =
+              stageVisualOffset === 0
+                ? "0deg"
+                : `${stageVisualOffset < 0 ? "-" : ""}${absoluteStageOffset === 1 ? 2.1 : 4.2}deg`;
+            const stageScale =
+              stageOffset === 0 ? 1 : absoluteStageOffset === 1 ? 0.965 : 0.915;
 
             return (
               <Link
@@ -880,15 +926,29 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
                 className={cn(
                   "audience-stage-card group flex min-h-[27rem] flex-col overflow-hidden rounded-[1.45rem] border p-3 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/35",
                   stageToneClasses[index % stageToneClasses.length],
+                  isVisibleStage ? "audience-stage-card-visible" : "audience-stage-card-hidden",
+                  stageOffsetClasses[stageVisualOffset],
+                  stageOffset === 0 && "audience-stage-card-center",
                   locale === "fa" ? "text-right" : "text-left",
                 )}
                 dir={copy.dir}
+                aria-hidden={!isVisibleStage}
+                aria-current={stageOffset === 0 ? "true" : undefined}
+                tabIndex={isVisibleStage ? undefined : -1}
+                style={
+                  {
+                    "--stage-abs-slot": absoluteStageOffset,
+                    "--stage-card-rotate": stageRotation,
+                    "--stage-card-scale": stageScale,
+                    "--stage-card-z": 20 - absoluteStageOffset,
+                  } as CSSProperties
+                }
               >
                 <div className="audience-stage-card-main relative flex flex-1 flex-col rounded-[1.12rem] border px-4 py-5">
-                  <h3 className="relative mt-auto max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
+                  <h3 className="relative max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
                     {stage.label}
                   </h3>
-                  <p className="relative mt-3 text-[13px] font-medium leading-7">
+                  <p className="relative text-[13px] font-medium leading-7">
                     {stageSummaries[locale][index]}
                   </p>
                 </div>
@@ -921,15 +981,15 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
         <div className="audience-stage-controls" dir="ltr">
           <button
             type="button"
-            aria-label={copy.previousStages}
-            onClick={() => scrollStageCards("left")}
+            aria-label={isRtl ? copy.nextStages : copy.previousStages}
+            onClick={() => moveStageCards(isRtl ? 1 : -1)}
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
           <button
             type="button"
-            aria-label={copy.nextStages}
-            onClick={() => scrollStageCards("right")}
+            aria-label={isRtl ? copy.previousStages : copy.nextStages}
+            onClick={() => moveStageCards(isRtl ? -1 : 1)}
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>
