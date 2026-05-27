@@ -11,18 +11,30 @@ import { Card } from "@/components/ui/card";
 import { siteEn } from "@/lib/site-data.en";
 import { cn } from "@/lib/utils";
 
+const canonicalPath = "/en/features/";
+const pageTitle = "PersianSaze features";
+const pageDescription =
+  "Project map, construction-stage filters, project-sales CRM, targeted messaging, and AI-assisted sales decisions in PersianSaze.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "PersianSaze features",
+    absolute: pageTitle,
   },
-  description:
-    "Project map, construction-stage filters, project-sales CRM, targeted messaging, and AI-assisted sales decisions in PersianSaze.",
+  description: pageDescription,
   alternates: {
-    canonical: "/en/features",
+    canonical: canonicalPath,
     languages: {
-      fa: "/features",
-      en: "/en/features",
+      fa: "/features/",
+      en: canonicalPath,
     },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteEn.url}${canonicalPath}`,
+    siteName: siteEn.name,
+    locale: "en_US",
+    type: "website",
   },
 };
 

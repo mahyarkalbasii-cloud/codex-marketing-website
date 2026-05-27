@@ -3,14 +3,30 @@ import type { Metadata } from "next";
 import { FaqList } from "@/components/marketing/faq-list";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
-import { absoluteUrl, faqs } from "@/lib/site-data";
+import { absoluteUrl, faqs, site } from "@/lib/site-data";
+
+const canonicalPath = "/faq/";
+const pageTitle = "سوالات متداول پرشین‌سازه";
+const pageDescription =
+  "پاسخ به سوالات رایج درباره پرشین‌سازه، تفاوت با بانک شماره، به‌روزرسانی داده، انتخاب پلن، AI و پوشش تهران، کرج و لواسان.";
 
 export const metadata: Metadata = {
-  title: "سوالات متداول پرشین‌سازه",
-  description:
-    "پاسخ به سوالات رایج درباره پرشین‌سازه، تفاوت با بانک شماره، به‌روزرسانی داده، انتخاب پلن، AI و پوشش تهران، کرج و لواسان.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
-    canonical: "/faq",
+    canonical: canonicalPath,
+    languages: {
+      fa: canonicalPath,
+      en: "/en/faq/",
+    },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: absoluteUrl(canonicalPath),
+    siteName: site.name,
+    locale: "fa_IR",
+    type: "website",
   },
 };
 
@@ -18,7 +34,7 @@ export default function FaqPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    url: absoluteUrl("/faq"),
+    url: absoluteUrl(canonicalPath),
     mainEntity: faqs.map((item) => ({
       "@type": "Question",
       name: item.question,

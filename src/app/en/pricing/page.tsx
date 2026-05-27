@@ -6,18 +6,30 @@ import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { pricingGroupsEn, siteEn } from "@/lib/site-data.en";
 
+const canonicalPath = "/en/pricing/";
+const pageTitle = "PersianSaze pricing";
+const pageDescription =
+  "Bonyan, Royan, Taban, and Taban Plus plans for accessing construction projects by land size, construction stages, and subscription duration.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "PersianSaze pricing",
+    absolute: pageTitle,
   },
-  description:
-    "Bonyan, Royan, Taban, and Taban Plus plans for accessing construction projects by land size, construction stages, and subscription duration.",
+  description: pageDescription,
   alternates: {
-    canonical: "/en/pricing",
+    canonical: canonicalPath,
     languages: {
-      fa: "/pricing",
-      en: "/en/pricing",
+      fa: "/pricing/",
+      en: canonicalPath,
     },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteEn.url}${canonicalPath}`,
+    siteName: siteEn.name,
+    locale: "en_US",
+    type: "website",
   },
 };
 
@@ -28,7 +40,7 @@ export default function EnglishPricingPage() {
     name: "PersianSaze subscription",
     description:
       "Updated construction-project data, map, filters, CRM, messaging, and AI-assisted sales decisions for construction suppliers.",
-    url: `${siteEn.url}/en/pricing`,
+    url: `${siteEn.url}${canonicalPath}`,
     offers: pricingGroupsEn.flatMap((group) =>
       group.plans.map((plan) => ({
         "@type": "Offer",

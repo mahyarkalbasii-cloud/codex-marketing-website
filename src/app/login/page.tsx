@@ -5,12 +5,23 @@ import { ArrowLeft, Building2, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { site } from "@/lib/site-data";
+import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "ورود به سامانه",
   description: "ورود کاربران پرشین‌سازه به سامانه فروش پروژه‌محور.",
+  alternates: {
+    canonical: "/login/",
+  },
+  openGraph: {
+    title: "ورود به سامانه پرشین‌سازه",
+    description: "ورود کاربران پرشین‌سازه به سامانه فروش پروژه‌محور.",
+    url: absoluteUrl("/login/"),
+    siteName: site.name,
+    locale: "fa_IR",
+    type: "website",
+  },
   robots: {
     index: false,
     follow: false,

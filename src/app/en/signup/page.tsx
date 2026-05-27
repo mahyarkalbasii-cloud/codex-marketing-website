@@ -14,6 +14,18 @@ export const metadata: Metadata = {
   },
   description:
     "Request PersianSaze access for suppliers of construction products and services.",
+  alternates: {
+    canonical: "/en/signup/",
+  },
+  openGraph: {
+    title: "Sign up and request access | PersianSaze",
+    description:
+      "Request PersianSaze access for suppliers of construction products and services.",
+    url: `${siteEn.url}/en/signup/`,
+    siteName: siteEn.name,
+    locale: "en_US",
+    type: "website",
+  },
   robots: {
     index: false,
     follow: false,

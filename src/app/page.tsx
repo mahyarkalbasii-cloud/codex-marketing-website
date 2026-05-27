@@ -4,16 +4,13 @@ import { Fragment } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
-  AlertCircle,
   CheckCircle2,
-  Clock3,
   Database,
   GraduationCap,
   Layers,
   MapPin,
   MapPinned,
   MessageSquareText,
-  Play,
   Route,
   Send,
   Sparkles,
@@ -41,6 +38,10 @@ export const metadata: Metadata = {
     "پرشین‌سازه پروژه‌های در حال ساخت در تهران، کرج و لواسان را جمع‌آوری و دسته‌بندی می‌کند تا تأمین‌کنندگان محصولات و خدمات ساختمانی سریع‌تر پروژه‌های مرتبط را بررسی و پیگیری کنند.",
   alternates: {
     canonical: "/",
+    languages: {
+      fa: "/",
+      en: "/en/",
+    },
   },
   openGraph: {
     title: "پرشین‌سازه | فروش پروژه‌محور برای بازار ساختمان",
@@ -59,33 +60,36 @@ export const metadata: Metadata = {
   },
 };
 
-const marketProblemRows = [
-  ["پروژه‌های پراکنده", "پیدا کردن فرصت مرتبط زمان‌بر است", AlertCircle],
-  ["اطلاعات نامطمئن", "مرحله ساخت و وضعیت فعالیت روشن نیست", Database],
-  ["زمان تماس نامناسب", "تماس زود یا دیر فرصت را فرسوده می‌کند", Clock3],
-] as const;
-
 const solutionCards = [
   {
-    eyebrow: "پایه",
-    title: "داده زنده پروژه‌های ساختمانی در حال ساخت",
-    body: "پروژه‌های در حال ساخت در تهران، کرج و لواسان به‌صورت میدانی جمع‌آوری و به‌روزرسانی می‌شوند. آدرس، مرحله ساخت، تصاویر واقعی و اطلاعات تماس در یک مسیر مشخص قابل بررسی است.",
-    icon: Database,
-    motif: "data",
-  },
-  {
-    eyebrow: "ابزار",
     title: "ابزار فروش و پیگیری پروژه‌محور",
-    body: "نقشه، فیلتر، CRM و پیامک هوشمند روی همان پروژه‌ها — برای پیگیری منظم و فروش نتیجه‌بخش.",
-    icon: MessageSquareText,
+    body: "نقشه، فیلتر، CRM و پیامک هوشمند کمک می‌کند تیم فروش فرصت‌ها را منظم‌تر ببیند، اولویت‌بندی کند و پیگیری را از دست ندهد.",
     motif: "workflow",
+    chips: [
+      { label: "فیلتر مرحله", icon: Layers },
+      { label: "CRM", icon: MessageSquareText },
+      { label: "پیگیری", icon: Send },
+    ],
   },
   {
-    eyebrow: "مهارت",
-    title: "آموزش فروش پروژه‌محور برای تیم شما",
-    body: "راهنمای متن تماس، روش پیگیری و نکات اجرایی برای استفاده درست از داده و ابزارها.",
-    icon: GraduationCap,
+    title: "داده زنده پروژه‌های ساختمانی",
+    body: "پروژه‌های فعال تهران، کرج و لواسان با آدرس، مرحله ساخت، تصویر و سرنخ تماس در یک نمای قابل بررسی جمع می‌شوند.",
+    motif: "data",
+    chips: [
+      { label: "به‌روزرسانی", icon: CheckCircle2 },
+      { label: "موقعیت پروژه", icon: MapPin },
+      { label: "مرحله ساخت", icon: Database },
+    ],
+  },
+  {
+    title: "آموزش فروش پروژه‌محور",
+    body: "تیم شما با متن تماس، سناریوی پیگیری و روش استفاده از داده‌ها یاد می‌گیرد در زمان درست و با زمینه روشن اقدام کند.",
     motif: "training",
+    chips: [
+      { label: "متن تماس", icon: MessageSquareText },
+      { label: "تمرین تیمی", icon: GraduationCap },
+      { label: "چک‌لیست", icon: CheckCircle2 },
+    ],
   },
 ] as const;
 
@@ -142,174 +146,65 @@ const salesFlowSteps = [
 ] as const;
 
 function SolutionCardMotif({
-  featured = false,
-  motif,
+  card,
 }: {
-  featured?: boolean;
-  motif: (typeof solutionCards)[number]["motif"];
+  card: (typeof solutionCards)[number];
 }) {
-  const illustrationClass = cn(
-    "solution-card-illustration rounded-[1.25rem] border border-[#E4D8C8] bg-[#FBF9F3]/70 px-4 py-2",
-    featured
-      ? "mt-6 h-[292px] md:mt-7 md:h-[340px] md:min-h-0 md:flex-none lg:h-[348px]"
-      : "mt-4 h-[132px] md:h-[112px] lg:h-[112px]",
-  );
-
-  if (motif === "data") {
-    const dataRows = [
-      { status: "به‌روز", tone: "clay", width: "w-[80%]" },
-      { status: "تأیید شده", tone: "dark", width: "w-[60%]" },
-      { status: "در حال بررسی", tone: "live", width: "w-[70%]" },
-      { status: "جدید", tone: "new", width: "w-[50%]" },
-      { status: "در حال پیگیری", tone: "follow", width: "w-[65%]" },
-    ] as const;
-
-    return (
-      <div
-        className={cn(illustrationClass, "solution-illustration-grid")}
-        aria-hidden="true"
-      >
-        <div className="grid h-full content-center gap-3">
-          {dataRows.map((row) => (
-            <div
-              key={row.status}
-              className="flex min-w-0 items-center gap-2 rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1]/88 px-3 py-2"
-            >
-              <span
-                className={cn(
-                  "inline-flex h-7 shrink-0 items-center whitespace-nowrap rounded-full border px-2.5 text-[11px] font-bold",
-                  row.tone === "clay" &&
-                    "border-[#C9792B]/35 bg-[#F6D6A8]/70 text-[#2A241D]",
-                  row.tone === "dark" &&
-                    "border-[#2A241D]/10 bg-[#2A241D] text-[#FFFAF1]",
-                  row.tone === "live" &&
-                    "solution-data-live border-[#E4D8C8] bg-[#FFFAF1] text-[#6F6254]",
-                  row.tone === "new" &&
-                    "border-[#C9792B]/35 bg-[#F6D6A8] text-[#2A241D]",
-                  row.tone === "follow" &&
-                    "border-[#E4D8C8] bg-[#FBF9F3] text-[#6F6254]",
-                )}
-              >
-                {row.status}
-              </span>
-              <span className="flex min-w-0 flex-1 justify-center">
-                <span className={cn("block h-2 rounded-full bg-[#D8C9B6]", row.width)} />
-              </span>
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#E4D8C8] bg-[#FBF9F3] text-[#7A6A59]">
-                <MapPin className="h-3.5 w-3.5" />
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (motif === "workflow") {
-    return (
-      <div
-        className={illustrationClass}
-        aria-hidden="true"
-      >
-        <div className="grid h-full grid-rows-[auto_1fr_auto] gap-2">
-          <div className="flex justify-center gap-1.5 text-[10px] font-bold text-[#6F6254]">
-            {["مرحله", "منطقه", "فروش"].map((chip, index) => (
-              <span
-                key={chip}
-                className={cn(
-                  "rounded-full border px-2 py-1",
-                  index === 1
-                    ? "solution-tool-highlight border-[#C9792B]/35 bg-[#F6D6A8] text-[#2A241D]"
-                    : "border-[#E4D8C8] bg-[#FFFAF1] text-[#7A6A59]",
-                )}
-              >
-                {chip}
-              </span>
-            ))}
-          </div>
-
-          <div className="solution-illustration-grid relative rounded-2xl border border-[#E4D8C8] bg-[#EDE6D7]/78">
-            <span className="absolute end-[24%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-[#2A241D] ring-4 ring-[#FFFAF1]/75" />
-            <span className="absolute start-[24%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-[#C9792B] ring-4 ring-[#FFFAF1]/75" />
-            <span className="absolute start-[28%] end-[28%] top-1/2 border-t border-dashed border-[#7A6A59]/35" />
-          </div>
-
-          <div className="flex items-center gap-2 rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1] px-3 py-2 shadow-sm shadow-[#2A241D]/[0.025]">
-            <MessageSquareText className="h-4 w-4 text-[#7A6A59]" />
-            <span className="h-2 flex-1 rounded-full bg-[#D8C9B6]" />
-            <span className="inline-flex items-center gap-1 rounded-full border border-[#C9792B]/30 bg-[#F6D6A8]/55 px-2 py-1 text-[10px] font-bold text-[#2A241D]">
-              <Send className="h-3 w-3" />
-              ارسال شد
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div
-      className={illustrationClass}
-      aria-hidden="true"
-    >
-      <div className={cn("grid h-full", featured ? "gap-2" : "gap-1.5")}>
-        {[
-          { duration: "۸ دقیقه", progress: true, done: false, width: "w-28" },
-          { duration: "۱۲ دقیقه", progress: false, done: true, width: "w-24" },
-          { duration: "۶ دقیقه", progress: false, done: false, width: "w-32" },
-        ].map((lesson) => (
-          <div
-            key={lesson.duration}
-            className={cn(
-              "rounded-2xl border border-[#E4D8C8] bg-[#FFFAF1]/88",
-              featured ? "px-3 py-2" : "flex min-w-0 items-center gap-2 px-2 py-0.5",
-            )}
-          >
-            <div className={cn("flex min-w-0 items-center gap-2", !featured && "contents")}>
+    <div className="solution-card-visual-frame relative overflow-hidden rounded-[1.15rem] p-4">
+      <div className="solution-card-orbit" aria-hidden="true" />
+      <div className="relative z-[1] flex h-full min-h-[15.5rem] flex-col justify-between">
+        <div className="relative my-auto min-h-[11rem]">
+          {card.chips.map((chip, chipIndex) => {
+            const ChipIcon = chip.icon;
+
+            return (
               <span
-                className={cn(
-                  "grid shrink-0 place-items-center rounded-full border border-[#E4D8C8] bg-[#FBF9F3] text-[#7A6A59]",
-                  featured ? "h-7 w-7" : "h-5 w-5",
-                )}
+                key={chip.label}
+                className="solution-card-chip solution-card-floating-chip"
+                data-chip-position={chipIndex}
               >
-                {lesson.done ? (
-                  <CheckCircle2 className={cn("text-[#2A241D]", featured ? "h-3.5 w-3.5" : "h-3 w-3")} />
-                ) : (
-                  <Play className={cn(featured ? "h-3.5 w-3.5" : "h-3 w-3")} />
-                )}
+                <ChipIcon className="h-3.5 w-3.5" />
+                {chip.label}
               </span>
-              <span
-                className={cn(
-                  "rounded-full bg-[#D8C9B6]",
-                  !featured && "solution-lesson-progress overflow-hidden",
-                  featured ? cn("h-2", lesson.width) : "h-1.5 flex-1",
-                )}
-              >
-                {!featured ? (
-                  <span
-                    className={cn(
-                      "block h-full origin-right rounded-full",
-                      lesson.progress ? "w-[58%] bg-[#C9792B]" : "w-[36%] bg-[#D8C9B6]",
-                    )}
-                  />
-                ) : null}
-              </span>
-              <span className="ms-auto shrink-0 text-[10px] font-bold text-[#7A6A59]">
-                {lesson.duration}
-              </span>
-            </div>
-            {featured ? (
-              <span className="solution-lesson-progress mt-2 block h-1.5 overflow-hidden rounded-full bg-[#E4D8C8]">
-                <span
-                  className={cn(
-                    "block h-full origin-right rounded-full",
-                    lesson.progress ? "w-[58%] bg-[#C9792B]" : "w-[36%] bg-[#D8C9B6]",
-                  )}
-                />
-              </span>
-            ) : null}
-          </div>
-        ))}
+            );
+          })}
+
+          <h3 className="solution-card-title absolute inset-x-2 top-1/2 text-center text-[1.58rem] font-semibold leading-[1.14] text-[#171716] md:text-[1.72rem]">
+            {card.title}
+          </h3>
+        </div>
+
+        <div
+          className={cn(
+            "solution-card-diagram",
+            card.motif === "data" && "solution-card-diagram-data",
+            card.motif === "workflow" && "solution-card-diagram-workflow",
+            card.motif === "training" && "solution-card-diagram-training",
+          )}
+        >
+          {card.motif === "data" ? (
+            <>
+              <span className="w-[78%]" />
+              <span className="w-[58%]" />
+              <span className="w-[68%]" />
+            </>
+          ) : null}
+          {card.motif === "workflow" ? (
+            <>
+              <span />
+              <span />
+              <span />
+            </>
+          ) : null}
+          {card.motif === "training" ? (
+            <>
+              <span className="solution-card-check" />
+              <span className="solution-card-check" />
+              <span className="solution-card-check" />
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -376,30 +271,9 @@ function MarketProblemSection() {
           </Link>
         </div>
 
-        <Card className="relative order-2 mx-auto flex w-full max-w-[620px] overflow-hidden border-[#f5dfc7] bg-[#FFF4E7]/90 p-0 shadow-lg shadow-[#2a241d]/[0.04] md:order-none lg:order-1 lg:aspect-[1.06/1] lg:max-h-[590px] lg:self-center">
+        <Card className="relative order-2 mx-auto flex w-full max-w-[620px] overflow-hidden border-[#f5dfc7] bg-[#FFF4E7]/90 p-0 shadow-lg shadow-[#2a241d]/[0.04] md:order-none lg:order-1 lg:aspect-[1.04/0.92] lg:max-h-[520px] lg:self-center">
           <article className="flex min-h-0 w-full flex-col" aria-label="نمای انتزاعی مشکل فروش در بازار ساختمان">
             <MarketProblemPresentationVisual />
-
-            <div className="grid gap-3 border-t border-[#f5dfc7] bg-[#fffaf1]/50 p-3 md:grid-cols-3">
-              {marketProblemRows.map(([project, problem, Icon]) => (
-                <div
-                  key={project}
-                  className="group flex items-center gap-2.5 rounded-2xl border border-white/60 bg-[linear-gradient(135deg,rgba(255,255,255,0.62),rgba(236,244,241,0.52))] p-3 shadow-sm shadow-[#2a241d]/[0.025] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-[#2F6F67]/25 hover:bg-white/60 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700"
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/60 text-[#2F6F67] shadow-sm dark:bg-zinc-900">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                      {project}
-                    </div>
-                    <div className="text-xs leading-5 text-zinc-500">
-                      {problem}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </article>
         </Card>
 
@@ -443,7 +317,7 @@ function SolutionOverviewSection() {
           </p>
         </header>
 
-        <div className="relative mt-10 grid gap-5 md:mt-12 md:min-h-[590px] md:grid-cols-[minmax(0,1.38fr)_minmax(0,1fr)] md:grid-rows-2 md:gap-5">
+        <div className="solution-card-strip -mx-4 mt-10 grid auto-cols-[82vw] grid-flow-col gap-4 overflow-x-auto px-4 pb-5 pt-2 snap-x snap-mandatory md:mx-0 md:mt-12 md:grid-flow-row md:auto-cols-auto md:grid-cols-3 md:items-start md:gap-5 md:overflow-visible md:px-0 md:pb-8 lg:gap-6">
           {solutionCards.map((card, index) => (
             <article
               key={card.title}
@@ -453,29 +327,28 @@ function SolutionOverviewSection() {
                 } as CSSProperties & Record<"--solution-delay", string>
               }
               className={cn(
-                "solution-card group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[#E4D8C8] bg-[#fffaf1] p-5 shadow-sm shadow-[#2a241d]/[0.025] dark:border-zinc-800 dark:bg-zinc-900/82",
+                "solution-card group relative flex min-h-[30rem] snap-center flex-col gap-3 overflow-hidden rounded-[1.45rem] border p-3 shadow-sm md:min-h-[34rem] md:p-3.5",
                 card.motif === "data" && "solution-card-data",
                 card.motif === "workflow" && "solution-card-workflow",
                 card.motif === "training" && "solution-card-training",
-                index === 0 && "md:row-span-2 md:p-6",
+                index === 0 && "md:mt-8 md:-rotate-2",
+                index === 1 && "order-first md:order-none md:scale-[1.03]",
+                index === 2 && "md:mt-8 md:rotate-2",
               )}
             >
-              <div className="flex items-center justify-between gap-3">
-                <span className="solution-card-eyebrow inline-flex items-center gap-1.5 rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254]">
-                  <card.icon className="h-3.5 w-3.5" />
-                  {card.eyebrow}
-                </span>
-                <span className="solution-card-icon grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#1B1916] text-[#CC785C]">
-                  <card.icon className="h-5 w-5" />
-                </span>
-              </div>
-              <h3 className="mt-5 text-xl font-bold leading-8 text-[#2a241d]">
-                {card.title}
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+              <SolutionCardMotif card={card} />
+              <div className="solution-card-copy-frame flex flex-1 flex-col justify-between rounded-[1.05rem] border p-4 text-right">
+                <p className="text-sm leading-7 text-[#4d4c49] md:text-[15px] md:leading-8">
                 {card.body}
-              </p>
-              <SolutionCardMotif featured={index === 0} motif={card.motif} />
+                </p>
+                <Link
+                  href="#how-it-works"
+                  className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#242321] transition hover:gap-3"
+                >
+                  جزئیات بیشتر
+                  <ArrowLeft className="h-4 w-4" />
+                </Link>
+              </div>
             </article>
           ))}
         </div>

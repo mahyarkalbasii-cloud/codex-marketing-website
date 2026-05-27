@@ -5,13 +5,25 @@ import { ArrowLeft, ClipboardList, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { site } from "@/lib/site-data";
+import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "ثبت‌نام و درخواست دسترسی",
   description:
     "ثبت درخواست دسترسی به پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی.",
+  alternates: {
+    canonical: "/signup/",
+  },
+  openGraph: {
+    title: "ثبت‌نام و درخواست دسترسی پرشین‌سازه",
+    description:
+      "ثبت درخواست دسترسی به پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی.",
+    url: absoluteUrl("/signup/"),
+    siteName: site.name,
+    locale: "fa_IR",
+    type: "website",
+  },
   robots: {
     index: false,
     follow: false,

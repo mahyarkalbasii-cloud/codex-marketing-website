@@ -8,15 +8,31 @@ import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { absoluteUrl } from "@/lib/site-data";
+import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
+const canonicalPath = "/features/";
+const pageTitle = "ویژگی‌های پرشین‌سازه";
+const pageDescription =
+  "نقشه پروژه‌ها، فیلتر مرحله ساخت، CRM فروش پروژه‌ای، پیامک هدفمند و AI تصمیم‌یار در پرشین‌سازه.";
+
 export const metadata: Metadata = {
-  title: "ویژگی‌های پرشین‌سازه",
-  description:
-    "نقشه پروژه‌ها، فیلتر مرحله ساخت، CRM فروش پروژه‌ای، پیامک هدفمند و AI تصمیم‌یار در پرشین‌سازه.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
-    canonical: "/features",
+    canonical: canonicalPath,
+    languages: {
+      fa: canonicalPath,
+      en: "/en/features/",
+    },
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: absoluteUrl(canonicalPath),
+    siteName: site.name,
+    locale: "fa_IR",
+    type: "website",
   },
 };
 

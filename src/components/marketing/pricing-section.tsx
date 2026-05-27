@@ -435,9 +435,9 @@ function PricingPlanCard({
       data-active-plan={isActive ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
-        "pricing-card flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
+        "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
-          ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10 xl:-translate-y-1"
+          ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
         isPulsing && "pricing-card-pulse",
       )}
@@ -453,16 +453,13 @@ function PricingPlanCard({
         {recommended ? (
           <span
             className={cn(
-              "absolute right-0 top-0 rounded-full border px-3 py-1 text-xs font-bold",
-              featured
-                ? "border-white/10 bg-white/12 text-[#fffaf1]"
-                : "border-[#e4d8c8] bg-[#fbf6ed] text-[#CC785C]",
+              "pricing-recommended-badge absolute right-0 top-0 z-10 rounded-full border border-[#d97757] bg-[#d97757] px-3 py-1 text-xs font-bold text-[#131314] shadow-sm shadow-[#d97757]/15",
             )}
           >
             {copy.recommended}
           </span>
         ) : null}
-        <h3 className={cn("relative text-2xl font-bold", recommended && "pt-8")}>
+        <h3 className="relative text-2xl font-bold">
           {plan.name}
         </h3>
       </div>
@@ -496,7 +493,7 @@ function PricingPlanCard({
 
       <div
         className={cn(
-          "space-y-3 text-sm font-semibold leading-7",
+          "pricing-highlights space-y-3 text-sm font-semibold leading-7 lg:min-h-[12rem]",
           locale === "fa" ? "text-right" : "text-left",
         )}
       >
@@ -536,7 +533,7 @@ function PricingPlanCard({
         rel="noopener noreferrer"
         className={cn(
           buttonVariants({ variant: featured ? "secondary" : "default" }),
-          "mt-auto w-full",
+          "pricing-plan-cta mt-auto w-full",
           featured &&
             "border-white bg-[#fffaf1] text-[#2a241d] hover:bg-[#f5eadb]",
         )}
