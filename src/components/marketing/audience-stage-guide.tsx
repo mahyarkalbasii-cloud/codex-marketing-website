@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { type CSSProperties } from "react";
+import { useRef, type CSSProperties } from "react";
 import {
   ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
   Handshake,
   Timer,
   type LucideIcon,
@@ -659,6 +661,8 @@ const audienceCopy = {
     execution: "مرحله مناسب اجرا",
     decisionSignal: "سیگنال تصمیم",
     followupNote: "نکته پیگیری",
+    nextStages: "نمایش مراحل بعدی",
+    previousStages: "نمایش مراحل قبلی",
     workAreas: "زمینه‌های مناسب این مرحله",
     dir: "rtl" as const,
   },
@@ -677,6 +681,8 @@ const audienceCopy = {
     execution: "Best execution stage",
     decisionSignal: "Decision signal",
     followupNote: "Follow-up note",
+    nextStages: "Show next stages",
+    previousStages: "Show previous stages",
     workAreas: "Relevant work areas",
     dir: "ltr" as const,
   },
@@ -728,18 +734,16 @@ const stageSummaries: Record<Locale, string[]> = {
   ],
 };
 
-const stageRotations = {
-  fa: ["1.6deg", "0.7deg", "-0.7deg", "-1.6deg"],
-  en: ["-1.6deg", "-0.7deg", "0.7deg", "1.6deg"],
-} as const;
-
-function stageCardStyle(stage: Stage, index: number, locale: Locale) {
-  return {
-    "--stage-accent": stage.color,
-    "--stage-soft": stage.soft,
-    "--stage-rotate": stageRotations[locale][index % stageRotations[locale].length],
-  } as CSSProperties & Record<"--stage-accent" | "--stage-soft" | "--stage-rotate", string>;
-}
+const stageToneClasses = [
+  "solution-card-workflow",
+  "solution-card-data",
+  "solution-card-training",
+  "solution-card-workflow",
+  "solution-card-data",
+  "solution-card-training",
+  "solution-card-workflow",
+  "solution-card-data",
+] as const;
 
 function SalesTypeCard({
   copy,
@@ -822,7 +826,30 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
   const localizedStages = locale === "fa" ? stages : stagesEn;
   const localizedSalesTypes = locale === "fa" ? salesTypes : salesTypesEn;
   const copy = audienceCopy[locale];
-  const numberLocale = locale === "fa" ? "fa-IR" : "en-US";
+  const stageTrackRef = useRef<HTMLDivElement>(null);
+
+  function scrollStageCards(direction: "left" | "right") {
+    const track = stageTrackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    const distance = Math.max(track.clientWidth * 0.72, 280);
+    const signedDistance =
+      copy.dir === "rtl"
+        ? direction === "right"
+          ? -distance
+          : distance
+        : direction === "left"
+          ? -distance
+          : distance;
+
+    track.scrollBy({
+      left: signedDistance,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <div className="relative mt-8 grid gap-5 lg:mt-10">
@@ -837,64 +864,76 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
         ))}
       </div>
 
-      <div
-        dir={copy.dir}
-        className={cn(
-          "audience-stage-grid grid gap-4 md:grid-cols-2 lg:grid-cols-4",
-          locale === "fa" ? "lg:[direction:rtl]" : "lg:[direction:ltr]",
-        )}
-      >
-        {localizedStages.map((stage, index) => {
-          const stageNumber = (index + 1).toLocaleString(numberLocale, {
-            minimumIntegerDigits: 2,
-          });
-          const visibleFields = stage.fields.slice(0, 4);
+      <div className="audience-stage-carousel" dir={copy.dir}>
+        <div
+          ref={stageTrackRef}
+          className="audience-stage-track"
+          aria-label={copy.stageProductsLabel}
+        >
+          {localizedStages.map((stage, index) => {
+            const visibleFields = stage.fields.slice(0, 4);
 
-          return (
-            <Link
-              key={stage.label}
-              href={stageRoutes[locale][index]}
-              className={cn(
-                "audience-stage-card group flex min-h-[27rem] flex-col overflow-hidden rounded-[1.45rem] border p-3 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/35",
-                locale === "fa" ? "text-right" : "text-left",
-              )}
-              style={stageCardStyle(stage, index, locale)}
-            >
-              <div className="audience-stage-card-main relative flex flex-1 flex-col rounded-[1.12rem] border px-4 py-5">
-                <span className="audience-stage-number" aria-hidden="true">
-                  {stageNumber}
-                </span>
-                <h3 className="relative mt-auto max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
-                  {stage.label}
-                </h3>
-                <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#5f574d] dark:text-zinc-300">
-                  {stageSummaries[locale][index]}
-                </p>
-              </div>
-
-              <div className="audience-stage-fields-panel mt-3 rounded-[1.05rem] border p-4">
-                <div className="text-[11px] font-black leading-5 text-[#8a6a4f] dark:text-zinc-300">
-                  {copy.workAreas}
+            return (
+              <Link
+                key={stage.label}
+                href={stageRoutes[locale][index]}
+                className={cn(
+                  "audience-stage-card group flex min-h-[27rem] flex-col overflow-hidden rounded-[1.45rem] border p-3 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/35",
+                  stageToneClasses[index % stageToneClasses.length],
+                  locale === "fa" ? "text-right" : "text-left",
+                )}
+                dir={copy.dir}
+              >
+                <div className="audience-stage-card-main relative flex flex-1 flex-col rounded-[1.12rem] border px-4 py-5">
+                  <h3 className="relative mt-auto max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
+                    {stage.label}
+                  </h3>
+                  <p className="relative mt-3 text-[13px] font-medium leading-7">
+                    {stageSummaries[locale][index]}
+                  </p>
                 </div>
-                <ul className="mt-3 grid gap-2">
-                  {visibleFields.map((field) => (
-                    <li
-                      key={field}
-                      className="audience-stage-field-row flex items-start gap-2 text-[12px] font-bold leading-6 text-[#3f3932] dark:text-zinc-200"
-                    >
-                      <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full" />
-                      <span>{field}</span>
-                    </li>
-                  ))}
-                </ul>
-                <span className="audience-stage-card-cta mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full text-sm font-black">
-                  {copy.more}
-                  <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-0.5" />
-                </span>
-              </div>
-            </Link>
-          );
-        })}
+
+                <div className="audience-stage-fields-panel mt-3 rounded-[1.05rem] border p-4">
+                  <div className="text-[11px] font-black leading-5">
+                    {copy.workAreas}
+                  </div>
+                  <ul className="mt-3 grid gap-2">
+                    {visibleFields.map((field) => (
+                      <li
+                        key={field}
+                        className="audience-stage-field-row flex items-start gap-2 text-[12px] font-bold leading-6"
+                      >
+                        <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full" />
+                        <span>{field}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="audience-stage-card-cta mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full text-sm font-black">
+                    {copy.more}
+                    <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="audience-stage-controls" dir="ltr">
+          <button
+            type="button"
+            aria-label={copy.previousStages}
+            onClick={() => scrollStageCards("left")}
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            aria-label={copy.nextStages}
+            onClick={() => scrollStageCards("right")}
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </div>
   );

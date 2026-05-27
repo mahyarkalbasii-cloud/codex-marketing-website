@@ -322,17 +322,69 @@ body {
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
 }
 
+.audience-stage-carousel {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.audience-stage-track {
+  display: grid;
+  grid-auto-columns: minmax(18.5rem, 21rem);
+  grid-auto-flow: column;
+  gap: 1rem;
+  margin-inline: -1rem;
+  overflow-x: auto;
+  padding: 0.5rem 1rem 1.25rem;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.audience-stage-track::-webkit-scrollbar {
+  display: none;
+}
+
+.audience-stage-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  padding-top: 0.35rem;
+}
+
+.audience-stage-controls button {
+  display: inline-grid;
+  height: 3rem;
+  width: 3rem;
+  place-items: center;
+  border: 1px solid rgba(216, 201, 182, 0.82);
+  border-radius: 999px;
+  background: rgba(255, 250, 241, 0.78);
+  color: #242321;
+  box-shadow: 0 10px 22px rgba(42, 33, 27, 0.045);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.audience-stage-controls button:hover {
+  border-color: rgba(201, 121, 43, 0.28);
+  background: rgba(255, 250, 241, 0.95);
+  transform: translateY(-1px);
+}
+
 .audience-stage-card {
-  --stage-warm-panel: rgba(245, 234, 219, 0.76);
-  background:
-    radial-gradient(circle at 88% 14%, color-mix(in srgb, var(--stage-soft) 62%, transparent), transparent 34%),
-    linear-gradient(180deg, rgba(255, 252, 246, 0.92), rgba(250, 244, 235, 0.88));
-  border-color: rgba(215, 197, 173, 0.72);
+  scroll-snap-align: center;
+  background: var(--solution-card-shell);
+  border-color: var(--solution-card-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.62),
     0 16px 38px rgba(42, 33, 27, 0.048);
-  color: #211c17;
-  transform: rotate(var(--stage-rotate, 0deg));
+  color: var(--solution-card-ink);
   transform-origin: 50% 100%;
 }
 
@@ -340,41 +392,39 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.7),
     0 22px 48px rgba(42, 33, 27, 0.075);
-  transform: rotate(var(--stage-rotate, 0deg)) translateY(-4px);
+  transform: translateY(-4px);
 }
 
 .audience-stage-card-main {
   min-height: 12.5rem;
-  background:
-    radial-gradient(circle at 16% 18%, color-mix(in srgb, var(--stage-soft) 70%, white), transparent 36%),
-    linear-gradient(145deg, rgba(255, 252, 246, 0.82), rgba(252, 248, 241, 0.68));
-  border-color: rgba(216, 201, 182, 0.78);
+  background: var(--solution-card-visual);
+  border-color: var(--solution-card-border);
 }
 
 .audience-stage-card h3 {
-  color: color-mix(in srgb, var(--stage-accent) 74%, #4a3427);
+  color: var(--solution-card-ink);
   letter-spacing: 0;
 }
 
-.audience-stage-number {
-  position: absolute;
-  inset-block-start: 1rem;
-  inset-inline-end: 1rem;
-  color: color-mix(in srgb, var(--stage-accent) 50%, #c8b69e);
-  font-size: 0.78rem;
-  font-weight: 900;
-  line-height: 1;
+.audience-stage-card-main p {
+  color: var(--solution-card-muted);
 }
 
 .audience-stage-fields-panel {
-  background:
-    linear-gradient(180deg, rgba(250, 240, 226, 0.82), rgba(244, 226, 206, 0.72)),
-    radial-gradient(circle at 10% 100%, rgba(201, 121, 43, 0.08), transparent 42%);
-  border-color: rgba(216, 196, 170, 0.78);
+  background: color-mix(in srgb, var(--solution-card-copy) 86%, white);
+  border-color: var(--solution-card-border);
+}
+
+.audience-stage-fields-panel > div {
+  color: var(--solution-card-muted);
+}
+
+.audience-stage-field-row {
+  color: var(--solution-card-ink);
 }
 
 .audience-stage-field-row > span:first-child {
-  background: color-mix(in srgb, var(--stage-accent) 62%, #d4b38f);
+  background: var(--solution-card-accent);
 }
 
 .audience-stage-card-cta {
@@ -385,6 +435,17 @@ body {
 
 .audience-stage-card-cta:hover {
   background: rgba(18, 16, 14, 0.96);
+}
+
+.dark .audience-stage-controls button {
+  border-color: rgba(232, 218, 198, 0.1);
+  background: rgba(24, 24, 27, 0.78);
+  color: #f4f4f1;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.dark .audience-stage-controls button:hover {
+  background: rgba(39, 39, 42, 0.9);
 }
 
 .audience-stage-rail,
@@ -412,39 +473,36 @@ body {
 }
 
 .dark .audience-stage-card {
-  --stage-warm-panel: rgba(45, 36, 29, 0.72);
-  background:
-    radial-gradient(circle at 88% 14%, color-mix(in srgb, var(--stage-accent) 16%, transparent), transparent 34%),
-    linear-gradient(180deg, rgba(32, 29, 26, 0.94), rgba(24, 22, 20, 0.94));
-  border-color: rgba(232, 218, 198, 0.12);
-  color: #f6f0e7;
+  background: var(--solution-card-shell);
+  border-color: var(--solution-card-border);
+  color: var(--solution-card-ink);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 16px 42px rgba(0, 0, 0, 0.22);
 }
 
 .dark .audience-stage-card-main {
-  background:
-    radial-gradient(circle at 16% 18%, color-mix(in srgb, var(--stage-accent) 18%, transparent), transparent 36%),
-    linear-gradient(145deg, rgba(39, 35, 31, 0.86), rgba(27, 25, 23, 0.78));
-  border-color: rgba(232, 218, 198, 0.1);
+  background: var(--solution-card-visual);
+  border-color: var(--solution-card-border);
 }
 
 .dark .audience-stage-card h3 {
-  color: color-mix(in srgb, var(--stage-soft) 72%, #f6f0e7);
+  color: var(--solution-card-ink);
 }
 
 .dark .audience-stage-fields-panel {
-  background:
-    linear-gradient(180deg, rgba(45, 36, 29, 0.82), rgba(35, 29, 24, 0.86)),
-    radial-gradient(circle at 10% 100%, color-mix(in srgb, var(--stage-accent) 18%, transparent), transparent 42%);
-  border-color: rgba(232, 218, 198, 0.1);
+  background: var(--solution-card-copy);
+  border-color: var(--solution-card-border);
 }
 
 @media (max-width: 767px) {
   .audience-stage-card,
   .audience-stage-card:hover {
     transform: none;
+  }
+
+  .audience-stage-track {
+    grid-auto-columns: minmax(20rem, 86vw);
   }
 }
 
