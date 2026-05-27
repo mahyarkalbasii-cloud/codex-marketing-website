@@ -1,11 +1,156 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FinalCTA, GradientSection, SupplierFAQ } from "@/components/marketing/suppliers/shared";
+
 import { StructuredData } from "@/components/marketing/structured-data";
+import {
+  FinalCTA,
+  GradientSection,
+  SupplierFAQ,
+} from "@/components/marketing/suppliers/shared";
 import { absoluteUrl } from "@/lib/site-data";
-const motions={"fast-sales":{name:"فروش سریع",desc:"مناسب محصولاتی که خریدشان نزدیک و تصمیم سریع است."},"consultative-sales":{name:"فروش مشاوره‌ای",desc:"برای محصولاتی که نیاز به معرفی فنی، اعتمادسازی و مذاکره چندمرحله‌ای دارند."},"hybrid-sales":{name:"فروش ترکیبی",desc:"ترکیب فرصت‌های سریع و مشاوره‌ای در یک تیم."}} as const;
-export function generateStaticParams(){return Object.keys(motions).map((motionSlug)=>({motionSlug}));}
-export async function generateMetadata({params}:{params:Promise<{motionSlug:string}>}):Promise<Metadata>{const {motionSlug}=await params; const m=motions[motionSlug as keyof typeof motions]; if(!m)return{}; return{title:`${m.name} | پرشین‌سازه`,description:m.desc,alternates:{canonical:`/suppliers/motions/${motionSlug}`},openGraph:{title:m.name,description:m.desc,url:absoluteUrl(`/suppliers/motions/${motionSlug}`)}}}
-export default async function Page({params}:{params:Promise<{motionSlug:string}>}){const {motionSlug}=await params; const m=motions[motionSlug as keyof typeof motions]; if(!m)notFound(); const faqs=[{question:"این مود برای چه تیمی مناسب است؟",answer:m.desc},{question:"گام بعدی چیست؟",answer:"فیلتر مرحله ساخت را بر اساس این مود تنظیم کنید و پیگیری‌ها را در CRM زمان‌بندی کنید."}];
-return <main className="mx-auto max-w-5xl space-y-8 px-4 py-12"><StructuredData data={{"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqs.map(f=>({"@type":"Question",name:f.question,acceptedAnswer:{"@type":"Answer",text:f.answer}}))}}/><GradientSection><h1 className="text-4xl font-black">{m.name}</h1><p className="mt-3 text-muted-foreground">{m.desc}</p><Link href="/suppliers" className="mt-4 inline-block">بازگشت به دسته‌بندی‌ها</Link></GradientSection><SupplierFAQ items={faqs}/><FinalCTA title="مود فروش تیم خود را نهایی کنید" description="با دمو، تنظیمات مود فروش و KPI پیگیری را متناسب با بازار خود دریافت کنید."/></main>}
+import {
+  getCategoriesBySaleType,
+  salesMotions,
+  type SaleType,
+} from "@/lib/supplier-pages-data";
+
+export function generateStaticParams() {
+  return Object.keys(salesMotions).map((motionSlug) => ({ motionSlug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ motionSlug: string }>;
+}): Promise<Metadata> {
+  const { motionSlug } = await params;
+  const motion = salesMotions[motionSlug as SaleType];
+
+  if (!motion) {
+    return {};
+  }
+
+  return {
+    title: `${motion.name} | پرشین‌سازه`,
+    description: motion.description,
+    alternates: { canonical: `/suppliers/motions/${motionSlug}` },
+    openGraph: {
+      title: motion.title,
+      description: motion.description,
+      url: absoluteUrl(`/suppliers/motions/${motionSlug}`),
+      locale: "fa_IR",
+      type: "article",
+    },
+  };
+}
+
+export default async function SalesMotionPage({
+  params,
+}: {
+  params: Promise<{ motionSlug: string }>;
+}) {
+  const { motionSlug } = await params;
+  const motion = salesMotions[motionSlug as SaleType];
+
+  if (!motion) {
+    notFound();
+  }
+
+  const categories = getCategoriesBySaleType(motionSlug as SaleType);
+  const faqs = [
+    {
+      question: "این مدل فروش برای چه تیمی مناسب است؟",
+      answer: motion.description,
+    },
+    {
+      question: "گام بعدی بعد از تشخیص مدل فروش چیست؟",
+      answer:
+        "باید مراحل ساخت مرتبط با دسته محصول را مشخص کنید و پروژه‌ها را بر اساس همان مرحله در CRM پیگیری کنید.",
+    },
+    {
+      question: "آیا همه دسته‌های یک مدل فروش زمان‌بندی یکسان دارند؟",
+      answer:
+        "خیر. مدل فروش جهت کلی را مشخص می‌کند، اما مرحله مذاکره، خرید و اجرا برای هر دسته محصول باید جداگانه بررسی شود.",
+    },
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "تأمین‌کنندگان",
+        item: absoluteUrl("/suppliers"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: motion.name,
+        item: absoluteUrl(`/suppliers/motions/${motionSlug}`),
+      },
+    ],
+  };
+
+  return (
+    <main className="mx-auto max-w-6xl space-y-8 px-4 py-12 md:px-6">
+      <StructuredData data={breadcrumb} />
+      <StructuredData data={faqSchema} />
+
+      <GradientSection>
+        <p className="text-sm font-bold text-muted-foreground">مدل فروش</p>
+        <h1 className="mt-3 text-4xl font-black md:text-6xl">{motion.title}</h1>
+        <p className="mt-4 max-w-3xl leading-8 text-muted-foreground">
+          {motion.description}
+        </p>
+        <Link href="/suppliers" className="mt-5 inline-block text-sm font-bold">
+          بازگشت به دسته‌بندی‌ها
+        </Link>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">دسته‌های مرتبط</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-2">
+          {categories.map((category) => (
+            <Link
+              key={category.slug}
+              href={`/suppliers/${category.slug}`}
+              className="rounded-3xl border bg-white/70 p-4"
+            >
+              <h3 className="font-bold">{category.name}</h3>
+              <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                {category.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">چطور از این مدل فروش استفاده کنیم؟</h2>
+        <p className="mt-3 leading-8 text-muted-foreground">
+          مدل فروش کمک می‌کند بدانید پروژه را باید برای اقدام فوری، مذاکره
+          زودهنگام یا پیگیری طولانی‌تر وارد CRM کنید. بعد از انتخاب مدل، دسته
+          محصول و مرحله ساخت را با هم بررسی کنید.
+        </p>
+      </GradientSection>
+
+      <SupplierFAQ items={faqs} />
+      <FinalCTA
+        title="مود فروش تیم خود را نهایی کنید"
+        description="با دمو، تنظیمات مدل فروش و KPI پیگیری را متناسب با بازار خود دریافت کنید."
+      />
+    </main>
+  );
+}
