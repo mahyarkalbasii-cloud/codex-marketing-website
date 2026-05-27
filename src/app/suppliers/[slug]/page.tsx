@@ -1,164 +1,197 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ClipboardList, MessageSquareText, Timer } from "lucide-react";
 
 import { AnswerBox } from "@/components/marketing/answer-box";
-import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
-import { cn } from "@/lib/utils";
-
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
+import {
+  FinalCTA,
+  GradientSection,
+  SupplierFAQ,
+} from "@/components/marketing/suppliers/shared";
+import { absoluteUrl } from "@/lib/site-data";
+import {
+  getConstructionStages,
+  getParentCategories,
+  getParentCategoryBySlug,
+  salesMotions,
+} from "@/lib/supplier-pages-data";
 
 export function generateStaticParams() {
-  return suppliers.map((supplier) => ({ slug: supplier.slug }));
+  return getParentCategories().map((category) => ({ slug: category.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
-  const supplier = suppliers.find((item) => item.slug === slug);
+  const category = getParentCategoryBySlug(slug);
 
-  if (!supplier) {
+  if (!category) {
     return {};
   }
 
   return {
-    title: supplier.title,
-    description: supplier.description,
-    alternates: {
-      canonical: `/suppliers/${supplier.slug}`,
-    },
+    title: `${category.name} | تأمین‌کنندگان ساختمانی`,
+    description: category.description,
+    alternates: { canonical: `/suppliers/${category.slug}` },
     openGraph: {
-      title: supplier.title,
-      description: supplier.description,
-      url: absoluteUrl(`/suppliers/${supplier.slug}`),
+      title: category.title,
+      description: category.description,
+      url: absoluteUrl(`/suppliers/${category.slug}`),
       locale: "fa_IR",
       type: "article",
     },
   };
 }
 
-export default async function SupplierPage({ params }: PageProps) {
+export default async function SupplierCategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const supplier = suppliers.find((item) => item.slug === slug);
+  const category = getParentCategoryBySlug(slug);
 
-  if (!supplier) {
+  if (!category) {
     notFound();
   }
 
-  const relatedStages = stages.filter((stage) => supplier.stages.includes(stage.name));
-  const schema = {
+  const relatedStages = getConstructionStages().filter((stage) =>
+    category.stageSlugs.includes(stage.slug),
+  );
+  const motion = salesMotions[category.saleType];
+  const faqs = [
+    {
+      question: `بهترین زمان تماس برای ${category.name} چه زمانی است؟`,
+      answer: category.timingHint,
+    },
+    {
+      question: "اولویت‌بندی پروژه‌ها چگونه انجام شود؟",
+      answer:
+        "پروژه‌ها را با سه شاخص مرحله ساخت، مقیاس پروژه و کیفیت مسیر ارتباطی امتیازدهی کنید و پیگیری بعدی را در CRM ثبت کنید.",
+    },
+    {
+      question: "پرشین‌سازه برای این دسته فقط شماره تماس می‌دهد؟",
+      answer:
+        "خیر. ارزش اصلی در ترکیب داده پروژه، مرحله ساخت، موقعیت، فیلتر، CRM و پیگیری زمان‌مند است؛ شماره تماس فقط بخشی از مسیر اقدام است.",
+    },
+  ];
+  const breadcrumb = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: supplier.title,
-    description: supplier.description,
-    url: absoluteUrl(`/suppliers/${supplier.slug}`),
-    inLanguage: "fa-IR",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "تأمین‌کنندگان",
+        item: absoluteUrl("/suppliers"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: category.name,
+        item: absoluteUrl(`/suppliers/${category.slug}`),
+      },
+    ],
+  };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 
   return (
-    <main>
-      <StructuredData data={schema} />
-      <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-        <Badge variant="signal">صفحه دسته فروش</Badge>
-        <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
-          {supplier.title}
-        </h1>
-        <p className="mt-5 max-w-3xl text-lg leading-9 text-muted-foreground">
-          {supplier.description}
+    <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 md:px-6 md:py-16">
+      <StructuredData data={breadcrumb} />
+      <StructuredData data={faqSchema} />
+
+      <GradientSection>
+        <p className="text-sm font-bold text-muted-foreground">{motion.name}</p>
+        <h1 className="mt-3 text-4xl font-black md:text-6xl">{category.title}</h1>
+        <p className="mt-4 max-w-4xl leading-8 text-muted-foreground">
+          {category.description}
         </p>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <Link href="/#demo" className={cn(buttonVariants({ size: "lg" }))}>
-            درخواست دمو
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/features"
-            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-          >
-            مشاهده ابزارها
-          </Link>
+        <div className="mt-6">
+          <AnswerBox>{category.answer}</AnswerBox>
         </div>
-        <div className="mt-10">
-          <AnswerBox>{supplier.answer}</AnswerBox>
-        </div>
-      </section>
+      </GradientSection>
 
-      <section className="border-y border-border bg-muted/35">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-          <SectionHeader
-            eyebrow={supplier.name}
-            title="برای این دسته، زمان رسیدن و کیفیت پیگیری مهم است."
-            description={`نمونه محصولات: ${supplier.products}`}
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {[
-              {
-                title: "مرحله مناسب را پیدا کنید",
-                text: "پروژه باید در مرحله‌ای باشد که ارتباط فروش برای محصول شما معنا داشته باشد.",
-                icon: Timer,
-              },
-              {
-                title: "فرصت را در CRM نگه دارید",
-                text: "نتیجه تماس، پیامک و پیگیری بعدی را ثبت کنید تا فرصت از بین نرود.",
-                icon: ClipboardList,
-              },
-              {
-                title: "ارتباط را با زمینه شروع کنید",
-                text: "پیام یا تماس باید با مرحله ساخت و نیاز احتمالی پروژه مرتبط باشد.",
-                icon: MessageSquareText,
-              },
-            ].map((item) => (
-              <Card key={item.title} className="p-6">
-                <item.icon className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
-                <h3 className="mt-5 text-xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-8 text-muted-foreground">
-                  {item.text}
-                </p>
-              </Card>
-            ))}
-          </div>
+      <GradientSection>
+        <h2 className="text-2xl font-black">نمونه محصولات و کاربردها</h2>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {category.examples.map((example) => (
+            <span
+              key={example}
+              className="rounded-full border border-white/70 bg-white/75 px-4 py-2 text-sm font-semibold"
+            >
+              {example}
+            </span>
+          ))}
         </div>
-      </section>
+      </GradientSection>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-16 md:grid-cols-2 md:px-6 md:py-24">
-        <Card className="p-6">
-          <h2 className="text-xl font-bold">مراحل ساخت مرتبط</h2>
-          <div className="mt-5 grid gap-3">
-            {relatedStages.map((stage) => (
-              <Link
-                key={stage.slug}
-                href={`/construction-stages/${stage.slug}`}
-                className="flex items-center justify-between rounded-md border border-border px-4 py-3 text-sm hover:bg-muted"
-              >
-                {stage.name}
-                <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-              </Link>
-            ))}
-          </div>
-        </Card>
-        <Card className="p-6">
-          <h2 className="text-xl font-bold">شهرهای قابل بررسی</h2>
-          <div className="mt-5 grid gap-3">
-            {cities.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/cities/${city.slug}`}
-                className="flex items-center justify-between rounded-md border border-border px-4 py-3 text-sm hover:bg-muted"
-              >
-                {city.name}
-                <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-              </Link>
-            ))}
-          </div>
-        </Card>
-      </section>
+      <GradientSection>
+        <h2 className="text-2xl font-black">بینش زمان‌بندی این دسته</h2>
+        <p className="mt-3 leading-8 text-muted-foreground">{category.timingHint}</p>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">پرشین‌سازه چطور کمک می‌کند؟</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-2">
+          {[
+            "شناسایی پروژه‌های فعال و مرتبط",
+            "اولویت‌بندی بر اساس مرحله ساخت",
+            "ثبت تاریخچه تماس و پیامک در CRM",
+            "تعریف پیگیری بعدی تا زمان مناسب خرید",
+          ].map((item) => (
+            <div key={item} className="rounded-3xl border bg-white/70 p-4">
+              {item}
+            </div>
+          ))}
+        </div>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">مسیر فروش مرتبط</h2>
+        <p className="mt-2 text-sm leading-7 text-muted-foreground">
+          {motion.description}
+        </p>
+        <Link
+          href={`/suppliers/motions/${category.saleType}`}
+          className="mt-4 inline-flex items-center gap-2 text-sm font-bold"
+        >
+          مشاهده مسیر فروش این دسته
+        </Link>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">مراحل ساخت مرتبط</h2>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {relatedStages.map((stage) => (
+            <Link
+              className="rounded-full border border-white/70 bg-white/70 px-3 py-2 text-sm"
+              key={stage.slug}
+              href={`/stages/${stage.slug}`}
+            >
+              {stage.name}
+            </Link>
+          ))}
+        </div>
+      </GradientSection>
+
+      <SupplierFAQ items={faqs} />
+      <FinalCTA
+        title={`برای رشد فروش ${category.name} آماده‌اید؟`}
+        description="با یک جلسه دمو، پنجره زمانی و مسیر پیگیری اختصاصی همین دسته را طراحی کنید."
+      />
     </main>
   );
 }
