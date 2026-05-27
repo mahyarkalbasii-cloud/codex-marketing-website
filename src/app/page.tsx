@@ -317,7 +317,7 @@ function SolutionOverviewSection() {
           </p>
         </header>
 
-        <div className="solution-card-strip -mx-4 mt-10 grid auto-cols-[82vw] grid-flow-col gap-4 overflow-x-auto px-4 pb-5 pt-2 snap-x snap-mandatory md:mx-0 md:mt-12 md:grid-flow-row md:auto-cols-auto md:grid-cols-3 md:items-start md:gap-5 md:overflow-visible md:px-0 md:pb-8 lg:gap-6">
+        <div className="solution-card-strip mt-10 grid grid-cols-1 gap-4 pb-5 pt-2 md:mt-12 md:grid-cols-3 md:items-start md:gap-5 md:pb-8 lg:gap-6">
           {solutionCards.map((card, index) => (
             <article
               key={card.title}
@@ -327,12 +327,12 @@ function SolutionOverviewSection() {
                 } as CSSProperties & Record<"--solution-delay", string>
               }
               className={cn(
-                "solution-card group relative flex min-h-[30rem] snap-center flex-col gap-3 overflow-hidden rounded-[1.45rem] border p-3 shadow-sm md:min-h-[34rem] md:p-3.5",
+                "solution-card group relative flex min-h-[30rem] flex-col gap-3 overflow-hidden rounded-[1.45rem] border p-3 shadow-sm md:min-h-[34rem] md:p-3.5",
                 card.motif === "data" && "solution-card-data",
                 card.motif === "workflow" && "solution-card-workflow",
                 card.motif === "training" && "solution-card-training",
                 index === 0 && "md:mt-8 md:-rotate-2",
-                index === 1 && "order-first md:order-none md:scale-[1.03]",
+                index === 1 && "md:scale-[1.03]",
                 index === 2 && "md:mt-8 md:rotate-2",
               )}
             >

@@ -839,6 +839,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
   const [activeStageIndex, setActiveStageIndex] = useState(() =>
     Math.min(INITIAL_CENTER_STAGE_INDEX, localizedStages.length - 1),
   );
+  const [isMobileStageLayout, setIsMobileStageLayout] = useState(false);
   const totalStages = localizedStages.length;
   const isRtl = copy.dir === "rtl";
 
@@ -873,9 +874,23 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
   }, [totalStages]);
 
   useEffect(() => {
+    const mobileLayoutQuery = window.matchMedia("(max-width: 767px)");
+    const syncMobileStageLayout = () => {
+      setIsMobileStageLayout(mobileLayoutQuery.matches);
+    };
+
+    syncMobileStageLayout();
+    mobileLayoutQuery.addEventListener("change", syncMobileStageLayout);
+
+    return () => {
+      mobileLayoutQuery.removeEventListener("change", syncMobileStageLayout);
+    };
+  }, []);
+
+  useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isMobileStageLayout) {
       return undefined;
     }
 
@@ -886,7 +901,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
     return () => {
       window.clearInterval(autoAdvanceTimer);
     };
-  }, [moveStageCards]);
+  }, [isMobileStageLayout, moveStageCards]);
 
   return (
     <div className="relative mt-8 grid gap-5 lg:mt-10">
@@ -911,7 +926,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
             const stageOffset = circularStageOffsets[index] ?? 0;
             const stageVisualOffset = isRtl ? -stageOffset : stageOffset;
             const absoluteStageOffset = Math.abs(stageOffset);
-            const isVisibleStage = absoluteStageOffset <= 2;
+            const isVisibleStage = isMobileStageLayout || absoluteStageOffset <= 2;
             const stageRotation =
               stageVisualOffset === 0
                 ? "0deg"
@@ -927,8 +942,8 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
                   "audience-stage-card group flex min-h-[27rem] flex-col overflow-hidden rounded-[1.45rem] border p-3 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/35",
                   stageToneClasses[index % stageToneClasses.length],
                   isVisibleStage ? "audience-stage-card-visible" : "audience-stage-card-hidden",
-                  stageOffsetClasses[stageVisualOffset],
-                  stageOffset === 0 && "audience-stage-card-center",
+                  !isMobileStageLayout && stageOffsetClasses[stageVisualOffset],
+                  !isMobileStageLayout && stageOffset === 0 && "audience-stage-card-center",
                   locale === "fa" ? "text-right" : "text-left",
                 )}
                 dir={copy.dir}
