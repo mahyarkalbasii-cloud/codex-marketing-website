@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import Link from "next/link";
+import { type CSSProperties } from "react";
 import {
   ArrowLeft,
-  CircleDot,
-  Compass,
   Handshake,
-  Layers3,
   Timer,
   type LucideIcon,
 } from "lucide-react";
@@ -14,7 +12,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import type { Locale } from "@/lib/i18n";
-import { salesTaxonomyMeta, taxonomyStageInsights } from "@/lib/sales-taxonomy";
 import { cn } from "@/lib/utils";
 
 type SalesKind = "fast" | "consultative";
@@ -662,6 +659,7 @@ const audienceCopy = {
     execution: "مرحله مناسب اجرا",
     decisionSignal: "سیگنال تصمیم",
     followupNote: "نکته پیگیری",
+    workAreas: "زمینه‌های مناسب این مرحله",
     dir: "rtl" as const,
   },
   en: {
@@ -679,9 +677,69 @@ const audienceCopy = {
     execution: "Best execution stage",
     decisionSignal: "Decision signal",
     followupNote: "Follow-up note",
+    workAreas: "Relevant work areas",
     dir: "ltr" as const,
   },
 };
+
+const stageRoutes: Record<Locale, string[]> = {
+  fa: [
+    "/stages/demolition/",
+    "/stages/foundation/",
+    "/stages/structure/",
+    "/stages/wall-building/",
+    "/stages/plaster/",
+    "/stages/early-finishing/",
+    "/stages/finishing/",
+    "/stages/completion/",
+  ],
+  en: [
+    "/en/construction-stages/demolition-excavation/",
+    "/en/construction-stages/foundation/",
+    "/en/construction-stages/structure/",
+    "/en/construction-stages/masonry/",
+    "/en/construction-stages/plaster/",
+    "/en/construction-stages/early-finishing/",
+    "/en/construction-stages/finishing/",
+    "/en/construction-stages/final-work/",
+  ],
+};
+
+const stageSummaries: Record<Locale, string[]> = {
+  fa: [
+    "شروع عملیات اجرایی و بهترین زمان رصد پروژه برای خدمات اولیه، ایمنی و آماده‌سازی کارگاه.",
+    "نیازهای سازه‌ای جدی می‌شود و تأمین بتن، فولاد، قالب و خدمات فنی به زمان‌بندی دقیق وابسته است.",
+    "تصمیم‌های سنگین سازه‌ای و هماهنگی تأمین‌کننده‌ها شکل می‌گیرد؛ تأخیر مستقیم روی سرعت پروژه اثر دارد.",
+    "فضاها و بازشوها تثبیت می‌شوند و فروشندگان مصالح، تأسیسات، در و پنجره می‌توانند وارد گفت‌وگو شوند.",
+    "پل بین سفت‌کاری و نازک‌کاری است؛ زیرساخت‌های پنهان، پوشش‌ها و تصمیم‌های داخلی جدی‌تر می‌شوند.",
+    "چند خرید هم‌زمان باز می‌شود و فروشندگان نما، آسانسور، کف‌سازی و تجهیزات داخلی باید فعال باشند.",
+    "نیازها روشن‌تر شده‌اند و نمونه، موجودی و سرعت اجرا برای فروش محصولات تکمیلی تعیین‌کننده است.",
+    "پروژه به تحویل نزدیک می‌شود و خدمات تکمیلی، نگهداری، نورپردازی و رفع نقص اهمیت بیشتری پیدا می‌کند.",
+  ],
+  en: [
+    "The site becomes active, making it the right moment to track early services, safety, and setup needs.",
+    "Structural needs become serious, with concrete, steel, formwork, and testing tied to tight timing.",
+    "Heavy structural decisions and supplier coordination start shaping the project's execution pace.",
+    "Spaces and openings are fixed, creating entry points for materials, MEP, doors, windows, and facade.",
+    "The bridge from shell work to finishing, when hidden systems and interior decisions become urgent.",
+    "Several purchases open at once, making facade, elevators, floor prep, and interior equipment active.",
+    "Needs are clearer, and samples, availability, and execution speed matter for final product decisions.",
+    "The project moves toward handover, where completion services, lighting, maintenance, and fixes matter.",
+  ],
+};
+
+const stageRotations = {
+  fa: ["1.6deg", "0.7deg", "-0.7deg", "-1.6deg"],
+  en: ["-1.6deg", "-0.7deg", "0.7deg", "1.6deg"],
+} as const;
+
+function stageCardStyle(stage: Stage, index: number, locale: Locale) {
+  return {
+    "--stage-accent": stage.color,
+    "--stage-soft": stage.soft,
+    "--stage-rotate": stageRotations[locale][index % stageRotations[locale].length],
+  } as CSSProperties & Record<"--stage-accent" | "--stage-soft" | "--stage-rotate", string>;
+}
 
 function SalesTypeCard({
   copy,
@@ -765,30 +823,6 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
   const localizedSalesTypes = locale === "fa" ? salesTypes : salesTypesEn;
   const copy = audienceCopy[locale];
   const numberLocale = locale === "fa" ? "fa-IR" : "en-US";
-  const [activeIndex, setActiveIndex] = useState(6);
-  const activeStage = localizedStages[activeIndex];
-  const activeTaxonomy =
-    locale === "fa" ? taxonomyStageInsights[activeStage.label] : undefined;
-  const matchedRowsLabel = activeTaxonomy?.matchedRows.toLocaleString(numberLocale);
-  const totalRowsLabel = salesTaxonomyMeta.totalRows.toLocaleString(numberLocale);
-  const activeFields = activeTaxonomy?.exampleFields ?? activeStage.fields;
-  const signalCards = activeTaxonomy
-    ? [
-        {
-          label: salesTaxonomyMeta.strategicColumnTitle,
-          text: activeTaxonomy.strategicFactors,
-          Icon: Layers3,
-          color: activeStage.color,
-          soft: activeStage.soft,
-        },
-      ]
-    : activeStage.signals.map((signal, index) => ({
-        label: index % 2 === 0 ? copy.decisionSignal : copy.followupNote,
-        text: signal,
-        Icon: index % 2 === 0 ? Compass : Layers3,
-        color: index % 2 === 0 ? activeStage.color : "#C9792B",
-        soft: index % 2 === 0 ? activeStage.soft : "#F6D6A8",
-      }));
 
   return (
     <div className="relative mt-8 grid gap-5 lg:mt-10">
@@ -803,183 +837,65 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
         ))}
       </div>
 
-      <Card
+      <div
         dir={copy.dir}
         className={cn(
-          "audience-stage-card relative h-full overflow-hidden p-4 md:p-5 lg:min-h-[33rem]",
+          "audience-stage-grid grid gap-4 md:grid-cols-2 lg:grid-cols-4",
           locale === "fa" ? "lg:[direction:rtl]" : "lg:[direction:ltr]",
         )}
       >
-        <div
-          className="pointer-events-none absolute -right-16 top-10 h-40 w-40 rounded-full blur-3xl"
-          style={{ backgroundColor: activeStage.soft, opacity: 0.54 }}
-          aria-hidden="true"
-        />
-        <div className="relative grid gap-5 md:grid-cols-[11.5rem_minmax(0,1fr)] md:[direction:ltr]">
-          <div className="audience-stage-rail relative rounded-[1.25rem] border border-[#e4d8c8] bg-[#faf9f6]/78 px-3 py-3 dark:border-zinc-800 dark:bg-zinc-950 md:min-h-[24.5rem] md:[direction:ltr]">
-            <div
-              className="pointer-events-none absolute bottom-8 left-5 top-8 w-px rounded-full bg-[#d8c9b6]"
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid h-full gap-1">
-              {localizedStages.map((stage, index) => {
-                const active = index === activeIndex;
+        {localizedStages.map((stage, index) => {
+          const stageNumber = (index + 1).toLocaleString(numberLocale, {
+            minimumIntegerDigits: 2,
+          });
+          const visibleFields = stage.fields.slice(0, 4);
 
-                return (
-                  <button
-                    key={stage.label}
-                    type="button"
-                    data-stage-option={stage.label}
-                    onClick={() => setActiveIndex(index)}
-                    onFocus={() => setActiveIndex(index)}
-                    aria-pressed={active}
-                    className={cn(
-                      "grid h-10 grid-cols-[2rem_1fr] items-center gap-2 rounded-2xl px-1.5 py-0.5 transition-[background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30",
-                      locale === "fa" ? "text-right" : "text-left",
-                      active
-                        ? "bg-white shadow-sm shadow-[#2a241d]/[0.04] dark:bg-zinc-900"
-                        : "hover:bg-white/70 dark:hover:bg-zinc-900/70",
-                    )}
-                  >
-                    <span className="relative mx-auto grid h-8 w-8 place-items-center">
-                      <span
-                        className={cn(
-                          "absolute inset-0 rounded-full border transition-[background-color,border-color,box-shadow,transform] duration-200",
-                          active
-                            ? "scale-100 border-[#fffaf1] shadow-lg dark:border-zinc-950"
-                            : "scale-[0.38] border-[#d8c9b6] shadow-none",
-                        )}
-                        style={{ backgroundColor: active ? stage.color : "#fffaf1" }}
-                      />
-                      <span
-                        className={cn(
-                          "relative h-2.5 w-2.5 rounded-full transition-[background-color,transform] duration-200",
-                          active ? "scale-100 bg-white" : "scale-0 bg-transparent",
-                        )}
-                      />
-                    </span>
-                    <span
-                      dir={copy.dir}
-                      className={cn(
-                        "text-[11px] font-bold leading-5 text-[#75695d] dark:text-zinc-300",
-                        active && "text-[#2a241d] dark:text-white",
-                      )}
-                    >
-                      {stage.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="audience-stage-detail relative rounded-[1.35rem] border border-[#e4d8c8] bg-[#faf9f6]/78 p-5 dark:border-zinc-800 dark:bg-zinc-950 md:[direction:rtl]">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <span
-                className="inline-flex items-center gap-2 rounded-full border bg-[#fffaf1] px-3 py-1 text-xs font-bold text-[#2a241d] dark:bg-zinc-900 dark:text-white"
-                style={{
-                  borderColor: `${activeStage.color}55`,
-                }}
-              >
-                <CircleDot
-                  className="h-3.5 w-3.5"
-                  style={{ color: activeStage.color }}
-                  strokeWidth={2}
-                />
-                {activeStage.cue}
-              </span>
-              <span className="text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-                {activeTaxonomy && matchedRowsLabel
-                  ? copy.matchedRows(matchedRowsLabel, totalRowsLabel)
-                  : copy.selectedStage}
-              </span>
-            </div>
-
-            <h3 className="mt-4 text-2xl font-bold text-[#2a241d] dark:text-white">
-              {activeStage.label}
-            </h3>
-            <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
-              {copy.stageBody}
-            </p>
-
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#7a6a59] dark:text-zinc-400">
-              <span>{copy.stageProductsLabel}</span>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {activeFields.map((field, index) => (
-                <span
-                  key={field}
-                  className="inline-flex min-h-9 items-center gap-2 rounded-full border border-[#e4d8c8] bg-[#fffaf1]/88 px-3 py-1.5 text-xs font-bold leading-5 text-[#2a241d] dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
-                >
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{
-                      backgroundColor: index % 2 === 0 ? activeStage.color : "#D99A35",
-                    }}
-                  />
-                  {field}
-                </span>
-              ))}
-            </div>
-
-            {activeTaxonomy ? (
-              <div className="audience-stage-timing mt-4 rounded-2xl border border-[#e4d8c8] bg-white/66 p-3 dark:border-zinc-800 dark:bg-zinc-900/70">
-                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    [copy.dominantSaleType, activeTaxonomy.dominantSaleType],
-                    [copy.negotiation, activeTaxonomy.timing.negotiation],
-                    [copy.purchase, activeTaxonomy.timing.purchase],
-                    [copy.execution, activeTaxonomy.timing.execution],
-                  ].map(([label, value]) => (
-                    <div
-                      key={label}
-                      className="audience-stage-timing-box rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/78 p-3 dark:border-zinc-800 dark:bg-zinc-950"
-                    >
-                      <div className="text-[10px] font-bold text-[#8a7a69] dark:text-zinc-500">
-                        {label}
-                      </div>
-                      <div className="mt-1 text-xs font-black leading-6 text-[#2a241d] dark:text-white">
-                        {value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-
-            <div
+          return (
+            <Link
+              key={stage.label}
+              href={stageRoutes[locale][index]}
               className={cn(
-                "mt-4 grid auto-rows-fr gap-3",
-                signalCards.length > 1 && "sm:grid-cols-2",
+                "audience-stage-card group flex min-h-[27rem] flex-col overflow-hidden rounded-[1.45rem] border p-3 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/35",
+                locale === "fa" ? "text-right" : "text-left",
               )}
+              style={stageCardStyle(stage, index, locale)}
             >
-              {signalCards.map(({ label, text, Icon, color, soft }) => (
-                <div
-                  key={`${label}-${text}`}
-                  className="audience-stage-signal-card flex min-w-0 gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/72 p-3 text-[13px] font-semibold leading-7 text-[#6f6254] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
-                >
-                  <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
-                    style={{
-                      backgroundColor: soft,
-                      color,
-                    }}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-[11px] font-black leading-5 text-[#2a241d] dark:text-white">
-                      {label}
-                    </span>
-                    {text}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Card>
+              <div className="audience-stage-card-main relative flex flex-1 flex-col rounded-[1.12rem] border px-4 py-5">
+                <span className="audience-stage-number" aria-hidden="true">
+                  {stageNumber}
+                </span>
+                <h3 className="relative mt-auto max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
+                  {stage.label}
+                </h3>
+                <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#5f574d] dark:text-zinc-300">
+                  {stageSummaries[locale][index]}
+                </p>
+              </div>
 
+              <div className="audience-stage-fields-panel mt-3 rounded-[1.05rem] border p-4">
+                <div className="text-[11px] font-black leading-5 text-[#8a6a4f] dark:text-zinc-300">
+                  {copy.workAreas}
+                </div>
+                <ul className="mt-3 grid gap-2">
+                  {visibleFields.map((field) => (
+                    <li
+                      key={field}
+                      className="audience-stage-field-row flex items-start gap-2 text-[12px] font-bold leading-6 text-[#3f3932] dark:text-zinc-200"
+                    >
+                      <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full" />
+                      <span>{field}</span>
+                    </li>
+                  ))}
+                </ul>
+                <span className="audience-stage-card-cta mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full text-sm font-black">
+                  {copy.more}
+                  <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-0.5" />
+                </span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
