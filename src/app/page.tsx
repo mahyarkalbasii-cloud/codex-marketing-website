@@ -508,6 +508,11 @@ function SalesFlowSection() {
                   "sales-flow-card-destination border-[#c9792b]/30",
               )}
             >
+              <span className="sales-flow-step-rail" aria-hidden="true">
+                <span className="sales-flow-step-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </span>
               <h3
                 className={cn(
                   "sales-flow-title text-xl font-bold leading-9 text-[#2a241d] dark:text-white",

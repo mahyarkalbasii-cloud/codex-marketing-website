@@ -269,39 +269,45 @@ body {
 }
 
 .audience-sales-card {
-  border-color: rgba(42, 33, 27, 0.09);
-  box-shadow: 0 14px 36px rgba(42, 33, 27, 0.045);
+  border-color: rgba(222, 211, 196, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 14px 32px rgba(42, 33, 27, 0.038);
 }
 
 .audience-sales-card-fast {
   background:
-    radial-gradient(circle at 90% 10%, rgba(218, 145, 105, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(255, 243, 235, 0.82), rgba(251, 235, 220, 0.72));
-  border-color: rgba(205, 137, 96, 0.26);
+    radial-gradient(circle at 16% 8%, rgba(255, 247, 214, 0.7), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(248, 210, 194, 0.48), transparent 34%),
+    linear-gradient(150deg, rgba(255, 251, 242, 0.92), rgba(255, 236, 222, 0.82) 58%, rgba(253, 229, 207, 0.74));
+  border-color: rgba(226, 190, 158, 0.56);
 }
 
 .audience-sales-card-consultative {
   background:
-    radial-gradient(circle at 12% 8%, rgba(109, 157, 139, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(240, 248, 242, 0.84), rgba(229, 241, 234, 0.74));
-  border-color: rgba(105, 145, 128, 0.25);
+    radial-gradient(circle at 14% 10%, rgba(218, 246, 232, 0.72), transparent 38%),
+    radial-gradient(circle at 88% 18%, rgba(224, 237, 250, 0.58), transparent 36%),
+    linear-gradient(150deg, rgba(249, 255, 251, 0.92), rgba(232, 245, 238, 0.82) 56%, rgba(226, 240, 246, 0.7));
+  border-color: rgba(174, 207, 188, 0.56);
 }
 
 .audience-sales-card-glow {
-  background: rgba(255, 255, 255, 0.55);
-  opacity: 0.72;
+  background: rgba(255, 255, 255, 0.66);
+  opacity: 0.42;
 }
 
 .audience-sales-card-fast .audience-sales-card-glow {
-  background: rgba(221, 146, 103, 0.28);
+  background: rgba(248, 198, 158, 0.34);
 }
 
 .audience-sales-card-consultative .audience-sales-card-glow {
-  background: rgba(111, 158, 141, 0.26);
+  background: rgba(172, 220, 201, 0.34);
 }
 
 .audience-sales-card:hover {
-  box-shadow: 0 18px 44px rgba(42, 33, 27, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 18px 42px rgba(42, 33, 27, 0.056);
 }
 
 .dark .audience-sales-card-fast {
@@ -369,99 +375,107 @@ body {
 }
 
 .audience-stage-tone-apricot {
-  --solution-card-shell: #f4ede6;
-  --solution-card-visual: #eadfd5;
-  --solution-card-visual-soft: #fbf6ef;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(203, 169, 145, 0.25);
-  --solution-card-line: rgba(174, 126, 96, 0.11);
+  --solution-card-shell: #f8ede1;
+  --solution-card-visual: #ead8c3;
+  --solution-card-visual-soft: #fff8ef;
+  --solution-card-wash: rgb(255 242 226 / 0.42);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(222, 194, 169, 0.38);
+  --solution-card-line: rgba(179, 128, 85, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #66584f;
-  --solution-card-accent: #aa755d;
+  --solution-card-muted: #625950;
+  --solution-card-accent: #b7895f;
 }
 
 .audience-stage-tone-sand {
-  --solution-card-shell: #f2ede4;
-  --solution-card-visual: #e7decd;
-  --solution-card-visual-soft: #fbf6ed;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(197, 181, 153, 0.25);
-  --solution-card-line: rgba(151, 126, 88, 0.1);
+  --solution-card-shell: #f0efec;
+  --solution-card-visual: #e1e0dc;
+  --solution-card-visual-soft: #faf9f6;
+  --solution-card-wash: rgb(242 241 237 / 0.46);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(204, 199, 190, 0.4);
+  --solution-card-line: rgba(133, 128, 118, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #5f584f;
-  --solution-card-accent: #8f7659;
+  --solution-card-muted: #5f5d57;
+  --solution-card-accent: #8f8c84;
 }
 
 .audience-stage-tone-rose {
-  --solution-card-shell: #f3ebe7;
-  --solution-card-visual: #eadbd7;
-  --solution-card-visual-soft: #fbf3ef;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(198, 166, 159, 0.24);
-  --solution-card-line: rgba(160, 112, 96, 0.1);
+  --solution-card-shell: #eee7f6;
+  --solution-card-visual: #ded7ee;
+  --solution-card-visual-soft: #fbfaff;
+  --solution-card-wash: rgb(245 241 255 / 0.42);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(199, 189, 221, 0.38);
+  --solution-card-line: rgba(133, 119, 169, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #625750;
-  --solution-card-accent: #9f7068;
+  --solution-card-muted: #5e5a66;
+  --solution-card-accent: #867bad;
 }
 
 .audience-stage-tone-sage {
-  --solution-card-shell: #eef3ed;
-  --solution-card-visual: #e1ebe3;
-  --solution-card-visual-soft: #fbf6ed;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(134, 161, 143, 0.2);
-  --solution-card-line: rgba(91, 129, 110, 0.09);
+  --solution-card-shell: #e2f3e8;
+  --solution-card-visual: #cfe8d8;
+  --solution-card-visual-soft: #f8fff9;
+  --solution-card-wash: rgb(232 252 239 / 0.44);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(173, 205, 185, 0.38);
+  --solution-card-line: rgba(103, 150, 118, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #586258;
-  --solution-card-accent: #748b7b;
+  --solution-card-muted: #58645a;
+  --solution-card-accent: #78a582;
 }
 
 .audience-stage-tone-honey {
-  --solution-card-shell: #f4efe0;
-  --solution-card-visual: #e9e0c3;
-  --solution-card-visual-soft: #fbf6e8;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(198, 180, 120, 0.24);
-  --solution-card-line: rgba(151, 127, 64, 0.09);
+  --solution-card-shell: #f6f0d7;
+  --solution-card-visual: #e9dfb9;
+  --solution-card-visual-soft: #fffbea;
+  --solution-card-wash: rgb(255 249 222 / 0.42);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(215, 199, 146, 0.38);
+  --solution-card-line: rgba(157, 134, 72, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #605b4a;
-  --solution-card-accent: #907d58;
+  --solution-card-muted: #625f50;
+  --solution-card-accent: #a99558;
 }
 
 .audience-stage-tone-mint {
-  --solution-card-shell: #eef3ef;
-  --solution-card-visual: #e0e9e1;
-  --solution-card-visual-soft: #fbf6ed;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(126, 156, 136, 0.2);
-  --solution-card-line: rgba(79, 126, 96, 0.09);
+  --solution-card-shell: #e7f3f6;
+  --solution-card-visual: #d3e8ee;
+  --solution-card-visual-soft: #f8fdff;
+  --solution-card-wash: rgb(234 248 252 / 0.44);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(174, 203, 213, 0.38);
+  --solution-card-line: rgba(101, 145, 160, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #566258;
-  --solution-card-accent: #718976;
+  --solution-card-muted: #556267;
+  --solution-card-accent: #719bad;
 }
 
 .audience-stage-tone-clay {
-  --solution-card-shell: #f2ebe4;
-  --solution-card-visual: #e7dad1;
-  --solution-card-visual-soft: #fbf3ed;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(194, 164, 145, 0.24);
-  --solution-card-line: rgba(153, 107, 82, 0.09);
+  --solution-card-shell: #f4e8e9;
+  --solution-card-visual: #e8d4d6;
+  --solution-card-visual-soft: #fff8f8;
+  --solution-card-wash: rgb(255 242 244 / 0.42);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(212, 184, 187, 0.38);
+  --solution-card-line: rgba(160, 111, 114, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #62564f;
-  --solution-card-accent: #93705f;
+  --solution-card-muted: #635759;
+  --solution-card-accent: #ac7b7e;
 }
 
 .audience-stage-tone-sky {
-  --solution-card-shell: #eef3f3;
-  --solution-card-visual: #e0e8eb;
-  --solution-card-visual-soft: #fbf6ed;
-  --solution-card-copy: rgb(242 235 225 / 0.48);
-  --solution-card-border: rgba(137, 160, 172, 0.2);
-  --solution-card-line: rgba(91, 127, 146, 0.09);
+  --solution-card-shell: #e9eee8;
+  --solution-card-visual: #dae3d9;
+  --solution-card-visual-soft: #f9fcf8;
+  --solution-card-wash: rgb(239 247 238 / 0.42);
+  --solution-card-copy: rgb(247 241 232 / 0.54);
+  --solution-card-border: rgba(190, 204, 187, 0.38);
+  --solution-card-line: rgba(119, 148, 112, 0.08);
   --solution-card-ink: #171716;
-  --solution-card-muted: #566063;
-  --solution-card-accent: #758a94;
+  --solution-card-muted: #59625a;
+  --solution-card-accent: #7f9979;
 }
 
 .dark .audience-stage-tone-apricot,
@@ -475,6 +489,7 @@ body {
   --solution-card-shell: #1e1b17;
   --solution-card-visual: #302821;
   --solution-card-visual-soft: #231f1a;
+  --solution-card-wash: rgb(185 155 131 / 0.16);
   --solution-card-copy: #1a1713;
   --solution-card-border: rgba(232, 218, 198, 0.11);
   --solution-card-line: rgba(232, 218, 198, 0.11);
@@ -484,11 +499,13 @@ body {
 }
 
 .audience-stage-card {
-  background: color-mix(in srgb, var(--solution-card-shell) 78%, #fffaf1);
+  background:
+    radial-gradient(circle at 14% 0%, var(--solution-card-wash), transparent 44%),
+    linear-gradient(155deg, color-mix(in srgb, var(--solution-card-shell) 74%, white), color-mix(in srgb, var(--solution-card-shell) 92%, white));
   border-color: var(--solution-card-border);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.62),
-    0 16px 38px rgba(42, 33, 27, 0.048);
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 14px 34px rgba(42, 33, 27, 0.04);
   color: var(--solution-card-ink);
   inset-block-start: 1.05rem;
   left: 50%;
@@ -538,7 +555,7 @@ body {
 .audience-stage-card:hover {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 22px 48px rgba(42, 33, 27, 0.075);
+    0 20px 44px rgba(42, 33, 27, 0.06);
   transform: translateX(calc(-50% + var(--stage-card-x, 0px))) rotate(var(--stage-card-rotate, 0deg)) scale(var(--stage-card-scale, 1)) translateY(-4px) translateZ(0);
 }
 
@@ -547,9 +564,9 @@ body {
   grid-template-rows: 4.75rem 1fr;
   min-height: 13.2rem;
   background:
-    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 54%, white), transparent 37%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 6%, transparent), transparent 34%),
-    linear-gradient(145deg, var(--solution-card-visual-soft), var(--solution-card-visual));
+    radial-gradient(circle at 17% 14%, var(--solution-card-wash), transparent 44%),
+    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 5%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--solution-card-visual-soft) 92%, white), color-mix(in srgb, var(--solution-card-visual) 50%, white));
   border-color: var(--solution-card-border);
 }
 
@@ -571,9 +588,9 @@ body {
   flex-direction: column;
   min-height: 14.9rem;
   background:
-    linear-gradient(180deg, color-mix(in srgb, rgb(242 235 225 / 0.58) 92%, var(--solution-card-visual) 8%), rgb(242 235 225 / 0.42));
+    linear-gradient(180deg, color-mix(in srgb, var(--solution-card-copy) 84%, white), color-mix(in srgb, var(--solution-card-copy) 95%, var(--solution-card-visual) 5%));
   border-color: var(--solution-card-border);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.56);
 }
 
 .audience-stage-fields-panel > div {
@@ -589,7 +606,8 @@ body {
 }
 
 .audience-stage-field-row > span:first-child {
-  background: var(--solution-card-accent);
+  background: color-mix(in srgb, var(--solution-card-accent) 82%, white);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--solution-card-accent) 12%, transparent);
 }
 
 .audience-stage-card-cta {
@@ -2756,8 +2774,13 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     0 16px 42px rgba(42, 33, 27, 0.052);
+  padding-right: 4.8rem;
   -webkit-backdrop-filter: blur(10px) saturate(1.08);
   backdrop-filter: blur(10px) saturate(1.08);
+}
+
+#sales-flow .sales-flow-card {
+  padding-right: 4.8rem;
 }
 
 .sales-flow-card::before {
@@ -2778,12 +2801,20 @@ body {
   z-index: 1;
 }
 
+.sales-flow-card > :not(.sales-flow-step-rail) {
+  z-index: 2;
+}
+
 .sales-flow-card-neutral {
   --sales-flow-surface:
     radial-gradient(circle at 88% 12%, rgba(111, 167, 216, 0.19), transparent 34%),
     radial-gradient(circle at 8% 88%, rgba(198, 220, 255, 0.18), transparent 34%),
     linear-gradient(145deg, rgba(238, 248, 254, 0.9), rgba(224, 240, 250, 0.74));
   --sales-flow-border: rgba(111, 167, 216, 0.24);
+  --sales-flow-rail: #d9c7a2;
+  --sales-flow-rail-deep: #b89058;
+  --sales-flow-rail-soft: rgb(247 238 221 / 0.74);
+  --sales-flow-rail-ink: #6b5433;
 }
 
 .sales-flow-card-soft {
@@ -2792,6 +2823,10 @@ body {
     radial-gradient(circle at 86% 84%, rgba(246, 214, 168, 0.18), transparent 34%),
     linear-gradient(145deg, rgba(255, 246, 233, 0.92), rgba(248, 235, 213, 0.74));
   --sales-flow-border: rgba(201, 121, 43, 0.22);
+  --sales-flow-rail: #c7dac6;
+  --sales-flow-rail-deep: #7da17b;
+  --sales-flow-rail-soft: rgb(232 245 231 / 0.74);
+  --sales-flow-rail-ink: #445f45;
 }
 
 .sales-flow-card-warm {
@@ -2800,6 +2835,10 @@ body {
     radial-gradient(circle at 10% 86%, rgba(190, 224, 211, 0.18), transparent 34%),
     linear-gradient(145deg, rgba(239, 249, 244, 0.9), rgba(225, 240, 233, 0.74));
   --sales-flow-border: rgba(104, 151, 135, 0.24);
+  --sales-flow-rail: #d9d1e8;
+  --sales-flow-rail-deep: #9184b5;
+  --sales-flow-rail-soft: rgb(241 237 248 / 0.76);
+  --sales-flow-rail-ink: #575074;
 }
 
 .sales-flow-card-destination {
@@ -2808,6 +2847,74 @@ body {
     radial-gradient(circle at 88% 82%, rgba(151, 132, 175, 0.13), transparent 34%),
     linear-gradient(145deg, rgba(255, 244, 236, 0.92), rgba(250, 229, 213, 0.74));
   --sales-flow-border: rgba(205, 137, 96, 0.25);
+  --sales-flow-rail: #e5c4b3;
+  --sales-flow-rail-deep: #bc7d61;
+  --sales-flow-rail-soft: rgb(249 232 223 / 0.76);
+  --sales-flow-rail-ink: #704936;
+}
+
+.sales-flow-step-rail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 3.15rem;
+  border-left: 1px solid color-mix(in srgb, var(--sales-flow-rail-deep) 18%, transparent);
+  border-radius: 0 1.55rem 1.55rem 0;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--sales-flow-rail-soft) 82%, white), color-mix(in srgb, var(--sales-flow-rail) 34%, white)),
+    var(--sales-flow-rail-soft);
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.5),
+    -10px 0 28px color-mix(in srgb, var(--sales-flow-rail) 13%, transparent);
+  pointer-events: none;
+}
+
+.sales-flow-step-rail::before {
+  position: absolute;
+  top: 5.4rem;
+  right: 1.34rem;
+  bottom: 1.2rem;
+  width: 0.28rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--sales-flow-rail-deep), color-mix(in srgb, var(--sales-flow-rail) 54%, white));
+  content: "";
+  opacity: 0.62;
+}
+
+.sales-flow-step-rail::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5.5rem;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.52), transparent);
+  content: "";
+}
+
+.sales-flow-step-number {
+  position: absolute;
+  top: 1.05rem;
+  right: 0;
+  display: grid;
+  width: 4.28rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--sales-flow-rail-deep) 22%, white);
+  border-right: 0;
+  border-radius: 1.15rem 0 0 1.15rem;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.54), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--sales-flow-rail) 64%, white), color-mix(in srgb, var(--sales-flow-rail-deep) 76%, white));
+  color: var(--sales-flow-rail-ink);
+  font-size: 1.32rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 1;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 9px 22px color-mix(in srgb, var(--sales-flow-rail-deep) 12%, transparent);
 }
 
 .sales-flow-card .sales-flow-step-icon,
@@ -3697,14 +3804,13 @@ html.theme-a .sales-flow-card {
 }
 
 html.theme-a :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
-  background: #b0aea5 !important;
-  background-image: none !important;
-  color: #b0aea5 !important;
+  background: linear-gradient(90deg, rgb(185 156 122 / 0.22), rgb(152 169 151 / 0.2)) !important;
+  color: rgb(158 143 123 / 0.42) !important;
 }
 
 html.theme-a .sales-flow-connector-final {
-  background: #d97757 !important;
-  color: #d97757 !important;
+  background: linear-gradient(90deg, rgb(145 129 174 / 0.2), rgb(188 126 97 / 0.24)) !important;
+  color: rgb(176 120 92 / 0.44) !important;
 }
 
 html.theme-a :is(
@@ -4439,31 +4545,62 @@ html.theme-a #solution .solution-card-title {
   color: var(--solution-card-ink) !important;
 }
 
+html.theme-a #audiences .audience-sales-card {
+  border-color: rgba(222, 211, 196, 0.58) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.72),
+    0 14px 32px rgba(42, 33, 27, 0.038) !important;
+}
+
+html.theme-a #audiences .audience-sales-card-fast {
+  background:
+    radial-gradient(circle at 16% 8%, rgba(255, 247, 214, 0.7), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(248, 210, 194, 0.48), transparent 34%),
+    linear-gradient(150deg, rgba(255, 251, 242, 0.92), rgba(255, 236, 222, 0.82) 58%, rgba(253, 229, 207, 0.74)) !important;
+  border-color: rgba(226, 190, 158, 0.56) !important;
+}
+
+html.theme-a #audiences .audience-sales-card-consultative {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(218, 246, 232, 0.72), transparent 38%),
+    radial-gradient(circle at 88% 18%, rgba(224, 237, 250, 0.58), transparent 36%),
+    linear-gradient(150deg, rgba(249, 255, 251, 0.92), rgba(232, 245, 238, 0.82) 56%, rgba(226, 240, 246, 0.7)) !important;
+  border-color: rgba(174, 207, 188, 0.56) !important;
+}
+
+html.theme-a #audiences .audience-sales-card:hover {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.78),
+    0 18px 42px rgba(42, 33, 27, 0.056) !important;
+}
+
 html.theme-a #audiences .audience-stage-card {
-  background: color-mix(in srgb, var(--solution-card-shell) 78%, #fffaf1) !important;
+  background:
+    radial-gradient(circle at 14% 0%, var(--solution-card-wash), transparent 44%),
+    linear-gradient(155deg, color-mix(in srgb, var(--solution-card-shell) 74%, white), color-mix(in srgb, var(--solution-card-shell) 92%, white)) !important;
   border-color: var(--solution-card-border) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.62),
-    0 16px 38px rgba(42, 33, 27, 0.048) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.7),
+    0 14px 34px rgba(42, 33, 27, 0.04) !important;
 }
 
 html.theme-a #audiences .audience-stage-card:hover {
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.72),
-    0 22px 48px rgba(42, 33, 27, 0.075) !important;
+    0 20px 44px rgba(42, 33, 27, 0.06) !important;
 }
 
 html.theme-a #audiences .audience-stage-card-main {
   background:
-    radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--solution-card-visual) 54%, white), transparent 37%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 6%, transparent), transparent 34%),
-    linear-gradient(145deg, var(--solution-card-visual-soft), var(--solution-card-visual)) !important;
+    radial-gradient(circle at 17% 14%, var(--solution-card-wash), transparent 44%),
+    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 5%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--solution-card-visual-soft) 92%, white), color-mix(in srgb, var(--solution-card-visual) 50%, white)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
 html.theme-a #audiences .audience-stage-fields-panel {
   background:
-    linear-gradient(180deg, color-mix(in srgb, rgb(242 235 225 / 0.58) 92%, var(--solution-card-visual) 8%), rgb(242 235 225 / 0.42)) !important;
+    linear-gradient(180deg, color-mix(in srgb, var(--solution-card-copy) 84%, white), color-mix(in srgb, var(--solution-card-copy) 95%, var(--solution-card-visual) 5%)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
