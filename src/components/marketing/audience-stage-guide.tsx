@@ -960,7 +960,7 @@ export function AudienceStageGuide({ locale = "fa" }: { locale?: Locale }) {
                 }
               >
                 <div className="audience-stage-card-main relative flex flex-1 flex-col rounded-[1.12rem] border px-4 py-5">
-                  <h3 className="relative max-w-[13rem] text-[1.55rem] font-black leading-[1.18] md:text-[1.62rem]">
+                  <h3 className="relative max-w-full text-[1.45rem] font-black leading-[1.18] md:text-[1.5rem]">
                     {stage.label}
                   </h3>
                   <p className="relative text-[13px] font-medium leading-7">
