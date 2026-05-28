@@ -129,6 +129,8 @@ body {
 .site-scroll-root {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  padding-top: var(--site-header-height, 4.25rem);
+  scroll-padding-top: var(--site-header-height, 4.25rem);
   scrollbar-gutter: stable;
 }
 
@@ -375,107 +377,68 @@ body {
 }
 
 .audience-stage-tone-apricot {
-  --solution-card-shell: #f8ede1;
-  --solution-card-visual: #ead8c3;
-  --solution-card-visual-soft: #fff8ef;
-  --solution-card-wash: rgb(255 242 226 / 0.42);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(222, 194, 169, 0.38);
-  --solution-card-line: rgba(179, 128, 85, 0.08);
+  --stage-card-glow-a: rgba(255, 247, 214, 0.68);
+  --stage-card-glow-b: rgba(248, 210, 194, 0.5);
+  --stage-card-surface-a: rgba(255, 251, 242, 0.94);
+  --stage-card-surface-b: rgba(255, 236, 222, 0.84);
+  --stage-card-surface-c: rgba(253, 229, 207, 0.76);
+  --stage-card-border: rgba(226, 190, 158, 0.58);
+  --stage-card-panel-a: rgba(255, 252, 247, 0.78);
+  --stage-card-panel-b: rgba(255, 238, 224, 0.68);
+  --stage-card-panel-c: rgba(253, 228, 205, 0.48);
+  --stage-card-detail-a: rgba(255, 253, 249, 0.88);
+  --stage-card-detail-b: rgba(255, 242, 231, 0.76);
+  --solution-card-copy: rgb(255 250 245 / 0.68);
+  --solution-card-border: rgba(226, 190, 158, 0.46);
+  --solution-card-line: rgba(181, 126, 86, 0.1);
   --solution-card-ink: #171716;
-  --solution-card-muted: #625950;
-  --solution-card-accent: #b7895f;
+  --solution-card-muted: #66584d;
+  --solution-card-accent: #b77952;
 }
 
-.audience-stage-tone-sand {
-  --solution-card-shell: #f0efec;
-  --solution-card-visual: #e1e0dc;
-  --solution-card-visual-soft: #faf9f6;
-  --solution-card-wash: rgb(242 241 237 / 0.46);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(204, 199, 190, 0.4);
-  --solution-card-line: rgba(133, 128, 118, 0.08);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #5f5d57;
-  --solution-card-accent: #8f8c84;
-}
-
-.audience-stage-tone-rose {
-  --solution-card-shell: #eee7f6;
-  --solution-card-visual: #ded7ee;
-  --solution-card-visual-soft: #fbfaff;
-  --solution-card-wash: rgb(245 241 255 / 0.42);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(199, 189, 221, 0.38);
-  --solution-card-line: rgba(133, 119, 169, 0.08);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #5e5a66;
-  --solution-card-accent: #867bad;
-}
-
-.audience-stage-tone-sage {
-  --solution-card-shell: #e2f3e8;
-  --solution-card-visual: #cfe8d8;
-  --solution-card-visual-soft: #f8fff9;
-  --solution-card-wash: rgb(232 252 239 / 0.44);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(173, 205, 185, 0.38);
-  --solution-card-line: rgba(103, 150, 118, 0.08);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #58645a;
-  --solution-card-accent: #78a582;
-}
-
-.audience-stage-tone-honey {
-  --solution-card-shell: #f6f0d7;
-  --solution-card-visual: #e9dfb9;
-  --solution-card-visual-soft: #fffbea;
-  --solution-card-wash: rgb(255 249 222 / 0.42);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(215, 199, 146, 0.38);
-  --solution-card-line: rgba(157, 134, 72, 0.08);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #625f50;
-  --solution-card-accent: #a99558;
-}
-
-.audience-stage-tone-mint {
-  --solution-card-shell: #e7f3f6;
-  --solution-card-visual: #d3e8ee;
-  --solution-card-visual-soft: #f8fdff;
-  --solution-card-wash: rgb(234 248 252 / 0.44);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(174, 203, 213, 0.38);
-  --solution-card-line: rgba(101, 145, 160, 0.08);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #556267;
-  --solution-card-accent: #719bad;
-}
-
+.audience-stage-tone-sand,
+.audience-stage-tone-honey,
 .audience-stage-tone-clay {
-  --solution-card-shell: #f4e8e9;
-  --solution-card-visual: #e8d4d6;
-  --solution-card-visual-soft: #fff8f8;
-  --solution-card-wash: rgb(255 242 244 / 0.42);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(212, 184, 187, 0.38);
-  --solution-card-line: rgba(160, 111, 114, 0.08);
+  --stage-card-glow-a: rgba(255, 248, 221, 0.56);
+  --stage-card-glow-b: rgba(244, 204, 184, 0.44);
+  --stage-card-surface-a: rgba(255, 252, 246, 0.92);
+  --stage-card-surface-b: rgba(249, 235, 222, 0.82);
+  --stage-card-surface-c: rgba(245, 226, 207, 0.72);
+  --stage-card-border: rgba(218, 190, 164, 0.54);
+  --stage-card-panel-a: rgba(255, 253, 249, 0.76);
+  --stage-card-panel-b: rgba(248, 236, 224, 0.66);
+  --stage-card-panel-c: rgba(239, 225, 207, 0.46);
+  --stage-card-detail-a: rgba(255, 253, 249, 0.86);
+  --stage-card-detail-b: rgba(249, 241, 232, 0.74);
+  --solution-card-copy: rgb(255 251 246 / 0.66);
+  --solution-card-border: rgba(218, 190, 164, 0.44);
+  --solution-card-line: rgba(146, 116, 92, 0.1);
   --solution-card-ink: #171716;
-  --solution-card-muted: #635759;
-  --solution-card-accent: #ac7b7e;
+  --solution-card-muted: #605850;
+  --solution-card-accent: #9a7357;
 }
 
+.audience-stage-tone-rose,
+.audience-stage-tone-sage,
+.audience-stage-tone-mint,
 .audience-stage-tone-sky {
-  --solution-card-shell: #e9eee8;
-  --solution-card-visual: #dae3d9;
-  --solution-card-visual-soft: #f9fcf8;
-  --solution-card-wash: rgb(239 247 238 / 0.42);
-  --solution-card-copy: rgb(247 241 232 / 0.54);
-  --solution-card-border: rgba(190, 204, 187, 0.38);
-  --solution-card-line: rgba(119, 148, 112, 0.08);
+  --stage-card-glow-a: rgba(218, 246, 232, 0.68);
+  --stage-card-glow-b: rgba(224, 237, 250, 0.58);
+  --stage-card-surface-a: rgba(249, 255, 251, 0.94);
+  --stage-card-surface-b: rgba(232, 245, 238, 0.84);
+  --stage-card-surface-c: rgba(226, 240, 246, 0.72);
+  --stage-card-border: rgba(174, 207, 188, 0.58);
+  --stage-card-panel-a: rgba(253, 255, 253, 0.78);
+  --stage-card-panel-b: rgba(234, 247, 239, 0.68);
+  --stage-card-panel-c: rgba(226, 241, 247, 0.5);
+  --stage-card-detail-a: rgba(253, 255, 253, 0.88);
+  --stage-card-detail-b: rgba(236, 247, 241, 0.74);
+  --solution-card-copy: rgb(248 255 251 / 0.68);
+  --solution-card-border: rgba(174, 207, 188, 0.46);
+  --solution-card-line: rgba(91, 133, 117, 0.1);
   --solution-card-ink: #171716;
-  --solution-card-muted: #59625a;
-  --solution-card-accent: #7f9979;
+  --solution-card-muted: #53625b;
+  --solution-card-accent: #6a9a83;
 }
 
 .dark .audience-stage-tone-apricot,
@@ -500,12 +463,13 @@ body {
 
 .audience-stage-card {
   background:
-    radial-gradient(circle at 14% 0%, var(--solution-card-wash), transparent 44%),
-    linear-gradient(155deg, color-mix(in srgb, var(--solution-card-shell) 74%, white), color-mix(in srgb, var(--solution-card-shell) 92%, white));
-  border-color: var(--solution-card-border);
+    radial-gradient(circle at 16% 8%, var(--stage-card-glow-a), transparent 36%),
+    radial-gradient(circle at 88% 18%, var(--stage-card-glow-b), transparent 35%),
+    linear-gradient(150deg, var(--stage-card-surface-a), var(--stage-card-surface-b) 58%, var(--stage-card-surface-c));
+  border-color: var(--stage-card-border);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 14px 34px rgba(42, 33, 27, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.76),
+    0 15px 36px rgba(42, 33, 27, 0.046);
   color: var(--solution-card-ink);
   inset-block-start: 1.05rem;
   left: 50%;
@@ -564,10 +528,11 @@ body {
   grid-template-rows: 4.75rem 1fr;
   min-height: 13.2rem;
   background:
-    radial-gradient(circle at 17% 14%, var(--solution-card-wash), transparent 44%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 5%, transparent), transparent 36%),
-    linear-gradient(145deg, color-mix(in srgb, var(--solution-card-visual-soft) 92%, white), color-mix(in srgb, var(--solution-card-visual) 50%, white));
+    radial-gradient(circle at 18% 14%, var(--stage-card-glow-a), transparent 42%),
+    radial-gradient(circle at 86% 20%, var(--stage-card-glow-b), transparent 36%),
+    linear-gradient(145deg, var(--stage-card-panel-a), var(--stage-card-panel-b) 62%, var(--stage-card-panel-c));
   border-color: var(--solution-card-border);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.56);
 }
 
 .audience-stage-card h3 {
@@ -588,7 +553,7 @@ body {
   flex-direction: column;
   min-height: 14.9rem;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--solution-card-copy) 84%, white), color-mix(in srgb, var(--solution-card-copy) 95%, var(--solution-card-visual) 5%));
+    linear-gradient(180deg, var(--stage-card-detail-a), var(--stage-card-detail-b));
   border-color: var(--solution-card-border);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.56);
 }
@@ -809,6 +774,7 @@ body {
     linear-gradient(145deg, var(--solution-card-visual-soft), var(--solution-card-visual));
   border: 1px solid var(--solution-card-border);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.52);
+  transform: translateZ(0);
 }
 
 .solution-card-orbit {
@@ -1970,12 +1936,192 @@ body {
     0 18px 44px rgba(42, 33, 27, 0.1);
 }
 
+.hero-orb-visual {
+  background:
+    radial-gradient(circle at 48% 42%, rgb(204 120 92 / 0.1), transparent 38%),
+    linear-gradient(145deg, #fffaf1 0%, #f6efe4 58%, #eadfce 100%);
+  border-color: rgba(42, 33, 27, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 44px rgba(42, 33, 27, 0.1);
+}
+
+.hero-orb-panel {
+  border-color: rgba(42, 33, 27, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -22px 58px rgba(42, 33, 27, 0.06);
+}
+
+.hero-orb-map-ghost {
+  background:
+    radial-gradient(circle at 24% 24%, rgb(111 167 216 / 0.08), transparent 22%),
+    radial-gradient(circle at 78% 73%, rgb(86 214 200 / 0.1), transparent 23%),
+    linear-gradient(23deg, transparent 0 47%, rgb(228 216 200 / 0.16) 47% 48%, transparent 48%),
+    linear-gradient(102deg, transparent 0 47%, rgb(228 216 200 / 0.13) 47% 48%, transparent 48%);
+  background-size: auto, auto, 7.2rem 6.8rem, 6rem 6.4rem;
+  opacity: 0.72;
+}
+
+.hero-orb-stage {
+  max-width: 29rem;
+}
+
+.hero-orb-status {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.44rem;
+  border: 1px solid rgb(234 223 206 / 0.9);
+  border-radius: 9999px;
+  background: rgb(255 250 241 / 0.78);
+  color: #2a241d;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.55rem 0.7rem;
+  box-shadow: 0 0.8rem 1.8rem rgb(42 33 27 / 0.06);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  backdrop-filter: blur(14px) saturate(1.08);
+}
+
+.hero-orb-status > span:first-child {
+  display: block;
+  height: 0.48rem;
+  width: 0.48rem;
+  border-radius: 9999px;
+  background: #cc785c;
+  box-shadow: 0 0 0 0.24rem rgb(204 120 92 / 0.12);
+}
+
+.hero-orb-status-a {
+  inset-block-start: 1.15rem;
+  inset-inline-start: 1.1rem;
+}
+
+.hero-orb-status-b {
+  inset-block-end: 1.15rem;
+  inset-inline-end: 1.1rem;
+}
+
 .hero-radar-visual .hero-radar-panel {
   background: #f2ebdf;
   border-color: rgba(42, 33, 27, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
     inset 0 -22px 58px rgba(42, 33, 27, 0.07);
+}
+
+.problem-radar-visual.hero-radar-visual {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(204, 120, 92, 0.12), transparent 36%),
+    radial-gradient(circle at 18% 18%, rgba(255, 244, 233, 0.04), transparent 26%),
+    linear-gradient(145deg, #11110f 0%, #0b0b0a 58%, #070707 100%);
+  border-color: rgba(255, 244, 233, 0.045);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 233, 0.025),
+    0 18px 44px rgba(42, 33, 27, 0.16);
+}
+
+.problem-radar-visual .hero-radar-panel {
+  inset: 0.9rem;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(204, 120, 92, 0.08), transparent 30%),
+    radial-gradient(circle at 42% 34%, rgba(255, 244, 233, 0.035), transparent 36%),
+    linear-gradient(145deg, #171815 0%, #11120f 58%, #0d0e0d 100%);
+  border-color: rgba(255, 244, 233, 0.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 233, 0.035),
+    inset 0 -22px 58px rgba(0, 0, 0, 0.24);
+}
+
+.problem-radar-visual .hero-radar-city-map {
+  background:
+    radial-gradient(circle at 74% 19%, rgb(58 83 67 / 0.28) 0 8%, transparent 8.5%),
+    radial-gradient(circle at 19% 71%, rgb(58 83 67 / 0.24) 0 7%, transparent 7.6%),
+    linear-gradient(135deg, #141513 0%, #10110f 48%, #0c0d0c 100%);
+  filter: saturate(0.6) contrast(1.04);
+  opacity: 0.72;
+}
+
+.problem-radar-visual .hero-radar-city-map::before {
+  opacity: 0.16;
+}
+
+.problem-radar-visual .hero-radar-district {
+  border-color: rgba(255, 244, 233, 0.035);
+  background: rgba(255, 244, 233, 0.025);
+}
+
+.problem-radar-visual .hero-radar-park {
+  background: rgba(51, 102, 82, 0.2);
+}
+
+.problem-radar-visual .hero-radar-road {
+  background: rgba(255, 244, 233, 0.16);
+  box-shadow: 0 0 0 1px rgba(255, 244, 233, 0.045);
+}
+
+.problem-radar-visual .hero-radar-road[data-kind="main"] {
+  background: rgba(226, 162, 62, 0.16);
+  box-shadow: 0 0 0 1px rgba(226, 162, 62, 0.06);
+}
+
+.problem-radar-visual .hero-radar-road[data-kind="thin"] {
+  background: rgba(255, 244, 233, 0.08);
+}
+
+.problem-radar-visual .hero-radar-map-label {
+  color: rgba(255, 244, 233, 0.18);
+  text-shadow: none;
+}
+
+.problem-radar-visual .hero-radar-map-pin {
+  filter: drop-shadow(0 0.34rem 0.36rem rgba(0, 0, 0, 0.42));
+  opacity: 0.72;
+}
+
+.problem-radar-visual .hero-radar-map-pin[data-tone="navy"] {
+  --pin-color: #1f2a40;
+}
+
+.problem-radar-visual .hero-radar-map-pin[data-tone="teal"] {
+  --pin-color: #158a81;
+}
+
+.problem-radar-visual .hero-radar-map-pin[data-tone="blue"] {
+  --pin-color: #2869b8;
+}
+
+.problem-radar-visual .hero-radar-map-pin[data-tone="gold"] {
+  --pin-color: #b88922;
+}
+
+.problem-radar-visual .hero-radar-map-wash {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(204, 120, 92, 0.06) 0 26%, transparent 48%),
+    linear-gradient(180deg, rgba(10, 10, 9, 0.08), rgba(8, 8, 7, 0.36));
+}
+
+.problem-radar-visual .hero-radar-grid {
+  background-image:
+    linear-gradient(rgba(255, 244, 233, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 244, 233, 0.035) 1px, transparent 1px);
+  opacity: 0.24;
+}
+
+.problem-radar-visual .hero-radar-vignette {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 42%, rgba(8, 8, 7, 0.2) 76%, rgba(8, 8, 7, 0.68) 100%);
+}
+
+.problem-radar-visual .hero-radar-axis path {
+  stroke: rgba(255, 244, 233, 0.055);
+}
+
+.problem-radar-visual .hero-radar-ring {
+  stroke: rgba(255, 244, 233, 0.105);
 }
 
 .hero-radar-city-map {
@@ -3195,16 +3341,32 @@ body {
 @media (hover: hover) and (pointer: fine) {
   .solution-card {
     transition:
-      translate 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
       border-color 200ms ease,
       box-shadow 200ms ease;
+    will-change: transform;
   }
 
-  .solution-card:hover {
-    translate: 0 -3px;
+  .solution-card-visual-frame {
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .solution-card:hover,
+  .solution-card:focus-within {
+    --tw-translate-y: -5px;
+    transform: translate(var(--tw-translate-x, 0), var(--tw-translate-y, 0)) rotate(var(--tw-rotate, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1));
     box-shadow:
       inset 0 0 0 1px color-mix(in srgb, var(--solution-card-accent) 20%, transparent),
       0 20px 42px rgba(42, 36, 29, 0.065);
+  }
+
+  .solution-card:hover .solution-card-visual-frame,
+  .solution-card:focus-within .solution-card-visual-frame {
+    transform: translate3d(0, -2px, 0) scale(1.01);
+  }
+
+  .solution-card:active {
+    --tw-translate-y: -2px;
   }
 }
 
@@ -4482,7 +4644,7 @@ html.theme-a :is(input, select, textarea) {
   color: #131314 !important;
 }
 
-html.theme-a :is(header, .fixed.inset-x-0.bottom-0, .theme-toggle-root) {
+html.theme-a :is(header:not(.site-header), .fixed.inset-x-0.bottom-0, .theme-toggle-root) {
   background: rgb(247 243 236 / 0.96) !important;
   background-image: none !important;
   border-color: rgb(222 211 196 / 0.78) !important;
@@ -4991,10 +5153,81 @@ html.theme-a #plans .pricing-card :is(
   background-image: none !important;
 }
 
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 70;
+  overflow: hidden;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 12px 34px rgb(31 41 55 / 0.055);
+  isolation: isolate;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 72% 34%, rgb(188 193 202 / 0.28), transparent 46%),
+    linear-gradient(90deg, rgb(250 249 247 / 0.46), rgb(239 240 242 / 0.36) 46%, rgb(249 247 243 / 0.46));
+  -webkit-backdrop-filter: blur(34px) saturate(1.18);
+  backdrop-filter: blur(34px) saturate(1.18);
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 0;
+  height: 1px;
+  pointer-events: none;
+  background: rgb(190 196 204 / 0.46);
+}
+
+.site-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .site-header {
+  background: transparent;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+}
+
+.dark .site-header::before {
+  background: rgb(9 9 11 / 0.58);
+}
+
 html.theme-a .site-header {
-  background: rgb(247 243 236 / 0.96) !important;
+  position: fixed !important;
+  inset-inline: 0 !important;
+  top: 0 !important;
+  z-index: 70 !important;
+  overflow: hidden !important;
+  background: transparent !important;
   background-image: none !important;
-  border-color: rgb(222 211 196 / 0.78) !important;
+  border-color: rgb(214 218 223 / 0.72) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 10px 32px rgb(31 41 55 / 0.055) !important;
+}
+
+html.theme-a .site-header::before {
+  background:
+    radial-gradient(ellipse at 72% 34%, rgb(188 193 202 / 0.28), transparent 46%),
+    linear-gradient(90deg, rgb(250 249 247 / 0.46), rgb(239 240 242 / 0.36) 46%, rgb(249 247 243 / 0.46)) !important;
+  -webkit-backdrop-filter: blur(34px) saturate(1.18) !important;
+  backdrop-filter: blur(34px) saturate(1.18) !important;
+}
+
+html.theme-a .site-header::after {
+  background: rgb(190 196 204 / 0.46) !important;
 }
 
 html.theme-a .site-header .site-brand-mark {
@@ -5107,6 +5340,13 @@ html.theme-a #solution .solution-card {
     0 18px 44px rgba(42, 36, 29, 0.055) !important;
 }
 
+html.theme-a #solution .solution-card:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--solution-card-accent) 26%, var(--solution-card-border)) !important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--solution-card-accent) 16%, transparent),
+    0 22px 46px rgba(42, 36, 29, 0.075) !important;
+}
+
 html.theme-a #solution .solution-card-visual-frame {
   background:
     radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--solution-card-visual) 74%, white), transparent 34%),
@@ -5161,12 +5401,13 @@ html.theme-a #audiences .audience-sales-card:hover {
 
 html.theme-a #audiences .audience-stage-card {
   background:
-    radial-gradient(circle at 14% 0%, var(--solution-card-wash), transparent 44%),
-    linear-gradient(155deg, color-mix(in srgb, var(--solution-card-shell) 74%, white), color-mix(in srgb, var(--solution-card-shell) 92%, white)) !important;
-  border-color: var(--solution-card-border) !important;
+    radial-gradient(circle at 16% 8%, var(--stage-card-glow-a), transparent 36%),
+    radial-gradient(circle at 88% 18%, var(--stage-card-glow-b), transparent 35%),
+    linear-gradient(150deg, var(--stage-card-surface-a), var(--stage-card-surface-b) 58%, var(--stage-card-surface-c)) !important;
+  border-color: var(--stage-card-border) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.7),
-    0 14px 34px rgba(42, 33, 27, 0.04) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.76),
+    0 15px 36px rgba(42, 33, 27, 0.046) !important;
 }
 
 html.theme-a #audiences .audience-stage-card:hover {
@@ -5177,15 +5418,16 @@ html.theme-a #audiences .audience-stage-card:hover {
 
 html.theme-a #audiences .audience-stage-card-main {
   background:
-    radial-gradient(circle at 17% 14%, var(--solution-card-wash), transparent 44%),
-    radial-gradient(circle at 84% 20%, color-mix(in srgb, var(--solution-card-accent) 5%, transparent), transparent 36%),
-    linear-gradient(145deg, color-mix(in srgb, var(--solution-card-visual-soft) 92%, white), color-mix(in srgb, var(--solution-card-visual) 50%, white)) !important;
+    radial-gradient(circle at 18% 14%, var(--stage-card-glow-a), transparent 42%),
+    radial-gradient(circle at 86% 20%, var(--stage-card-glow-b), transparent 36%),
+    linear-gradient(145deg, var(--stage-card-panel-a), var(--stage-card-panel-b) 62%, var(--stage-card-panel-c)) !important;
   border-color: var(--solution-card-border) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.56) !important;
 }
 
 html.theme-a #audiences .audience-stage-fields-panel {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--solution-card-copy) 84%, white), color-mix(in srgb, var(--solution-card-copy) 95%, var(--solution-card-visual) 5%)) !important;
+    linear-gradient(180deg, var(--stage-card-detail-a), var(--stage-card-detail-b)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
