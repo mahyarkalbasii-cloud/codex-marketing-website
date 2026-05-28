@@ -376,69 +376,31 @@ body {
   transform: translateY(-1px);
 }
 
-.audience-stage-tone-apricot {
-  --stage-card-glow-a: rgba(255, 247, 214, 0.68);
-  --stage-card-glow-b: rgba(248, 210, 194, 0.5);
-  --stage-card-surface-a: rgba(255, 251, 242, 0.94);
-  --stage-card-surface-b: rgba(255, 236, 222, 0.84);
-  --stage-card-surface-c: rgba(253, 229, 207, 0.76);
-  --stage-card-border: rgba(226, 190, 158, 0.58);
-  --stage-card-panel-a: rgba(255, 252, 247, 0.78);
-  --stage-card-panel-b: rgba(255, 238, 224, 0.68);
-  --stage-card-panel-c: rgba(253, 228, 205, 0.48);
-  --stage-card-detail-a: rgba(255, 253, 249, 0.88);
-  --stage-card-detail-b: rgba(255, 242, 231, 0.76);
-  --solution-card-copy: rgb(255 250 245 / 0.68);
-  --solution-card-border: rgba(226, 190, 158, 0.46);
-  --solution-card-line: rgba(181, 126, 86, 0.1);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #66584d;
-  --solution-card-accent: #b77952;
-}
-
+.audience-stage-tone-apricot,
 .audience-stage-tone-sand,
-.audience-stage-tone-honey,
-.audience-stage-tone-clay {
-  --stage-card-glow-a: rgba(255, 248, 221, 0.56);
-  --stage-card-glow-b: rgba(244, 204, 184, 0.44);
-  --stage-card-surface-a: rgba(255, 252, 246, 0.92);
-  --stage-card-surface-b: rgba(249, 235, 222, 0.82);
-  --stage-card-surface-c: rgba(245, 226, 207, 0.72);
-  --stage-card-border: rgba(218, 190, 164, 0.54);
-  --stage-card-panel-a: rgba(255, 253, 249, 0.76);
-  --stage-card-panel-b: rgba(248, 236, 224, 0.66);
-  --stage-card-panel-c: rgba(239, 225, 207, 0.46);
-  --stage-card-detail-a: rgba(255, 253, 249, 0.86);
-  --stage-card-detail-b: rgba(249, 241, 232, 0.74);
-  --solution-card-copy: rgb(255 251 246 / 0.66);
-  --solution-card-border: rgba(218, 190, 164, 0.44);
-  --solution-card-line: rgba(146, 116, 92, 0.1);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #605850;
-  --solution-card-accent: #9a7357;
-}
-
 .audience-stage-tone-rose,
 .audience-stage-tone-sage,
+.audience-stage-tone-honey,
 .audience-stage-tone-mint,
+.audience-stage-tone-clay,
 .audience-stage-tone-sky {
-  --stage-card-glow-a: rgba(218, 246, 232, 0.68);
-  --stage-card-glow-b: rgba(224, 237, 250, 0.58);
-  --stage-card-surface-a: rgba(249, 255, 251, 0.94);
-  --stage-card-surface-b: rgba(232, 245, 238, 0.84);
-  --stage-card-surface-c: rgba(226, 240, 246, 0.72);
-  --stage-card-border: rgba(174, 207, 188, 0.58);
-  --stage-card-panel-a: rgba(253, 255, 253, 0.78);
-  --stage-card-panel-b: rgba(234, 247, 239, 0.68);
-  --stage-card-panel-c: rgba(226, 241, 247, 0.5);
-  --stage-card-detail-a: rgba(253, 255, 253, 0.88);
-  --stage-card-detail-b: rgba(236, 247, 241, 0.74);
-  --solution-card-copy: rgb(248 255 251 / 0.68);
-  --solution-card-border: rgba(174, 207, 188, 0.46);
-  --solution-card-line: rgba(91, 133, 117, 0.1);
+  --stage-card-glow-a: rgba(191, 165, 145, 0.36);
+  --stage-card-glow-b: rgba(191, 165, 145, 0.28);
+  --stage-card-surface-a: #bfa591;
+  --stage-card-surface-b: #bfa591;
+  --stage-card-surface-c: #bfa591;
+  --stage-card-border: rgba(135, 109, 89, 0.42);
+  --stage-card-panel-a: rgba(191, 165, 145, 0.82);
+  --stage-card-panel-b: rgba(191, 165, 145, 0.82);
+  --stage-card-panel-c: rgba(191, 165, 145, 0.82);
+  --stage-card-detail-a: rgba(191, 165, 145, 0.7);
+  --stage-card-detail-b: rgba(191, 165, 145, 0.7);
+  --solution-card-copy: rgb(191 165 145 / 0.68);
+  --solution-card-border: rgba(135, 109, 89, 0.32);
+  --solution-card-line: rgba(135, 109, 89, 0.12);
   --solution-card-ink: #171716;
-  --solution-card-muted: #53625b;
-  --solution-card-accent: #6a9a83;
+  --solution-card-muted: #5f5147;
+  --solution-card-accent: #876d59;
 }
 
 .dark .audience-stage-tone-apricot,
