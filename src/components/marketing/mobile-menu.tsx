@@ -102,7 +102,7 @@ export function MobileMenu() {
         aria-expanded={open}
         aria-controls="mobile-menu-panel"
         onClick={() => setOpen((current) => !current)}
-        className="grid h-10 w-10 place-items-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] transition hover:border-[#d2bca2] hover:bg-[#f8efe2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/35 active:translate-y-px dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
+        className="site-header-mobile-trigger grid h-10 w-10 place-items-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] transition hover:border-[#d2bca2] hover:bg-[#f8efe2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/35 active:translate-y-px dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>

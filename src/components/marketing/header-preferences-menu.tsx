@@ -166,7 +166,7 @@ export function HeaderPreferencesMenu({
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
+        className="header-preferences-trigger inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
       >
         <Sun className="h-[18px] w-[18px] text-[#cc785c]" aria-hidden="true" />
       </button>

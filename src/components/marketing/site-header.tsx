@@ -74,7 +74,7 @@ export function SiteHeader() {
             href={localizeHref(authLinks.login, locale)}
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "h-10 px-3.5 text-[13px]",
+              "site-header-login-link h-10 px-3.5 text-[13px]",
             )}
           >
             <LogIn className="h-4 w-4" aria-hidden="true" />
@@ -82,7 +82,7 @@ export function SiteHeader() {
           </Link>
           <Link
             href={localizeHref("/#demo", locale)}
-            className={cn(buttonVariants({ size: "sm" }), "h-10 px-4")}
+            className={cn(buttonVariants({ size: "sm" }), "site-header-demo-link h-10 px-4")}
           >
             {labels.demo}
           </Link>
