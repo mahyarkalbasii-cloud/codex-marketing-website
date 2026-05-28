@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/sales-style/fast/", "weekly", 0.9),
     entry("/sales-style/consultative/", "weekly", 0.9),
     entry("/faq/", "monthly", 0.7),
+    entry("/rules/", "yearly", 0.4),
     ...CATEGORIES.filter((category) => !category.excludeFromPages).map(
       (category) => entry(`/suppliers/${category.slug}/`, "weekly", 0.8),
     ),

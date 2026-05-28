@@ -101,7 +101,7 @@ const pricingPlans: PricingPlan[] = [
     },
     addon: "هر مرحله اضافه: ۳,۰۰۰,۰۰۰ تومان",
     coverage: 1,
-    cta: "انتخاب بنیان",
+    cta: "ویژگی‌های بنیان",
   },
   {
     id: "royan",
@@ -121,7 +121,7 @@ const pricingPlans: PricingPlan[] = [
     },
     addon: "هر مرحله اضافه: ۴,۰۰۰,۰۰۰ تومان",
     coverage: 2,
-    cta: "انتخاب رویان",
+    cta: "ویژگی‌های رویان",
   },
   {
     id: "taban",
@@ -141,7 +141,7 @@ const pricingPlans: PricingPlan[] = [
     },
     addon: "هر مرحله اضافه: ۵,۰۰۰,۰۰۰ تومان",
     coverage: 3,
-    cta: "انتخاب تابان",
+    cta: "ویژگی‌های تابان",
     featured: true,
   },
   {
@@ -162,7 +162,7 @@ const pricingPlans: PricingPlan[] = [
     },
     addon: "هر مرحله اضافه: ۶,۰۰۰,۰۰۰ تومان",
     coverage: 4,
-    cta: "انتخاب تابان پلاس",
+    cta: "ویژگی‌های تابان پلاس",
   },
 ];
 
@@ -185,7 +185,7 @@ const pricingPlansEn: PricingPlan[] = [
     },
     addon: "Each additional stage: 3,000,000 toman",
     coverage: 1,
-    cta: "Choose Bonyan",
+    cta: "Bonyan features",
   },
   {
     id: "royan",
@@ -205,7 +205,7 @@ const pricingPlansEn: PricingPlan[] = [
     },
     addon: "Each additional stage: 4,000,000 toman",
     coverage: 2,
-    cta: "Choose Royan",
+    cta: "Royan features",
   },
   {
     id: "taban",
@@ -225,7 +225,7 @@ const pricingPlansEn: PricingPlan[] = [
     },
     addon: "Each additional stage: 5,000,000 toman",
     coverage: 3,
-    cta: "Choose Taban",
+    cta: "Taban features",
     featured: true,
   },
   {
@@ -246,7 +246,7 @@ const pricingPlansEn: PricingPlan[] = [
     },
     addon: "Each additional stage: 6,000,000 toman",
     coverage: 4,
-    cta: "Choose Taban Plus",
+    cta: "Taban Plus features",
   },
 ];
 
@@ -256,7 +256,8 @@ const pricingCopy = {
     title: "زمین بازی خود را انتخاب کنید",
     description:
       "در بازار داده، قیمت ارزان یعنی دسترسی همگانی، یعنی رقابت شلوغ و سوختن فرصت‌ها. تفکیک ساختاریافته‌ی اشتراک‌ها در پرشین‌سازه، رقابت را متعادل و سودآور نگه می‌دارد",
-    axisLabel: "متراژ زمین",
+    axisLabel: "متراژ زمین پروژه",
+    sliderPrompt: "یکی از بازه‌های متراژ را انتخاب کنید",
     sliderAria: "انتخاب مقیاس زمین پروژه",
     recommended: "پیشنهاد اصلی",
     bestValue: "بهترین ارزش",
@@ -272,7 +273,8 @@ const pricingCopy = {
     title: "Choose your playing field",
     description:
       "In a data market, cheap access often means crowded competition and burned opportunities. PersianSaze keeps subscriptions structured so competition stays more balanced and profitable.",
-    axisLabel: "Land size",
+    axisLabel: "Project land size",
+    sliderPrompt: "Choose a land-size segment",
     sliderAria: "Choose project land-size segment",
     recommended: "Recommended",
     bestValue: "Best value",
@@ -285,7 +287,7 @@ const pricingCopy = {
   },
 } as const;
 
-const DEFAULT_PLAN_INDEX = 2;
+const FALLBACK_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
   bonyan: "۳۰۰",
   royan: "۵۰۰",
@@ -559,7 +561,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   );
   const copy = pricingCopy[locale];
   const [duration, setDuration] = useState<Duration>("12");
-  const [activePlanIndex, setActivePlanIndex] = useState(DEFAULT_PLAN_INDEX);
+  const [activePlanIndex, setActivePlanIndex] = useState<number | null>(null);
   const [pulsingPlan, setPulsingPlan] = useState<PlanId | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -567,10 +569,10 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const railRef = useRef<HTMLDivElement | null>(null);
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const activePlan = plans[activePlanIndex];
+  const activePlan = activePlanIndex === null ? null : plans[activePlanIndex];
   const activeDuration = useMemo(() => durationById[duration], [duration, durationById]);
-  const activePercent = (activePlanIndex / (plans.length - 1)) * 100;
-  const activeBubbleTransform = getAxisItemTransform(activePlanIndex, plans.length);
+  const activePercent =
+    activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
 
   useEffect(() => {
     setIsReady(true);
@@ -642,7 +644,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
     const rail = railRef.current;
 
     if (!rail) {
-      return activePlanIndex;
+      return activePlanIndex ?? FALLBACK_PLAN_INDEX;
     }
 
     const rect = rail.getBoundingClientRect();
@@ -665,14 +667,16 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   };
 
   const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    const currentIndex = activePlanIndex ?? FALLBACK_PLAN_INDEX;
+
     if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
       event.preventDefault();
-      selectPlan(activePlanIndex + 1);
+      selectPlan(currentIndex + 1);
     }
 
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
       event.preventDefault();
-      selectPlan(activePlanIndex - 1);
+      selectPlan(currentIndex - 1);
     }
 
     if (event.key === "Home") {
@@ -704,60 +708,66 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="pricing-slider pricing-slider-labs mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-6">
+        <div className="pricing-slider pricing-slider-labs mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-7">
+          <div className="pricing-axis-copy mx-auto max-w-3xl text-center">
+            <span className="pricing-axis-label block text-lg font-black leading-7 text-[#2a241d] md:text-2xl md:leading-8">
+              {copy.axisLabel}
+            </span>
+            <span
+              className={cn(
+                "pricing-axis-insight mx-auto mt-2 block min-h-6 max-w-2xl rounded-full px-3 py-1 text-xs font-bold leading-5 transition duration-200 md:text-sm",
+                activePlan
+                  ? "bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/15 dark:bg-amber-300 dark:text-zinc-950"
+                  : "bg-[#f5eadb]/78 text-[#75695d]",
+              )}
+            >
+              {activePlan ? activePlan.sliderInsight : copy.sliderPrompt}
+            </span>
+          </div>
           <div
             ref={railRef}
-            className="relative mx-2 h-32 max-w-3xl touch-none md:mx-auto md:h-28"
+            className="relative mx-2 mt-5 h-24 max-w-3xl touch-none md:mx-auto md:h-20"
             onPointerDown={handleRailPointer}
             onPointerMove={handleRailMove}
           >
-            <span className="absolute right-0 top-9 text-[11px] font-bold leading-5 text-[#75695d] md:right-1 md:top-8 md:text-xs">
-              {copy.axisLabel}
-            </span>
-            <div className="absolute left-0 right-0 top-16 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2] md:top-14">
-              <span className="pricing-slider-rail block h-full w-full origin-right bg-[#CC785C]" />
+            <div className="absolute left-0 right-0 top-8 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
+              <span
+                className="pricing-slider-rail block h-full origin-right bg-[#CC785C] transition-[width] duration-200"
+                style={{ width: activePlanIndex === null ? "0%" : `${activePercent}%` }}
+              />
             </div>
             <ArrowLeft
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-0.8rem] top-16 z-30 h-5 w-5 -translate-y-1/2 text-[#CC785C] drop-shadow-[0_1px_0_rgba(255,250,241,0.95)] md:top-14"
+              className="pointer-events-none absolute left-[-0.8rem] top-8 z-30 h-5 w-5 -translate-y-1/2 text-[#CC785C] drop-shadow-[0_1px_0_rgba(255,250,241,0.95)]"
               strokeWidth={3}
             />
-            <span
-              className="absolute left-1/2 top-0 z-10 block w-max max-w-[calc(100%-1rem)] -translate-x-1/2 whitespace-nowrap rounded-full bg-[#CC785C] px-3 py-1 text-center text-[10.5px] font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 dark:bg-amber-300 dark:text-zinc-950 md:hidden"
-            >
-              {activePlan.sliderInsight}
-            </span>
-            <span
-              className="absolute top-0 z-10 hidden max-w-[min(72vw,24rem)] rounded-full bg-[#CC785C] px-3 py-1 text-center text-xs font-bold leading-5 text-white shadow-sm shadow-[#CC785C]/20 transition-[right] duration-200 dark:bg-amber-300 dark:text-zinc-950 md:block md:whitespace-nowrap"
-              style={{ right: `${activePercent}%`, transform: activeBubbleTransform }}
-            >
-              {activePlan.sliderInsight}
-            </span>
-            <button
-              type="button"
-              data-plan-slider-handle
-              role="slider"
-              aria-label={copy.sliderAria}
-              aria-valuemin={0}
-              aria-valuemax={plans.length - 1}
-              aria-valuenow={activePlanIndex}
-              aria-valuetext={`${activePlan.name}, ${activePlan.sliderInsight}`}
-              onKeyDown={handleSliderKeyDown}
-              onPointerDown={(event) => {
-                event.stopPropagation();
-                event.currentTarget.setPointerCapture(event.pointerId);
-                selectPlan(getIndexFromPointer(event.clientX));
-              }}
-              onPointerMove={(event) => {
-                if (event.buttons === 1) {
+            {activePlan ? (
+              <button
+                type="button"
+                data-plan-slider-handle
+                role="slider"
+                aria-label={copy.sliderAria}
+                aria-valuemin={0}
+                aria-valuemax={plans.length - 1}
+                aria-valuenow={activePlanIndex ?? 0}
+                aria-valuetext={`${activePlan.name}, ${activePlan.sliderInsight}`}
+                onKeyDown={handleSliderKeyDown}
+                onPointerDown={(event) => {
+                  event.stopPropagation();
+                  event.currentTarget.setPointerCapture(event.pointerId);
                   selectPlan(getIndexFromPointer(event.clientX));
-                }
-              }}
-              className="absolute top-16 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed] md:top-14"
-              style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
-            >
-              <span className="h-2.5 w-2.5 rounded-full bg-white" />
-            </button>
+                }}
+                onPointerMove={(event) => {
+                  if (event.buttons === 1) {
+                    selectPlan(getIndexFromPointer(event.clientX));
+                  }
+                }}
+                className="absolute top-8 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
+                style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-white" />
+              </button>
+            ) : null}
             {plans.map((plan, index) => {
               const tickPercent = (index / (plans.length - 1)) * 100;
 
@@ -771,7 +781,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       transform: "translate(50%, -50%)",
                     }}
                     className={cn(
-                      "absolute top-16 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1] md:top-14",
+                      "absolute top-8 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
                       activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
                     )}
                   />
@@ -784,7 +794,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       transform: getAxisItemTransform(index, plans.length),
                     }}
                     className={cn(
-                      "absolute top-16 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:top-14 md:h-14 md:w-20 md:text-xs",
+                      "absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:h-14 md:w-20 md:text-xs",
                       activePlanIndex === index && "text-[#2a241d]",
                     )}
                   >
@@ -797,13 +807,13 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             })}
           </div>
 
-          <p className="mx-auto mt-2 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
-            {activePlan.selectorMotto}
+          <p className="mx-auto min-h-6 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
+            {activePlan ? activePlan.selectorMotto : ""}
           </p>
         </div>
 
         <div className="pricing-duration mt-6 flex flex-col items-center gap-2">
-          <div className="grid w-full max-w-xl grid-cols-3 gap-1.5 rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.025] md:gap-2 md:rounded-[1.4rem]">
+          <div className="grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.3rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-2 pt-8 shadow-sm shadow-[#2a241d]/[0.025] md:rounded-[1.5rem]">
             {durationOptions.map((item) => {
               const active = item.id === duration;
 
@@ -814,16 +824,16 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                   data-duration-option={item.id}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "relative h-12 rounded-xl text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-12 md:rounded-2xl",
+                    "relative h-12 rounded-xl border text-sm font-bold shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-[3.25rem] md:rounded-2xl",
                     active
-                      ? "bg-[#2a241d] text-[#fffaf1] shadow-sm shadow-[#2a241d]/15"
-                      : "text-[#2a241d] hover:bg-[#f5eadb]",
+                      ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-[#2a241d]/15"
+                      : "border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-[#2a241d]/[0.025] hover:bg-[#f5eadb]",
                   )}
                 >
                   {item.id === "12" ? (
                     <span
                       className={cn(
-                        "absolute -top-4 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
+                        "pricing-best-value-badge absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
                         active
                           ? "border-[#2a241d] bg-[#fffaf1] text-[#2a241d]"
                           : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
@@ -832,7 +842,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       {copy.bestValue}
                     </span>
                   ) : null}
-                  <span className={cn("block", item.id === "12" && "pt-2")}>
+                  <span className="block">
                     {item.label}
                   </span>
                 </button>
