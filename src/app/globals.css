@@ -981,6 +981,14 @@ body {
   opacity: 0.38;
 }
 
+.problem-list-panel {
+  background: #fff;
+}
+
+.problem-list-panel-image {
+  object-position: center top;
+}
+
 .problem-orb-stage {
   background:
     radial-gradient(circle at 50% 52%, rgb(255 252 246 / 0.96), transparent 48%),
@@ -1630,46 +1638,70 @@ body {
 
 .hero-radar-visual {
   background:
-    linear-gradient(145deg, #11110f 0%, #0b0b0a 58%, #070707 100%);
-  border-color: rgba(255, 244, 233, 0.035);
+    linear-gradient(145deg, #fffaf1 0%, #f6efe4 58%, #eadfce 100%);
+  border-color: rgba(42, 33, 27, 0.1);
   box-shadow:
-    inset 0 1px 0 rgba(255, 244, 233, 0.02),
-    0 18px 44px rgba(42, 33, 27, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 44px rgba(42, 33, 27, 0.1);
 }
 
 .hero-radar-visual .hero-radar-panel {
-  background:
-    radial-gradient(circle at 50% 48%, rgba(204, 120, 92, 0.08), transparent 30%),
-    radial-gradient(circle at 42% 34%, rgba(255, 244, 233, 0.035), transparent 36%),
-    linear-gradient(145deg, #171815 0%, #11120f 58%, #0d0e0d 100%);
-  border-color: rgba(255, 244, 233, 0.055);
+  background: #f2ebdf;
+  border-color: rgba(42, 33, 27, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 244, 233, 0.035),
-    inset 0 -22px 58px rgba(0, 0, 0, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -22px 58px rgba(42, 33, 27, 0.07);
+}
+
+.hero-radar-map-image {
+  z-index: 0;
+  pointer-events: none;
+  filter: saturate(0.96) contrast(0.98) brightness(1.05);
+  object-position: center;
+  transform: scale(1.03);
+}
+
+.hero-radar-map-wash {
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 250, 241, 0.02) 0 32%, transparent 52%),
+    linear-gradient(180deg, rgba(255, 250, 241, 0.1), rgba(245, 238, 228, 0.02)),
+    rgba(255, 250, 241, 0.08);
 }
 
 .hero-radar-grid {
+  z-index: 2;
+  pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 244, 233, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 244, 233, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(42, 33, 27, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 33, 27, 0.06) 1px, transparent 1px);
   background-position: center;
   background-size: 4.15rem 4.15rem;
-  opacity: 0.24;
+  opacity: 0.18;
 }
 
 .hero-radar-vignette {
+  z-index: 3;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 50% 50%, transparent 0 42%, rgba(8, 8, 7, 0.2) 76%, rgba(8, 8, 7, 0.68) 100%);
+    radial-gradient(circle at 50% 50%, transparent 0 42%, rgba(255, 250, 241, 0.12) 72%, rgba(42, 33, 27, 0.2) 100%);
   background-size: auto;
 }
 
+.hero-radar-panel svg,
+.hero-radar-panel > div:last-child {
+  z-index: 4;
+  pointer-events: none;
+}
+
 .hero-radar-axis path {
-  stroke: rgba(255, 244, 233, 0.055);
+  stroke: rgba(42, 33, 27, 0.18);
   stroke-width: 1;
 }
 
 .hero-radar-ring {
-  stroke: rgba(255, 244, 233, 0.105);
+  stroke: rgba(42, 33, 27, 0.2);
   stroke-width: 1.15;
 }
 
@@ -4444,15 +4476,15 @@ html.theme-a .site-header {
 }
 
 html.theme-a .site-header .site-brand-mark {
-  background: #141413 !important;
+  background: rgb(255 250 241 / 0.9) !important;
   background-image: none !important;
-  border-color: #141413 !important;
-  box-shadow: none !important;
-  color: #faf9f5 !important;
+  border: 1px solid rgb(222 211 196 / 0.9) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: var(--theme-a-sun-orange) !important;
 }
 
 html.theme-a .site-header .site-brand-mark svg {
-  color: #faf9f5 !important;
+  color: var(--theme-a-sun-orange) !important;
 }
 
 html.theme-a .site-header .site-header-nav-link {
@@ -4469,11 +4501,11 @@ html.theme-a .site-header .site-header-nav-link:hover {
 }
 
 html.theme-a .site-header .site-header-phone {
-  background: #141413 !important;
+  background: rgb(255 250 241 / 0.82) !important;
   background-image: none !important;
-  border-color: #141413 !important;
-  box-shadow: none !important;
-  color: #faf9f5 !important;
+  border-color: rgb(222 211 196 / 0.9) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: #131314 !important;
 }
 
 html.theme-a .site-header .site-header-phone svg {
@@ -4481,7 +4513,38 @@ html.theme-a .site-header .site-header-phone svg {
 }
 
 html.theme-a .site-header .site-header-sales-label {
-  color: rgb(250 249 245 / 0.72) !important;
+  color: #6f6254 !important;
+}
+
+html.theme-a .site-header .site-header-login-link,
+html.theme-a .site-header .site-header-demo-link {
+  background: #141413 !important;
+  background-image: none !important;
+  border: 1px solid #141413 !important;
+  box-shadow: none !important;
+  color: #faf9f5 !important;
+}
+
+html.theme-a .site-header .site-header-login-link:hover,
+html.theme-a .site-header .site-header-demo-link:hover {
+  background: #24231f !important;
+  border-color: #24231f !important;
+}
+
+html.theme-a .site-header .site-header-phone:hover,
+html.theme-a .site-header .site-brand-mark:hover {
+  background: #fffaf1 !important;
+  border-color: rgb(204 120 92 / 0.38) !important;
+}
+
+html.theme-a .site-header a.site-header-phone[class*="bg-zinc-950"],
+html.theme-a .site-header button.header-preferences-trigger[class*="bg-zinc-950"],
+html.theme-a .site-header button.site-header-mobile-trigger[class*="bg-zinc-950"] {
+  background: rgb(255 250 241 / 0.88) !important;
+  background-image: none !important;
+  border-color: rgb(222 211 196 / 0.9) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: #131314 !important;
 }
 
 html.theme-a .faq-list-card {

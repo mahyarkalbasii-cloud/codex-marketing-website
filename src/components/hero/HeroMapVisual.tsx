@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { CSSProperties } from "react";
 
 import type { Locale } from "@/lib/i18n";
@@ -29,6 +30,8 @@ const radarBlips: RadarBlip[] = [
   { hitDelay: "1.75s", size: "sm", x: 42, y: 75 },
 ];
 
+const projectMapSrc = "/hero-project-map-focused.jpg";
+
 export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualProps) {
   void locale;
   const idPrefix = compact ? "hero-radar-compact" : "hero-radar-main";
@@ -42,6 +45,15 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       )}
     >
       <div className="hero-radar-panel absolute inset-4 overflow-hidden rounded-[1.25rem] border lg:inset-5">
+        <Image
+          src={projectMapSrc}
+          alt=""
+          fill
+          priority={!compact}
+          sizes={compact ? "(max-width: 768px) 100vw, 360px" : "(max-width: 1024px) 100vw, 540px"}
+          className="hero-radar-map-image object-cover"
+        />
+        <div className="hero-radar-map-wash absolute inset-0" />
         <div className="hero-radar-grid absolute inset-0" />
         <div className="hero-radar-vignette absolute inset-0" />
         <svg

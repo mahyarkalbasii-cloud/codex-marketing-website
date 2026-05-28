@@ -275,7 +275,7 @@ function MarketProblemSection() {
         </div>
 
         <Card className="relative order-2 mx-auto flex w-full max-w-[620px] overflow-hidden border-[#f5dfc7] bg-[#FFF4E7]/90 p-0 shadow-lg shadow-[#2a241d]/[0.04] md:order-none lg:order-1 lg:aspect-[1.04/0.92] lg:max-h-[520px] lg:self-center">
-          <article className="flex min-h-0 w-full flex-col" aria-label="نمای انتزاعی مشکل فروش در بازار ساختمان">
+          <article className="flex min-h-0 w-full flex-col" aria-label="نمای لیست پروژه‌های ساختمانی در پنل پرشین‌سازه">
             <MarketProblemPresentationVisual />
           </article>
         </Card>
