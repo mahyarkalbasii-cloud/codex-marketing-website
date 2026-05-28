@@ -948,79 +948,239 @@ body {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55);
 }
 
-.problem-hourglass-card {
-  --hourglass-cycle: 15.5s;
+.problem-orb-card {
   background:
-    radial-gradient(circle at 50% 42%, rgb(255 250 241 / 0.78), transparent 42%),
-    linear-gradient(135deg, rgb(255 250 241 / 0.82), rgb(248 244 237 / 0.64));
+    radial-gradient(circle at 50% 42%, rgb(255 250 241 / 0.82), transparent 42%),
+    radial-gradient(circle at 50% 58%, rgb(204 120 92 / 0.08), transparent 48%),
+    linear-gradient(135deg, rgb(255 250 241 / 0.86), rgb(248 244 237 / 0.66));
 }
 
-.problem-hourglass-grid {
+.problem-orb-grid {
   background-image:
-    linear-gradient(rgb(228 216 200 / 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(228 216 200 / 0.18) 1px, transparent 1px);
+    linear-gradient(rgb(228 216 200 / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(228 216 200 / 0.16) 1px, transparent 1px);
   background-size: 3.5rem 3.5rem;
-  opacity: 0.42;
+  opacity: 0.38;
 }
 
-.problem-hourglass-stage {
+.problem-orb-stage {
   background:
-    radial-gradient(circle at 50% 58%, rgb(20 20 19 / 0.055), transparent 36%),
-    radial-gradient(circle at 50% 50%, rgb(204 120 92 / 0.05), transparent 44%);
+    radial-gradient(circle at 50% 52%, rgb(255 252 246 / 0.96), transparent 48%),
+    radial-gradient(circle at 50% 56%, rgb(204 120 92 / 0.055), transparent 46%),
+    radial-gradient(circle at 50% 50%, rgb(86 214 200 / 0.055), transparent 54%);
+  isolation: isolate;
+  perspective: 900px;
 }
 
-.problem-hourglass-core {
-  animation: problem-hourglass-poise 18s ease-in-out infinite;
+.problem-orb-shell {
+  aspect-ratio: 1;
+  width: min(80vw, 28.5rem);
+  animation: problem-orb-breathe 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.problem-orb-shell::before {
+  position: absolute;
+  z-index: 1;
+  inset: 5.5%;
+  border: 1px solid rgb(255 255 255 / 0.82);
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 34% 27%, rgb(255 255 255 / 0.95), transparent 18%),
+    radial-gradient(circle at 43% 42%, rgb(255 255 255 / 0.54), transparent 35%),
+    radial-gradient(circle at 58% 59%, rgb(116 219 209 / 0.22), transparent 48%),
+    radial-gradient(circle at 70% 72%, rgb(232 162 76 / 0.16), transparent 38%),
+    linear-gradient(145deg, rgb(255 255 255 / 0.78), rgb(245 252 250 / 0.46) 48%, rgb(255 246 232 / 0.5));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.86),
+    inset 0 -2rem 3.4rem rgb(42 33 27 / 0.07),
+    inset 1.6rem 1.8rem 3.5rem rgb(255 255 255 / 0.38),
+    0 1.8rem 4.6rem rgb(42 33 27 / 0.13);
+  content: "";
+  -webkit-backdrop-filter: blur(10px) saturate(1.18);
+  backdrop-filter: blur(10px) saturate(1.18);
+}
+
+.problem-orb-shell::after {
+  position: absolute;
+  z-index: 5;
+  inset: 7%;
+  border-radius: 9999px;
+  background:
+    radial-gradient(ellipse at 34% 25%, rgb(255 255 255 / 0.68), transparent 18%),
+    radial-gradient(circle at 53% 52%, transparent 47%, rgb(255 255 255 / 0.18) 60%, transparent 72%),
+    linear-gradient(145deg, rgb(255 255 255 / 0.2), transparent 38%, rgb(204 120 92 / 0.055) 76%);
+  content: "";
+  pointer-events: none;
+}
+
+.problem-orb-aura {
+  position: absolute;
+  z-index: 0;
+  inset: -4%;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 34% 34%, rgb(86 214 200 / 0.18), transparent 34%),
+    radial-gradient(circle at 66% 58%, rgb(226 162 62 / 0.16), transparent 38%),
+    radial-gradient(circle at 50% 50%, rgb(215 117 89 / 0.1), transparent 60%);
+  filter: blur(22px);
+  opacity: 0.88;
+}
+
+.problem-orb-band-stack {
+  position: absolute;
+  z-index: 4;
+  inset: 10%;
+  transform-style: preserve-3d;
+}
+
+.problem-orb-band {
+  position: absolute;
+  inset: 0;
+  animation: problem-orb-band-spin var(--band-duration) linear infinite;
+  animation-delay: var(--band-delay);
   transform-origin: 50% 50%;
   will-change: transform;
 }
 
-.problem-hourglass-sand-layer,
-.problem-hourglass-grains-layer {
-  transform-origin: 50% 50%;
+.problem-orb-band-b,
+.problem-orb-band-d,
+.problem-orb-band-f {
+  animation-direction: reverse;
 }
 
-.problem-hourglass-sand-layer {
-  transform-box: view-box;
-}
-
-.problem-hourglass-top-sand {
-  animation: problem-hourglass-top-sand var(--hourglass-cycle) cubic-bezier(0.42, 0, 0.2, 1) infinite;
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  will-change: transform, opacity;
-}
-
-.problem-hourglass-bottom-sand {
-  animation: problem-hourglass-bottom-sand var(--hourglass-cycle) cubic-bezier(0.42, 0, 0.2, 1) infinite;
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  will-change: transform, opacity;
-}
-
-.problem-hourglass-stream {
-  animation: problem-hourglass-stream var(--hourglass-cycle) ease-in-out infinite;
-}
-
-.problem-hourglass-grains span {
+.problem-orb-particle {
   position: absolute;
-  left: 50%;
-  top: 0;
-  height: 0.16rem;
-  width: 0.16rem;
+  display: block;
+  height: var(--particle-size);
+  width: var(--particle-size);
   border-radius: 9999px;
-  background: #f8f2e7;
-  box-shadow: 0 0 7px rgb(248 242 231 / 0.28);
-  opacity: 0;
-  transform: translateX(-50%);
-  animation: problem-hourglass-grain var(--hourglass-cycle) cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
-  animation-delay: var(--grain-delay);
-  will-change: transform, opacity;
+  background: var(--particle-color);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.42),
+    0 0 10px color-mix(in srgb, var(--particle-color) 58%, transparent),
+    0 0 20px color-mix(in srgb, var(--particle-color) 28%, transparent);
+  opacity: var(--particle-opacity);
+  transform: translate(-50%, -50%) scale(var(--particle-depth));
+  animation: problem-orb-particle-twinkle 4.8s ease-in-out infinite;
+  animation-delay: var(--particle-delay);
+  will-change: opacity, transform;
 }
 
-.problem-hourglass-percent::before {
-  content: "۱۳٪";
-  animation: problem-hourglass-percent var(--hourglass-cycle) steps(1, end) infinite;
+.problem-orb-ring {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  height: var(--ring-height);
+  width: var(--ring-width);
+  border: 1px solid rgb(248 242 231 / 0.16);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 1.4rem rgb(255 255 255 / 0.18);
+  transform-origin: 50% 50%;
+  animation: problem-orb-ring-spin var(--ring-duration) linear infinite;
+  will-change: transform;
+}
+
+.problem-orb-ring-a {
+  --ring-duration: 19s;
+  --ring-height: 31%;
+  --ring-rotation: -14deg;
+  --ring-width: 79%;
+  border-color: rgb(42 33 27 / 0.12);
+}
+
+.problem-orb-ring-b {
+  --ring-duration: 24s;
+  --ring-height: 42%;
+  --ring-rotation: 38deg;
+  --ring-width: 72%;
+  animation-direction: reverse;
+  border-color: rgb(86 214 200 / 0.2);
+}
+
+.problem-orb-ring-c {
+  --ring-duration: 31s;
+  --ring-height: 64%;
+  --ring-rotation: 78deg;
+  --ring-width: 46%;
+  border-color: rgb(226 162 62 / 0.18);
+}
+
+.problem-orb-core {
+  position: absolute;
+  z-index: 6;
+  inset: 41.5%;
+  display: block;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 38% 32%, rgb(255 252 238 / 0.95), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgb(86 214 200 / 0.62), rgb(215 117 89 / 0.22) 46%, rgb(255 255 255 / 0.3) 72%);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.62),
+    0 0 1.6rem rgb(86 214 200 / 0.24),
+    0 0 2.6rem rgb(226 162 62 / 0.12);
+  animation: problem-orb-core-pulse 5.6s ease-in-out infinite;
+}
+
+.problem-orb-core > span {
+  position: absolute;
+  inset: var(--core-inset);
+  border: 1px solid var(--core-color);
+  border-radius: inherit;
+  opacity: var(--core-opacity);
+  animation: problem-orb-core-ring 4.8s ease-in-out infinite;
+  animation-delay: var(--core-delay);
+}
+
+.problem-orb-core > span:nth-child(1) {
+  --core-color: rgb(127 225 212 / 0.24);
+  --core-delay: -0.6s;
+  --core-inset: -58%;
+  --core-opacity: 0.72;
+}
+
+.problem-orb-core > span:nth-child(2) {
+  --core-color: rgb(240 191 99 / 0.2);
+  --core-delay: -1.4s;
+  --core-inset: -100%;
+  --core-opacity: 0.52;
+}
+
+.problem-orb-core > span:nth-child(3) {
+  --core-color: rgb(142 199 255 / 0.17);
+  --core-delay: -2.1s;
+  --core-inset: -145%;
+  --core-opacity: 0.38;
+}
+
+.problem-orb-status-dot {
+  position: relative;
+  display: grid;
+  height: 1.8rem;
+  width: 1.8rem;
+  place-items: center;
+  border: 1px solid rgb(224 210 190 / 0.9);
+  border-radius: 9999px;
+  background: rgb(255 250 241 / 0.7);
+}
+
+.problem-orb-status-dot::before {
+  position: absolute;
+  inset: 0.28rem;
+  border: 1px solid rgb(203 117 86 / 0.28);
+  border-radius: inherit;
+  content: "";
+}
+
+.problem-orb-status-dot > span {
+  height: 0.42rem;
+  width: 0.42rem;
+  border-radius: inherit;
+  background: #cc785c;
+  box-shadow: 0 0 0.7rem rgb(204 120 92 / 0.24);
+  animation: problem-orb-status-pulse 2.4s ease-in-out infinite;
 }
 
 .dark .solution-card-data {
@@ -2220,155 +2380,90 @@ body {
   }
 }
 
-@keyframes problem-hourglass-poise {
+@keyframes problem-orb-breathe {
   0%,
   100% {
-    transform: translateY(0) rotate(-0.8deg);
+    transform: translateY(0) rotateX(0deg) rotateZ(-0.6deg) scale(1);
   }
 
   45% {
-    transform: translateY(-0.18rem) rotate(0.65deg);
+    transform: translateY(-0.18rem) rotateX(2deg) rotateZ(0.7deg) scale(1.015);
   }
 
   72% {
-    transform: translateY(0.08rem) rotate(-0.25deg);
+    transform: translateY(0.08rem) rotateX(-1deg) rotateZ(-0.25deg) scale(0.996);
   }
 }
 
-@keyframes problem-hourglass-top-sand {
-  0% {
-    transform: scaleY(1);
-    opacity: 1;
+@keyframes problem-orb-band-spin {
+  from {
+    transform: rotate(var(--band-rotation));
   }
 
-  58% {
-    transform: scaleY(0.38);
-    opacity: 0.96;
-  }
-
-  78% {
-    transform: scaleY(0.18);
-    opacity: 0.9;
-  }
-
-  84% {
-    transform: scaleY(0.14);
-    opacity: 0;
-  }
-
-  90% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
+  to {
+    transform: rotate(calc(var(--band-rotation) + 360deg));
   }
 }
 
-@keyframes problem-hourglass-bottom-sand {
-  0% {
-    transform: scaleY(0.18);
-    opacity: 0.86;
+@keyframes problem-orb-ring-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--ring-rotation));
   }
 
-  58% {
-    transform: scaleY(0.72);
-    opacity: 0.96;
-  }
-
-  78% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-
-  84% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-
-  90% {
-    transform: scaleY(0.18);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scaleY(0.18);
-    opacity: 0.86;
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--ring-rotation) + 360deg));
   }
 }
 
-@keyframes problem-hourglass-stream {
+@keyframes problem-orb-particle-twinkle {
   0%,
-  10% {
-    opacity: 0;
+  100% {
+    filter: saturate(1);
+    opacity: var(--particle-opacity);
+    transform: translate(-50%, -50%) scale(var(--particle-depth));
   }
 
-  18%,
-  74% {
+  50% {
+    filter: saturate(1.16);
+    opacity: 0.92;
+    transform: translate(-50%, -50%) scale(calc(var(--particle-depth) + 0.12));
+  }
+}
+
+@keyframes problem-orb-core-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes problem-orb-core-ring {
+  0%,
+  100% {
+    opacity: var(--core-opacity);
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: calc(var(--core-opacity) + 0.16);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes problem-orb-status-pulse {
+  0%,
+  100% {
     opacity: 0.72;
+    transform: scale(0.86);
   }
 
-  84%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes problem-hourglass-grain {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 0.15rem) scale(0.72);
-  }
-
-  4% {
-    opacity: 0;
-  }
-
-  6% {
-    opacity: 0.42;
-  }
-
-  13% {
-    opacity: 0.34;
-    transform: translate(calc(-50% + var(--grain-end-x)), 6.7rem) scale(0.96);
-  }
-
-  16% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--grain-end-x)), 7.1rem) scale(0.9);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--grain-end-x)), 7.1rem) scale(0.9);
-  }
-}
-
-@keyframes problem-hourglass-percent {
-  0% {
-    content: "۱۳٪";
-  }
-
-  18% {
-    content: "۲۹٪";
-  }
-
-  36% {
-    content: "۴۷٪";
-  }
-
-  54% {
-    content: "۶۳٪";
-  }
-
-  72% {
-    content: "۷۸٪";
-  }
-
-  88% {
-    content: "۹۱٪";
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
 
@@ -3156,12 +3251,13 @@ body {
   .hero-radar-sweep,
   .hero-radar-blip,
   .hero-radar-blip::after,
-  .problem-hourglass-core,
-  .problem-hourglass-top-sand,
-  .problem-hourglass-bottom-sand,
-  .problem-hourglass-stream,
-  .problem-hourglass-grains span,
-  .problem-hourglass-percent::before,
+  .problem-orb-shell,
+  .problem-orb-band,
+  .problem-orb-particle,
+  .problem-orb-ring,
+  .problem-orb-core,
+  .problem-orb-core > span,
+  .problem-orb-status-dot > span,
   .hero-answer-card,
   .hero-score-bar,
   .mpv-grid,

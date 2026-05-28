@@ -119,21 +119,19 @@ export default function RootLayout({
       lang="fa-IR"
       dir="rtl"
       data-scroll-behavior="smooth"
+      data-theme="a"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} theme-a`}
     >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `(() => {
   try {
-    const savedTheme = window.localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = window.localStorage.getItem("persiansaze-theme");
     const theme = savedTheme === "dark" || savedTheme === "light" || savedTheme === "a"
       ? savedTheme
-      : prefersDark
-        ? "dark"
-        : "light";
+      : "a";
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.classList.toggle("theme-a", theme === "a");
     document.documentElement.dataset.theme = theme;
