@@ -750,7 +750,7 @@ const stageToneClasses = [
   "audience-stage-tone-sky",
 ] as const;
 
-const INITIAL_CENTER_STAGE_INDEX = 2;
+const INITIAL_CENTER_STAGE_INDEX = 6;
 
 const stageOffsetClasses: Record<number, string> = {
   "-2": "audience-stage-card-slot-before-far",

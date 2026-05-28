@@ -154,8 +154,8 @@ function SolutionCardMotif({
   card: (typeof solutionCards)[number];
 }) {
   return (
-    <div className="solution-card-visual-frame relative overflow-hidden rounded-[1.15rem] p-4">
-      <div className="solution-card-orbit" aria-hidden="true" />
+    <div className="solution-card-visual-frame solution-card-placeholder relative overflow-hidden rounded-[1.15rem] p-4">
+      <div className="solution-card-placeholder-mark" aria-hidden="true" />
       <div className="relative z-[1] flex h-full min-h-[15.5rem] flex-col justify-between">
         <div className="relative my-auto min-h-[11rem]">
           {card.chips.map((chip, chipIndex) => {
@@ -215,8 +215,8 @@ function SolutionCardMotif({
 
 function DemoClosingVisual() {
   return (
-    <div className="relative overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5 dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="absolute inset-0 map-parcel-pattern opacity-70" />
+    <div className="demo-path-card relative overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5 dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="absolute inset-0 demo-path-placeholder-pattern" aria-hidden="true" />
       <div className="relative rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/90 p-4 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -393,8 +393,8 @@ function HowItWorksSection() {
                 className={cn(
                   "how-layer-card min-w-0 overflow-hidden rounded-[1.5rem] border p-5 shadow-md shadow-[#2a241d]/[0.04] md:p-7 dark:border-zinc-800 dark:bg-zinc-900/82",
                   index === 0
-                    ? "border-[#F4DDC6] bg-[#FFF4EA]"
-                    : "border-[#D9EAF8] bg-[#EEF7FF]",
+                    ? "how-layer-card-data border-[#F4DDC6] bg-[#FFF4EA]"
+                    : "how-layer-card-decision border-[#D9EAF8] bg-[#EEF7FF]",
                 )}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -556,9 +556,9 @@ function DemoRequestSection() {
     <section id="demo" className="section-gradient section-gradient-demo relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
       <div className="absolute inset-0 map-parcel-pattern opacity-10" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
-        <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
+        <div className="demo-cta-surface relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
           <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(198,106,90,0.08),transparent_42%,rgba(47,111,103,0.08))]" aria-hidden="true" />
+            <div className="absolute inset-0 demo-section-flat-wash" aria-hidden="true" />
             <div className="relative">
               <h2 className="text-3xl font-semibold md:text-5xl">
                 برای دیدن نمونه اطلاعات پروژه‌ها، دمو بگیرید
@@ -572,7 +572,7 @@ function DemoRequestSection() {
               </div>
             </div>
             <div className="relative grid gap-4">
-              <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="demo-form-card rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
                 <div className="text-sm text-zinc-500">تماس فروش</div>
                 <div className="mt-3 text-2xl font-bold">{site.phones[0]}</div>
                 <div className="mt-2 text-sm text-zinc-500">

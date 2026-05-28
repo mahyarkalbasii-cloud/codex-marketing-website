@@ -39,6 +39,17 @@
   --accent-teal: #567F7E;
   --ambient-warm: rgba(201, 121, 43, 0.12);
   --ambient-cool: rgba(86, 128, 126, 0.08);
+  --ps-mudcloth: #2D2A26;
+  --ps-dusty-coral: #CB8373;
+  --ps-birch: #D6C4B0;
+  --ps-mossy-rock: #5F7A6A;
+  --ps-steel-blue: #6B8B98;
+  --ps-latte: #BFA591;
+  --ps-sienna-earth: #A64E3D;
+  --ps-deep-charcoal: #333333;
+  --ps-ivory: #FAF9F5;
+  --ps-ivory-soft: #EFE7DA;
+  --ps-ink: #1A1A1A;
 }
 
 .dark {
@@ -5439,4 +5450,427 @@ html.theme-a #audiences .audience-stage-field-row {
 html.theme-a #audiences .audience-stage-card-main p,
 html.theme-a #audiences .audience-stage-fields-panel > div {
   color: var(--solution-card-muted) !important;
+}
+
+/* Luxe tones color-composition wireframe for the Persian homepage. */
+html.theme-a #solution .solution-card {
+  background: var(--solution-card-shell) !important;
+  background-image: none !important;
+  border-color: color-mix(in srgb, var(--solution-card-shell) 78%, var(--ps-ivory)) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a #solution .solution-card-data {
+  --solution-card-shell: var(--ps-mossy-rock);
+  --solution-card-visual: #e5e0d7;
+  --solution-card-visual-soft: #d2c7b9;
+  --solution-card-copy: color-mix(in srgb, var(--ps-mossy-rock) 82%, black);
+  --solution-card-border: rgb(250 249 245 / 0.28);
+  --solution-card-line: rgb(45 42 38 / 0.18);
+  --solution-card-ink: var(--ps-ivory);
+  --solution-card-muted: var(--ps-ivory-soft);
+  --solution-card-accent: var(--ps-birch);
+}
+
+html.theme-a #solution .solution-card-workflow {
+  --solution-card-shell: var(--ps-steel-blue);
+  --solution-card-visual: #e3ded4;
+  --solution-card-visual-soft: #d0c4b5;
+  --solution-card-copy: color-mix(in srgb, var(--ps-steel-blue) 82%, black);
+  --solution-card-border: rgb(250 249 245 / 0.28);
+  --solution-card-line: rgb(45 42 38 / 0.18);
+  --solution-card-ink: var(--ps-ivory);
+  --solution-card-muted: var(--ps-ivory-soft);
+  --solution-card-accent: var(--ps-birch);
+}
+
+html.theme-a #solution .solution-card-training {
+  --solution-card-shell: var(--ps-birch);
+  --solution-card-visual: #ebe2d6;
+  --solution-card-visual-soft: #dcd0c1;
+  --solution-card-copy: color-mix(in srgb, var(--ps-birch) 72%, white);
+  --solution-card-border: rgb(45 42 38 / 0.18);
+  --solution-card-line: rgb(45 42 38 / 0.14);
+  --solution-card-ink: var(--ps-mudcloth);
+  --solution-card-muted: #4E4740;
+  --solution-card-accent: var(--ps-sienna-earth);
+}
+
+html.theme-a #solution .solution-card-placeholder {
+  background: #d9d1c5 !important;
+  background-image:
+    linear-gradient(135deg, transparent calc(50% - 0.5px), rgb(45 42 38 / 0.20) 50%, transparent calc(50% + 0.5px)) !important;
+  border-color: var(--solution-card-border) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a #solution .solution-card-placeholder::after {
+  position: absolute;
+  inset-block-end: 0.85rem;
+  inset-inline-start: 0.85rem;
+  z-index: 0;
+  border: 1px solid rgb(45 42 38 / 0.14);
+  border-radius: 999px;
+  background: rgb(250 249 245 / 0.54);
+  color: #4c4740;
+  content: "Image placeholder";
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.24rem 0.55rem;
+}
+
+html.theme-a #solution .solution-card-placeholder-mark,
+html.theme-a #solution .solution-card-orbit {
+  display: none !important;
+}
+
+html.theme-a #solution .solution-card-copy-frame,
+html.theme-a #solution .solution-card-chip,
+html.theme-a #solution .solution-card-mini-action {
+  background: color-mix(in srgb, var(--solution-card-copy) 82%, transparent) !important;
+  background-image: none !important;
+  border-color: var(--solution-card-border) !important;
+  color: var(--solution-card-muted) !important;
+}
+
+html.theme-a #solution .solution-card-copy-frame p,
+html.theme-a #solution .solution-card-copy-frame a,
+html.theme-a #solution .solution-card-title,
+html.theme-a #solution .solution-card-chip svg,
+html.theme-a #solution .solution-card-mini-action svg {
+  color: var(--solution-card-ink) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card {
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.18) !important;
+  box-shadow: none !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card-data {
+  background: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card-decision {
+  background: var(--ps-sienna-earth) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card :is(h3, p, svg) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card p {
+  color: var(--ps-ivory-soft) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card > div:first-child > span:first-child,
+html.theme-a #how-it-works .how-layer-card > div:first-child > span:last-child,
+html.theme-a #how-it-works .how-layer-card [class*="rounded-full"] {
+  background: var(--ps-birch) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.24) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #how-it-works .how-layer-arrow,
+html.theme-a #how-it-works .how-layer-arrow svg {
+  color: var(--ps-latte) !important;
+}
+
+html.theme-a #audiences .audience-sales-card {
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.16) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a #audiences .audience-sales-card-fast {
+  background: var(--ps-dusty-coral) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #audiences .audience-sales-card-consultative {
+  background: var(--ps-steel-blue) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #audiences .audience-sales-card-consultative :is(h3, p, div),
+html.theme-a #audiences .audience-sales-card-consultative .audience-sales-card-glow {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #audiences .audience-sales-card-fast :is(h3, p, div) {
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #audiences .audience-sales-card .badge,
+html.theme-a #audiences .audience-sales-card [class*="bg-[#f5eadb]"],
+html.theme-a #audiences .audience-sales-card [class*="bg-[#fffaf1]"] {
+  background: var(--ps-birch) !important;
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.14) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #audiences .audience-stage-card {
+  background: var(--ps-birch) !important;
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.16) !important;
+  box-shadow: none !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #audiences .audience-stage-card-center,
+html.theme-a #audiences .audience-stage-card[aria-current="true"] {
+  background: var(--ps-latte) !important;
+  border-color: color-mix(in srgb, var(--ps-sienna-earth) 38%, var(--ps-latte)) !important;
+}
+
+html.theme-a #audiences .audience-stage-card-main {
+  background: var(--ps-latte) !important;
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.16) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a #audiences .audience-stage-fields-panel {
+  background: var(--ps-mossy-rock) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.24) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #audiences .audience-stage-card h3,
+html.theme-a #audiences .audience-stage-card-main p {
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #audiences .audience-stage-fields-panel > div,
+html.theme-a #audiences .audience-stage-field-row {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #audiences .audience-stage-field-row > span:first-child {
+  background: var(--ps-birch) !important;
+}
+
+html.theme-a #audiences .audience-stage-card-cta {
+  background: var(--ps-sienna-earth) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card {
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.14) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(2) {
+  background: var(--ps-birch) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(3) {
+  background: var(--ps-latte) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(4) {
+  background: var(--ps-dusty-coral) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(5) {
+  background: var(--ps-mossy-rock) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(-n + 4) :is(.sales-flow-title, .sales-flow-body, .sales-flow-outcome, .sales-flow-step-number) {
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(5) :is(.sales-flow-title, .sales-flow-body, .sales-flow-outcome, .sales-flow-step-number) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-step-rail {
+  border-color: rgb(45 42 38 / 0.18) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(5) .sales-flow-step-rail,
+html.theme-a #sales-flow .sales-flow-card:nth-of-type(5) .sales-flow-outcome {
+  border-color: rgb(250 249 245 / 0.24) !important;
+}
+
+html.theme-a #plans {
+  background: var(--ps-deep-charcoal) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.14) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans .section-header :is(span, h2, p),
+html.theme-a #plans .pricing-reveal-header :is(span, h2, p) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans :is(.pricing-slider, .pricing-slider-labs, .pricing-duration > div) {
+  background: color-mix(in srgb, var(--ps-deep-charcoal) 86%, white) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.16) !important;
+  box-shadow: none !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans :is(.pricing-axis-label, .pricing-price-change, [data-plan-tick], .pricing-duration p) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans .pricing-axis-insight,
+html.theme-a #plans .pricing-best-value-badge {
+  background: var(--ps-latte) !important;
+  border-color: var(--ps-latte) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"]) {
+  background: var(--ps-dusty-coral) !important;
+  border-color: var(--ps-dusty-coral) !important;
+}
+
+html.theme-a #plans .pricing-card {
+  background: color-mix(in srgb, var(--ps-deep-charcoal) 78%, white) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.16) !important;
+  box-shadow: none !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans .pricing-card-featured,
+html.theme-a #plans .pricing-card[data-active-plan="true"] {
+  background: color-mix(in srgb, var(--ps-sienna-earth) 86%, black) !important;
+  border-color: var(--ps-sienna-earth) !important;
+}
+
+html.theme-a #plans .pricing-card :is(h3, p, div, span, svg) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#f5eadb]"]) {
+  background: rgb(250 249 245 / 0.12) !important;
+  border-color: rgb(250 249 245 / 0.18) !important;
+}
+
+html.theme-a #plans .pricing-card .pricing-recommended-badge {
+  background: var(--ps-sienna-earth) !important;
+  border-color: var(--ps-sienna-earth) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #plans .pricing-card > a {
+  background: var(--ps-ivory) !important;
+  border-color: var(--ps-ivory) !important;
+  color: var(--ps-deep-charcoal) !important;
+}
+
+html.theme-a #plans .pricing-card > a svg {
+  color: var(--ps-deep-charcoal) !important;
+}
+
+html.theme-a .faq-list-card {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.12) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a .faq-list-item {
+  background: var(--ps-birch) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a .faq-list-item:nth-of-type(even) {
+  background: var(--ps-latte) !important;
+}
+
+html.theme-a .faq-list-item:hover,
+html.theme-a .faq-list-item[open] {
+  background: color-mix(in srgb, var(--ps-birch) 86%, white) !important;
+}
+
+html.theme-a .faq-list-item:nth-of-type(even):hover,
+html.theme-a .faq-list-item:nth-of-type(even)[open] {
+  background: color-mix(in srgb, var(--ps-latte) 86%, white) !important;
+}
+
+html.theme-a .faq-list-item :is(summary, p, span) {
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a .faq-toggle-icon {
+  background: rgb(250 249 245 / 0.35) !important;
+  border-color: rgb(45 42 38 / 0.18) !important;
+}
+
+html.theme-a #demo .demo-cta-surface {
+  background: var(--ps-sienna-earth) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.22) !important;
+  box-shadow: none !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #demo .demo-cta-surface :is(h2, p) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #demo .demo-section-flat-wash {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+html.theme-a #demo .demo-form-card {
+  background: var(--ps-birch) !important;
+  background-image: none !important;
+  border-color: rgb(45 42 38 / 0.18) !important;
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #demo .demo-form-card :is(div, label, p, span) {
+  color: var(--ps-mudcloth) !important;
+}
+
+html.theme-a #demo .demo-path-card {
+  background: var(--ps-mossy-rock) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.24) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #demo .demo-path-card > div:last-child {
+  background: rgb(250 249 245 / 0.12) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.22) !important;
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #demo .demo-path-card :is(div, span, svg) {
+  color: var(--ps-ivory) !important;
+}
+
+html.theme-a #demo .demo-path-placeholder-pattern {
+  background: #d9d1c5 !important;
+  background-image:
+    linear-gradient(135deg, transparent calc(50% - 0.5px), rgb(45 42 38 / 0.22) 50%, transparent calc(50% + 0.5px)) !important;
+  opacity: 0.28;
+}
+
+html.theme-a #demo .demo-path-placeholder-pattern::after {
+  position: absolute;
+  inset-block-end: 0.85rem;
+  inset-inline-start: 0.85rem;
+  border: 1px solid rgb(45 42 38 / 0.16);
+  border-radius: 999px;
+  background: rgb(250 249 245 / 0.62);
+  color: #4c4740;
+  content: "Image placeholder";
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.24rem 0.55rem;
 }
