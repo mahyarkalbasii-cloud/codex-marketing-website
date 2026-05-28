@@ -8,9 +8,9 @@ import {
   pricingGroups,
   seoPages,
   site,
-  stages,
-  suppliers,
 } from "@/lib/site-data";
+import { CATEGORIES } from "@/data/categories";
+import { STAGES } from "@/data/stages";
 import {
   citiesEn,
   faqsEn,
@@ -28,6 +28,18 @@ export type Locale = "fa" | "en";
 
 export const defaultLocale: Locale = "fa";
 export const supportedLocales = ["fa", "en"] as const;
+
+const suppliers = CATEGORIES.filter((category) => !category.excludeFromPages).map(
+  (category) => ({
+    name: category.faTitle,
+    slug: category.slug,
+  }),
+);
+
+const stages = STAGES.filter((stage) => stage.isMain).map((stage) => ({
+  name: stage.faLabel,
+  slug: stage.slug,
+}));
 
 export function getLocaleFromPathname(pathname = "/"): Locale {
   return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "fa";

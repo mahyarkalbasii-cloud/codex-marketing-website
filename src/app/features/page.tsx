@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Bot, ClipboardList, Filter, MapPinned } from "lucide-react";
+import {
+  ArrowLeft,
+  Bot,
+  ClipboardList,
+  Filter,
+  GraduationCap,
+  MapPinned,
+} from "lucide-react";
 
 import { AnswerBox } from "@/components/marketing/answer-box";
 import { SectionHeader } from "@/components/marketing/section-header";
@@ -68,6 +75,14 @@ const features = [
       "لایه هوشمند به کاربر کمک می‌کند پروژه را سریع‌تر بفهمد، اولویت فرصت را بسنجد و اقدام بعدی را انتخاب کند.",
     icon: Bot,
     points: ["خلاصه پروژه", "پیشنهاد اقدام بعدی", "اولویت‌بندی فرصت‌ها"],
+  },
+  {
+    id: "training",
+    title: "آموزش فروش پروژه‌محور",
+    description:
+      "تیم فروش با متن تماس، سناریوی پیگیری و روش استفاده از داده‌ها، زمان درست اقدام را روشن‌تر می‌بیند.",
+    icon: GraduationCap,
+    points: ["متن تماس", "تمرین تیمی", "چک‌لیست پیگیری"],
   },
 ];
 

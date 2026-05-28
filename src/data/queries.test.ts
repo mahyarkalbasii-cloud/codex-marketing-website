@@ -3,7 +3,9 @@ import test from "node:test";
 
 import { CATEGORIES } from "./categories";
 import {
+  getHighValueCategoriesForCity,
   getMostCommonBuyStage,
+  getRelatedCategories,
   getRelatedBuyStages,
   getSaleMotionSummary,
   getSaleTypeSplit,
@@ -103,8 +105,10 @@ test("category insight helpers derive sale, timing, stages, and advice", () => {
   assert.ok(getSaleTypeSplit(category).fast.length > 0);
   assert.ok(getSaleTypeSplit(category).consultative.length > 0);
   assert.ok(getMostCommonBuyStage(category)?.id);
+  assert.ok(getRelatedCategories(category).every((item) => item.id !== category.id));
   assert.ok(getRelatedBuyStages(category).every((stage) => stage.id !== "pre-construction"));
   assert.ok(getStrategicAdviceHighlights(category, 3).length <= 3);
+  assert.equal(getHighValueCategoriesForCity("tehran").length, 4);
 });
 
 test("sales-style hubs include both-sale subcategories and visible parents", () => {
@@ -134,6 +138,7 @@ test("stage insight helpers derive active subcategories and redirects", () => {
   assert.equal(foundationGroups.length, 4);
   assert.equal(dominantSaleStyle.style, "mixed");
   assert.equal(getStageByRouteSlug("masonry").stage?.id, "wall-building");
+  assert.ok(getRelatedStages("foundation").length <= 2);
   assert.ok(getRelatedStages("foundation").some((stage) => stage.id === "structure"));
   assert.ok(foundationGroups.every((group) => !group.parent.excludeFromPages));
 });

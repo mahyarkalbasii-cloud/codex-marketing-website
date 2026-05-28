@@ -151,14 +151,21 @@ export function getDominantSaleStyleForStage(items: ActiveStageSubcategory[]) {
 }
 
 export function getRelatedStages(stageId: MainStageId) {
+  const adjacentStages = getAdjacentStages(stageId);
+
+  return [adjacentStages.previous, adjacentStages.next].filter(
+    (stage): stage is Stage & { id: MainStageId } => Boolean(stage),
+  );
+}
+
+export function getAdjacentStages(stageId: MainStageId) {
   const mainStages = getMainStages();
   const index = mainStages.findIndex((stage) => stage.id === stageId);
-  const offsets = [-1, 1, -2, 2];
 
-  return offsets
-    .map((offset) => mainStages[index + offset])
-    .filter((stage): stage is Stage & { id: MainStageId } => Boolean(stage))
-    .slice(0, 4);
+  return {
+    next: mainStages[index + 1],
+    previous: mainStages[index - 1],
+  };
 }
 
 export function formatStageRoles(roles: StageRole[]) {

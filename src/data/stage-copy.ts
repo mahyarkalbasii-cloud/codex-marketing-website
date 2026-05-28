@@ -1,4 +1,12 @@
-import type { StageId } from "./types";
+import { STAGES } from "./stages";
+import {
+  STAGE_ROLE_LABELS,
+  getActiveSubcategoriesForStage,
+  getDominantSaleStyleForStage,
+  type ActiveStageSubcategory,
+  type DominantSaleStyle,
+} from "./stage-insights";
+import type { Stage, StageId, SubCategory } from "./types";
 
 type StageActionCopy = {
   title: string;
@@ -28,301 +36,219 @@ export interface StageCopy {
   faqItems: { q: string; a: string }[];
   ctaTitle: string;
   ctaDescription: string;
+  marketStat?: string;
 }
 
-const commonActions = {
-  immediate: {
-    title: "اقدام فوری",
-    body: "اگر نیاز خرید فعال شده، سرعت تماس و پیشنهاد مرتبط اهمیت بالایی دارد.",
-  },
-  negotiation: {
-    title: "مذاکره",
-    body: "اگر پروژه به تصمیم نزدیک است، ارتباط اولیه باید با زمینه مرحله ساخت شروع شود.",
-  },
-  monitoring: {
-    title: "رصد",
-    body: "اگر هنوز برای خرید زود است، پروژه را ذخیره کنید و زمان پیگیری بعدی بسازید.",
-  },
-};
+export interface StageMarketStatSlot {
+  marketStat?: string;
+}
 
-function makeDominantParagraphs(stageName: string) {
+// TODO: Fill these slots only with verified PersianSaze database facts.
+export const STAGE_MARKET_STATS = Object.fromEntries(
+  STAGES.map((stage) => [stage.id, {}]),
+) as Record<StageId, StageMarketStatSlot>;
+
+const stageById = new Map(STAGES.map((stage) => [stage.id, stage]));
+
+function uniqueItems<T>(items: T[]): T[] {
+  return Array.from(new Set(items));
+}
+
+function formatList(items: string[], fallback: string) {
+  const cleanItems = uniqueItems(items.filter(Boolean));
+
+  if (cleanItems.length === 0) {
+    return fallback;
+  }
+
+  return cleanItems.join("، ");
+}
+
+function namesFromItems(items: ActiveStageSubcategory[], limit = 5) {
+  return uniqueItems(items.map((item) => item.subcategory.faTitle)).slice(0, limit);
+}
+
+function parentNamesFromItems(items: ActiveStageSubcategory[], limit = 4) {
+  return uniqueItems(items.map((item) => item.parent.faTitle)).slice(0, limit);
+}
+
+function itemsByRole(items: ActiveStageSubcategory[], role: keyof typeof STAGE_ROLE_LABELS) {
+  return items.filter((item) => item.roles.includes(role));
+}
+
+function itemsBySaleType(items: ActiveStageSubcategory[], saleType: DominantSaleStyle) {
+  if (saleType === "mixed") {
+    return items;
+  }
+
+  return items.filter(
+    (item) =>
+      item.subcategory.saleType === saleType || item.subcategory.saleType === "both",
+  );
+}
+
+function getDecisionItems(items: ActiveStageSubcategory[]) {
+  const decisionItems = items.filter(
+    (item) => item.roles.includes("buy") || item.roles.includes("negotiation"),
+  );
+
+  return decisionItems.length > 0 ? decisionItems : items;
+}
+
+function getRoleSentence(
+  roleLabel: string,
+  items: ActiveStageSubcategory[],
+  fallback: string,
+) {
+  const names = namesFromItems(items, 5);
+
+  if (names.length === 0) {
+    return fallback;
+  }
+
+  return `برای ${formatList(names, "")}، نقش این مرحله بیشتر در ${roleLabel} دیده می‌شود.`;
+}
+
+function getTopStrategicAdvice(items: ActiveStageSubcategory[]): SubCategory | undefined {
+  return [...items]
+    .map((item) => item.subcategory)
+    .filter((subcategory) => subcategory.strategicAdvice.trim().length > 0)
+    .sort(
+      (left, right) =>
+        right.strategicAdvice.length - left.strategicAdvice.length ||
+        left.id - right.id,
+    )[0];
+}
+
+function getStyleLabel(style: DominantSaleStyle) {
+  if (style === "fast") {
+    return "فروش سریع";
+  }
+
+  if (style === "consultative") {
+    return "فروش مشاوره‌ای";
+  }
+
+  return "فروش ترکیبی";
+}
+
+export function getStagePageContent(
+  stage: Stage,
+  activeItems = getActiveSubcategoriesForStage(stage.id),
+  dominant = getDominantSaleStyleForStage(activeItems),
+): StageCopy {
+  const decisionItems = getDecisionItems(activeItems);
+  const buyItems = itemsByRole(activeItems, "buy");
+  const negotiationItems = itemsByRole(activeItems, "negotiation");
+  const executionItems = itemsByRole(activeItems, "execution");
+  const fastItems = itemsBySaleType(activeItems, "fast");
+  const consultativeItems = itemsBySaleType(activeItems, "consultative");
+  const activeNames = namesFromItems(activeItems, 6);
+  const decisionNames = namesFromItems(decisionItems, 6);
+  const buyNames = namesFromItems(buyItems, 5);
+  const negotiationNames = namesFromItems(negotiationItems, 5);
+  const executionNames = namesFromItems(executionItems, 5);
+  const parentNames = parentNamesFromItems(activeItems);
+  const fastNames = namesFromItems(fastItems, 4);
+  const consultativeNames = namesFromItems(consultativeItems, 4);
+  const adviceExample = getTopStrategicAdvice(activeItems);
+  const marketStat = STAGE_MARKET_STATS[stage.id]?.marketStat;
+  const styleLabel = getStyleLabel(dominant.style);
+
+  const activeFieldsText = formatList(activeNames, "زیرگروه‌های فعال همین مرحله");
+  const decisionFieldsText = formatList(decisionNames, activeFieldsText);
+  const parentText = formatList(parentNames, "دسته‌های مرتبط");
+  const buyText = formatList(buyNames, "زیرگروه‌های نزدیک به خرید");
+  const negotiationText = formatList(
+    negotiationNames,
+    "زیرگروه‌های نیازمند مذاکره",
+  );
+  const executionText = formatList(executionNames, "زیرگروه‌های اجرایی");
+  const fastText = formatList(fastNames, "زیرگروه‌های سریع");
+  const consultativeText = formatList(
+    consultativeNames,
+    "زیرگروه‌های مشاوره‌ای",
+  );
+
   return {
-    fast: `در مرحله ${stageName}، بخش بزرگی از فرصت‌ها به فروش سریع نزدیک می‌شوند؛ یعنی تیم فروش باید پروژه‌های آماده اقدام را سریع شناسایی کند و تماس را عقب نیندازد.`,
-    consultative: `در مرحله ${stageName}، فروش مشاوره‌ای پررنگ‌تر است؛ چون تصمیم‌ها معمولاً قبل از خرید نهایی ساخته می‌شوند و فروشنده باید اعتماد، شواهد فنی و پیگیری منظم بسازد.`,
-    mixed: `در مرحله ${stageName}، هر دو سبک فروش فعال‌اند؛ بعضی زیرگروه‌ها نیاز به اقدام سریع دارند و بعضی باید زودتر وارد مذاکره و رصد شوند.`,
+    heroTitle: `فرصت‌های فروش در مرحله ${stage.faLabel}`,
+    heroSubtitle: `در مرحله ${stage.faLabel}، داده واقعی زیرگروه‌ها نشان می‌دهد ${decisionFieldsText} وارد خرید، مذاکره یا پیگیری جدی می‌شوند. این صفحه از ردیف‌های فعال در ${parentText} ساخته شده است، نه از توضیح عمومی درباره چرخه ساخت.`,
+    shortAnswer: `در ${stage.faLabel}، زیرگروه‌هایی مثل ${decisionFieldsText} باید از زاویه نقش واقعی‌شان در پروژه بررسی شوند. وزن فروش این مرحله ${styleLabel} است؛ سمت سریع با ${fastText} و سمت مشاوره‌ای با ${consultativeText} خوانده می‌شود. برای فروش، تفاوت بین خرید، مذاکره و اجرا در همین مرحله مهم‌تر از خود نام مرحله است.`,
+    definition: `این صفحه مرحله ${stage.faLabel} را از زاویه زیرگروه‌های فعال می‌خواند: ${buyText} در خرید، ${negotiationText} در مذاکره و ${executionText} در اجرا. بنابراین یک فروشنده باید اول بداند محصول یا خدمتش در کدام نقش ظاهر می‌شود و بعد زمان پیگیری را تنظیم کند.`,
+    timing: {
+      negotiation: getRoleSentence(
+        "مذاکره",
+        negotiationItems,
+        `در ${stage.faLabel} مذاکره برای همه زیرگروه‌ها فعال نیست، اما رصد پروژه برای تشخیص زمان ورود بعدی لازم است.`,
+      ),
+      purchase: getRoleSentence(
+        "خرید",
+        buyItems,
+        `در ${stage.faLabel} خرید مستقیم برای همه زیرگروه‌ها دیده نمی‌شود؛ نقش هر محصول باید جداگانه بررسی شود.`,
+      ),
+      execution: getRoleSentence(
+        "اجرا",
+        executionItems,
+        `در ${stage.faLabel} اجرای مستقیم برای همه زیرگروه‌ها فعال نیست، اما وضعیت پروژه به تصمیم‌های بعدی جهت می‌دهد.`,
+      ),
+    },
+    threeActions: {
+      immediate: {
+        title: "اقدام فوری",
+        body: `اگر محصول شما در این مرحله در خرید دیده می‌شود، مثل ${buyText}، پاسخ سریع، قیمت‌دهی روشن و ثبت نتیجه تماس در CRM باید بدون فاصله انجام شود.`,
+      },
+      negotiation: {
+        title: "مذاکره",
+        body: `برای مسیرهای مشاوره‌ای مثل ${consultativeText}، تماس باید با زمینه مرحله ${stage.faLabel} شروع شود و به نمونه‌کار، توضیح فنی یا جلسه بعدی وصل بماند.`,
+      },
+      monitoring: {
+        title: "رصد",
+        body: `اگر زیرگروه شما هنوز در خرید نیست اما در اجرا یا مذاکره دیده می‌شود، مثل ${executionText}، پروژه را ذخیره کنید و پیگیری بعدی را با نقش واقعی همان زیرگروه بسازید.`,
+      },
+    },
+    dominantSaleStyleParagraph: {
+      fast: `در داده این مرحله، فروش سریع با زیرگروه‌هایی مثل ${fastText} معنا پیدا می‌کند؛ یعنی زمان پاسخ، موجودی، قیمت و پیگیری کوتاه‌چرخه نقش پررنگ‌تری دارند.`,
+      consultative: `در داده این مرحله، فروش مشاوره‌ای با زیرگروه‌هایی مثل ${consultativeText} پررنگ‌تر است؛ یعنی تیم فروش باید زودتر وارد گفت‌وگوی فنی، اعتمادسازی و پیگیری مرحله‌ای شود.`,
+      mixed: `در ${stage.faLabel} هر دو مسیر دیده می‌شود: سمت سریع با ${fastText} و سمت مشاوره‌ای با ${consultativeText}. به همین دلیل تیم فروش باید هر زیرگروه را جدا از نام کلی مرحله بخواند.`,
+    },
+    faqItems: [
+      {
+        q: `در مرحله ${stage.faLabel} کدام زیرگروه‌ها وارد خرید یا مذاکره می‌شوند؟`,
+        a: `در داده این مرحله، ${decisionFieldsText} در نقش خرید یا مذاکره دیده می‌شوند. این‌ها باید در اولویت بررسی تیم فروش قرار بگیرند.`,
+      },
+      {
+        q: `در ${stage.faLabel} فروش سریع پررنگ‌تر است یا فروش مشاوره‌ای؟`,
+        a: `ترکیب saleType این مرحله به ${styleLabel} نزدیک است. نمونه‌های سریع شامل ${fastText} و نمونه‌های مشاوره‌ای شامل ${consultativeText} هستند.`,
+      },
+      {
+        q: `برای دسته‌هایی مثل ${parentText} در این مرحله چه کاری باید انجام داد؟`,
+        a: `باید نقش هر زیرگروه مشخص شود: خرید برای ${buyText}، مذاکره برای ${negotiationText} و اجرا برای ${executionText}. سپس پیگیری در CRM بر اساس همان نقش تنظیم می‌شود.`,
+      },
+      {
+        q: `کدام توصیه واقعی داده در صفحه ${stage.faLabel} مهم است؟`,
+        a: adviceExample
+          ? `${adviceExample.faTitle}: ${adviceExample.strategicAdvice}`
+          : `برای این مرحله، saleType و نقش‌های خرید، مذاکره و اجرا مبنای تصمیم فروش هستند.`,
+      },
+    ],
+    ctaTitle: `مرحله ${stage.faLabel} را به مسیر فروش قابل پیگیری تبدیل کنید`,
+    ctaDescription: `در دمو، همین زیرگروه‌ها و نقش‌های خرید، مذاکره و اجرا را روی پروژه‌های واقعی‌تر بررسی می‌کنیم تا تیم فروش بداند چه چیزی را پیگیری کند.`,
+    marketStat,
   };
 }
 
-function makeFaq(stageName: string, activeExample: string, inactiveExample: string) {
-  return [
-    {
-      q: `در مرحله ${stageName} باید مذاکره کنیم یا فقط رصد؟`,
-      a: "بسته به دسته محصول، این مرحله می‌تواند زمان مذاکره، خرید یا اجرای پیگیری باشد. مهم این است که مرحله ساخت را به اقدام فروش مشخص تبدیل کنید.",
-    },
-    {
-      q: `خرید در مرحله ${stageName} رخ می‌دهد؟`,
-      a: "برای برخی دسته‌ها بله، اما برای بسیاری از فروشندگان این مرحله بیشتر نقطه آماده‌سازی تصمیم خرید یا پیگیری جدی است.",
-    },
-    {
-      q: `چه تأمین‌کنندگانی در مرحله ${stageName} باید تماس فعال داشته باشند؟`,
-      a: activeExample,
-    },
-    {
-      q: `آیا ${inactiveExample} در مرحله ${stageName} فعال است؟`,
-      a: "معمولاً نه به‌عنوان خرید اصلی. ممکن است مذاکره یا رصد زودهنگام معنا داشته باشد، اما خرید و اجرای جدی آن به مرحله‌های بعدی نزدیک‌تر است.",
-    },
-    {
-      q: `پرشین‌سازه در مرحله ${stageName} چه کمکی می‌کند؟`,
-      a: "پرشین‌سازه با نمایش پروژه‌های هم‌مرحله، فیلتر، ثبت فرصت و یادآوری پیگیری کمک می‌کند تیم فروش دیر یا زود وارد نشود.",
-    },
-  ];
+export function getStagePageContentById(stageId: StageId) {
+  const stage = stageById.get(stageId);
+
+  if (!stage) {
+    return undefined;
+  }
+
+  return getStagePageContent(stage);
 }
 
-export const STAGE_COPY: Record<StageId, StageCopy> = {
-  "pre-construction": {
-    heroTitle: "فرصت‌های فروش پیش از شروع ساخت",
-    heroSubtitle:
-      "این مرحله برای خدمات مهندسی، طراحی، مشاوره و تصمیم‌های زودهنگام کاربرد دارد و صفحه عمومی مرحله ساخت ندارد.",
-    shortAnswer:
-      "پیش از ساخت بیشتر برای فروش مشاوره‌ای و تصمیم‌سازی اولیه معنا دارد. این داده در دسته‌بندی‌ها استفاده می‌شود اما به‌عنوان مرحله عمومی ساخت منتشر نمی‌شود.",
-    definition:
-      "در این بازه، پروژه هنوز وارد عملیات اجرایی نشده اما تصمیم‌های طراحی، مجوز، انتخاب مشاور و بعضی تأمین‌کنندگان شکل می‌گیرد.",
-    timing: {
-      negotiation: "مذاکره برای خدمات مهندسی و تصمیم‌های فنی زودهنگام فعال است.",
-      purchase: "خرید اجرایی معمولاً هنوز قطعی نیست.",
-      execution: "اجرای کارگاهی هنوز شروع نشده است.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("پیش از ساخت"),
-    faqItems: makeFaq(
-      "پیش از ساخت",
-      "خدمات مهندسی، مشاوره، طراحی و نرم‌افزارهای مدیریتی باید زودتر وارد گفتگو شوند.",
-      "مصالح نهایی",
-    ),
-    ctaTitle: "پیش از شروع ساخت را به فرصت فروش تبدیل کنید",
-    ctaDescription:
-      "با داده پروژه و پیگیری مرحله‌ای، تصمیم‌های زودهنگام سازنده را از دست ندهید.",
-  },
-  demolition: {
-    heroTitle: "فرصت‌های فروش در مرحله تخریب و گودبرداری",
-    heroSubtitle:
-      "مرحله شروع عملیات اجرایی و آماده‌سازی زمین؛ زمانی که بسیاری از فروشندگان باید پروژه را وارد رصد و پیگیری کنند.",
-    shortAnswer:
-      "مرحله تخریب و گودبرداری باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "در این مرحله پروژه از حالت برنامه‌ریزی وارد عملیات کارگاهی می‌شود و نشانه‌های واقعی فعالیت قابل مشاهده‌تر می‌شوند.",
-    timing: {
-      negotiation:
-        "برای خدمات اجرایی، ماشین‌آلات، ایمنی و برخی مصالح پایه زمان شروع مذاکره جدی است.",
-      purchase:
-        "خریدهای مرتبط با تجهیز کارگاه، حمل، نخاله‌برداری و بخشی از مصالح اولیه نزدیک می‌شود.",
-      execution:
-        "خدمات تخریب، گودبرداری، پایدارسازی و پشتیبانی کارگاه در این مرحله فعال‌اند.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("تخریب و گودبرداری"),
-    faqItems: makeFaq(
-      "تخریب و گودبرداری",
-      "پیمانکاران اجرایی، ماشین‌آلات، ایمنی، تجهیز کارگاه و بخشی از مصالح پایه باید تماس فعال داشته باشند.",
-      "کابینت و دکوراسیون داخلی",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  foundation: {
-    heroTitle: "فرصت‌های فروش در مرحله فونداسیون",
-    heroSubtitle:
-      "مرحله پی‌سازی و شروع سازه؛ نقطه مهم برای فروش مصالح، بتن، فولاد و خدمات مهندسی مرتبط.",
-    shortAnswer:
-      "مرحله فونداسیون باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "در فونداسیون، نیازهای سازه‌ای و تأمین مصالح سنگین جدی می‌شود و زمان‌بندی تأمین اهمیت بالایی دارد.",
-    timing: {
-      negotiation:
-        "تأمین‌کنندگان بتن، فولاد، قالب، افزودنی و خدمات آزمایشگاهی باید پیش از شروع کامل این مرحله مذاکره را آغاز کرده باشند.",
-      purchase:
-        "خرید بتن آماده، میلگرد، قالب و بخشی از تجهیزات کارگاهی در این بازه محتمل است.",
-      execution:
-        "اجرای بتن‌ریزی، قالب‌بندی، کنترل کیفیت و خدمات آزمایشگاهی در این مرحله انجام می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("فونداسیون"),
-    faqItems: makeFaq(
-      "فونداسیون",
-      "فروشندگان بتن آماده، میلگرد، قالب، افزودنی بتن، آزمایشگاه، ماشین‌آلات و خدمات اجرایی باید تماس فعال داشته باشند.",
-      "درب و پنجره",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  structure: {
-    heroTitle: "فرصت‌های فروش در مرحله اسکلت‌بندی",
-    heroSubtitle:
-      "مرحله اجرای سازه اصلی؛ نقطه طلایی برای ورود زودهنگام برخی فروشندگان مشاوره‌ای مانند نما، آسانسور و تأسیسات.",
-    shortAnswer:
-      "مرحله اسکلت‌بندی باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "اسکلت‌بندی علاوه بر نیازهای اجرایی، برای بسیاری از تأمین‌کنندگان سیگنال شروع مذاکره پیش از خرید نهایی است.",
-    timing: {
-      negotiation:
-        "برای آسانسور، نما، پنجره، تأسیسات و برخی خدمات طراحی، این مرحله زمان بسیار مهم مذاکره است.",
-      purchase:
-        "برای فولاد، اتصالات، ابزار و بخشی از خدمات اجرایی، خرید در این بازه جدی‌تر می‌شود.",
-      execution:
-        "اجرای اسکلت بتنی یا فلزی، سقف و کنترل کیفیت سازه در این مرحله جریان دارد.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("اسکلت‌بندی"),
-    faqItems: makeFaq(
-      "اسکلت‌بندی",
-      "فروشندگان فولاد، اتصالات، ابزار، آسانسور، نما، پنجره، تأسیسات و خدمات طراحی باید پروژه را فعالانه پیگیری کنند.",
-      "لوازم تکمیلی لابی",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  "wall-building": {
-    heroTitle: "فرصت‌های فروش در مرحله دیوارچینی",
-    heroSubtitle:
-      "مرحله جداره‌ها و سفت‌کاری؛ زمان نزدیک شدن پروژه به تصمیم‌های تأسیساتی، بازشوها و بخشی از نازک‌کاری.",
-    shortAnswer:
-      "مرحله دیوارچینی باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "دیوارچینی پروژه را به مرز تصمیم‌های اجرایی بعدی نزدیک می‌کند و برای بسیاری از دسته‌ها زمان پیگیری جدی است.",
-    timing: {
-      negotiation:
-        "فروشندگان پنجره، در، تأسیسات، عایق، پوشش‌ها و نازک‌کاری باید ارتباط خود را فعال کنند.",
-      purchase:
-        "بخشی از خریدهای مربوط به بلوک، ملات، وال‌پست، تأسیسات زیرکار و بازشوها محتمل است.",
-      execution:
-        "دیوارچینی، سفت‌کاری و آماده‌سازی زیرساخت‌های بعدی انجام می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("دیوارچینی"),
-    faqItems: makeFaq(
-      "دیوارچینی",
-      "مصالح دیوارچینی، وال‌پست، تأسیسات زیرکار، در و پنجره، عایق و فروشندگان مرتبط با نازک‌کاری باید پیگیری را جدی کنند.",
-      "تجهیزات بهره‌برداری نهایی",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  plaster: {
-    heroTitle: "فرصت‌های فروش در مرحله گچ و خاک",
-    heroSubtitle:
-      "مرحله آماده‌سازی برای نازک‌کاری؛ جایی که فروشندگان داخلی، پوشش‌ها و تجهیزات باید جدی‌تر پیگیری کنند.",
-    shortAnswer:
-      "مرحله گچ و خاک باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "گچ و خاک نشانه نزدیک شدن پروژه به انتخاب و خرید بسیاری از آیتم‌های داخلی و تکمیلی است.",
-    timing: {
-      negotiation:
-        "برای کابینت، دکوراسیون، روشنایی، کفپوش، رنگ و تجهیزات داخلی زمان مناسبی برای مذاکره است.",
-      purchase:
-        "خرید برخی مصالح پودری، زیرکارها، عایق‌ها و تجهیزات اولیه داخلی در این مرحله محتمل است.",
-      execution:
-        "اجرای گچ و خاک و آماده‌سازی سطوح برای مراحل نهایی انجام می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("گچ و خاک"),
-    faqItems: makeFaq(
-      "گچ و خاک",
-      "فروشندگان کابینت، دکوراسیون، روشنایی، کفپوش، رنگ، عایق و تجهیزات داخلی باید مذاکره و پیگیری را فعال کنند.",
-      "مصالح سنگین فونداسیون",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  "early-finishing": {
-    heroTitle: "فرصت‌های فروش در ابتدای نازک‌کاری",
-    heroSubtitle:
-      "مرحله شروع انتخاب‌ها و خریدهای نهایی‌تر؛ برای فروشندگان داخلی و تجهیزات تکمیلی اهمیت بالایی دارد.",
-    shortAnswer:
-      "مرحله ابتدای نازک‌کاری باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "ابتدای نازک‌کاری معمولاً پنجره فعال‌سازی خرید برای بسیاری از محصولات داخلی و تکمیلی است.",
-    timing: {
-      negotiation:
-        "فروشندگان کابینت، کمد، کفپوش، روشنایی، هوشمندسازی و دکوراسیون باید فعالانه پیگیری کنند.",
-      purchase:
-        "خرید کاشی، سرامیک، کفپوش، رنگ، تجهیزات برقی و بخشی از تجهیزات مکانیکی محتمل است.",
-      execution:
-        "نازک‌کاری، نصب پوشش‌ها و آماده‌سازی نصب تجهیزات شروع می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("ابتدای نازک‌کاری"),
-    faqItems: makeFaq(
-      "ابتدای نازک‌کاری",
-      "فروشندگان کاشی، سرامیک، کفپوش، رنگ، روشنایی، کابینت، دکوراسیون و تجهیزات مکانیکی و برقی باید فعالانه پیگیری کنند.",
-      "خدمات تخریب و گودبرداری",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  finishing: {
-    heroTitle: "فرصت‌های فروش در مرحله نازک‌کاری",
-    heroSubtitle:
-      "مرحله اجرای پوشش‌ها، تجهیزات داخلی و تصمیم‌های نهایی؛ زمان اقدام سریع برای بسیاری از فروشندگان.",
-    shortAnswer:
-      "مرحله نازک‌کاری باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "نازک‌کاری مرحله‌ای است که بسیاری از انتخاب‌ها به خرید یا نصب تبدیل می‌شود و تأخیر در پیگیری می‌تواند فرصت را از بین ببرد.",
-    timing: {
-      negotiation:
-        "برای برخی اقلام دکوراسیون، تجهیزات لابی، محوطه و خدمات تکمیلی هنوز فرصت مذاکره وجود دارد.",
-      purchase:
-        "خرید نهایی تجهیزات داخلی، روشنایی، شیرآلات، پوشش‌ها و لوازم تکمیلی در این بازه جدی است.",
-      execution:
-        "نصب و اجرای بسیاری از آیتم‌های نهایی ساختمان در این مرحله انجام می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("نازک‌کاری"),
-    faqItems: makeFaq(
-      "نازک‌کاری",
-      "فروشندگان تجهیزات داخلی، روشنایی، شیرآلات، پوشش‌ها، دکوراسیون، لابی و خدمات تکمیلی باید تماس و پیگیری سریع داشته باشند.",
-      "اسکلت فلزی و بتنی",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-  completion: {
-    heroTitle: "فرصت‌های فروش در ظریف‌کاری و پایان کار",
-    heroSubtitle:
-      "مرحله تکمیل، تحویل و آماده‌سازی بهره‌برداری؛ مناسب برای خدمات تکمیلی، نگهداری و برخی تجهیزات مشاعات.",
-    shortAnswer:
-      "مرحله ظریف‌کاری و پایان کار باید به یک اقدام فروش روشن تبدیل شود: مذاکره، خرید یا اجرای پیگیری.",
-    definition:
-      "در پایان کار، فرصت‌های اجرایی محدودتر می‌شوند اما خدمات تکمیلی، نگهداری، مشاعات و بهره‌برداری اهمیت پیدا می‌کنند.",
-    timing: {
-      negotiation:
-        "برای خدمات پس از فروش، نگهداری، تجهیزات مشاعات و بهره‌برداری زمان مناسبی برای شروع ارتباط است.",
-      purchase:
-        "خرید تجهیزات تکمیلی، لابی، مشاعات، نگهداری و برخی خدمات پشتیبان محتمل است.",
-      execution:
-        "تحویل، رفع نقص، نصب نهایی و آماده‌سازی بهره‌برداری انجام می‌شود.",
-    },
-    threeActions: commonActions,
-    dominantSaleStyleParagraph: makeDominantParagraphs("ظریف‌کاری و پایان کار"),
-    faqItems: makeFaq(
-      "ظریف‌کاری و پایان کار",
-      "فروشندگان تجهیزات مشاعات، خدمات نگهداری، بهره‌برداری، لابی و خدمات پس از فروش باید فرصت‌های آماده تحویل را دنبال کنند.",
-      "مصالح اصلی سازه",
-    ),
-    ctaTitle: "این مرحله را به فروش تبدیل کنید",
-    ctaDescription:
-      "با داده به‌روز پروژه و پیگیری ساخت‌یافته، تصمیم‌گیری تیم فروش را سریع‌تر کنید.",
-  },
-};
-
 export function getStageMetaDescription(stageId: StageId) {
-  const answer = STAGE_COPY[stageId].shortAnswer;
+  const answer = getStagePageContentById(stageId)?.shortAnswer ?? "";
 
   return answer.length <= 155 ? answer : `${answer.slice(0, 154).trim()}…`;
 }

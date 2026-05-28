@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Building2, MapPinned, Target } from "lucide-react";
+import { ArrowLeft, MapPinned } from "lucide-react";
 
+import { CityInternalLinks } from "@/components/city/CityInternalLinks";
 import { AnswerBox } from "@/components/marketing/answer-box";
-import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getStageByRouteSlug } from "@/data/stage-insights";
-import { absoluteUrl, cities, stages, suppliers } from "@/lib/site-data";
-import { getStageHref } from "@/lib/stage-routes";
+import { getHighValueCategoriesForCity } from "@/data/category-insights";
+import { getCityInsight } from "@/data/city-insights";
+import { absoluteUrl, cities } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 type PageProps = {
@@ -54,14 +54,8 @@ export default async function CityPage({ params }: PageProps) {
     notFound();
   }
 
-  const importantStages = stages.slice(1, 5).map((stage) => {
-    const canonicalStage = getStageByRouteSlug(stage.slug).stage;
-
-    return {
-      ...stage,
-      href: canonicalStage ? getStageHref(canonicalStage) : `/stages/${stage.slug}/`,
-    };
-  });
+  const cityInsight = getCityInsight(city.slug);
+  const highValueCategories = getHighValueCategoriesForCity(city.slug);
 
   const schema = {
     "@context": "https://schema.org",
@@ -119,49 +113,12 @@ export default async function CityPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="border-y border-border bg-muted/35">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-          <SectionHeader
-            eyebrow={`فروش در ${city.name}`}
-            title="در این بازار، مرحله ساخت و زمان ورود تعیین‌کننده است."
-            description="برای هر محصول ساختمانی، ارزش پروژه در یک پنجره زمانی مشخص فعال می‌شود. صفحه‌های زیر کمک می‌کنند این پنجره را دقیق‌تر بفهمید."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            <Card className="p-6">
-              <Building2 className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
-              <h3 className="mt-5 text-xl font-bold">دسته‌های مناسب فروش</h3>
-              <div className="mt-5 grid gap-3">
-                {suppliers.slice(0, 4).map((supplier) => (
-                  <Link
-                    key={supplier.slug}
-                    href={`/suppliers/${supplier.slug}`}
-                    className="flex items-center justify-between rounded-md border border-border bg-background px-4 py-3 text-sm hover:bg-muted"
-                  >
-                    {supplier.name}
-                    <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-                  </Link>
-                ))}
-              </div>
-            </Card>
-            <Card className="p-6">
-              <Target className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
-              <h3 className="mt-5 text-xl font-bold">مراحل ساخت مهم</h3>
-              <div className="mt-5 grid gap-3">
-                {importantStages.map((stage) => (
-                  <Link
-                    key={stage.slug}
-                    href={stage.href}
-                    className="flex items-center justify-between rounded-md border border-border bg-background px-4 py-3 text-sm hover:bg-muted"
-                  >
-                    {stage.name}
-                    <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-                  </Link>
-                ))}
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <CityInternalLinks
+        categories={highValueCategories}
+        cityName={city.name}
+        faqItems={cityInsight.faqItems}
+        reasonByCategorySlug={cityInsight.categoryReasons}
+      />
     </main>
   );
 }
