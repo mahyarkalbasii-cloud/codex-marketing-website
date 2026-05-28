@@ -19,20 +19,21 @@ type HeaderPreferencesMenuProps = {
   compact?: boolean;
 };
 
+const THEME_STORAGE_KEY = "persiansaze-theme";
 const themes: Theme[] = ["light", "dark", "a"];
 
 function getPreferredTheme(): Theme {
   if (typeof window === "undefined") {
-    return "light";
+    return "a";
   }
 
-  const savedTheme = window.localStorage.getItem("theme");
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
 
   if (savedTheme === "dark" || savedTheme === "light" || savedTheme === "a") {
     return savedTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "a";
 }
 
 function applyTheme(theme: Theme) {
@@ -108,7 +109,7 @@ export function HeaderPreferencesMenu({
   const targetLocale: Locale = locale === "fa" ? "en" : "fa";
   const labels = copy[locale];
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("a");
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -149,7 +150,7 @@ export function HeaderPreferencesMenu({
   function selectTheme(nextTheme: Theme) {
     setTheme(nextTheme);
     applyTheme(nextTheme);
-    window.localStorage.setItem("theme", nextTheme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
     setOpen(false);
   }
 

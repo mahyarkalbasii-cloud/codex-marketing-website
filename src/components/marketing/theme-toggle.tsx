@@ -9,20 +9,21 @@ import { cn } from "@/lib/utils";
 
 type Theme = "light" | "dark" | "a";
 
+const THEME_STORAGE_KEY = "persiansaze-theme";
 const themes: Theme[] = ["light", "dark", "a"];
 
 function getPreferredTheme(): Theme {
   if (typeof window === "undefined") {
-    return "light";
+    return "a";
   }
 
-  const savedTheme = window.localStorage.getItem("theme");
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
 
   if (savedTheme === "dark" || savedTheme === "light" || savedTheme === "a") {
     return savedTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "a";
 }
 
 function applyTheme(theme: Theme) {
@@ -36,7 +37,7 @@ function applyTheme(theme: Theme) {
 
 export function ThemeToggle({ className }: { className?: string }) {
   const locale = getLocaleFromPathname(usePathname() || "/");
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("a");
 
   useEffect(() => {
     const nextTheme = getPreferredTheme();
@@ -47,7 +48,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   function selectTheme(nextTheme: Theme) {
     setTheme(nextTheme);
     applyTheme(nextTheme);
-    window.localStorage.setItem("theme", nextTheme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
   }
 
   const labels = locale === "fa"
