@@ -4522,12 +4522,20 @@ body {
   color: var(--card-on-light);
 }
 
-/* Chips/badges → tonal Seamist */
-.audience-sales-card-fast .rounded-full:not(.audience-sales-card-glow),
-.audience-sales-card-consultative .rounded-full:not(.audience-sales-card-glow) {
+/* Chips/badges → tonal Seamist; exclude CTA <a> links */
+.audience-sales-card-fast .rounded-full:not(.audience-sales-card-glow):not(a),
+.audience-sales-card-consultative .rounded-full:not(.audience-sales-card-glow):not(a) {
   background: color-mix(in srgb, var(--card-on-light) 14%, var(--card-supplier));
   border-color: color-mix(in srgb, var(--card-on-light) 22%, var(--card-supplier));
   color: var(--card-on-light);
+}
+
+/* CTA link keeps its dark surface regardless of card recolor */
+.audience-sales-card-fast a.rounded-full,
+.audience-sales-card-consultative a.rounded-full {
+  background: #2a241d;
+  border-color: transparent;
+  color: #ffffff;
 }
 
 /* ── 3. Stages (مراحل ساخت) — all 8 cards → Latte ────────────── */
