@@ -1,3 +1,5 @@
+import { CATEGORIES } from "./categories";
+import { CITY_CATEGORY_PRIORITY } from "./city-insights";
 import { STAGES } from "./stages";
 import type { Category, SaleType, Stage, StageId, SubCategory } from "./types";
 
@@ -148,6 +150,70 @@ export function getRelatedBuyStages(category: Category): Stage[] {
   return STAGES.filter((stage) => stageIds.has(stage.id));
 }
 
+function getActiveStageIds(category: Category): Set<StageId> {
+  const stageIds = new Set<StageId>();
+
+  for (const subcategory of category.subcategories) {
+    for (const stageId of [
+      ...subcategory.negotiationStages,
+      ...subcategory.buyStages,
+      ...subcategory.executionStages,
+    ]) {
+      if (stageId !== "pre-construction") {
+        stageIds.add(stageId);
+      }
+    }
+  }
+
+  return stageIds;
+}
+
+export function getRelatedCategories(
+  category: Category,
+  limit = 3,
+): Category[] {
+  const currentStageIds = getActiveStageIds(category);
+
+  return CATEGORIES.filter(
+    (candidate) => !candidate.excludeFromPages && candidate.id !== category.id,
+  )
+    .map((candidate) => {
+      const candidateStageIds = getActiveStageIds(candidate);
+      const sharedStageCount = [...candidateStageIds].filter((stageId) =>
+        currentStageIds.has(stageId),
+      ).length;
+
+      return { candidate, sharedStageCount };
+    })
+    .filter((item) => item.sharedStageCount > 0)
+    .sort((left, right) => {
+      if (right.sharedStageCount !== left.sharedStageCount) {
+        return right.sharedStageCount - left.sharedStageCount;
+      }
+
+      return left.candidate.faTitle.localeCompare(right.candidate.faTitle, "fa");
+    })
+    .slice(0, limit)
+    .map((item) => item.candidate);
+}
+
+export function getHighValueCategoriesForCity(
+  citySlug: string,
+  limit = 4,
+): Category[] {
+  const visibleCategories = CATEGORIES.filter((category) => !category.excludeFromPages);
+  const preferredSlugs =
+    CITY_CATEGORY_PRIORITY[citySlug] ?? CITY_CATEGORY_PRIORITY.tehran;
+  const preferredCategories = preferredSlugs
+    .map((slug) => visibleCategories.find((category) => category.slug === slug))
+    .filter((category): category is Category => Boolean(category));
+  const fallbackCategories = visibleCategories.filter(
+    (category) => !preferredCategories.some((preferred) => preferred.id === category.id),
+  );
+
+  return [...preferredCategories, ...fallbackCategories].slice(0, limit);
+}
+
 export function getStrategicAdviceHighlights(
   category: Category,
   limit = 5,
@@ -179,7 +245,7 @@ export function getFaqItemsForCategory(
   category: Category,
   categorySpecificItems: { q: string; a: string }[],
 ) {
-  return [...getGenericFaqItems(category), ...categorySpecificItems].slice(0, 6);
+  return [...categorySpecificItems, ...getGenericFaqItems(category)].slice(0, 4);
 }
 
 export function getSaleTypeLabel(saleType: SaleType | null) {

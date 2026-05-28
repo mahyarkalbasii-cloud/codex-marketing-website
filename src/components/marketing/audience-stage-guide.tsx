@@ -36,6 +36,7 @@ type Stage = {
 
 type SalesTypeCardData = {
   id: SalesKind;
+  href: string;
   label: string;
   title: string;
   text: string;
@@ -307,6 +308,7 @@ const stages: Stage[] = [
 const salesTypes: readonly SalesTypeCardData[] = [
   {
     id: "fast",
+    href: "/sales-style/fast/",
     label: "نیاز نزدیک به خرید",
     title: "فروش سریع و تراکنشی",
     text: "برای کالاها و خدماتی که باید سریع به پروژه فعال و آماده خرید برسند.",
@@ -326,6 +328,7 @@ const salesTypes: readonly SalesTypeCardData[] = [
   },
   {
     id: "consultative",
+    href: "/sales-style/consultative/",
     label: "ورود زودتر به تصمیم",
     title: "فروش مشاوره‌ای",
     text: "برای فروش‌هایی که اعتمادسازی، بررسی فنی یا مذاکره قبل از خرید لازم دارند.",
@@ -607,6 +610,7 @@ const stagesEn: Stage[] = [
 const salesTypesEn: readonly SalesTypeCardData[] = [
   {
     id: "fast",
+    href: "/sales-style/fast/",
     label: "Near-purchase need",
     title: "Fast transactional sales",
     text: "For goods and services that need to reach active, purchase-ready projects quickly.",
@@ -626,6 +630,7 @@ const salesTypesEn: readonly SalesTypeCardData[] = [
   },
   {
     id: "consultative",
+    href: "/sales-style/consultative/",
     label: "Earlier decision entry",
     title: "Consultative sales",
     text: "For sales that require trust-building, technical review, or negotiation before purchase.",
@@ -713,7 +718,7 @@ const stageRoutes: Record<Locale, string[]> = {
 
 const stageSummaries: Record<Locale, string[]> = {
   fa: [
-    "شروع عملیات اجرایی و بهترین زمان رصد پروژه برای خدمات اولیه، ایمنی و آماده‌سازی کارگاه.",
+    "شروع عملیات اجرایی و زمان مناسب رصد پروژه برای خدمات اولیه، ایمنی و آماده‌سازی کارگاه.",
     "نیازهای سازه‌ای جدی می‌شود و تأمین بتن، فولاد، قالب و خدمات فنی به زمان‌بندی دقیق وابسته است.",
     "تصمیم‌های سنگین سازه‌ای و هماهنگی تأمین‌کننده‌ها شکل می‌گیرد؛ تأخیر مستقیم روی سرعت پروژه اثر دارد.",
     "فضاها و بازشوها تثبیت می‌شوند و فروشندگان مصالح، تأسیسات، در و پنجره می‌توانند وارد گفت‌وگو شوند.",
@@ -820,13 +825,13 @@ function SalesTypeCard({
       </div>
 
       <div className="relative mt-4">
-        <button
-          type="button"
+        <Link
+          href={type.href}
           className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#2a241d] px-4 text-sm font-black text-white shadow-lg shadow-[#2a241d]/15 transition hover:bg-[#18130f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/40"
         >
           {copy.more}
           <ArrowLeft className="h-4 w-4" strokeWidth={2} />
-        </button>
+        </Link>
       </div>
     </Card>
   );

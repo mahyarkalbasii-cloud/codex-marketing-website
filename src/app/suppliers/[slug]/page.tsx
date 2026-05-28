@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CTABanner } from "@/components/category/CTABanner";
 import { FAQ } from "@/components/category/FAQ";
 import { Hero } from "@/components/category/Hero";
+import { RelatedCategories } from "@/components/category/RelatedCategories";
 import { HowWeHelp } from "@/components/category/HowWeHelp";
 import { RelatedStages } from "@/components/category/RelatedStages";
 import { SalesPathLink } from "@/components/category/SalesPathLink";
@@ -16,12 +17,13 @@ import { StructuredData } from "@/components/marketing/structured-data";
 import {
   getFaqItemsForCategory,
   getMostCommonBuyStage,
+  getRelatedCategories,
   getRelatedBuyStages,
   getSaleMotionSummary,
   getSaleTypeSplit,
   getStrategicAdviceHighlights,
 } from "@/data/category-insights";
-import { CATEGORY_COPY } from "@/data/category-copy";
+import { getCategoryPageContent } from "@/data/category-copy";
 import { CATEGORIES } from "@/data/categories";
 import { getCategoryBySlug } from "@/data/queries";
 import type { Category } from "@/data/types";
@@ -60,7 +62,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const copy = CATEGORY_COPY[category.slug];
+  const copy = getCategoryPageContent(category);
   const description = truncateDescription(copy.shortAnswer);
   const canonicalPath = `/suppliers/${category.slug}/`;
 
@@ -90,14 +92,18 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const copy = CATEGORY_COPY[category.slug];
+  const copy = getCategoryPageContent(category);
   const saleMotion = getSaleMotionSummary(category);
   const split = getSaleTypeSplit(category);
   const timingStage = getMostCommonBuyStage(category);
   const relatedStages = getRelatedBuyStages(category);
-  const adviceHighlights = getStrategicAdviceHighlights(category);
+  const relatedCategories = getRelatedCategories(category);
+  const adviceHighlights = getStrategicAdviceHighlights(
+    category,
+    category.subcategories.length,
+  );
   const faqItems = getFaqItemsForCategory(category, copy.faqItems);
-  const shortAnswerQuestion = `چه زمانی پرشین‌سازه برای فروشندگان ${category.faTitle} ارزشمند است؟`;
+  const shortAnswerQuestion = copy.shortAnswerQuestion;
   const canonicalUrl = absoluteUrl(`/suppliers/${category.slug}/`);
 
   const faqSchema = {
@@ -137,14 +143,21 @@ export default async function CategoryPage({
       />
       <Hero category={category} saleMotion={saleMotion} subtitle={copy.heroSubtitle} />
       <ShortAnswer question={shortAnswerQuestion} answer={copy.shortAnswer} />
-      <SubcategoryGrid split={split} />
+      <SubcategoryGrid category={category} split={split} />
       <TimingInsight
         category={category}
+        marketStat={copy.marketStat}
         stage={timingStage}
         override={copy.timingInsight}
       />
-      <HowWeHelp />
-      <SalesPathLink motion={saleMotion.motion} />
+      <HowWeHelp
+        category={category}
+        saleMotion={saleMotion}
+        split={split}
+        stage={timingStage}
+      />
+      <SalesPathLink category={category} motion={saleMotion.motion} split={split} />
+      <RelatedCategories categories={relatedCategories} />
       <RelatedStages stages={relatedStages} />
       <StrategicAdvice items={adviceHighlights} />
       <FAQ items={faqItems} />

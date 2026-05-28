@@ -64,6 +64,7 @@ const solutionCards = [
   {
     title: "ابزار فروش و پیگیری پروژه‌محور",
     body: "نقشه، فیلتر، CRM و پیامک هوشمند کمک می‌کند تیم فروش فرصت‌ها را منظم‌تر ببیند، اولویت‌بندی کند و پیگیری را از دست ندهد.",
+    href: "/features/#crm",
     motif: "workflow",
     chips: [
       { label: "فیلتر مرحله", icon: Layers },
@@ -74,6 +75,7 @@ const solutionCards = [
   {
     title: "داده زنده پروژه‌های ساختمانی",
     body: "پروژه‌های فعال تهران، کرج و لواسان با آدرس، مرحله ساخت، تصویر و سرنخ تماس در یک نمای قابل بررسی جمع می‌شوند.",
+    href: "/features/#map",
     motif: "data",
     chips: [
       { label: "به‌روزرسانی", icon: CheckCircle2 },
@@ -84,6 +86,7 @@ const solutionCards = [
   {
     title: "آموزش فروش پروژه‌محور",
     body: "تیم شما با متن تماس، سناریوی پیگیری و روش استفاده از داده‌ها یاد می‌گیرد در زمان درست و با زمینه روشن اقدام کند.",
+    href: "/features/#training",
     motif: "training",
     chips: [
       { label: "متن تماس", icon: MessageSquareText },
@@ -342,7 +345,7 @@ function SolutionOverviewSection() {
                 {card.body}
                 </p>
                 <Link
-                  href="#how-it-works"
+                  href={card.href}
                   className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#242321] transition hover:gap-3"
                 >
                   جزئیات بیشتر

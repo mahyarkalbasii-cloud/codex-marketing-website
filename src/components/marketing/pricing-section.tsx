@@ -260,7 +260,7 @@ const pricingCopy = {
     sliderPrompt: "یکی از بازه‌های متراژ را انتخاب کنید",
     sliderAria: "انتخاب مقیاس زمین پروژه",
     recommended: "پیشنهاد اصلی",
-    bestValue: "بهترین ارزش",
+    bestValue: "ارزش پیشنهادی",
     stagesIncluded: "۳ مرحله ساخت",
     coverage: "پوشش بازار",
     from: "از",

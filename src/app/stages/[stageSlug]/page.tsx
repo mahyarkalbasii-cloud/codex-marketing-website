@@ -16,7 +16,7 @@ import {
   SupplierFAQ,
 } from "@/components/marketing/suppliers/shared";
 import { buttonVariants } from "@/components/ui/button";
-import { STAGE_COPY, getStageMetaDescription } from "@/data/stage-copy";
+import { getStageMetaDescription, getStagePageContent } from "@/data/stage-copy";
 import {
   getActiveParentGroupsForStage,
   getActiveSubcategoriesForStage,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
-  const copy = STAGE_COPY[stage.id];
+  const copy = getStagePageContent(stage);
 
   return {
     title: { absolute: `${stage.faLabel} | مرحله ساخت در پرشین‌سازه` },
@@ -80,10 +80,10 @@ export default async function StagePage({ params }: PageProps) {
     permanentRedirect(getStageHref(stage));
   }
 
-  const copy = STAGE_COPY[stage.id];
   const activeSubcategories = getActiveSubcategoriesForStage(stage.id);
   const activeGroups = getActiveParentGroupsForStage(stage.id);
   const dominantSaleStyle = getDominantSaleStyleForStage(activeSubcategories);
+  const copy = getStagePageContent(stage, activeSubcategories, dominantSaleStyle);
   const relatedStages = getRelatedStages(stage.id as MainStageId);
   const canonicalUrl = absoluteUrl(getStageHref(stage));
   const faqItems = copy.faqItems.map((item) => ({
@@ -139,7 +139,7 @@ export default async function StagePage({ params }: PageProps) {
       <Breadcrumbs
         items={[
           { label: "خانه", href: "/" },
-          { label: "مراحل ساخت", href: "/stages/foundation/" },
+          { label: "مراحل ساخت", href: "/stages/" },
           { label: stage.faLabel, href: getStageHref(stage) },
         ]}
       />
@@ -187,6 +187,11 @@ export default async function StagePage({ params }: PageProps) {
       <GradientSection>
         <h2 className="text-2xl font-black">تعریف مرحله</h2>
         <p className="mt-3 leading-8 text-muted-foreground">{copy.definition}</p>
+        {copy.marketStat ? (
+          <p className="mt-5 rounded-2xl border border-[#e4d8c8] bg-white/60 px-4 py-3 text-sm font-bold leading-7 text-[#6f4a28] dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200">
+            {copy.marketStat}
+          </p>
+        ) : null}
       </GradientSection>
 
       <GradientSection>
