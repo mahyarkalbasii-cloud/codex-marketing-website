@@ -6,6 +6,8 @@ type HeroMapVisualProps = {
   locale?: Locale;
 };
 
+const heroIllustrationSrc = "/images/C682555D-6D28-4B95-962A-9E25932EB3D9.png";
+
 export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualProps) {
   const ariaLabel =
     locale === "en"
@@ -24,7 +26,7 @@ export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualP
       <div className="hero-project-finder-card">
         <img
           className="hero-project-field-svg h-full w-full object-cover"
-          src="/images/hero-project-intelligence.svg"
+          src={heroIllustrationSrc}
           alt=""
           aria-hidden="true"
           loading="eager"
