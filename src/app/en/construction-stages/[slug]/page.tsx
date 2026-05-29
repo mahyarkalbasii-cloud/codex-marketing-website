@@ -103,7 +103,7 @@ export default async function EnglishStagePage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="border-y border-border bg-muted/35">
+      <section className="border-y border-border">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
           <SectionHeader
             eyebrow="Sales window"

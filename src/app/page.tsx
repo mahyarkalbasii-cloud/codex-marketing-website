@@ -3,14 +3,10 @@ import type { CSSProperties } from "react";
 import { Fragment } from "react";
 import Link from "next/link";
 import {
-  ArrowLeft,
-  CheckCircle2,
   Database,
   GraduationCap,
   Layers,
-  MapPin,
   MapPinned,
-  MessageSquareText,
   Route,
   Send,
   Sparkles,
@@ -23,13 +19,21 @@ import { AudienceStageGuide } from "@/components/marketing/audience-stage-guide"
 import { FaqList } from "@/components/marketing/faq-list";
 import { MarketProblemPresentationVisual } from "@/components/marketing/market-problem-presentation-visual";
 import { PricingSection } from "@/components/marketing/pricing-section";
-import { SalesFlowRevealController } from "@/components/marketing/sales-flow-reveal-controller";
 import { SectionHeader } from "@/components/marketing/section-header";
-import { SolutionRevealController } from "@/components/marketing/solution-reveal-controller";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { getSalesStyleSubcategories } from "@/data/sales-style";
+import { SALES_STYLE_COPY } from "@/data/sales-style-copy";
+import { getStagePageContent } from "@/data/stage-copy";
+import {
+  TOTAL_SUBCATEGORY_COUNT,
+  formatStageRoles,
+  getActiveSubcategoriesForStage,
+  getDominantSaleStyleForStage,
+  getMainStages,
+} from "@/data/stage-insights";
 import { faqs, site } from "@/lib/site-data";
+import { getStageHref } from "@/lib/stage-routes";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -62,44 +66,32 @@ export const metadata: Metadata = {
 
 const solutionCards = [
   {
-    title: "ابزار فروش و پیگیری پروژه‌محور",
-    body: "نقشه، فیلتر، CRM و پیامک هوشمند کمک می‌کند تیم فروش فرصت‌ها را منظم‌تر ببیند، اولویت‌بندی کند و پیگیری را از دست ندهد.",
-    href: "/features/#crm",
-    motif: "workflow",
-    chips: [
-      { label: "فیلتر مرحله", icon: Layers },
-      { label: "CRM", icon: MessageSquareText },
-      { label: "پیگیری", icon: Send },
-    ],
-  },
-  {
     title: "داده زنده پروژه‌های ساختمانی",
     body: "پروژه‌های فعال تهران، کرج و لواسان با آدرس، مرحله ساخت، تصویر و سرنخ تماس در یک نمای قابل بررسی جمع می‌شوند.",
     href: "/features/#map",
     motif: "data",
-    chips: [
-      { label: "به‌روزرسانی", icon: CheckCircle2 },
-      { label: "موقعیت پروژه", icon: MapPin },
-      { label: "مرحله ساخت", icon: Database },
-    ],
+    icon: Database,
+  },
+  {
+    title: "ابزار فروش و پیگیری پروژه‌محور",
+    body: "نقشه، فیلتر، CRM و پیامک هوشمند کمک می‌کند تیم فروش فرصت‌ها را منظم‌تر ببیند، اولویت‌بندی کند و پیگیری را از دست ندهد.",
+    href: "/features/#crm",
+    motif: "workflow",
+    icon: Send,
   },
   {
     title: "آموزش فروش پروژه‌محور",
     body: "تیم شما با متن تماس، سناریوی پیگیری و روش استفاده از داده‌ها یاد می‌گیرد در زمان درست و با زمینه روشن اقدام کند.",
     href: "/features/#training",
     motif: "training",
-    chips: [
-      { label: "متن تماس", icon: MessageSquareText },
-      { label: "تمرین تیمی", icon: GraduationCap },
-      { label: "چک‌لیست", icon: CheckCircle2 },
-    ],
+    icon: GraduationCap,
   },
 ] as const;
 
 const howItWorksLayers = [
   {
     title: "جمع‌آوری و به‌روزرسانی میدانی پروژه‌های ساختمانی",
-    eyebrow: "لایه ۱ · داده",
+    eyebrow: "لایه · داده",
     body: "اطلاعات پروژه‌های در حال ساخت به‌صورت میدانی جمع‌آوری و راستی‌آزمایی می‌شود تا تصویری زنده و قابل اعتماد از بازار در دسترس باشد.",
     icon: MapPinned,
     eyebrowIcon: Layers,
@@ -112,7 +104,7 @@ const howItWorksLayers = [
   },
   {
     title: "تحلیل، امتیازدهی و پیشنهاد اقدام برای تیم فروش",
-    eyebrow: "لایه ۲ · تصمیم",
+    eyebrow: "لایه · تصمیم",
     body: "هوش مصنوعی داده‌های میدانی را تحلیل می‌کند، فرصت‌های مناسب را شناسایی و امتیازدهی می‌کند و پیشنهاد اقدام مشخص برای تیم فروش ارائه می‌دهد.",
     icon: Sparkles,
     eyebrowIcon: Sparkles,
@@ -124,6 +116,101 @@ const howItWorksLayers = [
     ],
   },
 ] as const;
+
+const faNumber = new Intl.NumberFormat("fa-IR");
+
+function getDominantSaleStyleLabel(style: "fast" | "consultative" | "mixed") {
+  if (style === "fast") {
+    return "فروش سریع و تراکنشی";
+  }
+
+  if (style === "consultative") {
+    return "فروش مشاوره‌ای";
+  }
+
+  return "ترکیبی";
+}
+
+function getRoleSubcategorySummary(
+  items: ReturnType<typeof getActiveSubcategoriesForStage>,
+  role: "negotiation" | "buy" | "execution",
+) {
+  const names = Array.from(
+    new Set(
+      items
+        .filter((item) => item.roles.includes(role))
+        .map((item) => item.subcategory.faTitle),
+    ),
+  );
+  const visibleNames = names.slice(0, 2);
+
+  if (visibleNames.length === 0) {
+    return "نیازمند رصد مرحله";
+  }
+
+  return `${visibleNames.join("، ")}${names.length > visibleNames.length ? " و..." : ""}`;
+}
+
+const audienceStageGuideStages = getMainStages().map((stage) => {
+  const activeItems = getActiveSubcategoriesForStage(stage.id);
+  const dominantSaleStyle = getDominantSaleStyleForStage(activeItems);
+  const copy = getStagePageContent(stage, activeItems, dominantSaleStyle);
+
+  return {
+    activeCategories: activeItems.slice(0, 12).map((item) => ({
+      href: `/suppliers/${item.parent.slug}/#sub-${item.subcategory.id}`,
+      label: item.subcategory.faTitle,
+      parentLabel: item.parent.faTitle,
+      roleLabel: formatStageRoles(item.roles),
+    })),
+    activeCategoryTotal: activeItems.length,
+    countLine: `${faNumber.format(activeItems.length)} ردیف مرتبط از ${faNumber.format(TOTAL_SUBCATEGORY_COUNT)} زمینه کاری`,
+    facts: [
+      {
+        label: "نوع فروش غالب",
+        value: getDominantSaleStyleLabel(dominantSaleStyle.style),
+      },
+      {
+        label: "مذاکره",
+        value: getRoleSubcategorySummary(activeItems, "negotiation"),
+      },
+      {
+        label: "خرید",
+        value: getRoleSubcategorySummary(activeItems, "buy"),
+      },
+      {
+        label: "اجرا",
+        value: getRoleSubcategorySummary(activeItems, "execution"),
+      },
+    ],
+    href: getStageHref(stage),
+    id: stage.id,
+    slug: stage.slug,
+    timing: {
+      execution: copy.timing.execution,
+      negotiation: copy.timing.negotiation,
+      purchase: copy.timing.purchase,
+    },
+    title: stage.faLabel,
+  };
+});
+
+const audienceSaleTypeCards = (["fast", "consultative"] as const).map((style) => {
+  const subcategories = getSalesStyleSubcategories(style);
+  const copy = SALES_STYLE_COPY[style];
+
+  return {
+    countLine: `${faNumber.format(subcategories.length)} زیرگروه مرتبط`,
+    description: copy.shortAnswer,
+    href: copy.path,
+    id: style,
+    sampleFields: subcategories
+      .filter((subcategory) => subcategory.faTitle !== "جوشکاری و برشکاری")
+      .slice(0, 6)
+      .map((subcategory) => subcategory.faTitle),
+    title: style === "fast" ? "فروش سریع و تراکنشی" : "فروش مشاوره‌ای",
+  };
+});
 
 const salesFlowSteps = [
   {
@@ -148,68 +235,104 @@ const salesFlowSteps = [
   },
 ] as const;
 
-function SolutionCardMotif({
+const salesFlowStepNumbers = ["۰۱", "۰۲", "۰۳", "۰۴"] as const;
+
+function SolutionPillarIllustration({
+  motif,
+}: {
+  motif: (typeof solutionCards)[number]["motif"];
+}) {
+  return (
+    <div className="solution-pillar-illustration" aria-hidden="true">
+      {motif === "data" ? (
+        <svg className="solution-illustration-svg solution-project-card-view" viewBox="0 0 360 250" focusable="false" aria-hidden="true">
+          <rect className="solution-project-panel" x="18" y="16" width="324" height="218" rx="24" />
+          <path className="solution-project-map-grid" d="M48 88H312M48 138H312M48 188H312M112 46V212M180 46V212M248 46V212" />
+
+          <path className="solution-project-pin" d="M294 44C284 44 276 52 276 62C276 75 294 91 294 91C294 91 312 75 312 62C312 52 304 44 294 44Z" />
+          <circle className="solution-project-pin-core" cx="294" cy="62" r="5" />
+          <text className="solution-project-text solution-project-text--strong" x="178" y="58" textAnchor="middle" direction="rtl">تهران، منطقه ۲</text>
+          <path className="solution-project-address-line" d="M86 76H230" />
+
+          <text className="solution-project-text solution-project-text--muted" x="248" y="118" textAnchor="middle" direction="rtl">مرحله ساخت</text>
+          <text className="solution-project-text solution-project-text--strong" x="126" y="118" textAnchor="end" direction="rtl">اسکلت</text>
+          <rect className="solution-project-stage" x="64" y="132" width="48" height="8" rx="4" />
+          <rect className="solution-project-stage solution-project-stage--active" x="124" y="132" width="48" height="8" rx="4" />
+          <rect className="solution-project-stage" x="184" y="132" width="48" height="8" rx="4" />
+          <rect className="solution-project-stage" x="244" y="132" width="48" height="8" rx="4" />
+
+          <rect className="solution-project-chip" x="196" y="166" width="102" height="30" rx="15" />
+          <text className="solution-project-text solution-project-text--small" x="247" y="186" textAnchor="middle" direction="rtl">۲۲۰۰ متر</text>
+          <rect className="solution-project-chip" x="82" y="166" width="96" height="30" rx="15" />
+          <text className="solution-project-text solution-project-text--small" x="130" y="186" textAnchor="middle" direction="rtl">۸ طبقه</text>
+          <circle className="solution-project-contact" cx="68" cy="181" r="10" />
+          <path className="solution-project-phone" d="M64 177C68 185 72 187 76 183" />
+        </svg>
+      ) : null}
+
+      {motif === "training" ? (
+        <svg className="solution-illustration-svg solution-training-steps" viewBox="0 0 320 88" focusable="false" aria-hidden="true">
+          <path className="solution-step-frame" d="M70 20H242M70 44H226M70 68H258" />
+          <path className="solution-chevron solution-chevron--accent" d="M104 13L92 20L104 27" />
+          <path className="solution-chevron" d="M104 37L92 44L104 51" />
+          <path className="solution-chevron" d="M104 61L92 68L104 75" />
+          <circle className="solution-small-node" cx="262" cy="20" r="4.5" />
+          <circle className="solution-small-node" cx="246" cy="44" r="4.5" />
+          <circle className="solution-small-node" cx="278" cy="68" r="4.5" />
+        </svg>
+      ) : null}
+
+      {motif === "workflow" ? (
+        <svg className="solution-illustration-svg solution-pipeline" viewBox="0 0 320 88" focusable="false" aria-hidden="true">
+          <path className="solution-pipeline-track" d="M72 42H248" />
+          <circle className="solution-pipeline-node" cx="248" cy="42" r="8" />
+          <circle className="solution-pipeline-node" cx="160" cy="42" r="8" />
+          <circle className="solution-pipeline-node solution-pipeline-node--active" cx="72" cy="42" r="9" />
+          <path className="solution-pipeline-hint" d="M248 64H206M160 64H126M72 64H44" />
+        </svg>
+      ) : null}
+    </div>
+  );
+}
+
+function SolutionPillarCard({
   card,
 }: {
   card: (typeof solutionCards)[number];
 }) {
+  const PillarIcon = card.icon;
+
   return (
-    <div className="solution-card-visual-frame relative overflow-hidden rounded-[1.15rem] p-4">
-      <div className="solution-card-orbit" aria-hidden="true" />
-      <div className="relative z-[1] flex h-full min-h-[15.5rem] flex-col justify-between">
-        <div className="relative my-auto min-h-[11rem]">
-          {card.chips.map((chip, chipIndex) => {
-            const ChipIcon = chip.icon;
-
-            return (
-              <span
-                key={chip.label}
-                className="solution-card-chip solution-card-floating-chip"
-                data-chip-position={chipIndex}
-              >
-                <ChipIcon className="h-3.5 w-3.5" />
-                {chip.label}
-              </span>
-            );
-          })}
-
-          <h3 className="solution-card-title absolute inset-x-2 top-1/2 text-center text-[1.58rem] font-semibold leading-[1.14] text-[#171716] md:text-[1.72rem]">
-            {card.title}
-          </h3>
-        </div>
-
-        <div
-          className={cn(
-            "solution-card-diagram",
-            card.motif === "data" && "solution-card-diagram-data",
-            card.motif === "workflow" && "solution-card-diagram-workflow",
-            card.motif === "training" && "solution-card-diagram-training",
-          )}
-        >
-          {card.motif === "data" ? (
-            <>
-              <span className="w-[78%]" />
-              <span className="w-[58%]" />
-              <span className="w-[68%]" />
-            </>
-          ) : null}
-          {card.motif === "workflow" ? (
-            <>
-              <span />
-              <span />
-              <span />
-            </>
-          ) : null}
-          {card.motif === "training" ? (
-            <>
-              <span className="solution-card-check" />
-              <span className="solution-card-check" />
-              <span className="solution-card-check" />
-            </>
-          ) : null}
-        </div>
+    <article
+      className={cn(
+        "solution-pillar-card",
+        `solution-pillar-card--${card.motif}`,
+        card.motif === "data" && "solution-pillar-card--featured",
+      )}
+    >
+      <div className="solution-pillar-topline">
+        <span className="solution-pillar-icon" aria-hidden="true">
+          <PillarIcon focusable="false" />
+        </span>
+        <h3 className="solution-pillar-title">
+          {card.title}
+        </h3>
       </div>
-    </div>
+
+      <SolutionPillarIllustration motif={card.motif} />
+
+      <p className="solution-pillar-body">
+        {card.body}
+      </p>
+
+      <Link
+        href={card.href}
+        className="solution-pillar-link"
+      >
+        جزئیات بیشتر
+        <span className="solution-pillar-link-arrow" aria-hidden="true">←</span>
+      </Link>
+    </article>
   );
 }
 
@@ -244,52 +367,31 @@ function MarketProblemSection() {
   return (
     <section
       id="problem"
-      className="section-gradient section-gradient-problem relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
+      className="section-gradient section-gradient-problem problem-section"
       aria-labelledby="market-problem-title"
     >
-      <div className="absolute inset-0 map-parcel-pattern opacity-20" aria-hidden="true" />
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:px-6 md:py-14 lg:grid-cols-2 lg:[direction:ltr] lg:items-center lg:gap-8 lg:py-16">
-        <div className="relative order-1 mx-auto min-w-0 max-w-3xl text-center lg:order-2 lg:ml-auto lg:mr-0 lg:max-w-[38rem] lg:text-right lg:[direction:rtl]">
-          <h2
-            id="market-problem-title"
-            className="mx-auto max-w-[23rem] text-3xl font-bold leading-[1.3] text-foreground md:max-w-3xl md:text-[2.85rem] md:leading-[1.24] lg:mx-0 lg:max-w-full lg:text-5xl"
-          >
+      <div className="problem-container">
+        <div className="problem-copy">
+          <h2 id="market-problem-title" className="problem-title">
             فروش در بازار ساختمان، فقط به داشتن محصول خوب بستگی ندارد
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg md:leading-9 lg:mx-0 lg:max-w-full">
+          <p className="problem-body">
             پروژه‌ها پراکنده‌اند، اطلاعات بازار همیشه دقیق و به‌روز نیست و اگر
             تماس زود یا دیر انجام شود، فرصت فروش از بین می‌رود. برای همین پیدا
             کردن پروژه مناسب، هنوز برای خیلی از تأمین‌کنندگان محصولات و خدمات
             ساختمانی کاری زمان‌بر، پرهزینه و فرسایشی است.
           </p>
-          <Link
-            href="#solution"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "mt-6 hidden h-11 rounded-xl bg-white/80 px-5 shadow-sm md:inline-flex dark:bg-zinc-900/80",
-            )}
-          >
+          <Link href="#solution" className="marketing-cta marketing-cta--secondary problem-cta">
             آشنایی با راه‌حل پرشین‌سازه
-            <ArrowLeft className="h-4 w-4" />
+            <span className="marketing-cta__arrow" aria-hidden="true">←</span>
           </Link>
         </div>
 
-        <Card className="relative order-2 mx-auto flex w-full max-w-[576px] overflow-hidden border-[#f5dfc7] bg-[#FFF4E7]/90 p-0 shadow-lg shadow-[#2a241d]/[0.04] md:order-none lg:order-1 lg:aspect-[16/15] lg:max-h-[540px] lg:self-center">
-          <article className="flex min-h-0 w-full flex-col" aria-label="نمای لیست پروژه‌های ساختمانی در پنل پرشین‌سازه">
+        <div className="problem-visual-card">
+          <article className="problem-visual-frame">
             <MarketProblemPresentationVisual />
           </article>
-        </Card>
-
-        <Link
-          href="#solution"
-          className={cn(
-            buttonVariants({ variant: "outline" }),
-            "order-3 h-11 rounded-xl bg-white/80 px-5 shadow-sm md:hidden dark:bg-zinc-900/80",
-          )}
-        >
-          آشنایی با راه‌حل پرشین‌سازه
-          <ArrowLeft className="h-4 w-4" />
-        </Link>
+        </div>
       </div>
     </section>
   );
@@ -299,61 +401,32 @@ function SolutionOverviewSection() {
   return (
     <section
       id="solution"
-      className="section-gradient section-gradient-solution relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
+      className="section-gradient section-gradient-solution solution-section"
       aria-labelledby="solution-title"
     >
-      <SolutionRevealController />
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#f8f8f4] to-transparent dark:from-zinc-950" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
-        <header className="solution-reveal-header relative mx-auto max-w-3xl text-center">
+      <div className="solution-container">
+        <div className="solution-header">
           <h2
             id="solution-title"
-            className="text-3xl font-bold leading-[1.3] text-foreground md:text-[2.85rem] md:leading-[1.24] lg:text-5xl"
+            className="solution-title"
           >
             پرشین‌سازه پیدا کردن پروژه ساختمانی مناسب را ساده‌تر می‌کند.
           </h2>
-          <p className="mt-4 text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
+          <p className="solution-subline">
             پرشین‌سازه با داده‌های زنده پروژه‌های ساختمانی تهران، کرج و لواسان،
             ابزارهای اجرایی مثل CRM و پیامک هوشمند، و آموزش فروش پروژه‌محور، به
             شما کمک می‌کند فرصت‌های مناسب را زودتر ببینید و مسیر فروش را
             هدفمندتر پیش ببرید.
           </p>
-        </header>
+        </div>
 
-        <div className="solution-card-strip mt-10 grid grid-cols-1 gap-4 pb-5 pt-2 md:mt-12 md:grid-cols-3 md:items-start md:gap-5 md:pb-8 lg:gap-6">
-          {solutionCards.map((card, index) => (
-            <article
-              key={card.title}
-              style={
-                {
-                  "--solution-delay": `${[200, 350, 500][index]}ms`,
-                } as CSSProperties & Record<"--solution-delay", string>
-              }
-              className={cn(
-                "solution-card group relative flex min-h-[30rem] flex-col gap-3 overflow-hidden rounded-[1.45rem] border p-3 shadow-sm md:min-h-[34rem] md:p-3.5",
-                card.motif === "data" && "solution-card-data",
-                card.motif === "workflow" && "solution-card-workflow",
-                card.motif === "training" && "solution-card-training",
-                index === 0 && "md:mt-8 md:-rotate-2",
-                index === 1 && "md:scale-[1.03]",
-                index === 2 && "md:mt-8 md:rotate-2",
-              )}
-            >
-              <SolutionCardMotif card={card} />
-              <div className="solution-card-copy-frame flex flex-1 flex-col justify-between rounded-[1.05rem] border p-4 text-right">
-                <p className="text-sm leading-7 text-[#4d4c49] md:text-[15px] md:leading-8">
-                {card.body}
-                </p>
-                <Link
-                  href={card.href}
-                  className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#242321] transition hover:gap-3"
-                >
-                  جزئیات بیشتر
-                  <ArrowLeft className="h-4 w-4" />
-                </Link>
-              </div>
-            </article>
-          ))}
+        <div className="solution-pillars-grid">
+          <SolutionPillarCard card={solutionCards[0]} />
+          <div className="solution-support-stack">
+            {solutionCards.slice(1).map((card) => (
+              <SolutionPillarCard key={card.title} card={card} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -381,7 +454,7 @@ function HowItWorksSection() {
           </p>
         </header>
 
-        <div className="relative mx-auto mt-8 flex max-w-[880px] flex-col items-stretch md:mt-10">
+        <div className="how-layer-stack relative mx-auto mt-8 flex max-w-[880px] flex-col items-stretch md:mt-10">
           {howItWorksLayers.map((layer, index) => (
             <Fragment key={layer.title}>
               <article
@@ -391,37 +464,37 @@ function HowItWorksSection() {
                   } as CSSProperties & Record<"--how-delay", string>
                 }
                 className={cn(
-                  "how-layer-card min-w-0 overflow-hidden rounded-[1.5rem] border p-5 shadow-md shadow-[#2a241d]/[0.04] md:p-7 dark:border-zinc-800 dark:bg-zinc-900/82",
+                  "how-layer-card",
                   index === 0
-                    ? "border-[#F4DDC6] bg-[#FFF4EA]"
-                    : "border-[#D9EAF8] bg-[#EEF7FF]",
+                    ? "how-layer-card--data"
+                    : "how-layer-card--decision",
                 )}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#1B1916] text-[#CC785C]">
-                    <layer.icon className="h-5 w-5" />
+                <div className="how-layer-heading-row">
+                  <span className="how-layer-icon" aria-hidden="true">
+                    <layer.icon />
                   </span>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-4 py-2 text-sm font-bold leading-6 text-[#2A241D] shadow-sm shadow-[#2A241D]/[0.025]">
-                    <layer.eyebrowIcon className="h-4 w-4 text-[#CC785C]" />
+                  <span className="how-layer-badge">
+                    <layer.eyebrowIcon aria-hidden="true" />
                     {layer.eyebrow}
                   </span>
                 </div>
-                <h3 className="mt-5 break-words text-2xl font-semibold">
+                <h3 className="how-layer-title">
                   {layer.title}
                 </h3>
-                <p className="mt-3 text-sm leading-8 text-zinc-600 dark:text-zinc-400">
+                <p className="how-layer-body">
                   {layer.body}
                 </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-2">
+                <div className="how-process-list" role="list">
                   {layer.steps.map((step, stepIndex) => (
-                    <div key={step} className="flex items-center gap-2">
-                      <span className="rounded-full border border-[#E4D8C8] bg-[#FBF9F3] px-3 py-1.5 text-xs font-semibold leading-5 text-[#6F6254] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
+                    <div key={step} className="how-process-item" role="listitem">
+                      <span className="how-process-chip">
                         {step}
                       </span>
                       {stepIndex < layer.steps.length - 1 ? (
                         <span
-                          className="text-sm font-bold leading-none text-[#CC785C]/50"
+                          className="how-process-arrow"
                           aria-hidden="true"
                         >
                           ←
@@ -434,7 +507,7 @@ function HowItWorksSection() {
 
               {index === 0 ? (
                 <div
-                  className="how-layer-arrow my-6 flex flex-col items-center justify-center gap-2 text-center text-sm leading-6 text-[#6F6254] md:flex-row md:gap-3 md:text-right"
+                  className="how-layer-arrow"
                   style={
                     {
                       "--how-delay": "350ms",
@@ -442,7 +515,6 @@ function HowItWorksSection() {
                   }
                 >
                   <svg
-                    className="h-14 w-5 shrink-0 text-[#CC785C]"
                     viewBox="0 0 20 56"
                     fill="none"
                     aria-hidden="true"
@@ -456,7 +528,7 @@ function HowItWorksSection() {
                     />
                     <path d="M5 43L10 52L15 43H5Z" fill="currentColor" />
                   </svg>
-                  <span>داده میدانی به فرصت قابل اقدام تبدیل می‌شود</span>
+                  <span className="how-layer-arrow-label">داده میدانی به فرصت قابل اقدام تبدیل می‌شود</span>
                 </div>
               ) : null}
             </Fragment>
@@ -474,7 +546,6 @@ function SalesFlowSection() {
       className="section-gradient section-gradient-sales relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
       aria-labelledby="sales-flow-title"
     >
-      <SalesFlowRevealController />
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
         <header className="sales-flow-reveal-header relative mx-auto max-w-5xl text-center">
           <div>
@@ -490,60 +561,60 @@ function SalesFlowSection() {
           </p>
         </header>
 
-        <ol className="sales-flow-journey relative mt-10 grid gap-5 md:mt-12 md:grid-cols-4 md:gap-4">
-          <li className="sales-flow-connector pointer-events-none hidden md:flex" aria-hidden="true">
+        <div className="sales-flow-path-shell">
+          <div className="sales-flow-connector" aria-hidden="true">
             <span className="sales-flow-connector-segment" />
             <span className="sales-flow-connector-segment" />
-            <span className="sales-flow-connector-segment sales-flow-connector-final" />
-          </li>
-          {salesFlowSteps.map((step, index) => (
-            <li
-              key={step.title}
-              style={
-                { "--sales-flow-delay": `${index * 150}ms` } as CSSProperties
-              }
-              className={cn(
-                "sales-flow-card relative z-[1] isolate flex h-full min-h-[250px] flex-col overflow-hidden rounded-[1.6rem] border p-5 shadow-sm shadow-[#2a241d]/[0.03] transition duration-200 md:min-h-[292px] md:p-6 dark:border-zinc-800",
-                index === 0 && "sales-flow-card-neutral border-[#e4d8c8]",
-                index === 1 && "sales-flow-card-soft border-[#e4d8c8]",
-                index === 2 && "sales-flow-card-warm border-[#e0c7ad]",
-                index === 3 &&
-                  "sales-flow-card-destination border-[#c9792b]/30",
-              )}
-            >
-              <span className="sales-flow-step-rail" aria-hidden="true">
-                <span className="sales-flow-step-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </span>
-              <h3
+            <span className="sales-flow-connector-segment" />
+          </div>
+          <ol className="sales-flow-journey">
+            {salesFlowSteps.map((step, index) => (
+              <li
+                key={step.title}
+                style={
+                  {
+                    "--sales-flow-progress": `${(index + 1) * 25}%`,
+                  } as CSSProperties & Record<"--sales-flow-progress", string>
+                }
                 className={cn(
-                  "sales-flow-title text-xl font-bold leading-9 text-[#2a241d] dark:text-white",
-                  index >= 2 && "text-[#4b2c12] dark:text-white",
+                  "sales-flow-card",
+                  index === 0 && "sales-flow-card-neutral",
+                  index === 1 && "sales-flow-card-soft",
+                  index === 2 && "sales-flow-card-warm",
+                  index === 3 && "sales-flow-card-destination",
                 )}
               >
-                {step.title}
-              </h3>
-              <p className="sales-flow-body mt-3 text-[15px] leading-8 text-[#6f6254]">
-                {step.body}
-              </p>
-              <p className="sales-flow-outcome mt-auto border-t border-[#eadfce] pt-4 text-sm font-semibold leading-7 text-[#7a6a59]">
-                {step.outcome}
-              </p>
-            </li>
-          ))}
-        </ol>
+                <div className="sales-flow-card-top">
+                  <span className="sales-flow-step-number" aria-hidden="true">
+                    {salesFlowStepNumbers[index]}
+                  </span>
+                  <span className="sales-flow-step-node" aria-hidden="true" />
+                </div>
+                <span className="sales-flow-progress" aria-hidden="true">
+                  <span className="sales-flow-progress-fill" />
+                </span>
+                <h3 className="sales-flow-title">
+                  {step.title}
+                </h3>
+                <p className="sales-flow-body">
+                  {step.body}
+                </p>
+                <p className="sales-flow-outcome">
+                  <strong>نتیجه:</strong>
+                  <span>{step.outcome.replace("نتیجه: ", "")}</span>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <div className="mt-12 flex justify-center md:mt-14">
           <Link
             href="#demo"
-            className={cn(
-              buttonVariants(),
-              "h-11 rounded-2xl px-6 shadow-sm",
-            )}
+            className="sales-flow-cta"
           >
             شروع جست‌وجوی پروژه‌ها
-            <ArrowLeft className="h-4 w-4" />
+            <span aria-hidden="true">←</span>
           </Link>
         </div>
       </div>
@@ -642,21 +713,16 @@ export default function Home() {
     <main className="behance-background home-sections min-h-screen text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
       <StructuredData data={[faqSchema, softwareSchema, webPageSchema]} />
 
-      <section id="hero" className="hero-surface relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800">
-        <div className="pointer-events-none absolute inset-0 map-parcel-pattern opacity-30" aria-hidden="true" />
-        <div className="mx-auto max-w-7xl px-5 pb-12 pt-10 md:px-6 md:pb-14 md:pt-12 lg:pb-16 lg:pt-12">
-          <div className="grid gap-8 lg:grid-cols-[.96fr_1.04fr] lg:[direction:ltr] lg:items-center">
-            <div className="relative hidden md:order-2 md:block lg:order-1 lg:[direction:rtl]">
-              <HeroMapVisual />
-            </div>
-
-            <div className="relative max-w-4xl space-y-4 text-center md:space-y-6 lg:order-2 lg:mr-auto lg:text-right lg:[direction:rtl]">
-              <div className="space-y-5">
-                <h1 className="hero-title mx-auto max-w-[22rem] text-[2rem] font-bold leading-[1.34] text-zinc-950 sm:max-w-3xl sm:text-4xl sm:leading-[1.22] md:text-5xl md:leading-[1.18] lg:mx-0 xl:text-[3.45rem] dark:text-white">
-                  <span className="block sm:inline">پروژه‌های ساختمانی فعال</span>{" "}
-                  <span className="block sm:inline">را زودتر پیدا کنید</span>
+      <section id="hero" className="hero-surface hero-section">
+        <div className="hero-container">
+          <div className="hero-layout">
+            <div className="hero-copy">
+              <div className="hero-copy-inner">
+                <h1 className="hero-title">
+                  <span>پروژه‌های ساختمانی فعال</span>{" "}
+                  <span>را زودتر پیدا کنید</span>
                 </h1>
-                <p className="mx-auto max-w-2xl text-base leading-9 text-zinc-600 md:text-lg lg:mx-0 dark:text-zinc-400">
+                <p className="hero-subline">
                   در بازار محصولات و خدمات ساختمانی، فروش موفق از رسیدن به پروژه
                   مناسب در زمان درست شروع می‌شود. پرشین‌سازه پروژه‌های در
                   حال ساخت در تهران، کرج و لواسان را جمع‌آوری و دسته‌بندی می‌کند
@@ -664,39 +730,20 @@ export default function Home() {
                   سریع‌تر بررسی و پیگیری کنند.
                 </p>
               </div>
-              <div className="mx-auto flex w-full max-w-[24rem] flex-col gap-3.5 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4 lg:mx-0 lg:justify-start">
-                <Link
-                  href="#demo"
-                  className={cn(
-                    buttonVariants({ size: "lg" }),
-                    "h-14 w-full rounded-[1.15rem] bg-[#2A211B] px-8 text-base text-[#FFF9F0] shadow-[0_10px_26px_rgba(204,120,92,0.18),inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#3A2C24] sm:w-auto sm:min-w-[10.75rem] [&_svg]:h-5 [&_svg]:w-5 [&_svg]:text-[#E6A38B]",
-                  )}
-                >
+              <div className="hero-actions">
+                <Link href="#demo" className="marketing-cta marketing-cta--primary">
                   مشاهده دمو
-                  <ArrowLeft className="h-4 w-4" />
+                  <span className="marketing-cta__arrow" aria-hidden="true">←</span>
                 </Link>
-                <Link
-                  href="#solution"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-14 w-full rounded-[1.15rem] border-[rgba(42,33,27,0.14)] bg-[rgba(255,252,246,0.58)] px-8 text-base text-[#2A211B] shadow-sm shadow-[#2A211B]/[0.04] hover:border-[rgba(204,120,92,0.34)] hover:bg-[rgba(255,252,246,0.86)] sm:w-auto sm:min-w-[10.75rem]",
-                  )}
-                >
+                <Link href="#solution" className="marketing-cta marketing-cta--secondary">
                   چرا پرشین‌سازه؟
+                  <span className="marketing-cta__arrow" aria-hidden="true">←</span>
                 </Link>
               </div>
-              <div className="mx-auto flex max-w-[22rem] flex-wrap items-center justify-center gap-x-2 gap-y-1 px-2 pt-1 text-center text-xs font-medium leading-6 text-[#6c6258] sm:hidden">
-                <span className="after:mr-2 after:text-[#c27a61] after:content-['•']">
-                  تهران، کرج و لواسان
-                </span>
-                <span className="after:mr-2 after:text-[#c27a61] after:content-['•']">
-                  هزاران پروژه فعال
-                </span>
-                <span>۸ مرحله ساخت</span>
-              </div>
-              <div className="md:hidden">
-                <HeroMapVisual compact />
-              </div>
+            </div>
+
+            <div className="hero-visual-slot">
+              <HeroMapVisual />
             </div>
           </div>
         </div>
@@ -708,14 +755,25 @@ export default function Home() {
 
       <HowItWorksSection />
 
-      <section id="audiences" className="section-gradient section-gradient-audience relative overflow-hidden border-y border-[#e4d8c8] dark:border-zinc-800">
-        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
-          <SectionHeader
-            eyebrow="مخاطبان"
-            title="برای چه نوع تأمین‌کنندگانی مناسب است؟"
-            description="پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی مناسب است که فروش پروژه‌محورشان به شناخت پروژه‌های ساختمانی، زمان مناسب تماس و پیگیری منظم وابسته است."
+      <section
+        aria-labelledby="audiences-title"
+        className="section-gradient section-gradient-audience audience-section"
+        id="audiences"
+      >
+        <div className="audience-section-container">
+          <header className="audience-section-header">
+            <h2 className="audience-section-title" id="audiences-title">
+              برای چه نوع تأمین‌کنندگانی مناسب است؟
+            </h2>
+            <p className="audience-section-description">
+              پرشین‌سازه برای تأمین‌کنندگان محصولات و خدمات ساختمانی مناسب است که فروش پروژه‌محورشان به شناخت پروژه‌های ساختمانی، زمان مناسب تماس و پیگیری منظم وابسته است.
+            </p>
+          </header>
+          <AudienceStageGuide
+            defaultStageSlug="finishing"
+            saleTypes={audienceSaleTypeCards}
+            stages={audienceStageGuideStages}
           />
-          <AudienceStageGuide />
         </div>
       </section>
 
