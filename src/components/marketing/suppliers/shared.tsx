@@ -22,7 +22,7 @@ export function GradientSection({
     <section
       id={id}
       className={cn(
-        "rounded-[2rem] border border-amber-200/60 bg-gradient-to-br from-amber-50/90 via-white to-orange-50/80 p-6 shadow-xl shadow-amber-100/40 md:p-10 dark:border-zinc-800 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800",
+        "rounded-[2rem] border border-[#CC785C]/25 bg-gradient-to-br from-[rgba(204,120,92,0.12)] via-white to-[#fbf6ed]/80 p-6 shadow-xl shadow-[#CC785C]/10 md:p-10 dark:border-zinc-800 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800",
         className,
       )}
     >

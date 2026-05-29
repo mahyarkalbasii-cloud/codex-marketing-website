@@ -88,6 +88,26 @@ const solutionCards = [
   },
 ] as const;
 
+const SOLUTION_ILLUSTRATION_VIEW_BOX = "0 0 360 250";
+const SOLUTION_PROJECT_ILLUSTRATION_VIEW_BOX = "0 0 360 286";
+
+const solutionWorkflowSteps = ["فیلتر", "پروژه", "تماس / پیامک", "ثبت پیگیری"] as const;
+
+const solutionTrainingCourses = [
+  {
+    label: "فروش پروژه‌محور در صنعت ساختمان",
+    lessons: "۶ جلسه",
+  },
+  {
+    label: "بازاریابی و مسیر تماس مؤثر",
+    lessons: "۴ جلسه",
+  },
+  {
+    label: "استفاده از داده برای زمان‌بندی فروش",
+    lessons: "۵ جلسه",
+  },
+] as const;
+
 const howItWorksLayers = [
   {
     title: "جمع‌آوری و به‌روزرسانی میدانی پروژه‌های ساختمانی",
@@ -198,10 +218,14 @@ const audienceStageGuideStages = getMainStages().map((stage) => {
 const audienceSaleTypeCards = (["fast", "consultative"] as const).map((style) => {
   const subcategories = getSalesStyleSubcategories(style);
   const copy = SALES_STYLE_COPY[style];
+  const description =
+    style === "fast"
+      ? "فروش سریع برای محصولاتی مناسب است که سازنده معمولاً در فاصله کوتاهی بین نیاز و خرید تصمیم می‌گیرد."
+      : "فروش مشاوره‌ای زمانی لازم است که تصمیم خرید سازنده قبل از لحظه اجرا و طی چند گفت‌وگو شکل می‌گیرد.";
 
   return {
     countLine: `${faNumber.format(subcategories.length)} زیرگروه مرتبط`,
-    description: copy.shortAnswer,
+    description,
     href: copy.path,
     id: style,
     sampleFields: subcategories
@@ -245,9 +269,9 @@ function SolutionPillarIllustration({
   return (
     <div className="solution-pillar-illustration" aria-hidden="true">
       {motif === "data" ? (
-        <svg className="solution-illustration-svg solution-project-card-view" viewBox="0 0 360 250" focusable="false" aria-hidden="true">
-          <rect className="solution-project-panel" x="18" y="16" width="324" height="218" rx="24" />
-          <path className="solution-project-map-grid" d="M48 88H312M48 138H312M48 188H312M112 46V212M180 46V212M248 46V212" />
+        <svg className="solution-illustration-svg solution-project-card-view" viewBox={SOLUTION_PROJECT_ILLUSTRATION_VIEW_BOX} focusable="false" aria-hidden="true">
+          <rect className="solution-project-panel" x="18" y="16" width="324" height="254" rx="24" />
+          <path className="solution-project-map-grid" d="M48 88H312M48 138H312M48 188H312M112 46V198M180 46V198M248 46V198" />
 
           <path className="solution-project-pin" d="M294 44C284 44 276 52 276 62C276 75 294 91 294 91C294 91 312 75 312 62C312 52 304 44 294 44Z" />
           <circle className="solution-project-pin-core" cx="294" cy="62" r="5" />
@@ -267,29 +291,46 @@ function SolutionPillarIllustration({
           <text className="solution-project-text solution-project-text--small" x="130" y="186" textAnchor="middle" direction="rtl">۸ طبقه</text>
           <circle className="solution-project-contact" cx="68" cy="181" r="10" />
           <path className="solution-project-phone" d="M64 177C68 185 72 187 76 183" />
+
+          <path className="solution-project-info-divider" d="M62 208H298" />
+          <rect className="solution-project-info-row" x="62" y="214" width="236" height="22" rx="8" />
+          <text className="solution-project-info-label" x="286" y="225" dominantBaseline="middle" direction="rtl">آخرین به‌روزرسانی</text>
+          <text className="solution-project-info-value" x="111" y="225" textAnchor="middle" dominantBaseline="middle" direction="rtl">۳ روز پیش</text>
+          <rect className="solution-project-info-row" x="62" y="240" width="236" height="22" rx="8" />
+          <text className="solution-project-info-label" x="286" y="250" dominantBaseline="middle" direction="rtl">سرنخ تماس</text>
+          <rect className="solution-project-info-pill" x="84" y="243" width="54" height="16" rx="6" />
+          <text className="solution-project-info-pill-text" x="111" y="251" textAnchor="middle" dominantBaseline="middle" direction="rtl">موجود</text>
         </svg>
       ) : null}
 
       {motif === "training" ? (
-        <svg className="solution-illustration-svg solution-training-steps" viewBox="0 0 320 88" focusable="false" aria-hidden="true">
-          <path className="solution-step-frame" d="M70 20H242M70 44H226M70 68H258" />
-          <path className="solution-chevron solution-chevron--accent" d="M104 13L92 20L104 27" />
-          <path className="solution-chevron" d="M104 37L92 44L104 51" />
-          <path className="solution-chevron" d="M104 61L92 68L104 75" />
-          <circle className="solution-small-node" cx="262" cy="20" r="4.5" />
-          <circle className="solution-small-node" cx="246" cy="44" r="4.5" />
-          <circle className="solution-small-node" cx="278" cy="68" r="4.5" />
-        </svg>
+        <div className="solution-product-sim solution-course-sim" data-view-box={SOLUTION_ILLUSTRATION_VIEW_BOX}>
+          <div className="solution-sim-caption">دوره‌های آموزش</div>
+          <div className="solution-course-list">
+            {solutionTrainingCourses.map((course) => (
+              <div className="solution-course-row" key={course.label}>
+                <span className="solution-course-label">{course.label}</span>
+                <span className="solution-course-tag">{course.lessons}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : null}
 
       {motif === "workflow" ? (
-        <svg className="solution-illustration-svg solution-pipeline" viewBox="0 0 320 88" focusable="false" aria-hidden="true">
-          <path className="solution-pipeline-track" d="M72 42H248" />
-          <circle className="solution-pipeline-node" cx="248" cy="42" r="8" />
-          <circle className="solution-pipeline-node" cx="160" cy="42" r="8" />
-          <circle className="solution-pipeline-node solution-pipeline-node--active" cx="72" cy="42" r="9" />
-          <path className="solution-pipeline-hint" d="M248 64H206M160 64H126M72 64H44" />
-        </svg>
+        <div className="solution-product-sim solution-workflow-sim" data-view-box={SOLUTION_ILLUSTRATION_VIEW_BOX}>
+          <div className="solution-sim-caption">از داده تا پیگیری</div>
+          <div className="solution-workflow-stack">
+            {solutionWorkflowSteps.map((step, index) => (
+              <div className={cn("solution-workflow-row", index === solutionWorkflowSteps.length - 1 && "solution-workflow-row--active")} key={step}>
+                <span className="solution-workflow-label">
+                  {step}
+                </span>
+                <span className="solution-workflow-marker" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+        </div>
       ) : null}
     </div>
   );
@@ -353,7 +394,7 @@ function DemoClosingVisual() {
         <div className="mt-5 grid gap-3">
           {["مشاهده مسیر پیدا کردن پروژه", "بررسی فیلترها و مرحله ساخت", "مرور پیگیری فروش"].map((item, index) => (
             <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-3 dark:border-zinc-800 dark:bg-zinc-950">
-              <span className={cn("h-2.5 w-2.5 rounded-full", index === 1 ? "bg-[#d99a35]" : "bg-[#6f765f]")} />
+              <span className={cn("h-2.5 w-2.5 rounded-full", index === 1 ? "bg-[#CC785C]" : "bg-[#d8c7b2]")} />
               <span className="text-sm font-medium">{item}</span>
             </div>
           ))}
@@ -410,7 +451,8 @@ function SolutionOverviewSection() {
             id="solution-title"
             className="solution-title"
           >
-            پرشین‌سازه پیدا کردن پروژه ساختمانی مناسب را ساده‌تر می‌کند.
+            <span className="solution-title-line">پرشین‌سازه پیدا کردن پروژه ساختمانی</span>{" "}
+            <span className="solution-title-line">مناسب را ساده‌تر می‌کند.</span>
           </h2>
           <p className="solution-subline">
             پرشین‌سازه با داده‌های زنده پروژه‌های ساختمانی تهران، کرج و لواسان،
@@ -421,12 +463,9 @@ function SolutionOverviewSection() {
         </div>
 
         <div className="solution-pillars-grid">
-          <SolutionPillarCard card={solutionCards[0]} />
-          <div className="solution-support-stack">
-            {solutionCards.slice(1).map((card) => (
-              <SolutionPillarCard key={card.title} card={card} />
-            ))}
-          </div>
+          {solutionCards.map((card) => (
+            <SolutionPillarCard key={card.title} card={card} />
+          ))}
         </div>
       </div>
     </section>

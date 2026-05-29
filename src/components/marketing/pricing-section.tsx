@@ -399,7 +399,7 @@ function PricingCoverage({
                 "pricing-coverage-segment h-1.5 rounded-full transition-colors",
                 filled
                   ? featured
-                    ? "bg-[#f5c842]"
+                    ? "bg-[#CC785C]"
                     : "bg-[#CC785C]"
                   : featured
                     ? "bg-white/20"
@@ -460,7 +460,7 @@ function PricingPlanCard({
         {recommended ? (
           <span
             className={cn(
-              "pricing-recommended-badge absolute right-0 top-0 z-10 rounded-full border border-[#d97757] bg-[#d97757] px-3 py-1 text-xs font-bold text-[#131314] shadow-sm shadow-[#d97757]/15",
+              "pricing-recommended-badge absolute right-0 top-0 z-10 rounded-full border border-[#C16B4E] bg-[#C16B4E] px-3 py-1 text-xs font-bold text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15",
             )}
           >
             {copy.recommended}
@@ -724,7 +724,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
               className={cn(
                 "pricing-axis-insight mx-auto mt-2 block min-h-6 max-w-2xl rounded-full px-3 py-1 text-xs font-bold leading-5 transition duration-200 md:text-sm",
                 activePlan
-                  ? "bg-[#CC785C] text-white shadow-sm shadow-[#CC785C]/15 dark:bg-amber-300 dark:text-zinc-950"
+                  ? "bg-[#C16B4E] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15 dark:bg-[#C16B4E] dark:text-[#FFF7EF]"
                   : "bg-[#f5eadb]/78 text-[#75695d]",
               )}
             >
@@ -803,7 +803,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       transform: getAxisItemTransform(index, plans.length),
                     }}
                     className={cn(
-                      "pricing-slider-tick absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:h-14 md:w-20 md:text-xs",
+                      "pricing-slider-tick absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 md:h-14 md:w-20 md:text-xs",
                       activePlanIndex === index && "text-[#2a241d]",
                     )}
                   >

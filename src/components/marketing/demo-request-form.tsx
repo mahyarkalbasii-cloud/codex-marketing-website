@@ -135,7 +135,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             autoComplete="name"
-            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/20 dark:border-zinc-800 dark:bg-zinc-900"
+            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-900"
           />
         </label>
         <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
@@ -147,7 +147,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
             autoComplete="tel"
             inputMode="tel"
             dir="ltr"
-            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-left text-sm font-medium outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/20 dark:border-zinc-800 dark:bg-zinc-900"
+            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-left text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-900"
           />
         </label>
       </div>
@@ -159,7 +159,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
           value={form.company}
           onChange={(event) => updateField("company", event.target.value)}
           autoComplete="organization"
-          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/20 dark:border-zinc-800 dark:bg-zinc-900"
+          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-900"
         />
       </label>
 
@@ -169,7 +169,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
           name="supplier"
           value={form.supplier}
           onChange={(event) => updateField("supplier", event.target.value)}
-          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#c9792b] focus:ring-2 focus:ring-[#c9792b]/20 dark:border-zinc-800 dark:bg-zinc-900"
+          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-900"
         >
           <option value="">{copy.choose}</option>
           {supplierOptions.map((supplier) => (
@@ -196,7 +196,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
       </button>
 
       {status === "success" ? (
-        <p className="rounded-2xl border border-[#c9792b]/25 bg-[#f6d6a8]/35 px-3 py-2 text-xs font-semibold leading-6 text-[#5a3515]">
+        <p className="rounded-2xl border border-[#CC785C]/35 bg-[rgba(204,120,92,0.12)] px-3 py-2 text-xs font-semibold leading-6 text-[#5a3515]">
           {copy.success}
         </p>
       ) : null}
