@@ -36,10 +36,10 @@ export function FaqList({
         <details key={item.question} className="group faq-list-item p-5 transition duration-200 open:bg-[#fbf6ed]/80 hover:bg-[#fbf6ed]/68 md:p-6 dark:open:bg-zinc-950/60 dark:hover:bg-zinc-950/40">
           <summary
             onKeyDown={toggleWithKeyboard}
-            className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30"
+            className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35"
           >
             <span>{item.question}</span>
-            <span className="faq-toggle-icon grid h-8 w-8 shrink-0 place-items-center rounded-xl border border-[#e4d8c8] bg-[#fbf6ed] text-[#7a6a59] transition duration-200 group-open:rotate-45 group-open:border-[#d99a35]/55 group-open:bg-[#f6d6a8] group-open:text-[#2a241d] dark:bg-zinc-950 dark:group-open:border-amber-300/30 dark:group-open:bg-amber-300">
+            <span className="faq-toggle-icon grid h-8 w-8 shrink-0 place-items-center rounded-xl border border-[#e4d8c8] bg-[#fbf6ed] text-[#7a6a59] transition duration-200 group-open:rotate-45 group-open:border-[#CC785C]/55 group-open:bg-[rgba(204,120,92,0.12)] group-open:text-[#2a241d] dark:bg-zinc-950 dark:group-open:border-[#CC785C]/40 dark:group-open:bg-[rgba(204,120,92,0.22)] dark:group-open:text-[#FFF7EF]">
               <Plus className="h-4 w-4" />
             </span>
           </summary>

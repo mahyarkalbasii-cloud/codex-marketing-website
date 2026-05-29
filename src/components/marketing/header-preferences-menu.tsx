@@ -166,7 +166,7 @@ export function HeaderPreferencesMenu({
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((current) => !current)}
-        className="header-preferences-trigger inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
+        className="header-preferences-trigger inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#e4d8c8] bg-[#fffaf1]/82 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-[#fffaf1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
       >
         <Sun className="h-[18px] w-[18px] text-[#cc785c]" aria-hidden="true" />
       </button>
@@ -187,7 +187,7 @@ export function HeaderPreferencesMenu({
             role="menuitem"
             aria-label={labels.switchLanguage}
             onClick={() => setOpen(false)}
-            className="flex h-10 items-center justify-between gap-3 rounded-xl px-2.5 text-sm font-bold transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:hover:bg-zinc-900"
+            className="flex h-10 items-center justify-between gap-3 rounded-xl px-2.5 text-sm font-bold transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:hover:bg-zinc-900"
           >
             <span>{labels.targetLanguage}</span>
             <span className="text-[11px] font-black text-[#cc785c]">
@@ -211,7 +211,7 @@ export function HeaderPreferencesMenu({
                   role="menuitemradio"
                   aria-checked={selected}
                   onClick={() => selectTheme(item)}
-                  className="flex h-10 items-center justify-between gap-3 rounded-xl px-2.5 text-sm font-bold transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:hover:bg-zinc-900"
+                  className="flex h-10 items-center justify-between gap-3 rounded-xl px-2.5 text-sm font-bold transition hover:bg-[#f5eadb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:hover:bg-zinc-900"
                 >
                   <span className="flex items-center gap-2">
                     <span className="grid h-7 w-7 place-items-center rounded-xl bg-[#f5eadb] text-[#2a241d] dark:bg-zinc-900 dark:text-white">

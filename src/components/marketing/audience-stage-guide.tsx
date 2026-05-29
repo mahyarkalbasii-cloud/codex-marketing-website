@@ -153,7 +153,7 @@ export function AudienceStageGuide({
               برخی از محصولات و خدمات این دسته
             </div>
             <div className="audience-sale-type-card__samples" aria-label="نمونه زمینه‌های کاری">
-              {saleType.sampleFields.map((field) => (
+              {saleType.sampleFields.slice(0, 4).map((field) => (
                 <span className="audience-sale-type-card__chip" key={field}>
                   {field}
                 </span>
@@ -262,7 +262,15 @@ export function AudienceStageGuide({
                       >
                         <span className="audience-stage-category__label">{category.label}</span>
                         <span className="audience-stage-category__meta">
-                          {category.roleLabel}
+                          {category.roleLabel.split(/(\/)/).map((part, partIndex) =>
+                            part === "/" ? (
+                              <span className="audience-stage-category__meta-separator" key={`${category.href}-separator-${partIndex}`}>
+                                {part}
+                              </span>
+                            ) : (
+                              part
+                            ),
+                          )}
                         </span>
                       </Link>
                     ))}

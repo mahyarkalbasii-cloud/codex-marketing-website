@@ -51,7 +51,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={localizeHref(item.href, locale)}
-              className="site-header-nav-link rounded-2xl px-2.5 py-2 text-[12.5px] font-semibold text-[#65594e] transition hover:bg-white/72 hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+              className="site-header-nav-link rounded-2xl px-2.5 py-2 text-[12.5px] font-semibold text-[#65594e] transition hover:bg-white/72 hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
             >
               {item.label}
             </Link>
@@ -62,7 +62,7 @@ export function SiteHeader() {
           <HeaderPreferencesMenu />
           <a
             href="tel:+982175425000"
-            className="site-header-phone inline-flex h-10 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-white/72 px-3 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9792b]/30 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
+            className="site-header-phone inline-flex h-10 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-white/72 px-3 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
           >
             <PhoneCall className="h-4 w-4 text-[#cc785c]" aria-hidden="true" />
             <span className="site-header-sales-label text-[11px] font-semibold text-[#7a6a59] dark:text-zinc-400">

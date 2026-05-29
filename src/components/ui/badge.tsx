@@ -15,7 +15,7 @@ const badgeVariants = cva(
         outline:
           "border-[#d8c7b2] bg-[#fffaf1]/72 text-[#5f5348] shadow-sm shadow-[#2a241d]/[0.03] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-white",
         signal:
-          "border-[#d9a35a] bg-[#d99a35] text-[#2a241d] shadow-sm shadow-[#8a4f1b]/10",
+          "border-[#C16B4E] bg-[#C16B4E] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15",
       },
     },
     defaultVariants: {
