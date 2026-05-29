@@ -459,6 +459,7 @@ function PricingPlanCard({
       className={cn(
         "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
+        recommended && "bg-[#F6EDE4] border-[#CC785C]/60 shadow-md shadow-[#CC785C]/8 motion-safe:-translate-y-0.5",
         isActive && "ring-1 ring-[#CC785C] shadow-md shadow-[#CC785C]/15 motion-safe:-translate-y-1",
         recommended && "pricing-card-recommended",
         isPulsing && "pricing-card-pulse",
@@ -491,7 +492,8 @@ function PricingPlanCard({
           key={`${plan.id}-${duration}`}
           className="pricing-plan-price pricing-price-change text-3xl font-black leading-tight tracking-normal text-[#2a241d] md:text-[2rem]"
         >
-          {plan.prices[duration]} {copy.currency}
+          {plan.prices[duration]}{" "}
+          <span className="pricing-plan-currency">{copy.currency}</span>
         </div>
         <div className="pricing-plan-stages mt-2 text-xs font-semibold text-[#75695d]">
           {copy.stagesIncluded}

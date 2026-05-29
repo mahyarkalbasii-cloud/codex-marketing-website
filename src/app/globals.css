@@ -9680,11 +9680,12 @@ html.theme-a body main section#plans .pricing-card-head {
 
 body main section#plans .pricing-card[data-recommended-plan="true"],
 html.theme-a body main section#plans .pricing-card[data-recommended-plan="true"] {
-  border-color: rgba(204, 120, 92, 0.28) !important;
-  background: var(--clay-tint-strong) !important;
+  border-color: rgba(204, 120, 92, 0.6) !important;
+  background: #F6EDE4 !important;
   box-shadow:
     var(--shadow-card),
-    0 14px 32px rgba(204, 120, 92, 0.08) !important;
+    0 14px 32px rgba(204, 120, 92, 0.1) !important;
+  transform: translateY(-2px) !important;
 }
 
 body main section#plans .pricing-card[data-active-plan="true"]:not([data-recommended-plan="true"]),
@@ -9745,16 +9746,23 @@ html.theme-a body main section#plans .pricing-plan-price-group {
 
 body main section#plans .pricing-plan-price,
 html.theme-a body main section#plans .pricing-plan-price {
-  color: #1B1916 !important;
+  color: #2A241D !important;
   font-size: clamp(1.55rem, 2.2vw, 2rem) !important;
   font-weight: 950 !important;
   letter-spacing: 0 !important;
   line-height: 1.35 !important;
 }
 
+body main section#plans .pricing-plan-currency,
+html.theme-a body main section#plans .pricing-plan-currency {
+  color: #75695D !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+
 body main section#plans .pricing-plan-stages,
 html.theme-a body main section#plans .pricing-plan-stages {
-  color: #6B6259 !important;
+  color: #75695D !important;
   font-size: 0.78rem !important;
   font-weight: 750 !important;
 }
@@ -9829,7 +9837,7 @@ html.theme-a body main section#plans .pricing-coverage-header {
 
 body main section#plans .pricing-coverage-value,
 html.theme-a body main section#plans .pricing-coverage-value {
-  color: #1B1916 !important;
+  color: #A8573D !important;
 }
 
 body main section#plans .pricing-coverage-meter,
@@ -9878,12 +9886,12 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
   gap: 0.5rem;
   min-block-size: 2.7rem;
   margin-block-start: auto !important;
-  border: 1px solid #1B1916 !important;
+  border: 1px solid #C16B4E !important;
   border-radius: 999px !important;
-  background: transparent !important;
+  background: #C16B4E !important;
   background-image: none !important;
   box-shadow: none !important;
-  color: #1B1916 !important;
+  color: #FFF7EF !important;
   font-size: 0.86rem !important;
   font-weight: 850 !important;
   line-height: 1 !important;
@@ -9901,14 +9909,14 @@ body main section#plans .pricing-plan-cta svg,
 body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg,
 html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta svg,
 html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
-  color: var(--clay) !important;
-  stroke: var(--clay) !important;
+  color: #FFF7EF !important;
+  stroke: #FFF7EF !important;
 }
 
 body main section#plans .pricing-plan-cta:hover,
 html.theme-a body main section#plans .pricing-plan-cta:hover {
-  border-color: rgba(204, 120, 92, 0.55) !important;
-  background: var(--clay-tint) !important;
+  border-color: #A8573D !important;
+  background: #A8573D !important;
 }
 
 body main section#plans .pricing-plan-cta:focus-visible,
@@ -9939,12 +9947,13 @@ body main section#plans article.pricing-card[data-plan-card][data-recommended-pl
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"],
 html.theme-a body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
 html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] {
-  border-color: rgba(204, 120, 92, 0.28) !important;
-  background: var(--clay-tint-strong) !important;
+  border-color: rgba(204, 120, 92, 0.6) !important;
+  background: #F6EDE4 !important;
   background-image: none !important;
   box-shadow:
     var(--shadow-card),
-    0 14px 32px rgba(204, 120, 92, 0.08) !important;
+    0 14px 32px rgba(204, 120, 92, 0.1) !important;
+  transform: translateY(-2px) !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]),
@@ -10086,85 +10095,17 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
 html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
 html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
-  border-color: #1B1916 !important;
-  background: #1B1916 !important;
+  border-color: #CC785C !important;
   background-image: none !important;
   box-shadow:
-    0 1px 2px rgba(27, 25, 22, 0.08),
-    0 16px 36px rgba(27, 25, 22, 0.16) !important;
-  color: var(--surface-card) !important;
+    0 0 0 1px #CC785C,
+    var(--shadow-card) !important;
+  transform: translateY(-3px) !important;
 }
 
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] :is(h3, p, div, span),
-body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] :is(h3, p, div, span),
-body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] :is(h3, p, div, span),
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] :is(h3, p, div, span),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] :is(h3, p, div, span),
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] :is(h3, p, div, span) {
-  color: var(--surface-card) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] :is(.pricing-plan-stages, .pricing-coverage-header, .pricing-addon),
-body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] :is(.pricing-plan-stages, .pricing-coverage-header, .pricing-addon),
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] :is(.pricing-plan-stages, .pricing-coverage-header, .pricing-addon),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] :is(.pricing-plan-stages, .pricing-coverage-header, .pricing-addon) {
-  color: var(--border-soft) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge {
-  border-color: rgba(204, 120, 92, 0.35) !important;
-  background: var(--clay) !important;
-  color: #1B1916 !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-card-divider,
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-addon,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-card-divider,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-addon {
-  border-color: rgba(245, 240, 230, 0.16) !important;
-  background: rgba(245, 240, 230, 0.16) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-highlight-icon,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-highlight-icon {
-  border-color: rgba(204, 120, 92, 0.38) !important;
-  background: rgba(245, 240, 230, 0.08) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-highlight-icon svg,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-highlight-icon svg {
-  color: var(--clay) !important;
-  stroke: var(--clay) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage {
-  border-color: rgba(245, 240, 230, 0.16) !important;
-  background: rgba(245, 240, 230, 0.08) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage-segment,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage-segment {
-  background: rgba(245, 240, 230, 0.18) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage-segment[data-filled-segment="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-coverage-segment[data-filled-segment="true"] {
-  background: var(--clay) !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta {
-  border-color: var(--surface-card) !important;
-  background: var(--surface-card) !important;
-  color: #1B1916 !important;
-}
-
-body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg {
-  color: var(--clay) !important;
-  stroke: var(--clay) !important;
+body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"][data-active-plan="true"],
+html.theme-a body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] {
+  background: #F6EDE4 !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card],
