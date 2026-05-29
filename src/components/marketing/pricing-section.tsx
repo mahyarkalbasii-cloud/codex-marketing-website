@@ -366,14 +366,14 @@ function PricingCoverage({
       className={cn(
         "rounded-2xl border p-3",
         featured
-          ? "border-[#F7F1E8]/10 bg-[#F7F1E8]/10 text-[#F7F1E8]"
-          : "border-[#F7F1E8]/10 bg-[#F7F1E8]/10 text-[#F7F1E8]",
+          ? "border-white/10 bg-white/10 text-[#fffaf1]"
+          : "border-[#e4d8c8] bg-[#fbf6ed]/78 text-[#2a241d]",
       )}
     >
       <div
         className={cn(
           "mb-3 flex items-center justify-between text-[11px] font-semibold",
-          featured ? "text-[#F7F1E8]/72" : "text-[#F7F1E8]/72",
+          featured ? "text-[#efe2d2]" : "text-[#6f6254]",
         )}
       >
         <span>{copy.coverage}</span>
@@ -399,8 +399,8 @@ function PricingCoverage({
                     ? "bg-[#f5c842]"
                     : "bg-[#CC785C]"
                   : featured
-                    ? "bg-[#F7F1E8]/20"
-                    : "bg-[#F7F1E8]/20",
+                    ? "bg-white/20"
+                    : "bg-[#e8dfd2]",
               )}
             />
           );
@@ -439,8 +439,8 @@ function PricingPlanCard({
       className={cn(
         "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
-          ? "pricing-card-featured border-[#484848] bg-[#333333] text-[#F7F1E8] shadow-xl shadow-black/20"
-          : "border-[#484848] bg-[#333333] text-[#F7F1E8] shadow-sm shadow-black/[0.10]",
+          ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10"
+          : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
         isPulsing && "pricing-card-pulse",
       )}
     >
@@ -471,7 +471,7 @@ function PricingPlanCard({
           key={`${plan.id}-${duration}`}
           className={cn(
             "pricing-price-change text-3xl font-black leading-tight tracking-normal md:text-[2rem]",
-            featured ? "text-[#F7F1E8]" : "text-[#F7F1E8]",
+            featured ? "text-white" : "text-[#2a241d]",
           )}
         >
           {plan.prices[duration]} {copy.currency}
@@ -479,7 +479,7 @@ function PricingPlanCard({
         <div
           className={cn(
             "mt-2 text-xs font-semibold",
-            featured ? "text-[#F7F1E8]/82" : "text-[#F7F1E8]/72",
+            featured ? "text-[#efe2d2]" : "text-[#75695d]",
           )}
         >
           {copy.stagesIncluded}
@@ -489,7 +489,7 @@ function PricingPlanCard({
       <div
         className={cn(
           "my-5 h-px",
-          featured ? "bg-[#F7F1E8]/12" : "bg-[#F7F1E8]/12",
+          featured ? "bg-white/12" : "bg-[#e4d8c8]",
         )}
       />
 
@@ -504,7 +504,7 @@ function PricingPlanCard({
             <span
               className={cn(
                 "grid h-5 w-5 shrink-0 place-items-center rounded-full",
-                featured ? "bg-[#F7F1E8]/12" : "bg-[#F7F1E8]/12",
+                featured ? "bg-white/10" : "bg-[#f5eadb]",
               )}
             >
               <Check className="h-3.5 w-3.5" />
@@ -522,8 +522,8 @@ function PricingPlanCard({
         className={cn(
           "mt-5 border-t pt-4 text-xs font-semibold leading-6",
           featured
-            ? "border-[#F7F1E8]/12 text-[#F7F1E8]/72"
-            : "border-[#F7F1E8]/12 text-[#F7F1E8]/72",
+            ? "border-white/12 text-[#efe2d2]"
+            : "border-[#e4d8c8] text-[#6f6254]",
         )}
       >
         {plan.addon}
