@@ -18,7 +18,7 @@ export function CityInternalLinks({
   reasonByCategorySlug: Record<string, string>;
 }) {
   return (
-    <section className="border-y border-border bg-muted/35">
+    <section className="border-y border-border">
       <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
         <SectionHeader
           eyebrow={`فروش در ${cityName}`}

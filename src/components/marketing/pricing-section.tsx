@@ -364,27 +364,29 @@ function PricingCoverage({
   return (
     <div
       className={cn(
-        "rounded-2xl border p-3",
+        "pricing-coverage rounded-2xl border p-3",
         featured
           ? "border-white/10 bg-white/10 text-[#fffaf1]"
           : "border-[#e4d8c8] bg-[#fbf6ed]/78 text-[#2a241d]",
       )}
+      data-featured-coverage={featured ? "true" : "false"}
+      aria-label={`${copy.coverage} ${coverage.toLocaleString(formatter)} ${copy.from} ${Number(4).toLocaleString(formatter)}`}
     >
       <div
         className={cn(
-          "mb-3 flex items-center justify-between text-[11px] font-semibold",
+          "pricing-coverage-header mb-3 flex items-center justify-between text-[11px] font-semibold",
           featured ? "text-[#efe2d2]" : "text-[#6f6254]",
         )}
       >
-        <span>{copy.coverage}</span>
-        <span className="flex items-center gap-1">
+        <span className="pricing-coverage-label">{copy.coverage}</span>
+        <span className="pricing-coverage-value flex items-center gap-1">
           {coverage.toLocaleString(formatter)} {copy.from} {Number(4).toLocaleString(formatter)}
-          <BarChart3 className="h-3.5 w-3.5" />
+          <BarChart3 aria-hidden="true" className="h-3.5 w-3.5" />
         </span>
       </div>
       <div
-        className="grid gap-1.5"
-        aria-label={`${copy.coverage} ${coverage.toLocaleString(formatter)} ${copy.from} ${Number(4).toLocaleString(formatter)}`}
+        className="pricing-coverage-meter grid gap-1.5"
+        aria-hidden="true"
       >
         {[1, 2, 3, 4].map((item) => {
           const filled = item <= coverage;
@@ -392,8 +394,9 @@ function PricingCoverage({
           return (
             <span
               key={item}
+              data-filled-segment={filled ? "true" : "false"}
               className={cn(
-                "h-1.5 rounded-full transition-colors",
+                "pricing-coverage-segment h-1.5 rounded-full transition-colors",
                 filled
                   ? featured
                     ? "bg-[#f5c842]"
@@ -435,16 +438,18 @@ function PricingPlanCard({
     <article
       data-plan-card={plan.id}
       data-active-plan={isActive ? "true" : "false"}
+      data-recommended-plan={recommended ? "true" : "false"}
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
         "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
         featured
           ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10"
           : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
+        recommended && "pricing-card-recommended",
         isPulsing && "pricing-card-pulse",
       )}
     >
-      <div className="relative">
+      <div className="pricing-card-head relative">
         <div
           className={cn(
             "absolute -left-12 -top-12 h-28 w-28 rounded-full blur-2xl",
@@ -461,16 +466,16 @@ function PricingPlanCard({
             {copy.recommended}
           </span>
         ) : null}
-        <h3 className="relative text-2xl font-bold">
+        <h3 className="pricing-plan-title relative text-2xl font-bold">
           {plan.name}
         </h3>
       </div>
 
-      <div className="mt-5">
+      <div className="pricing-plan-price-group mt-5">
         <div
           key={`${plan.id}-${duration}`}
           className={cn(
-            "pricing-price-change text-3xl font-black leading-tight tracking-normal md:text-[2rem]",
+            "pricing-plan-price pricing-price-change text-3xl font-black leading-tight tracking-normal md:text-[2rem]",
             featured ? "text-white" : "text-[#2a241d]",
           )}
         >
@@ -478,7 +483,7 @@ function PricingPlanCard({
         </div>
         <div
           className={cn(
-            "mt-2 text-xs font-semibold",
+            "pricing-plan-stages mt-2 text-xs font-semibold",
             featured ? "text-[#efe2d2]" : "text-[#75695d]",
           )}
         >
@@ -488,7 +493,7 @@ function PricingPlanCard({
 
       <div
         className={cn(
-          "my-5 h-px",
+          "pricing-card-divider my-5 h-px",
           featured ? "bg-white/12" : "bg-[#e4d8c8]",
         )}
       />
@@ -500,27 +505,28 @@ function PricingPlanCard({
         )}
       >
         {plan.highlights.map((feature) => (
-          <div key={feature} className="flex items-center gap-2">
+          <div key={feature} className="pricing-highlight-item flex items-center gap-2">
             <span
               className={cn(
-                "grid h-5 w-5 shrink-0 place-items-center rounded-full",
+                "pricing-highlight-icon grid h-5 w-5 shrink-0 place-items-center rounded-full",
                 featured ? "bg-white/10" : "bg-[#f5eadb]",
               )}
+              aria-hidden="true"
             >
-              <Check className="h-3.5 w-3.5" />
+              <Check aria-hidden="true" className="h-3.5 w-3.5" />
             </span>
             {feature}
           </div>
         ))}
       </div>
 
-      <div className="mt-5">
+      <div className="pricing-coverage-wrap mt-5">
         <PricingCoverage coverage={plan.coverage} featured={featured} locale={locale} />
       </div>
 
       <div
         className={cn(
-          "mt-5 border-t pt-4 text-xs font-semibold leading-6",
+          "pricing-addon mt-5 border-t pt-4 text-xs font-semibold leading-6",
           featured
             ? "border-white/12 text-[#efe2d2]"
             : "border-[#e4d8c8] text-[#6f6254]",
@@ -541,7 +547,7 @@ function PricingPlanCard({
         )}
       >
         {plan.cta}
-        <ArrowLeft className="h-4 w-4" />
+        <ArrowLeft aria-hidden="true" className="h-4 w-4" />
       </Link>
     </article>
   );
@@ -697,6 +703,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       dir={locale === "fa" ? "rtl" : "ltr"}
       data-pricing-ready={isReady ? "true" : undefined}
       data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
+      data-active-plan-id={activePlan?.id ?? ""}
       className="section-gradient section-gradient-pricing relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
     >
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 md:px-6 md:py-20">
@@ -726,11 +733,11 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           </div>
           <div
             ref={railRef}
-            className="relative mx-2 mt-5 h-24 max-w-3xl touch-none md:mx-auto md:h-20"
+            className="pricing-slider-control relative mx-2 mt-5 h-24 max-w-3xl touch-none md:mx-auto md:h-20"
             onPointerDown={handleRailPointer}
             onPointerMove={handleRailMove}
           >
-            <div className="absolute left-0 right-0 top-8 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
+            <div className="pricing-slider-track absolute left-0 right-0 top-8 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
               <span
                 className="pricing-slider-rail block h-full origin-right bg-[#CC785C] transition-[width] duration-200"
                 style={{ width: activePlanIndex === null ? "0%" : `${activePercent}%` }}
@@ -738,7 +745,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             </div>
             <ArrowLeft
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-0.8rem] top-8 z-30 h-5 w-5 -translate-y-1/2 text-[#CC785C] drop-shadow-[0_1px_0_rgba(255,250,241,0.95)]"
+              className="pricing-slider-arrow pointer-events-none absolute left-[-0.8rem] top-8 z-30 h-5 w-5 -translate-y-1/2 text-[#CC785C] drop-shadow-[0_1px_0_rgba(255,250,241,0.95)]"
               strokeWidth={3}
             />
             {activePlan ? (
@@ -762,10 +769,10 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                     selectPlan(getIndexFromPointer(event.clientX));
                   }
                 }}
-                className="absolute top-8 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
+                className="pricing-slider-handle absolute top-8 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
                 style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
               >
-                <span className="h-2.5 w-2.5 rounded-full bg-white" />
+                <span aria-hidden="true" className="pricing-slider-handle-dot h-2.5 w-2.5 rounded-full bg-white" />
               </button>
             ) : null}
             {plans.map((plan, index) => {
@@ -776,29 +783,31 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                   <span
                     aria-hidden="true"
                     data-plan-stopper={plan.id}
+                    data-active-stopper={activePlanIndex === index ? "true" : "false"}
                     style={{
                       right: `${tickPercent}%`,
                       transform: "translate(50%, -50%)",
                     }}
                     className={cn(
-                      "absolute top-8 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
+                      "pricing-slider-stopper absolute top-8 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
                       activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
                     )}
                   />
                   <button
                     type="button"
                     data-plan-tick={plan.id}
+                    data-active-tick={activePlanIndex === index ? "true" : "false"}
                     onClick={() => selectPlan(index)}
                     style={{
                       right: `${tickPercent}%`,
                       transform: getAxisItemTransform(index, plans.length),
                     }}
                     className={cn(
-                      "absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:h-14 md:w-20 md:text-xs",
+                      "pricing-slider-tick absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/30 md:h-14 md:w-20 md:text-xs",
                       activePlanIndex === index && "text-[#2a241d]",
                     )}
                   >
-                    <span dir="ltr" className="absolute left-1/2 top-5 w-full -translate-x-1/2">
+                    <span dir="ltr" className="pricing-slider-tick-label absolute left-1/2 top-5 w-full -translate-x-1/2">
                       {tickLabels[plan.id]}
                     </span>
                   </button>
@@ -807,13 +816,16 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             })}
           </div>
 
-          <p className="mx-auto min-h-6 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
+          <p className="pricing-selector-motto mx-auto min-h-6 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
             {activePlan ? activePlan.selectorMotto : ""}
           </p>
         </div>
 
-        <div className="pricing-duration mt-6 flex flex-col items-center gap-2">
-          <div className="grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.3rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-2 pt-8 shadow-sm shadow-[#2a241d]/[0.025] md:rounded-[1.5rem]">
+        <div
+          className="pricing-duration mt-6 flex flex-col items-center gap-2"
+          data-selected-duration={duration}
+        >
+          <div className="pricing-duration-group grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.3rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-2 pt-8 shadow-sm shadow-[#2a241d]/[0.025] md:rounded-[1.5rem]">
             {durationOptions.map((item) => {
               const active = item.id === duration;
 
@@ -822,9 +834,10 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                   key={item.id}
                   type="button"
                   data-duration-option={item.id}
+                  data-active-duration={active ? "true" : "false"}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "relative h-12 rounded-xl border text-sm font-bold shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-[3.25rem] md:rounded-2xl",
+                    "pricing-duration-option relative h-12 rounded-xl border text-sm font-bold shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-[3.25rem] md:rounded-2xl",
                     active
                       ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-[#2a241d]/15"
                       : "border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-[#2a241d]/[0.025] hover:bg-[#f5eadb]",
@@ -851,7 +864,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           </div>
           <p
             key={duration}
-            className="pricing-price-change text-center text-xs font-semibold text-[#75695d]"
+            className="pricing-duration-note pricing-price-change text-center text-xs font-semibold text-[#75695d]"
           >
             {activeDuration.note}
           </p>

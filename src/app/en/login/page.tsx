@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function EnglishLoginPage() {
   return (
-    <main className="min-h-[calc(100dvh-5rem)] bg-[#faf9f6] px-4 py-10 text-zinc-950 dark:bg-zinc-950 dark:text-white">
+    <main className="min-h-[calc(100dvh-5rem)] px-4 py-10 text-zinc-950 dark:bg-zinc-950 dark:text-white">
       <section className="mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[1fr_.85fr] md:px-6 md:py-12">
         <div>
           <Badge>

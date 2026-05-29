@@ -149,7 +149,7 @@ export default function RulesPage() {
   return (
     <main>
       <StructuredData data={schema} />
-      <section className="border-b border-border bg-[#f8f2e9]">
+      <section className="border-b border-border">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <p className="text-sm font-bold text-[#b17643]">قوانین و مقررات</p>
