@@ -266,7 +266,6 @@ const pricingCopy = {
     coverage: "پوشش بازار",
     from: "از",
     currency: "تومان",
-    monthlyEquivalent: (amount: string) => `معادل ماهانه: ${amount} تومان`,
     whatsappMessage: (plan: string, duration: string) =>
       `علاقمندم به پلن ${plan} (${duration}) پرشین‌سازه`,
   },
@@ -285,7 +284,6 @@ const pricingCopy = {
     coverage: "Market coverage",
     from: "of",
     currency: "toman",
-    monthlyEquivalent: (amount: string) => `Monthly: ${amount} toman`,
     whatsappMessage: (plan: string, duration: string) =>
       `I am interested in the ${plan} plan (${duration}) on PersianSaze`,
   },
@@ -304,24 +302,8 @@ const axisTickLabelsEn: Record<PlanId, string> = {
   taban: "500–700 m²",
   "taban-plus": "700+ m²",
 };
-const savingsLabelsFa: Record<Duration, string> = { "3": "", "6": "−۲۵٪", "12": "−۵۰٪" };
-const savingsLabelsEn: Record<Duration, string> = { "3": "", "6": "−25%", "12": "−50%" };
-const durationMonths: Record<Duration, number> = { "3": 3, "6": 6, "12": 12 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
-
-function parsePriceNumber(s: string): number {
-  return Number(
-    s
-      .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
-      .replace(/,/g, ""),
-  );
-}
-
-function formatMonthlyEquivalent(priceStr: string, months: number, locale: Locale): string {
-  const monthly = Math.round(parsePriceNumber(priceStr) / months);
-  return locale === "fa" ? monthly.toLocaleString("fa-IR") : monthly.toLocaleString("en-US");
-}
 
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -498,10 +480,7 @@ function PricingPlanCard({
           {plan.prices[duration]}{" "}
           <span className="pricing-plan-currency">{copy.currency}</span>
         </div>
-        <div className="pricing-plan-monthly mt-1 text-[11px] leading-tight text-[#75695d]">
-          {copy.monthlyEquivalent(formatMonthlyEquivalent(plan.prices[duration], durationMonths[duration], locale))}
-        </div>
-        <div className="pricing-plan-stages mt-1 text-xs font-semibold text-[#75695d]">
+        <div className="pricing-plan-stages mt-2 text-xs font-semibold text-[#75695d]">
           {copy.stagesIncluded}
         </div>
       </div>
@@ -576,7 +555,6 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const activePlan = activePlanIndex === null ? null : plans[activePlanIndex];
   const activePercent =
     activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
-  const savingsLabels = locale === "fa" ? savingsLabelsFa : savingsLabelsEn;
 
   useEffect(() => {
     setIsReady(true);
@@ -866,65 +844,48 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           className="pricing-duration mt-6 flex flex-col items-center gap-2"
           data-selected-duration={duration}
         >
-          <div
-            role="tablist"
-            aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
-            onKeyDown={handleDurationKeyDown}
-            className="pricing-duration-group flex w-full max-w-xs rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 shadow-sm shadow-[#2a241d]/[0.025] md:max-w-sm"
-          >
-            {durationOptions.map((item) => {
-              const active = item.id === duration;
-              const savingsLabel = savingsLabels[item.id];
-
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  tabIndex={active ? 0 : -1}
-                  data-duration-option={item.id}
-                  data-active-duration={active ? "true" : "false"}
-                  onClick={() => setDuration(item.id)}
-                  className={cn(
-                    "pricing-duration-option flex min-h-[3rem] flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-2 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
-                    active
-                      ? "bg-[#CC785C] text-[#FFF7EF] shadow-sm shadow-[#CC785C]/20"
-                      : "text-[#2A241D] hover:bg-[rgba(204,120,92,0.08)]",
-                  )}
-                >
-                  {/* Badge: always render for equal heights; invisible on non-12 segments */}
-                  <span
-                    aria-hidden={item.id !== "12" ? "true" : undefined}
+          {/* Relative wrapper: badge sits above the toggle, never changes segment height */}
+          <div className="relative w-full max-w-xs pt-3 md:max-w-sm">
+            <span
+              className={cn(
+                "pricing-best-value-badge absolute end-2 top-0.5 z-10 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
+                duration === "12"
+                  ? "border-[#CC785C]/40 bg-[#CC785C] text-[#FFF7EF]"
+                  : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
+              )}
+            >
+              {copy.bestValue}
+            </span>
+            <div
+              role="tablist"
+              aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
+              onKeyDown={handleDurationKeyDown}
+              className="pricing-duration-group flex w-full rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 shadow-sm shadow-[#2a241d]/[0.025]"
+            >
+              {durationOptions.map((item) => {
+                const active = item.id === duration;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    tabIndex={active ? 0 : -1}
+                    data-duration-option={item.id}
+                    data-active-duration={active ? "true" : "false"}
+                    onClick={() => setDuration(item.id)}
                     className={cn(
-                      "pricing-best-value-badge whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
-                      item.id !== "12"
-                        ? "invisible"
-                        : active
-                        ? "border-[#FFF7EF]/30 bg-[#FFF7EF]/15 text-[#FFF7EF]"
-                        : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
+                      "pricing-duration-option flex h-12 flex-1 items-center justify-center rounded-[9px] text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
+                      active
+                        ? "bg-[#CC785C] text-[#FFF7EF] shadow-sm shadow-[#CC785C]/20"
+                        : "text-[#2A241D] hover:bg-[rgba(204,120,92,0.08)]",
                     )}
                   >
-                    {item.id === "12" ? copy.bestValue : " "}
-                  </span>
-                  <span className="block leading-tight">{item.label}</span>
-                  {/* Savings: always render for equal heights; invisible on baseline */}
-                  <span
-                    aria-hidden={!savingsLabel ? "true" : undefined}
-                    className={cn(
-                      "pricing-duration-savings block text-[10px] font-semibold leading-tight",
-                      savingsLabel
-                        ? active
-                          ? "text-[#FFF7EF]/75"
-                          : "text-[#75695D]"
-                        : "invisible",
-                    )}
-                  >
-                    {savingsLabel || " "}
-                  </span>
-                </button>
-              );
-            })}
+                    <span className="block">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
