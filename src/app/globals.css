@@ -9005,7 +9005,7 @@ body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stop
 
 html.theme-a body main section#plans .pricing-duration [data-duration-option] > span.block,
 body main section#plans .pricing-duration [data-duration-option] > span.block {
-  color: #1B1916 !important;
+  color: inherit !important;
 }
 
 html.theme-a body main section#plans .pricing-duration > p.pricing-price-change,
@@ -9540,44 +9540,63 @@ html.theme-a body main section#plans .pricing-duration {
 body main section#plans .pricing-duration-group,
 html.theme-a body main section#plans .pricing-duration > div.pricing-duration-group {
   inline-size: 100%;
-  border: 1px solid var(--border-soft) !important;
+  border: 1px solid #E4D8C8 !important;
   border-radius: 1.2rem !important;
-  background: var(--surface-card) !important;
+  background: #FBF6ED !important;
   background-image: none !important;
   box-shadow: var(--shadow-card) !important;
-  gap: 0.5rem !important;
-  padding-block: 0.5rem !important;
-  padding-inline: 0.5rem !important;
+  gap: 0.25rem !important;
+  padding-block: 0.25rem !important;
+  padding-inline: 0.25rem !important;
 }
 
 body main section#plans .pricing-duration-option,
 html.theme-a body main section#plans [data-duration-option].pricing-duration-option {
-  display: grid;
-  place-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
   min-block-size: 3rem;
   block-size: auto !important;
-  border: 1px solid var(--border-soft) !important;
-  border-radius: 0.95rem !important;
+  border: none !important;
+  border-radius: 0.6rem !important;
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
-  color: #1B1916 !important;
-  padding-block: 0.62rem !important;
+  color: #2A241D !important;
+  padding-block: 0.45rem !important;
   padding-inline: 0.4rem !important;
+  gap: 0.15rem !important;
 }
 
 body main section#plans .pricing-duration-option[data-active-duration="true"],
 html.theme-a body main section#plans [data-duration-option].pricing-duration-option[data-active-duration="true"] {
-  border-color: rgba(204, 120, 92, 0.38) !important;
-  background: var(--clay) !important;
-  color: #1B1916 !important;
-  box-shadow: 0 8px 18px rgba(204, 120, 92, 0.12) !important;
+  background: #CC785C !important;
+  color: #FFF7EF !important;
+  box-shadow: 0 4px 12px rgba(204, 120, 92, 0.2) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body main section#plans .pricing-duration-option:not([data-active-duration="true"]):hover,
+  html.theme-a body main section#plans .pricing-duration-option:not([data-active-duration="true"]):hover {
+    background: rgba(204, 120, 92, 0.08) !important;
+  }
 }
 
 body main section#plans .pricing-duration-option > span.block,
 html.theme-a body main section#plans .pricing-duration-option > span.block {
-  color: #1B1916 !important;
+  color: inherit !important;
   line-height: 1.35;
+}
+
+body main section#plans .pricing-duration-option > span.pricing-duration-savings,
+html.theme-a body main section#plans .pricing-duration-option > span.pricing-duration-savings {
+  color: #75695D !important;
+}
+
+body main section#plans .pricing-duration-option[data-active-duration="true"] > span.pricing-duration-savings,
+html.theme-a body main section#plans .pricing-duration-option[data-active-duration="true"] > span.pricing-duration-savings {
+  color: rgba(255, 247, 239, 0.75) !important;
 }
 
 body main section#plans .pricing-best-value-badge,
@@ -9587,18 +9606,24 @@ html.theme-a body main section#plans .pricing-best-value-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-block-end: 0.24rem;
-  border: 1px solid rgba(204, 120, 92, 0.25) !important;
+  border: 1px solid #E4D8C8 !important;
   border-radius: 999px;
-  background: var(--clay-tint) !important;
+  background: #FBF6ED !important;
   background-image: none !important;
   box-shadow: none !important;
-  color: #1B1916 !important;
+  color: #CC785C !important;
   font-size: 0.64rem !important;
   line-height: 1.45 !important;
   padding-block: 0.08rem !important;
   padding-inline: 0.45rem !important;
   transform: none !important;
+}
+
+body main section#plans .pricing-duration-option[data-active-duration="true"] .pricing-best-value-badge,
+html.theme-a body main section#plans .pricing-duration-option[data-active-duration="true"] .pricing-best-value-badge {
+  border-color: rgba(255, 247, 239, 0.3) !important;
+  background: rgba(255, 247, 239, 0.15) !important;
+  color: #FFF7EF !important;
 }
 
 body main section#plans .pricing-duration-note,
@@ -9765,6 +9790,14 @@ html.theme-a body main section#plans .pricing-plan-stages {
   color: #75695D !important;
   font-size: 0.78rem !important;
   font-weight: 750 !important;
+}
+
+body main section#plans .pricing-plan-monthly,
+html.theme-a body main section#plans .pricing-plan-monthly {
+  color: #75695D !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
 }
 
 body main section#plans .pricing-card-divider,

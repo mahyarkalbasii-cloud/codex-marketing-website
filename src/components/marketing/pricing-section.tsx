@@ -266,6 +266,7 @@ const pricingCopy = {
     coverage: "پوشش بازار",
     from: "از",
     currency: "تومان",
+    monthlyEquivalent: (amount: string) => `معادل ماهانه: ${amount} تومان`,
     whatsappMessage: (plan: string, duration: string) =>
       `علاقمندم به پلن ${plan} (${duration}) پرشین‌سازه`,
   },
@@ -284,6 +285,7 @@ const pricingCopy = {
     coverage: "Market coverage",
     from: "of",
     currency: "toman",
+    monthlyEquivalent: (amount: string) => `Monthly: ${amount} toman`,
     whatsappMessage: (plan: string, duration: string) =>
       `I am interested in the ${plan} plan (${duration}) on PersianSaze`,
   },
@@ -291,17 +293,20 @@ const pricingCopy = {
 
 const FALLBACK_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
-  bonyan: "۳۰۰",
-  royan: "۵۰۰",
-  taban: "۷۰۰",
-  "taban-plus": "+۷۰۰",
+  bonyan: "تا ۳۰۰ متر",
+  royan: "۳۰۰ تا ۵۰۰ متر",
+  taban: "۵۰۰ تا ۷۰۰ متر",
+  "taban-plus": "بالای ۷۰۰ متر",
 };
 const axisTickLabelsEn: Record<PlanId, string> = {
-  bonyan: "300",
-  royan: "500",
-  taban: "700",
-  "taban-plus": "+700",
+  bonyan: "Up to 300 m²",
+  royan: "300–500 m²",
+  taban: "500–700 m²",
+  "taban-plus": "700+ m²",
 };
+const savingsLabelsFa: Record<Duration, string> = { "3": "", "6": "−۲۵٪", "12": "−۵۰٪" };
+const savingsLabelsEn: Record<Duration, string> = { "3": "", "6": "−25%", "12": "−50%" };
+const durationMonths: Record<Duration, number> = { "3": 3, "6": 6, "12": 12 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
 
@@ -313,11 +318,9 @@ function parsePriceNumber(s: string): number {
   );
 }
 
-function formatSavings(percent: number, locale: Locale): string {
-  if (percent <= 0) return "";
-  const num = locale === "fa" ? percent.toLocaleString("fa-IR") : String(percent);
-  const pct = locale === "fa" ? "٪" : "%";
-  return `−${num}${pct}`;
+function formatMonthlyEquivalent(priceStr: string, months: number, locale: Locale): string {
+  const monthly = Math.round(parsePriceNumber(priceStr) / months);
+  return locale === "fa" ? monthly.toLocaleString("fa-IR") : monthly.toLocaleString("en-US");
 }
 
 function usePrefersReducedMotion() {
@@ -495,7 +498,10 @@ function PricingPlanCard({
           {plan.prices[duration]}{" "}
           <span className="pricing-plan-currency">{copy.currency}</span>
         </div>
-        <div className="pricing-plan-stages mt-2 text-xs font-semibold text-[#75695d]">
+        <div className="pricing-plan-monthly mt-1 text-[11px] leading-tight text-[#75695d]">
+          {copy.monthlyEquivalent(formatMonthlyEquivalent(plan.prices[duration], durationMonths[duration], locale))}
+        </div>
+        <div className="pricing-plan-stages mt-1 text-xs font-semibold text-[#75695d]">
           {copy.stagesIncluded}
         </div>
       </div>
@@ -568,17 +574,9 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const activePlan = activePlanIndex === null ? null : plans[activePlanIndex];
-  const activeDuration = useMemo(() => durationById[duration], [duration, durationById]);
   const activePercent =
     activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
-  const savingsPercent = useMemo<Record<Duration, number>>(() => {
-    const baseMonthly = parsePriceNumber(plans[0].prices["3"]) / 3;
-    return {
-      "3": 0,
-      "6": Math.round((1 - parsePriceNumber(plans[0].prices["6"]) / 6 / baseMonthly) * 100),
-      "12": Math.round((1 - parsePriceNumber(plans[0].prices["12"]) / 12 / baseMonthly) * 100),
-    };
-  }, [plans]);
+  const savingsLabels = locale === "fa" ? savingsLabelsFa : savingsLabelsEn;
 
   useEffect(() => {
     setIsReady(true);
@@ -843,7 +841,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                     )}
                   >
                     <span className="pricing-slider-tick-label absolute left-1/2 top-5 flex w-full -translate-x-1/2 flex-col items-center gap-0.5">
-                      <span dir="ltr" className={activePlanIndex === index ? "text-[#2a241d]" : "text-[#75695d]"}>
+                      <span className={activePlanIndex === index ? "text-[#2a241d]" : "text-[#75695d]"}>
                         {tickLabels[plan.id]}
                       </span>
                       <span className={cn(
@@ -872,11 +870,11 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             role="tablist"
             aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
             onKeyDown={handleDurationKeyDown}
-            className="pricing-duration-group flex w-full max-w-xs rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 pt-9 shadow-sm shadow-[#2a241d]/[0.025] md:max-w-sm"
+            className="pricing-duration-group flex w-full max-w-xs rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 shadow-sm shadow-[#2a241d]/[0.025] md:max-w-sm"
           >
             {durationOptions.map((item) => {
               const active = item.id === duration;
-              const savings = savingsPercent[item.id];
+              const savingsLabel = savingsLabels[item.id];
 
               return (
                 <button
@@ -889,45 +887,45 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                   data-active-duration={active ? "true" : "false"}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "pricing-duration-option relative flex min-h-[2.5rem] flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-2 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
+                    "pricing-duration-option flex min-h-[3rem] flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-2 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
                     active
                       ? "bg-[#CC785C] text-[#FFF7EF] shadow-sm shadow-[#CC785C]/20"
                       : "text-[#2A241D] hover:bg-[rgba(204,120,92,0.08)]",
                   )}
                 >
-                  {item.id === "12" ? (
-                    <span
-                      className={cn(
-                        "pricing-best-value-badge absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
-                        active
-                          ? "border-[#CC785C]/40 bg-[#CC785C] text-[#FFF7EF]"
-                          : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
-                      )}
-                    >
-                      {copy.bestValue}
-                    </span>
-                  ) : null}
+                  {/* Badge: always render for equal heights; invisible on non-12 segments */}
+                  <span
+                    aria-hidden={item.id !== "12" ? "true" : undefined}
+                    className={cn(
+                      "pricing-best-value-badge whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
+                      item.id !== "12"
+                        ? "invisible"
+                        : active
+                        ? "border-[#FFF7EF]/30 bg-[#FFF7EF]/15 text-[#FFF7EF]"
+                        : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
+                    )}
+                  >
+                    {item.id === "12" ? copy.bestValue : " "}
+                  </span>
                   <span className="block leading-tight">{item.label}</span>
-                  {savings > 0 ? (
-                    <span
-                      className={cn(
-                        "block text-[10px] font-semibold leading-tight",
-                        active ? "text-[#FFF7EF]/75" : "text-[#75695D]",
-                      )}
-                    >
-                      {formatSavings(savings, locale)}
-                    </span>
-                  ) : null}
+                  {/* Savings: always render for equal heights; invisible on baseline */}
+                  <span
+                    aria-hidden={!savingsLabel ? "true" : undefined}
+                    className={cn(
+                      "pricing-duration-savings block text-[10px] font-semibold leading-tight",
+                      savingsLabel
+                        ? active
+                          ? "text-[#FFF7EF]/75"
+                          : "text-[#75695D]"
+                        : "invisible",
+                    )}
+                  >
+                    {savingsLabel || " "}
+                  </span>
                 </button>
               );
             })}
           </div>
-          <p
-            key={duration}
-            className="pricing-duration-note pricing-price-change text-center text-xs font-semibold text-[#75695d]"
-          >
-            {activeDuration.note}
-          </p>
         </div>
 
         <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-4">
