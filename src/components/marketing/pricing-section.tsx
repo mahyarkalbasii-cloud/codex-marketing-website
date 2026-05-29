@@ -259,6 +259,7 @@ const pricingCopy = {
     axisLabel: "متراژ زمین پروژه",
     sliderPrompt: "یکی از بازه‌های متراژ را انتخاب کنید",
     sliderAria: "انتخاب مقیاس زمین پروژه",
+    suggestedPlanText: (name: string) => `پلن پیشنهادی برای شما: ${name}`,
     recommended: "پیشنهاد اصلی",
     bestValue: "ارزش پیشنهادی",
     stagesIncluded: "۳ مرحله ساخت",
@@ -276,6 +277,7 @@ const pricingCopy = {
     axisLabel: "Project land size",
     sliderPrompt: "Choose a land-size segment",
     sliderAria: "Choose project land-size segment",
+    suggestedPlanText: (name: string) => `Suggested plan for you: ${name}`,
     recommended: "Recommended",
     bestValue: "Best value",
     stagesIncluded: "3 construction stages",
@@ -289,16 +291,16 @@ const pricingCopy = {
 
 const FALLBACK_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
-  bonyan: "۳۰۰",
-  royan: "۵۰۰",
-  taban: "۷۰۰",
-  "taban-plus": "+۷۰۰",
+  bonyan: "تا ۳۰۰ متر",
+  royan: "۳۰۰ تا ۵۰۰ متر",
+  taban: "۵۰۰ تا ۷۰۰ متر",
+  "taban-plus": "بالای ۷۰۰ متر",
 };
 const axisTickLabelsEn: Record<PlanId, string> = {
-  bonyan: "300",
-  royan: "500",
-  taban: "700",
-  "taban-plus": "+700",
+  bonyan: "Up to 300 m²",
+  royan: "300–500 m²",
+  taban: "500–700 m²",
+  "taban-plus": "700+ m²",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
@@ -430,7 +432,6 @@ function PricingPlanCard({
   cardDelay: string;
   locale: Locale;
 }) {
-  const featured = isActive;
   const recommended = Boolean(plan.featured);
   const copy = pricingCopy[locale];
 
@@ -442,9 +443,9 @@ function PricingPlanCard({
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
         "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
-        featured
-          ? "pricing-card-featured border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-xl shadow-[#2a241d]/10"
-          : "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
+        "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
+        recommended && "bg-[#F6EDE4] border-[#CC785C]/60 shadow-md shadow-[#CC785C]/8 motion-safe:-translate-y-0.5",
+        isActive && "ring-1 ring-[#CC785C] shadow-md shadow-[#CC785C]/15 motion-safe:-translate-y-1",
         recommended && "pricing-card-recommended",
         isPulsing && "pricing-card-pulse",
       )}
@@ -453,7 +454,7 @@ function PricingPlanCard({
         <div
           className={cn(
             "absolute -left-12 -top-12 h-28 w-28 rounded-full blur-2xl",
-            featured ? "bg-[#CC785C]/20" : "bg-[#CC785C]/10",
+            isActive ? "bg-[#CC785C]/20" : "bg-[#CC785C]/10",
           )}
           aria-hidden="true"
         />
@@ -474,29 +475,17 @@ function PricingPlanCard({
       <div className="pricing-plan-price-group mt-5">
         <div
           key={`${plan.id}-${duration}`}
-          className={cn(
-            "pricing-plan-price pricing-price-change text-3xl font-black leading-tight tracking-normal md:text-[2rem]",
-            featured ? "text-white" : "text-[#2a241d]",
-          )}
+          className="pricing-plan-price pricing-price-change text-3xl font-black leading-tight tracking-normal text-[#2a241d] md:text-[2rem]"
         >
-          {plan.prices[duration]} {copy.currency}
+          {plan.prices[duration]}{" "}
+          <span className="pricing-plan-currency">{copy.currency}</span>
         </div>
-        <div
-          className={cn(
-            "pricing-plan-stages mt-2 text-xs font-semibold",
-            featured ? "text-[#efe2d2]" : "text-[#75695d]",
-          )}
-        >
+        <div className="pricing-plan-stages mt-2 text-xs font-semibold text-[#75695d]">
           {copy.stagesIncluded}
         </div>
       </div>
 
-      <div
-        className={cn(
-          "pricing-card-divider my-5 h-px",
-          featured ? "bg-white/12" : "bg-[#e4d8c8]",
-        )}
-      />
+      <div className="pricing-card-divider my-5 h-px bg-[#e4d8c8]" />
 
       <div
         className={cn(
@@ -507,10 +496,7 @@ function PricingPlanCard({
         {plan.highlights.map((feature) => (
           <div key={feature} className="pricing-highlight-item flex items-center gap-2">
             <span
-              className={cn(
-                "pricing-highlight-icon grid h-5 w-5 shrink-0 place-items-center rounded-full",
-                featured ? "bg-white/10" : "bg-[#f5eadb]",
-              )}
+              className="pricing-highlight-icon grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#f5eadb]"
               aria-hidden="true"
             >
               <Check aria-hidden="true" className="h-3.5 w-3.5" />
@@ -521,17 +507,10 @@ function PricingPlanCard({
       </div>
 
       <div className="pricing-coverage-wrap mt-5">
-        <PricingCoverage coverage={plan.coverage} featured={featured} locale={locale} />
+        <PricingCoverage coverage={plan.coverage} featured={false} locale={locale} />
       </div>
 
-      <div
-        className={cn(
-          "pricing-addon mt-5 border-t pt-4 text-xs font-semibold leading-6",
-          featured
-            ? "border-white/12 text-[#efe2d2]"
-            : "border-[#e4d8c8] text-[#6f6254]",
-        )}
-      >
+      <div className="pricing-addon mt-5 border-t border-[#e4d8c8] pt-4 text-xs font-semibold leading-6 text-[#6f6254]">
         {plan.addon}
       </div>
 
@@ -540,10 +519,8 @@ function PricingPlanCard({
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          buttonVariants({ variant: featured ? "secondary" : "default" }),
+          buttonVariants({ variant: "default" }),
           "pricing-plan-cta mt-auto w-full",
-          featured &&
-            "border-white bg-[#fffaf1] text-[#2a241d] hover:bg-[#f5eadb]",
         )}
       >
         {plan.cta}
@@ -576,7 +553,6 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const activePlan = activePlanIndex === null ? null : plans[activePlanIndex];
-  const activeDuration = useMemo(() => durationById[duration], [duration, durationById]);
   const activePercent =
     activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
 
@@ -621,6 +597,15 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (activePlanIndex === null) return;
+    const plan = plans[activePlanIndex];
+    const card = document.querySelector<HTMLElement>(`[data-plan-card="${plan.id}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, [activePlanIndex, plans]);
 
   const selectPlan = useCallback(
     (nextIndex: number) => {
@@ -696,6 +681,28 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
     }
   };
 
+  const handleDurationKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      const tabs = durationOptions.map((d) => d.id);
+      const currentIndex = tabs.indexOf(duration);
+      const isRTL = locale === "fa";
+      let newIndex: number;
+
+      if (event.key === "ArrowLeft") {
+        newIndex = isRTL ? currentIndex + 1 : currentIndex - 1;
+      } else if (event.key === "ArrowRight") {
+        newIndex = isRTL ? currentIndex - 1 : currentIndex + 1;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      const clamped = Math.min(Math.max(newIndex, 0), tabs.length - 1);
+      setDuration(tabs[clamped] as Duration);
+    },
+    [durationOptions, duration, locale],
+  );
+
   return (
     <section
       ref={sectionRef}
@@ -728,7 +735,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                   : "bg-[#f5eadb]/78 text-[#75695d]",
               )}
             >
-              {activePlan ? activePlan.sliderInsight : copy.sliderPrompt}
+              {activePlan ? copy.suggestedPlanText(activePlan.name) : copy.sliderPrompt}
             </span>
           </div>
           <div
@@ -797,18 +804,30 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                     type="button"
                     data-plan-tick={plan.id}
                     data-active-tick={activePlanIndex === index ? "true" : "false"}
+                    aria-label={`${tickLabels[plan.id]} - ${plan.name}`}
+                    aria-pressed={activePlanIndex === index}
                     onClick={() => selectPlan(index)}
                     style={{
                       right: `${tickPercent}%`,
                       transform: getAxisItemTransform(index, plans.length),
                     }}
                     className={cn(
-                      "pricing-slider-tick absolute top-8 z-10 h-16 w-16 rounded-2xl text-center text-[10.5px] font-bold leading-5 text-[#75695d] transition hover:text-[#2a241d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 md:h-14 md:w-20 md:text-xs",
-                      activePlanIndex === index && "text-[#2a241d]",
+                      "pricing-slider-tick absolute top-8 z-10 h-[4.5rem] w-16 rounded-2xl text-center text-[10.5px] font-bold leading-snug transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 md:h-16 md:w-20 md:text-xs",
+                      activePlanIndex === index
+                        ? "text-[#2a241d]"
+                        : "text-[#75695d] hover:text-[#2a241d]",
                     )}
                   >
-                    <span dir="ltr" className="pricing-slider-tick-label absolute left-1/2 top-5 w-full -translate-x-1/2">
-                      {tickLabels[plan.id]}
+                    <span className="pricing-slider-tick-label absolute left-1/2 top-5 flex w-full -translate-x-1/2 flex-col items-center gap-0.5">
+                      <span className={activePlanIndex === index ? "text-[#2a241d]" : "text-[#75695d]"}>
+                        {tickLabels[plan.id]}
+                      </span>
+                      <span className={cn(
+                        "block text-[10px] leading-tight",
+                        activePlanIndex === index ? "text-[#CC785C]" : "text-[#75695d]",
+                      )}>
+                        {plan.name}
+                      </span>
                     </span>
                   </button>
                 </div>
@@ -825,49 +844,49 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           className="pricing-duration mt-6 flex flex-col items-center gap-2"
           data-selected-duration={duration}
         >
-          <div className="pricing-duration-group grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.3rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-2 pt-8 shadow-sm shadow-[#2a241d]/[0.025] md:rounded-[1.5rem]">
-            {durationOptions.map((item) => {
-              const active = item.id === duration;
-
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  data-duration-option={item.id}
-                  data-active-duration={active ? "true" : "false"}
-                  onClick={() => setDuration(item.id)}
-                  className={cn(
-                    "pricing-duration-option relative h-12 rounded-xl border text-sm font-bold shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-[3.25rem] md:rounded-2xl",
-                    active
-                      ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-[#2a241d]/15"
-                      : "border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-[#2a241d]/[0.025] hover:bg-[#f5eadb]",
-                  )}
-                >
-                  {item.id === "12" ? (
-                    <span
-                      className={cn(
-                        "pricing-best-value-badge absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
-                        active
-                          ? "border-[#2a241d] bg-[#fffaf1] text-[#2a241d]"
-                          : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
-                      )}
-                    >
-                      {copy.bestValue}
-                    </span>
-                  ) : null}
-                  <span className="block">
-                    {item.label}
-                  </span>
-                </button>
-              );
-            })}
+          {/* Relative wrapper: badge sits above the toggle, never changes segment height */}
+          <div className="relative w-full max-w-xs pt-3 md:max-w-sm">
+            <span
+              className={cn(
+                "pricing-best-value-badge absolute end-2 top-0.5 z-10 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
+                duration === "12"
+                  ? "border-[#CC785C]/40 bg-[#CC785C] text-[#FFF7EF]"
+                  : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
+              )}
+            >
+              {copy.bestValue}
+            </span>
+            <div
+              role="tablist"
+              aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
+              onKeyDown={handleDurationKeyDown}
+              className="pricing-duration-group flex w-full rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 shadow-sm shadow-[#2a241d]/[0.025]"
+            >
+              {durationOptions.map((item) => {
+                const active = item.id === duration;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    tabIndex={active ? 0 : -1}
+                    data-duration-option={item.id}
+                    data-active-duration={active ? "true" : "false"}
+                    onClick={() => setDuration(item.id)}
+                    className={cn(
+                      "pricing-duration-option flex h-12 flex-1 items-center justify-center rounded-[9px] text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
+                      active
+                        ? "bg-[#CC785C] text-[#FFF7EF] shadow-sm shadow-[#CC785C]/20"
+                        : "text-[#2A241D] hover:bg-[rgba(204,120,92,0.08)]",
+                    )}
+                  >
+                    <span className="block">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <p
-            key={duration}
-            className="pricing-duration-note pricing-price-change text-center text-xs font-semibold text-[#75695d]"
-          >
-            {activeDuration.note}
-          </p>
         </div>
 
         <div className="pricing-cards mt-8 grid justify-items-center gap-4 md:grid-cols-2 md:justify-items-stretch lg:grid-cols-4">
