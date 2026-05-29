@@ -312,8 +312,8 @@ const salesTypes: readonly SalesTypeCardData[] = [
     label: "نیاز نزدیک به خرید",
     title: "فروش سریع و تراکنشی",
     text: "برای کالاها و خدماتی که باید سریع به پروژه فعال و آماده خرید برسند.",
-    accent: "#CC785C",
-    soft: "#F5EADB",
+    accent: "#6D655B",
+    soft: "#E8E5DD",
     sampleFields: [
       "ماشین‌آلات",
       "حمل نخاله",
@@ -332,8 +332,8 @@ const salesTypes: readonly SalesTypeCardData[] = [
     label: "ورود زودتر به تصمیم",
     title: "فروش مشاوره‌ای",
     text: "برای فروش‌هایی که اعتمادسازی، بررسی فنی یا مذاکره قبل از خرید لازم دارند.",
-    accent: "#7B6BA8",
-    soft: "#E5E0F0",
+    accent: "#58605D",
+    soft: "#E0E0DA",
     sampleFields: [
       "پایدارسازی گود",
       "ژئوتکنیک و آزمایش خاک",
@@ -614,8 +614,8 @@ const salesTypesEn: readonly SalesTypeCardData[] = [
     label: "Near-purchase need",
     title: "Fast transactional sales",
     text: "For goods and services that need to reach active, purchase-ready projects quickly.",
-    accent: "#CC785C",
-    soft: "#F5EADB",
+    accent: "#6D655B",
+    soft: "#E8E5DD",
     sampleFields: [
       "Machinery",
       "Debris removal",
@@ -634,8 +634,8 @@ const salesTypesEn: readonly SalesTypeCardData[] = [
     label: "Earlier decision entry",
     title: "Consultative sales",
     text: "For sales that require trust-building, technical review, or negotiation before purchase.",
-    accent: "#7B6BA8",
-    soft: "#E5E0F0",
+    accent: "#58605D",
+    soft: "#E0E0DA",
     sampleFields: [
       "Excavation stabilization",
       "Geotechnical testing",

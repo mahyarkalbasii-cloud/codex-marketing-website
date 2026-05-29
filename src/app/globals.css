@@ -39,14 +39,6 @@
   --accent-teal: #567F7E;
   --ambient-warm: rgba(201, 121, 43, 0.12);
   --ambient-cool: rgba(86, 128, 126, 0.08);
-  /* Section card palette — finalized earth tones */
-  --card-solution: #A64E3D;
-  --card-supplier: #9DB4AC;
-  --card-stages:   #BFA591;
-  --card-flow:     #66483A;
-  --card-pricing:  #333333;
-  --card-on-dark:  #F7F1E8;
-  --card-on-light: #2C2A27;
 }
 
 .dark {
@@ -287,18 +279,18 @@ body {
 
 .audience-sales-card-fast {
   background:
-    radial-gradient(circle at 16% 8%, rgba(255, 247, 214, 0.7), transparent 36%),
-    radial-gradient(circle at 88% 18%, rgba(248, 210, 194, 0.48), transparent 34%),
-    linear-gradient(150deg, rgba(255, 251, 242, 0.92), rgba(255, 236, 222, 0.82) 58%, rgba(253, 229, 207, 0.74));
-  border-color: rgba(226, 190, 158, 0.56);
+    radial-gradient(circle at 16% 8%, rgba(255, 255, 252, 0.48), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(177, 169, 156, 0.26), transparent 34%),
+    linear-gradient(150deg, rgba(244, 243, 240, 0.96), rgba(233, 231, 225, 0.92) 58%, rgba(222, 219, 211, 0.88));
+  border-color: rgba(176, 168, 154, 0.5);
 }
 
 .audience-sales-card-consultative {
   background:
-    radial-gradient(circle at 14% 10%, rgba(218, 246, 232, 0.72), transparent 38%),
-    radial-gradient(circle at 88% 18%, rgba(224, 237, 250, 0.58), transparent 36%),
-    linear-gradient(150deg, rgba(249, 255, 251, 0.92), rgba(232, 245, 238, 0.82) 56%, rgba(226, 240, 246, 0.7));
-  border-color: rgba(174, 207, 188, 0.56);
+    radial-gradient(circle at 14% 10%, rgba(252, 251, 248, 0.42), transparent 38%),
+    radial-gradient(circle at 88% 18%, rgba(145, 148, 143, 0.24), transparent 36%),
+    linear-gradient(150deg, rgba(236, 235, 231, 0.96), rgba(224, 222, 216, 0.92) 56%, rgba(211, 208, 200, 0.88));
+  border-color: rgba(155, 152, 144, 0.5);
 }
 
 .audience-sales-card-glow {
@@ -307,11 +299,11 @@ body {
 }
 
 .audience-sales-card-fast .audience-sales-card-glow {
-  background: rgba(248, 198, 158, 0.34);
+  background: rgba(176, 168, 154, 0.26);
 }
 
 .audience-sales-card-consultative .audience-sales-card-glow {
-  background: rgba(172, 220, 201, 0.34);
+  background: rgba(145, 148, 143, 0.24);
 }
 
 .audience-sales-card:hover {
@@ -322,16 +314,16 @@ body {
 
 .dark .audience-sales-card-fast {
   background:
-    radial-gradient(circle at 90% 10%, rgba(218, 145, 105, 0.13), transparent 34%),
-    linear-gradient(145deg, rgba(44, 35, 30, 0.92), rgba(31, 28, 26, 0.9));
-  border-color: rgba(205, 137, 96, 0.22);
+    radial-gradient(circle at 90% 10%, rgba(176, 168, 154, 0.14), transparent 34%),
+    linear-gradient(145deg, rgba(38, 37, 34, 0.92), rgba(29, 28, 26, 0.9));
+  border-color: rgba(176, 168, 154, 0.22);
 }
 
 .dark .audience-sales-card-consultative {
   background:
-    radial-gradient(circle at 12% 8%, rgba(109, 157, 139, 0.13), transparent 34%),
-    linear-gradient(145deg, rgba(29, 42, 38, 0.92), rgba(25, 32, 30, 0.9));
-  border-color: rgba(105, 145, 128, 0.22);
+    radial-gradient(circle at 12% 8%, rgba(145, 148, 143, 0.14), transparent 34%),
+    linear-gradient(145deg, rgba(35, 36, 34, 0.92), rgba(28, 28, 26, 0.9));
+  border-color: rgba(145, 148, 143, 0.22);
 }
 
 .dark .audience-sales-card {
@@ -384,69 +376,31 @@ body {
   transform: translateY(-1px);
 }
 
-.audience-stage-tone-apricot {
-  --stage-card-glow-a: rgba(255, 247, 214, 0.68);
-  --stage-card-glow-b: rgba(248, 210, 194, 0.5);
-  --stage-card-surface-a: rgba(255, 251, 242, 0.94);
-  --stage-card-surface-b: rgba(255, 236, 222, 0.84);
-  --stage-card-surface-c: rgba(253, 229, 207, 0.76);
-  --stage-card-border: rgba(226, 190, 158, 0.58);
-  --stage-card-panel-a: rgba(255, 252, 247, 0.78);
-  --stage-card-panel-b: rgba(255, 238, 224, 0.68);
-  --stage-card-panel-c: rgba(253, 228, 205, 0.48);
-  --stage-card-detail-a: rgba(255, 253, 249, 0.88);
-  --stage-card-detail-b: rgba(255, 242, 231, 0.76);
-  --solution-card-copy: rgb(255 250 245 / 0.68);
-  --solution-card-border: rgba(226, 190, 158, 0.46);
-  --solution-card-line: rgba(181, 126, 86, 0.1);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #66584d;
-  --solution-card-accent: #b77952;
-}
-
+.audience-stage-tone-apricot,
 .audience-stage-tone-sand,
-.audience-stage-tone-honey,
-.audience-stage-tone-clay {
-  --stage-card-glow-a: rgba(255, 248, 221, 0.56);
-  --stage-card-glow-b: rgba(244, 204, 184, 0.44);
-  --stage-card-surface-a: rgba(255, 252, 246, 0.92);
-  --stage-card-surface-b: rgba(249, 235, 222, 0.82);
-  --stage-card-surface-c: rgba(245, 226, 207, 0.72);
-  --stage-card-border: rgba(218, 190, 164, 0.54);
-  --stage-card-panel-a: rgba(255, 253, 249, 0.76);
-  --stage-card-panel-b: rgba(248, 236, 224, 0.66);
-  --stage-card-panel-c: rgba(239, 225, 207, 0.46);
-  --stage-card-detail-a: rgba(255, 253, 249, 0.86);
-  --stage-card-detail-b: rgba(249, 241, 232, 0.74);
-  --solution-card-copy: rgb(255 251 246 / 0.66);
-  --solution-card-border: rgba(218, 190, 164, 0.44);
-  --solution-card-line: rgba(146, 116, 92, 0.1);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #605850;
-  --solution-card-accent: #9a7357;
-}
-
 .audience-stage-tone-rose,
 .audience-stage-tone-sage,
+.audience-stage-tone-honey,
 .audience-stage-tone-mint,
+.audience-stage-tone-clay,
 .audience-stage-tone-sky {
-  --stage-card-glow-a: rgba(218, 246, 232, 0.68);
-  --stage-card-glow-b: rgba(224, 237, 250, 0.58);
-  --stage-card-surface-a: rgba(249, 255, 251, 0.94);
-  --stage-card-surface-b: rgba(232, 245, 238, 0.84);
-  --stage-card-surface-c: rgba(226, 240, 246, 0.72);
-  --stage-card-border: rgba(174, 207, 188, 0.58);
-  --stage-card-panel-a: rgba(253, 255, 253, 0.78);
-  --stage-card-panel-b: rgba(234, 247, 239, 0.68);
-  --stage-card-panel-c: rgba(226, 241, 247, 0.5);
-  --stage-card-detail-a: rgba(253, 255, 253, 0.88);
-  --stage-card-detail-b: rgba(236, 247, 241, 0.74);
-  --solution-card-copy: rgb(248 255 251 / 0.68);
-  --solution-card-border: rgba(174, 207, 188, 0.46);
-  --solution-card-line: rgba(91, 133, 117, 0.1);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #53625b;
-  --solution-card-accent: #6a9a83;
+  --stage-card-glow-a: rgba(255, 249, 234, 0.36);
+  --stage-card-glow-b: rgba(197, 179, 150, 0.24);
+  --stage-card-surface-a: rgba(230, 221, 205, 0.98);
+  --stage-card-surface-b: rgba(223, 212, 194, 0.96);
+  --stage-card-surface-c: rgba(216, 204, 184, 0.94);
+  --stage-card-border: rgba(184, 169, 145, 0.48);
+  --stage-card-panel-a: rgba(229, 220, 204, 0.88);
+  --stage-card-panel-b: rgba(222, 211, 193, 0.84);
+  --stage-card-panel-c: rgba(215, 203, 183, 0.8);
+  --stage-card-detail-a: rgba(228, 219, 203, 0.78);
+  --stage-card-detail-b: rgba(217, 206, 187, 0.74);
+  --solution-card-copy: rgb(226 217 202 / 0.62);
+  --solution-card-border: rgba(171, 156, 132, 0.38);
+  --solution-card-line: rgba(39, 33, 27, 0.12);
+  --solution-card-ink: #111111;
+  --solution-card-muted: #3f3932;
+  --solution-card-accent: #2a241d;
 }
 
 .dark .audience-stage-tone-apricot,
@@ -721,40 +675,18 @@ body {
   border-color: rgba(63, 63, 70, 0.86);
 }
 
-.solution-card-data {
-  --solution-card-shell: #eff2f1;
-  --solution-card-visual: #dfe8e6;
-  --solution-card-visual-soft: #f7f9f7;
-  --solution-card-copy: #f8faf8;
-  --solution-card-border: rgba(61, 76, 72, 0.12);
-  --solution-card-line: rgba(61, 76, 72, 0.13);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #565d5a;
-  --solution-card-accent: #637570;
-}
-
-.solution-card-workflow {
-  --solution-card-shell: #f0efeb;
-  --solution-card-visual: #e2e0d8;
-  --solution-card-visual-soft: #fbfaf6;
-  --solution-card-copy: #fbfaf7;
-  --solution-card-border: rgba(80, 76, 68, 0.12);
-  --solution-card-line: rgba(80, 76, 68, 0.13);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #5f5c55;
-  --solution-card-accent: #777166;
-}
-
+.solution-card-data,
+.solution-card-workflow,
 .solution-card-training {
-  --solution-card-shell: #eef1ec;
-  --solution-card-visual: #dfe5dc;
-  --solution-card-visual-soft: #f7f9f5;
-  --solution-card-copy: #f8faf6;
-  --solution-card-border: rgba(68, 82, 65, 0.12);
-  --solution-card-line: rgba(68, 82, 65, 0.13);
-  --solution-card-ink: #171716;
-  --solution-card-muted: #586056;
-  --solution-card-accent: #697767;
+  --solution-card-shell: #e8ded2;
+  --solution-card-visual: #ded2c4;
+  --solution-card-visual-soft: #f4eee7;
+  --solution-card-copy: #efe6dc;
+  --solution-card-border: rgba(173, 154, 132, 0.28);
+  --solution-card-line: rgba(78, 66, 53, 0.12);
+  --solution-card-ink: #23201d;
+  --solution-card-muted: #5e554d;
+  --solution-card-accent: #8a7662;
 }
 
 .solution-card-strip {
@@ -3527,52 +3459,19 @@ body {
   z-index: 2;
 }
 
-.sales-flow-card-neutral {
-  --sales-flow-surface:
-    radial-gradient(circle at 88% 12%, rgba(111, 167, 216, 0.19), transparent 34%),
-    radial-gradient(circle at 8% 88%, rgba(198, 220, 255, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(238, 248, 254, 0.9), rgba(224, 240, 250, 0.74));
-  --sales-flow-border: rgba(111, 167, 216, 0.24);
-  --sales-flow-rail: #d9c7a2;
-  --sales-flow-rail-deep: #b89058;
-  --sales-flow-rail-soft: rgb(247 238 221 / 0.74);
-  --sales-flow-rail-ink: #6b5433;
-}
-
-.sales-flow-card-soft {
-  --sales-flow-surface:
-    radial-gradient(circle at 16% 12%, rgba(217, 154, 53, 0.17), transparent 34%),
-    radial-gradient(circle at 86% 84%, rgba(246, 214, 168, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(255, 246, 233, 0.92), rgba(248, 235, 213, 0.74));
-  --sales-flow-border: rgba(201, 121, 43, 0.22);
-  --sales-flow-rail: #c7dac6;
-  --sales-flow-rail-deep: #7da17b;
-  --sales-flow-rail-soft: rgb(232 245 231 / 0.74);
-  --sales-flow-rail-ink: #445f45;
-}
-
-.sales-flow-card-warm {
-  --sales-flow-surface:
-    radial-gradient(circle at 84% 12%, rgba(104, 151, 135, 0.18), transparent 34%),
-    radial-gradient(circle at 10% 86%, rgba(190, 224, 211, 0.18), transparent 34%),
-    linear-gradient(145deg, rgba(239, 249, 244, 0.9), rgba(225, 240, 233, 0.74));
-  --sales-flow-border: rgba(104, 151, 135, 0.24);
-  --sales-flow-rail: #d9d1e8;
-  --sales-flow-rail-deep: #9184b5;
-  --sales-flow-rail-soft: rgb(241 237 248 / 0.76);
-  --sales-flow-rail-ink: #575074;
-}
-
+.sales-flow-card-neutral,
+.sales-flow-card-soft,
+.sales-flow-card-warm,
 .sales-flow-card-destination {
   --sales-flow-surface:
-    radial-gradient(circle at 14% 12%, rgba(218, 145, 105, 0.2), transparent 34%),
-    radial-gradient(circle at 88% 82%, rgba(151, 132, 175, 0.13), transparent 34%),
-    linear-gradient(145deg, rgba(255, 244, 236, 0.92), rgba(250, 229, 213, 0.74));
-  --sales-flow-border: rgba(205, 137, 96, 0.25);
-  --sales-flow-rail: #e5c4b3;
-  --sales-flow-rail-deep: #bc7d61;
-  --sales-flow-rail-soft: rgb(249 232 223 / 0.76);
-  --sales-flow-rail-ink: #704936;
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.34), transparent 34%),
+    radial-gradient(circle at 8% 88%, rgba(119, 155, 167, 0.16), transparent 34%),
+    linear-gradient(145deg, rgba(231, 241, 244, 0.94), rgba(213, 227, 232, 0.84));
+  --sales-flow-border: rgba(126, 154, 166, 0.3);
+  --sales-flow-rail: #d5e3e8;
+  --sales-flow-rail-deep: #7e9aa6;
+  --sales-flow-rail-soft: rgb(213 227 232 / 0.78);
+  --sales-flow-rail-ink: #3f5d68;
 }
 
 .sales-flow-step-rail {
@@ -3647,31 +3546,16 @@ body {
 }
 
 .sales-flow-card-neutral .sales-flow-step-icon,
-.sales-flow-card-neutral .sales-flow-station {
-  background: rgba(232, 242, 255, 0.88);
-  border-color: rgba(89, 151, 246, 0.36);
-  color: #3F7DD8;
-}
-
+.sales-flow-card-neutral .sales-flow-station,
 .sales-flow-card-soft .sales-flow-step-icon,
-.sales-flow-card-soft .sales-flow-station {
-  background: rgba(255, 247, 189, 0.9);
-  border-color: rgba(226, 189, 46, 0.36);
-  color: #9A7B11;
-}
-
+.sales-flow-card-soft .sales-flow-station,
 .sales-flow-card-warm .sales-flow-step-icon,
-.sales-flow-card-warm .sales-flow-station {
-  background: rgba(225, 250, 235, 0.9);
-  border-color: rgba(72, 196, 116, 0.36);
-  color: #2D9158;
-}
-
+.sales-flow-card-warm .sales-flow-station,
 .sales-flow-card-destination .sales-flow-step-icon,
 .sales-flow-card-destination .sales-flow-station {
-  background: rgba(255, 235, 224, 0.9);
-  border-color: rgba(232, 113, 78, 0.38);
-  color: #D85F42;
+  background: rgba(231, 241, 244, 0.88);
+  border-color: rgba(126, 154, 166, 0.32);
+  color: #3f5d68;
 }
 
 .sales-flow-card .sales-flow-title {
@@ -3735,21 +3619,23 @@ body {
 }
 
 .pricing-slider-labs {
-  background:
-    radial-gradient(circle at 14% 18%, rgba(89, 151, 246, 0.18), transparent 34%),
-    radial-gradient(circle at 86% 88%, rgba(198, 220, 255, 0.22), transparent 34%),
-    linear-gradient(145deg, rgba(246, 250, 255, 0.9), rgba(232, 242, 255, 0.7));
-  border-color: rgba(89, 151, 246, 0.22);
+  background-color: #e0dcd1;
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 252, 0.38), transparent 34%),
+    radial-gradient(circle at 86% 88%, rgba(174, 166, 151, 0.2), transparent 36%),
+    linear-gradient(145deg, rgba(232, 228, 218, 0.96), rgba(224, 220, 209, 0.86));
+  border-color: rgba(154, 145, 130, 0.32);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 14px 34px rgba(65, 114, 187, 0.05);
+    0 14px 34px rgba(111, 101, 86, 0.06);
 }
 
 .dark .pricing-slider-labs {
-  background:
-    radial-gradient(circle at 14% 18%, rgba(89, 151, 246, 0.12), transparent 34%),
-    linear-gradient(145deg, rgba(24, 35, 52, 0.9), rgba(22, 27, 36, 0.88));
-  border-color: rgba(89, 151, 246, 0.2);
+  background-color: #272521;
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(224, 220, 209, 0.12), transparent 34%),
+    linear-gradient(145deg, rgba(39, 37, 33, 0.9), rgba(27, 26, 24, 0.88));
+  border-color: rgba(224, 220, 209, 0.2);
 }
 
 .sales-flow-card-destination::after {
@@ -4450,182 +4336,6 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   Section card color overrides — finalized earth palette
-   Five sections recolored. All other sections untouched.
-═══════════════════════════════════════════════════════════════════════ */
-
-/* ── 1. Solution (راه‌حل) — all 3 pillar cards → Sienna Earth ────── */
-.solution-card-data,
-.solution-card-workflow,
-.solution-card-training {
-  --solution-card-shell: var(--card-solution);
-  --solution-card-visual: color-mix(in srgb, var(--card-solution) 82%, #000);
-  --solution-card-visual-soft: color-mix(in srgb, var(--card-solution) 90%, #000);
-  --solution-card-copy: var(--card-solution);
-  --solution-card-border: color-mix(in srgb, var(--card-solution) 52%, transparent);
-  --solution-card-line: color-mix(in srgb, var(--card-on-dark) 22%, transparent);
-  --solution-card-ink: var(--card-on-dark);
-  --solution-card-muted: color-mix(in srgb, var(--card-on-dark) 68%, var(--card-solution));
-  --solution-card-accent: color-mix(in srgb, var(--card-on-dark) 14%, var(--card-solution));
-}
-
-/* Chips inside solution cards → tonal Sienna */
-.solution-card-data .solution-card-chip,
-.solution-card-workflow .solution-card-chip,
-.solution-card-training .solution-card-chip,
-.solution-card-data .solution-card-mini-action,
-.solution-card-workflow .solution-card-mini-action,
-.solution-card-training .solution-card-mini-action {
-  background: color-mix(in srgb, var(--card-on-dark) 14%, var(--card-solution));
-  border-color: color-mix(in srgb, var(--card-on-dark) 22%, var(--card-solution));
-}
-
-/* Copy-frame body text and link inside solution cards */
-.solution-card-data .solution-card-copy-frame p,
-.solution-card-workflow .solution-card-copy-frame p,
-.solution-card-training .solution-card-copy-frame p {
-  color: color-mix(in srgb, var(--card-on-dark) 82%, var(--card-solution));
-}
-
-.solution-card-data .solution-card-copy-frame a,
-.solution-card-workflow .solution-card-copy-frame a,
-.solution-card-training .solution-card-copy-frame a {
-  color: var(--card-on-dark);
-}
-
-/* ── 2. Supplier (تأمین‌کنندگان) — both cards → Seamist ─────────── */
-.audience-sales-card-fast,
-.audience-sales-card-consultative {
-  background: var(--card-supplier);
-  border-color: color-mix(in srgb, var(--card-supplier) 52%, transparent);
-}
-
-.audience-sales-card-fast .audience-sales-card-glow,
-.audience-sales-card-consultative .audience-sales-card-glow {
-  background: color-mix(in srgb, var(--card-supplier) 82%, #000);
-  opacity: 0.2;
-}
-
-.audience-sales-card-fast h3,
-.audience-sales-card-consultative h3 {
-  color: var(--card-on-light);
-}
-
-.audience-sales-card-fast p,
-.audience-sales-card-consultative p {
-  color: var(--card-on-light);
-}
-
-.audience-sales-card-fast div:not(.audience-sales-card-glow),
-.audience-sales-card-consultative div:not(.audience-sales-card-glow) {
-  color: var(--card-on-light);
-}
-
-/* Chips/badges → tonal Seamist */
-.audience-sales-card-fast .rounded-full:not(.audience-sales-card-glow),
-.audience-sales-card-consultative .rounded-full:not(.audience-sales-card-glow) {
-  background: color-mix(in srgb, var(--card-on-light) 14%, var(--card-supplier));
-  border-color: color-mix(in srgb, var(--card-on-light) 22%, var(--card-supplier));
-  color: var(--card-on-light);
-}
-
-/* ── 3. Stages (مراحل ساخت) — all 8 cards → Latte ────────────── */
-.audience-stage-tone-apricot,
-.audience-stage-tone-sand,
-.audience-stage-tone-honey,
-.audience-stage-tone-clay,
-.audience-stage-tone-rose,
-.audience-stage-tone-sage,
-.audience-stage-tone-mint,
-.audience-stage-tone-sky {
-  --stage-card-glow-a: transparent;
-  --stage-card-glow-b: transparent;
-  --stage-card-surface-a: var(--card-stages);
-  --stage-card-surface-b: var(--card-stages);
-  --stage-card-surface-c: var(--card-stages);
-  --stage-card-border: color-mix(in srgb, var(--card-stages) 52%, transparent);
-  --stage-card-panel-a: color-mix(in srgb, var(--card-stages) 84%, #000);
-  --stage-card-panel-b: color-mix(in srgb, var(--card-stages) 84%, #000);
-  --stage-card-panel-c: color-mix(in srgb, var(--card-stages) 84%, #000);
-  --stage-card-detail-a: color-mix(in srgb, var(--card-stages) 88%, #000);
-  --stage-card-detail-b: color-mix(in srgb, var(--card-stages) 88%, #000);
-  --solution-card-ink: var(--card-on-light);
-  --solution-card-muted: color-mix(in srgb, var(--card-on-light) 68%, var(--card-stages));
-  --solution-card-accent: color-mix(in srgb, var(--card-on-light) 14%, var(--card-stages));
-  --solution-card-border: color-mix(in srgb, var(--card-stages) 52%, transparent);
-  --solution-card-copy: var(--card-stages);
-}
-
-/* ── 4. Flow (فروش پروژه‌محور) — all 4 step-cards → Coffee ────── */
-.sales-flow-card-neutral,
-.sales-flow-card-soft,
-.sales-flow-card-warm,
-.sales-flow-card-destination {
-  --sales-flow-surface: var(--card-flow);
-  --sales-flow-border: color-mix(in srgb, var(--card-flow) 52%, transparent);
-  --sales-flow-rail: color-mix(in srgb, var(--card-on-dark) 28%, var(--card-flow));
-  --sales-flow-rail-deep: color-mix(in srgb, var(--card-on-dark) 58%, var(--card-flow));
-  --sales-flow-rail-soft: color-mix(in srgb, var(--card-on-dark) 14%, var(--card-flow));
-  --sales-flow-rail-ink: var(--card-on-dark);
-}
-
-/* Flat background + border (removes the white-wash gradient layer) */
-.sales-flow-card-neutral.sales-flow-card,
-.sales-flow-card-soft.sales-flow-card,
-.sales-flow-card-warm.sales-flow-card,
-.sales-flow-card-destination.sales-flow-card {
-  background: var(--card-flow);
-  border-color: color-mix(in srgb, var(--card-flow) 52%, transparent);
-}
-
-/* Suppress inner ::before highlight overlay on dark surface */
-.sales-flow-card-neutral.sales-flow-card::before,
-.sales-flow-card-soft.sales-flow-card::before,
-.sales-flow-card-warm.sales-flow-card::before,
-.sales-flow-card-destination.sales-flow-card::before {
-  background: transparent;
-  border-color: transparent;
-}
-
-/* Step icons/stations → tonal Coffee */
-.sales-flow-card-neutral .sales-flow-step-icon,
-.sales-flow-card-neutral .sales-flow-station,
-.sales-flow-card-soft .sales-flow-step-icon,
-.sales-flow-card-soft .sales-flow-station,
-.sales-flow-card-warm .sales-flow-step-icon,
-.sales-flow-card-warm .sales-flow-station,
-.sales-flow-card-destination .sales-flow-step-icon,
-.sales-flow-card-destination .sales-flow-station {
-  background: color-mix(in srgb, var(--card-on-dark) 14%, var(--card-flow));
-  border-color: color-mix(in srgb, var(--card-on-dark) 22%, var(--card-flow));
-  color: var(--card-on-dark);
-}
-
-/* Title */
-.sales-flow-card-neutral .sales-flow-title,
-.sales-flow-card-soft .sales-flow-title,
-.sales-flow-card-warm .sales-flow-title,
-.sales-flow-card-destination .sales-flow-title {
-  color: var(--card-on-dark);
-}
-
-/* Body and outcome */
-.sales-flow-card-neutral .sales-flow-body,
-.sales-flow-card-soft .sales-flow-body,
-.sales-flow-card-warm .sales-flow-body,
-.sales-flow-card-destination .sales-flow-body {
-  color: color-mix(in srgb, var(--card-on-dark) 78%, var(--card-flow));
-}
-
-.sales-flow-card-neutral .sales-flow-outcome,
-.sales-flow-card-soft .sales-flow-outcome,
-.sales-flow-card-warm .sales-flow-outcome,
-.sales-flow-card-destination .sales-flow-outcome {
-  border-color: color-mix(in srgb, var(--card-on-dark) 18%, transparent);
-  color: color-mix(in srgb, var(--card-on-dark) 72%, var(--card-flow));
-}
-
 /* Theme A: restored warm paper palette from the earlier FAQ reference. */
 html.theme-a,
 html.theme-a body,
@@ -4698,19 +4408,32 @@ html.theme-a :is(.solution-card, .sales-flow-card, .audience-sales-card, .audien
   box-shadow: none !important;
 }
 
-html.theme-a .sales-flow-card {
-  --sales-flow-surface: var(--ref-card) !important;
-  --sales-flow-border: var(--ref-border) !important;
+html.theme-a #sales-flow .sales-flow-card {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.52), rgba(255, 250, 241, 0.24)),
+    var(--sales-flow-surface) !important;
+  border-color: var(--sales-flow-border) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card-neutral,
+html.theme-a #sales-flow .sales-flow-card-soft,
+html.theme-a #sales-flow .sales-flow-card-warm,
+html.theme-a #sales-flow .sales-flow-card-destination {
+  --sales-flow-surface:
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.34), transparent 34%),
+    radial-gradient(circle at 8% 88%, rgba(119, 155, 167, 0.16), transparent 34%),
+    linear-gradient(145deg, rgba(231, 241, 244, 0.94), rgba(213, 227, 232, 0.84)) !important;
+  --sales-flow-border: rgba(126, 154, 166, 0.3) !important;
 }
 
 html.theme-a :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
-  background: linear-gradient(90deg, rgb(185 156 122 / 0.22), rgb(152 169 151 / 0.2)) !important;
-  color: rgb(158 143 123 / 0.42) !important;
+  background: linear-gradient(90deg, rgb(126 154 166 / 0.24), rgb(119 155 167 / 0.2)) !important;
+  color: rgb(126 154 166 / 0.4) !important;
 }
 
 html.theme-a .sales-flow-connector-final {
-  background: linear-gradient(90deg, rgb(145 129 174 / 0.2), rgb(188 126 97 / 0.24)) !important;
-  color: rgb(176 120 92 / 0.44) !important;
+  background: linear-gradient(90deg, rgb(119 155 167 / 0.2), rgb(63 93 104 / 0.22)) !important;
+  color: rgb(63 93 104 / 0.36) !important;
 }
 
 html.theme-a :is(
@@ -5006,6 +4729,18 @@ html.theme-a #plans :is(.pricing-slider, .pricing-duration > div) {
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
+}
+
+html.theme-a #plans .pricing-slider-labs {
+  background-color: #e0dcd1 !important;
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 252, 0.38), transparent 34%),
+    radial-gradient(circle at 86% 88%, rgba(174, 166, 151, 0.2), transparent 36%),
+    linear-gradient(145deg, rgba(232, 228, 218, 0.96), rgba(224, 220, 209, 0.86)) !important;
+  border-color: rgba(154, 145, 130, 0.32) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 14px 34px rgba(111, 101, 86, 0.06) !important;
 }
 
 html.theme-a #plans .pricing-card {
@@ -5337,6 +5072,15 @@ html.theme-a #plans .pricing-card :is(
   background-image: none !important;
 }
 
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
+  background-color: #e0dcd1 !important;
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 252, 0.38), transparent 34%),
+    radial-gradient(circle at 86% 88%, rgba(174, 166, 151, 0.2), transparent 36%),
+    linear-gradient(145deg, rgba(232, 228, 218, 0.96), rgba(224, 220, 209, 0.86)) !important;
+  border-color: rgba(154, 145, 130, 0.32) !important;
+}
+
 .site-header {
   position: fixed;
   inset-inline: 0;
@@ -5563,18 +5307,18 @@ html.theme-a #audiences .audience-sales-card {
 
 html.theme-a #audiences .audience-sales-card-fast {
   background:
-    radial-gradient(circle at 16% 8%, rgba(255, 247, 214, 0.7), transparent 36%),
-    radial-gradient(circle at 88% 18%, rgba(248, 210, 194, 0.48), transparent 34%),
-    linear-gradient(150deg, rgba(255, 251, 242, 0.92), rgba(255, 236, 222, 0.82) 58%, rgba(253, 229, 207, 0.74)) !important;
-  border-color: rgba(226, 190, 158, 0.56) !important;
+    radial-gradient(circle at 16% 8%, rgba(255, 255, 252, 0.48), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(177, 169, 156, 0.26), transparent 34%),
+    linear-gradient(150deg, rgba(244, 243, 240, 0.96), rgba(233, 231, 225, 0.92) 58%, rgba(222, 219, 211, 0.88)) !important;
+  border-color: rgba(176, 168, 154, 0.5) !important;
 }
 
 html.theme-a #audiences .audience-sales-card-consultative {
   background:
-    radial-gradient(circle at 14% 10%, rgba(218, 246, 232, 0.72), transparent 38%),
-    radial-gradient(circle at 88% 18%, rgba(224, 237, 250, 0.58), transparent 36%),
-    linear-gradient(150deg, rgba(249, 255, 251, 0.92), rgba(232, 245, 238, 0.82) 56%, rgba(226, 240, 246, 0.7)) !important;
-  border-color: rgba(174, 207, 188, 0.56) !important;
+    radial-gradient(circle at 14% 10%, rgba(252, 251, 248, 0.42), transparent 38%),
+    radial-gradient(circle at 88% 18%, rgba(145, 148, 143, 0.24), transparent 36%),
+    linear-gradient(150deg, rgba(236, 235, 231, 0.96), rgba(224, 222, 216, 0.92) 56%, rgba(211, 208, 200, 0.88)) !important;
+  border-color: rgba(155, 152, 144, 0.5) !important;
 }
 
 html.theme-a #audiences .audience-sales-card:hover {
