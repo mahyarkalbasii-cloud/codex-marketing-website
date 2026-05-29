@@ -5081,6 +5081,7 @@ html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
   border-color: rgba(154, 145, 130, 0.32) !important;
 }
 
+
 .site-header {
   position: fixed;
   inset-inline: 0;
@@ -5367,4 +5368,1125 @@ html.theme-a #audiences .audience-stage-field-row {
 html.theme-a #audiences .audience-stage-card-main p,
 html.theme-a #audiences .audience-stage-fields-panel > div {
   color: var(--solution-card-muted) !important;
+}
+
+/* Final flat-card correction: keep section backgrounds, remove card gradients. */
+html.theme-a {
+  --card-solution: #f5ebe0;
+  --card-solution-soft: #f5ebe0;
+  --card-how: #d5ccc0;
+  --card-how-soft: #d5ccc0;
+  --card-sales-type: #d8dace;
+  --card-sales-type-soft: #d8dace;
+  --card-stage: #f1e6d2;
+  --card-stage-soft: #f1e6d2;
+  --card-flow: #dcc9bc;
+  --card-flow-soft: #dcc9bc;
+  --card-meter: #1a1918;
+  --card-meter-soft: #1f1e1d;
+  --flat-earth-border: rgb(111 78 59 / 0.2);
+  --flat-earth-ink: #201b17;
+  --flat-earth-muted: #584537;
+  --flat-earth-accent: #a64e3c;
+  --flat-pricing-card: #1a1918;
+  --flat-pricing-card-soft: #1f1e1d;
+  --flat-pricing-active-card: #faf9f5;
+  --flat-pricing-active-card-soft: #faf9f5;
+  --flat-pricing-border: rgb(250 249 245 / 0.16);
+  --flat-pricing-ink: #faf9f5;
+  --flat-pricing-muted: #87867f;
+}
+
+html.theme-a #solution :is(.solution-card-data, .solution-card-workflow, .solution-card-training) {
+  --solution-card-shell: var(--card-solution);
+  --solution-card-visual: var(--card-solution-soft);
+  --solution-card-visual-soft: var(--card-solution-soft);
+  --solution-card-copy: rgb(231 220 193 / 0.72);
+  --solution-card-border: var(--flat-earth-border);
+  --solution-card-line: rgb(77 58 44 / 0.14);
+  --solution-card-ink: var(--flat-earth-ink);
+  --solution-card-muted: var(--flat-earth-muted);
+  --solution-card-accent: var(--flat-earth-accent);
+}
+
+html.theme-a #solution .solution-card,
+html.theme-a #solution .solution-card-visual-frame,
+html.theme-a #solution .solution-card-copy-frame,
+html.theme-a #solution .solution-card-chip,
+html.theme-a #solution .solution-card-mini-action {
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+}
+
+html.theme-a #solution .solution-card {
+  background: var(--card-solution) !important;
+}
+
+html.theme-a #solution .solution-card-visual-frame,
+html.theme-a #solution .solution-card-copy-frame,
+html.theme-a #solution .solution-card-chip,
+html.theme-a #solution .solution-card-mini-action {
+  background: var(--card-solution-soft) !important;
+}
+
+html.theme-a #solution .solution-card :is(h3, p, a, span, svg) {
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #solution .solution-card-chip svg,
+html.theme-a #solution .solution-card-mini-action svg {
+  color: var(--flat-earth-accent) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card,
+html.theme-a #how-it-works .how-layer-card:last-of-type {
+  background: var(--card-how) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card :is(h3, p, div, span, svg) {
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#fffaf1]"], [class*="bg-[#1B1916]"]) {
+  background: var(--card-how-soft) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+}
+
+html.theme-a #how-it-works .how-layer-card > div:first-child > span:first-child svg,
+html.theme-a #how-it-works .how-layer-arrow svg,
+html.theme-a #how-it-works .how-layer-card [class*="text-[#CC785C]"] {
+  color: var(--flat-earth-accent) !important;
+}
+
+html.theme-a #audiences :is(
+  .audience-sales-card,
+  .audience-sales-card-fast,
+  .audience-sales-card-consultative
+) {
+  background: var(--card-sales-type) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #audiences .audience-sales-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#faf9f6]"]) {
+  background: var(--card-sales-type-soft) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+}
+
+html.theme-a #audiences :is(
+  .audience-stage-card,
+  .audience-stage-card-main,
+  .audience-stage-fields-panel
+) {
+  background: var(--card-stage) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-border) !important;
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #audiences :is(.audience-stage-card-main, .audience-stage-fields-panel) {
+  background: var(--card-stage-soft) !important;
+}
+
+html.theme-a #audiences .audience-sales-card :is(h3, p, div, span, svg),
+html.theme-a #audiences .audience-stage-card :is(h3, p, div, li, span, svg) {
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #audiences :is(.audience-sales-card-glow, [class*="blur-2xl"]) {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card-neutral,
+html.theme-a #sales-flow .sales-flow-card-soft,
+html.theme-a #sales-flow .sales-flow-card-warm,
+html.theme-a #sales-flow .sales-flow-card-destination {
+  --sales-flow-surface: var(--card-flow);
+  --sales-flow-border: var(--flat-earth-border);
+  --sales-flow-rail: var(--card-flow-soft);
+  --sales-flow-rail-deep: var(--flat-earth-accent);
+  --sales-flow-rail-soft: rgb(240 223 181 / 0.82);
+  --sales-flow-rail-ink: #4c342a;
+}
+
+html.theme-a #sales-flow .sales-flow-card,
+html.theme-a #sales-flow .sales-flow-card::before,
+html.theme-a #sales-flow .sales-flow-step-rail,
+html.theme-a #sales-flow .sales-flow-step-number {
+  background-image: none !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card {
+  background: var(--card-flow) !important;
+  border-color: var(--flat-earth-border) !important;
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card::before {
+  background: transparent !important;
+}
+
+html.theme-a #sales-flow .sales-flow-card :is(h3, p, div, span, svg) {
+  color: var(--flat-earth-ink) !important;
+}
+
+html.theme-a #sales-flow .sales-flow-step-rail,
+html.theme-a #sales-flow .sales-flow-step-number {
+  background: var(--card-flow-soft) !important;
+  border-color: var(--flat-earth-border) !important;
+}
+
+html.theme-a #sales-flow :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
+  background: rgb(166 78 60 / 0.32) !important;
+  background-image: none !important;
+  color: rgb(166 78 60 / 0.48) !important;
+}
+
+html.theme-a body main section#plans {
+  background-color: var(--ref-bg) !important;
+  background-image:
+    linear-gradient(90deg, rgb(230 220 207 / 0.12) 0 1px, transparent 1px 8.5rem),
+    linear-gradient(180deg, rgb(230 220 207 / 0.1) 0 1px, transparent 1px 8.5rem),
+    linear-gradient(90deg, rgb(244 238 229 / 0.68) 0%, rgb(250 247 242 / 0.96) 28%, rgb(248 244 237 / 1) 54%, rgb(246 241 233 / 0.96) 100%) !important;
+  border-color: var(--ref-border) !important;
+  color: #131314 !important;
+}
+
+html.theme-a #plans .pricing-reveal-header header {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+}
+
+html.theme-a #plans .pricing-reveal-header :is(h2, p),
+html.theme-a #plans .pricing-axis-label,
+html.theme-a #plans .pricing-axis-copy,
+html.theme-a #plans .pricing-duration > p {
+  color: #131314 !important;
+}
+
+html.theme-a #plans .pricing-reveal-header p,
+html.theme-a #plans .pricing-duration > p {
+  color: #3d3d3a !important;
+}
+
+html.theme-a #plans :is(.pricing-slider, .pricing-slider-labs, .pricing-duration > div) {
+  background: var(--card-meter) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  color: #131314 !important;
+}
+
+html.theme-a #plans :is(.pricing-slider, .pricing-duration > div) :is(span, p, button) {
+  color: #3d3d3a !important;
+}
+
+html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#d97757]"]) {
+  background: var(--flat-earth-accent) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-accent) !important;
+}
+
+html.theme-a #plans .pricing-card,
+html.theme-a #plans .pricing-card.pricing-card-featured,
+html.theme-a #plans article.pricing-card.pricing-card-featured {
+  background: var(--flat-pricing-card) !important;
+  background-image: none !important;
+  border-color: var(--flat-pricing-border) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 18px 44px rgb(0 0 0 / 0.12) !important;
+  color: var(--flat-pricing-ink) !important;
+}
+
+html.theme-a #plans .pricing-card::before,
+html.theme-a #plans .pricing-card::after,
+html.theme-a #plans .pricing-card [class*="blur-2xl"] {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+html.theme-a #plans .pricing-card :is(h3, p, div, span, svg),
+html.theme-a #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+  color: var(--flat-pricing-ink) !important;
+}
+
+html.theme-a #plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+  color: var(--flat-pricing-muted) !important;
+}
+
+html.theme-a #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+  background: var(--flat-pricing-card-soft) !important;
+  background-image: none !important;
+  border-color: var(--flat-pricing-border) !important;
+}
+
+html.theme-a #plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+  background: rgb(242 235 225 / 0.12) !important;
+  background-image: none !important;
+}
+
+html.theme-a #plans .pricing-card :is([class*="bg-[#f5c842]"], [class*="bg-[#CC785C]"], [class*="bg-[#cc785c]"]),
+html.theme-a #plans .pricing-recommended-badge,
+html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+  background: var(--flat-earth-accent) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-accent) !important;
+  color: #fffaf1 !important;
+}
+
+html.theme-a #plans .pricing-card > a,
+html.theme-a #plans article.pricing-card.pricing-card-featured > a,
+html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
+  background: var(--flat-earth-accent) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-accent) !important;
+  box-shadow: none !important;
+  color: #fffaf1 !important;
+}
+
+html.theme-a #plans .pricing-card > a svg,
+html.theme-a #plans article.pricing-card.pricing-card-featured > a svg,
+html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs,
+html.theme-a body main section#plans .pricing-duration > div {
+  background: var(--card-meter) !important;
+  background-image: none !important;
+  border-color: rgb(111 78 59 / 0.18) !important;
+  color: #201b17 !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
+html.theme-a body main section#plans .pricing-duration > div :is(span, p, button) {
+  color: #201b17 !important;
+}
+
+html.theme-a body main section#plans .pricing-axis-insight[class*="bg-[#CC785C]"] {
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+  background: #141413 !important;
+  background-image: none !important;
+  border-color: #141413 !important;
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans .pricing-best-value-badge {
+  top: -2.7rem !important;
+  z-index: 30 !important;
+  display: inline-flex !important;
+  min-width: 7.2rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.42rem 0.85rem !important;
+  background: var(--flat-earth-accent) !important;
+  background-image: none !important;
+  border-color: rgb(255 250 241 / 0.72) !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.2) inset,
+    0 10px 22px rgb(166 78 60 / 0.22) !important;
+  color: #fffaf1 !important;
+  font-size: 0.75rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+  background: var(--flat-pricing-active-card) !important;
+  background-image: none !important;
+  border-color: rgb(166 78 60 / 0.62) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 0 0 2px rgb(166 78 60 / 0.25),
+    0 26px 58px rgb(75 55 50 / 0.24) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+  background: var(--flat-pricing-active-card-soft) !important;
+  background-image: none !important;
+  border-color: rgb(242 235 225 / 0.2) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+  background: rgb(242 235 225 / 0.18) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
+  background: var(--flat-earth-accent) !important;
+  background-image: none !important;
+  border-color: var(--flat-earth-accent) !important;
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
+  color: #fffaf1 !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+  color: #fffaf1 !important;
+}
+
+/* Claude-inspired pricing palette: dark page, quiet cards, white selected plan. */
+html.theme-a body main section#plans {
+  --claude-bg: #141413;
+  --claude-surface: #1a1918;
+  --claude-surface-raised: #1f1e1d;
+  --claude-ink: #faf9f5;
+  --claude-muted: #87867f;
+  --claude-selected: #faf9f5;
+  --claude-selected-ink: #141413;
+  background: var(--claude-bg) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.12) !important;
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a #plans .pricing-reveal-header :is(h2, p),
+html.theme-a #plans .pricing-axis-label,
+html.theme-a #plans .pricing-duration > p {
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a #plans .pricing-reveal-header p,
+html.theme-a #plans .pricing-duration > p {
+  color: var(--claude-muted) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs,
+html.theme-a body main section#plans .pricing-duration > div {
+  background: var(--claude-surface) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.14) !important;
+  box-shadow: none !important;
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
+html.theme-a body main section#plans .pricing-duration > div :is(span, p, button) {
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-axis-insight {
+  background: var(--claude-surface-raised) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.12) !important;
+  color: var(--claude-muted) !important;
+}
+
+html.theme-a body main section#plans .pricing-axis-insight.text-white {
+  background: var(--claude-selected) !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#d97757]"]) {
+  background: var(--claude-selected) !important;
+  background-image: none !important;
+  border-color: var(--claude-selected) !important;
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a #plans .pricing-slider [class*="bg-[#d8c7b2]"],
+html.theme-a #plans .pricing-slider [class*="bg-[#fffaf1]"] {
+  background: rgb(250 249 245 / 0.24) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.28) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option] {
+  background: var(--claude-surface-raised) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.12) !important;
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+  background: var(--claude-selected) !important;
+  background-image: none !important;
+  border-color: var(--claude-selected) !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-best-value-badge {
+  background: var(--claude-selected) !important;
+  border-color: var(--claude-selected) !important;
+  box-shadow: none !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card {
+  background: var(--claude-surface) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.14) !important;
+  box-shadow: none !important;
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+  background: var(--claude-selected) !important;
+  background-image: none !important;
+  border-color: var(--claude-selected) !important;
+  box-shadow: none !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is(h3, p, div, span, svg),
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+  color: var(--claude-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+  color: var(--claude-muted) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg) {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+  color: rgb(20 20 19 / 0.66) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+  background: var(--claude-surface-raised) !important;
+  background-image: none !important;
+  border-color: rgb(250 249 245 / 0.12) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+  background: rgb(20 20 19 / 0.06) !important;
+  background-image: none !important;
+  border-color: rgb(20 20 19 / 0.14) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+  background: rgb(250 249 245 / 0.16) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+  background: rgb(20 20 19 / 0.16) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#plans .pricing-recommended-badge,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+  background: var(--claude-selected) !important;
+  background-image: none !important;
+  border-color: var(--claude-selected) !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge {
+  background: var(--claude-selected-ink) !important;
+  border-color: var(--claude-selected-ink) !important;
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans .pricing-card > a,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
+  background: var(--claude-selected) !important;
+  background-image: none !important;
+  border-color: var(--claude-selected) !important;
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card > a svg,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a svg,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
+  background: var(--claude-selected-ink) !important;
+  border-color: var(--claude-selected-ink) !important;
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg),
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
+  color: var(--claude-selected-ink) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]),
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+  color: rgb(20 20 19 / 0.66) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge,
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
+  background: var(--claude-selected-ink) !important;
+  border-color: var(--claude-selected-ink) !important;
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span),
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span) {
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
+  background: var(--claude-selected-ink) !important;
+  border-color: var(--claude-selected-ink) !important;
+  color: var(--claude-selected) !important;
+}
+
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg,
+html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg {
+  color: var(--claude-selected) !important;
+}
+
+/* Unified card pass: match the visible surface of the open FAQ row while keeping section backgrounds intact. */
+html.theme-a {
+  --unified-card-surface: rgb(245 239 231);
+  --unified-card-border: rgb(222 211 196 / 0.82);
+  --unified-card-border-strong: rgb(55 47 40 / 0.42);
+  --unified-card-ink: #131314;
+  --unified-card-muted: #554b42;
+  --unified-card-line: rgb(31 27 22 / 0.14);
+  --unified-card-control: #171716;
+  --unified-card-control-ink: #fffaf1;
+  --card-solution: var(--unified-card-surface);
+  --card-solution-soft: var(--unified-card-surface);
+  --card-how: var(--unified-card-surface);
+  --card-how-soft: var(--unified-card-surface);
+  --card-sales-type: var(--unified-card-surface);
+  --card-sales-type-soft: var(--unified-card-surface);
+  --card-stage: var(--unified-card-surface);
+  --card-stage-soft: var(--unified-card-surface);
+  --card-flow: var(--unified-card-surface);
+  --card-flow-soft: var(--unified-card-surface);
+  --card-meter: var(--unified-card-surface);
+  --flat-pricing-card: var(--unified-card-surface);
+  --flat-pricing-card-soft: var(--unified-card-surface);
+  --flat-pricing-active-card: var(--unified-card-surface);
+  --flat-pricing-active-card-soft: var(--unified-card-surface);
+  --flat-pricing-border: var(--unified-card-border);
+  --flat-pricing-ink: var(--unified-card-ink);
+  --flat-pricing-muted: var(--unified-card-muted);
+  --flat-earth-border: var(--unified-card-border);
+  --flat-earth-ink: var(--unified-card-ink);
+  --flat-earth-muted: var(--unified-card-muted);
+  --flat-earth-accent: var(--unified-card-control);
+}
+
+html.theme-a body main :is(
+  .solution-card,
+  .solution-card-visual-frame,
+  .solution-card-copy-frame,
+  .solution-card-chip,
+  .solution-card-mini-action,
+  .how-layer-card,
+  .how-layer-card [class*="bg-[#FBF9F3]"],
+  .how-layer-card [class*="bg-[#fffaf1]"],
+  .how-layer-card [class*="bg-[#1B1916]"],
+  .audience-sales-card,
+  .audience-sales-card-fast,
+  .audience-sales-card-consultative,
+  .audience-stage-card,
+  .audience-stage-card-main,
+  .audience-stage-fields-panel,
+  .audience-stage-signal-card,
+  .audience-stage-timing-box,
+  .sales-flow-card,
+  .sales-flow-step-rail,
+  .sales-flow-step-number,
+  .pricing-slider,
+  .pricing-slider-labs,
+  .pricing-axis-insight,
+  .pricing-duration > div,
+  .pricing-duration > div > button,
+  .pricing-best-value-badge,
+  .pricing-card,
+  .pricing-card[data-active-plan="true"],
+  .pricing-card [class*="bg-white/10"],
+  .pricing-card [class*="bg-white/12"],
+  .pricing-card [class*="bg-[#fbf6ed]"],
+  .pricing-card [class*="bg-[#f5eadb]"],
+  .pricing-card [class*="bg-[#e8dfd2]"],
+  .pricing-card [class*="bg-white/20"],
+  .pricing-recommended-badge,
+  .faq-list-card,
+  .faq-list-item,
+  .category-card,
+  .hero-map-visual,
+  .hero-orb-panel,
+  .hero-orb-status,
+  .problem-list-panel,
+  .problem-list-shell,
+  .problem-project-card,
+  #problem [class*="bg-[#FFF4E7]"],
+  #problem [class*="bg-[#fffaf1]"],
+  #problem [class*="bg-[#fbf6ed]"],
+  #demo [class*="rounded-[1.6rem]"][class*="border"],
+  #demo [class*="rounded-[1.4rem]"][class*="border"],
+  #demo [class*="rounded-[1.2rem]"][class*="border"],
+  #demo [class*="rounded-2xl"][class*="border"],
+  #demo [class*="bg-[#fffaf1]"],
+  #demo [class*="bg-[#fbf6ed]"]
+) {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main :is(
+  .solution-card,
+  .how-layer-card,
+  .audience-sales-card,
+  .audience-stage-card,
+  .sales-flow-card,
+  .pricing-slider,
+  .pricing-duration,
+  .pricing-card,
+  .faq-list-card,
+  .category-card,
+  .hero-map-visual,
+  .problem-list-panel,
+  #demo
+) :is(h2, h3, h4, p, li, div, span, small, strong, summary, svg) {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main :is(
+  .solution-card,
+  .how-layer-card,
+  .audience-sales-card,
+  .audience-stage-card,
+  .sales-flow-card,
+  .pricing-slider,
+  .pricing-card,
+  .faq-list-card,
+  .category-card,
+  .problem-list-panel,
+  #demo
+) :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"], [class*="text-zinc-500"], [class*="text-zinc-600"], [class*="text-zinc-400"]) {
+  color: var(--unified-card-muted) !important;
+}
+
+html.theme-a body main :is(
+  .solution-card::before,
+  .solution-card::after,
+  .sales-flow-card::before,
+  .sales-flow-card::after,
+  .pricing-card::before,
+  .pricing-card::after,
+  .audience-sales-card-glow,
+  .solution-card-orbit,
+  [class*="blur-2xl"],
+  [class*="blur-3xl"]
+) {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+html.theme-a .faq-list-card {
+  background: var(--unified-card-surface) !important;
+  border-color: var(--unified-card-border) !important;
+}
+
+html.theme-a .faq-list-item,
+html.theme-a .faq-list-item:hover,
+html.theme-a .faq-list-item[open] {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+}
+
+html.theme-a .faq-list-item[open] .faq-toggle-icon,
+html.theme-a .faq-list-item .faq-toggle-icon {
+  background: var(--unified-card-surface) !important;
+  border-color: var(--unified-card-border) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main :is(
+  .solution-card-diagram-data span,
+  .solution-card-diagram-workflow span,
+  .sales-flow-connector-segment,
+  .sales-flow-connector-final,
+  .pricing-slider-rail,
+  [data-plan-slider-handle],
+  [data-plan-stopper],
+  [class*="bg-[#CC785C]"],
+  [class*="bg-[#cc785c]"],
+  [class*="bg-[#d97757]"],
+  [class*="bg-[#f5c842]"],
+  [class*="bg-[#d99a35]"],
+  [class*="bg-[#6f765f]"]
+) {
+  background: var(--unified-card-control) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-control) !important;
+  color: var(--unified-card-control) !important;
+}
+
+html.theme-a body main :is(
+  .solution-card-check::before,
+  .solution-card-diagram-workflow::before
+) {
+  border-color: var(--unified-card-control) !important;
+}
+
+html.theme-a body main section#plans {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans :is(.pricing-reveal-header h2, .pricing-reveal-header p, .pricing-axis-label, .pricing-duration > p) {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-axis-insight.text-white,
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+  background: var(--unified-card-surface) !important;
+  border-color: var(--unified-card-border) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option],
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+  border-color: var(--unified-card-control) !important;
+  box-shadow: inset 0 0 0 2px var(--unified-card-control) !important;
+}
+
+html.theme-a body main section#plans [data-duration-option] span,
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span,
+html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card,
+html.theme-a body main section#plans .pricing-card.pricing-card-featured,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured,
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+  border-color: var(--unified-card-border-strong) !important;
+  box-shadow:
+    0 0 0 2px rgb(23 23 22 / 0.12),
+    0 18px 40px rgb(19 19 20 / 0.08) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is(h3, p, div, span, svg),
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is(
+  [class*="bg-white/10"],
+  [class*="bg-white/12"],
+  [class*="bg-[#fbf6ed]"],
+  [class*="bg-[#f5eadb]"]
+),
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(
+  [class*="bg-white/10"],
+  [class*="bg-white/12"],
+  [class*="bg-[#fbf6ed]"],
+  [class*="bg-[#f5eadb]"]
+) {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+}
+
+html.theme-a body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]),
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+  background: var(--unified-card-line) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#plans .pricing-recommended-badge,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border-strong) !important;
+  color: var(--unified-card-ink) !important;
+  box-shadow: none !important;
+}
+
+html.theme-a body main :is(
+  .pricing-card > a,
+  .pricing-card > a.pricing-plan-cta,
+  article.pricing-card.pricing-card-featured > a,
+  article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
+  .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
+  article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
+  .audience-stage-card-cta,
+  #demo button[type="submit"],
+  #demo a[href^="tel:"]
+) {
+  background: var(--unified-card-control) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-control) !important;
+  box-shadow: none !important;
+  color: var(--unified-card-control-ink) !important;
+}
+
+html.theme-a body main :is(
+  .pricing-card > a,
+  .pricing-card > a.pricing-plan-cta,
+  article.pricing-card.pricing-card-featured > a,
+  article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
+  .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
+  article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
+  .audience-stage-card-cta,
+  #demo button[type="submit"],
+  #demo a[href^="tel:"]
+) :is(span, svg) {
+  color: var(--unified-card-control-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-reveal-header :is(h2, p),
+html.theme-a body main section#plans > div > .pricing-duration > p {
+  color: #faf9f5 !important;
+}
+
+html.theme-a body main section#plans .pricing-reveal-header p,
+html.theme-a body main section#plans .pricing-duration > p {
+  color: rgb(250 249 245 / 0.72) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(h3, p, div, span, button, svg),
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label,
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-copy,
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight {
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight,
+html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+  background: var(--unified-card-surface) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-border) !important;
+  color: var(--unified-card-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta,
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
+  background: var(--unified-card-control) !important;
+  background-image: none !important;
+  border-color: var(--unified-card-control) !important;
+  box-shadow: none !important;
+  color: var(--unified-card-control-ink) !important;
+}
+
+html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta :is(span, svg),
+html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg),
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta :is(span, svg),
+html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg) {
+  color: var(--unified-card-control-ink) !important;
+}
+
+/* Latest correction: pricing gets the same page background, FAQ returns to its native open/closed colors. */
+html.theme-a body main section#plans {
+  background-color: var(--ref-bg) !important;
+  background-image:
+    linear-gradient(90deg, rgb(230 220 207 / 0.12) 0 1px, transparent 1px 8.5rem),
+    linear-gradient(180deg, rgb(230 220 207 / 0.1) 0 1px, transparent 1px 8.5rem),
+    linear-gradient(90deg, rgb(244 238 229 / 0.68) 0%, rgb(250 247 242 / 0.96) 28%, rgb(248 244 237 / 1) 54%, rgb(246 241 233 / 0.96) 100%) !important;
+  border-color: var(--ref-border) !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main section#plans .pricing-reveal-header :is(h2, p),
+html.theme-a body main section#plans .pricing-duration > p {
+  color: #131314 !important;
+}
+
+html.theme-a body main section#plans .pricing-reveal-header p,
+html.theme-a body main section#plans .pricing-duration > p {
+  color: #3d3d3a !important;
+}
+
+html.theme-a body main .faq-list-card {
+  background: var(--ref-card) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main .faq-list-item {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main .faq-list-item:hover,
+html.theme-a body main .faq-list-item[open] {
+  background: rgb(242 235 225 / 0.48) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main .faq-list-card :is(h3, p, div, span, summary) {
+  color: #131314 !important;
+}
+
+html.theme-a body main .faq-toggle-icon,
+html.theme-a body main .faq-list-item .faq-toggle-icon {
+  background: rgb(248 244 237 / 0.76) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: none !important;
+  color: #6f6254 !important;
+}
+
+html.theme-a body main .faq-list-item[open] .faq-toggle-icon {
+  background: rgb(242 235 225 / 0.78) !important;
+  border-color: var(--ref-border-strong) !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main section#faq .faq-list-card {
+  background: var(--ref-card) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main section#faq .faq-list-item {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main section#faq .faq-list-item:hover,
+html.theme-a body main section#faq .faq-list-item[open] {
+  background: rgb(242 235 225 / 0.48) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#faq .faq-list-card :is(h3, p, div, span, summary) {
+  color: #131314 !important;
+}
+
+html.theme-a body main section#faq .faq-toggle-icon,
+html.theme-a body main section#faq .faq-list-item .faq-toggle-icon {
+  background: rgb(248 244 237 / 0.76) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: none !important;
+  color: #6f6254 !important;
+}
+
+html.theme-a body main section#faq .faq-list-item[open] .faq-toggle-icon {
+  background: rgb(242 235 225 / 0.78) !important;
+  border-color: var(--ref-border-strong) !important;
+  color: #131314 !important;
+}
+
+html.theme-a body main section#faq div.faq-list-card.divide-y {
+  background: var(--ref-card) !important;
+  background-image: none !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
+}
+
+html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item:hover,
+html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] {
+  background: rgb(242 235 225 / 0.48) !important;
+  background-image: none !important;
+}
+
+html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item .faq-toggle-icon {
+  background: rgb(248 244 237 / 0.76) !important;
+  border-color: var(--ref-border) !important;
+  box-shadow: none !important;
+  color: #6f6254 !important;
+}
+
+html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] .faq-toggle-icon {
+  background: rgb(242 235 225 / 0.78) !important;
+  border-color: var(--ref-border-strong) !important;
+  color: #131314 !important;
 }
