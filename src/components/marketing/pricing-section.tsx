@@ -305,6 +305,21 @@ const axisTickLabelsEn: Record<PlanId, string> = {
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
 
+function parsePriceNumber(s: string): number {
+  return Number(
+    s
+      .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+      .replace(/,/g, ""),
+  );
+}
+
+function formatSavings(percent: number, locale: Locale): string {
+  if (percent <= 0) return "";
+  const num = locale === "fa" ? percent.toLocaleString("fa-IR") : String(percent);
+  const pct = locale === "fa" ? "٪" : "%";
+  return `−${num}${pct}`;
+}
+
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -554,6 +569,14 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const activeDuration = useMemo(() => durationById[duration], [duration, durationById]);
   const activePercent =
     activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
+  const savingsPercent = useMemo<Record<Duration, number>>(() => {
+    const baseMonthly = parsePriceNumber(plans[0].prices["3"]) / 3;
+    return {
+      "3": 0,
+      "6": Math.round((1 - parsePriceNumber(plans[0].prices["6"]) / 6 / baseMonthly) * 100),
+      "12": Math.round((1 - parsePriceNumber(plans[0].prices["12"]) / 12 / baseMonthly) * 100),
+    };
+  }, [plans]);
 
   useEffect(() => {
     setIsReady(true);
@@ -679,6 +702,28 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       selectPlan(plans.length - 1);
     }
   };
+
+  const handleDurationKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      const tabs = durationOptions.map((d) => d.id);
+      const currentIndex = tabs.indexOf(duration);
+      const isRTL = locale === "fa";
+      let newIndex: number;
+
+      if (event.key === "ArrowLeft") {
+        newIndex = isRTL ? currentIndex + 1 : currentIndex - 1;
+      } else if (event.key === "ArrowRight") {
+        newIndex = isRTL ? currentIndex - 1 : currentIndex + 1;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      const clamped = Math.min(Math.max(newIndex, 0), tabs.length - 1);
+      setDuration(tabs[clamped] as Duration);
+    },
+    [durationOptions, duration, locale],
+  );
 
   return (
     <section
@@ -821,22 +866,31 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
           className="pricing-duration mt-6 flex flex-col items-center gap-2"
           data-selected-duration={duration}
         >
-          <div className="pricing-duration-group grid w-full max-w-xl grid-cols-3 gap-2 rounded-[1.3rem] border border-[#e4d8c8] bg-[#fffaf1]/70 p-2 pt-8 shadow-sm shadow-[#2a241d]/[0.025] md:rounded-[1.5rem]">
+          <div
+            role="tablist"
+            aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
+            onKeyDown={handleDurationKeyDown}
+            className="pricing-duration-group flex w-full max-w-xs rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 pt-9 shadow-sm shadow-[#2a241d]/[0.025] md:max-w-sm"
+          >
             {durationOptions.map((item) => {
               const active = item.id === duration;
+              const savings = savingsPercent[item.id];
 
               return (
                 <button
                   key={item.id}
                   type="button"
+                  role="tab"
+                  aria-selected={active}
+                  tabIndex={active ? 0 : -1}
                   data-duration-option={item.id}
                   data-active-duration={active ? "true" : "false"}
                   onClick={() => setDuration(item.id)}
                   className={cn(
-                    "pricing-duration-option relative h-12 rounded-xl border text-sm font-bold shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a241d]/25 md:h-[3.25rem] md:rounded-2xl",
+                    "pricing-duration-option relative flex min-h-[2.5rem] flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-2 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-inset",
                     active
-                      ? "border-[#2a241d] bg-[#2a241d] text-[#fffaf1] shadow-[#2a241d]/15"
-                      : "border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-[#2a241d]/[0.025] hover:bg-[#f5eadb]",
+                      ? "bg-[#CC785C] text-[#FFF7EF] shadow-sm shadow-[#CC785C]/20"
+                      : "text-[#2A241D] hover:bg-[rgba(204,120,92,0.08)]",
                   )}
                 >
                   {item.id === "12" ? (
@@ -844,16 +898,24 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       className={cn(
                         "pricing-best-value-badge absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
                         active
-                          ? "border-[#2a241d] bg-[#fffaf1] text-[#2a241d]"
-                          : "border-[#e4d8c8] bg-[#fffaf1] text-[#CC785C]",
+                          ? "border-[#CC785C]/40 bg-[#CC785C] text-[#FFF7EF]"
+                          : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
                       )}
                     >
                       {copy.bestValue}
                     </span>
                   ) : null}
-                  <span className="block">
-                    {item.label}
-                  </span>
+                  <span className="block leading-tight">{item.label}</span>
+                  {savings > 0 ? (
+                    <span
+                      className={cn(
+                        "block text-[10px] font-semibold leading-tight",
+                        active ? "text-[#FFF7EF]/75" : "text-[#75695D]",
+                      )}
+                    >
+                      {formatSavings(savings, locale)}
+                    </span>
+                  ) : null}
                 </button>
               );
             })}
