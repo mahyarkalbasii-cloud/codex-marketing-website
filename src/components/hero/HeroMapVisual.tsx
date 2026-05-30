@@ -14,18 +14,25 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
         compact && "hero-laptop-map-visual--compact",
       )}
     >
-      <picture>
-        <source media="(max-width: 767px)" srcSet={heroMobileProjectMap.src} />
-        <img
-          src={heroMobileProjectMapLarge.src}
-        alt="نقشه تعاملی پروژه‌های ساختمانی فعال تهران با نشانگرهای موقعیت روی صفحه لپ‌تاپ - پرشین‌سازه"
-          width={heroMobileProjectMapLarge.width}
-          height={heroMobileProjectMapLarge.height}
-          loading="eager"
-          fetchPriority="high"
-          className="hero-laptop-map-image"
-        />
-      </picture>
+      <div className="hero-laptop-map-stage">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={heroMobileProjectMap.src} />
+          <img
+            src={heroMobileProjectMapLarge.src}
+            alt="نقشه تعاملی پروژه‌های ساختمانی فعال تهران با نشانگرهای موقعیت روی صفحه لپ‌تاپ - پرشین‌سازه"
+            width={heroMobileProjectMapLarge.width}
+            height={heroMobileProjectMapLarge.height}
+            loading="eager"
+            fetchPriority="high"
+            className="hero-laptop-map-image"
+          />
+        </picture>
+        <span className="hero-laptop-map-sweep" aria-hidden="true" />
+        <span className="hero-laptop-map-signal hero-laptop-map-signal--primary" aria-hidden="true" />
+        <span className="hero-laptop-map-signal hero-laptop-map-signal--secondary" aria-hidden="true" />
+        <span className="hero-laptop-map-signal hero-laptop-map-signal--tertiary" aria-hidden="true" />
+        <span className="hero-laptop-map-touch-ripple" aria-hidden="true" />
+      </div>
     </div>
   );
 }
