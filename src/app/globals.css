@@ -7275,8 +7275,8 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 }
 
 #hero.hero-section {
-  --hero-bg: #F9EFDE;
-  --hero-bg-floor: #F9EFDE;
+  --hero-bg: #F6ECDA;
+  --hero-bg-floor: #F6ECDA;
   position: relative;
   overflow: hidden;
   border-block-end: 1px solid #e4d8c8;
@@ -7287,7 +7287,7 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 .hero-container {
   max-inline-size: 80rem;
   margin-inline: auto;
-  padding-block: 2.5rem 3rem;
+  padding-block: 3.25rem 3.75rem;
   padding-inline: 1.25rem;
 }
 
@@ -7604,7 +7604,7 @@ html.brand-palette body main .hero-project-badge--signal {
 
 @media (min-width: 768px) {
   .hero-container {
-    padding-block: 3rem 3.5rem;
+    padding-block: 4rem 4.75rem;
     padding-inline: 1.5rem;
   }
 
@@ -7620,7 +7620,7 @@ html.brand-palette body main .hero-project-badge--signal {
 
 @media (min-width: 1024px) {
   .hero-container {
-    padding-block: 3rem 4rem;
+    padding-block: 4.75rem 5.25rem;
   }
 
   .hero-layout {
@@ -7662,7 +7662,7 @@ html.brand-palette body main .hero-project-badge--signal {
   }
 
   .hero-laptop-map-image {
-    inline-size: min(118%, 42.5rem);
+    inline-size: min(126%, 47rem);
     max-inline-size: none;
   }
 }
@@ -8233,6 +8233,8 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 }
 
 .solution-title {
+  max-inline-size: 48rem;
+  margin-inline: auto;
   color: #2A241D;
   font-size: 1.875rem;
   font-weight: 700;
@@ -8400,6 +8402,14 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 .solution-pillar-card--workflow .solution-pillar-illustration {
   border-color: transparent;
   background: transparent;
+  margin-block-start: clamp(0.85rem, 1.3vw, 1.2rem);
+  padding: 0;
+}
+
+.solution-pillar-card--training .solution-pillar-illustration {
+  border-color: transparent;
+  background: transparent;
+  margin-block-start: clamp(0.85rem, 1.3vw, 1.2rem);
   padding: 0;
 }
 
@@ -8413,72 +8423,14 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   object-fit: contain;
 }
 
-.solution-product-sim {
-  display: grid;
-  align-content: center;
-  gap: 0.55rem;
-  inline-size: min(100%, 20.5rem);
-  aspect-ratio: 360 / 250;
-  direction: rtl;
-  color: #2A241D;
-  padding: 0.75rem;
-}
-
-.solution-sim-caption {
-  color: #75695D;
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: start;
-}
-
-.solution-course-sim {
-  align-content: center;
-}
-
-.solution-course-list {
-  display: grid;
-  gap: 0.42rem;
-  min-inline-size: 0;
-}
-
-.solution-course-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.5rem;
-  align-items: center;
-  min-block-size: 2.24rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.5rem;
-  background: #FBF6ED;
-  padding-block: 0.36rem;
-  padding-inline: 0.55rem;
-}
-
-.solution-course-label {
-  min-inline-size: 0;
-  color: #2A241D;
-  font-size: 0.7rem;
-  font-weight: 850;
-  line-height: 1.45;
-  text-align: start;
-}
-
-.solution-course-tag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: 1.4rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.42rem;
-  background: #FBF6ED;
-  color: #75695D;
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1.2;
-  padding-block: 0.16rem;
-  padding-inline: 0.36rem;
-  white-space: nowrap;
+.solution-training-playbook-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 23rem;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
 }
 
 .solution-pillar-body {
@@ -8536,8 +8488,9 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .solution-title {
-    font-size: 2.55rem;
-    line-height: 1.24;
+    max-inline-size: 45rem;
+    font-size: 2.25rem;
+    line-height: 1.28;
   }
 
   .solution-title-line {
@@ -8613,31 +8566,21 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     padding: 0;
   }
 
-  .solution-pillar-card--data .solution-verified-map-image {
-    inline-size: min(100%, 35rem);
+  .solution-pillar-card--training .solution-pillar-illustration {
+    min-block-size: 0;
+    padding: 0;
   }
 
-  .solution-pillar-card--training .solution-product-sim {
-    inline-size: 100%;
-    block-size: 100%;
-    aspect-ratio: auto;
+  .solution-pillar-card--data .solution-verified-map-image {
+    inline-size: min(100%, 35rem);
   }
 
   .solution-pillar-card--workflow .solution-followup-pipeline-image {
     inline-size: min(100%, 21rem);
   }
 
-  .solution-pillar-card--training .solution-product-sim {
-    padding: 0.65rem;
-  }
-
-  .solution-course-list {
-    align-content: center;
-  }
-
-  .solution-course-row {
-    min-block-size: 2.05rem;
-    padding-block: 0.28rem;
+  .solution-pillar-card--training .solution-training-playbook-image {
+    inline-size: min(100%, 23rem);
   }
 
 }

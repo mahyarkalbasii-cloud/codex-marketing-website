@@ -24,6 +24,7 @@ import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
 import constructionIntelligenceMap from "@/assets/images/home-solution-construction-intelligence-map.webp";
 import salesFollowupPipeline from "@/assets/images/home-sales-followup-pipeline.webp";
+import salesTrainingPlaybook from "@/assets/images/home-sales-training-playbook.webp";
 import { getSalesStyleSubcategories } from "@/data/sales-style";
 import { SALES_STYLE_COPY } from "@/data/sales-style-copy";
 import { getStagePageContent } from "@/data/stage-copy";
@@ -86,22 +87,6 @@ const solutionCards = [
     href: "/features/#training",
     motif: "training",
     icon: GraduationCap,
-  },
-] as const;
-
-const SOLUTION_ILLUSTRATION_VIEW_BOX = "0 0 360 250";
-const solutionTrainingCourses = [
-  {
-    label: "فروش پروژه‌محور در صنعت ساختمان",
-    lessons: "۶ جلسه",
-  },
-  {
-    label: "بازاریابی و مسیر تماس مؤثر",
-    lessons: "۴ جلسه",
-  },
-  {
-    label: "استفاده از داده برای زمان‌بندی فروش",
-    lessons: "۵ جلسه",
   },
 ] as const;
 
@@ -278,17 +263,15 @@ function SolutionPillarIllustration({
       ) : null}
 
       {motif === "training" ? (
-        <div className="solution-product-sim solution-course-sim" data-view-box={SOLUTION_ILLUSTRATION_VIEW_BOX}>
-          <div className="solution-sim-caption">دوره‌های آموزش</div>
-          <div className="solution-course-list">
-            {solutionTrainingCourses.map((course) => (
-              <div className="solution-course-row" key={course.label}>
-                <span className="solution-course-label">{course.label}</span>
-                <span className="solution-course-tag">{course.lessons}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <img
+          src={salesTrainingPlaybook.src}
+          alt=""
+          width="1774"
+          height="887"
+          loading="lazy"
+          decoding="async"
+          className="solution-training-playbook-image"
+        />
       ) : null}
 
       {motif === "workflow" ? (
