@@ -7857,8 +7857,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .problem-title,
-  .problem-body,
-  .problem-cta {
+  .problem-body {
     margin-inline: 0;
   }
 
@@ -7868,7 +7867,13 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .problem-cta {
-    inline-size: auto;
+    display: flex;
+    inline-size: fit-content;
+    margin-inline: auto;
+  }
+
+  .problem-cta .marketing-cta__arrow {
+    margin-inline-start: 0;
   }
 
   .problem-visual-frame {
