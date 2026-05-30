@@ -8365,13 +8365,14 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   border-color: #D8B29C;
   background: transparent;
   padding: 0;
-  order: 3;
+  order: 4;
   inline-size: 100%;
-  margin-block-start: clamp(1.5rem, 3vw, 2.25rem);
+  margin-block-start: clamp(1rem, 2vw, 1.65rem);
 }
 
 .solution-pillar-card--data .solution-pillar-link {
-  order: 4;
+  order: 3;
+  margin-block-start: 0.1rem;
 }
 
 .solution-illustration-svg {
