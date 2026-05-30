@@ -8,8 +8,8 @@
 @tailwind utilities;
 
 :root {
-  --page-bg: #F6ECDA;
-  --background: 38.6 60.9% 91%;
+  --page-bg: #F0EEE6;
+  --background: 48 25% 92.2%;
   --foreground: 31 19% 14%;
   --card: 39 52% 97%;
   --card-foreground: 31 19% 14%;
@@ -30,8 +30,8 @@
   --ring: 15 52% 58%;
   --radius: 1rem;
   --bg-base: var(--page-bg);
-  --gradient-neutral: 246 236 218;
-  --gradient-floor: 246 236 218;
+  --gradient-neutral: 240 238 230;
+  --gradient-floor: 240 238 230;
   --gradient-left: 204 120 92;
   --gradient-right: 204 120 92;
   --gradient-left-soft: 204 120 92;
@@ -72,7 +72,7 @@
 }
 
 .brand-palette {
-  --background: 38.6 60.9% 91%;
+  --background: 48 25% 92.2%;
   --foreground: 240 2% 8%;
   --card: 38 41% 95%;
   --card-foreground: 240 2% 8%;
@@ -92,12 +92,12 @@
   --input: 36 25% 82%;
   --ring: 15 52% 58%;
   --bg-base: var(--page-bg);
-  --gradient-neutral: 246 236 218;
-  --gradient-floor: 246 236 218;
-  --gradient-left: 246 236 218;
-  --gradient-right: 246 236 218;
-  --gradient-left-soft: 246 236 218;
-  --gradient-right-soft: 246 236 218;
+  --gradient-neutral: 240 238 230;
+  --gradient-floor: 240 238 230;
+  --gradient-left: 240 238 230;
+  --gradient-right: 240 238 230;
+  --gradient-left-soft: 240 238 230;
+  --gradient-right-soft: 240 238 230;
   --accent-clay: #CC785C;
   --accent-teal: #3d3d3a;
   --ref-bg: var(--page-bg);
@@ -10671,47 +10671,54 @@ html.dark.brand-palette .faq-list-item[open] .faq-toggle-icon {
   color: #FFF7EF !important;
 }
 
-/* Monochrome pricing pass: cards and duration toggle follow the Anthropic-style two-tone system. */
+/* Anthropic-inspired pricing pass: cards and duration toggle use the Claude release card tone. */
 body main section#plans,
 html.brand-palette body main section#plans {
-  --pricing-mono-dark: #333333;
-  --pricing-mono-black: #333333;
-  --pricing-mono-light: #F6F1E8;
-  --pricing-mono-muted-light: rgba(246, 241, 232, 0.68);
-  --pricing-mono-muted-dark: rgba(51, 51, 51, 0.62);
-  --pricing-mono-line-light: rgba(246, 241, 232, 0.18);
-  --pricing-mono-line-dark: rgba(51, 51, 51, 0.16);
+  --pricing-card-bg: #E3DACC;
+  --pricing-card-fg: #141413;
+  --pricing-card-muted: rgba(20, 20, 19, 0.66);
+  --pricing-card-line: rgba(20, 20, 19, 0.14);
+  --pricing-card-soft: rgba(20, 20, 19, 0.055);
+  --pricing-card-inverse-bg: #141413;
+  --pricing-card-inverse-fg: #FAF9F5;
+  --pricing-mono-dark: var(--pricing-card-bg);
+  --pricing-mono-black: var(--pricing-card-fg);
+  --pricing-mono-light: var(--pricing-card-inverse-fg);
+  --pricing-mono-muted-light: var(--pricing-card-muted);
+  --pricing-mono-muted-dark: var(--pricing-card-muted);
+  --pricing-mono-line-light: var(--pricing-card-line);
+  --pricing-mono-line-dark: var(--pricing-card-line);
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
-  border-color: var(--pricing-mono-dark) !important;
-  background: var(--pricing-mono-dark) !important;
+  border-color: var(--pricing-card-line) !important;
+  background: var(--pricing-card-bg) !important;
   background-image: none !important;
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
   box-shadow: none !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label {
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art {
   background:
-    radial-gradient(ellipse at center, rgba(246, 241, 232, 0.15), rgba(246, 241, 232, 0.07) 52%, transparent 74%) !important;
+    radial-gradient(ellipse at center, rgba(20, 20, 19, 0.07), rgba(20, 20, 19, 0.035) 52%, transparent 74%) !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art-image,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art-image {
-  filter: grayscale(1) invert(1) brightness(1.22) contrast(1.08) opacity(0.98) !important;
-  mix-blend-mode: normal !important;
+  filter: grayscale(1) contrast(1.04) opacity(0.72) !important;
+  mix-blend-mode: darken !important;
 }
 
 body main section#plans .pricing-slider-track,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track {
-  background: rgba(246, 241, 232, 0.16) !important;
+  background: rgba(20, 20, 19, 0.16) !important;
 }
 
 body main section#plans .pricing-slider-rail,
@@ -10720,46 +10727,46 @@ body main section#plans .pricing-slider-handle,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
 body main section#plans .pricing-slider-stopper[data-active-stopper="true"],
 html.brand-palette body main section#plans .pricing-slider-stopper[data-active-stopper="true"] {
-  border-color: var(--pricing-mono-light) !important;
-  background: var(--pricing-mono-light) !important;
+  border-color: var(--pricing-card-fg) !important;
+  background: var(--pricing-card-fg) !important;
   box-shadow: none !important;
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
 }
 
 body main section#plans .pricing-slider-handle {
-  border-color: var(--pricing-mono-dark) !important;
+  border-color: var(--pricing-card-bg) !important;
 }
 
 body main section#plans .pricing-slider-handle-dot,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot {
-  background: var(--pricing-mono-dark) !important;
+  background: var(--pricing-card-bg) !important;
 }
 
 body main section#plans .pricing-slider-stopper,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper {
-  border-color: rgba(246, 241, 232, 0.34) !important;
-  background: var(--pricing-mono-dark) !important;
+  border-color: rgba(20, 20, 19, 0.32) !important;
+  background: var(--pricing-card-bg) !important;
 }
 
 body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 body main section#plans .pricing-slider-tick[data-active-tick="true"],
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] {
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
 }
 
 body main section#plans .pricing-slider-tick,
 body main section#plans .pricing-slider-tick :is(span),
 html.brand-palette body main section#plans .pricing-slider-tick,
 html.brand-palette body main section#plans .pricing-slider-tick :is(span) {
-  color: rgba(246, 241, 232, 0.66) !important;
+  color: var(--pricing-card-muted) !important;
 }
 
 body main section#plans .pricing-slider-tick[data-active-tick="true"],
 body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"],
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span) {
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
@@ -10768,7 +10775,7 @@ body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span {
-  color: rgba(246, 241, 232, 0.66) !important;
+  color: var(--pricing-card-muted) !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
@@ -10783,7 +10790,7 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label > span {
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
 }
 
 body main section#plans .pricing-duration,
@@ -10802,9 +10809,9 @@ html.brand-palette body main section#plans .pricing-duration > .relative {
 body main section#plans .pricing-duration-group,
 html.brand-palette body main section#plans .pricing-duration > div.pricing-duration-group,
 html.brand-palette body main section#plans .pricing-duration-group {
-  border-color: rgba(247, 245, 239, 0.16) !important;
+  border-color: var(--pricing-card-line) !important;
   border-radius: 1rem !important;
-  background: var(--pricing-mono-dark) !important;
+  background: var(--pricing-card-bg) !important;
   box-shadow: none !important;
   gap: 0.25rem !important;
   padding: 0.28rem !important;
@@ -10815,17 +10822,17 @@ html.brand-palette body main section#plans [data-duration-option].pricing-durati
   block-size: 3rem !important;
   border-radius: 0.72rem !important;
   background: transparent !important;
-  color: var(--pricing-mono-light) !important;
+  color: var(--pricing-card-fg) !important;
   box-shadow: none !important;
 }
 
 body main section#plans .pricing-duration-option[data-active-duration="true"],
 html.brand-palette body main section#plans [data-duration-option].pricing-duration-option[data-active-duration="true"] {
-  background: var(--pricing-mono-black) !important;
-  color: var(--pricing-mono-light) !important;
+  background: var(--pricing-card-inverse-bg) !important;
+  color: var(--pricing-card-inverse-fg) !important;
   box-shadow:
-    inset 0 0 0 1px rgba(246, 241, 232, 0.12),
-    0 8px 18px rgba(0, 0, 0, 0.1) !important;
+    inset 0 0 0 1px rgba(250, 249, 245, 0.1),
+    0 8px 18px rgba(20, 20, 19, 0.1) !important;
 }
 
 body main section#plans .pricing-duration-option > span.block,
@@ -10839,9 +10846,9 @@ html.brand-palette body main section#plans .pricing-best-value-badge,
 html.brand-palette body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge {
   inset-block-start: 0 !important;
   inset-inline-end: 0.35rem !important;
-  border-color: var(--pricing-mono-dark) !important;
-  background: var(--pricing-mono-dark) !important;
-  color: var(--pricing-mono-light) !important;
+  border-color: var(--pricing-card-inverse-bg) !important;
+  background: var(--pricing-card-inverse-bg) !important;
+  color: var(--pricing-card-inverse-fg) !important;
   box-shadow: none !important;
 }
 
@@ -10851,14 +10858,14 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] {
-  --plan-bg: var(--pricing-mono-dark);
-  --plan-fg: var(--pricing-mono-light);
-  --plan-muted: var(--pricing-mono-muted-light);
-  --plan-line: var(--pricing-mono-line-light);
-  --plan-soft: rgba(247, 245, 239, 0.07);
-  --plan-inverse-bg: var(--pricing-mono-light);
-  --plan-inverse-fg: var(--pricing-mono-black);
-  --plan-icon-filter: grayscale(1) invert(1) contrast(1.06);
+  --plan-bg: var(--pricing-card-bg);
+  --plan-fg: var(--pricing-card-fg);
+  --plan-muted: var(--pricing-card-muted);
+  --plan-line: var(--pricing-card-line);
+  --plan-soft: var(--pricing-card-soft);
+  --plan-inverse-bg: var(--pricing-card-inverse-bg);
+  --plan-inverse-fg: var(--pricing-card-inverse-fg);
+  --plan-icon-filter: grayscale(1) contrast(1.05) opacity(0.78);
   display: grid !important;
   grid-template-rows: 6.85rem auto auto minmax(12.25rem, auto) auto auto 2.8rem !important;
   border: 1px solid var(--plan-line) !important;
@@ -10875,19 +10882,19 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
-  --plan-bg: var(--pricing-mono-light);
-  --plan-fg: var(--pricing-mono-black);
-  --plan-muted: var(--pricing-mono-muted-dark);
-  --plan-line: var(--pricing-mono-black);
-  --plan-soft: rgba(16, 16, 15, 0.06);
-  --plan-inverse-bg: var(--pricing-mono-black);
-  --plan-inverse-fg: var(--pricing-mono-light);
+  --plan-bg: var(--pricing-card-bg);
+  --plan-fg: var(--pricing-card-fg);
+  --plan-muted: var(--pricing-card-muted);
+  --plan-line: var(--pricing-card-fg);
+  --plan-soft: var(--pricing-card-soft);
+  --plan-inverse-bg: var(--pricing-card-inverse-bg);
+  --plan-inverse-fg: var(--pricing-card-inverse-fg);
   --plan-icon-filter: grayscale(1) contrast(1.08);
   border-color: var(--plan-line) !important;
   background: var(--plan-bg) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-mono-black),
-    0 18px 42px rgba(16, 16, 15, 0.12) !important;
+    0 0 0 1px var(--pricing-card-fg),
+    0 18px 42px rgba(20, 20, 19, 0.1) !important;
   transform: translateY(-3px) !important;
 }
 
@@ -10957,8 +10964,8 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"] {
-  border-color: rgba(246, 241, 232, 0.62) !important;
-  box-shadow: inset 0 0 0 1px rgba(246, 241, 232, 0.42) !important;
+  border-color: var(--pricing-card-fg) !important;
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 19, 0.18) !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
@@ -10967,10 +10974,10 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"][data-active-plan="true"] {
-  border-color: var(--pricing-mono-black) !important;
+  border-color: var(--pricing-card-fg) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-mono-black),
-    0 18px 42px rgba(51, 51, 51, 0.12) !important;
+    0 0 0 1px var(--pricing-card-fg),
+    0 18px 42px rgba(20, 20, 19, 0.1) !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card] :is(h3, p, div, span, svg),
@@ -11096,12 +11103,12 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card][
 html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"][data-recommended-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
-  border-color: var(--pricing-mono-black) !important;
-  background: var(--pricing-mono-light) !important;
-  color: var(--pricing-mono-black) !important;
+  border-color: var(--pricing-card-fg) !important;
+  background: var(--pricing-card-bg) !important;
+  color: var(--pricing-card-fg) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-mono-black),
-    0 18px 42px rgba(16, 16, 15, 0.12) !important;
+    0 0 0 1px var(--pricing-card-fg),
+    0 18px 42px rgba(20, 20, 19, 0.1) !important;
 }
 
 @media (max-width: 640px) {
@@ -11255,7 +11262,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span {
-    color: rgba(246, 241, 232, 0.66) !important;
+    color: var(--pricing-card-muted) !important;
   }
 
   body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
@@ -11264,7 +11271,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span {
-    color: var(--pricing-mono-light) !important;
+    color: var(--pricing-card-fg) !important;
   }
 }
 
