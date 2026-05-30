@@ -7748,6 +7748,10 @@ html.brand-palette body main .hero-project-badge--signal {
   text-wrap: balance;
 }
 
+.problem-title-line {
+  display: inline;
+}
+
 .problem-body {
   max-inline-size: 42rem;
   margin-block-start: 1rem;
@@ -7815,8 +7819,12 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .problem-title {
     max-inline-size: 48rem;
-    font-size: 2.85rem;
+    font-size: 2.35rem;
     line-height: 1.24;
+  }
+
+  .problem-title-line {
+    display: block;
   }
 
   .problem-body {
@@ -7863,7 +7871,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .problem-title {
     max-inline-size: none;
-    font-size: 3rem;
+    font-size: 2.35rem;
   }
 
   .problem-cta {
