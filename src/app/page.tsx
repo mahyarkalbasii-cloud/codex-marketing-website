@@ -389,8 +389,8 @@ function MarketProblemSection() {
       <div className="problem-container">
         <div className="problem-copy">
           <h2 id="market-problem-title" className="problem-title">
-            <span className="problem-title-line">فروش در بازار ساختمان، فقط به</span>{" "}
-            <span className="problem-title-line">داشتن محصول خوب بستگی ندارد</span>
+            <span className="problem-title-line">فروش در بازار ساختمان، فقط به داشتن</span>{" "}
+            <span className="problem-title-line">محصول خوب بستگی ندارد</span>
           </h2>
           <p className="problem-body">
             پروژه‌ها پراکنده‌اند، اطلاعات بازار همیشه دقیق و به‌روز نیست و اگر
