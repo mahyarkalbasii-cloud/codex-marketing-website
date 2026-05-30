@@ -7287,7 +7287,7 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 .hero-container {
   max-inline-size: 80rem;
   margin-inline: auto;
-  padding-block: 2.5rem 3rem;
+  padding-block: 3.25rem 3.75rem;
   padding-inline: 1.25rem;
 }
 
@@ -7604,7 +7604,7 @@ html.brand-palette body main .hero-project-badge--signal {
 
 @media (min-width: 768px) {
   .hero-container {
-    padding-block: 3rem 3.5rem;
+    padding-block: 4rem 4.75rem;
     padding-inline: 1.5rem;
   }
 
@@ -7620,7 +7620,7 @@ html.brand-palette body main .hero-project-badge--signal {
 
 @media (min-width: 1024px) {
   .hero-container {
-    padding-block: 3rem 4rem;
+    padding-block: 4.75rem 5.25rem;
   }
 
   .hero-layout {
@@ -7659,6 +7659,11 @@ html.brand-palette body main .hero-project-badge--signal {
   .hero-project-finder-visual.hero-map-visual {
     aspect-ratio: 1;
     padding: 1.25rem;
+  }
+
+  .hero-laptop-map-image {
+    inline-size: min(126%, 47rem);
+    max-inline-size: none;
   }
 }
 
@@ -7748,6 +7753,10 @@ html.brand-palette body main .hero-project-badge--signal {
   text-wrap: balance;
 }
 
+.problem-title-line {
+  display: inline;
+}
+
 .problem-body {
   max-inline-size: 42rem;
   margin-block-start: 1rem;
@@ -7815,8 +7824,12 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .problem-title {
     max-inline-size: 48rem;
-    font-size: 2.85rem;
+    font-size: 2.22rem;
     line-height: 1.24;
+  }
+
+  .problem-title-line {
+    display: block;
   }
 
   .problem-body {
@@ -7839,36 +7852,41 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .problem-copy {
-    grid-column: 2;
+    grid-column: 1;
     inline-size: 100%;
     max-inline-size: 38rem;
     margin-inline: 0;
-    justify-self: end;
+    justify-self: start;
     direction: rtl;
     text-align: start;
   }
 
   .problem-visual-card {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 1;
     max-block-size: none;
     margin-inline: 0;
-    justify-self: start;
+    justify-self: end;
   }
 
   .problem-title,
-  .problem-body,
-  .problem-cta {
+  .problem-body {
     margin-inline: 0;
   }
 
   .problem-title {
     max-inline-size: none;
-    font-size: 3rem;
+    font-size: 2.22rem;
   }
 
   .problem-cta {
-    inline-size: auto;
+    display: flex;
+    inline-size: fit-content;
+    margin-inline: auto;
+  }
+
+  .problem-cta .marketing-cta__arrow {
+    margin-inline-start: 0;
   }
 
   .problem-visual-frame {
@@ -8186,11 +8204,6 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   padding: 0;
 }
 
-.problem-signals-picture {
-  display: block;
-  inline-size: 100%;
-}
-
 .problem-signals-image {
   display: block;
   inline-size: 100%;
@@ -8220,6 +8233,8 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 }
 
 .solution-title {
+  max-inline-size: 48rem;
+  margin-inline: auto;
   color: #2A241D;
   font-size: 1.875rem;
   font-weight: 700;
@@ -8355,7 +8370,16 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
 .solution-pillar-card--data .solution-pillar-illustration {
   border-color: #D8B29C;
-  background: #FDF8F0;
+  background: transparent;
+  padding: 0;
+  order: 4;
+  inline-size: 100%;
+  margin-block-start: clamp(1rem, 2vw, 1.65rem);
+}
+
+.solution-pillar-card--data .solution-pillar-link {
+  order: 3;
+  margin-block-start: 0.1rem;
 }
 
 .solution-illustration-svg {
@@ -8365,240 +8389,48 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   overflow: visible;
 }
 
-.solution-project-card-view {
-  inline-size: min(100%, 20.5rem);
+.solution-verified-map-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 100%;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
 }
 
-.solution-project-panel {
-  fill: #FDF8F0;
-  stroke: #D8B29C;
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
+.solution-pillar-card--workflow .solution-pillar-illustration {
+  border-color: transparent;
+  background: transparent;
+  margin-block-start: clamp(0.85rem, 1.3vw, 1.2rem);
+  padding: 0;
 }
 
-.solution-project-map-grid {
-  fill: none;
-  stroke: #D8B29C;
-  stroke-width: 1;
-  opacity: 0.62;
-  vector-effect: non-scaling-stroke;
+.solution-pillar-card--training .solution-pillar-illustration {
+  border-color: transparent;
+  background: transparent;
+  margin-block-start: clamp(0.85rem, 1.3vw, 1.2rem);
+  padding: 0;
 }
 
-.solution-project-pin,
-.solution-project-contact {
-  fill: #CC785C;
-  opacity: 0.95;
+.solution-followup-pipeline-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 21rem;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
 }
 
-.solution-project-pin-core {
-  fill: #CC785C;
-  opacity: 1;
-}
-
-.solution-project-text {
-  fill: #2A241D;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.solution-project-text--muted,
-.solution-project-text--small {
-  fill: #75695D;
-  font-weight: 650;
-}
-
-.solution-project-text--small {
-  font-size: 12px;
-}
-
-.solution-project-address-line,
-.solution-project-phone {
-  fill: none;
-  stroke: #2A241D;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-  opacity: 0.24;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-stage {
-  fill: #2A241D;
-  opacity: 0.16;
-}
-
-.solution-project-stage--active {
-  fill: #CC785C;
-  opacity: 0.95;
-}
-
-.solution-project-chip {
-  fill: #FDF8F0;
-  stroke: #D8B29C;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-divider {
-  fill: none;
-  stroke: rgba(204, 120, 92, 0.18);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-row {
-  fill: #FDF8F0;
-  stroke: rgba(204, 120, 92, 0.18);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-label {
-  fill: #75695D;
-  font-size: 8.5px;
-  font-weight: 650;
-}
-
-.solution-project-info-value {
-  fill: #2A241D;
-  font-size: 8.5px;
-  font-weight: 700;
-}
-
-.solution-project-info-pill {
-  fill: rgba(204, 120, 92, 0.12);
-}
-
-.solution-project-info-pill-text {
-  fill: #A8573D;
-  font-size: 8.5px;
-  font-weight: 700;
-}
-
-.solution-product-sim {
-  display: grid;
-  align-content: center;
-  gap: 0.55rem;
-  inline-size: min(100%, 20.5rem);
-  aspect-ratio: 360 / 250;
-  direction: rtl;
-  color: #2A241D;
-  padding: 0.75rem;
-}
-
-.solution-sim-caption {
-  color: #75695D;
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: start;
-}
-
-.solution-workflow-sim,
-.solution-course-sim {
-  align-content: center;
-}
-
-.solution-workflow-sim {
-  align-content: stretch;
-  gap: 0.25rem;
-  grid-template-rows: auto minmax(0, 1fr);
-}
-
-.solution-workflow-stack {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.18rem;
-  min-block-size: 0;
-  min-inline-size: 0;
-}
-
-.solution-workflow-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.55rem;
-  min-block-size: 1.9rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.5rem;
-  background: #FBF6ED;
-  color: #2A241D;
-  padding-block: 0.18rem;
-  padding-inline: 0.55rem;
-  font-size: 0.7rem;
-  font-weight: 850;
-  line-height: 1.25;
-  text-align: start;
-}
-
-.solution-workflow-row--active {
-  border-color: #CC785C;
-  background: rgba(204, 120, 92, 0.12);
-  color: #A8573D;
-}
-
-.solution-workflow-label {
-  min-inline-size: 0;
-}
-
-.solution-workflow-marker {
-  flex: 0 0 auto;
-  inline-size: 0.52rem;
-  block-size: 0.52rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 999px;
-  background: #FBF6ED;
-}
-
-.solution-workflow-row--active .solution-workflow-marker {
-  border-color: #CC785C;
-  background: #CC785C;
-}
-
-.solution-course-list {
-  display: grid;
-  gap: 0.42rem;
-  min-inline-size: 0;
-}
-
-.solution-course-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.5rem;
-  align-items: center;
-  min-block-size: 2.24rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.5rem;
-  background: #FBF6ED;
-  padding-block: 0.36rem;
-  padding-inline: 0.55rem;
-}
-
-.solution-course-label {
-  min-inline-size: 0;
-  color: #2A241D;
-  font-size: 0.7rem;
-  font-weight: 850;
-  line-height: 1.45;
-  text-align: start;
-}
-
-.solution-course-tag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: 1.4rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.42rem;
-  background: #FBF6ED;
-  color: #75695D;
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1.2;
-  padding-block: 0.16rem;
-  padding-inline: 0.36rem;
-  white-space: nowrap;
+.solution-training-playbook-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 23rem;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
 }
 
 .solution-pillar-body {
@@ -8656,8 +8488,9 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .solution-title {
-    font-size: 2.55rem;
-    line-height: 1.24;
+    max-inline-size: 45rem;
+    font-size: 2.25rem;
+    line-height: 1.28;
   }
 
   .solution-title-line {
@@ -8728,43 +8561,28 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     padding: 0.65rem;
   }
 
-  .solution-pillar-card--data .solution-project-card-view {
+  .solution-pillar-card--workflow .solution-pillar-illustration {
+    min-block-size: 0;
+    padding: 0;
+  }
+
+  .solution-pillar-card--training .solution-pillar-illustration {
+    min-block-size: 0;
+    padding: 0;
+  }
+
+  .solution-pillar-card--data .solution-verified-map-image {
     inline-size: min(100%, 35rem);
   }
 
-  .solution-pillar-card--workflow .solution-product-sim,
-  .solution-pillar-card--training .solution-product-sim {
-    inline-size: 100%;
-    block-size: 100%;
-    aspect-ratio: auto;
+  .solution-pillar-card--workflow .solution-followup-pipeline-image {
+    inline-size: min(100%, 21rem);
   }
 
-  .solution-pillar-card--workflow .solution-product-sim {
-    padding: 0.2rem;
+  .solution-pillar-card--training .solution-training-playbook-image {
+    inline-size: min(100%, 23rem);
   }
 
-  .solution-pillar-card--training .solution-product-sim {
-    padding: 0.65rem;
-  }
-
-  .solution-course-list {
-    align-content: center;
-  }
-
-  .solution-course-row {
-    min-block-size: 2.05rem;
-    padding-block: 0.28rem;
-  }
-
-  .solution-workflow-stack {
-    gap: 0.18rem;
-  }
-
-  .solution-workflow-row {
-    min-block-size: 1.9rem;
-    padding-block: 0.18rem;
-    padding-inline: 0.5rem;
-  }
 }
 
 @media (min-width: 1120px) {
@@ -8776,7 +8594,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     font-size: 1.16rem;
   }
 
-  .solution-project-card-view {
+  .solution-verified-map-image {
     inline-size: min(100%, 21rem);
   }
 }
@@ -8814,7 +8632,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     font-size: 1.12rem;
   }
 
-  .solution-project-card-view {
+  .solution-verified-map-image {
     inline-size: min(100%, 18rem);
   }
 }

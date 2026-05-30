@@ -1,4 +1,4 @@
-import heroLaptopMap from "@/assets/images/hero-laptop-map.webp";
+import heroProjectMapWide from "@/assets/images/home-hero-project-map-wide.webp";
 import { cn } from "@/lib/utils";
 
 type HeroMapVisualProps = {
@@ -14,10 +14,10 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
       )}
     >
       <img
-        src={heroLaptopMap.src}
-        alt="نقشهٔ تعاملی پروژه‌های ساختمانی فعال تهران با نشانگرهای موقعیت روی صفحهٔ لپ‌تاپ — پرشین‌سازه"
-        width="1254"
-        height="1254"
+        src={heroProjectMapWide.src}
+        alt="نقشه تعاملی پروژه‌های ساختمانی فعال تهران با نشانگرهای موقعیت روی صفحه لپ‌تاپ - پرشین‌سازه"
+        width="1774"
+        height="887"
         loading="eager"
         fetchPriority="high"
         className="hero-laptop-map-image"
