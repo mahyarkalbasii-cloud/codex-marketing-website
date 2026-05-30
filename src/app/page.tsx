@@ -22,6 +22,7 @@ import { PricingSection } from "@/components/marketing/pricing-section";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
+import verifiedProjectMap from "@/assets/images/home-solution-verified-project-map.webp";
 import { getSalesStyleSubcategories } from "@/data/sales-style";
 import { SALES_STYLE_COPY } from "@/data/sales-style-copy";
 import { getStagePageContent } from "@/data/stage-copy";
@@ -88,8 +89,6 @@ const solutionCards = [
 ] as const;
 
 const SOLUTION_ILLUSTRATION_VIEW_BOX = "0 0 360 250";
-const SOLUTION_PROJECT_ILLUSTRATION_VIEW_BOX = "0 0 360 286";
-
 const solutionWorkflowSteps = ["فیلتر", "پروژه", "تماس / پیامک", "ثبت پیگیری"] as const;
 
 const solutionTrainingCourses = [
@@ -268,38 +267,15 @@ function SolutionPillarIllustration({
   return (
     <div className="solution-pillar-illustration" aria-hidden="true">
       {motif === "data" ? (
-        <svg className="solution-illustration-svg solution-project-card-view" viewBox={SOLUTION_PROJECT_ILLUSTRATION_VIEW_BOX} focusable="false" aria-hidden="true">
-          <rect className="solution-project-panel" x="18" y="16" width="324" height="254" rx="24" />
-          <path className="solution-project-map-grid" d="M48 88H312M48 138H312M48 188H312M112 46V198M180 46V198M248 46V198" />
-
-          <path className="solution-project-pin" d="M294 44C284 44 276 52 276 62C276 75 294 91 294 91C294 91 312 75 312 62C312 52 304 44 294 44Z" />
-          <circle className="solution-project-pin-core" cx="294" cy="62" r="5" />
-          <text className="solution-project-text solution-project-text--strong" x="178" y="58" textAnchor="middle" direction="rtl">تهران، منطقه ۲</text>
-          <path className="solution-project-address-line" d="M86 76H230" />
-
-          <text className="solution-project-text solution-project-text--muted" x="248" y="118" textAnchor="middle" direction="rtl">مرحله ساخت</text>
-          <text className="solution-project-text solution-project-text--strong" x="126" y="118" textAnchor="end" direction="rtl">اسکلت</text>
-          <rect className="solution-project-stage" x="64" y="132" width="48" height="8" rx="4" />
-          <rect className="solution-project-stage solution-project-stage--active" x="124" y="132" width="48" height="8" rx="4" />
-          <rect className="solution-project-stage" x="184" y="132" width="48" height="8" rx="4" />
-          <rect className="solution-project-stage" x="244" y="132" width="48" height="8" rx="4" />
-
-          <rect className="solution-project-chip" x="196" y="166" width="102" height="30" rx="15" />
-          <text className="solution-project-text solution-project-text--small" x="247" y="186" textAnchor="middle" direction="rtl">۲۲۰۰ متر</text>
-          <rect className="solution-project-chip" x="82" y="166" width="96" height="30" rx="15" />
-          <text className="solution-project-text solution-project-text--small" x="130" y="186" textAnchor="middle" direction="rtl">۸ طبقه</text>
-          <circle className="solution-project-contact" cx="68" cy="181" r="10" />
-          <path className="solution-project-phone" d="M64 177C68 185 72 187 76 183" />
-
-          <path className="solution-project-info-divider" d="M62 208H298" />
-          <rect className="solution-project-info-row" x="62" y="214" width="236" height="22" rx="8" />
-          <text className="solution-project-info-label" x="286" y="225" dominantBaseline="middle" direction="rtl">آخرین به‌روزرسانی</text>
-          <text className="solution-project-info-value" x="111" y="225" textAnchor="middle" dominantBaseline="middle" direction="rtl">۳ روز پیش</text>
-          <rect className="solution-project-info-row" x="62" y="240" width="236" height="22" rx="8" />
-          <text className="solution-project-info-label" x="286" y="250" dominantBaseline="middle" direction="rtl">سرنخ تماس</text>
-          <rect className="solution-project-info-pill" x="84" y="243" width="54" height="16" rx="6" />
-          <text className="solution-project-info-pill-text" x="111" y="251" textAnchor="middle" dominantBaseline="middle" direction="rtl">موجود</text>
-        </svg>
+        <img
+          src={verifiedProjectMap.src}
+          alt=""
+          width="1254"
+          height="1254"
+          loading="lazy"
+          decoding="async"
+          className="solution-verified-map-image"
+        />
       ) : null}
 
       {motif === "training" ? (

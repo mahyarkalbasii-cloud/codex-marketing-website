@@ -8191,11 +8191,6 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   padding: 0;
 }
 
-.problem-signals-picture {
-  display: block;
-  inline-size: 100%;
-}
-
 .problem-signals-image {
   display: block;
   inline-size: 100%;
@@ -8360,7 +8355,13 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
 .solution-pillar-card--data .solution-pillar-illustration {
   border-color: #D8B29C;
-  background: #FDF8F0;
+  background: transparent;
+  padding: 0;
+  order: 3;
+}
+
+.solution-pillar-card--data .solution-pillar-link {
+  order: 4;
 }
 
 .solution-illustration-svg {
@@ -8370,114 +8371,14 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   overflow: visible;
 }
 
-.solution-project-card-view {
-  inline-size: min(100%, 20.5rem);
-}
-
-.solution-project-panel {
-  fill: #FDF8F0;
-  stroke: #D8B29C;
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-map-grid {
-  fill: none;
-  stroke: #D8B29C;
-  stroke-width: 1;
-  opacity: 0.62;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-pin,
-.solution-project-contact {
-  fill: #CC785C;
-  opacity: 0.95;
-}
-
-.solution-project-pin-core {
-  fill: #CC785C;
-  opacity: 1;
-}
-
-.solution-project-text {
-  fill: #2A241D;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.solution-project-text--muted,
-.solution-project-text--small {
-  fill: #75695D;
-  font-weight: 650;
-}
-
-.solution-project-text--small {
-  font-size: 12px;
-}
-
-.solution-project-address-line,
-.solution-project-phone {
-  fill: none;
-  stroke: #2A241D;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-  opacity: 0.24;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-stage {
-  fill: #2A241D;
-  opacity: 0.16;
-}
-
-.solution-project-stage--active {
-  fill: #CC785C;
-  opacity: 0.95;
-}
-
-.solution-project-chip {
-  fill: #FDF8F0;
-  stroke: #D8B29C;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-divider {
-  fill: none;
-  stroke: rgba(204, 120, 92, 0.18);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-row {
-  fill: #FDF8F0;
-  stroke: rgba(204, 120, 92, 0.18);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.solution-project-info-label {
-  fill: #75695D;
-  font-size: 8.5px;
-  font-weight: 650;
-}
-
-.solution-project-info-value {
-  fill: #2A241D;
-  font-size: 8.5px;
-  font-weight: 700;
-}
-
-.solution-project-info-pill {
-  fill: rgba(204, 120, 92, 0.12);
-}
-
-.solution-project-info-pill-text {
-  fill: #A8573D;
-  font-size: 8.5px;
-  font-weight: 700;
+.solution-verified-map-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 24rem;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
 }
 
 .solution-product-sim {
@@ -8733,7 +8634,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     padding: 0.65rem;
   }
 
-  .solution-pillar-card--data .solution-project-card-view {
+  .solution-pillar-card--data .solution-verified-map-image {
     inline-size: min(100%, 35rem);
   }
 
@@ -8781,7 +8682,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     font-size: 1.16rem;
   }
 
-  .solution-project-card-view {
+  .solution-verified-map-image {
     inline-size: min(100%, 21rem);
   }
 }
@@ -8819,7 +8720,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     font-size: 1.12rem;
   }
 
-  .solution-project-card-view {
+  .solution-verified-map-image {
     inline-size: min(100%, 18rem);
   }
 }
