@@ -10912,13 +10912,11 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   body main section#plans .pricing-slider.pricing-slider-labs,
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "stage"
-      "control";
+    grid-template-columns: minmax(0, 1fr) minmax(6.2rem, 6.8rem);
+    grid-template-areas: "control stage";
     align-items: start;
-    row-gap: 0.95rem;
-    direction: rtl;
+    column-gap: 0.75rem;
+    direction: ltr;
     padding-block: 1rem !important;
     padding-inline: 1rem !important;
   }
@@ -10932,15 +10930,15 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     justify-content: flex-start;
     inline-size: 100%;
     max-inline-size: 100%;
-    gap: 0.5rem !important;
+    gap: 0.45rem !important;
     direction: rtl;
   }
 
   body main section#plans .pricing-land-art,
   html.brand-palette body main section#plans .pricing-land-art {
-    inline-size: min(10rem, 72vw) !important;
-    block-size: 4.85rem !important;
-    border-radius: 1rem !important;
+    inline-size: 5rem !important;
+    block-size: 3.85rem !important;
+    border-radius: 0.9rem !important;
   }
 
   body main section#plans .pricing-land-art--small,
@@ -10951,8 +10949,8 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   body main section#plans .pricing-land-art--large,
   html.brand-palette body main section#plans .pricing-land-art--large {
     order: 3;
-    inline-size: min(11rem, 78vw) !important;
-    block-size: 5.25rem !important;
+    inline-size: 5.8rem !important;
+    block-size: 4.45rem !important;
   }
 
   body main section#plans .pricing-axis-copy,
@@ -10966,7 +10964,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
 
   body main section#plans .pricing-axis-label,
   html.brand-palette body main section#plans .pricing-axis-label {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     line-height: 1.45 !important;
   }
 

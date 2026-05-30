@@ -336,14 +336,6 @@ function DemoClosingVisual() {
             <Route className="h-5 w-5" />
           </span>
         </div>
-        <div className="mt-5 grid gap-3">
-          {["مشاهده مسیر پیدا کردن پروژه", "بررسی فیلترها و مرحله ساخت", "مرور پیگیری فروش"].map((item, index) => (
-            <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-3 dark:border-zinc-800 dark:bg-zinc-950">
-              <span className={cn("h-2.5 w-2.5 rounded-full", index === 1 ? "bg-[#CC785C]" : "bg-[#d8c7b2]")} />
-              <span className="text-sm font-medium">{item}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
@@ -623,11 +615,6 @@ function DemoRequestSection() {
             </div>
             <div className="relative grid gap-4">
               <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
-                <div className="text-sm text-zinc-500">تماس فروش</div>
-                <div className="mt-3 text-2xl font-bold">{site.phones[0]}</div>
-                <div className="mt-2 text-sm text-zinc-500">
-                  {site.salesExpert} | داخلی {site.extension}
-                </div>
                 <DemoRequestForm />
                 <div className="mt-5 grid gap-3">
                   <a
