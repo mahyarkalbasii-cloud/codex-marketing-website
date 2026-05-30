@@ -70,34 +70,20 @@ export function SiteFooter() {
   const pathname = usePathname() || "/";
   const locale = getLocaleFromPathname(pathname);
   const direction = getDirection(locale);
-  const { featurePages, seoPages, site } = getSiteContent(locale);
-  const mainLinks = locale === "fa" ? FOOTER_MAIN_LINKS : seoPages.slice(0, 5);
-  const footerCopy =
-    locale === "fa"
-      ? {
-          allSuppliers: "همه زمینه‌های کاری ←",
-          categories: "زمینه‌های کاری",
-          cities: "شهرها",
-          description:
-            "منبع واحد حقیقت برای فروش پروژه‌محور در بازار ساختمان؛ از اطلاعات به‌روز تا نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار.",
-          extension: "داخلی",
-          legal: "قوانین و مقررات",
-          mainPages: "صفحات اصلی",
-          saleStyles: "نوع فروش",
-          stages: "مراحل ساخت",
-        }
-      : {
-          allSuppliers: "All supplier categories →",
-          categories: "Supplier categories",
-          cities: "Cities",
-          description:
-            "The single source of truth for project-based construction sales: updated data, maps, filters, CRM, messaging, and AI sales assistance.",
-          extension: "ext.",
-          legal: "Terms and rules",
-          mainPages: "Main pages",
-          saleStyles: "Sales style",
-          stages: "Construction stages",
-        };
+  const { featurePages, site } = getSiteContent(locale);
+  const mainLinks = FOOTER_MAIN_LINKS;
+  const footerCopy = {
+    allSuppliers: "همه زمینه‌های کاری ←",
+    categories: "زمینه‌های کاری",
+    cities: "شهرها",
+    description:
+      "منبع واحد حقیقت برای فروش پروژه‌محور در بازار ساختمان؛ از اطلاعات به‌روز تا نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار.",
+    extension: "داخلی",
+    legal: "قوانین و مقررات",
+    mainPages: "صفحات اصلی",
+    saleStyles: "نوع فروش",
+    stages: "مراحل ساخت",
+  };
 
   return (
     <footer

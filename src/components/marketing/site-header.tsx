@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Building2, LogIn, PhoneCall } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { HeaderPreferencesMenu } from "@/components/marketing/header-preferences-menu";
 import { MobileMenu } from "@/components/marketing/mobile-menu";
 import { getDirection, getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -15,19 +14,12 @@ export function SiteHeader() {
   const locale = getLocaleFromPathname(pathname);
   const direction = getDirection(locale);
   const { authLinks, navItems, site } = getSiteContent(locale);
-  const labels = locale === "fa"
-    ? {
-        tagline: "زیرساخت فروش پروژه‌محور",
-        salesCall: "تماس فروش",
-        login: "ورود",
-        demo: "درخواست دمو",
-      }
-    : {
-        tagline: "Project-based sales infrastructure",
-        salesCall: "Sales",
-        login: "Login",
-        demo: "Request demo",
-      };
+  const labels = {
+    tagline: "زیرساخت فروش پروژه‌محور",
+    salesCall: "تماس فروش",
+    login: "ورود",
+    demo: "درخواست دمو",
+  };
 
   return (
     <header dir={direction} className="site-header sticky top-0 z-[60] border-b border-[#e4d8c8]/80 bg-[#fbf6ed]/96 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/92">
@@ -59,7 +51,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 min-[1120px]:flex">
-          <HeaderPreferencesMenu />
           <a
             href="tel:+982175425000"
             className="site-header-phone inline-flex h-10 items-center gap-2 rounded-2xl border border-[#e4d8c8] bg-white/72 px-3 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035] transition hover:border-[#d8c9b6] hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
@@ -89,7 +80,6 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2 min-[1120px]:hidden">
-          <HeaderPreferencesMenu compact />
           <a
             href="tel:+982175425000"
             dir="ltr"

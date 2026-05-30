@@ -71,7 +71,7 @@
   color-scheme: dark;
 }
 
-.theme-a {
+.brand-palette {
   --background: 41 38% 89%;
   --foreground: 240 2% 8%;
   --card: 38 41% 95%;
@@ -170,7 +170,7 @@ body {
   background: #09090b;
 }
 
-.theme-a .behance-background {
+.brand-palette .behance-background {
   background: var(--page-bg);
 }
 
@@ -1516,7 +1516,7 @@ body {
     );
 }
 
-.theme-a :is(.section-gradient, .hero-surface) {
+.brand-palette :is(.section-gradient, .hero-surface) {
   --section-neutral: 237 230 215;
   --section-floor: 237 230 215;
   --section-left: 237 230 215;
@@ -1526,7 +1526,7 @@ body {
   background: var(--page-bg);
 }
 
-.theme-a .hero-surface {
+.brand-palette .hero-surface {
   --hero-bg: var(--page-bg);
   --hero-bg-floor: var(--page-bg);
   --hero-glow-warm: transparent;
@@ -1548,84 +1548,64 @@ body {
   background: var(--page-bg);
 }
 
-.theme-a header {
+.brand-palette header {
   border-color: rgba(222, 211, 196, 0.82);
   background-color: rgba(247, 243, 236, 0.96);
 }
 
-.theme-a .theme-toggle-root {
-  border-color: rgba(222, 211, 196, 0.82);
-  background: rgba(248, 244, 237, 0.78);
-  color: #131314;
-}
-
-.theme-a .theme-toggle-button {
-  color: #3d3d3a;
-}
-
-.theme-a .theme-toggle-button:hover {
-  background: #f2ebe1;
-  color: #131314;
-}
-
-.theme-a .theme-toggle-button[data-active="true"] {
-  background: #C16B4E;
-  color: #FFF7EF;
-}
-
-.theme-a [class*="bg-[#fbf6ed]"],
-.theme-a [class*="bg-[#FBF6ED]"],
-.theme-a [class*="bg-[#faf9f6]"],
-.theme-a [class*="bg-[#FAF9F6]"],
-.theme-a [class*="bg-[#fffaf1]"],
-.theme-a [class*="bg-[#FFFAF1]"],
-.theme-a [class*="bg-[#fff4e7]"],
-.theme-a [class*="bg-[#FFF4E7]"],
-.theme-a [class*="bg-[#FBF9F3]"],
-.theme-a [class*="bg-[#EDE6D7]"] {
+.brand-palette [class*="bg-[#fbf6ed]"],
+.brand-palette [class*="bg-[#FBF6ED]"],
+.brand-palette [class*="bg-[#faf9f6]"],
+.brand-palette [class*="bg-[#FAF9F6]"],
+.brand-palette [class*="bg-[#fffaf1]"],
+.brand-palette [class*="bg-[#FFFAF1]"],
+.brand-palette [class*="bg-[#fff4e7]"],
+.brand-palette [class*="bg-[#FFF4E7]"],
+.brand-palette [class*="bg-[#FBF9F3]"],
+.brand-palette [class*="bg-[#EDE6D7]"] {
   background-color: rgb(248 244 237 / 0.72);
 }
 
-.theme-a [class*="bg-[#f5eadb]"],
-.theme-a [class*="bg-[#F5EADB]"] {
+.brand-palette [class*="bg-[#f5eadb]"],
+.brand-palette [class*="bg-[#F5EADB]"] {
   background-color: rgb(242 235 225 / 0.78);
 }
 
-.theme-a [class~="bg-white"],
-.theme-a [class*="bg-white/"] {
+.brand-palette [class~="bg-white"],
+.brand-palette [class*="bg-white/"] {
   background-color: rgb(248 244 237 / 0.7);
 }
 
-.theme-a [class*="border-[#e4d8c8]"],
-.theme-a [class*="border-[#E4D8C8]"],
-.theme-a [class*="border-[#eadfce]"],
-.theme-a [class*="border-[#EADFCE]"],
-.theme-a [class*="border-[#d8c7b2]"],
-.theme-a [class*="border-[#D8C7B2]"],
-.theme-a [class*="border-[#f5dfc7]"],
-.theme-a [class*="border-[#F5DFC7]"],
-.theme-a [class*="border-[#d2bca2]"],
-.theme-a [class*="border-[#D2BCA2]"] {
+.brand-palette [class*="border-[#e4d8c8]"],
+.brand-palette [class*="border-[#E4D8C8]"],
+.brand-palette [class*="border-[#eadfce]"],
+.brand-palette [class*="border-[#EADFCE]"],
+.brand-palette [class*="border-[#d8c7b2]"],
+.brand-palette [class*="border-[#D8C7B2]"],
+.brand-palette [class*="border-[#f5dfc7]"],
+.brand-palette [class*="border-[#F5DFC7]"],
+.brand-palette [class*="border-[#d2bca2]"],
+.brand-palette [class*="border-[#D2BCA2]"] {
   border-color: rgb(222 211 196 / 0.82);
 }
 
-.theme-a [class*="text-[#2a241d]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#2A241D]"]:not([class*="dark:text"]),
-.theme-a [class*="text-zinc-950"]:not([class*="dark:text"]) {
+.brand-palette [class*="text-[#2a241d]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#2A241D]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-zinc-950"]:not([class*="dark:text"]) {
   color: #131314;
 }
 
-.theme-a [class*="text-[#4b4036]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#5f5348]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#5F5348]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#65594e]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#6f6254]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#6F6254]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#75695d]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#7a6a59]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#7A6A59]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#8a7a69]"]:not([class*="dark:text"]),
-.theme-a [class*="text-[#6c6258]"]:not([class*="dark:text"]) {
+.brand-palette [class*="text-[#4b4036]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#5f5348]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#5F5348]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#65594e]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#6f6254]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#6F6254]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#75695d]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#7a6a59]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#7A6A59]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#8a7a69]"]:not([class*="dark:text"]),
+.brand-palette [class*="text-[#6c6258]"]:not([class*="dark:text"]) {
   color: #3d3d3a;
 }
 
@@ -4286,34 +4266,34 @@ body {
   }
 }
 
-/* Theme A: restored warm paper palette from the earlier FAQ reference. */
-html.theme-a,
-html.theme-a body,
-html.theme-a .site-scroll-root,
-html.theme-a .behance-background,
-html.theme-a .home-sections {
+/* Primary palette: restored warm paper palette from the earlier FAQ reference. */
+html.brand-palette,
+html.brand-palette body,
+html.brand-palette .site-scroll-root,
+html.brand-palette .behance-background,
+html.brand-palette .home-sections {
   background-color: var(--ref-bg) !important;
   background-image: none !important;
   color: #131314;
 }
 
-html.theme-a :is(.section-gradient, .hero-surface) {
+html.brand-palette :is(.section-gradient, .hero-surface) {
   background-color: var(--ref-bg) !important;
   background-image: none !important;
 }
 
-html.theme-a :is(.section-gradient, .hero-surface)::before,
-html.theme-a :is(.section-gradient, .hero-surface)::after,
-html.theme-a .home-sections [aria-hidden="true"]:is([class*="bg-gradient"], [class*="bg-[linear-gradient"], [class*="bg-[radial-gradient"]) {
+html.brand-palette :is(.section-gradient, .hero-surface)::before,
+html.brand-palette :is(.section-gradient, .hero-surface)::after,
+html.brand-palette .home-sections [aria-hidden="true"]:is([class*="bg-gradient"], [class*="bg-[linear-gradient"], [class*="bg-[radial-gradient"]) {
   background: transparent !important;
   background-image: none !important;
 }
 
-html.theme-a .hero-surface .map-parcel-pattern {
+html.brand-palette .hero-surface .map-parcel-pattern {
   opacity: 0 !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   .solution-card,
   .how-layer-card,
   .audience-sales-card,
@@ -4344,25 +4324,25 @@ html.theme-a :is(
   color: #131314;
 }
 
-html.theme-a :is(.solution-card, .sales-flow-card, .audience-sales-card, .audience-stage-card, .pricing-card)::before,
-html.theme-a :is(.solution-card, .sales-flow-card, .audience-sales-card, .audience-stage-card, .pricing-card)::after {
+html.brand-palette :is(.solution-card, .sales-flow-card, .audience-sales-card, .audience-stage-card, .pricing-card)::before,
+html.brand-palette :is(.solution-card, .sales-flow-card, .audience-sales-card, .audience-stage-card, .pricing-card)::after {
   background: transparent !important;
   background-image: none !important;
   border-color: rgb(222 211 196 / 0.58) !important;
   box-shadow: none !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card {
+html.brand-palette #sales-flow .sales-flow-card {
   background:
     linear-gradient(180deg, rgba(255, 252, 246, 0.52), rgba(255, 250, 241, 0.24)),
     var(--sales-flow-surface) !important;
   border-color: var(--sales-flow-border) !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card-neutral,
-html.theme-a #sales-flow .sales-flow-card-soft,
-html.theme-a #sales-flow .sales-flow-card-warm,
-html.theme-a #sales-flow .sales-flow-card-destination {
+html.brand-palette #sales-flow .sales-flow-card-neutral,
+html.brand-palette #sales-flow .sales-flow-card-soft,
+html.brand-palette #sales-flow .sales-flow-card-warm,
+html.brand-palette #sales-flow .sales-flow-card-destination {
   --sales-flow-surface:
     radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.34), transparent 34%),
     radial-gradient(circle at 8% 88%, rgba(119, 155, 167, 0.16), transparent 34%),
@@ -4370,17 +4350,17 @@ html.theme-a #sales-flow .sales-flow-card-destination {
   --sales-flow-border: rgba(126, 154, 166, 0.3) !important;
 }
 
-html.theme-a :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
+html.brand-palette :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
   background: linear-gradient(90deg, rgb(126 154 166 / 0.24), rgb(119 155 167 / 0.2)) !important;
   color: rgb(126 154 166 / 0.4) !important;
 }
 
-html.theme-a .sales-flow-connector-final {
+html.brand-palette .sales-flow-connector-final {
   background: linear-gradient(90deg, rgb(119 155 167 / 0.2), rgb(63 93 104 / 0.22)) !important;
   color: rgb(63 93 104 / 0.36) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="bg-[#fbf6ed]"],
   [class*="bg-[#FBF6ED]"],
   [class*="bg-[#faf9f6]"],
@@ -4399,12 +4379,12 @@ html.theme-a :is(
   background-color: rgb(248 244 237 / 0.72) !important;
 }
 
-html.theme-a :is([class*="bg-[linear-gradient"], [class*="bg-[radial-gradient"], [class*="bg-gradient"]):not([aria-hidden="true"]) {
+html.brand-palette :is([class*="bg-[linear-gradient"], [class*="bg-[radial-gradient"], [class*="bg-gradient"]):not([aria-hidden="true"]) {
   background: rgb(248 244 237 / 0.7) !important;
   background-image: none !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="border-[#e4d8c8]"],
   [class*="border-[#E4D8C8]"],
   [class*="border-[#eadfce]"],
@@ -4420,7 +4400,7 @@ html.theme-a :is(
   border-color: var(--ref-border) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="text-[#2a241d]"],
   [class*="text-[#2A241D]"],
   [class*="text-[#2A211B]"],
@@ -4429,7 +4409,7 @@ html.theme-a :is(
   color: #131314 !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="text-[#4b4036]"],
   [class*="text-[#5f5348]"],
   [class*="text-[#5F5348]"],
@@ -4445,10 +4425,10 @@ html.theme-a :is(
   color: #3d3d3a !important;
 }
 
-html.theme-a :is(a, button)[class*="bg-[#2a241d]"],
-html.theme-a :is(a, button)[class*="bg-[#2A241D]"],
-html.theme-a :is(a, button)[class*="bg-[#2A211B]"],
-html.theme-a :is(a, button)[class*="bg-zinc-950"] {
+html.brand-palette :is(a, button)[class*="bg-[#2a241d]"],
+html.brand-palette :is(a, button)[class*="bg-[#2A241D]"],
+html.brand-palette :is(a, button)[class*="bg-[#2A211B]"],
+html.brand-palette :is(a, button)[class*="bg-zinc-950"] {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4456,13 +4436,13 @@ html.theme-a :is(a, button)[class*="bg-zinc-950"] {
   color: #faf9f5 !important;
 }
 
-html.theme-a :is(a, button)[class*="bg-[#fbf6ed]"],
-html.theme-a :is(a, button)[class*="bg-[#FBF6ED]"],
-html.theme-a :is(a, button)[class*="bg-[#fffaf1]"],
-html.theme-a :is(a, button)[class*="bg-[#FFFAF1]"],
-html.theme-a :is(a, button)[class*="bg-[#f5eadb]"],
-html.theme-a :is(a, button)[class*="bg-[#F5EADB]"],
-html.theme-a :is(a, button)[class*="bg-white"] {
+html.brand-palette :is(a, button)[class*="bg-[#fbf6ed]"],
+html.brand-palette :is(a, button)[class*="bg-[#FBF6ED]"],
+html.brand-palette :is(a, button)[class*="bg-[#fffaf1]"],
+html.brand-palette :is(a, button)[class*="bg-[#FFFAF1]"],
+html.brand-palette :is(a, button)[class*="bg-[#f5eadb]"],
+html.brand-palette :is(a, button)[class*="bg-[#F5EADB]"],
+html.brand-palette :is(a, button)[class*="bg-white"] {
   background: var(--ref-card-strong) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -4470,14 +4450,14 @@ html.theme-a :is(a, button)[class*="bg-white"] {
   color: #131314 !important;
 }
 
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#cc785c]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"],
-html.theme-a :is(a, button)[class*="bg-[#CC785C]"] {
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#cc785c]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"],
+html.brand-palette :is(a, button)[class*="bg-[#CC785C]"] {
   background: #CC785C !important;
   background-image: none !important;
   border-color: #CC785C !important;
@@ -4485,29 +4465,23 @@ html.theme-a :is(a, button)[class*="bg-[#CC785C]"] {
   color: #131314 !important;
 }
 
-html.theme-a :is(a, button):hover {
+html.brand-palette :is(a, button):hover {
   box-shadow: none !important;
 }
 
-html.theme-a :is(input, select, textarea) {
+html.brand-palette :is(input, select, textarea) {
   background: var(--ref-card-strong) !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
 }
 
-html.theme-a :is(header:not(.site-header), .fixed.inset-x-0.bottom-0, .theme-toggle-root) {
+html.brand-palette :is(header:not(.site-header), .fixed.inset-x-0.bottom-0) {
   background: rgb(247 243 236 / 0.96) !important;
   background-image: none !important;
   border-color: rgb(222 211 196 / 0.78) !important;
 }
 
-html.theme-a .theme-toggle-button[data-active="true"] {
-  background: #CC785C !important;
-  border-color: #CC785C !important;
-  color: #131314 !important;
-}
-
-html.theme-a #plans article.pricing-card.pricing-card-featured {
+html.brand-palette #plans article.pricing-card.pricing-card-featured {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4515,28 +4489,28 @@ html.theme-a #plans article.pricing-card.pricing-card-featured {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.16) !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: #3d3d3a !important;
   background-image: none !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: #CC785C !important;
   border-color: #CC785C !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.2) !important;
@@ -4544,11 +4518,11 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a svg {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a svg {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured {
+html.brand-palette #plans article.pricing-card.pricing-card-featured {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4556,28 +4530,28 @@ html.theme-a #plans article.pricing-card.pricing-card-featured {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.16) !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: #3d3d3a !important;
   background-image: none !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: #CC785C !important;
   border-color: #CC785C !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a {
   background: #faf9f5 !important;
   background-image: none !important;
   border-color: #faf9f5 !important;
@@ -4585,12 +4559,12 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a {
   color: #141413 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a svg {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a svg {
   color: #141413 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a[class*="bg-[#fffaf1]"],
-html.theme-a #plans article.pricing-card.pricing-card-featured > a[class*="hover:bg-[#f5eadb]"] {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a[class*="bg-[#fffaf1]"],
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a[class*="hover:bg-[#f5eadb]"] {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4598,11 +4572,11 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a[class*="hover
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a svg {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a svg {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured {
+html.brand-palette #plans .pricing-card.pricing-card-featured {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4610,11 +4584,11 @@ html.theme-a #plans .pricing-card.pricing-card-featured {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured :is(h3, p, div, span) {
+html.brand-palette #plans .pricing-card.pricing-card-featured :is(h3, p, div, span) {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured :is(
+html.brand-palette #plans .pricing-card.pricing-card-featured :is(
   [class*="text-[#2a241d]"],
   [class*="text-[#2A241D]"],
   [class*="text-[#75695d]"],
@@ -4626,24 +4600,24 @@ html.theme-a #plans .pricing-card.pricing-card-featured :is(
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans .pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.16) !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans .pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: #3d3d3a !important;
   background-image: none !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette #plans .pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: #CC785C !important;
   border-color: #CC785C !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured > a {
+html.brand-palette #plans .pricing-card.pricing-card-featured > a {
   background: #faf9f5 !important;
   background-image: none !important;
   border-color: #faf9f5 !important;
@@ -4651,28 +4625,28 @@ html.theme-a #plans .pricing-card.pricing-card-featured > a {
   color: #141413 !important;
 }
 
-html.theme-a #plans .pricing-card.pricing-card-featured > a svg {
+html.brand-palette #plans .pricing-card.pricing-card-featured > a svg {
   color: #141413 !important;
 }
 
-html.theme-a #plans {
+html.brand-palette #plans {
   background: var(--ref-bg) !important;
   background-image: none !important;
 }
 
-html.theme-a #plans .mx-auto.max-w-7xl {
+html.brand-palette #plans .mx-auto.max-w-7xl {
   background: transparent !important;
   background-image: none !important;
 }
 
-html.theme-a #plans :is(.pricing-slider, .pricing-duration > div) {
+html.brand-palette #plans :is(.pricing-slider, .pricing-duration > div) {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-slider-labs {
+html.brand-palette #plans .pricing-slider-labs {
   background-color: #e0dcd1 !important;
   background-image:
     radial-gradient(circle at 14% 18%, rgba(255, 255, 252, 0.38), transparent 34%),
@@ -4684,7 +4658,7 @@ html.theme-a #plans .pricing-slider-labs {
     0 14px 34px rgba(111, 101, 86, 0.06) !important;
 }
 
-html.theme-a #plans .pricing-card {
+html.brand-palette #plans .pricing-card {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -4692,36 +4666,36 @@ html.theme-a #plans .pricing-card {
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-card-featured,
-html.theme-a #plans .pricing-card-featured :is(h3, p, div, span) {
+html.brand-palette #plans .pricing-card-featured,
+html.brand-palette #plans .pricing-card-featured :is(h3, p, div, span) {
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-card-featured :is([class*="text-white"], [class*="text-[#fffaf1]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette #plans .pricing-card-featured :is([class*="text-white"], [class*="text-[#fffaf1]"], [class*="text-[#efe2d2]"]) {
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette #plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
   color: #3d3d3a !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: var(--ref-card-muted) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#cc785c]"]) {
+html.brand-palette #plans .pricing-card :is([class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#cc785c]"]) {
   background: #CC785C !important;
   background-image: none !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: rgb(236 228 216 / 0.78) !important;
   background-image: none !important;
 }
 
-html.theme-a #plans .pricing-recommended-badge {
+html.brand-palette #plans .pricing-recommended-badge {
   background: #CC785C !important;
   background-image: none !important;
   border-color: #CC785C !important;
@@ -4729,7 +4703,7 @@ html.theme-a #plans .pricing-recommended-badge {
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-card > a {
+html.brand-palette #plans .pricing-card > a {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4737,36 +4711,36 @@ html.theme-a #plans .pricing-card > a {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans .pricing-card > a svg {
+html.brand-palette #plans .pricing-card > a svg {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
+html.brand-palette #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
   background: #CC785C !important;
   background-image: none !important;
   border-color: #CC785C !important;
   box-shadow: none !important;
 }
 
-html.theme-a #plans :is([data-plan-slider-handle] span, .pricing-slider [class*="bg-white"]) {
+html.brand-palette #plans :is([data-plan-slider-handle] span, .pricing-slider [class*="bg-white"]) {
   background: #faf9f5 !important;
 }
 
-html.theme-a #plans :is(.pricing-slider, .pricing-duration, .pricing-card) * {
+html.brand-palette #plans :is(.pricing-slider, .pricing-duration, .pricing-card) * {
   text-shadow: none !important;
 }
 
-html.theme-a #plans .pricing-card :is([aria-hidden="true"][class*="blur"], [class*="blur-2xl"], [class*="blur-3xl"]) {
+html.brand-palette #plans .pricing-card :is([aria-hidden="true"][class*="blur"], [class*="blur-2xl"], [class*="blur-3xl"]) {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
   opacity: 0 !important;
 }
 
-html.theme-a :is(a, button):not(.theme-toggle-button)[class*="bg-[#2a241d]"],
-html.theme-a :is(a, button):not(.theme-toggle-button)[class*="bg-[#2A241D]"],
-html.theme-a :is(a, button):not(.theme-toggle-button)[class*="bg-[#2A211B]"],
-html.theme-a :is(a, button):not(.theme-toggle-button)[class*="bg-zinc-950"] {
+html.brand-palette :is(a, button)[class*="bg-[#2a241d]"],
+html.brand-palette :is(a, button)[class*="bg-[#2A241D]"],
+html.brand-palette :is(a, button)[class*="bg-[#2A211B]"],
+html.brand-palette :is(a, button)[class*="bg-zinc-950"] {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4774,13 +4748,7 @@ html.theme-a :is(a, button):not(.theme-toggle-button)[class*="bg-zinc-950"] {
   color: #faf9f5 !important;
 }
 
-html.theme-a .theme-toggle-button[data-active="true"] {
-  background: #CC785C !important;
-  border-color: #CC785C !important;
-  color: #131314 !important;
-}
-
-html.theme-a #plans article.pricing-card.pricing-card-featured {
+html.brand-palette #plans article.pricing-card.pricing-card-featured {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
@@ -4788,28 +4756,28 @@ html.theme-a #plans article.pricing-card.pricing-card-featured {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.16) !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: #3d3d3a !important;
   background-image: none !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: #CC785C !important;
   border-color: #CC785C !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a {
   background: #24231f !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.2) !important;
@@ -4817,11 +4785,11 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a svg {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a svg {
   color: #faf9f5 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
   background: #faf9f5 !important;
   background-image: none !important;
   border-color: #faf9f5 !important;
@@ -4829,19 +4797,19 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-
   color: #141413 !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
   color: #141413 !important;
 }
 
-/* Theme A uses the header sun orange as the single accent color. */
-html.theme-a {
-  --theme-a-sun-orange: #cc785c;
-  --theme-a-sun-orange-soft: rgb(204 120 92 / 0.18);
-  --accent-clay: var(--theme-a-sun-orange);
-  --hero-clay: var(--theme-a-sun-orange);
+/* Primary palette uses the header sun orange as the single accent color. */
+html.brand-palette {
+  --brand-palette-sun-orange: #cc785c;
+  --brand-palette-sun-orange-soft: rgb(204 120 92 / 0.18);
+  --accent-clay: var(--brand-palette-sun-orange);
+  --hero-clay: var(--brand-palette-sun-orange);
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="text-[#CC785C]"],
   [class*="text-[#CC785C]"],
   [class*="text-[#CC785C]"],
@@ -4855,10 +4823,10 @@ html.theme-a :is(
   [class*="text-[#CC785C]"],
   [class*="text-[#CC785C]"]
 ) {
-  color: var(--theme-a-sun-orange) !important;
+  color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"],
@@ -4872,18 +4840,18 @@ html.theme-a :is(
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"]
 ) {
-  background: var(--theme-a-sun-orange) !important;
+  background: var(--brand-palette-sun-orange) !important;
   background-image: none !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="bg-[rgba(204,120,92,0.12)]"]
 ) {
-  background: var(--theme-a-sun-orange-soft) !important;
+  background: var(--brand-palette-sun-orange-soft) !important;
   background-image: none !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="border-[#CC785C]"],
   [class*="border-[#CC785C]"],
   [class*="border-[#CC785C]"],
@@ -4897,10 +4865,10 @@ html.theme-a :is(
   [class*="border-[#CC785C]"],
   [class*="border-[#CC785C]"]
 ) {
-  border-color: var(--theme-a-sun-orange) !important;
+  border-color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="ring-[#CC785C]"],
   [class*="ring-[#CC785C]"],
   [class*="ring-[#CC785C]"],
@@ -4915,7 +4883,7 @@ html.theme-a :is(
   --tw-ring-color: rgb(204 120 92 / 0.34) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [class*="shadow-[#CC785C]"],
   [class*="shadow-[#CC785C]"],
   [class*="shadow-[#CC785C]"],
@@ -4930,7 +4898,7 @@ html.theme-a :is(
   --tw-shadow-color: rgb(204 120 92 / 0.2) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   stop[stop-color="#CC785C"],
   stop[stop-color="#cc785c"],
   stop[stop-color="#CC785C"],
@@ -4942,10 +4910,10 @@ html.theme-a :is(
   stop[stop-color="#CC785C"],
   stop[stop-color="#CC785C"]
 ) {
-  stop-color: var(--theme-a-sun-orange) !important;
+  stop-color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [stroke="#CC785C"],
   [stroke="#cc785c"],
   [stroke="#CC785C"],
@@ -4957,10 +4925,10 @@ html.theme-a :is(
   [stroke="#CC785C"],
   [stroke="#CC785C"]
 ) {
-  stroke: var(--theme-a-sun-orange) !important;
+  stroke: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a :is(
+html.brand-palette :is(
   [fill="#CC785C"],
   [fill="#cc785c"],
   [fill="#CC785C"],
@@ -4972,10 +4940,10 @@ html.theme-a :is(
   [fill="#CC785C"],
   [fill="#CC785C"]
 ) {
-  fill: var(--theme-a-sun-orange) !important;
+  fill: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a #plans :is(
+html.brand-palette #plans :is(
   .pricing-slider-rail,
   [data-plan-slider-handle],
   [data-plan-stopper][class*="bg-[#CC785C]"],
@@ -4985,22 +4953,22 @@ html.theme-a #plans :is(
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"]
 ) {
-  background: var(--theme-a-sun-orange) !important;
+  background: var(--brand-palette-sun-orange) !important;
   background-image: none !important;
-  border-color: var(--theme-a-sun-orange) !important;
+  border-color: var(--brand-palette-sun-orange) !important;
   box-shadow: none !important;
 }
 
-html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
-html.theme-a #plans .pricing-card.pricing-card-featured .pricing-recommended-badge,
-html.theme-a #plans .pricing-recommended-badge {
-  background: var(--theme-a-sun-orange) !important;
+html.brand-palette #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
+html.brand-palette #plans .pricing-card.pricing-card-featured .pricing-recommended-badge,
+html.brand-palette #plans .pricing-recommended-badge {
+  background: var(--brand-palette-sun-orange) !important;
   background-image: none !important;
-  border-color: var(--theme-a-sun-orange) !important;
+  border-color: var(--brand-palette-sun-orange) !important;
   box-shadow: none !important;
 }
 
-html.theme-a #plans .pricing-card :is(
+html.brand-palette #plans .pricing-card :is(
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"],
@@ -5008,11 +4976,11 @@ html.theme-a #plans .pricing-card :is(
   [class*="bg-[#CC785C]"],
   [class*="bg-[#CC785C]"]
 ) {
-  background: var(--theme-a-sun-orange) !important;
+  background: var(--brand-palette-sun-orange) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
   background-color: #e0dcd1 !important;
   background-image:
     radial-gradient(circle at 14% 18%, rgba(255, 255, 252, 0.38), transparent 34%),
@@ -5073,7 +5041,7 @@ html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
   background: rgb(9 9 11 / 0.58);
 }
 
-html.theme-a .site-header {
+html.brand-palette .site-header {
   position: fixed !important;
   inset-inline: 0 !important;
   top: 0 !important;
@@ -5087,7 +5055,7 @@ html.theme-a .site-header {
   box-shadow: 0 10px 32px rgb(31 41 55 / 0.055) !important;
 }
 
-html.theme-a .site-header::before {
+html.brand-palette .site-header::before {
   background:
     radial-gradient(ellipse at 72% 34%, rgb(188 193 202 / 0.28), transparent 46%),
     linear-gradient(90deg, rgb(250 249 247 / 0.46), rgb(239 240 242 / 0.36) 46%, rgb(249 247 243 / 0.46)) !important;
@@ -5095,23 +5063,23 @@ html.theme-a .site-header::before {
   backdrop-filter: blur(34px) saturate(1.18) !important;
 }
 
-html.theme-a .site-header::after {
+html.brand-palette .site-header::after {
   background: rgb(190 196 204 / 0.46) !important;
 }
 
-html.theme-a .site-header .site-brand-mark {
+html.brand-palette .site-header .site-brand-mark {
   background: rgb(255 250 241 / 0.9) !important;
   background-image: none !important;
   border: 1px solid rgb(222 211 196 / 0.9) !important;
   box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
-  color: var(--theme-a-sun-orange) !important;
+  color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a .site-header .site-brand-mark svg {
-  color: var(--theme-a-sun-orange) !important;
+html.brand-palette .site-header .site-brand-mark svg {
+  color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a .site-header .site-header-nav-link {
+html.brand-palette .site-header .site-header-nav-link {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
@@ -5119,12 +5087,12 @@ html.theme-a .site-header .site-header-nav-link {
   color: #3d3d3a !important;
 }
 
-html.theme-a .site-header .site-header-nav-link:hover {
+html.brand-palette .site-header .site-header-nav-link:hover {
   background: transparent !important;
   color: #131314 !important;
 }
 
-html.theme-a .site-header .site-header-phone {
+html.brand-palette .site-header .site-header-phone {
   background: rgb(255 250 241 / 0.82) !important;
   background-image: none !important;
   border-color: rgb(222 211 196 / 0.9) !important;
@@ -5132,16 +5100,16 @@ html.theme-a .site-header .site-header-phone {
   color: #131314 !important;
 }
 
-html.theme-a .site-header .site-header-phone svg {
-  color: var(--theme-a-sun-orange) !important;
+html.brand-palette .site-header .site-header-phone svg {
+  color: var(--brand-palette-sun-orange) !important;
 }
 
-html.theme-a .site-header .site-header-sales-label {
+html.brand-palette .site-header .site-header-sales-label {
   color: #6f6254 !important;
 }
 
-html.theme-a .site-header .site-header-login-link,
-html.theme-a .site-header .site-header-demo-link {
+html.brand-palette .site-header .site-header-login-link,
+html.brand-palette .site-header .site-header-demo-link {
   background: #141413 !important;
   background-image: none !important;
   border: 1px solid #141413 !important;
@@ -5149,21 +5117,20 @@ html.theme-a .site-header .site-header-demo-link {
   color: #faf9f5 !important;
 }
 
-html.theme-a .site-header .site-header-login-link:hover,
-html.theme-a .site-header .site-header-demo-link:hover {
+html.brand-palette .site-header .site-header-login-link:hover,
+html.brand-palette .site-header .site-header-demo-link:hover {
   background: #24231f !important;
   border-color: #24231f !important;
 }
 
-html.theme-a .site-header .site-header-phone:hover,
-html.theme-a .site-header .site-brand-mark:hover {
+html.brand-palette .site-header .site-header-phone:hover,
+html.brand-palette .site-header .site-brand-mark:hover {
   background: #fffaf1 !important;
   border-color: rgb(204 120 92 / 0.38) !important;
 }
 
-html.theme-a .site-header a.site-header-phone[class*="bg-zinc-950"],
-html.theme-a .site-header button.header-preferences-trigger[class*="bg-zinc-950"],
-html.theme-a .site-header button.site-header-mobile-trigger[class*="bg-zinc-950"] {
+html.brand-palette .site-header a.site-header-phone[class*="bg-zinc-950"],
+html.brand-palette .site-header button.site-header-mobile-trigger[class*="bg-zinc-950"] {
   background: rgb(255 250 241 / 0.88) !important;
   background-image: none !important;
   border-color: rgb(222 211 196 / 0.9) !important;
@@ -5171,36 +5138,36 @@ html.theme-a .site-header button.site-header-mobile-trigger[class*="bg-zinc-950"
   color: #131314 !important;
 }
 
-html.theme-a .faq-list-card {
+html.brand-palette .faq-list-card {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
 }
 
-html.theme-a .faq-list-item {
+html.brand-palette .faq-list-item {
   background: transparent !important;
 }
 
-html.theme-a .faq-list-item:hover,
-html.theme-a .faq-list-item[open] {
+html.brand-palette .faq-list-item:hover,
+html.brand-palette .faq-list-item[open] {
   background: rgb(242 235 225 / 0.48) !important;
 }
 
-html.theme-a .faq-toggle-icon {
+html.brand-palette .faq-toggle-icon {
   background: rgb(248 244 237 / 0.76) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #6f6254 !important;
 }
 
-html.theme-a .faq-list-item[open] .faq-toggle-icon {
+html.brand-palette .faq-list-item[open] .faq-toggle-icon {
   background: rgb(242 235 225 / 0.78) !important;
   border-color: var(--ref-border-strong) !important;
   color: #131314 !important;
 }
 
-html.theme-a #solution .solution-card {
+html.brand-palette #solution .solution-card {
   background: var(--solution-card-shell) !important;
   background-image: none !important;
   border-color: var(--solution-card-border) !important;
@@ -5209,14 +5176,14 @@ html.theme-a #solution .solution-card {
     0 18px 44px rgba(42, 36, 29, 0.055) !important;
 }
 
-html.theme-a #solution .solution-card:is(:hover, :focus-within) {
+html.brand-palette #solution .solution-card:is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--solution-card-accent) 26%, var(--solution-card-border)) !important;
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--solution-card-accent) 16%, transparent),
     0 22px 46px rgba(42, 36, 29, 0.075) !important;
 }
 
-html.theme-a #solution .solution-card-visual-frame {
+html.brand-palette #solution .solution-card-visual-frame {
   background:
     radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--solution-card-visual) 74%, white), transparent 34%),
     radial-gradient(circle at 82% 34%, color-mix(in srgb, var(--solution-card-accent) 18%, transparent), transparent 33%),
@@ -5224,29 +5191,29 @@ html.theme-a #solution .solution-card-visual-frame {
   border-color: var(--solution-card-border) !important;
 }
 
-html.theme-a #solution .solution-card-copy-frame,
-html.theme-a #solution .solution-card-chip,
-html.theme-a #solution .solution-card-mini-action {
+html.brand-palette #solution .solution-card-copy-frame,
+html.brand-palette #solution .solution-card-chip,
+html.brand-palette #solution .solution-card-mini-action {
   background-color: color-mix(in srgb, var(--solution-card-copy) 78%, white) !important;
   background-image: none !important;
   border-color: var(--solution-card-border) !important;
   color: var(--solution-card-muted) !important;
 }
 
-html.theme-a #solution .solution-card-copy-frame a,
-html.theme-a #solution .solution-card-mini-action,
-html.theme-a #solution .solution-card-title {
+html.brand-palette #solution .solution-card-copy-frame a,
+html.brand-palette #solution .solution-card-mini-action,
+html.brand-palette #solution .solution-card-title {
   color: var(--solution-card-ink) !important;
 }
 
-html.theme-a #audiences .audience-sales-card {
+html.brand-palette #audiences .audience-sales-card {
   border-color: rgba(222, 211, 196, 0.58) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.72),
     0 14px 32px rgba(42, 33, 27, 0.038) !important;
 }
 
-html.theme-a #audiences .audience-sales-card-fast {
+html.brand-palette #audiences .audience-sales-card-fast {
   background:
     radial-gradient(circle at 16% 8%, rgba(255, 255, 252, 0.48), transparent 36%),
     radial-gradient(circle at 88% 18%, rgba(177, 169, 156, 0.26), transparent 34%),
@@ -5254,7 +5221,7 @@ html.theme-a #audiences .audience-sales-card-fast {
   border-color: rgba(176, 168, 154, 0.5) !important;
 }
 
-html.theme-a #audiences .audience-sales-card-consultative {
+html.brand-palette #audiences .audience-sales-card-consultative {
   background:
     radial-gradient(circle at 14% 10%, rgba(252, 251, 248, 0.42), transparent 38%),
     radial-gradient(circle at 88% 18%, rgba(145, 148, 143, 0.24), transparent 36%),
@@ -5262,13 +5229,13 @@ html.theme-a #audiences .audience-sales-card-consultative {
   border-color: rgba(155, 152, 144, 0.5) !important;
 }
 
-html.theme-a #audiences .audience-sales-card:hover {
+html.brand-palette #audiences .audience-sales-card:hover {
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.78),
     0 18px 42px rgba(42, 33, 27, 0.056) !important;
 }
 
-html.theme-a #audiences .audience-stage-card {
+html.brand-palette #audiences .audience-stage-card {
   background:
     radial-gradient(circle at 16% 8%, var(--stage-card-glow-a), transparent 36%),
     radial-gradient(circle at 88% 18%, var(--stage-card-glow-b), transparent 35%),
@@ -5279,13 +5246,13 @@ html.theme-a #audiences .audience-stage-card {
     0 15px 36px rgba(42, 33, 27, 0.046) !important;
 }
 
-html.theme-a #audiences .audience-stage-card:hover {
+html.brand-palette #audiences .audience-stage-card:hover {
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.72),
     0 20px 44px rgba(42, 33, 27, 0.06) !important;
 }
 
-html.theme-a #audiences .audience-stage-card-main {
+html.brand-palette #audiences .audience-stage-card-main {
   background:
     radial-gradient(circle at 18% 14%, var(--stage-card-glow-a), transparent 42%),
     radial-gradient(circle at 86% 20%, var(--stage-card-glow-b), transparent 36%),
@@ -5294,24 +5261,24 @@ html.theme-a #audiences .audience-stage-card-main {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.56) !important;
 }
 
-html.theme-a #audiences .audience-stage-fields-panel {
+html.brand-palette #audiences .audience-stage-fields-panel {
   background:
     linear-gradient(180deg, var(--stage-card-detail-a), var(--stage-card-detail-b)) !important;
   border-color: var(--solution-card-border) !important;
 }
 
-html.theme-a #audiences .audience-stage-card h3,
-html.theme-a #audiences .audience-stage-field-row {
+html.brand-palette #audiences .audience-stage-card h3,
+html.brand-palette #audiences .audience-stage-field-row {
   color: var(--solution-card-ink) !important;
 }
 
-html.theme-a #audiences .audience-stage-card-main p,
-html.theme-a #audiences .audience-stage-fields-panel > div {
+html.brand-palette #audiences .audience-stage-card-main p,
+html.brand-palette #audiences .audience-stage-fields-panel > div {
   color: var(--solution-card-muted) !important;
 }
 
 /* Final flat-card correction: keep section backgrounds, remove card gradients. */
-html.theme-a {
+html.brand-palette {
   --card-solution: #f5ebe0;
   --card-solution-soft: #f5ebe0;
   --card-how: #d5ccc0;
@@ -5337,7 +5304,7 @@ html.theme-a {
   --flat-pricing-muted: #87867f;
 }
 
-html.theme-a #solution :is(.solution-card-data, .solution-card-workflow, .solution-card-training) {
+html.brand-palette #solution :is(.solution-card-data, .solution-card-workflow, .solution-card-training) {
   --solution-card-shell: var(--card-solution);
   --solution-card-visual: var(--card-solution-soft);
   --solution-card-visual-soft: var(--card-solution-soft);
@@ -5349,60 +5316,60 @@ html.theme-a #solution :is(.solution-card-data, .solution-card-workflow, .soluti
   --solution-card-accent: var(--flat-earth-accent);
 }
 
-html.theme-a #solution .solution-card,
-html.theme-a #solution .solution-card-visual-frame,
-html.theme-a #solution .solution-card-copy-frame,
-html.theme-a #solution .solution-card-chip,
-html.theme-a #solution .solution-card-mini-action {
+html.brand-palette #solution .solution-card,
+html.brand-palette #solution .solution-card-visual-frame,
+html.brand-palette #solution .solution-card-copy-frame,
+html.brand-palette #solution .solution-card-chip,
+html.brand-palette #solution .solution-card-mini-action {
   background-image: none !important;
   border-color: var(--flat-earth-border) !important;
 }
 
-html.theme-a #solution .solution-card {
+html.brand-palette #solution .solution-card {
   background: var(--card-solution) !important;
 }
 
-html.theme-a #solution .solution-card-visual-frame,
-html.theme-a #solution .solution-card-copy-frame,
-html.theme-a #solution .solution-card-chip,
-html.theme-a #solution .solution-card-mini-action {
+html.brand-palette #solution .solution-card-visual-frame,
+html.brand-palette #solution .solution-card-copy-frame,
+html.brand-palette #solution .solution-card-chip,
+html.brand-palette #solution .solution-card-mini-action {
   background: var(--card-solution-soft) !important;
 }
 
-html.theme-a #solution .solution-card :is(h3, p, a, span, svg) {
+html.brand-palette #solution .solution-card :is(h3, p, a, span, svg) {
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #solution .solution-card-chip svg,
-html.theme-a #solution .solution-card-mini-action svg {
+html.brand-palette #solution .solution-card-chip svg,
+html.brand-palette #solution .solution-card-mini-action svg {
   color: var(--flat-earth-accent) !important;
 }
 
-html.theme-a #how-it-works .how-layer-card,
-html.theme-a #how-it-works .how-layer-card:last-of-type {
+html.brand-palette #how-it-works .how-layer-card,
+html.brand-palette #how-it-works .how-layer-card:last-of-type {
   background: var(--card-how) !important;
   background-image: none !important;
   border-color: var(--flat-earth-border) !important;
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #how-it-works .how-layer-card :is(h3, p, div, span, svg) {
+html.brand-palette #how-it-works .how-layer-card :is(h3, p, div, span, svg) {
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #how-it-works .how-layer-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#fffaf1]"], [class*="bg-[#1B1916]"]) {
+html.brand-palette #how-it-works .how-layer-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#fffaf1]"], [class*="bg-[#1B1916]"]) {
   background: var(--card-how-soft) !important;
   background-image: none !important;
   border-color: var(--flat-earth-border) !important;
 }
 
-html.theme-a #how-it-works .how-layer-card > div:first-child > span:first-child svg,
-html.theme-a #how-it-works .how-layer-arrow svg,
-html.theme-a #how-it-works .how-layer-card [class*="text-[#CC785C]"] {
+html.brand-palette #how-it-works .how-layer-card > div:first-child > span:first-child svg,
+html.brand-palette #how-it-works .how-layer-arrow svg,
+html.brand-palette #how-it-works .how-layer-card [class*="text-[#CC785C]"] {
   color: var(--flat-earth-accent) !important;
 }
 
-html.theme-a body main #how-it-works .how-works-reveal-header {
+html.brand-palette body main #how-it-works .how-works-reveal-header {
   border: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
@@ -5993,7 +5960,7 @@ html.theme-a body main #how-it-works .how-works-reveal-header {
   }
 }
 
-html.theme-a #audiences :is(
+html.brand-palette #audiences :is(
   .audience-sales-card,
   .audience-sales-card-fast,
   .audience-sales-card-consultative
@@ -6004,13 +5971,13 @@ html.theme-a #audiences :is(
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #audiences .audience-sales-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#faf9f6]"]) {
+html.brand-palette #audiences .audience-sales-card :is([class*="bg-[#FBF9F3]"], [class*="bg-[#faf9f6]"]) {
   background: var(--card-sales-type-soft) !important;
   background-image: none !important;
   border-color: var(--flat-earth-border) !important;
 }
 
-html.theme-a #audiences :is(
+html.brand-palette #audiences :is(
   .audience-stage-card,
   .audience-stage-card-main,
   .audience-stage-fields-panel
@@ -6021,25 +5988,25 @@ html.theme-a #audiences :is(
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #audiences :is(.audience-stage-card-main, .audience-stage-fields-panel) {
+html.brand-palette #audiences :is(.audience-stage-card-main, .audience-stage-fields-panel) {
   background: var(--card-stage-soft) !important;
 }
 
-html.theme-a #audiences .audience-sales-card :is(h3, p, div, span, svg),
-html.theme-a #audiences .audience-stage-card :is(h3, p, div, li, span, svg) {
+html.brand-palette #audiences .audience-sales-card :is(h3, p, div, span, svg),
+html.brand-palette #audiences .audience-stage-card :is(h3, p, div, li, span, svg) {
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #audiences :is(.audience-sales-card-glow, [class*="blur-2xl"]) {
+html.brand-palette #audiences :is(.audience-sales-card-glow, [class*="blur-2xl"]) {
   background: transparent !important;
   background-image: none !important;
   opacity: 0 !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card-neutral,
-html.theme-a #sales-flow .sales-flow-card-soft,
-html.theme-a #sales-flow .sales-flow-card-warm,
-html.theme-a #sales-flow .sales-flow-card-destination {
+html.brand-palette #sales-flow .sales-flow-card-neutral,
+html.brand-palette #sales-flow .sales-flow-card-soft,
+html.brand-palette #sales-flow .sales-flow-card-warm,
+html.brand-palette #sales-flow .sales-flow-card-destination {
   --sales-flow-surface: var(--card-flow);
   --sales-flow-border: var(--flat-earth-border);
   --sales-flow-rail: var(--card-flow-soft);
@@ -6048,29 +6015,29 @@ html.theme-a #sales-flow .sales-flow-card-destination {
   --sales-flow-rail-ink: #4c342a;
 }
 
-html.theme-a #sales-flow .sales-flow-card,
-html.theme-a #sales-flow .sales-flow-card::before,
-html.theme-a #sales-flow .sales-flow-step-rail,
-html.theme-a #sales-flow .sales-flow-step-number {
+html.brand-palette #sales-flow .sales-flow-card,
+html.brand-palette #sales-flow .sales-flow-card::before,
+html.brand-palette #sales-flow .sales-flow-step-rail,
+html.brand-palette #sales-flow .sales-flow-step-number {
   background-image: none !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card {
+html.brand-palette #sales-flow .sales-flow-card {
   background: var(--card-flow) !important;
   border-color: var(--flat-earth-border) !important;
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card::before {
+html.brand-palette #sales-flow .sales-flow-card::before {
   background: transparent !important;
 }
 
-html.theme-a #sales-flow .sales-flow-card :is(h3, p, div, span, svg) {
+html.brand-palette #sales-flow .sales-flow-card :is(h3, p, div, span, svg) {
   color: var(--flat-earth-ink) !important;
 }
 
-html.theme-a body main #sales-flow .sales-flow-reveal-header,
-html.theme-a body main #sales-flow .sales-flow-reveal-header > div {
+html.brand-palette body main #sales-flow .sales-flow-reveal-header,
+html.brand-palette body main #sales-flow .sales-flow-reveal-header > div {
   border: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
@@ -6078,63 +6045,63 @@ html.theme-a body main #sales-flow .sales-flow-reveal-header > div {
   box-shadow: none !important;
 }
 
-html.theme-a #sales-flow .sales-flow-step-rail,
-html.theme-a #sales-flow .sales-flow-step-number {
+html.brand-palette #sales-flow .sales-flow-step-rail,
+html.brand-palette #sales-flow .sales-flow-step-number {
   background: var(--card-flow-soft) !important;
   border-color: var(--flat-earth-border) !important;
 }
 
-html.theme-a #sales-flow :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
+html.brand-palette #sales-flow :is(.sales-flow-connector-segment, .sales-flow-connector-final) {
   background: rgb(166 78 60 / 0.32) !important;
   background-image: none !important;
   color: rgb(166 78 60 / 0.48) !important;
 }
 
-html.theme-a body main section#plans {
+html.brand-palette body main section#plans {
   background-color: var(--ref-bg) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-reveal-header header {
+html.brand-palette #plans .pricing-reveal-header header {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
 }
 
-html.theme-a #plans .pricing-reveal-header :is(h2, p),
-html.theme-a #plans .pricing-axis-label,
-html.theme-a #plans .pricing-axis-copy,
-html.theme-a #plans .pricing-duration > p {
+html.brand-palette #plans .pricing-reveal-header :is(h2, p),
+html.brand-palette #plans .pricing-axis-label,
+html.brand-palette #plans .pricing-axis-copy,
+html.brand-palette #plans .pricing-duration > p {
   color: #131314 !important;
 }
 
-html.theme-a #plans .pricing-reveal-header p,
-html.theme-a #plans .pricing-duration > p {
+html.brand-palette #plans .pricing-reveal-header p,
+html.brand-palette #plans .pricing-duration > p {
   color: #3d3d3a !important;
 }
 
-html.theme-a #plans :is(.pricing-slider, .pricing-slider-labs, .pricing-duration > div) {
+html.brand-palette #plans :is(.pricing-slider, .pricing-slider-labs, .pricing-duration > div) {
   background: var(--card-meter) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
 }
 
-html.theme-a #plans :is(.pricing-slider, .pricing-duration > div) :is(span, p, button) {
+html.brand-palette #plans :is(.pricing-slider, .pricing-duration > div) :is(span, p, button) {
   color: #3d3d3a !important;
 }
 
-html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
+html.brand-palette #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
   background: var(--flat-earth-accent) !important;
   background-image: none !important;
   border-color: var(--flat-earth-accent) !important;
 }
 
-html.theme-a #plans .pricing-card,
-html.theme-a #plans .pricing-card.pricing-card-featured,
-html.theme-a #plans article.pricing-card.pricing-card-featured {
+html.brand-palette #plans .pricing-card,
+html.brand-palette #plans .pricing-card.pricing-card-featured,
+html.brand-palette #plans article.pricing-card.pricing-card-featured {
   background: var(--flat-pricing-card) !important;
   background-image: none !important;
   border-color: var(--flat-pricing-border) !important;
@@ -6144,46 +6111,46 @@ html.theme-a #plans article.pricing-card.pricing-card-featured {
   color: var(--flat-pricing-ink) !important;
 }
 
-html.theme-a #plans .pricing-card::before,
-html.theme-a #plans .pricing-card::after,
-html.theme-a #plans .pricing-card [class*="blur-2xl"] {
+html.brand-palette #plans .pricing-card::before,
+html.brand-palette #plans .pricing-card::after,
+html.brand-palette #plans .pricing-card [class*="blur-2xl"] {
   background: transparent !important;
   background-image: none !important;
   opacity: 0 !important;
 }
 
-html.theme-a #plans .pricing-card :is(h3, p, div, span, svg),
-html.theme-a #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+html.brand-palette #plans .pricing-card :is(h3, p, div, span, svg),
+html.brand-palette #plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
   color: var(--flat-pricing-ink) !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette #plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
   color: var(--flat-pricing-muted) !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette #plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: var(--flat-pricing-card-soft) !important;
   background-image: none !important;
   border-color: var(--flat-pricing-border) !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette #plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: rgb(242 235 225 / 0.12) !important;
   background-image: none !important;
 }
 
-html.theme-a #plans .pricing-card :is([class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#cc785c]"]),
-html.theme-a #plans .pricing-recommended-badge,
-html.theme-a #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette #plans .pricing-card :is([class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#cc785c]"]),
+html.brand-palette #plans .pricing-recommended-badge,
+html.brand-palette #plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: var(--flat-earth-accent) !important;
   background-image: none !important;
   border-color: var(--flat-earth-accent) !important;
   color: #fffaf1 !important;
 }
 
-html.theme-a #plans .pricing-card > a,
-html.theme-a #plans article.pricing-card.pricing-card-featured > a,
-html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
+html.brand-palette #plans .pricing-card > a,
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a,
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
   background: var(--flat-earth-accent) !important;
   background-image: none !important;
   border-color: var(--flat-earth-accent) !important;
@@ -6191,43 +6158,43 @@ html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-
   color: #fffaf1 !important;
 }
 
-html.theme-a #plans .pricing-card > a svg,
-html.theme-a #plans article.pricing-card.pricing-card-featured > a svg,
-html.theme-a #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
+html.brand-palette #plans .pricing-card > a svg,
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a svg,
+html.brand-palette #plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs,
-html.theme-a body main section#plans .pricing-duration > div {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs,
+html.brand-palette body main section#plans .pricing-duration > div {
   background: var(--card-meter) !important;
   background-image: none !important;
   border-color: rgb(111 78 59 / 0.18) !important;
   color: #201b17 !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
-html.theme-a body main section#plans .pricing-duration > div :is(span, p, button) {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
+html.brand-palette body main section#plans .pricing-duration > div :is(span, p, button) {
   color: #201b17 !important;
 }
 
-html.theme-a body main section#plans .pricing-axis-insight[class*="bg-[#CC785C]"] {
+html.brand-palette body main section#plans .pricing-axis-insight[class*="bg-[#CC785C]"] {
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
   background: #141413 !important;
   background-image: none !important;
   border-color: #141413 !important;
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-best-value-badge {
   top: -2.7rem !important;
   z-index: 30 !important;
   display: inline-flex !important;
@@ -6247,12 +6214,12 @@ html.theme-a body main section#plans .pricing-best-value-badge {
   line-height: 1 !important;
 }
 
-html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-duration > div button .pricing-best-value-badge {
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
   background: var(--flat-pricing-active-card) !important;
   background-image: none !important;
   border-color: rgb(166 78 60 / 0.62) !important;
@@ -6262,34 +6229,34 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
     0 26px 58px rgb(75 55 50 / 0.24) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: var(--flat-pricing-active-card-soft) !important;
   background-image: none !important;
   border-color: rgb(242 235 225 / 0.2) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: rgb(242 235 225 / 0.18) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
   background: var(--flat-earth-accent) !important;
   background-image: none !important;
   border-color: var(--flat-earth-accent) !important;
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
   color: #fffaf1 !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
   color: #fffaf1 !important;
 }
 
 /* Claude-inspired pricing palette: dark page, quiet cards, white selected plan. */
-html.theme-a body main section#plans {
+html.brand-palette body main section#plans {
   --claude-bg: #141413;
   --claude-surface: #1a1918;
   --claude-surface-raised: #1f1e1d;
@@ -6303,19 +6270,19 @@ html.theme-a body main section#plans {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a #plans .pricing-reveal-header :is(h2, p),
-html.theme-a #plans .pricing-axis-label,
-html.theme-a #plans .pricing-duration > p {
+html.brand-palette #plans .pricing-reveal-header :is(h2, p),
+html.brand-palette #plans .pricing-axis-label,
+html.brand-palette #plans .pricing-duration > p {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a #plans .pricing-reveal-header p,
-html.theme-a #plans .pricing-duration > p {
+html.brand-palette #plans .pricing-reveal-header p,
+html.brand-palette #plans .pricing-duration > p {
   color: var(--claude-muted) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs,
-html.theme-a body main section#plans .pricing-duration > div {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs,
+html.brand-palette body main section#plans .pricing-duration > div {
   background: var(--claude-surface) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.14) !important;
@@ -6323,65 +6290,65 @@ html.theme-a body main section#plans .pricing-duration > div {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
-html.theme-a body main section#plans .pricing-duration > div :is(span, p, button) {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs :is(span, p, button),
+html.brand-palette body main section#plans .pricing-duration > div :is(span, p, button) {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-axis-insight {
+html.brand-palette body main section#plans .pricing-axis-insight {
   background: var(--claude-surface-raised) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.12) !important;
   color: var(--claude-muted) !important;
 }
 
-html.theme-a body main section#plans .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-axis-insight.text-white {
   background: var(--claude-selected) !important;
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
+html.brand-palette #plans :is(.pricing-slider-rail, [data-plan-slider-handle], [data-plan-stopper][class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"], [class*="bg-[#CC785C]"]) {
   background: var(--claude-selected) !important;
   background-image: none !important;
   border-color: var(--claude-selected) !important;
   color: var(--claude-selected) !important;
 }
 
-html.theme-a #plans .pricing-slider [class*="bg-[#d8c7b2]"],
-html.theme-a #plans .pricing-slider [class*="bg-[#fffaf1]"] {
+html.brand-palette #plans .pricing-slider [class*="bg-[#d8c7b2]"],
+html.brand-palette #plans .pricing-slider [class*="bg-[#fffaf1]"] {
   background: rgb(250 249 245 / 0.24) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.28) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option] {
+html.brand-palette body main section#plans [data-duration-option] {
   background: var(--claude-surface-raised) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.12) !important;
   color: var(--claude-ink) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
   background: var(--claude-selected) !important;
   background-image: none !important;
   border-color: var(--claude-selected) !important;
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-best-value-badge {
   background: var(--claude-selected) !important;
   border-color: var(--claude-selected) !important;
   box-shadow: none !important;
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card {
+html.brand-palette body main section#plans .pricing-card {
   background: var(--claude-surface) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.14) !important;
@@ -6389,8 +6356,8 @@ html.theme-a body main section#plans .pricing-card {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
   background: var(--claude-selected) !important;
   background-image: none !important;
   border-color: var(--claude-selected) !important;
@@ -6398,128 +6365,128 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is(h3, p, div, span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
+html.brand-palette body main section#plans .pricing-card :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg) {
   color: var(--claude-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette body main section#plans .pricing-card :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
   color: var(--claude-muted) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg) {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
   color: rgb(20 20 19 / 0.66) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette body main section#plans .pricing-card :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: var(--claude-surface-raised) !important;
   background-image: none !important;
   border-color: rgb(250 249 245 / 0.12) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/10"], [class*="bg-white/12"], [class*="bg-[#fbf6ed]"], [class*="bg-[#f5eadb]"]) {
   background: rgb(20 20 19 / 0.06) !important;
   background-image: none !important;
   border-color: rgb(20 20 19 / 0.14) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: rgb(250 249 245 / 0.16) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: rgb(20 20 19 / 0.16) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#plans .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
+html.brand-palette body main section#plans .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge {
   background: var(--claude-selected) !important;
   background-image: none !important;
   border-color: var(--claude-selected) !important;
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge {
   background: var(--claude-selected-ink) !important;
   border-color: var(--claude-selected-ink) !important;
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans .pricing-card > a,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
+html.brand-palette body main section#plans .pricing-card > a,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta {
   background: var(--claude-selected) !important;
   background-image: none !important;
   border-color: var(--claude-selected) !important;
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card > a svg,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a svg,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans .pricing-card > a svg,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a svg,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta svg {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta {
   background: var(--claude-selected-ink) !important;
   border-color: var(--claude-selected-ink) !important;
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-duration > div button .pricing-best-value-badge {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg),
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
   color: var(--claude-selected-ink) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]),
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]),
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] :is([class*="text-[#75695d]"], [class*="text-[#6f6254]"], [class*="text-[#efe2d2]"]) {
   color: rgb(20 20 19 / 0.66) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge,
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
   background: var(--claude-selected-ink) !important;
   border-color: var(--claude-selected-ink) !important;
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span),
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span) {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span),
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge:is(span) {
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
   background: var(--claude-selected-ink) !important;
   border-color: var(--claude-selected-ink) !important;
   color: var(--claude-selected) !important;
 }
 
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta svg {
   color: var(--claude-selected) !important;
 }
 
 /* Unified card pass: match the visible surface of the open FAQ row while keeping section backgrounds intact. */
-html.theme-a {
+html.brand-palette {
   --unified-card-surface: rgb(245 239 231);
   --unified-card-border: rgb(222 211 196 / 0.82);
   --unified-card-border-strong: rgb(55 47 40 / 0.42);
@@ -6552,7 +6519,7 @@ html.theme-a {
   --flat-earth-accent: var(--unified-card-control);
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card,
   .solution-card-visual-frame,
   .solution-card-copy-frame,
@@ -6614,7 +6581,7 @@ html.theme-a body main :is(
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card,
   .how-layer-card,
   .audience-sales-card,
@@ -6632,7 +6599,7 @@ html.theme-a body main :is(
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card,
   .how-layer-card,
   .audience-sales-card,
@@ -6648,7 +6615,7 @@ html.theme-a body main :is(
   color: var(--unified-card-muted) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card::before,
   .solution-card::after,
   .sales-flow-card::before,
@@ -6665,26 +6632,26 @@ html.theme-a body main :is(
   opacity: 0 !important;
 }
 
-html.theme-a .faq-list-card {
+html.brand-palette .faq-list-card {
   background: var(--unified-card-surface) !important;
   border-color: var(--unified-card-border) !important;
 }
 
-html.theme-a .faq-list-item,
-html.theme-a .faq-list-item:hover,
-html.theme-a .faq-list-item[open] {
+html.brand-palette .faq-list-item,
+html.brand-palette .faq-list-item:hover,
+html.brand-palette .faq-list-item[open] {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
 }
 
-html.theme-a .faq-list-item[open] .faq-toggle-icon,
-html.theme-a .faq-list-item .faq-toggle-icon {
+html.brand-palette .faq-list-item[open] .faq-toggle-icon,
+html.brand-palette .faq-list-item .faq-toggle-icon {
   background: var(--unified-card-surface) !important;
   border-color: var(--unified-card-border) !important;
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card-diagram-data span,
   .solution-card-diagram-workflow span,
   .sales-flow-connector-segment,
@@ -6705,83 +6672,83 @@ html.theme-a body main :is(
   color: var(--unified-card-control) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .solution-card-check::before,
   .solution-card-diagram-workflow::before
 ) {
   border-color: var(--unified-card-control) !important;
 }
 
-html.theme-a body main section#plans {
+html.brand-palette body main section#plans {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans :is(.pricing-reveal-header h2, .pricing-reveal-header p, .pricing-axis-label, .pricing-duration > p) {
+html.brand-palette body main section#plans :is(.pricing-reveal-header h2, .pricing-reveal-header p, .pricing-axis-label, .pricing-duration > p) {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-axis-insight.text-white,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-axis-insight.text-white,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
   background: var(--unified-card-surface) !important;
   border-color: var(--unified-card-border) !important;
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option],
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+html.brand-palette body main section#plans [data-duration-option],
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
   border-color: var(--unified-card-border) !important;
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"],
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] {
   border-color: var(--unified-card-control) !important;
   box-shadow: inset 0 0 0 2px var(--unified-card-control) !important;
 }
 
-html.theme-a body main section#plans [data-duration-option] span,
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
-html.theme-a body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span,
-html.theme-a body main section#plans .pricing-duration > div button .pricing-best-value-badge {
+html.brand-palette body main section#plans [data-duration-option] span,
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2a241d]"] span,
+html.brand-palette body main section#plans [data-duration-option][class*="bg-[#2A241D]"] span,
+html.brand-palette body main section#plans .pricing-duration > div button .pricing-best-value-badge {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card,
-html.theme-a body main section#plans .pricing-card.pricing-card-featured,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+html.brand-palette body main section#plans .pricing-card,
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
   border-color: var(--unified-card-border) !important;
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
   border-color: var(--unified-card-border-strong) !important;
   box-shadow:
     0 0 0 2px rgb(23 23 22 / 0.12),
     0 18px 40px rgb(19 19 20 / 0.08) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is(h3, p, div, span, svg),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
+html.brand-palette body main section#plans .pricing-card :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is(
+html.brand-palette body main section#plans .pricing-card :is(
   [class*="bg-white/10"],
   [class*="bg-white/12"],
   [class*="bg-[#fbf6ed]"],
   [class*="bg-[#f5eadb]"]
 ),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is(
   [class*="bg-white/10"],
   [class*="bg-white/12"],
   [class*="bg-[#fbf6ed]"],
@@ -6792,16 +6759,16 @@ html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(
   border-color: var(--unified-card-border) !important;
 }
 
-html.theme-a body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
+html.brand-palette body main section#plans .pricing-card :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]),
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is([class*="bg-white/20"], [class*="bg-[#e8dfd2]"]) {
   background: var(--unified-card-line) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#plans .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] .pricing-recommended-badge {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
   border-color: var(--unified-card-border-strong) !important;
@@ -6809,7 +6776,7 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
   box-shadow: none !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .pricing-card > a,
   .pricing-card > a.pricing-plan-cta,
   article.pricing-card.pricing-card-featured > a,
@@ -6827,7 +6794,7 @@ html.theme-a body main :is(
   color: var(--unified-card-control-ink) !important;
 }
 
-html.theme-a body main :is(
+html.brand-palette body main :is(
   .pricing-card > a,
   .pricing-card > a.pricing-plan-cta,
   article.pricing-card.pricing-card-featured > a,
@@ -6841,17 +6808,17 @@ html.theme-a body main :is(
   color: var(--unified-card-control-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-reveal-header :is(h2, p),
-html.theme-a body main section#plans > div > .pricing-duration > p {
+html.brand-palette body main section#plans .pricing-reveal-header :is(h2, p),
+html.brand-palette body main section#plans > div > .pricing-duration > p {
   color: #faf9f5 !important;
 }
 
-html.theme-a body main section#plans .pricing-reveal-header p,
-html.theme-a body main section#plans .pricing-duration > p {
+html.brand-palette body main section#plans .pricing-reveal-header p,
+html.brand-palette body main section#plans .pricing-duration > p {
   color: rgb(250 249 245 / 0.72) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
   border-color: var(--unified-card-border) !important;
@@ -6859,25 +6826,25 @@ html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs :is(h3, p, div, span, button, svg),
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-copy,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs :is(h3, p, div, span, button, svg),
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-copy,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight {
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
   background: var(--unified-card-surface) !important;
   background-image: none !important;
   border-color: var(--unified-card-border) !important;
   color: var(--unified-card-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans .pricing-card > a.pricing-plan-cta,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
   background: var(--unified-card-control) !important;
   background-image: none !important;
   border-color: var(--unified-card-control) !important;
@@ -6885,32 +6852,32 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
   color: var(--unified-card-control-ink) !important;
 }
 
-html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta :is(span, svg),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta :is(span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg) {
+html.brand-palette body main section#plans .pricing-card > a.pricing-plan-cta :is(span, svg),
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta :is(span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta :is(span, svg) {
   color: var(--unified-card-control-ink) !important;
 }
 
 /* Latest correction: pricing gets the same page background, FAQ returns to its native open/closed colors. */
-html.theme-a body main section#plans {
+html.brand-palette body main section#plans {
   background-color: var(--ref-bg) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   color: #131314 !important;
 }
 
-html.theme-a body main section#plans .pricing-reveal-header :is(h2, p),
-html.theme-a body main section#plans .pricing-duration > p {
+html.brand-palette body main section#plans .pricing-reveal-header :is(h2, p),
+html.brand-palette body main section#plans .pricing-duration > p {
   color: #131314 !important;
 }
 
-html.theme-a body main section#plans .pricing-reveal-header p,
-html.theme-a body main section#plans .pricing-duration > p {
+html.brand-palette body main section#plans .pricing-reveal-header p,
+html.brand-palette body main section#plans .pricing-duration > p {
   color: #3d3d3a !important;
 }
 
-html.theme-a body main .faq-list-card {
+html.brand-palette body main .faq-list-card {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -6918,7 +6885,7 @@ html.theme-a body main .faq-list-card {
   color: #131314 !important;
 }
 
-html.theme-a body main .faq-list-item {
+html.brand-palette body main .faq-list-item {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
@@ -6926,18 +6893,18 @@ html.theme-a body main .faq-list-item {
   color: #131314 !important;
 }
 
-html.theme-a body main .faq-list-item:hover,
-html.theme-a body main .faq-list-item[open] {
+html.brand-palette body main .faq-list-item:hover,
+html.brand-palette body main .faq-list-item[open] {
   background: rgb(242 235 225 / 0.48) !important;
   background-image: none !important;
 }
 
-html.theme-a body main .faq-list-card :is(h3, p, div, span, summary) {
+html.brand-palette body main .faq-list-card :is(h3, p, div, span, summary) {
   color: #131314 !important;
 }
 
-html.theme-a body main .faq-toggle-icon,
-html.theme-a body main .faq-list-item .faq-toggle-icon {
+html.brand-palette body main .faq-toggle-icon,
+html.brand-palette body main .faq-list-item .faq-toggle-icon {
   background: rgb(248 244 237 / 0.76) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -6945,13 +6912,13 @@ html.theme-a body main .faq-list-item .faq-toggle-icon {
   color: #6f6254 !important;
 }
 
-html.theme-a body main .faq-list-item[open] .faq-toggle-icon {
+html.brand-palette body main .faq-list-item[open] .faq-toggle-icon {
   background: rgb(242 235 225 / 0.78) !important;
   border-color: var(--ref-border-strong) !important;
   color: #131314 !important;
 }
 
-html.theme-a body main section#faq .faq-list-card {
+html.brand-palette body main section#faq .faq-list-card {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -6959,7 +6926,7 @@ html.theme-a body main section#faq .faq-list-card {
   color: #131314 !important;
 }
 
-html.theme-a body main section#faq .faq-list-item {
+html.brand-palette body main section#faq .faq-list-item {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
@@ -6967,18 +6934,18 @@ html.theme-a body main section#faq .faq-list-item {
   color: #131314 !important;
 }
 
-html.theme-a body main section#faq .faq-list-item:hover,
-html.theme-a body main section#faq .faq-list-item[open] {
+html.brand-palette body main section#faq .faq-list-item:hover,
+html.brand-palette body main section#faq .faq-list-item[open] {
   background: rgb(242 235 225 / 0.48) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#faq .faq-list-card :is(h3, p, div, span, summary) {
+html.brand-palette body main section#faq .faq-list-card :is(h3, p, div, span, summary) {
   color: #131314 !important;
 }
 
-html.theme-a body main section#faq .faq-toggle-icon,
-html.theme-a body main section#faq .faq-list-item .faq-toggle-icon {
+html.brand-palette body main section#faq .faq-toggle-icon,
+html.brand-palette body main section#faq .faq-list-item .faq-toggle-icon {
   background: rgb(248 244 237 / 0.76) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
@@ -6986,40 +6953,40 @@ html.theme-a body main section#faq .faq-list-item .faq-toggle-icon {
   color: #6f6254 !important;
 }
 
-html.theme-a body main section#faq .faq-list-item[open] .faq-toggle-icon {
+html.brand-palette body main section#faq .faq-list-item[open] .faq-toggle-icon {
   background: rgb(242 235 225 / 0.78) !important;
   border-color: var(--ref-border-strong) !important;
   color: #131314 !important;
 }
 
-html.theme-a body main section#faq div.faq-list-card.divide-y {
+html.brand-palette body main section#faq div.faq-list-card.divide-y {
   background: var(--ref-card) !important;
   background-image: none !important;
   border-color: var(--ref-border) !important;
   box-shadow: 0 1px 0 rgb(19 19 20 / 0.035) !important;
 }
 
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item {
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
 }
 
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item:hover,
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] {
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item:hover,
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] {
   background: rgb(242 235 225 / 0.48) !important;
   background-image: none !important;
 }
 
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item .faq-toggle-icon {
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item .faq-toggle-icon {
   background: rgb(248 244 237 / 0.76) !important;
   border-color: var(--ref-border) !important;
   box-shadow: none !important;
   color: #6f6254 !important;
 }
 
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] .faq-toggle-icon {
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] .faq-toggle-icon {
   background: rgb(242 235 225 / 0.78) !important;
   border-color: var(--ref-border-strong) !important;
   color: #131314 !important;
@@ -7246,63 +7213,63 @@ html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.fa
   }
 }
 
-html.theme-a body main #how-it-works .how-layer-card {
+html.brand-palette body main #how-it-works .how-layer-card {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-card) !important;
   color: #1B1916 !important;
 }
 
-html.theme-a body main section#how-it-works .how-layer-stack > article.how-layer-card.how-layer-card {
+html.brand-palette body main section#how-it-works .how-layer-stack > article.how-layer-card.how-layer-card {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-card) !important;
   color: #1B1916 !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-icon {
+html.brand-palette body main #how-it-works .how-layer-icon {
   border-color: rgba(204, 120, 92, 0.25) !important;
   background: var(--clay-tint) !important;
   color: var(--clay) !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-icon svg,
-html.theme-a body main #how-it-works .how-layer-badge svg,
-html.theme-a body main #how-it-works .how-process-arrow,
-html.theme-a body main #how-it-works .how-layer-arrow svg {
+html.brand-palette body main #how-it-works .how-layer-icon svg,
+html.brand-palette body main #how-it-works .how-layer-badge svg,
+html.brand-palette body main #how-it-works .how-process-arrow,
+html.brand-palette body main #how-it-works .how-layer-arrow svg {
   color: var(--clay) !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-icon svg,
-html.theme-a body main #how-it-works .how-layer-icon svg *,
-html.theme-a body main #how-it-works .how-layer-badge svg,
-html.theme-a body main #how-it-works .how-layer-badge svg * {
+html.brand-palette body main #how-it-works .how-layer-icon svg,
+html.brand-palette body main #how-it-works .how-layer-icon svg *,
+html.brand-palette body main #how-it-works .how-layer-badge svg,
+html.brand-palette body main #how-it-works .how-layer-badge svg * {
   stroke: var(--clay) !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-badge {
+html.brand-palette body main #how-it-works .how-layer-badge {
   border-color: var(--border-soft) !important;
   background: transparent !important;
   color: #1B1916 !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-card--decision .how-layer-badge,
-html.theme-a body main #how-it-works .how-layer-card--decision .how-process-chip {
+html.brand-palette body main #how-it-works .how-layer-card--decision .how-layer-badge,
+html.brand-palette body main #how-it-works .how-layer-card--decision .how-process-chip {
   border-color: rgba(204, 120, 92, 0.25) !important;
   background: var(--clay-tint) !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-title,
-html.theme-a body main #how-it-works .how-process-chip {
+html.brand-palette body main #how-it-works .how-layer-title,
+html.brand-palette body main #how-it-works .how-process-chip {
   color: #1B1916 !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-body,
-html.theme-a body main #how-it-works .how-layer-arrow-label {
+html.brand-palette body main #how-it-works .how-layer-body,
+html.brand-palette body main #how-it-works .how-layer-arrow-label {
   color: hsl(var(--muted-foreground)) !important;
 }
 
-html.theme-a body main #how-it-works .how-layer-card--data .how-process-chip {
+html.brand-palette body main #how-it-works .how-layer-card--data .how-process-chip {
   border-color: var(--border-soft) !important;
   background: #EDE6D7 !important;
 }
@@ -7569,26 +7536,26 @@ html.theme-a body main #how-it-works .how-layer-card--data .how-process-chip {
   background: var(--clay-tint);
 }
 
-html.theme-a body main .hero-project-finder-visual.hero-map-visual,
-html.theme-a body main .hero-project-finder-card {
+html.brand-palette body main .hero-project-finder-visual.hero-map-visual,
+html.brand-palette body main .hero-project-finder-card {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-card) !important;
 }
 
-html.theme-a body main section#hero.hero-section .hero-visual-slot > .hero-map-visual.hero-project-finder-visual {
+html.brand-palette body main section#hero.hero-section .hero-visual-slot > .hero-map-visual.hero-project-finder-visual {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-card) !important;
 }
 
-html.theme-a body main .hero-project-badge {
+html.brand-palette body main .hero-project-badge {
   border-color: var(--border-soft) !important;
   background: transparent !important;
   color: #1B1916 !important;
 }
 
-html.theme-a body main .hero-project-badge--signal {
+html.brand-palette body main .hero-project-badge--signal {
   border-color: rgba(204, 120, 92, 0.25) !important;
   background: var(--clay-tint) !important;
 }
@@ -7803,17 +7770,17 @@ html.theme-a body main .hero-project-badge--signal {
   min-inline-size: 0;
 }
 
-html.theme-a body main section#problem .problem-visual-card,
-html.theme-a body main section#problem .problem-visual-frame,
-html.theme-a body main section#problem .market-problem-presentation-visual {
+html.brand-palette body main section#problem .problem-visual-card,
+html.brand-palette body main section#problem .problem-visual-frame,
+html.brand-palette body main section#problem .market-problem-presentation-visual {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-card) !important;
   color: #1B1916 !important;
 }
 
-html.theme-a body main section#problem .problem-visual-frame,
-html.theme-a body main section#problem .market-problem-presentation-visual {
+html.brand-palette body main section#problem .problem-visual-frame,
+html.brand-palette body main section#problem .market-problem-presentation-visual {
   box-shadow: none !important;
 }
 
@@ -8963,19 +8930,19 @@ body main section#plans [data-duration-option][class*="bg-[#2a241d]"] {
   }
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track,
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track {
   background: var(--border-soft) !important;
   border-color: var(--border-soft) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail {
   background: var(--clay) !important;
   border-color: var(--clay) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle {
   background: var(--clay) !important;
   border-color: var(--surface-card) !important;
@@ -8984,31 +8951,31 @@ body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-hand
     0 10px 20px rgba(27, 25, 22, 0.12) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot,
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot {
   background: #1B1916 !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper,
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper {
   background: var(--surface-card) !important;
   border-color: rgba(204, 120, 92, 0.46) !important;
   box-shadow: 0 0 0 3px var(--surface-card) !important;
 }
 
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper[class*="bg-[#CC785C]"],
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper[class*="bg-[#CC785C]"],
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper[class*="bg-[#CC785C]"] {
   background: var(--clay) !important;
   border-color: var(--clay) !important;
   box-shadow: 0 0 0 4px rgba(204, 120, 92, 0.16) !important;
 }
 
-html.theme-a body main section#plans .pricing-duration [data-duration-option] > span.block,
+html.brand-palette body main section#plans .pricing-duration [data-duration-option] > span.block,
 body main section#plans .pricing-duration [data-duration-option] > span.block {
   color: inherit !important;
 }
 
-html.theme-a body main section#plans .pricing-duration > p.pricing-price-change,
+html.brand-palette body main section#plans .pricing-duration > p.pricing-price-change,
 body main section#plans .pricing-duration > p.pricing-price-change {
   color: #6B6259 !important;
 }
@@ -9059,11 +9026,11 @@ body main section#sales-flow .sales-flow-card {
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-html.theme-a body main section#sales-flow .sales-flow-card,
-html.theme-a body main section#sales-flow .sales-flow-card-neutral,
-html.theme-a body main section#sales-flow .sales-flow-card-soft,
-html.theme-a body main section#sales-flow .sales-flow-card-warm,
-html.theme-a body main section#sales-flow .sales-flow-card-destination {
+html.brand-palette body main section#sales-flow .sales-flow-card,
+html.brand-palette body main section#sales-flow .sales-flow-card-neutral,
+html.brand-palette body main section#sales-flow .sales-flow-card-soft,
+html.brand-palette body main section#sales-flow .sales-flow-card-warm,
+html.brand-palette body main section#sales-flow .sales-flow-card-destination {
   background: var(--surface-card) !important;
   background-image: none !important;
   border-color: var(--border-soft) !important;
@@ -9073,8 +9040,8 @@ html.theme-a body main section#sales-flow .sales-flow-card-destination {
 
 body main section#sales-flow .sales-flow-card::before,
 body main section#sales-flow .sales-flow-card::after,
-html.theme-a body main section#sales-flow .sales-flow-card::before,
-html.theme-a body main section#sales-flow .sales-flow-card::after {
+html.brand-palette body main section#sales-flow .sales-flow-card::before,
+html.brand-palette body main section#sales-flow .sales-flow-card::after {
   content: none !important;
 }
 
@@ -9132,7 +9099,7 @@ body main section#sales-flow .sales-flow-progress-fill {
 }
 
 body main section#sales-flow .sales-flow-title,
-html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-title {
+html.brand-palette body main section#sales-flow .sales-flow-card .sales-flow-title {
   margin: 0;
   color: #1B1916 !important;
   font-size: clamp(1.12rem, 1.7vw, 1.26rem);
@@ -9141,7 +9108,7 @@ html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-title {
 }
 
 body main section#sales-flow .sales-flow-body,
-html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-body {
+html.brand-palette body main section#sales-flow .sales-flow-card .sales-flow-body {
   margin: 0;
   color: #6B6259 !important;
   font-size: 0.92rem;
@@ -9149,7 +9116,7 @@ html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-body {
 }
 
 body main section#sales-flow .sales-flow-outcome,
-html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-outcome {
+html.brand-palette body main section#sales-flow .sales-flow-card .sales-flow-outcome {
   display: grid;
   gap: 0.25rem;
   margin: 0;
@@ -9163,13 +9130,13 @@ html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-outcome {
 }
 
 body main section#sales-flow .sales-flow-outcome strong,
-html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-outcome strong {
+html.brand-palette body main section#sales-flow .sales-flow-card .sales-flow-outcome strong {
   color: #1B1916 !important;
   font-weight: 900;
 }
 
 body main section#sales-flow .sales-flow-outcome span,
-html.theme-a body main section#sales-flow .sales-flow-card .sales-flow-outcome span {
+html.brand-palette body main section#sales-flow .sales-flow-card .sales-flow-outcome span {
   color: #1B1916 !important;
 }
 
@@ -9287,7 +9254,7 @@ body main section#sales-flow .sales-flow-cta:focus-visible {
 }
 
 body main section#faq,
-html.theme-a body main section#faq {
+html.brand-palette body main section#faq {
   background: var(--page-bg) !important;
   background-color: var(--page-bg) !important;
   background-image: none !important;
@@ -9295,8 +9262,8 @@ html.theme-a body main section#faq {
 
 body main section#faq > div > header,
 body main section#faq > div > header > div,
-html.theme-a body main section#faq > div > header,
-html.theme-a body main section#faq > div > header > div {
+html.brand-palette body main section#faq > div > header,
+html.brand-palette body main section#faq > div > header > div {
   border: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
@@ -9308,15 +9275,15 @@ body main section#faq > div > header::before,
 body main section#faq > div > header::after,
 body main section#faq > div > header > div::before,
 body main section#faq > div > header > div::after,
-html.theme-a body main section#faq > div > header::before,
-html.theme-a body main section#faq > div > header::after,
-html.theme-a body main section#faq > div > header > div::before,
-html.theme-a body main section#faq > div > header > div::after {
+html.brand-palette body main section#faq > div > header::before,
+html.brand-palette body main section#faq > div > header::after,
+html.brand-palette body main section#faq > div > header > div::before,
+html.brand-palette body main section#faq > div > header > div::after {
   content: none !important;
 }
 
 body main section#plans,
-html.theme-a body main section#plans {
+html.brand-palette body main section#plans {
   background: var(--page-bg) !important;
   background-color: var(--page-bg) !important;
   background-image: none !important;
@@ -9325,16 +9292,16 @@ html.theme-a body main section#plans {
 }
 
 body main section#plans :is(.pricing-reveal-header, .pricing-slider, .pricing-duration, .pricing-card),
-html.theme-a body main section#plans :is(.pricing-reveal-header, .pricing-slider, .pricing-duration, .pricing-card) {
+html.brand-palette body main section#plans :is(.pricing-reveal-header, .pricing-slider, .pricing-duration, .pricing-card) {
   animation: none !important;
 }
 
 body main section#plans .pricing-reveal-header,
 body main section#plans .pricing-reveal-header > header,
 body main section#plans .pricing-reveal-header > header > div,
-html.theme-a body main section#plans .pricing-reveal-header,
-html.theme-a body main section#plans .pricing-reveal-header > header,
-html.theme-a body main section#plans .pricing-reveal-header > header > div {
+html.brand-palette body main section#plans .pricing-reveal-header,
+html.brand-palette body main section#plans .pricing-reveal-header > header,
+html.brand-palette body main section#plans .pricing-reveal-header > header > div {
   border: 0 !important;
   background: transparent !important;
   background-image: none !important;
@@ -9342,17 +9309,17 @@ html.theme-a body main section#plans .pricing-reveal-header > header > div {
 }
 
 body main section#plans .pricing-reveal-header :is(h2, p),
-html.theme-a body main section#plans .pricing-reveal-header :is(h2, p) {
+html.brand-palette body main section#plans .pricing-reveal-header :is(h2, p) {
   color: #1B1916 !important;
 }
 
 body main section#plans .pricing-reveal-header p,
-html.theme-a body main section#plans .pricing-reveal-header p {
+html.brand-palette body main section#plans .pricing-reveal-header p {
   color: #6B6259 !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
   inline-size: min(100%, 48rem);
   border: 1px solid var(--border-soft) !important;
   border-radius: 1.25rem !important;
@@ -9365,14 +9332,14 @@ html.theme-a body main section#plans .pricing-slider.pricing-slider-labs {
 }
 
 body main section#plans .pricing-axis-copy,
-html.theme-a body main section#plans .pricing-axis-copy {
+html.brand-palette body main section#plans .pricing-axis-copy {
   display: grid;
   gap: 0.5rem;
   color: #1B1916 !important;
 }
 
 body main section#plans .pricing-axis-label,
-html.theme-a body main section#plans .pricing-axis-label {
+html.brand-palette body main section#plans .pricing-axis-label {
   color: #1B1916 !important;
   font-size: clamp(1.2rem, 2vw, 1.55rem) !important;
   line-height: 1.55 !important;
@@ -9380,10 +9347,10 @@ html.theme-a body main section#plans .pricing-axis-label {
 
 body main section#plans .pricing-axis-insight,
 body main section#plans .pricing-axis-insight.text-white,
-html.theme-a body main section#plans .pricing-axis-insight,
-html.theme-a body main section#plans .pricing-axis-insight.text-white,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
+html.brand-palette body main section#plans .pricing-axis-insight,
+html.brand-palette body main section#plans .pricing-axis-insight.text-white,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-insight.text-white {
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
@@ -9399,15 +9366,15 @@ html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricin
 }
 
 body main section#plans .pricing-slider-control,
-html.theme-a body main section#plans .pricing-slider-control {
+html.brand-palette body main section#plans .pricing-slider-control {
   block-size: 5.6rem !important;
   margin-block-start: 1.25rem !important;
   padding-inline: 1.35rem !important;
 }
 
 body main section#plans .pricing-slider-track,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track,
-html.theme-a body main section#plans .pricing-slider-track {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track,
+html.brand-palette body main section#plans .pricing-slider-track {
   inset-block-start: 1.7rem !important;
   inset-inline: 1.35rem !important;
   block-size: 0.48rem !important;
@@ -9419,8 +9386,8 @@ html.theme-a body main section#plans .pricing-slider-track {
 }
 
 body main section#plans .pricing-slider-rail,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
-html.theme-a body main section#plans .pricing-slider-rail {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
+html.brand-palette body main section#plans .pricing-slider-rail {
   block-size: 100%;
   border-radius: inherit;
   background: var(--clay) !important;
@@ -9429,13 +9396,13 @@ html.theme-a body main section#plans .pricing-slider-rail {
 }
 
 body main section#plans .pricing-slider-arrow,
-html.theme-a body main section#plans .pricing-slider-arrow {
+html.brand-palette body main section#plans .pricing-slider-arrow {
   display: none !important;
 }
 
 body main section#plans .pricing-slider-handle,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
-html.theme-a body main section#plans .pricing-slider-handle {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
+html.brand-palette body main section#plans .pricing-slider-handle {
   inset-block-start: 1.7rem !important;
   inline-size: 1.55rem !important;
   block-size: 1.55rem !important;
@@ -9449,15 +9416,15 @@ html.theme-a body main section#plans .pricing-slider-handle {
 }
 
 body main section#plans .pricing-slider-handle-dot,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot {
   inline-size: 0.4rem !important;
   block-size: 0.4rem !important;
   background: #1B1916 !important;
 }
 
 body main section#plans .pricing-slider-stopper,
-html.theme-a body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper,
-html.theme-a body main section#plans .pricing-slider-stopper {
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper,
+html.brand-palette body main section#plans .pricing-slider-stopper {
   inset-block-start: 1.7rem !important;
   inline-size: 0.78rem !important;
   block-size: 0.78rem !important;
@@ -9469,7 +9436,7 @@ html.theme-a body main section#plans .pricing-slider-stopper {
 }
 
 body main section#plans .pricing-slider-stopper[data-active-stopper="true"],
-html.theme-a body main section#plans .pricing-slider-stopper[data-active-stopper="true"] {
+html.brand-palette body main section#plans .pricing-slider-stopper[data-active-stopper="true"] {
   inline-size: 1rem !important;
   block-size: 1rem !important;
   border-color: var(--surface-card) !important;
@@ -9478,7 +9445,7 @@ html.theme-a body main section#plans .pricing-slider-stopper[data-active-stopper
 }
 
 body main section#plans .pricing-slider-tick,
-html.theme-a body main section#plans .pricing-slider-tick {
+html.brand-palette body main section#plans .pricing-slider-tick {
   inset-block-start: 2rem !important;
   display: grid !important;
   place-items: end center;
@@ -9497,7 +9464,7 @@ html.theme-a body main section#plans .pricing-slider-tick {
 }
 
 body main section#plans .pricing-slider-tick-label,
-html.theme-a body main section#plans .pricing-slider-tick-label {
+html.brand-palette body main section#plans .pricing-slider-tick-label {
   position: static !important;
   display: block;
   inline-size: auto !important;
@@ -9507,21 +9474,21 @@ html.theme-a body main section#plans .pricing-slider-tick-label {
 
 body main section#plans .pricing-slider-tick[data-active-tick="true"],
 body main section#plans .pricing-slider-tick:hover,
-html.theme-a body main section#plans .pricing-slider-tick[data-active-tick="true"],
-html.theme-a body main section#plans .pricing-slider-tick:hover {
+html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"],
+html.brand-palette body main section#plans .pricing-slider-tick:hover {
   color: #1B1916 !important;
 }
 
 body main section#plans .pricing-slider-tick:focus-visible,
 body main section#plans .pricing-slider-handle:focus-visible,
-html.theme-a body main section#plans .pricing-slider-tick:focus-visible,
-html.theme-a body main section#plans .pricing-slider-handle:focus-visible {
+html.brand-palette body main section#plans .pricing-slider-tick:focus-visible,
+html.brand-palette body main section#plans .pricing-slider-handle:focus-visible {
   outline: 2px solid var(--clay) !important;
   outline-offset: 4px;
 }
 
 body main section#plans .pricing-selector-motto,
-html.theme-a body main section#plans .pricing-selector-motto {
+html.brand-palette body main section#plans .pricing-selector-motto {
   min-block-size: 1.6rem !important;
   color: #6B6259 !important;
   font-size: 0.86rem !important;
@@ -9530,7 +9497,7 @@ html.theme-a body main section#plans .pricing-selector-motto {
 }
 
 body main section#plans .pricing-duration,
-html.theme-a body main section#plans .pricing-duration {
+html.brand-palette body main section#plans .pricing-duration {
   position: relative;
   inline-size: min(100%, 36rem);
   margin-inline: auto;
@@ -9538,7 +9505,7 @@ html.theme-a body main section#plans .pricing-duration {
 }
 
 body main section#plans .pricing-duration-group,
-html.theme-a body main section#plans .pricing-duration > div.pricing-duration-group {
+html.brand-palette body main section#plans .pricing-duration > div.pricing-duration-group {
   inline-size: 100%;
   border: 1px solid #E4D8C8 !important;
   border-radius: 1.2rem !important;
@@ -9551,7 +9518,7 @@ html.theme-a body main section#plans .pricing-duration > div.pricing-duration-gr
 }
 
 body main section#plans .pricing-duration-option,
-html.theme-a body main section#plans [data-duration-option].pricing-duration-option {
+html.brand-palette body main section#plans [data-duration-option].pricing-duration-option {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -9567,7 +9534,7 @@ html.theme-a body main section#plans [data-duration-option].pricing-duration-opt
 }
 
 body main section#plans .pricing-duration-option[data-active-duration="true"],
-html.theme-a body main section#plans [data-duration-option].pricing-duration-option[data-active-duration="true"] {
+html.brand-palette body main section#plans [data-duration-option].pricing-duration-option[data-active-duration="true"] {
   background: #CC785C !important;
   color: #FFF7EF !important;
   box-shadow: 0 2px 8px rgba(204, 120, 92, 0.2) !important;
@@ -9575,18 +9542,18 @@ html.theme-a body main section#plans [data-duration-option].pricing-duration-opt
 
 @media (hover: hover) and (pointer: fine) {
   body main section#plans .pricing-duration-option:not([data-active-duration="true"]):hover,
-  html.theme-a body main section#plans .pricing-duration-option:not([data-active-duration="true"]):hover {
+  html.brand-palette body main section#plans .pricing-duration-option:not([data-active-duration="true"]):hover {
     background: rgba(204, 120, 92, 0.08) !important;
   }
 }
 
 body main section#plans .pricing-duration-option > span.block,
-html.theme-a body main section#plans .pricing-duration-option > span.block {
+html.brand-palette body main section#plans .pricing-duration-option > span.block {
   color: inherit !important;
 }
 
 body main section#plans .pricing-best-value-badge,
-html.theme-a body main section#plans .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-best-value-badge {
   position: absolute !important;
   display: inline-flex;
   align-items: center;
@@ -9604,14 +9571,14 @@ html.theme-a body main section#plans .pricing-best-value-badge {
 }
 
 body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge,
-html.theme-a body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge {
+html.brand-palette body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge {
   border-color: rgba(204, 120, 92, 0.4) !important;
   background: #CC785C !important;
   color: #FFF7EF !important;
 }
 
 body main section#plans .pricing-duration-note,
-html.theme-a body main section#plans .pricing-duration > p.pricing-duration-note {
+html.brand-palette body main section#plans .pricing-duration > p.pricing-duration-note {
   position: absolute;
   inset-block-end: 0;
   inline-size: 33.333%;
@@ -9637,7 +9604,7 @@ body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-
 }
 
 body main section#plans .pricing-cards,
-html.theme-a body main section#plans .pricing-cards {
+html.brand-palette body main section#plans .pricing-cards {
   align-items: stretch;
   gap: 1rem !important;
 }
@@ -9646,10 +9613,10 @@ body main section#plans .pricing-card,
 body main section#plans .pricing-card.pricing-card-featured,
 body main section#plans .pricing-card[data-active-plan="true"],
 body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"],
-html.theme-a body main section#plans .pricing-card,
-html.theme-a body main section#plans .pricing-card.pricing-card-featured,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
+html.brand-palette body main section#plans .pricing-card,
+html.brand-palette body main section#plans .pricing-card.pricing-card-featured,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] {
   display: flex;
   min-block-size: auto !important;
   min-height: auto !important;
@@ -9668,18 +9635,18 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
 
 body main section#plans .pricing-card::before,
 body main section#plans .pricing-card::after,
-html.theme-a body main section#plans .pricing-card::before,
-html.theme-a body main section#plans .pricing-card::after {
+html.brand-palette body main section#plans .pricing-card::before,
+html.brand-palette body main section#plans .pricing-card::after {
   content: none !important;
 }
 
 body main section#plans .pricing-card-head > [aria-hidden="true"],
-html.theme-a body main section#plans .pricing-card-head > [aria-hidden="true"] {
+html.brand-palette body main section#plans .pricing-card-head > [aria-hidden="true"] {
   display: none !important;
 }
 
 body main section#plans .pricing-card-head,
-html.theme-a body main section#plans .pricing-card-head {
+html.brand-palette body main section#plans .pricing-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9688,7 +9655,7 @@ html.theme-a body main section#plans .pricing-card-head {
 }
 
 body main section#plans .pricing-card[data-recommended-plan="true"],
-html.theme-a body main section#plans .pricing-card[data-recommended-plan="true"] {
+html.brand-palette body main section#plans .pricing-card[data-recommended-plan="true"] {
   border-color: rgba(204, 120, 92, 0.6) !important;
   background: #F6EDE4 !important;
   box-shadow:
@@ -9698,7 +9665,7 @@ html.theme-a body main section#plans .pricing-card[data-recommended-plan="true"]
 }
 
 body main section#plans .pricing-card[data-active-plan="true"]:not([data-recommended-plan="true"]),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"]:not([data-recommended-plan="true"]) {
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"]:not([data-recommended-plan="true"]) {
   border-color: rgba(204, 120, 92, 0.34) !important;
   box-shadow:
     var(--shadow-card),
@@ -9709,15 +9676,15 @@ body main section#plans .pricing-card :is(h3, p, div, span, svg),
 body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
 body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
 body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg),
-html.theme-a body main section#plans .pricing-card :is(h3, p, div, span, svg),
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
+html.brand-palette body main section#plans .pricing-card :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] :is(h3, p, div, span, svg) {
   color: #1B1916 !important;
 }
 
 body main section#plans .pricing-plan-title,
-html.theme-a body main section#plans .pricing-plan-title {
+html.brand-palette body main section#plans .pricing-plan-title {
   flex: 1 1 auto;
   margin: 0;
   min-block-size: 2rem;
@@ -9731,9 +9698,9 @@ html.theme-a body main section#plans .pricing-plan-title {
 
 body main section#plans .pricing-recommended-badge,
 body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured .pricing-recommended-badge,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] .pricing-recommended-badge {
   position: static !important;
   flex: 0 0 auto;
   border: 1px solid rgba(204, 120, 92, 0.25) !important;
@@ -9749,12 +9716,12 @@ html.theme-a body main section#plans .pricing-card[data-active-plan="true"] .pri
 }
 
 body main section#plans .pricing-plan-price-group,
-html.theme-a body main section#plans .pricing-plan-price-group {
+html.brand-palette body main section#plans .pricing-plan-price-group {
   margin-block-start: 1.15rem !important;
 }
 
 body main section#plans .pricing-plan-price,
-html.theme-a body main section#plans .pricing-plan-price {
+html.brand-palette body main section#plans .pricing-plan-price {
   color: #2A241D !important;
   font-size: clamp(1.55rem, 2.2vw, 2rem) !important;
   font-weight: 950 !important;
@@ -9763,27 +9730,27 @@ html.theme-a body main section#plans .pricing-plan-price {
 }
 
 body main section#plans .pricing-plan-currency,
-html.theme-a body main section#plans .pricing-plan-currency {
+html.brand-palette body main section#plans .pricing-plan-currency {
   color: #75695D !important;
   font-size: 0.85rem !important;
   font-weight: 600 !important;
 }
 
 body main section#plans .pricing-plan-stages,
-html.theme-a body main section#plans .pricing-plan-stages {
+html.brand-palette body main section#plans .pricing-plan-stages {
   color: #75695D !important;
   font-size: 0.78rem !important;
   font-weight: 750 !important;
 }
 
 body main section#plans .pricing-card-divider,
-html.theme-a body main section#plans .pricing-card-divider {
+html.brand-palette body main section#plans .pricing-card-divider {
   margin-block: 1rem !important;
   background: var(--border-soft) !important;
 }
 
 body main section#plans .pricing-highlights,
-html.theme-a body main section#plans .pricing-highlights {
+html.brand-palette body main section#plans .pricing-highlights {
   display: grid;
   gap: 0.7rem !important;
   min-block-size: 8.5rem !important;
@@ -9795,13 +9762,13 @@ html.theme-a body main section#plans .pricing-highlights {
 }
 
 body main section#plans .pricing-highlight-item,
-html.theme-a body main section#plans .pricing-highlight-item {
+html.brand-palette body main section#plans .pricing-highlight-item {
   align-items: flex-start !important;
   color: #1B1916 !important;
 }
 
 body main section#plans .pricing-highlight-icon,
-html.theme-a body main section#plans .pricing-highlight-icon {
+html.brand-palette body main section#plans .pricing-highlight-icon {
   inline-size: 1.25rem !important;
   block-size: 1.25rem !important;
   border: 1px solid rgba(204, 120, 92, 0.25);
@@ -9810,18 +9777,18 @@ html.theme-a body main section#plans .pricing-highlight-icon {
 }
 
 body main section#plans .pricing-highlight-icon svg,
-html.theme-a body main section#plans .pricing-highlight-icon svg {
+html.brand-palette body main section#plans .pricing-highlight-icon svg {
   color: var(--clay) !important;
   stroke: var(--clay) !important;
 }
 
 body main section#plans .pricing-coverage-wrap,
-html.theme-a body main section#plans .pricing-coverage-wrap {
+html.brand-palette body main section#plans .pricing-coverage-wrap {
   margin-block-start: 1rem !important;
 }
 
 body main section#plans .pricing-coverage,
-html.theme-a body main section#plans .pricing-coverage {
+html.brand-palette body main section#plans .pricing-coverage {
   border: 1px solid var(--border-soft) !important;
   border-radius: 1rem !important;
   background: rgba(237, 230, 215, 0.56) !important;
@@ -9837,7 +9804,7 @@ body main section#plans .pricing-card[data-recommended-plan="true"] .pricing-cov
 }
 
 body main section#plans .pricing-coverage-header,
-html.theme-a body main section#plans .pricing-coverage-header {
+html.brand-palette body main section#plans .pricing-coverage-header {
   margin-block-end: 0.65rem !important;
   color: #6B6259 !important;
   font-size: 0.74rem !important;
@@ -9845,19 +9812,19 @@ html.theme-a body main section#plans .pricing-coverage-header {
 }
 
 body main section#plans .pricing-coverage-value,
-html.theme-a body main section#plans .pricing-coverage-value {
+html.brand-palette body main section#plans .pricing-coverage-value {
   color: #A8573D !important;
 }
 
 body main section#plans .pricing-coverage-meter,
-html.theme-a body main section#plans .pricing-coverage-meter {
+html.brand-palette body main section#plans .pricing-coverage-meter {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.38rem !important;
 }
 
 body main section#plans .pricing-coverage-segment,
-html.theme-a body main section#plans .pricing-coverage-segment {
+html.brand-palette body main section#plans .pricing-coverage-segment {
   display: block;
   block-size: 0.48rem !important;
   border-radius: 999px;
@@ -9866,12 +9833,12 @@ html.theme-a body main section#plans .pricing-coverage-segment {
 }
 
 body main section#plans .pricing-coverage-segment[data-filled-segment="true"],
-html.theme-a body main section#plans .pricing-coverage-segment[data-filled-segment="true"] {
+html.brand-palette body main section#plans .pricing-coverage-segment[data-filled-segment="true"] {
   background: var(--clay) !important;
 }
 
 body main section#plans .pricing-addon,
-html.theme-a body main section#plans .pricing-addon {
+html.brand-palette body main section#plans .pricing-addon {
   margin-block-start: 1rem !important;
   border-block-start: 1px solid var(--border-soft) !important;
   color: #1B1916 !important;
@@ -9885,10 +9852,10 @@ body main section#plans .pricing-plan-cta,
 body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
 body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
 body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans .pricing-card > a.pricing-plan-cta,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-active-plan="true"] > a.pricing-plan-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -9916,35 +9883,35 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
 
 body main section#plans .pricing-plan-cta svg,
 body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans .pricing-card > a.pricing-plan-cta svg,
-html.theme-a body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans .pricing-card > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans .pricing-card[data-active-plan="true"] > a.pricing-plan-cta svg {
   color: #FFF7EF !important;
   stroke: #FFF7EF !important;
 }
 
 body main section#plans .pricing-plan-cta:hover,
-html.theme-a body main section#plans .pricing-plan-cta:hover {
+html.brand-palette body main section#plans .pricing-plan-cta:hover {
   border-color: #A8573D !important;
   background: #A8573D !important;
 }
 
 body main section#plans .pricing-plan-cta:focus-visible,
-html.theme-a body main section#plans .pricing-plan-cta:focus-visible {
+html.brand-palette body main section#plans .pricing-plan-cta:focus-visible {
   outline: 2px solid var(--clay) !important;
   outline-offset: 4px;
 }
 
 body main section#plans .pricing-card-pulse,
-html.theme-a body main section#plans .pricing-card-pulse {
+html.brand-palette body main section#plans .pricing-card-pulse {
   animation: none !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card],
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
   border-color: var(--border-soft) !important;
   background: var(--surface-card) !important;
   background-image: none !important;
@@ -9954,8 +9921,8 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card][data-a
 
 body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] {
   border-color: rgba(204, 120, 92, 0.6) !important;
   background: #F6EDE4 !important;
   background-image: none !important;
@@ -9966,7 +9933,7 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-recommend
 }
 
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]),
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]) {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]) {
   border-color: rgba(204, 120, 92, 0.34) !important;
   box-shadow:
     var(--shadow-card),
@@ -9975,8 +9942,8 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card][data-a
 
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] .pricing-recommended-badge,
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] .pricing-recommended-badge {
   border-color: rgba(204, 120, 92, 0.25) !important;
   background: var(--clay-tint) !important;
   background-image: none !important;
@@ -10049,7 +10016,7 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-recommend
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-card-head,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-card-head {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-card-head {
   display: grid;
   grid-template-rows: 1.55rem auto;
   align-content: start;
@@ -10060,14 +10027,14 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] .prici
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title {
   grid-row: 2;
   inline-size: 100%;
   text-align: center !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge {
   grid-row: 1;
   justify-self: center;
 }
@@ -10076,22 +10043,22 @@ body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price
 body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
 body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap,
 body main section#plans article.pricing-card[data-plan-card] .pricing-addon,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price-group,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price-group,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
   inline-size: 100%;
   text-align: center;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-highlights,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-highlights {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-highlights {
   inline-size: 100%;
   text-align: start !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-highlight-item,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-highlight-item {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-highlight-item {
   display: grid !important;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: start !important;
@@ -10101,9 +10068,9 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] .prici
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
   border-color: #CC785C !important;
   background-image: none !important;
   box-shadow:
@@ -10113,23 +10080,23 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-recommend
 }
 
 body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] {
   background: #F6EDE4 !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card],
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
-html.theme-a body main section#plans article.pricing-card[data-plan-card],
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
   display: grid !important;
   grid-template-rows: 4.45rem auto auto 12.25rem auto auto auto;
   align-content: start;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-card-head,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-card-head {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-card-head {
   position: relative;
   display: grid;
   min-block-size: 4.45rem;
@@ -10140,7 +10107,7 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] .prici
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-title {
   grid-row: auto;
   inline-size: 100%;
   margin: 0;
@@ -10150,8 +10117,8 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] .prici
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge {
   position: absolute !important;
   inset-block-start: 0.15rem;
   inset-inline-end: 0.1rem;
@@ -10166,33 +10133,33 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card][data-a
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price-group,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price-group {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-price-group {
   align-self: start;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider {
   align-self: center;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-highlights,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-highlights {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-highlights {
   min-block-size: 0 !important;
   align-content: start;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-wrap {
   align-self: start;
 }
 
 body main section#plans article.pricing-card[data-plan-card] .pricing-addon,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
   align-self: start;
 }
 
 body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta {
   align-self: end;
   margin-block-start: 0 !important;
 }
@@ -10201,9 +10168,9 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pr
   body main section#plans article.pricing-card[data-plan-card],
   body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
   body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
-  html.theme-a body main section#plans article.pricing-card[data-plan-card],
-  html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
-  html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
+  html.brand-palette body main section#plans article.pricing-card[data-plan-card],
+  html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+  html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] {
     grid-template-rows: 4.35rem auto auto auto auto auto auto;
   }
 }
@@ -10211,9 +10178,9 @@ html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pr
 body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head,
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head,
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head {
   position: relative !important;
   display: block !important;
   min-block-size: 4.45rem !important;
@@ -10223,9 +10190,9 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-recommend
 body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head > .pricing-plan-title,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head > .pricing-plan-title,
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head > .pricing-plan-title,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head > .pricing-plan-title,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head > .pricing-plan-title,
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head > .pricing-plan-title {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head > .pricing-plan-title {
   position: absolute !important;
   inset-block-start: 2.05rem;
   inset-inline: 0;
@@ -10238,9 +10205,9 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-recommend
 body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
 body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
 body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] > .pricing-card-head > .pricing-recommended-badge {
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured.pricing-card-recommended[data-plan-card][data-recommended-plan="true"][data-active-plan="true"] > .pricing-card-head > .pricing-recommended-badge {
   position: absolute !important;
   inset-block-start: 0.05rem !important;
   inset-inline-end: 0.1rem !important;
@@ -10255,17 +10222,17 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured.
 }
 
 .site-header .site-header-demo-link,
-html.theme-a .site-header .site-header-demo-link,
+html.brand-palette .site-header .site-header-demo-link,
 body main #demo button[type="submit"],
-html.theme-a body main #demo button[type="submit"],
+html.brand-palette body main #demo button[type="submit"],
 body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta {
   background: #C16B4E !important;
   background-image: none !important;
   border-color: #C16B4E !important;
@@ -10273,41 +10240,41 @@ html.theme-a body main section#plans article.pricing-card.pricing-card-featured[
 }
 
 .site-header .site-header-demo-link:hover,
-html.theme-a .site-header .site-header-demo-link:hover,
+html.brand-palette .site-header .site-header-demo-link:hover,
 body main #demo button[type="submit"]:hover,
-html.theme-a body main #demo button[type="submit"]:hover,
+html.brand-palette body main #demo button[type="submit"]:hover,
 body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta:hover,
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta:hover,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta:hover,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta:hover,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta:hover,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta:hover,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta:hover {
   background: #A8573D !important;
   border-color: #A8573D !important;
   color: #FFF7EF !important;
 }
 
 .site-header .site-header-demo-link svg,
-html.theme-a .site-header .site-header-demo-link svg,
+html.brand-palette .site-header .site-header-demo-link svg,
 body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta svg,
 body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta svg,
 body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta svg,
-html.theme-a body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg {
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg {
   color: #FFF7EF !important;
   stroke: #FFF7EF !important;
 }
 
 .faq-list-item[open] .faq-toggle-icon,
-html.theme-a .faq-list-item[open] .faq-toggle-icon,
-html.theme-a body main .faq-list-item[open] .faq-toggle-icon,
-html.theme-a body main section#faq .faq-list-item[open] .faq-toggle-icon,
-html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] .faq-toggle-icon {
+html.brand-palette .faq-list-item[open] .faq-toggle-icon,
+html.brand-palette body main .faq-list-item[open] .faq-toggle-icon,
+html.brand-palette body main section#faq .faq-list-item[open] .faq-toggle-icon,
+html.brand-palette body main section#faq div.faq-list-card.divide-y > details.group.faq-list-item[open] .faq-toggle-icon {
   background: rgba(204, 120, 92, 0.12) !important;
   background-image: none !important;
   border-color: rgb(204 120 92 / 0.55) !important;
@@ -10315,7 +10282,7 @@ html.theme-a body main section#faq div.faq-list-card.divide-y > details.group.fa
 }
 
 .dark .faq-list-item[open] .faq-toggle-icon,
-html.dark.theme-a .faq-list-item[open] .faq-toggle-icon {
+html.dark.brand-palette .faq-list-item[open] .faq-toggle-icon {
   background: rgba(204, 120, 92, 0.22) !important;
   border-color: rgb(204 120 92 / 0.4) !important;
   color: #FFF7EF !important;

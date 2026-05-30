@@ -52,29 +52,17 @@ function persistLocalRequest(request: DemoFormState) {
 }
 
 export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
-  const copy = locale === "fa"
-    ? {
-        name: "نام",
-        phone: "تلفن",
-        company: "نام شرکت",
-        supplier: "حوزه فعالیت",
-        choose: "انتخاب کنید",
-        submit: "ثبت درخواست دمو",
-        success:
-          "درخواست دمو ثبت شد. تیم فروش برای هماهنگی زمان دمو پیام تأیید ارسال می‌کند.",
-        error: "لطفاً هر چهار فیلد فرم را کامل کنید.",
-      }
-    : {
-        name: "Name",
-        phone: "Phone",
-        company: "Company",
-        supplier: "Business area",
-        choose: "Select one",
-        submit: "Request demo",
-        success:
-          "Your demo request has been saved. Sales will follow up to coordinate a time.",
-        error: "Please complete all four fields.",
-      };
+  const copy = {
+    name: "نام",
+    phone: "تلفن",
+    company: "نام شرکت",
+    supplier: "حوزه فعالیت",
+    choose: "انتخاب کنید",
+    submit: "ثبت درخواست دمو",
+    success:
+      "درخواست دمو ثبت شد. تیم فروش برای هماهنگی زمان دمو پیام تأیید ارسال می‌کند.",
+    error: "لطفاً هر چهار فیلد فرم را کامل کنید.",
+  };
   const { suppliers } = getSiteContent(locale);
   const supplierOptions = useMemo(
     () => suppliers.map((supplier) => supplier.name),

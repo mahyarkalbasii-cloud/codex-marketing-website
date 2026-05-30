@@ -30,7 +30,6 @@ export const metadata: Metadata = {
     canonical: canonicalPath,
     languages: {
       fa: canonicalPath,
-      en: "/en/features/",
     },
   },
   openGraph: {

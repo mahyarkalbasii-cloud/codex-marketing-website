@@ -3,7 +3,6 @@ import type { MetadataRoute } from "next";
 import { CATEGORIES } from "@/data/categories";
 import { STAGES } from "@/data/stages";
 import { absoluteUrl, cities } from "@/lib/site-data";
-import { citiesEn, stagesEn, suppliersEn } from "@/lib/site-data.en";
 
 export const dynamic = "force-static";
 
@@ -58,17 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entry(`/stages/${stage.slug}/`, "weekly", 0.8),
     ),
     ...cities.map((city) => entry(`/cities/${city.slug}/`, "weekly", 0.7)),
-    entry("/en/", "monthly", 0.6),
-    entry("/en/features/", "monthly", 0.5),
-    entry("/en/pricing/", "monthly", 0.5),
-    entry("/en/faq/", "monthly", 0.4),
-    ...citiesEn.map((city) => entry(`/en/cities/${city.slug}/`, "monthly", 0.4)),
-    ...suppliersEn.map((supplier) =>
-      entry(`/en/suppliers/${supplier.slug}/`, "monthly", 0.4),
-    ),
-    ...stagesEn.map((stage) =>
-      entry(`/en/construction-stages/${stage.slug}/`, "monthly", 0.4),
-    ),
   ];
 
   const uniqueEntries = Array.from(

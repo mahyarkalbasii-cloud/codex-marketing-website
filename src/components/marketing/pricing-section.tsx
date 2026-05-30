@@ -61,27 +61,6 @@ const durations: Array<{
   },
 ];
 
-const durationsEn: typeof durations = [
-  {
-    id: "3",
-    label: "3 months",
-    months: "3 months",
-    note: "No long-term discount",
-  },
-  {
-    id: "6",
-    label: "6 months",
-    months: "6 months",
-    note: "Less discount than 12 months",
-  },
-  {
-    id: "12",
-    label: "12 months",
-    months: "12 months",
-    note: "Highest savings",
-  },
-];
-
 const pricingPlans: PricingPlan[] = [
   {
     id: "bonyan",
@@ -166,90 +145,6 @@ const pricingPlans: PricingPlan[] = [
   },
 ];
 
-const pricingPlansEn: PricingPlan[] = [
-  {
-    id: "bonyan",
-    name: "Bonyan",
-    sliderLabel: "Land up to 300 m2",
-    sliderInsight: "Up to 18,000 projects across 8 stages",
-    selectorMotto: "A lighter start for testing the market and building follow-up rhythm",
-    highlights: [
-      "A lighter start for smaller sales teams",
-      "Focus on closer and easier-to-follow opportunities",
-      "Good for market testing without a heavy upfront cost",
-    ],
-    prices: {
-      "3": "9,000,000",
-      "6": "13,500,000",
-      "12": "18,000,000",
-    },
-    addon: "Each additional stage: 3,000,000 toman",
-    coverage: 1,
-    cta: "Bonyan features",
-  },
-  {
-    id: "royan",
-    name: "Royan",
-    sliderLabel: "Land up to 500 m2",
-    sliderInsight: "Up to 20,000 projects across 8 stages",
-    selectorMotto: "Balanced coverage for teams that want more consistent calls",
-    highlights: [
-      "For teams building more consistent sales calls",
-      "A wider range for discovering growing projects",
-      "Good for turning scattered follow-up into a sales plan",
-    ],
-    prices: {
-      "3": "12,000,000",
-      "6": "18,000,000",
-      "12": "24,000,000",
-    },
-    addon: "Each additional stage: 4,000,000 toman",
-    coverage: 2,
-    cta: "Royan features",
-  },
-  {
-    id: "taban",
-    name: "Taban",
-    sliderLabel: "Land up to 700 m2",
-    sliderInsight: "Up to 23,000 projects across 8 stages",
-    selectorMotto: "The core recommendation for serious sales and meaningful coverage",
-    highlights: [
-      "For serious sales with wider field coverage",
-      "Better prioritization between hot and negotiable projects",
-      "A strong fit for teams that want more market share",
-    ],
-    prices: {
-      "3": "15,000,000",
-      "6": "22,500,000",
-      "12": "30,000,000",
-    },
-    addon: "Each additional stage: 5,000,000 toman",
-    coverage: 3,
-    cta: "Taban features",
-    featured: true,
-  },
-  {
-    id: "taban-plus",
-    name: "Taban Plus",
-    sliderLabel: "Larger land",
-    sliderInsight: "Up to 25,000 projects across 8 stages",
-    selectorMotto: "Wide coverage for multi-area teams and heavier sales motions",
-    highlights: [
-      "For teams covering several areas at once",
-      "Wider visibility into large decision-shaping projects",
-      "Good for building a heavier and more durable sales funnel",
-    ],
-    prices: {
-      "3": "18,000,000",
-      "6": "27,000,000",
-      "12": "36,000,000",
-    },
-    addon: "Each additional stage: 6,000,000 toman",
-    coverage: 4,
-    cta: "Taban Plus features",
-  },
-];
-
 const pricingCopy = {
   fa: {
     eyebrow: "پلن‌ها",
@@ -269,24 +164,6 @@ const pricingCopy = {
     whatsappMessage: (plan: string, duration: string) =>
       `علاقمندم به پلن ${plan} (${duration}) پرشین‌سازه`,
   },
-  en: {
-    eyebrow: "Plans",
-    title: "Choose your playing field",
-    description:
-      "In a data market, cheap access often means crowded competition and burned opportunities. PersianSaze keeps subscriptions structured so competition stays more balanced and profitable.",
-    axisLabel: "Project land size",
-    sliderPrompt: "Choose a land-size segment",
-    sliderAria: "Choose project land-size segment",
-    suggestedPlanText: (name: string) => `Suggested plan for you: ${name}`,
-    recommended: "Recommended",
-    bestValue: "Best value",
-    stagesIncluded: "3 construction stages",
-    coverage: "Market coverage",
-    from: "of",
-    currency: "toman",
-    whatsappMessage: (plan: string, duration: string) =>
-      `I am interested in the ${plan} plan (${duration}) on PersianSaze`,
-  },
 } as const;
 
 const FALLBACK_PLAN_INDEX = 2;
@@ -295,12 +172,6 @@ const axisTickLabels: Record<PlanId, string> = {
   royan: "۳۰۰ تا ۵۰۰ متر",
   taban: "۵۰۰ تا ۷۰۰ متر",
   "taban-plus": "بالای ۷۰۰ متر",
-};
-const axisTickLabelsEn: Record<PlanId, string> = {
-  bonyan: "Up to 300 m²",
-  royan: "300–500 m²",
-  taban: "500–700 m²",
-  "taban-plus": "700+ m²",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
@@ -361,7 +232,7 @@ function PricingCoverage({
   locale: Locale;
 }) {
   const copy = pricingCopy[locale];
-  const formatter = locale === "fa" ? "fa-IR" : "en-US";
+  const formatter = "fa-IR";
 
   return (
     <div
@@ -489,8 +360,7 @@ function PricingPlanCard({
 
       <div
         className={cn(
-          "pricing-highlights space-y-3 text-sm font-semibold leading-7 lg:min-h-[12rem]",
-          locale === "fa" ? "text-right" : "text-left",
+          "pricing-highlights space-y-3 text-right text-sm font-semibold leading-7 lg:min-h-[12rem]",
         )}
       >
         {plan.highlights.map((feature) => (
@@ -531,9 +401,9 @@ function PricingPlanCard({
 }
 
 export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
-  const plans = locale === "fa" ? pricingPlans : pricingPlansEn;
-  const durationOptions = locale === "fa" ? durations : durationsEn;
-  const tickLabels = locale === "fa" ? axisTickLabels : axisTickLabelsEn;
+  const plans = pricingPlans;
+  const durationOptions = durations;
+  const tickLabels = axisTickLabels;
   const durationById = useMemo(
     () =>
       durationOptions.reduce(
@@ -685,7 +555,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
     (event: KeyboardEvent<HTMLDivElement>) => {
       const tabs = durationOptions.map((d) => d.id);
       const currentIndex = tabs.indexOf(duration);
-      const isRTL = locale === "fa";
+      const isRTL = true;
       let newIndex: number;
 
       if (event.key === "ArrowLeft") {
@@ -700,14 +570,14 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       const clamped = Math.min(Math.max(newIndex, 0), tabs.length - 1);
       setDuration(tabs[clamped] as Duration);
     },
-    [durationOptions, duration, locale],
+    [durationOptions, duration],
   );
 
   return (
     <section
       ref={sectionRef}
       id="plans"
-      dir={locale === "fa" ? "rtl" : "ltr"}
+      dir="rtl"
       data-pricing-ready={isReady ? "true" : undefined}
       data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
       data-active-plan-id={activePlan?.id ?? ""}
@@ -858,7 +728,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             </span>
             <div
               role="tablist"
-              aria-label={locale === "fa" ? "دوره اشتراک" : "Subscription duration"}
+              aria-label="دوره اشتراک"
               onKeyDown={handleDurationKeyDown}
               className="pricing-duration-group flex w-full rounded-2xl border border-[#E4D8C8] bg-[#FBF6ED] p-1 shadow-sm shadow-[#2a241d]/[0.025]"
             >

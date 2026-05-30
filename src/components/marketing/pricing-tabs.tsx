@@ -14,17 +14,11 @@ export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
   const { karajAddon, pricingGroups } = getSiteContent(locale);
   const [active, setActive] = useState(pricingGroups[0].id);
   const group = pricingGroups.find((item) => item.id === active) ?? pricingGroups[0];
-  const copy = locale === "fa"
-    ? {
-        featured: "پیشنهاد جدی‌تر",
-        demo: "درخواست دمو و انتخاب پلن",
-        addon: "افزودنی جغرافیایی",
-      }
-    : {
-        featured: "Stronger option",
-        demo: "Request demo and choose plan",
-        addon: "Geographic add-on",
-      };
+  const copy = {
+    featured: "پیشنهاد جدی‌تر",
+    demo: "درخواست دمو و انتخاب پلن",
+    addon: "افزودنی جغرافیایی",
+  };
 
   return (
     <div className="space-y-6">

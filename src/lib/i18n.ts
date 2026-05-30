@@ -11,23 +11,11 @@ import {
 } from "@/lib/site-data";
 import { CATEGORIES } from "@/data/categories";
 import { STAGES } from "@/data/stages";
-import {
-  citiesEn,
-  faqsEn,
-  featurePagesEn,
-  karajAddonEn,
-  navItemsEn,
-  pricingGroupsEn,
-  seoPagesEn,
-  siteEn,
-  stagesEn,
-  suppliersEn,
-} from "@/lib/site-data.en";
 
-export type Locale = "fa" | "en";
+export type Locale = "fa";
 
 export const defaultLocale: Locale = "fa";
-export const supportedLocales = ["fa", "en"] as const;
+export const supportedLocales = ["fa"] as const;
 
 const suppliers = CATEGORIES.filter((category) => !category.excludeFromPages).map(
   (category) => ({
@@ -41,23 +29,17 @@ const stages = STAGES.filter((stage) => stage.isMain).map((stage) => ({
   slug: stage.slug,
 }));
 
-export function getLocaleFromPathname(pathname = "/"): Locale {
-  return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "fa";
+export function getLocaleFromPathname(_pathname = "/"): Locale {
+  void _pathname;
+  return "fa";
 }
 
 export function stripLocalePrefix(pathname = "/") {
-  if (pathname === "/en") {
-    return "/";
-  }
-
-  if (pathname.startsWith("/en/")) {
-    return pathname.slice(3) || "/";
-  }
-
   return pathname || "/";
 }
 
-export function localizeHref(href: string, locale: Locale) {
+export function localizeHref(href: string, _locale: Locale) {
+  void _locale;
   if (
     href.startsWith("http") ||
     href.startsWith("tel:") ||
@@ -69,50 +51,28 @@ export function localizeHref(href: string, locale: Locale) {
   const [pathPart, hashPart] = href.split("#");
   const path = pathPart || "/";
   const cleanPath = stripLocalePrefix(path);
-  const localizedPath =
-    locale === "en"
-      ? cleanPath === "/"
-        ? "/en/"
-        : `/en${cleanPath}`
-      : cleanPath;
 
-  return hashPart ? `${localizedPath}#${hashPart}` : localizedPath;
+  return hashPart ? `${cleanPath}#${hashPart}` : cleanPath;
 }
 
-export function switchLocalePath(pathname: string, targetLocale: Locale) {
-  return localizeHref(stripLocalePrefix(pathname || "/"), targetLocale);
+export function getDirection(_locale: Locale) {
+  void _locale;
+  return "rtl";
 }
 
-export function getDirection(locale: Locale) {
-  return locale === "fa" ? "rtl" : "ltr";
-}
-
-export function getSiteContent(locale: Locale) {
-  return locale === "en"
-    ? {
-        authLinks,
-        cities: citiesEn,
-        faqs: faqsEn,
-        featurePages: featurePagesEn,
-        karajAddon: karajAddonEn,
-        navItems: navItemsEn,
-        pricingGroups: pricingGroupsEn,
-        seoPages: seoPagesEn,
-        site: siteEn,
-        stages: stagesEn,
-        suppliers: suppliersEn,
-      }
-    : {
-        authLinks,
-        cities,
-        faqs,
-        featurePages,
-        karajAddon,
-        navItems,
-        pricingGroups,
-        seoPages,
-        site,
-        stages,
-        suppliers,
-      };
+export function getSiteContent(_locale: Locale) {
+  void _locale;
+  return {
+    authLinks,
+    cities,
+    faqs,
+    featurePages,
+    karajAddon,
+    navItems,
+    pricingGroups,
+    seoPages,
+    site,
+    stages,
+    suppliers,
+  };
 }
