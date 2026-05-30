@@ -8,8 +8,8 @@
 @tailwind utilities;
 
 :root {
-  --page-bg: #EDE6D7;
-  --background: 41 38% 89%;
+  --page-bg: #F6ECDA;
+  --background: 38.6 60.9% 91%;
   --foreground: 31 19% 14%;
   --card: 39 52% 97%;
   --card-foreground: 31 19% 14%;
@@ -30,8 +30,8 @@
   --ring: 15 52% 58%;
   --radius: 1rem;
   --bg-base: var(--page-bg);
-  --gradient-neutral: 237 230 215;
-  --gradient-floor: 237 230 215;
+  --gradient-neutral: 246 236 218;
+  --gradient-floor: 246 236 218;
   --gradient-left: 204 120 92;
   --gradient-right: 204 120 92;
   --gradient-left-soft: 204 120 92;
@@ -72,7 +72,7 @@
 }
 
 .brand-palette {
-  --background: 41 38% 89%;
+  --background: 38.6 60.9% 91%;
   --foreground: 240 2% 8%;
   --card: 38 41% 95%;
   --card-foreground: 240 2% 8%;
@@ -92,12 +92,12 @@
   --input: 36 25% 82%;
   --ring: 15 52% 58%;
   --bg-base: var(--page-bg);
-  --gradient-neutral: 237 230 215;
-  --gradient-floor: 237 230 215;
-  --gradient-left: 237 230 215;
-  --gradient-right: 237 230 215;
-  --gradient-left-soft: 237 230 215;
-  --gradient-right-soft: 237 230 215;
+  --gradient-neutral: 246 236 218;
+  --gradient-floor: 246 236 218;
+  --gradient-left: 246 236 218;
+  --gradient-right: 246 236 218;
+  --gradient-left-soft: 246 236 218;
+  --gradient-right-soft: 246 236 218;
   --accent-clay: #CC785C;
   --accent-teal: #3d3d3a;
   --ref-bg: var(--page-bg);
@@ -175,8 +175,8 @@ body {
 }
 
 .hero-surface {
-  --hero-bg: var(--page-bg);
-  --hero-bg-floor: var(--page-bg);
+  --hero-bg: #F6ECDA;
+  --hero-bg-floor: #F6ECDA;
   --hero-glow-warm: rgba(204, 120, 92, 0.115);
   --hero-glow-cool: transparent;
   --hero-glow-amber: transparent;
@@ -193,7 +193,7 @@ body {
   --hero-map-grid: rgba(42, 33, 27, 0.055);
   --hero-map-ring: rgba(42, 33, 27, 0.1);
   --hero-map-route: rgba(42, 33, 27, 0.12);
-  background: var(--page-bg);
+  background: var(--hero-bg);
 }
 
 .hero-surface .map-parcel-pattern {
@@ -1517,12 +1517,12 @@ body {
 }
 
 .brand-palette :is(.section-gradient, .hero-surface) {
-  --section-neutral: 237 230 215;
-  --section-floor: 237 230 215;
-  --section-left: 237 230 215;
-  --section-right: 237 230 215;
-  --section-left-soft: 237 230 215;
-  --section-right-soft: 237 230 215;
+  --section-neutral: 246 236 218;
+  --section-floor: 246 236 218;
+  --section-left: 246 236 218;
+  --section-right: 246 236 218;
+  --section-left-soft: 246 236 218;
+  --section-right-soft: 246 236 218;
   background: var(--page-bg);
 }
 
@@ -7274,10 +7274,14 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
   background: #EDE6D7 !important;
 }
 
-.hero-section {
+#hero.hero-section {
+  --hero-bg: #F6ECDA;
+  --hero-bg-floor: #F6ECDA;
   position: relative;
   overflow: hidden;
   border-block-end: 1px solid #e4d8c8;
+  background: var(--hero-bg) !important;
+  background-image: none !important;
 }
 
 .hero-container {
@@ -7289,7 +7293,7 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 
 .hero-layout {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -7405,6 +7409,20 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 
 .hero-visual-slot {
   min-inline-size: 0;
+}
+
+.hero-laptop-map-visual {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+}
+
+.hero-laptop-map-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 600px;
+  object-fit: contain;
 }
 
 .hero-project-finder-visual.hero-map-visual {
@@ -7568,7 +7586,7 @@ html.brand-palette body main .hero-project-badge--signal {
   }
 
   .hero-section .hero-title span {
-    display: inline;
+    display: block;
   }
 
   .hero-actions {
@@ -7606,20 +7624,25 @@ html.brand-palette body main .hero-project-badge--signal {
   }
 
   .hero-layout {
-    grid-template-columns: 0.96fr 1.04fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(3rem, 5vw, 5rem);
     direction: ltr;
   }
 
   .hero-copy {
     grid-column: 2;
-    max-inline-size: 48rem;
+    inline-size: 100%;
+    max-inline-size: 40rem;
     margin-inline: 0;
+    justify-self: end;
     text-align: start;
   }
 
   .hero-visual-slot {
     grid-column: 1;
     grid-row: 1;
+    inline-size: 100%;
+    justify-self: start;
     direction: rtl;
   }
 
@@ -7700,7 +7723,7 @@ html.brand-palette body main .hero-project-badge--signal {
 .problem-container {
   position: relative;
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
   max-inline-size: 80rem;
   margin-inline: auto;
   padding-block: 3rem;
@@ -7743,28 +7766,28 @@ html.brand-palette body main .hero-project-badge--signal {
 .problem-visual-card {
   position: relative;
   inline-size: 100%;
-  max-inline-size: 36rem;
+  max-inline-size: 38rem;
   margin-inline: auto;
-  overflow: hidden;
-  border: 1px solid var(--border-soft);
-  border-radius: 1.45rem;
-  background: var(--surface-card);
-  box-shadow: var(--shadow-card);
-  padding: 0.875rem;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
 .problem-visual-frame {
   display: flex;
-  min-block-size: 21rem;
+  min-block-size: 0;
   inline-size: 100%;
-  overflow: hidden;
-  border: 1px solid var(--border-soft);
-  border-radius: 1.25rem;
-  background: var(--surface-card);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .market-problem-presentation-visual {
-  display: grid;
+  display: flex;
   place-items: center;
   inline-size: 100%;
   min-inline-size: 0;
@@ -7773,9 +7796,9 @@ html.brand-palette body main .hero-project-badge--signal {
 html.brand-palette body main section#problem .problem-visual-card,
 html.brand-palette body main section#problem .problem-visual-frame,
 html.brand-palette body main section#problem .market-problem-presentation-visual {
-  border-color: var(--border-soft) !important;
-  background: var(--surface-card) !important;
-  box-shadow: var(--shadow-card) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
   color: #1B1916 !important;
 }
 
@@ -7802,13 +7825,14 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .problem-visual-frame {
-    min-block-size: 27rem;
+    min-block-size: 0;
   }
 }
 
 @media (min-width: 1024px) {
   .problem-container {
-    grid-template-columns: 0.96fr 1.04fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(3rem, 5vw, 5rem);
     align-items: center;
     direction: ltr;
     padding-block: 4rem;
@@ -7816,8 +7840,10 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .problem-copy {
     grid-column: 2;
+    inline-size: 100%;
     max-inline-size: 38rem;
     margin-inline: 0;
+    justify-self: end;
     direction: rtl;
     text-align: start;
   }
@@ -7825,8 +7851,9 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   .problem-visual-card {
     grid-column: 1;
     grid-row: 1;
-    aspect-ratio: 16 / 15;
-    max-block-size: 540px;
+    max-block-size: none;
+    margin-inline: 0;
+    justify-self: start;
   }
 
   .problem-title,
@@ -8146,6 +8173,31 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     box-shadow: 0 0 0 0.28rem rgba(204, 120, 92, 0.12);
     transform: scale(1.025);
   }
+}
+
+.market-problem-presentation-visual.problem-composition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.problem-signals-picture {
+  display: block;
+  inline-size: 100%;
+}
+
+.problem-signals-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 600px;
+  margin-inline: auto;
+  object-fit: contain;
 }
 
 .solution-section {
