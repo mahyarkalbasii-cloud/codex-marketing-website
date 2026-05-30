@@ -7010,7 +7010,10 @@ html.brand-palette body main section#faq div.faq-list-card.divide-y > details.gr
 }
 
 #how-it-works .how-layer-card {
+  display: flex;
+  flex-direction: column;
   min-inline-size: 0;
+  min-block-size: 19.5rem;
   overflow: hidden;
   border: 1px solid var(--border-soft) !important;
   border-radius: 1.5rem;
@@ -7078,7 +7081,7 @@ html.brand-palette body main section#faq div.faq-list-card.divide-y > details.gr
 }
 
 #how-it-works .how-layer-title {
-  margin-block-start: 1.25rem;
+  margin-block-start: 0;
   color: #1B1916 !important;
   font-size: 1.5rem;
   font-weight: 600;
@@ -7088,6 +7091,7 @@ html.brand-palette body main section#faq div.faq-list-card.divide-y > details.gr
 
 #how-it-works .how-layer-body {
   margin-block-start: 0.75rem;
+  min-block-size: 4rem;
   color: hsl(var(--muted-foreground)) !important;
   font-size: 0.875rem;
   line-height: 2rem;
@@ -7142,6 +7146,16 @@ html.brand-palette body main section#faq div.faq-list-card.divide-y > details.gr
   margin-inline: 0.0625rem;
 }
 
+#how-it-works .how-layer-process-image {
+  display: block;
+  inline-size: 100%;
+  block-size: clamp(5.25rem, 13vw, 7.75rem);
+  margin-block-start: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: center;
+}
+
 #how-it-works .how-layer-arrow {
   display: flex;
   flex-direction: column;
@@ -7192,8 +7206,13 @@ html.brand-palette body main section#faq div.faq-list-card.divide-y > details.gr
 @media (max-width: 480px) {
   #how-it-works .how-layer-card {
     border-radius: 1.25rem;
+    min-block-size: 20.75rem;
     padding-block: 1rem;
     padding-inline: 1rem;
+  }
+
+  #how-it-works .how-layer-body {
+    min-block-size: 6rem;
   }
 
   #how-it-works .how-layer-heading-row {
@@ -7278,6 +7297,9 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
   --hero-bg: #F6ECDA;
   --hero-bg-floor: #F6ECDA;
   position: relative;
+  display: flex;
+  align-items: center;
+  min-block-size: clamp(42rem, 76svh, 56rem);
   overflow: hidden;
   border-block-end: 1px solid #e4d8c8;
   background: var(--hero-bg) !important;
@@ -7285,6 +7307,7 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 }
 
 .hero-container {
+  inline-size: 100%;
   max-inline-size: 80rem;
   margin-inline: auto;
   padding-block: 3.25rem 3.75rem;
@@ -7415,13 +7438,22 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
   display: flex;
   justify-content: center;
   inline-size: 100%;
+  background: transparent;
+  isolation: isolate;
+}
+
+.hero-laptop-map-visual picture {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
 }
 
 .hero-laptop-map-image {
   display: block;
   inline-size: 100%;
   block-size: auto;
-  max-inline-size: 600px;
+  max-inline-size: min(100%, 36rem);
+  mix-blend-mode: darken;
   object-fit: contain;
 }
 
@@ -7662,7 +7694,7 @@ html.brand-palette body main .hero-project-badge--signal {
   }
 
   .hero-laptop-map-image {
-    inline-size: min(126%, 47rem);
+    inline-size: min(132%, 46rem);
     max-inline-size: none;
   }
 }
@@ -8318,25 +8350,24 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  inline-size: 2.65rem;
-  block-size: 2.65rem;
-  border: 1px solid #DECDB6;
-  border-radius: 0.95rem;
-  background: #FBF6ED;
-  color: #CC785C;
+  inline-size: 3rem;
+  block-size: 3rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
 }
 
 .solution-pillar-card--featured .solution-pillar-icon {
-  inline-size: 2.65rem;
-  block-size: 2.65rem;
-  border-color: rgba(204, 120, 92, 0.35);
-  background: rgba(204, 120, 92, 0.12);
+  inline-size: 3rem;
+  block-size: 3rem;
 }
 
-.solution-pillar-icon svg {
-  inline-size: 1.25rem;
-  block-size: 1.25rem;
-  stroke-width: 2;
+.solution-pillar-icon-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
 }
 
 .solution-pillar-title {
@@ -8513,7 +8544,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     align-items: stretch;
     gap: 0.75rem;
     margin-block-start: 1.8rem;
-    min-block-size: clamp(39rem, 47vw, 43rem);
+    min-block-size: clamp(32rem, 38vw, 36rem);
   }
 
   .solution-support-stack {
@@ -8540,19 +8571,21 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .solution-pillar-card--workflow,
   .solution-pillar-card--training {
-    gap: 0.55rem;
-    padding-block: 0.95rem;
-    padding-inline: 0.95rem;
+    gap: 0.42rem;
+    padding-block: 0.82rem;
+    padding-inline: 0.9rem;
   }
 
   .solution-pillar-card--workflow .solution-pillar-body,
   .solution-pillar-card--training .solution-pillar-body {
-    font-size: 0.9rem;
-    line-height: 1.65;
+    font-size: 0.88rem;
+    line-height: 1.48;
   }
 
   .solution-pillar-card--data .solution-pillar-illustration {
-    padding: 1rem;
+    margin-block-start: 0.75rem;
+    overflow: hidden;
+    padding: 0.8rem;
   }
 
   .solution-pillar-card--workflow .solution-pillar-illustration,
@@ -8563,24 +8596,28 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
 
   .solution-pillar-card--workflow .solution-pillar-illustration {
     min-block-size: 0;
+    margin-block-start: 0.35rem;
     padding: 0;
   }
 
   .solution-pillar-card--training .solution-pillar-illustration {
     min-block-size: 0;
+    margin-block-start: 0.35rem;
     padding: 0;
   }
 
   .solution-pillar-card--data .solution-verified-map-image {
-    inline-size: min(100%, 35rem);
+    inline-size: 100%;
+    block-size: clamp(22rem, 23vw, 24.5rem);
+    object-fit: cover;
   }
 
   .solution-pillar-card--workflow .solution-followup-pipeline-image {
-    inline-size: min(100%, 21rem);
+    inline-size: min(100%, 14.5rem);
   }
 
   .solution-pillar-card--training .solution-training-playbook-image {
-    inline-size: min(100%, 23rem);
+    inline-size: min(100%, 16rem);
   }
 
 }
@@ -8620,8 +8657,8 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   }
 
   .solution-pillar-icon {
-    inline-size: 2.35rem;
-    block-size: 2.35rem;
+    inline-size: 2.65rem;
+    block-size: 2.65rem;
   }
 
   .solution-pillar-title {
@@ -8923,6 +8960,30 @@ body main section#sales-flow .sales-flow-card-top {
   min-inline-size: 0;
 }
 
+body main section#sales-flow .sales-flow-step-icon {
+  display: block;
+  flex: 0 0 auto;
+  inline-size: 3.35rem;
+  block-size: 3.35rem;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  direction: ltr;
+}
+
+body main section#sales-flow .sales-flow-step-icon-strip {
+  display: block;
+  inline-size: 400%;
+  max-inline-size: none;
+  block-size: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transform: translateX(calc(var(--sales-flow-icon-index) * -25%));
+  transform-origin: left center;
+}
+
 body main section#sales-flow .sales-flow-step-number {
   position: static !important;
   display: inline-grid;
@@ -9110,6 +9171,11 @@ body main section#sales-flow .sales-flow-cta:focus-visible {
     padding-inline: 0.95rem;
   }
 
+  body main section#sales-flow .sales-flow-step-icon {
+    inline-size: 3rem;
+    block-size: 3rem;
+  }
+
   body main section#sales-flow .sales-flow-body {
     font-size: 0.88rem;
   }
@@ -9201,11 +9267,22 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
   padding-inline: clamp(1rem, 3vw, 2rem) !important;
 }
 
+body main section#plans .pricing-axis-stage,
+html.brand-palette body main section#plans .pricing-axis-stage {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.72fr) minmax(16rem, 1.4fr) minmax(7rem, 0.58fr);
+  align-items: center;
+  gap: clamp(0.55rem, 2vw, 1.25rem);
+  direction: ltr;
+}
+
 body main section#plans .pricing-axis-copy,
 html.brand-palette body main section#plans .pricing-axis-copy {
   display: grid;
   gap: 0.5rem;
+  min-inline-size: 0;
   color: #1B1916 !important;
+  direction: rtl;
 }
 
 body main section#plans .pricing-axis-label,
@@ -9233,6 +9310,43 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .
   color: #1B1916 !important;
   padding-block: 0.35rem !important;
   padding-inline: 0.9rem !important;
+}
+
+body main section#plans .pricing-land-art,
+html.brand-palette body main section#plans .pricing-land-art {
+  display: grid;
+  place-items: center;
+  min-inline-size: 0;
+  block-size: clamp(4.8rem, 7vw, 6.35rem);
+  overflow: hidden;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at center, rgba(204, 120, 92, 0.1), rgba(204, 120, 92, 0.055) 46%, transparent 74%);
+  pointer-events: none;
+}
+
+body main section#plans .pricing-land-art-image,
+html.brand-palette body main section#plans .pricing-land-art-image {
+  display: block;
+  inline-size: 90%;
+  block-size: 90%;
+  max-inline-size: none;
+  object-fit: contain;
+  opacity: 0.94;
+  filter: contrast(1.03) saturate(0.9);
+  mix-blend-mode: multiply;
+}
+
+body main section#plans .pricing-land-art--small .pricing-land-art-image,
+html.brand-palette body main section#plans .pricing-land-art--small .pricing-land-art-image {
+  inline-size: 84%;
+  block-size: 84%;
+}
+
+body main section#plans .pricing-land-art--large .pricing-land-art-image,
+html.brand-palette body main section#plans .pricing-land-art--large .pricing-land-art-image {
+  inline-size: 94%;
+  block-size: 94%;
 }
 
 body main section#plans .pricing-slider-control,
@@ -9835,6 +9949,41 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     border-radius: 1rem !important;
   }
 
+  body main section#plans .pricing-axis-stage {
+    grid-template-columns: minmax(3.7rem, 0.42fr) minmax(10.75rem, 1.25fr) minmax(3.5rem, 0.42fr);
+    gap: 0.25rem;
+  }
+
+  body main section#plans .pricing-land-art {
+    block-size: 3.65rem;
+    border-radius: 0.55rem;
+  }
+
+  body main section#plans .pricing-land-art--small .pricing-land-art-image {
+    inline-size: 86%;
+    block-size: 86%;
+  }
+
+  body main section#plans .pricing-land-art--large .pricing-land-art-image {
+    inline-size: 96%;
+    block-size: 96%;
+  }
+
+  body main section#plans .pricing-axis-label {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  body main section#plans .pricing-axis-insight {
+    max-inline-size: 100% !important;
+    min-block-size: auto !important;
+    padding-block: 0.28rem !important;
+    padding-inline: 0.42rem !important;
+    white-space: normal;
+    font-size: 0.62rem !important;
+    line-height: 1.55 !important;
+  }
+
   body main section#plans .pricing-slider-control {
     block-size: 5.9rem !important;
     padding-inline: 0.95rem !important;
@@ -10156,6 +10305,601 @@ html.dark.brand-palette .faq-list-item[open] .faq-toggle-icon {
   background: rgba(204, 120, 92, 0.22) !important;
   border-color: rgb(204 120 92 / 0.4) !important;
   color: #FFF7EF !important;
+}
+
+/* Monochrome pricing pass: cards and duration toggle follow the Anthropic-style two-tone system. */
+body main section#plans,
+html.brand-palette body main section#plans {
+  --pricing-mono-dark: #333333;
+  --pricing-mono-black: #333333;
+  --pricing-mono-light: #F6F1E8;
+  --pricing-mono-muted-light: rgba(246, 241, 232, 0.68);
+  --pricing-mono-muted-dark: rgba(51, 51, 51, 0.62);
+  --pricing-mono-line-light: rgba(246, 241, 232, 0.18);
+  --pricing-mono-line-dark: rgba(51, 51, 51, 0.16);
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
+  border-color: var(--pricing-mono-dark) !important;
+  background: var(--pricing-mono-dark) !important;
+  background-image: none !important;
+  color: var(--pricing-mono-light) !important;
+  box-shadow: none !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-axis-label {
+  color: var(--pricing-mono-light) !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art {
+  background:
+    radial-gradient(ellipse at center, rgba(246, 241, 232, 0.15), rgba(246, 241, 232, 0.07) 52%, transparent 74%) !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art-image,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-land-art-image {
+  filter: grayscale(1) invert(1) brightness(1.22) contrast(1.08) opacity(0.98) !important;
+  mix-blend-mode: normal !important;
+}
+
+body main section#plans .pricing-slider-track,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track {
+  background: rgba(246, 241, 232, 0.16) !important;
+}
+
+body main section#plans .pricing-slider-rail,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
+body main section#plans .pricing-slider-handle,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
+body main section#plans .pricing-slider-stopper[data-active-stopper="true"],
+html.brand-palette body main section#plans .pricing-slider-stopper[data-active-stopper="true"] {
+  border-color: var(--pricing-mono-light) !important;
+  background: var(--pricing-mono-light) !important;
+  box-shadow: none !important;
+  color: var(--pricing-mono-light) !important;
+}
+
+body main section#plans .pricing-slider-handle {
+  border-color: var(--pricing-mono-dark) !important;
+}
+
+body main section#plans .pricing-slider-handle-dot,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle-dot {
+  background: var(--pricing-mono-dark) !important;
+}
+
+body main section#plans .pricing-slider-stopper,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper {
+  border-color: rgba(246, 241, 232, 0.34) !important;
+  background: var(--pricing-mono-dark) !important;
+}
+
+body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
+body main section#plans .pricing-slider-tick[data-active-tick="true"],
+html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
+html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] {
+  color: var(--pricing-mono-light) !important;
+}
+
+body main section#plans .pricing-slider-tick,
+body main section#plans .pricing-slider-tick :is(span),
+html.brand-palette body main section#plans .pricing-slider-tick,
+html.brand-palette body main section#plans .pricing-slider-tick :is(span) {
+  color: rgba(246, 241, 232, 0.66) !important;
+}
+
+body main section#plans .pricing-slider-tick[data-active-tick="true"],
+body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
+html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"],
+html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span) {
+  color: var(--pricing-mono-light) !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span {
+  color: rgba(246, 241, 232, 0.66) !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span,
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover,
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label,
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label > span,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label,
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label > span {
+  color: var(--pricing-mono-light) !important;
+}
+
+body main section#plans .pricing-duration,
+html.brand-palette body main section#plans .pricing-duration {
+  inline-size: min(100%, 24rem);
+  padding-block-end: 0 !important;
+}
+
+body main section#plans .pricing-duration > .relative,
+html.brand-palette body main section#plans .pricing-duration > .relative {
+  inline-size: 100%;
+  max-inline-size: none !important;
+  padding-block-start: 0 !important;
+}
+
+body main section#plans .pricing-duration-group,
+html.brand-palette body main section#plans .pricing-duration > div.pricing-duration-group,
+html.brand-palette body main section#plans .pricing-duration-group {
+  border-color: rgba(247, 245, 239, 0.16) !important;
+  border-radius: 1rem !important;
+  background: var(--pricing-mono-dark) !important;
+  box-shadow: none !important;
+  gap: 0.25rem !important;
+  padding: 0.28rem !important;
+}
+
+body main section#plans .pricing-duration-option,
+html.brand-palette body main section#plans [data-duration-option].pricing-duration-option {
+  block-size: 3rem !important;
+  border-radius: 0.72rem !important;
+  background: transparent !important;
+  color: var(--pricing-mono-light) !important;
+  box-shadow: none !important;
+}
+
+body main section#plans .pricing-duration-option[data-active-duration="true"],
+html.brand-palette body main section#plans [data-duration-option].pricing-duration-option[data-active-duration="true"] {
+  background: var(--pricing-mono-black) !important;
+  color: var(--pricing-mono-light) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(246, 241, 232, 0.12),
+    0 8px 18px rgba(0, 0, 0, 0.1) !important;
+}
+
+body main section#plans .pricing-duration-option > span.block,
+html.brand-palette body main section#plans .pricing-duration-option > span.block {
+  color: inherit !important;
+}
+
+body main section#plans .pricing-best-value-badge,
+body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge,
+html.brand-palette body main section#plans .pricing-best-value-badge,
+html.brand-palette body main section#plans .pricing-duration[data-selected-duration="12"] .pricing-best-value-badge {
+  inset-block-start: 0 !important;
+  inset-inline-end: 0.35rem !important;
+  border-color: var(--pricing-mono-dark) !important;
+  background: var(--pricing-mono-dark) !important;
+  color: var(--pricing-mono-light) !important;
+  box-shadow: none !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card],
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] {
+  --plan-bg: var(--pricing-mono-dark);
+  --plan-fg: var(--pricing-mono-light);
+  --plan-muted: var(--pricing-mono-muted-light);
+  --plan-line: var(--pricing-mono-line-light);
+  --plan-soft: rgba(247, 245, 239, 0.07);
+  --plan-inverse-bg: var(--pricing-mono-light);
+  --plan-inverse-fg: var(--pricing-mono-black);
+  --plan-icon-filter: grayscale(1) invert(1) contrast(1.06);
+  display: grid !important;
+  grid-template-rows: 6.85rem auto auto minmax(12.25rem, auto) auto auto 2.8rem !important;
+  border: 1px solid var(--plan-line) !important;
+  background: var(--plan-bg) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--plan-fg) !important;
+  transform: none !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
+  --plan-bg: var(--pricing-mono-light);
+  --plan-fg: var(--pricing-mono-black);
+  --plan-muted: var(--pricing-mono-muted-dark);
+  --plan-line: var(--pricing-mono-black);
+  --plan-soft: rgba(16, 16, 15, 0.06);
+  --plan-inverse-bg: var(--pricing-mono-black);
+  --plan-inverse-fg: var(--pricing-mono-light);
+  --plan-icon-filter: grayscale(1) contrast(1.08);
+  border-color: var(--plan-line) !important;
+  background: var(--plan-bg) !important;
+  box-shadow:
+    0 0 0 1px var(--pricing-mono-black),
+    0 18px 42px rgba(16, 16, 15, 0.12) !important;
+  transform: translateY(-3px) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-recommended-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] {
+  border-color: var(--plan-line) !important;
+  background: var(--plan-bg) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head,
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head,
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 3.65rem auto;
+  align-content: start;
+  justify-items: center;
+  justify-self: stretch;
+  inline-size: 100%;
+  gap: 0.45rem;
+  min-block-size: 6.85rem !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-plan-icon,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-icon {
+  display: block;
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  justify-self: center;
+  margin-inline: auto;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-plan-icon-image,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-plan-icon-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  filter: var(--plan-icon-filter);
+}
+
+body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > .pricing-card-head > .pricing-plan-title,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] > .pricing-card-head > .pricing-plan-title {
+  position: static !important;
+  inset: auto !important;
+  inline-size: 100% !important;
+  color: var(--plan-fg) !important;
+  text-align: center !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card="taban"],
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"] {
+  border-color: rgba(246, 241, 232, 0.62) !important;
+  box-shadow: inset 0 0 0 1px rgba(246, 241, 232, 0.42) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"][data-active-plan="true"],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"][data-active-plan="true"] {
+  border-color: var(--pricing-mono-black) !important;
+  box-shadow:
+    0 0 0 1px var(--pricing-mono-black),
+    0 18px 42px rgba(51, 51, 51, 0.12) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] :is(h3, p, div, span, svg),
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] :is(h3, p, div, span, svg),
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] :is(h3, p, div, span, svg),
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] :is(h3, p, div, span, svg) {
+  color: var(--plan-fg) !important;
+  stroke: currentColor !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] :is(.pricing-plan-currency, .pricing-plan-stages, .pricing-highlights, .pricing-addon, .pricing-coverage-header, .pricing-coverage-label),
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] :is(.pricing-plan-currency, .pricing-plan-stages, .pricing-highlights, .pricing-addon, .pricing-coverage-header, .pricing-coverage-label) {
+  color: var(--plan-muted) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge,
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] .pricing-recommended-badge,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-recommended-plan="true"] > .pricing-card-head > .pricing-recommended-badge {
+  position: absolute !important;
+  inset-block-start: 0 !important;
+  inset-inline-end: 0 !important;
+  border-color: var(--plan-inverse-bg) !important;
+  background: var(--plan-inverse-bg) !important;
+  color: var(--plan-inverse-fg) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-highlight-icon,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-highlight-icon {
+  border-color: var(--plan-line) !important;
+  background: transparent !important;
+  color: var(--plan-fg) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
+body main section#plans article.pricing-card[data-plan-card] .pricing-addon,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-card-divider,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
+  border-color: var(--plan-line) !important;
+  background: var(--plan-line) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-addon,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-addon {
+  background: transparent !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-coverage,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage {
+  border-color: var(--plan-line) !important;
+  background: var(--plan-soft) !important;
+  color: var(--plan-fg) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-value,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-value {
+  color: var(--plan-fg) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-segment,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-segment {
+  background: var(--plan-line) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-segment[data-filled-segment="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] .pricing-coverage-segment[data-filled-segment="true"] {
+  background: var(--plan-fg) !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta,
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card] > a.pricing-plan-cta,
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta {
+  border-color: var(--plan-inverse-bg) !important;
+  background: var(--plan-inverse-bg) !important;
+  color: var(--plan-inverse-fg) !important;
+  box-shadow: none !important;
+}
+
+body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta svg,
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card] > a.pricing-plan-cta svg,
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"] > a.pricing-plan-cta svg {
+  color: var(--plan-inverse-fg) !important;
+  stroke: currentColor !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body main section#plans article.pricing-card[data-plan-card]:hover,
+  html.brand-palette body main section#plans article.pricing-card[data-plan-card]:hover {
+    border-color: var(--plan-fg) !important;
+    box-shadow: 0 18px 42px rgba(16, 16, 15, 0.1) !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body main section#plans article.pricing-card[data-plan-card],
+  body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+  body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card],
+  html.brand-palette body main section#plans article.pricing-card[data-plan-card],
+  html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card],
+  html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card] {
+    grid-template-rows: 6.65rem auto auto auto auto auto 2.8rem !important;
+  }
+}
+
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]),
+body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"][data-recommended-plan="true"],
+body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
+body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"]:not([data-recommended-plan="true"]),
+html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"][data-recommended-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
+html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
+  border-color: var(--pricing-mono-black) !important;
+  background: var(--pricing-mono-light) !important;
+  color: var(--pricing-mono-black) !important;
+  box-shadow:
+    0 0 0 1px var(--pricing-mono-black),
+    0 18px 42px rgba(16, 16, 15, 0.12) !important;
+}
+
+@media (max-width: 640px) {
+  body main section#plans .pricing-slider.pricing-slider-labs,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(5.8rem, 6.2rem);
+    grid-template-areas: "control stage";
+    align-items: start;
+    column-gap: 0.75rem;
+    direction: ltr;
+    padding-block: 1rem !important;
+    padding-inline: 1rem !important;
+  }
+
+  body main section#plans .pricing-axis-stage,
+  html.brand-palette body main section#plans .pricing-axis-stage {
+    grid-area: stage;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    gap: 0.45rem !important;
+    direction: rtl;
+  }
+
+  body main section#plans .pricing-land-art,
+  html.brand-palette body main section#plans .pricing-land-art {
+    inline-size: 4.55rem !important;
+    block-size: 3.8rem !important;
+    border-radius: 0.85rem !important;
+  }
+
+  body main section#plans .pricing-land-art--small,
+  html.brand-palette body main section#plans .pricing-land-art--small {
+    order: 1;
+  }
+
+  body main section#plans .pricing-land-art--large,
+  html.brand-palette body main section#plans .pricing-land-art--large {
+    order: 3;
+    inline-size: 5.25rem !important;
+    block-size: 4.45rem !important;
+  }
+
+  body main section#plans .pricing-axis-copy,
+  html.brand-palette body main section#plans .pricing-axis-copy {
+    order: 2;
+    inline-size: 100%;
+    max-inline-size: 100% !important;
+    justify-self: auto;
+    text-align: center !important;
+  }
+
+  body main section#plans .pricing-axis-label,
+  html.brand-palette body main section#plans .pricing-axis-label {
+    font-size: 0.86rem !important;
+    line-height: 1.45 !important;
+  }
+
+  body main section#plans .pricing-slider-control,
+  html.brand-palette body main section#plans .pricing-slider-control {
+    grid-area: control;
+    inline-size: 100%;
+    block-size: 14rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body main section#plans .pricing-slider-track,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track,
+  html.brand-palette body main section#plans .pricing-slider-track {
+    inset-block-start: 1.35rem !important;
+    inset-block-end: 1.35rem !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: auto !important;
+    left: 1.05rem !important;
+    right: auto !important;
+    inline-size: 0.46rem !important;
+    block-size: auto !important;
+    transform: none !important;
+  }
+
+  body main section#plans .pricing-slider-rail,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-rail,
+  html.brand-palette body main section#plans .pricing-slider-rail {
+    inline-size: 100% !important;
+    block-size: var(--pricing-active-percent, 0%) !important;
+    transform-origin: top center !important;
+    transition: block-size 200ms ease !important;
+  }
+
+  body main section#plans .pricing-slider-handle,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
+  html.brand-palette body main section#plans .pricing-slider-handle {
+    inset-block-start: var(--pricing-active-y, 1.35rem) !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: auto !important;
+    left: 1.05rem !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    transition: inset-block-start 200ms ease, transform 160ms ease !important;
+  }
+
+  body main section#plans .pricing-slider-stopper,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper,
+  html.brand-palette body main section#plans .pricing-slider-stopper {
+    inset-block-start: var(--pricing-tick-y, 1.35rem) !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: auto !important;
+    left: 1.05rem !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  body main section#plans .pricing-slider-tick,
+  html.brand-palette body main section#plans .pricing-slider-tick {
+    inset-block-start: var(--pricing-tick-y, 1.35rem) !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: auto !important;
+    left: 1.9rem !important;
+    right: auto !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    inline-size: calc(100% - 2rem) !important;
+    block-size: auto !important;
+    min-block-size: 3.1rem;
+    padding-inline: 0.35rem 0 !important;
+    text-align: start !important;
+    transform: translateY(-50%) !important;
+  }
+
+  body main section#plans .pricing-slider-tick-label,
+  html.brand-palette body main section#plans .pricing-slider-tick-label {
+    position: static !important;
+    display: flex !important;
+    inline-size: 100% !important;
+    transform: none !important;
+    align-items: flex-start !important;
+    gap: 0.1rem !important;
+  }
+
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick] .pricing-slider-tick-label > span {
+    color: rgba(246, 241, 232, 0.66) !important;
+  }
+
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
+  body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
+  html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span {
+    color: var(--pricing-mono-light) !important;
+  }
 }
 
 /* Audience dark anchor block. */

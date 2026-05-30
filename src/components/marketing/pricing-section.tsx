@@ -13,6 +13,12 @@ import {
 } from "react";
 import { ArrowLeft, BarChart3, Check } from "lucide-react";
 
+import bonyanPlanIcon from "@/assets/images/pricing-plan-bonyan-icon.webp";
+import rouyanPlanIcon from "@/assets/images/pricing-plan-rouyan-icon.webp";
+import tabanPlanIcon from "@/assets/images/pricing-plan-taban-icon.webp";
+import tabanPlusPlanIcon from "@/assets/images/pricing-plan-taban-plus-icon.webp";
+import pricingLandSizeTierLarge from "@/assets/images/pricing-land-size-tier-large.webp";
+import pricingLandSizeTierSmall from "@/assets/images/pricing-land-size-tier-small.webp";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { buttonVariants } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
@@ -60,6 +66,13 @@ const durations: Array<{
     note: "بیشترین صرفه‌جویی",
   },
 ];
+
+const pricingPlanIcons: Record<PlanId, typeof bonyanPlanIcon> = {
+  bonyan: bonyanPlanIcon,
+  royan: rouyanPlanIcon,
+  taban: tabanPlanIcon,
+  "taban-plus": tabanPlusPlanIcon,
+};
 
 const pricingPlans: PricingPlan[] = [
   {
@@ -168,10 +181,10 @@ const pricingCopy = {
 
 const FALLBACK_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
-  bonyan: "تا ۳۰۰ متر",
-  royan: "۳۰۰ تا ۵۰۰ متر",
-  taban: "۵۰۰ تا ۷۰۰ متر",
-  "taban-plus": "بالای ۷۰۰ متر",
+  bonyan: "زمین تا ۳۰۰ متر",
+  royan: "زمین تا ۵۰۰ متر",
+  taban: "زمین تا ۷۰۰ متر",
+  "taban-plus": "زمین + ۷۰۰ متر",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";
@@ -206,6 +219,14 @@ function getAxisItemTransform(index: number, planCount: number) {
   }
 
   return "translateX(50%)";
+}
+
+function getVerticalAxisPosition(ratio: number) {
+  const insetRem = 1.35;
+  const offset = (1 - 2 * ratio) * insetRem;
+  const operator = offset < 0 ? "-" : "+";
+
+  return `calc(${ratio * 100}% ${operator} ${Math.abs(offset).toFixed(3)}rem)`;
 }
 
 function getWhatsappHref(
@@ -304,6 +325,7 @@ function PricingPlanCard({
   locale: Locale;
 }) {
   const recommended = Boolean(plan.featured);
+  const planIcon = pricingPlanIcons[plan.id];
   const copy = pricingCopy[locale];
 
   return (
@@ -322,22 +344,17 @@ function PricingPlanCard({
       )}
     >
       <div className="pricing-card-head relative">
-        <div
-          className={cn(
-            "absolute -left-12 -top-12 h-28 w-28 rounded-full blur-2xl",
-            isActive ? "bg-[#CC785C]/20" : "bg-[#CC785C]/10",
-          )}
-          aria-hidden="true"
-        />
-        {recommended ? (
-          <span
-            className={cn(
-              "pricing-recommended-badge absolute right-0 top-0 z-10 rounded-full border border-[#C16B4E] bg-[#C16B4E] px-3 py-1 text-xs font-bold text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15",
-            )}
-          >
-            {copy.recommended}
-          </span>
-        ) : null}
+        <span className="pricing-plan-icon">
+          <img
+            src={planIcon.src}
+            alt=""
+            width={planIcon.width}
+            height={planIcon.height}
+            loading="lazy"
+            decoding="async"
+            className="pricing-plan-icon-image"
+          />
+        </span>
         <h3 className="pricing-plan-title relative text-2xl font-bold">
           {plan.name}
         </h3>
@@ -423,8 +440,10 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const pulseTimeoutRef = useRef<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const activePlan = activePlanIndex === null ? null : plans[activePlanIndex];
+  const activeRatio = activePlanIndex === null ? 0 : activePlanIndex / (plans.length - 1);
   const activePercent =
-    activePlanIndex === null ? 0 : (activePlanIndex / (plans.length - 1)) * 100;
+    activePlanIndex === null ? 0 : activeRatio * 100;
+  const activeVerticalPosition = getVerticalAxisPosition(activeRatio);
 
   useEffect(() => {
     setIsReady(true);
@@ -501,7 +520,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
     [plans, prefersReducedMotion],
   );
 
-  const getIndexFromPointer = useCallback((clientX: number) => {
+  const getIndexFromPointer = useCallback((clientX: number, clientY: number) => {
     const rail = railRef.current;
 
     if (!rail) {
@@ -509,14 +528,17 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
     }
 
     const rect = rail.getBoundingClientRect();
-    const ratio = Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
+    const isVertical = window.matchMedia("(max-width: 640px)").matches;
+    const ratio = isVertical
+      ? Math.min(Math.max((clientY - rect.top) / rect.height, 0), 1)
+      : Math.min(Math.max((rect.right - clientX) / rect.width, 0), 1);
 
     return Math.round(ratio * (plans.length - 1));
   }, [activePlanIndex, plans.length]);
 
   const handleRailPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
-    selectPlan(getIndexFromPointer(event.clientX));
+    selectPlan(getIndexFromPointer(event.clientX, event.clientY));
   };
 
   const handleRailMove = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -524,7 +546,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       return;
     }
 
-    selectPlan(getIndexFromPointer(event.clientX));
+    selectPlan(getIndexFromPointer(event.clientX, event.clientY));
   };
 
   const handleSliderKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -593,19 +615,33 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
         </div>
 
         <div className="pricing-slider pricing-slider-labs mt-8 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fffaf1]/70 px-3 py-5 shadow-sm shadow-[#2a241d]/[0.03] md:mx-auto md:mt-12 md:max-w-4xl md:px-8 md:py-7">
-          <div className="pricing-axis-copy mx-auto max-w-3xl text-center">
-            <span className="pricing-axis-label block text-lg font-black leading-7 text-[#2a241d] md:text-2xl md:leading-8">
-              {copy.axisLabel}
+          <div className="pricing-axis-stage">
+            <span className="pricing-land-art pricing-land-art--large" aria-hidden="true">
+              <img
+                src={pricingLandSizeTierLarge.src}
+                alt=""
+                width="824"
+                height="475"
+                loading="lazy"
+                decoding="async"
+                className="pricing-land-art-image"
+              />
             </span>
-            <span
-              className={cn(
-                "pricing-axis-insight mx-auto mt-2 block min-h-6 max-w-2xl rounded-full px-3 py-1 text-xs font-bold leading-5 transition duration-200 md:text-sm",
-                activePlan
-                  ? "bg-[#C16B4E] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15 dark:bg-[#C16B4E] dark:text-[#FFF7EF]"
-                  : "bg-[#f5eadb]/78 text-[#75695d]",
-              )}
-            >
-              {activePlan ? copy.suggestedPlanText(activePlan.name) : copy.sliderPrompt}
+            <div className="pricing-axis-copy mx-auto max-w-3xl text-center">
+              <span className="pricing-axis-label block text-lg font-black leading-7 text-[#2a241d] md:text-2xl md:leading-8">
+                {copy.axisLabel}
+              </span>
+            </div>
+            <span className="pricing-land-art pricing-land-art--small" aria-hidden="true">
+              <img
+                src={pricingLandSizeTierSmall.src}
+                alt=""
+                width="320"
+                height="230"
+                loading="lazy"
+                decoding="async"
+                className="pricing-land-art-image"
+              />
             </span>
           </div>
           <div
@@ -617,7 +653,12 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             <div className="pricing-slider-track absolute left-0 right-0 top-8 h-px -translate-y-1/2 overflow-hidden rounded-full bg-[#d8c7b2]">
               <span
                 className="pricing-slider-rail block h-full origin-right bg-[#CC785C] transition-[width] duration-200"
-                style={{ width: activePlanIndex === null ? "0%" : `${activePercent}%` }}
+                style={{
+                  width: activePlanIndex === null ? "0%" : `${activePercent}%`,
+                  "--pricing-active-percent": `${activePercent}%`,
+                  "--pricing-active-ratio": activeRatio,
+                  "--pricing-active-y": activeVerticalPosition,
+                } as CSSProperties}
               />
             </div>
             <ArrowLeft
@@ -639,21 +680,29 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                 onPointerDown={(event) => {
                   event.stopPropagation();
                   event.currentTarget.setPointerCapture(event.pointerId);
-                  selectPlan(getIndexFromPointer(event.clientX));
+                  selectPlan(getIndexFromPointer(event.clientX, event.clientY));
                 }}
                 onPointerMove={(event) => {
                   if (event.buttons === 1) {
-                    selectPlan(getIndexFromPointer(event.clientX));
+                    selectPlan(getIndexFromPointer(event.clientX, event.clientY));
                   }
                 }}
                 className="pricing-slider-handle absolute top-8 z-20 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full border-2 border-[#fffaf1] bg-[#CC785C] shadow-lg shadow-[#CC785C]/20 transition-[right,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed]"
-                style={{ right: `${activePercent}%`, transform: "translate(50%, -50%)" }}
+                style={{
+                  right: `${activePercent}%`,
+                  transform: "translate(50%, -50%)",
+                  "--pricing-active-percent": `${activePercent}%`,
+                  "--pricing-active-ratio": activeRatio,
+                  "--pricing-active-y": activeVerticalPosition,
+                } as CSSProperties}
               >
                 <span aria-hidden="true" className="pricing-slider-handle-dot h-2.5 w-2.5 rounded-full bg-white" />
               </button>
             ) : null}
             {plans.map((plan, index) => {
+              const tickRatio = index / (plans.length - 1);
               const tickPercent = (index / (plans.length - 1)) * 100;
+              const tickVerticalPosition = getVerticalAxisPosition(tickRatio);
 
               return (
                 <div key={plan.id}>
@@ -664,7 +713,10 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                     style={{
                       right: `${tickPercent}%`,
                       transform: "translate(50%, -50%)",
-                    }}
+                      "--pricing-tick-percent": `${tickPercent}%`,
+                      "--pricing-tick-ratio": tickRatio,
+                      "--pricing-tick-y": tickVerticalPosition,
+                    } as CSSProperties}
                     className={cn(
                       "pricing-slider-stopper absolute top-8 z-10 block h-3 w-3 rounded-full border border-[#d8c7b2] bg-[#fffaf1]",
                       activePlanIndex === index && "border-[#CC785C] bg-[#CC785C]",
@@ -674,13 +726,16 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                     type="button"
                     data-plan-tick={plan.id}
                     data-active-tick={activePlanIndex === index ? "true" : "false"}
-                    aria-label={`${tickLabels[plan.id]} - ${plan.name}`}
+                    aria-label={tickLabels[plan.id]}
                     aria-pressed={activePlanIndex === index}
                     onClick={() => selectPlan(index)}
                     style={{
                       right: `${tickPercent}%`,
                       transform: getAxisItemTransform(index, plans.length),
-                    }}
+                      "--pricing-tick-percent": `${tickPercent}%`,
+                      "--pricing-tick-ratio": tickRatio,
+                      "--pricing-tick-y": tickVerticalPosition,
+                    } as CSSProperties}
                     className={cn(
                       "pricing-slider-tick absolute top-8 z-10 h-[4.5rem] w-16 rounded-2xl text-center text-[10.5px] font-bold leading-snug transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 md:h-16 md:w-20 md:text-xs",
                       activePlanIndex === index
@@ -692,12 +747,6 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
                       <span className={activePlanIndex === index ? "text-[#2a241d]" : "text-[#75695d]"}>
                         {tickLabels[plan.id]}
                       </span>
-                      <span className={cn(
-                        "block text-[10px] leading-tight",
-                        activePlanIndex === index ? "text-[#CC785C]" : "text-[#75695d]",
-                      )}>
-                        {plan.name}
-                      </span>
                     </span>
                   </button>
                 </div>
@@ -705,27 +754,13 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
             })}
           </div>
 
-          <p className="pricing-selector-motto mx-auto min-h-6 max-w-xl text-center text-xs font-bold leading-6 text-[#6f6254]">
-            {activePlan ? activePlan.selectorMotto : ""}
-          </p>
         </div>
 
         <div
           className="pricing-duration mt-6 flex flex-col items-center gap-2"
           data-selected-duration={duration}
         >
-          {/* Relative wrapper: badge sits above the toggle, never changes segment height */}
-          <div className="relative w-full max-w-xs pt-3 md:max-w-sm">
-            <span
-              className={cn(
-                "pricing-best-value-badge absolute end-2 top-0.5 z-10 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[10px] font-bold leading-4 transition duration-200",
-                duration === "12"
-                  ? "border-[#CC785C]/40 bg-[#CC785C] text-[#FFF7EF]"
-                  : "border-[#E4D8C8] bg-[#FBF6ED] text-[#CC785C]",
-              )}
-            >
-              {copy.bestValue}
-            </span>
+          <div className="relative w-full max-w-xs md:max-w-sm">
             <div
               role="tablist"
               aria-label="دوره اشتراک"

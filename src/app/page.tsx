@@ -3,13 +3,7 @@ import type { CSSProperties } from "react";
 import { Fragment } from "react";
 import Link from "next/link";
 import {
-  Database,
-  GraduationCap,
-  Layers,
-  MapPinned,
   Route,
-  Send,
-  Sparkles,
 } from "lucide-react";
 
 import { HeroMapVisual } from "@/components/hero/HeroMapVisual";
@@ -22,7 +16,13 @@ import { PricingSection } from "@/components/marketing/pricing-section";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
+import featureLiveProjectDataIcon from "@/assets/images/feature-live-project-data-icon.webp";
+import featureSalesToolsIcon from "@/assets/images/feature-sales-tools-icon.webp";
+import featureSalesTrainingIcon from "@/assets/images/feature-sales-training-icon.webp";
 import constructionIntelligenceMap from "@/assets/images/home-solution-construction-intelligence-map.webp";
+import fieldDataLiveMarketView from "@/assets/images/home-field-data-live-market-view.webp";
+import salesPipelineIconSet from "@/assets/images/icon-set-sales-pipeline.webp";
+import opportunityScoringAction from "@/assets/images/home-opportunity-scoring-action.webp";
 import salesFollowupPipeline from "@/assets/images/home-sales-followup-pipeline.webp";
 import salesTrainingPlaybook from "@/assets/images/home-sales-training-playbook.webp";
 import { getSalesStyleSubcategories } from "@/data/sales-style";
@@ -72,50 +72,34 @@ const solutionCards = [
     body: "پروژه‌های فعال تهران، کرج و لواسان با آدرس، مرحله ساخت، تصویر و سرنخ تماس در یک نمای قابل بررسی جمع می‌شوند.",
     href: "/features/#map",
     motif: "data",
-    icon: Database,
+    icon: featureLiveProjectDataIcon,
   },
   {
     title: "ابزار فروش و پیگیری پروژه‌محور",
     body: "نقشه، فیلتر، CRM و پیامک هوشمند کمک می‌کند تیم فروش فرصت‌ها را منظم‌تر ببیند، اولویت‌بندی کند و پیگیری را از دست ندهد.",
     href: "/features/#crm",
     motif: "workflow",
-    icon: Send,
+    icon: featureSalesToolsIcon,
   },
   {
     title: "آموزش فروش پروژه‌محور",
     body: "تیم شما با متن تماس، سناریوی پیگیری و روش استفاده از داده‌ها یاد می‌گیرد در زمان درست و با زمینه روشن اقدام کند.",
     href: "/features/#training",
     motif: "training",
-    icon: GraduationCap,
+    icon: featureSalesTrainingIcon,
   },
 ] as const;
 
 const howItWorksLayers = [
   {
     title: "جمع‌آوری و به‌روزرسانی میدانی پروژه‌های ساختمانی",
-    eyebrow: "لایه · داده",
     body: "اطلاعات پروژه‌های در حال ساخت به‌صورت میدانی جمع‌آوری و راستی‌آزمایی می‌شود تا تصویری زنده و قابل اعتماد از بازار در دسترس باشد.",
-    icon: MapPinned,
-    eyebrowIcon: Layers,
-    steps: [
-      "بازدید میدانی",
-      "جمع‌آوری مستمر",
-      "تأیید و راستی‌آزمایی",
-      "تصویر زنده از بازار",
-    ],
+    image: fieldDataLiveMarketView,
   },
   {
     title: "تحلیل، امتیازدهی و پیشنهاد اقدام برای تیم فروش",
-    eyebrow: "لایه · تصمیم",
     body: "هوش مصنوعی داده‌های میدانی را تحلیل می‌کند، فرصت‌های مناسب را شناسایی و امتیازدهی می‌کند و پیشنهاد اقدام مشخص برای تیم فروش ارائه می‌دهد.",
-    icon: Sparkles,
-    eyebrowIcon: Sparkles,
-    steps: [
-      "تحلیل اطلاعات",
-      "شناسایی فرصت",
-      "امتیازدهی پروژه",
-      "پیشنهاد اقدام",
-    ],
+    image: opportunityScoringAction,
   },
 ] as const;
 
@@ -294,7 +278,7 @@ function SolutionPillarCard({
 }: {
   card: (typeof solutionCards)[number];
 }) {
-  const PillarIcon = card.icon;
+  const pillarIcon = card.icon;
 
   return (
     <article
@@ -306,7 +290,15 @@ function SolutionPillarCard({
     >
       <div className="solution-pillar-topline">
         <span className="solution-pillar-icon" aria-hidden="true">
-          <PillarIcon focusable="false" />
+          <img
+            src={pillarIcon.src}
+            alt=""
+            width={pillarIcon.width}
+            height={pillarIcon.height}
+            loading="lazy"
+            decoding="async"
+            className="solution-pillar-icon-image"
+          />
         </span>
         <h3 className="solution-pillar-title">
           {card.title}
@@ -443,7 +435,7 @@ function HowItWorksSection() {
             پرشین‌سازه چطور پروژه‌های ساختمانی را به فرصت فروش تبدیل می‌کند
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
-            دو لایه به هم وصل می‌شوند: جمع‌آوری میدانی پروژه‌ها در تهران، کرج و لواسان، و هوش مصنوعی که این داده‌ها را به فرصت قابل اقدام برای تیم فروش تبدیل می‌کند.
+            مسیر از جمع‌آوری میدانی پروژه‌ها در تهران، کرج و لواسان شروع می‌شود و با تحلیل هوشمند، این داده‌ها به فرصت قابل اقدام برای تیم فروش تبدیل می‌شوند.
           </p>
         </header>
 
@@ -463,15 +455,6 @@ function HowItWorksSection() {
                     : "how-layer-card--decision",
                 )}
               >
-                <div className="how-layer-heading-row">
-                  <span className="how-layer-icon" aria-hidden="true">
-                    <layer.icon />
-                  </span>
-                  <span className="how-layer-badge">
-                    <layer.eyebrowIcon aria-hidden="true" />
-                    {layer.eyebrow}
-                  </span>
-                </div>
                 <h3 className="how-layer-title">
                   {layer.title}
                 </h3>
@@ -479,23 +462,16 @@ function HowItWorksSection() {
                   {layer.body}
                 </p>
 
-                <div className="how-process-list" role="list">
-                  {layer.steps.map((step, stepIndex) => (
-                    <div key={step} className="how-process-item" role="listitem">
-                      <span className="how-process-chip">
-                        {step}
-                      </span>
-                      {stepIndex < layer.steps.length - 1 ? (
-                        <span
-                          className="how-process-arrow"
-                          aria-hidden="true"
-                        >
-                          ←
-                        </span>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
+                <img
+                  src={layer.image.src}
+                  alt=""
+                  width="3072"
+                  height="512"
+                  loading="lazy"
+                  decoding="async"
+                  className="how-layer-process-image"
+                  aria-hidden="true"
+                />
               </article>
 
               {index === 0 ? (
@@ -567,7 +543,8 @@ function SalesFlowSection() {
                 style={
                   {
                     "--sales-flow-progress": `${(index + 1) * 25}%`,
-                  } as CSSProperties & Record<"--sales-flow-progress", string>
+                    "--sales-flow-icon-index": `${index}`,
+                  } as CSSProperties & Record<"--sales-flow-progress" | "--sales-flow-icon-index", string>
                 }
                 className={cn(
                   "sales-flow-card",
@@ -578,10 +555,20 @@ function SalesFlowSection() {
                 )}
               >
                 <div className="sales-flow-card-top">
+                  <span className="sales-flow-step-icon" aria-hidden="true">
+                    <img
+                      src={salesPipelineIconSet.src}
+                      alt=""
+                      width="2508"
+                      height="627"
+                      loading="lazy"
+                      decoding="async"
+                      className="sales-flow-step-icon-strip"
+                    />
+                  </span>
                   <span className="sales-flow-step-number" aria-hidden="true">
                     {salesFlowStepNumbers[index]}
                   </span>
-                  <span className="sales-flow-step-node" aria-hidden="true" />
                 </div>
                 <span className="sales-flow-progress" aria-hidden="true">
                   <span className="sales-flow-progress-fill" />
