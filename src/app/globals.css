@@ -10681,6 +10681,11 @@ html.brand-palette body main section#plans {
   --pricing-card-soft: rgba(20, 20, 19, 0.055);
   --pricing-card-inverse-bg: #141413;
   --pricing-card-inverse-fg: #FAF9F5;
+  --pricing-axis-accent: #657468;
+  --pricing-axis-accent-strong: #53665A;
+  --pricing-axis-accent-line: rgba(101, 116, 104, 0.46);
+  --pricing-axis-accent-soft: rgba(101, 116, 104, 0.16);
+  --pricing-axis-accent-shadow: rgba(83, 102, 90, 0.16);
   --pricing-mono-dark: var(--pricing-card-bg);
   --pricing-mono-black: var(--pricing-card-fg);
   --pricing-mono-light: var(--pricing-card-inverse-fg);
@@ -10718,7 +10723,7 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .
 
 body main section#plans .pricing-slider-track,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-track {
-  background: rgba(20, 20, 19, 0.16) !important;
+  background: var(--pricing-axis-accent-line) !important;
 }
 
 body main section#plans .pricing-slider-rail,
@@ -10727,10 +10732,10 @@ body main section#plans .pricing-slider-handle,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-handle,
 body main section#plans .pricing-slider-stopper[data-active-stopper="true"],
 html.brand-palette body main section#plans .pricing-slider-stopper[data-active-stopper="true"] {
-  border-color: var(--pricing-card-fg) !important;
-  background: var(--pricing-card-fg) !important;
+  border-color: var(--pricing-axis-accent-strong) !important;
+  background: var(--pricing-axis-accent-strong) !important;
   box-shadow: none !important;
-  color: var(--pricing-card-fg) !important;
+  color: var(--pricing-axis-accent-strong) !important;
 }
 
 body main section#plans .pricing-slider-handle {
@@ -10744,15 +10749,21 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .
 
 body main section#plans .pricing-slider-stopper,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper {
-  border-color: rgba(20, 20, 19, 0.32) !important;
+  border-color: var(--pricing-axis-accent-line) !important;
   background: var(--pricing-card-bg) !important;
+}
+
+body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper[data-active-stopper="true"],
+html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-stopper[data-active-stopper="true"] {
+  border-color: var(--pricing-axis-accent-strong) !important;
+  background: var(--pricing-axis-accent-strong) !important;
 }
 
 body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 body main section#plans .pricing-slider-tick[data-active-tick="true"],
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] {
-  color: var(--pricing-card-fg) !important;
+  color: var(--pricing-axis-accent-strong) !important;
 }
 
 body main section#plans .pricing-slider-tick,
@@ -10766,7 +10777,7 @@ body main section#plans .pricing-slider-tick[data-active-tick="true"],
 body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span),
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"],
 html.brand-palette body main section#plans .pricing-slider-tick[data-active-tick="true"] :is(span) {
-  color: var(--pricing-card-fg) !important;
+  color: var(--pricing-axis-accent-strong) !important;
 }
 
 body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-plan-tick],
@@ -10790,7 +10801,7 @@ html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label,
 html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick:hover .pricing-slider-tick-label > span {
-  color: var(--pricing-card-fg) !important;
+  color: var(--pricing-axis-accent-strong) !important;
 }
 
 body main section#plans .pricing-duration,
@@ -10885,7 +10896,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   --plan-bg: var(--pricing-card-bg);
   --plan-fg: var(--pricing-card-fg);
   --plan-muted: var(--pricing-card-muted);
-  --plan-line: var(--pricing-card-fg);
+  --plan-line: var(--pricing-axis-accent-strong);
   --plan-soft: var(--pricing-card-soft);
   --plan-inverse-bg: var(--pricing-card-inverse-bg);
   --plan-inverse-fg: var(--pricing-card-inverse-fg);
@@ -10893,8 +10904,8 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   border-color: var(--plan-line) !important;
   background: var(--plan-bg) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-card-fg),
-    0 18px 42px rgba(20, 20, 19, 0.1) !important;
+    0 0 0 1px var(--pricing-axis-accent-strong),
+    0 18px 42px var(--pricing-axis-accent-shadow) !important;
   transform: translateY(-3px) !important;
 }
 
@@ -10964,8 +10975,8 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"] {
-  border-color: var(--pricing-card-fg) !important;
-  box-shadow: inset 0 0 0 1px rgba(20, 20, 19, 0.18) !important;
+  border-color: var(--pricing-axis-accent-strong) !important;
+  box-shadow: inset 0 0 0 1px var(--pricing-axis-accent-soft) !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
@@ -10974,10 +10985,10 @@ body main section#plans article.pricing-card.pricing-card-recommended[data-plan-
 html.brand-palette body main section#plans article.pricing-card[data-plan-card="taban"][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card="taban"][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card="taban"][data-recommended-plan="true"][data-active-plan="true"] {
-  border-color: var(--pricing-card-fg) !important;
+  border-color: var(--pricing-axis-accent-strong) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-card-fg),
-    0 18px 42px rgba(20, 20, 19, 0.1) !important;
+    0 0 0 1px var(--pricing-axis-accent-strong),
+    0 18px 42px var(--pricing-axis-accent-shadow) !important;
 }
 
 body main section#plans article.pricing-card[data-plan-card] :is(h3, p, div, span, svg),
@@ -11103,12 +11114,12 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card][
 html.brand-palette body main section#plans article.pricing-card[data-plan-card][data-active-plan="true"][data-recommended-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-featured[data-plan-card][data-active-plan="true"],
 html.brand-palette body main section#plans article.pricing-card.pricing-card-recommended[data-plan-card][data-active-plan="true"] {
-  border-color: var(--pricing-card-fg) !important;
+  border-color: var(--pricing-axis-accent-strong) !important;
   background: var(--pricing-card-bg) !important;
   color: var(--pricing-card-fg) !important;
   box-shadow:
-    0 0 0 1px var(--pricing-card-fg),
-    0 18px 42px rgba(20, 20, 19, 0.1) !important;
+    0 0 0 1px var(--pricing-axis-accent-strong),
+    0 18px 42px var(--pricing-axis-accent-shadow) !important;
 }
 
 @media (max-width: 640px) {
@@ -11175,6 +11186,8 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
 
   body main section#plans .pricing-slider-control,
   html.brand-palette body main section#plans .pricing-slider-control {
+    --pricing-mobile-axis-center: 1.05rem;
+    --pricing-mobile-axis-width: 0.46rem;
     grid-area: control;
     inline-size: 100%;
     block-size: 14rem !important;
@@ -11189,9 +11202,9 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     inset-block-end: 1.35rem !important;
     inset-inline-start: auto !important;
     inset-inline-end: auto !important;
-    left: 1.05rem !important;
+    left: calc(var(--pricing-mobile-axis-center) - (var(--pricing-mobile-axis-width) / 2)) !important;
     right: auto !important;
-    inline-size: 0.46rem !important;
+    inline-size: var(--pricing-mobile-axis-width) !important;
     block-size: auto !important;
     transform: none !important;
   }
@@ -11211,7 +11224,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     inset-block-start: var(--pricing-active-y, 1.35rem) !important;
     inset-inline-start: auto !important;
     inset-inline-end: auto !important;
-    left: 1.05rem !important;
+    left: var(--pricing-mobile-axis-center) !important;
     right: auto !important;
     transform: translate(-50%, -50%) !important;
     transition: inset-block-start 200ms ease, transform 160ms ease !important;
@@ -11223,7 +11236,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     inset-block-start: var(--pricing-tick-y, 1.35rem) !important;
     inset-inline-start: auto !important;
     inset-inline-end: auto !important;
-    left: 1.05rem !important;
+    left: var(--pricing-mobile-axis-center) !important;
     right: auto !important;
     transform: translate(-50%, -50%) !important;
   }
@@ -11271,7 +11284,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"],
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label,
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs .pricing-slider-tick[data-active-tick="true"] .pricing-slider-tick-label > span {
-    color: var(--pricing-card-fg) !important;
+    color: var(--pricing-axis-accent-strong) !important;
   }
 }
 
