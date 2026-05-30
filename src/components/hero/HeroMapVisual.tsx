@@ -1,9 +1,7 @@
-import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type HeroMapVisualProps = {
   compact?: boolean;
-  locale?: Locale;
 };
 
 const fieldDots = Array.from({ length: 42 }, (_, index) => ({
@@ -25,19 +23,12 @@ const mutedPins = [
 const pinPath =
   "M0 -12C6.6 -12 11 -7.4 11 -1.7C11 5.7 0 15 0 15C0 15 -11 5.7 -11 -1.7C-11 -7.4 -6.6 -12 0 -12Z";
 
-export function HeroMapVisual({ compact = false, locale = "fa" }: HeroMapVisualProps) {
-  const labels =
-    locale === "en"
-      ? {
-          active: "Active opportunities",
-          aria: "Abstract project field showing one surfaced active construction opportunity",
-          pulse: "Sales signal",
-        }
-      : {
-          active: "فرصت‌های فعال",
-          aria: "نمای انتزاعی از پروژه‌های ساختمانی فعال که یک فرصت مناسب زودتر برجسته شده است",
-          pulse: "سیگنال فروش",
-        };
+export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
+  const labels = {
+    active: "فرصت‌های فعال",
+    aria: "نمای انتزاعی از پروژه‌های ساختمانی فعال که یک فرصت مناسب زودتر برجسته شده است",
+    pulse: "سیگنال فروش",
+  };
 
   return (
     <div

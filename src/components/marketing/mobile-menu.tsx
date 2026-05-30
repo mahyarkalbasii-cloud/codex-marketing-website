@@ -7,7 +7,6 @@ import { createPortal } from "react-dom";
 import { LogIn, Menu, PhoneCall, UserPlus, X } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { HeaderPreferencesMenu } from "@/components/marketing/header-preferences-menu";
 import { getDirection, getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -16,25 +15,15 @@ export function MobileMenu() {
   const locale = getLocaleFromPathname(pathname);
   const direction = getDirection(locale);
   const { authLinks, navItems, site } = getSiteContent(locale);
-  const labels = locale === "fa"
-    ? {
-        open: "باز کردن منوی موبایل",
-        close: "بستن منوی موبایل",
-        title: "منوی موبایل",
-        tagline: "زیرساخت فروش پروژه‌محور برای بازار ساختمان",
-        login: "ورود",
-        signup: "ثبت‌نام",
-        demo: "درخواست دمو",
-      }
-    : {
-        open: "Open mobile menu",
-        close: "Close mobile menu",
-        title: "Mobile menu",
-        tagline: "Project-based sales infrastructure for construction suppliers",
-        login: "Login",
-        signup: "Sign up",
-        demo: "Request demo",
-      };
+  const labels = {
+    open: "باز کردن منوی موبایل",
+    close: "بستن منوی موبایل",
+    title: "منوی موبایل",
+    tagline: "زیرساخت فروش پروژه‌محور برای بازار ساختمان",
+    login: "ورود",
+    signup: "ثبت‌نام",
+    demo: "درخواست دمو",
+  };
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -130,7 +119,6 @@ export function MobileMenu() {
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-2">
-                <HeaderPreferencesMenu compact />
                 <button
                   ref={closeButtonRef}
                   type="button"
