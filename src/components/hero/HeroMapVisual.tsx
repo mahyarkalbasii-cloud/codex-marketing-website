@@ -1,4 +1,5 @@
-import heroProjectMapWide from "@/assets/images/home-hero-project-map-wide.webp";
+import heroMobileProjectMapLarge from "@/assets/images/home-hero-mobile-project-map-large.webp";
+import heroMobileProjectMap from "@/assets/images/home-hero-mobile-project-map.webp";
 import { cn } from "@/lib/utils";
 
 type HeroMapVisualProps = {
@@ -13,15 +14,18 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
         compact && "hero-laptop-map-visual--compact",
       )}
     >
-      <img
-        src={heroProjectMapWide.src}
+      <picture>
+        <source media="(max-width: 767px)" srcSet={heroMobileProjectMap.src} />
+        <img
+          src={heroMobileProjectMapLarge.src}
         alt="نقشه تعاملی پروژه‌های ساختمانی فعال تهران با نشانگرهای موقعیت روی صفحه لپ‌تاپ - پرشین‌سازه"
-        width="1774"
-        height="887"
-        loading="eager"
-        fetchPriority="high"
-        className="hero-laptop-map-image"
-      />
+          width={heroMobileProjectMapLarge.width}
+          height={heroMobileProjectMapLarge.height}
+          loading="eager"
+          fetchPriority="high"
+          className="hero-laptop-map-image"
+        />
+      </picture>
     </div>
   );
 }
