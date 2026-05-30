@@ -90,10 +90,10 @@ export function SiteFooter() {
       dir={direction}
       className="border-t border-[#3b3128] bg-[#241f1a] text-[#fffaf1] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
     >
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-9 md:grid-cols-2 md:gap-10 md:px-6 md:py-12 lg:grid-cols-4 xl:grid-cols-[1.35fr_0.85fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-9 md:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] md:gap-10 md:px-6 md:py-12">
         <section
           aria-label="اطلاعات پرشین‌سازه"
-          className="space-y-5 md:col-span-2 lg:col-span-4 xl:col-span-1"
+          className="space-y-5"
         >
           <Link href={localizeHref("/", locale)} className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl border border-[#6b5542] bg-white text-sm font-black text-[#241f1a]">
@@ -128,6 +128,7 @@ export function SiteFooter() {
           </div>
         </section>
 
+        <div className="grid min-w-0 grid-cols-2 gap-x-5 gap-y-8 sm:gap-x-7 lg:gap-x-10">
         <section aria-label={footerCopy.mainPages} className="min-w-0">
           <h3 className="mb-3 text-sm font-semibold text-[#fffaf1]">
             {footerCopy.mainPages}
@@ -171,7 +172,7 @@ export function SiteFooter() {
 
         <section
           aria-label={footerCopy.categories}
-          className="flex min-h-[15.5rem] min-w-0 flex-col"
+          className="flex min-w-0 flex-col"
         >
           <h3 className="mb-3 text-sm font-semibold text-[#fffaf1]">
             {footerCopy.categories}
@@ -203,6 +204,7 @@ export function SiteFooter() {
           localize={false}
           title={footerCopy.stages}
         />
+        </div>
       </div>
       <div className="border-t border-[#3b3128]">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-xs text-[#cfc0af] md:flex-row md:items-center md:justify-between md:px-6">

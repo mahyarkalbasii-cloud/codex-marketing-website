@@ -370,7 +370,6 @@ function MarketProblemSection() {
           </p>
           <Link href="#solution" className="marketing-cta marketing-cta--secondary problem-cta">
             آشنایی با راه‌حل پرشین‌سازه
-            <span className="marketing-cta__arrow" aria-hidden="true">←</span>
           </Link>
         </div>
 
@@ -713,11 +712,9 @@ export default function Home() {
               <div className="hero-actions">
                 <Link href="#demo" className="marketing-cta marketing-cta--primary">
                   مشاهده دمو
-                  <span className="marketing-cta__arrow" aria-hidden="true">←</span>
                 </Link>
                 <Link href="#solution" className="marketing-cta marketing-cta--secondary">
                   چرا پرشین‌سازه؟
-                  <span className="marketing-cta__arrow" aria-hidden="true">←</span>
                 </Link>
               </div>
             </div>

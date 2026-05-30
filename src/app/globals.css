@@ -5138,6 +5138,155 @@ html.brand-palette .site-header button.site-header-mobile-trigger[class*="bg-zin
   color: #131314 !important;
 }
 
+.mobile-action-bar {
+  padding-block: 0.45rem calc(env(safe-area-inset-bottom) + 0.55rem);
+  padding-inline: 0.75rem;
+  border-block-start: 1px solid rgba(204, 120, 92, 0.2);
+  background:
+    linear-gradient(180deg, rgba(251, 246, 237, 0.82), rgba(251, 246, 237, 0.98) 34%),
+    #fbf6ed;
+  box-shadow: 0 -18px 44px rgba(42, 33, 27, 0.13);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.mobile-action-bar__shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.18fr) minmax(0, 0.9fr);
+  gap: 0.5rem;
+  max-inline-size: 24rem;
+  margin-inline: auto;
+  padding: 0.45rem;
+  border: 1px solid rgba(204, 120, 92, 0.18);
+  border-radius: 1.3rem;
+  background: rgba(255, 250, 241, 0.96);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    0 12px 28px rgba(42, 33, 27, 0.12);
+}
+
+.mobile-action-bar__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-block-size: 3rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.mobile-action-bar__item:active {
+  transform: translateY(1px);
+}
+
+.mobile-action-bar__item--call {
+  border-color: rgba(204, 120, 92, 0.48);
+  background: #cc785c;
+  color: #fffaf1;
+  box-shadow: 0 10px 20px rgba(204, 120, 92, 0.22);
+}
+
+.mobile-action-bar__item--signup {
+  border-color: #171716;
+  background: #171716;
+  color: #fffaf1;
+  box-shadow: 0 10px 20px rgba(19, 19, 20, 0.18);
+}
+
+.mobile-action-bar__item--login {
+  border-color: rgba(42, 33, 27, 0.22);
+  background: rgba(255, 250, 241, 0.72);
+  color: #2a241d;
+}
+
+html.brand-palette body .mobile-action-bar {
+  background:
+    linear-gradient(180deg, rgba(251, 246, 237, 0.82), rgba(251, 246, 237, 0.98) 34%),
+    #fbf6ed !important;
+  border-color: rgba(204, 120, 92, 0.2) !important;
+}
+
+html.brand-palette body .mobile-action-bar__shell {
+  background: rgba(255, 250, 241, 0.96) !important;
+  border-color: rgba(204, 120, 92, 0.18) !important;
+}
+
+html.brand-palette body .mobile-action-bar__item--call {
+  background: #cc785c !important;
+  border-color: rgba(204, 120, 92, 0.48) !important;
+  color: #fffaf1 !important;
+}
+
+html.brand-palette body .mobile-action-bar__item--signup {
+  background: #171716 !important;
+  border-color: #171716 !important;
+  color: #fffaf1 !important;
+}
+
+html.brand-palette body .mobile-action-bar__item--login {
+  background: rgba(255, 250, 241, 0.72) !important;
+  border-color: rgba(42, 33, 27, 0.22) !important;
+  color: #2a241d !important;
+}
+
+html.brand-palette body #mobile-menu-panel .mobile-menu-actions {
+  border-color: rgba(204, 120, 92, 0.18) !important;
+}
+
+html.brand-palette body #mobile-menu-panel .mobile-menu-actions__call {
+  background: #cc785c !important;
+  border-color: rgba(204, 120, 92, 0.48) !important;
+  color: #fffaf1 !important;
+  box-shadow: 0 10px 20px rgba(204, 120, 92, 0.16) !important;
+}
+
+html.brand-palette body #mobile-menu-panel .mobile-menu-actions__call svg {
+  color: #fffaf1 !important;
+}
+
+html.brand-palette body #mobile-menu-panel .mobile-menu-actions__signup {
+  background: #171716 !important;
+  border-color: #171716 !important;
+  color: #fffaf1 !important;
+  box-shadow: 0 10px 20px rgba(19, 19, 20, 0.14) !important;
+}
+
+html.brand-palette body #mobile-menu-panel .mobile-menu-actions__login {
+  background: rgba(255, 250, 241, 0.92) !important;
+  border-color: rgba(42, 33, 27, 0.22) !important;
+  color: #2a241d !important;
+}
+
+.dark body .mobile-action-bar {
+  border-color: rgba(63, 63, 70, 0.88);
+  background:
+    linear-gradient(180deg, rgba(9, 9, 11, 0.82), rgba(9, 9, 11, 0.98) 34%),
+    rgb(9 9 11);
+}
+
+.dark body .mobile-action-bar__shell,
+.dark body .mobile-action-bar__item--login {
+  border-color: rgb(39 39 42);
+  background: rgb(24 24 27);
+  color: rgb(244 244 245);
+}
+
+html.brand-palette body #mobile-menu-panel.mobile-menu-panel {
+  background-color: #fbf6ed !important;
+}
+
+.dark body #mobile-menu-panel.mobile-menu-panel {
+  background-color: rgb(9 9 11) !important;
+}
+
 html.brand-palette .faq-list-card {
   background: var(--ref-card) !important;
   background-image: none !important;
@@ -5609,8 +5758,26 @@ html.brand-palette body main #how-it-works .how-works-reveal-header {
   max-inline-size: 100%;
   min-inline-size: 0;
   overflow-x: auto;
-  padding-block: 0.15rem 0.5rem;
+  padding-block: 0.15rem 0.8rem;
+  background:
+    linear-gradient(90deg, rgba(204, 120, 92, 0.88), rgba(204, 120, 92, 0.5)) right bottom / 30% 0.24rem no-repeat,
+    linear-gradient(90deg, rgba(228, 216, 200, 0.82), rgba(228, 216, 200, 0.42)) left bottom / 100% 0.24rem no-repeat;
+  scrollbar-color: rgba(204, 120, 92, 0.72) rgba(228, 216, 200, 0.72);
   scrollbar-width: thin;
+}
+
+.audience-stage-tabs::-webkit-scrollbar {
+  block-size: 0.42rem;
+}
+
+.audience-stage-tabs::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(228, 216, 200, 0.72);
+}
+
+.audience-stage-tabs::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(204, 120, 92, 0.72);
 }
 
 .audience-stage-tab {
@@ -5911,6 +6078,7 @@ html.brand-palette body main #how-it-works .how-works-reveal-header {
   .audience-stage-tabs {
     flex-direction: column;
     overflow: visible;
+    background: none;
     padding-block: 0;
     padding-inline-start: 0.2rem;
   }
@@ -10744,11 +10912,13 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   body main section#plans .pricing-slider.pricing-slider-labs,
   html.brand-palette body main section#plans .pricing-slider.pricing-slider-labs {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(5.8rem, 6.2rem);
-    grid-template-areas: "control stage";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "stage"
+      "control";
     align-items: start;
-    column-gap: 0.75rem;
-    direction: ltr;
+    row-gap: 0.95rem;
+    direction: rtl;
     padding-block: 1rem !important;
     padding-inline: 1rem !important;
   }
@@ -10762,15 +10932,15 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
     justify-content: flex-start;
     inline-size: 100%;
     max-inline-size: 100%;
-    gap: 0.45rem !important;
+    gap: 0.5rem !important;
     direction: rtl;
   }
 
   body main section#plans .pricing-land-art,
   html.brand-palette body main section#plans .pricing-land-art {
-    inline-size: 4.55rem !important;
-    block-size: 3.8rem !important;
-    border-radius: 0.85rem !important;
+    inline-size: min(10rem, 72vw) !important;
+    block-size: 4.85rem !important;
+    border-radius: 1rem !important;
   }
 
   body main section#plans .pricing-land-art--small,
@@ -10781,8 +10951,8 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
   body main section#plans .pricing-land-art--large,
   html.brand-palette body main section#plans .pricing-land-art--large {
     order: 3;
-    inline-size: 5.25rem !important;
-    block-size: 4.45rem !important;
+    inline-size: min(11rem, 78vw) !important;
+    block-size: 5.25rem !important;
   }
 
   body main section#plans .pricing-axis-copy,
@@ -10796,7 +10966,7 @@ html.brand-palette body main section#plans article.pricing-card.pricing-card-rec
 
   body main section#plans .pricing-axis-label,
   html.brand-palette body main section#plans .pricing-axis-label {
-    font-size: 0.86rem !important;
+    font-size: 1rem !important;
     line-height: 1.45 !important;
   }
 
