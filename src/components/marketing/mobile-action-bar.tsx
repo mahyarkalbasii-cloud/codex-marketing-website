@@ -5,6 +5,13 @@ import { usePathname } from "next/navigation";
 import { LogIn, PhoneCall, UserPlus } from "lucide-react";
 
 import { getDirection, getLocaleFromPathname, getSiteContent, localizeHref } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+
+const actionStyles = {
+  call: "mobile-action-bar__item--call",
+  login: "mobile-action-bar__item--login",
+  signup: "mobile-action-bar__item--signup",
+} as const;
 
 export function MobileActionBar() {
   const pathname = usePathname() || "/";
@@ -13,39 +20,37 @@ export function MobileActionBar() {
   const { authLinks } = getSiteContent(locale);
   const actions = [
     {
+      id: "call",
       label: "تماس",
       href: "tel:+982175425000",
       icon: PhoneCall,
     },
     {
+      id: "signup",
       label: "ثبت‌نام",
       href: localizeHref(authLinks.signup, locale),
       icon: UserPlus,
-      emphasized: true,
     },
     {
+      id: "login",
       label: "ورود",
       href: localizeHref(authLinks.login, locale),
       icon: LogIn,
     },
-  ];
+  ] as const;
 
   return (
     <nav
       dir={direction}
       aria-label="اقدام‌های سریع موبایل"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e4d8c8]/80 bg-[#fbf6ed]/98 px-2 pb-[calc(env(safe-area-inset-bottom)+0.35rem)] pt-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/98 lg:hidden"
+      className="mobile-action-bar fixed inset-x-0 bottom-0 z-40 lg:hidden"
     >
-      <div className="mx-auto grid max-w-[23.25rem] grid-cols-3 gap-1.5 rounded-[1.1rem] border border-[#e4d8c8] bg-white/78 p-1.5 shadow-sm shadow-[#2a241d]/[0.04] dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="mobile-action-bar__shell">
         {actions.map((action) => (
           <Link
-            key={action.label}
+            key={action.id}
             href={action.href}
-            className={
-              action.emphasized
-                ? "flex h-11 items-center justify-center gap-1.5 rounded-[0.9rem] border border-[#d2bca2] bg-[#f5eadb] px-2 text-xs font-bold text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] transition active:translate-y-px dark:!border-white dark:!bg-white dark:!text-zinc-950"
-                : "flex h-11 items-center justify-center gap-1.5 rounded-[0.9rem] px-2 text-xs font-semibold text-[#5f5348] transition hover:bg-[#f3e7d8] active:translate-y-px dark:text-zinc-300 dark:hover:bg-zinc-900"
-            }
+            className={cn("mobile-action-bar__item", actionStyles[action.id])}
           >
             <action.icon className="h-4 w-4" aria-hidden="true" />
             <span>{action.label}</span>
