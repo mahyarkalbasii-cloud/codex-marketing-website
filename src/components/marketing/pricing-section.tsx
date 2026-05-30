@@ -181,10 +181,10 @@ const pricingCopy = {
 
 const FALLBACK_PLAN_INDEX = 2;
 const axisTickLabels: Record<PlanId, string> = {
-  bonyan: "زمین تا ۳۰۰ متر",
-  royan: "زمین تا ۵۰۰ متر",
-  taban: "زمین تا ۷۰۰ متر",
-  "taban-plus": "زمین + ۷۰۰ متر",
+  bonyan: "تا ۳۰۰ متر",
+  royan: "تا ۵۰۰ متر",
+  taban: "تا ۷۰۰ متر",
+  "taban-plus": "+۷۰۰ متر",
 };
 // TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
 const WHATSAPP_NUMBER = "98TODO";

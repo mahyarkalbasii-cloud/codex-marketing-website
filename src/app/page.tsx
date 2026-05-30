@@ -623,11 +623,6 @@ function DemoRequestSection() {
             </div>
             <div className="relative grid gap-4">
               <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
-                <div className="text-sm text-zinc-500">تماس فروش</div>
-                <div className="mt-3 text-2xl font-bold">{site.phones[0]}</div>
-                <div className="mt-2 text-sm text-zinc-500">
-                  {site.salesExpert} | داخلی {site.extension}
-                </div>
                 <DemoRequestForm />
                 <div className="mt-5 grid gap-3">
                   <a

@@ -78,7 +78,6 @@ export function SiteFooter() {
     cities: "شهرها",
     description:
       "منبع واحد حقیقت برای فروش پروژه‌محور در بازار ساختمان؛ از اطلاعات به‌روز تا نقشه، فیلتر، CRM، پیامک و AI تصمیم‌یار.",
-    extension: "داخلی",
     legal: "قوانین و مقررات",
     mainPages: "صفحات اصلی",
     saleStyles: "نوع فروش",
@@ -105,9 +104,6 @@ export function SiteFooter() {
             {footerCopy.description}
           </p>
           <div className="space-y-2 text-sm text-[#cfc0af]">
-            <p>
-              {site.salesExpert} | {footerCopy.extension} {site.extension}
-            </p>
             <p>
               <a href="tel:+982175425000" dir="ltr" className="transition hover:text-[#fffaf1]">
                 {site.phones[0]}
