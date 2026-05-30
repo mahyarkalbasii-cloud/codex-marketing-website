@@ -22,7 +22,7 @@ import { PricingSection } from "@/components/marketing/pricing-section";
 import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
-import verifiedProjectMap from "@/assets/images/home-solution-verified-project-map.webp";
+import constructionIntelligenceMap from "@/assets/images/home-solution-construction-intelligence-map.webp";
 import { getSalesStyleSubcategories } from "@/data/sales-style";
 import { SALES_STYLE_COPY } from "@/data/sales-style-copy";
 import { getStagePageContent } from "@/data/stage-copy";
@@ -268,10 +268,10 @@ function SolutionPillarIllustration({
     <div className="solution-pillar-illustration" aria-hidden="true">
       {motif === "data" ? (
         <img
-          src={verifiedProjectMap.src}
+          src={constructionIntelligenceMap.src}
           alt=""
-          width="1254"
-          height="1254"
+          width="1600"
+          height="1000"
           loading="lazy"
           decoding="async"
           className="solution-verified-map-image"

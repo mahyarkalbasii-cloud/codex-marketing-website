@@ -8366,6 +8366,8 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   background: transparent;
   padding: 0;
   order: 3;
+  inline-size: 100%;
+  margin-block-start: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .solution-pillar-card--data .solution-pillar-link {
@@ -8383,7 +8385,7 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   display: block;
   inline-size: 100%;
   block-size: auto;
-  max-inline-size: 24rem;
+  max-inline-size: 100%;
   margin-inline: auto;
   border-radius: 0.95rem;
   object-fit: contain;
