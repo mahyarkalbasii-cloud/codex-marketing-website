@@ -7275,8 +7275,8 @@ html.brand-palette body main #how-it-works .how-layer-card--data .how-process-ch
 }
 
 #hero.hero-section {
-  --hero-bg: #F6ECDA;
-  --hero-bg-floor: #F6ECDA;
+  --hero-bg: #F9EFDE;
+  --hero-bg-floor: #F9EFDE;
   position: relative;
   overflow: hidden;
   border-block-end: 1px solid #e4d8c8;
@@ -7659,6 +7659,11 @@ html.brand-palette body main .hero-project-badge--signal {
   .hero-project-finder-visual.hero-map-visual {
     aspect-ratio: 1;
     padding: 1.25rem;
+  }
+
+  .hero-laptop-map-image {
+    inline-size: min(118%, 42.5rem);
+    max-inline-size: none;
   }
 }
 
