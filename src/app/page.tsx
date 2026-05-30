@@ -23,6 +23,7 @@ import { SectionHeader } from "@/components/marketing/section-header";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { buttonVariants } from "@/components/ui/button";
 import constructionIntelligenceMap from "@/assets/images/home-solution-construction-intelligence-map.webp";
+import salesFollowupPipeline from "@/assets/images/home-sales-followup-pipeline.webp";
 import { getSalesStyleSubcategories } from "@/data/sales-style";
 import { SALES_STYLE_COPY } from "@/data/sales-style-copy";
 import { getStagePageContent } from "@/data/stage-copy";
@@ -89,8 +90,6 @@ const solutionCards = [
 ] as const;
 
 const SOLUTION_ILLUSTRATION_VIEW_BOX = "0 0 360 250";
-const solutionWorkflowSteps = ["فیلتر", "پروژه", "تماس / پیامک", "ثبت پیگیری"] as const;
-
 const solutionTrainingCourses = [
   {
     label: "فروش پروژه‌محور در صنعت ساختمان",
@@ -293,19 +292,15 @@ function SolutionPillarIllustration({
       ) : null}
 
       {motif === "workflow" ? (
-        <div className="solution-product-sim solution-workflow-sim" data-view-box={SOLUTION_ILLUSTRATION_VIEW_BOX}>
-          <div className="solution-sim-caption">از داده تا پیگیری</div>
-          <div className="solution-workflow-stack">
-            {solutionWorkflowSteps.map((step, index) => (
-              <div className={cn("solution-workflow-row", index === solutionWorkflowSteps.length - 1 && "solution-workflow-row--active")} key={step}>
-                <span className="solution-workflow-label">
-                  {step}
-                </span>
-                <span className="solution-workflow-marker" aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-        </div>
+        <img
+          src={salesFollowupPipeline.src}
+          alt=""
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+          className="solution-followup-pipeline-image"
+        />
       ) : null}
     </div>
   );

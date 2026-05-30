@@ -8397,6 +8397,22 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   object-fit: contain;
 }
 
+.solution-pillar-card--workflow .solution-pillar-illustration {
+  border-color: transparent;
+  background: transparent;
+  padding: 0;
+}
+
+.solution-followup-pipeline-image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 21rem;
+  margin-inline: auto;
+  border-radius: 0.95rem;
+  object-fit: contain;
+}
+
 .solution-product-sim {
   display: grid;
   align-content: center;
@@ -8416,66 +8432,8 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
   text-align: start;
 }
 
-.solution-workflow-sim,
 .solution-course-sim {
   align-content: center;
-}
-
-.solution-workflow-sim {
-  align-content: stretch;
-  gap: 0.25rem;
-  grid-template-rows: auto minmax(0, 1fr);
-}
-
-.solution-workflow-stack {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.18rem;
-  min-block-size: 0;
-  min-inline-size: 0;
-}
-
-.solution-workflow-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.55rem;
-  min-block-size: 1.9rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 0.5rem;
-  background: #FBF6ED;
-  color: #2A241D;
-  padding-block: 0.18rem;
-  padding-inline: 0.55rem;
-  font-size: 0.7rem;
-  font-weight: 850;
-  line-height: 1.25;
-  text-align: start;
-}
-
-.solution-workflow-row--active {
-  border-color: #CC785C;
-  background: rgba(204, 120, 92, 0.12);
-  color: #A8573D;
-}
-
-.solution-workflow-label {
-  min-inline-size: 0;
-}
-
-.solution-workflow-marker {
-  flex: 0 0 auto;
-  inline-size: 0.52rem;
-  block-size: 0.52rem;
-  border: 1px solid #D8C7B2;
-  border-radius: 999px;
-  background: #FBF6ED;
-}
-
-.solution-workflow-row--active .solution-workflow-marker {
-  border-color: #CC785C;
-  background: #CC785C;
 }
 
 .solution-course-list {
@@ -8650,19 +8608,23 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     padding: 0.65rem;
   }
 
+  .solution-pillar-card--workflow .solution-pillar-illustration {
+    min-block-size: 0;
+    padding: 0;
+  }
+
   .solution-pillar-card--data .solution-verified-map-image {
     inline-size: min(100%, 35rem);
   }
 
-  .solution-pillar-card--workflow .solution-product-sim,
   .solution-pillar-card--training .solution-product-sim {
     inline-size: 100%;
     block-size: 100%;
     aspect-ratio: auto;
   }
 
-  .solution-pillar-card--workflow .solution-product-sim {
-    padding: 0.2rem;
+  .solution-pillar-card--workflow .solution-followup-pipeline-image {
+    inline-size: min(100%, 21rem);
   }
 
   .solution-pillar-card--training .solution-product-sim {
@@ -8678,15 +8640,6 @@ html.brand-palette body main section#problem .market-problem-presentation-visual
     padding-block: 0.28rem;
   }
 
-  .solution-workflow-stack {
-    gap: 0.18rem;
-  }
-
-  .solution-workflow-row {
-    min-block-size: 1.9rem;
-    padding-block: 0.18rem;
-    padding-inline: 0.5rem;
-  }
 }
 
 @media (min-width: 1120px) {
