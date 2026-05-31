@@ -10,12 +10,15 @@ type FaqItem = (typeof faqs)[number];
 export function FaqList({
   items: providedItems,
   limit,
+  questionHeadingLevel,
 }: {
   items?: FaqItem[];
   limit?: number;
+  questionHeadingLevel?: "h2" | "h3";
 }) {
   const sourceItems = providedItems ?? faqs;
   const items = limit ? sourceItems.slice(0, limit) : sourceItems;
+  const QuestionTag = questionHeadingLevel ?? "span";
 
   const toggleWithKeyboard = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key !== "Enter" && event.key !== " ") {
@@ -38,7 +41,7 @@ export function FaqList({
             onKeyDown={toggleWithKeyboard}
             className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35"
           >
-            <span>{item.question}</span>
+            <QuestionTag className="text-base font-semibold leading-7">{item.question}</QuestionTag>
             <span className="faq-toggle-icon grid h-8 w-8 shrink-0 place-items-center rounded-xl border border-[#e4d8c8] bg-[#fbf6ed] text-[#7a6a59] transition duration-200 group-open:rotate-45 group-open:border-[#CC785C]/55 group-open:bg-[rgba(204,120,92,0.12)] group-open:text-[#2a241d] dark:bg-zinc-950 dark:group-open:border-[#CC785C]/40 dark:group-open:bg-[rgba(204,120,92,0.22)] dark:group-open:text-[#FFF7EF]">
               <Plus className="h-4 w-4" />
             </span>

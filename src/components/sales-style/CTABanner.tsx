@@ -19,7 +19,7 @@ export function CTABanner({ copy }: { copy: SalesStyleCopy }) {
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <Link
-          href="/pricing"
+          href="/subscriptions/"
           className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
         >
           {SALES_STYLE_LABELS.pricingCta}

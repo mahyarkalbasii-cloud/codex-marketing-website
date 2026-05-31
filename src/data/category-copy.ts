@@ -28,6 +28,39 @@ export const CATEGORY_MARKET_STATS = Object.fromEntries(
   ]),
 ) as Record<string, CategoryMarketStatSlot>;
 
+const CATEGORY_SHORT_ANSWERS: Record<string, string> = {
+  "engineering-and-consulting":
+    "فروش خدمات مهندسی وقتی زود شروع می‌شود که طراح، مشاور و آزمایشگاه قبل از تصمیم سازنده دیده شوند و پیگیری فنی در CRM گم نشود.",
+  "it-and-software":
+    "برای نرم‌افزار، BMS و زیرساخت IT ساختمان، زمان ورود معمولاً قبل از اجراست؛ باید ذی‌نفع فنی، بودجه و مرحله تصمیم را همزمان دید.",
+  "business-services-and-consulting":
+    "خدمات مالی، حقوقی، بازاریابی و بیمه پروژه زمانی می‌فروشند که ریسک سازنده روشن باشد و پیشنهاد قبل از بسته شدن تصمیم روی میز برسد.",
+  "general-services-and-support":
+    "خدمات پشتیبانی و عمومی وقتی فرصت می‌شوند که پروژه وارد نیاز اجرایی روزمره شده باشد؛ سرعت پاسخ، ظرفیت اجرا و پیگیری کوتاه تعیین‌کننده است.",
+  "contracting-and-execution":
+    "پیمانکاری و اجرا به زمان‌بندی مرحله وابسته است؛ فروشنده باید قبل از شروع کارگاه، نقش خود، ظرفیت تیم و سابقه اجرایی را شفاف کند.",
+  "building-materials":
+    "مصالح ساختمانی با تأخیر نمی‌فروشد؛ مرحله خرید، حجم پروژه، موجودی و امکان تحویل باید کنار هم دیده شوند تا تماس فروش به‌موقع باشد.",
+  "steel-and-metals":
+    "در آهن‌آلات و فولاد، قیمت روز کافی نیست؛ حجم مصرف، مرحله اسکلت یا فونداسیون و توان تأمین سریع باید قبل از تماس فروش مشخص باشد.",
+  "machinery-tools-and-equipment":
+    "ماشین‌آلات و ابزار زمانی فروش می‌روند که نیاز کارگاه فوری یا قابل پیش‌بینی باشد؛ موقعیت پروژه، نوع عملیات و زمان اجرا باید خوانده شود.",
+  "mechanical-installations":
+    "تأسیسات مکانیکی از طراحی تا اجرا چند پنجره فروش دارد؛ فروشنده باید رایزر، لوله، سرمایش و گرمایش را با مرحله پروژه تطبیق دهد.",
+  "electrical-installations":
+    "تأسیسات الکتریکی فقط سیم و کابل نیست؛ تابلو، روشنایی و جریان ضعیف باید بر اساس مرحله ساخت و تصمیم فنی پروژه پیگیری شوند.",
+  "doors-windows-and-facade":
+    "در، پنجره و نما به اندازه ظاهر، به زمان تصمیم وابسته است؛ فروشنده باید قبل از نازک‌کاری، مشخصات فنی و بودجه سازنده را بفهمد.",
+  "interior-and-exterior-finishes":
+    "پوشش‌های داخلی و خارجی نزدیک پایان کار داغ می‌شوند؛ فروش موفق به شناخت مرحله، سبک پروژه، حجم سفارش و سرعت نمونه‌دهی وابسته است.",
+  "interior-architecture-and-decoration":
+    "معماری داخلی و دکوراسیون با سلیقه و اعتماد جلو می‌رود؛ باید قبل از خرید نهایی، نمونه‌کار، بودجه و تصمیم‌گیر پروژه مشخص شود.",
+  "landscaping-and-green-space":
+    "محوطه‌سازی وقتی ارزش می‌سازد که پروژه به تصمیم بیرونی نزدیک شده باشد؛ طراحی، اجرا و تأمین باید با زمان پایان کار هماهنگ شوند.",
+  "lobby-and-common-area-equipment":
+    "تجهیزات لابی و مشاعات در پایان پروژه دیده می‌شوند، اما تصمیمشان زودتر شکل می‌گیرد؛ فروشنده باید نیاز رفاهی و بودجه را زود رصد کند.",
+};
+
 const stageById = new Map(STAGES.map((stage) => [stage.id, stage]));
 const stageOrder = new Map(STAGES.map((stage, index) => [stage.id, index]));
 
@@ -165,6 +198,12 @@ export function getCategoryPageContent(category: Category): CategoryPageContent 
     topStageLabels.length > 0
       ? `مرحله‌های پررنگ برای این دسته ${formatList(topStageLabels, "")} هستند.`
       : "زمان‌بندی این دسته باید در سطح هر زیرگروه جداگانه بررسی شود.";
+  const generatedShortAnswer = `${fastPhrase} ${consultativePhrase} ${stagePhrase} زیرگروه‌های مبنای این صفحه ${formatList(
+    allSubcategoryNames,
+    category.faTitle,
+  )} هستند.`;
+  const shortAnswer =
+    CATEGORY_SHORT_ANSWERS[category.slug] ?? generatedShortAnswer;
 
   return {
     heroSubtitle: `${getMotionSentence(category, split, topStages)} نمونه‌های واقعی این صفحه از داده زیرگروه‌هایی مثل ${formatList(
@@ -172,10 +211,7 @@ export function getCategoryPageContent(category: Category): CategoryPageContent 
       category.faTitle,
     )} ساخته شده است.`,
     shortAnswerQuestion: `چه زمانی پرشین‌سازه برای فروشندگان ${category.faTitle} مفید است؟`,
-    shortAnswer: `${fastPhrase} ${consultativePhrase} ${stagePhrase} زیرگروه‌های مبنای این صفحه ${formatList(
-      allSubcategoryNames,
-      category.faTitle,
-    )} هستند.`,
+    shortAnswer,
     timingInsight: mostCommonBuyStage
       ? `در داده زیرگروه‌های ${category.faTitle}، مرحله «${mostCommonBuyStage.faLabel}» پرتکرارترین نقطه خرید است. زیرگروه‌هایی مثل ${formatList(
           buyStageNames,

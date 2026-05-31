@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
+import { subscriptionPlanOptions } from "@/data/subscriptions";
 import { getSiteContent, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ type DemoFormState = {
   phone: string;
   company: string;
   supplier: string;
+  plan: string;
 };
 
 const initialState: DemoFormState = {
@@ -19,6 +21,7 @@ const initialState: DemoFormState = {
   phone: "",
   company: "",
   supplier: "",
+  plan: "",
 };
 
 function persistLocalRequest(request: DemoFormState) {
@@ -68,8 +71,24 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
     () => suppliers.map((supplier) => supplier.name),
     [suppliers],
   );
+  const planSlugs = useMemo(
+    () => new Set(subscriptionPlanOptions.map((plan) => plan.slug)),
+    [],
+  );
   const [form, setForm] = useState<DemoFormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  useEffect(() => {
+    const plan = new URLSearchParams(window.location.search).get("plan");
+
+    if (!plan || !planSlugs.has(plan as (typeof subscriptionPlanOptions)[number]["slug"])) {
+      return;
+    }
+
+    setForm((current) =>
+      current.plan === plan ? current : { ...current, plan },
+    );
+  }, [planSlugs]);
 
   const updateField = (field: keyof DemoFormState, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -107,7 +126,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
       }
 
       setStatus("success");
-      setForm(initialState);
+      setForm((current) => ({ ...initialState, plan: current.plan }));
     } catch {
       setStatus("error");
     }
@@ -115,6 +134,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
 
   return (
     <form className="mt-6 grid gap-3" onSubmit={handleSubmit}>
+      <input type="hidden" name="plan" value={form.plan} />
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="grid gap-1.5 text-sm font-bold text-[#2a241d] dark:text-zinc-100">
           {copy.name}

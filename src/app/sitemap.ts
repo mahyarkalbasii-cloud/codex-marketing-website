@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { CATEGORIES } from "@/data/categories";
 import { STAGES } from "@/data/stages";
+import { subscriptions } from "@/data/subscriptions";
 import { absoluteUrl, cities } from "@/lib/site-data";
 
 export const dynamic = "force-static";
@@ -41,13 +42,19 @@ function entry(
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: SitemapEntry[] = [
     entry("/", "weekly", 1.0),
+    entry("/about/", "monthly", 0.7),
+    entry("/contact/", "monthly", 0.7),
     entry("/features/", "monthly", 0.9),
-    entry("/pricing/", "monthly", 0.9),
+    entry("/subscriptions/", "monthly", 0.9),
+    ...subscriptions.map((subscription) =>
+      entry(`/subscriptions/${subscription.slug}/`, "monthly", 0.8),
+    ),
     entry("/suppliers/", "weekly", 0.9),
     entry("/cities/", "weekly", 0.8),
     entry("/stages/", "weekly", 0.8),
     entry("/sales-style/fast/", "weekly", 0.9),
     entry("/sales-style/consultative/", "weekly", 0.9),
+    entry("/sales-style/hybrid/", "weekly", 0.8),
     entry("/faq/", "monthly", 0.7),
     entry("/rules/", "yearly", 0.4),
     ...CATEGORIES.filter((category) => !category.excludeFromPages).map(

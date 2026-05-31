@@ -5,6 +5,7 @@ import {
   SALES_STYLE_COPY,
   getSalesStyleMetaDescription,
 } from "@/data/sales-style-copy";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 
 const copy = SALES_STYLE_COPY.fast;
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     url: absoluteUrl(copy.path),
     locale: "fa_IR",
     type: "article",
+    images: routeOgImage(copy.path, copy.h1),
   },
 };
 
