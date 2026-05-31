@@ -27,11 +27,6 @@ export function HeroMapVisual({ compact = false }: HeroMapVisualProps) {
             className="hero-laptop-map-image"
           />
         </picture>
-        <span className="hero-laptop-map-sweep" aria-hidden="true" />
-        <span className="hero-laptop-map-signal hero-laptop-map-signal--primary" aria-hidden="true" />
-        <span className="hero-laptop-map-signal hero-laptop-map-signal--secondary" aria-hidden="true" />
-        <span className="hero-laptop-map-signal hero-laptop-map-signal--tertiary" aria-hidden="true" />
-        <span className="hero-laptop-map-touch-ripple" aria-hidden="true" />
       </div>
     </div>
   );

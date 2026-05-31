@@ -327,7 +327,7 @@ function SolutionPillarCard({
 
 function DemoClosingVisual() {
   return (
-    <div className="relative overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5">
+    <div className="relative min-w-0 overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5">
       <div className="absolute inset-0 map-parcel-pattern opacity-70" />
       <div className="relative rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/90 p-4 shadow-sm backdrop-blur">
         <div className="flex items-center justify-between gap-3">
@@ -610,9 +610,9 @@ function DemoRequestSection() {
       <div className="absolute inset-0 map-parcel-pattern opacity-10" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
         <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07]">
-          <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
+          <div className="relative grid min-w-0 gap-8 p-5 sm:p-7 md:grid-cols-[minmax(0,1fr)_minmax(0,.72fr)] md:p-10">
             <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(198,106,90,0.08),transparent_42%,rgba(47,111,103,0.08))]" aria-hidden="true" />
-            <div className="relative">
+            <div className="relative min-w-0">
               <h2 className="text-3xl font-semibold md:text-5xl">
                 برای دیدن نمونه اطلاعات پروژه‌ها، دمو بگیرید
               </h2>
@@ -624,13 +624,16 @@ function DemoRequestSection() {
                 <DemoClosingVisual />
               </div>
             </div>
-            <div className="relative grid gap-4">
-              <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6">
+            <div className="relative grid min-w-0 gap-4">
+              <div className="min-w-0 rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5 sm:p-6">
                 <DemoRequestForm />
                 <div className="mt-5 grid gap-3">
                   <a
                     href="tel:+982175425000"
-                    className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "w-full max-w-full whitespace-normal text-center",
+                    )}
                   >
                     تماس با فروش
                   </a>

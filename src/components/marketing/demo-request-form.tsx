@@ -133,20 +133,20 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
   };
 
   return (
-    <form className="mt-6 grid gap-3" onSubmit={handleSubmit}>
+    <form className="mt-6 grid min-w-0 gap-3" onSubmit={handleSubmit}>
       <input type="hidden" name="plan" value={form.plan} />
-      <div className="grid gap-3 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm font-bold text-[#2a241d]">
+      <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+        <label className="grid min-w-0 gap-1.5 text-sm font-bold text-[#2a241d]">
           {copy.name}
           <input
             name="name"
             value={form.name}
             onChange={(event) => updateField("name", event.target.value)}
             autoComplete="name"
-            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
+            className="h-11 w-full min-w-0 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-bold text-[#2a241d]">
+        <label className="grid min-w-0 gap-1.5 text-sm font-bold text-[#2a241d]">
           {copy.phone}
           <input
             name="phone"
@@ -155,29 +155,29 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
             autoComplete="tel"
             inputMode="tel"
             dir="ltr"
-            className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-left text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
+            className="h-11 w-full min-w-0 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-left text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
           />
         </label>
       </div>
 
-      <label className="grid gap-1.5 text-sm font-bold text-[#2a241d]">
+      <label className="grid min-w-0 gap-1.5 text-sm font-bold text-[#2a241d]">
         {copy.company}
         <input
           name="company"
           value={form.company}
           onChange={(event) => updateField("company", event.target.value)}
           autoComplete="organization"
-          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
+          className="h-11 w-full min-w-0 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
         />
       </label>
 
-      <label className="grid gap-1.5 text-sm font-bold text-[#2a241d]">
+      <label className="grid min-w-0 gap-1.5 text-sm font-bold text-[#2a241d]">
         {copy.supplier}
         <select
           name="supplier"
           value={form.supplier}
           onChange={(event) => updateField("supplier", event.target.value)}
-          className="h-11 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
+          className="h-11 w-full min-w-0 rounded-2xl border border-[#e4d8c8] bg-[#fffaf1] px-3 text-sm font-medium outline-none transition focus:border-[#CC785C] focus:ring-2 focus:ring-[#CC785C]/35"
         >
           <option value="">{copy.choose}</option>
           {supplierOptions.map((supplier) => (
@@ -191,7 +191,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className={cn(buttonVariants(), "mt-1 w-full")}
+        className={cn(buttonVariants(), "mt-1 w-full max-w-full whitespace-normal text-center")}
       >
         {status === "submitting" ? (
           <Loader2 className="h-4 w-4 animate-spin" />

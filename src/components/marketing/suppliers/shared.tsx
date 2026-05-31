@@ -22,7 +22,7 @@ export function GradientSection({
     <section
       id={id}
       className={cn(
-        "rounded-[2rem] border border-[#CC785C]/25 bg-gradient-to-br from-[rgba(204,120,92,0.12)] via-white to-[#fbf6ed]/80 p-6 shadow-xl shadow-[#CC785C]/10 md:p-10",
+        "gradient-section-shell rounded-[2rem] border border-[#CC785C]/25 bg-gradient-to-br from-[rgba(204,120,92,0.12)] via-white to-[#fbf6ed]/80 p-6 shadow-xl shadow-[#CC785C]/10 md:p-10",
         className,
       )}
     >
@@ -72,19 +72,28 @@ export function FinalCTA({
   primaryHref?: string;
 }) {
   return (
-    <GradientSection className="text-center">
+    <GradientSection className="final-cta text-center">
       <h2 className="text-2xl font-black md:text-3xl">{title}</h2>
       <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-muted-foreground md:text-base">
         {description}
       </p>
-      <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-        <Link href={primaryHref} className={cn(buttonVariants({ size: "lg" }))}>
+      <div className="final-cta-actions mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+        <Link
+          href={primaryHref}
+          className={cn(
+            buttonVariants({ size: "lg" }),
+            "max-w-full whitespace-normal text-center",
+          )}
+        >
           درخواست دمو
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <Link
           href="/subscriptions/"
-          className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "max-w-full whitespace-normal text-center",
+          )}
         >
           مشاهده پلن‌ها
         </Link>
