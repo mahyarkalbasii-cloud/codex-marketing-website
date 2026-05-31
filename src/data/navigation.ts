@@ -4,20 +4,25 @@ import type { Category, Stage } from "./types";
 
 export const FOOTER_CATEGORY_ORDER = [
   "building-materials",
-  "contracting-and-execution",
   "steel-and-metals",
-  "mechanical-installations",
-  "electrical-installations",
+  "blocks-walls-and-roof-systems",
+  "construction-chemicals-adhesives-sealants",
+  "thermal-moisture-sound-insulation",
+  "mechanical-piping",
+  "hvac-heating-cooling",
+  "electrical-lighting",
+  "smart-building-and-safety-systems",
   "doors-windows-and-facade",
+  "flooring-tiles-and-ceramics",
   "interior-and-exterior-finishes",
-  "machinery-tools-and-equipment",
+  "sanitary-fixtures-and-faucets",
+  "kitchen-and-millwork",
+  "vertical-transportation",
+  "workshop-tools",
+  "heavy-machinery-transport-concrete",
+  "hse-safety-equipment",
   "engineering-and-consulting",
-  "interior-architecture-and-decoration",
-  "landscaping-and-green-space",
-  "lobby-and-common-area-equipment",
-  "it-and-software",
-  "business-services-and-consulting",
-  "general-services-and-support",
+  "contracting-and-execution",
 ] as const;
 
 export const SALE_STYLE_NAV_LINKS = [
@@ -28,6 +33,10 @@ export const SALE_STYLE_NAV_LINKS = [
   {
     title: "فروش مشاوره‌ای",
     href: "/sales-style/consultative/",
+  },
+  {
+    title: "تهاتر مصالح و خدمات",
+    href: "/sales-style/barter/",
   },
   {
     title: "فروش ترکیبی",

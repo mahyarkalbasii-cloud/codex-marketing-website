@@ -38,13 +38,13 @@ import {
 } from "./queries";
 
 test("getCategoryBySlug returns the requested parent category", () => {
-  assert.equal(getCategoryBySlug("building-materials")?.id, 6);
+  assert.equal(getCategoryBySlug("building-materials")?.id, 1);
 });
 
 test("getSubcategoryBySlug returns a nested subcategory", () => {
-  const subcategory = getSubcategoryBySlug("c-1001");
+  const subcategory = getSubcategoryBySlug("syman-prtlnd-typ-1-ta-5-1-1");
 
-  assert.equal(subcategory?.id, 1001);
+  assert.equal(subcategory?.id, "1.1");
   assert.equal(subcategory?.parentId, 1);
 });
 
@@ -73,12 +73,12 @@ test("getStageBySlug returns the canonical stage", () => {
 });
 
 test("getStagesForSubcategory resolves typed stages by journey kind", () => {
-  const subcategory = getSubcategoryBySlug("c-1001");
+  const subcategory = getSubcategoryBySlug("syman-prtlnd-typ-1-ta-5-1-1");
 
   assert.ok(subcategory);
   assert.deepEqual(
     getStagesForSubcategory(subcategory, "execution").map((stage) => stage.id),
-    ["pre-construction", "demolition"],
+    ["foundation", "wall-building", "plaster"],
   );
 });
 
@@ -88,13 +88,13 @@ test("taxonomy includes all parents and all subcategories", () => {
     0,
   );
 
-  assert.equal(CATEGORIES.length, 17);
-  assert.equal(subcategoryCount, 151);
+  assert.equal(CATEGORIES.length, 20);
+  assert.equal(subcategoryCount, 270);
 });
 
-test("excluded parent IDs are marked but retained in data", () => {
-  assert.equal(CATEGORIES.find((category) => category.id === 16)?.excludeFromPages, true);
-  assert.equal(CATEGORIES.find((category) => category.id === 17)?.excludeFromPages, true);
+test("all taxonomy parent categories are visible pages", () => {
+  assert.ok(CATEGORIES.every((category) => !category.excludeFromPages));
+  assert.ok(CATEGORIES.every((category) => category.intro.length > 0));
 });
 
 test("category insight helpers derive sale, timing, stages, and advice", () => {
@@ -106,7 +106,7 @@ test("category insight helpers derive sale, timing, stages, and advice", () => {
   assert.ok(getSaleTypeSplit(category).consultative.length > 0);
   assert.ok(getMostCommonBuyStage(category)?.id);
   assert.ok(getRelatedCategories(category).every((item) => item.id !== category.id));
-  assert.ok(getRelatedBuyStages(category).every((stage) => stage.id !== "pre-construction"));
+  assert.ok(getRelatedBuyStages(category).some((stage) => stage.id === "pre-construction"));
   assert.ok(getStrategicAdviceHighlights(category, 3).length <= 3);
   assert.equal(getHighValueCategoriesForCity("tehran").length, 4);
 });
@@ -116,17 +116,15 @@ test("sales-style hubs include both-sale subcategories and visible parents", () 
   const consultativeCategories = getSalesStyleCategories("consultative");
   const fastSubcategories = getSalesStyleSubcategories("fast");
   const consultativeSubcategories = getSalesStyleSubcategories("consultative");
+  const barterSubcategories = getSalesStyleSubcategories("barter");
 
-  assert.equal(fastCategories.length, 13);
-  assert.equal(consultativeCategories.length, 14);
-  assert.equal(fastSubcategories.length, 70);
-  assert.equal(consultativeSubcategories.length, 103);
+  assert.equal(fastCategories.length, 18);
+  assert.equal(consultativeCategories.length, 19);
+  assert.equal(fastSubcategories.length, 144);
+  assert.equal(consultativeSubcategories.length, 155);
+  assert.equal(barterSubcategories.length, 40);
   assert.ok(fastSubcategories.some((subcategory) => subcategory.saleType === "both"));
-  assert.ok(
-    getSalesStyleRelatedStages("consultative").every(
-      (stage) => stage.id !== "pre-construction",
-    ),
-  );
+  assert.ok(getSalesStyleRelatedStages("consultative").some((stage) => stage.id === "pre-construction"));
 });
 
 test("stage insight helpers derive active subcategories and redirects", () => {
@@ -134,8 +132,8 @@ test("stage insight helpers derive active subcategories and redirects", () => {
   const foundationGroups = getActiveParentGroupsForStage("foundation");
   const dominantSaleStyle = getDominantSaleStyleForStage(foundationSubs);
 
-  assert.equal(foundationSubs.length, 9);
-  assert.equal(foundationGroups.length, 4);
+  assert.equal(foundationSubs.length, 74);
+  assert.equal(foundationGroups.length, 13);
   assert.equal(dominantSaleStyle.style, "mixed");
   assert.equal(getStageByRouteSlug("masonry").stage?.id, "wall-building");
   assert.ok(getRelatedStages("foundation").length <= 2);
@@ -147,9 +145,9 @@ test("navigation helpers expose the visible taxonomy in editorial order", () => 
   const visibleCategories = getOrderedVisibleCategories();
   const mainStages = getMainStages();
 
-  assert.equal(visibleCategories.length, 15);
+  assert.equal(visibleCategories.length, 20);
   assert.equal(visibleCategories[0].slug, "building-materials");
-  assert.equal(getVisibleSubcategoryCount(), 149);
-  assert.equal(mainStages.length, 8);
+  assert.equal(getVisibleSubcategoryCount(), 270);
+  assert.equal(mainStages.length, 10);
   assert.ok(visibleCategories.every((category) => !category.excludeFromPages));
 });

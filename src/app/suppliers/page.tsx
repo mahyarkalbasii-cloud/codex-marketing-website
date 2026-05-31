@@ -28,6 +28,7 @@ const fastCount = categories.reduce(
     sum +
     category.subcategories.filter(
       (subcategory) =>
+        subcategory.salesTypes.includes("fast") ||
         subcategory.saleType === "fast" || subcategory.saleType === "both",
     ).length,
   0,
@@ -37,8 +38,19 @@ const consultativeCount = categories.reduce(
     sum +
     category.subcategories.filter(
       (subcategory) =>
+        subcategory.salesTypes.some((type) =>
+          ["consultative", "engineering", "custom", "rental", "barter"].includes(type),
+        ) ||
         subcategory.saleType === "consultative" ||
         subcategory.saleType === "both",
+    ).length,
+  0,
+);
+const barterCount = categories.reduce(
+  (sum, category) =>
+    sum +
+    category.subcategories.filter((subcategory) =>
+      subcategory.salesTypes.includes("barter"),
     ).length,
   0,
 );
@@ -46,7 +58,7 @@ const pageTitle = "همه زمینه‌های کاری ساختمانی";
 
 const faqItems: SuppliersFAQItem[] = [
   {
-    q: "پرشین‌سازه چند دسته فروش را پوشش می‌دهد؟",
+    q: "پرشین‌سازه چند دسته ساختمانی را پوشش می‌دهد؟",
     a: `در نسخه فعلی، ${faNumber.format(categoryCount)} دسته اصلی و ${faNumber.format(subcategoryCount)} زمینه کاری قابل استفاده برای تامین‌کنندگان صنعت ساختمان پوشش داده می‌شود.`,
   },
   {
@@ -58,8 +70,8 @@ const faqItems: SuppliersFAQItem[] = [
     a: "از دسته اصلی شروع کنید، زیرگروه‌های نزدیک به محصول یا خدمت خود را ببینید و بعد مرحله ساخت و نوع فروش غالب را با چرخه فروش واقعی تیم خود مقایسه کنید.",
   },
   {
-    q: "آیا همه ۱۵ دسته در همه ۸ مرحله ساخت فعال هستند؟",
-    a: "خیر. بعضی دسته‌ها مثل خدمات مهندسی قبل از شروع ساخت فعال‌ترند و بعضی دیگر مثل تجهیزات تکمیلی در نازک‌کاری و پایان کار ارزش بیشتری پیدا می‌کنند.",
+    q: "آیا همه ۲۰ دسته در همه مرحله‌های ساخت فعال هستند؟",
+    a: "خیر. هر زیرگروه زمان جداگانه‌ای برای مذاکره، خرید و اجرا دارد؛ بعضی قبل از ساخت فعال‌اند و بعضی در تاسیسات، نازک‌کاری یا تحویل ارزش بیشتری پیدا می‌کنند.",
   },
   {
     q: "اگر دسته من در لیست نیست چه کنم؟",
@@ -70,7 +82,7 @@ const faqItems: SuppliersFAQItem[] = [
 export const metadata: Metadata = {
   title: pageTitle,
   description:
-    "۱۵ دسته اصلی شامل مصالح ساختمانی، پیمانکاری، آهن‌آلات، تاسیسات مکانیکی و الکتریکی، در/پنجره/نما، و ۹ دسته دیگر. ۱۴۹ زمینه کاری در ۸ مرحله ساخت.",
+    "۲۰ دسته اصلی و ۲۷۰ زیرگروه ساختمانی از سند جامع محصولات، خدمات و زنجیره تأمین؛ با زمان مذاکره، خرید و اجرا برای هر زیرگروه.",
   alternates: { canonical: "/suppliers/" },
   openGraph: {
     title: pageTitle,
@@ -131,6 +143,7 @@ export default function SuppliersIndexPage() {
         subcategoryCount={faNumber.format(subcategoryCount)}
       />
       <SaleStyleSplit
+        barterCount={faNumber.format(barterCount)}
         consultativeCount={faNumber.format(consultativeCount)}
         fastCount={faNumber.format(fastCount)}
       />

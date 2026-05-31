@@ -14,10 +14,11 @@ import { getStageHref } from "@/lib/stage-routes";
 
 const canonicalPath = "/stages/";
 const pageTitle = "مراحل ساخت پروژه‌های ساختمانی";
-const pageDescription =
-  "۸ مرحله ساخت را از زاویه زمان خرید، مذاکره و اجرا ببینید تا فروشنده بداند در هر مرحله کدام دسته محصول را باید پیگیری کند.";
 const faNumber = new Intl.NumberFormat("fa-IR");
 const mainStages = STAGES.filter((stage) => stage.isMain);
+const pageDescription = `فهرست ${faNumber.format(
+  mainStages.length,
+)} مرحله اصلی ساخت برای بررسی زمان مناسب مذاکره، خرید و اجرای هر زیرگروه ساختمانی.`;
 
 export function generateMetadata(): Metadata {
   return {

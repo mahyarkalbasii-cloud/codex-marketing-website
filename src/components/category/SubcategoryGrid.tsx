@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { CategorySection } from "@/components/category/CategorySection";
 import type { SaleTypeSplit } from "@/data/category-insights";
 import { STAGES } from "@/data/stages";
@@ -20,9 +22,11 @@ function formatStages(stageIds: SubCategory["buyStages"], fallback: string) {
 }
 
 function SubcategoryPill({
+  category,
   subcategory,
   withAnchor,
 }: {
+  category: Category;
   subcategory: SubCategory;
   withAnchor: boolean;
 }) {
@@ -37,7 +41,12 @@ function SubcategoryPill({
       className="category-pill flex-col items-start justify-start"
     >
       <div className="flex w-full min-w-0 items-start justify-between gap-3">
-        <span className="min-w-0 break-words">{subcategory.faTitle}</span>
+        <Link
+          href={`/suppliers/${category.slug}/${subcategory.slug}/`}
+          className="min-w-0 break-words hover:text-[#7a4a22]"
+        >
+          {subcategory.faTitle}
+        </Link>
         {subcategory.saleType === "both" ? (
           <span className="shrink-0 rounded-full bg-[#f3e7d8] px-2 py-0.5 text-[11px] font-bold text-[#7a5b38] dark:bg-white/10 dark:text-zinc-200">
             دوگانه
@@ -55,6 +64,13 @@ function SubcategoryPill({
         خرید در {formatStages(subcategory.buyStages, "مرحله وابسته به پروژه")}؛
         اجرا در {formatStages(subcategory.executionStages, "مرحله وابسته به پروژه")}.
       </p>
+      <Link
+        href={`/suppliers/${category.slug}/${subcategory.slug}/`}
+        className="text-xs font-bold text-[#7a4a22] dark:text-zinc-200"
+      >
+        مشاهده صفحه مستقل زیرگروه
+        <span aria-hidden="true">←</span>
+      </Link>
     </li>
   );
 }
@@ -71,7 +87,7 @@ function SaleColumn({
   title: string;
   description: string;
   items: SubCategory[];
-  anchorFor: "fast" | "consultative";
+  anchorFor: "fast" | "consultative" | "other";
   className?: string;
 }) {
   return (
@@ -85,9 +101,14 @@ function SaleColumn({
         {items.map((subcategory) => (
           <SubcategoryPill
             key={`${title}-${subcategory.id}`}
+            category={category}
             subcategory={subcategory}
             withAnchor={
               subcategory.saleType === anchorFor ||
+              (anchorFor === "other" &&
+                subcategory.salesTypes.some((type) =>
+                  ["barter", "custom", "rental"].includes(type),
+                )) ||
               (anchorFor === "fast" && subcategory.saleType === "both")
             }
           />
@@ -100,6 +121,7 @@ function SaleColumn({
 export function SubcategoryGrid({ category, split }: SubcategoryGridProps) {
   const hasFast = split.fast.length > 0;
   const hasConsultative = split.consultative.length > 0;
+  const hasOther = split.other.length > 0;
 
   return (
     <CategorySection>
@@ -120,7 +142,9 @@ export function SubcategoryGrid({ category, split }: SubcategoryGridProps) {
       <div
         className={cn(
           "mt-7 grid gap-4",
-          hasFast && hasConsultative ? "lg:grid-cols-2" : "max-w-3xl",
+          [hasFast, hasConsultative, hasOther].filter(Boolean).length > 1
+            ? "lg:grid-cols-3"
+            : "max-w-3xl",
         )}
       >
         {hasFast ? (
@@ -139,6 +163,15 @@ export function SubcategoryGrid({ category, split }: SubcategoryGridProps) {
             description="برای خریدهایی که به اعتبار، مذاکره فنی و ورود زودتر نیاز دارند."
             items={split.consultative}
             anchorFor="consultative"
+          />
+        ) : null}
+        {hasOther ? (
+          <SaleColumn
+            category={category}
+            title="سفارشی، تهاتری یا اجاره‌ای"
+            description="برای تصمیم‌هایی که علاوه بر زمان خرید، مدل توافق مالی یا اجرا هم مهم است."
+            items={split.other}
+            anchorFor="other"
           />
         ) : null}
       </div>

@@ -146,7 +146,7 @@ const audienceStageGuideStages = getMainStages().map((stage) => {
 
   return {
     activeCategories: activeItems.slice(0, 12).map((item) => ({
-      href: `/suppliers/${item.parent.slug}/#sub-${item.subcategory.id}`,
+      href: `/suppliers/${item.parent.slug}/${item.subcategory.slug}/`,
       label: item.subcategory.faTitle,
       parentLabel: item.parent.faTitle,
       roleLabel: formatStageRoles(item.roles),

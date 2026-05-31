@@ -83,7 +83,12 @@ function itemsBySaleType(items: ActiveStageSubcategory[], saleType: DominantSale
 
   return items.filter(
     (item) =>
-      item.subcategory.saleType === saleType || item.subcategory.saleType === "both",
+      item.subcategory.saleType === saleType ||
+      item.subcategory.saleType === "both" ||
+      (saleType === "consultative" &&
+        item.subcategory.salesTypes.some((type) =>
+          ["engineering", "custom", "rental", "barter"].includes(type),
+        )),
   );
 }
 
@@ -116,7 +121,7 @@ function getTopStrategicAdvice(items: ActiveStageSubcategory[]): SubCategory | u
     .sort(
       (left, right) =>
         right.strategicAdvice.length - left.strategicAdvice.length ||
-        left.id - right.id,
+        left.id.localeCompare(right.id, "en", { numeric: true }),
     )[0];
 }
 

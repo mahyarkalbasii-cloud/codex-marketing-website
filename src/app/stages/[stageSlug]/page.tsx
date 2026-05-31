@@ -25,7 +25,9 @@ import {
   getRelatedStages,
   getStageByRouteSlug,
   getStageStaticParams,
+  STAGE_ROLE_LABELS,
   type MainStageId,
+  type StageRole,
 } from "@/data/stage-insights";
 import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
@@ -41,6 +43,8 @@ const actionIcons = {
   monitoring: Clock3,
   negotiation: Building2,
 };
+
+const timingRoles: StageRole[] = ["negotiation", "buy", "execution"];
 
 export function generateStaticParams() {
   return getStageStaticParams();
@@ -251,6 +255,47 @@ export default async function StagePage({ params }: PageProps) {
               </p>
             </div>
           ))}
+        </div>
+      </GradientSection>
+
+      <GradientSection>
+        <h2 className="text-2xl font-black">
+          کدام محصولات در این فاز مذاکره، خرید یا اجرا می‌شوند؟
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
+          این بخش معکوس دیتاست زیرگروه‌هاست: هر محصول از ستون stageTiming سند
+          به این مرحله وصل شده و مشخص می‌کند تیم فروش باید مذاکره کند، خرید را
+          پیگیری کند یا وضعیت اجرا را رصد کند.
+        </p>
+        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+          {timingRoles.map((role) => {
+            const items = activeSubcategories
+              .filter((item) => item.roles.includes(role))
+              .slice(0, 12);
+
+            return (
+              <div
+                key={role}
+                className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+              >
+                <h3 className="font-extrabold">{STAGE_ROLE_LABELS[role]}</h3>
+                <div className="mt-4 grid gap-2">
+                  {items.map((item) => (
+                    <Link
+                      key={`${role}-${item.parent.slug}-${item.subcategory.id}`}
+                      href={`/suppliers/${item.parent.slug}/${item.subcategory.slug}/`}
+                      className="rounded-2xl border border-[#eadfce] bg-white/70 px-3 py-2 text-sm font-bold leading-6 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/50"
+                    >
+                      {item.subcategory.faTitle}
+                      <span className="block text-xs font-medium text-muted-foreground">
+                        {item.parent.faTitle}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </GradientSection>
 

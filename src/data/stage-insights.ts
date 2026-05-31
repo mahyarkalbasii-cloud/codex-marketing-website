@@ -2,7 +2,7 @@ import { CATEGORIES } from "./categories";
 import { STAGES } from "./stages";
 import type { Category, Stage, StageId, SubCategory } from "./types";
 
-export type MainStageId = Exclude<StageId, "pre-construction">;
+export type MainStageId = StageId;
 export type StageRole = "negotiation" | "buy" | "execution";
 export type DominantSaleStyle = "fast" | "consultative" | "mixed";
 
@@ -30,8 +30,10 @@ export const STAGE_ROLE_LABELS: Record<StageRole, string> = {
 };
 
 export const STAGE_ROUTE_ALIASES: Record<string, MainStageId> = {
+  "design-permit": "pre-construction",
   "demolition-excavation": "demolition",
   masonry: "wall-building",
+  mep: "installations",
   "final-work": "completion",
 };
 
@@ -125,8 +127,15 @@ export function getDominantSaleStyleForStage(items: ActiveStageSubcategory[]) {
   const counts = items.reduce(
     (acc, item) => {
       if (item.subcategory.saleType === "fast") acc.fast += 1;
-      if (item.subcategory.saleType === "consultative") acc.consultative += 1;
-      if (item.subcategory.saleType === "both") acc.both += 1;
+      else if (item.subcategory.saleType === "consultative") acc.consultative += 1;
+      else if (item.subcategory.saleType === "both") acc.both += 1;
+      else if (
+        item.subcategory.salesTypes.some((type) =>
+          ["engineering", "custom", "rental", "barter"].includes(type),
+        )
+      ) {
+        acc.consultative += 1;
+      }
 
       return acc;
     },
