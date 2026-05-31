@@ -6,7 +6,7 @@ import {
   Route,
 } from "lucide-react";
 
-import { HeroMapVisual } from "@/components/hero/HeroMapVisual";
+import { HeroPhoneMap } from "@/components/hero/HeroPhoneMap";
 import { DemoRequestForm } from "@/components/marketing/demo-request-form";
 import { HowItWorksRevealController } from "@/components/marketing/how-it-works-reveal-controller";
 import { AudienceStageGuide } from "@/components/marketing/audience-stage-guide";
@@ -724,7 +724,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="hero-visual-slot">
-                <HeroMapVisual />
+                <HeroPhoneMap />
               </div>
               <div className="hero-actions">
                 <Link href="#demo" className="marketing-cta marketing-cta--primary">

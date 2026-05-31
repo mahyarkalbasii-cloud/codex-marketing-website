@@ -1,0 +1,866 @@
+/* ===========================================================================
+   Hero Phone Map — موشن پریمیوم هیرو
+   یک موبایل شناور که اپلیکیشن پرشین‌سازه را نشان می‌دهد: نقشه شماتیک شهری با
+   پین پروژه‌ها (رنگ بر اساس مرحله ساخت)، رادار اسکن، چشمک پین‌ها و اسکرول بی‌درز.
+   فقط CSS خالص (transform/opacity) برای کارایی بالا و سازگاری با SSR.
+   =========================================================================== */
+
+.scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding-block: clamp(1.5rem, 4vw, 2.75rem);
+  perspective: 1400px;
+  isolation: isolate;
+}
+
+/* هاله محیطی پشت موبایل با رنگ‌های برند */
+.ambientGlow {
+  position: absolute;
+  inset: 4% 8%;
+  z-index: 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(47, 111, 103, 0.28), transparent 58%),
+    radial-gradient(circle at 70% 72%, rgba(180, 91, 62, 0.26), transparent 58%),
+    radial-gradient(circle at 52% 50%, rgba(226, 162, 62, 0.16), transparent 62%);
+  filter: blur(46px);
+  opacity: 0.85;
+  animation: aura-breathe 9s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------- دستگاه --- */
+.phone {
+  position: relative;
+  z-index: 2;
+  inline-size: min(100%, 17.5rem);
+  aspect-ratio: 295 / 600;
+  border-radius: 2.6rem;
+  padding: 0.5rem;
+  background:
+    linear-gradient(155deg, #2b2723 0%, #14110e 46%, #322c26 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16),
+    0 1.6rem 3.4rem rgba(36, 26, 18, 0.34),
+    0 0.5rem 1.4rem rgba(36, 26, 18, 0.22);
+  transform-style: preserve-3d;
+  animation: phone-float 11s ease-in-out infinite;
+  direction: rtl;
+}
+
+/* دینامیک آیلند */
+.island {
+  position: absolute;
+  inset-block-start: 1.15rem;
+  inset-inline: 0;
+  z-index: 6;
+  inline-size: 4.6rem;
+  block-size: 1.1rem;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: #080706;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.island::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0.55rem;
+  margin-block: auto;
+  inline-size: 0.42rem;
+  block-size: 0.42rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #3a4f6b, #0c1118);
+}
+
+/* انعکاس نور روی شیشه */
+.glare {
+  position: absolute;
+  inset: 0.5rem;
+  z-index: 7;
+  border-radius: 2.15rem;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 14%,
+    transparent 32%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: glare-sweep 11s ease-in-out infinite;
+}
+
+/* ----------------------------------------------------------------- صفحه --- */
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  border-radius: 2.15rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, #fffdf7, #fbf3e4 70%);
+  box-shadow: inset 0 0 0 1px rgba(36, 26, 18, 0.08);
+  color: var(--ink-900, #171512);
+  font-family: inherit;
+}
+
+/* نوار وضعیت */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.25rem 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ink-900, #171512);
+}
+
+.statusTime {
+  letter-spacing: 0.02em;
+}
+
+.statusIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+}
+
+.signal {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  block-size: 0.5rem;
+}
+
+.signal i {
+  inline-size: 2px;
+  border-radius: 1px;
+  background: var(--ink-900, #171512);
+}
+
+.signal i:nth-child(1) { block-size: 30%; }
+.signal i:nth-child(2) { block-size: 55%; }
+.signal i:nth-child(3) { block-size: 78%; }
+.signal i:nth-child(4) { block-size: 100%; }
+
+.battery {
+  position: relative;
+  inline-size: 0.95rem;
+  block-size: 0.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(23, 21, 18, 0.55);
+}
+
+.battery::before {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  inset-inline-end: 35%;
+  border-radius: 1px;
+  background: var(--ink-900, #171512);
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  inset-block: 30%;
+  inset-inline-end: -2.5px;
+  inline-size: 1.5px;
+  border-radius: 1px;
+  background: rgba(23, 21, 18, 0.55);
+}
+
+/* هدر اپلیکیشن */
+.appHeader {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem 0.7rem;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(255, 253, 247, 0.78));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0.5rem 0.9rem rgba(36, 26, 18, 0.06);
+}
+
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink-900, #171512);
+}
+
+.brandMark {
+  inline-size: 1.05rem;
+  block-size: 1.05rem;
+  border-radius: 0.4rem;
+  background: linear-gradient(140deg, var(--clay-500, #b45b3e), var(--clay-600, #8f3f2a));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.liveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(47, 111, 103, 0.12);
+  color: var(--sage-600, #2f6f67);
+  font-size: 0.56rem;
+  font-weight: 700;
+}
+
+.liveDot {
+  inline-size: 0.4rem;
+  block-size: 0.4rem;
+  border-radius: 999px;
+  background: var(--sage-600, #2f6f67);
+  box-shadow: 0 0 0 0 rgba(47, 111, 103, 0.5);
+  animation: live-pulse 2s ease-out infinite;
+}
+
+.searchPill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.6rem;
+  border-radius: 0.7rem;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(36, 26, 18, 0.08);
+  font-size: 0.58rem;
+  color: var(--ink-400, #86745f);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.searchIcon {
+  position: relative;
+  flex: none;
+  inline-size: 0.62rem;
+  block-size: 0.62rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink-400, #86745f);
+}
+
+.searchIcon::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -2px;
+  inset-inline-start: -2px;
+  inline-size: 0.3rem;
+  block-size: 1.5px;
+  border-radius: 1px;
+  background: var(--ink-400, #86745f);
+  transform: rotate(45deg);
+}
+
+.chips {
+  display: flex;
+  gap: 0.3rem;
+  overflow: hidden;
+}
+
+.chip {
+  flex: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(36, 26, 18, 0.05);
+  font-size: 0.54rem;
+  font-weight: 600;
+  color: var(--ink-600, #574a3f);
+  white-space: nowrap;
+}
+
+.chipActive {
+  background: var(--surface-ink, #171512);
+  color: #fff7ef;
+}
+
+/* ----------------------------------------------------- بدنه اسکرول‌شونده --- */
+.viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem 1rem;
+  animation: track-scroll 26s linear infinite;
+  will-change: transform;
+}
+
+.viewportFadeTop,
+.viewportFadeBottom {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 3;
+  block-size: 1.1rem;
+  pointer-events: none;
+}
+
+.viewportFadeTop {
+  inset-block-start: 0;
+  background: linear-gradient(180deg, #fdf6e9, transparent);
+}
+
+.viewportFadeBottom {
+  inset-block-end: 0;
+  background: linear-gradient(0deg, #fdf6e9, transparent);
+}
+
+/* -------------------------------------------------------------- کارت نقشه --- */
+.mapCard {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.5rem;
+  border-radius: 1.1rem;
+  background: #fffdf8;
+  box-shadow:
+    0 0.6rem 1.2rem rgba(36, 26, 18, 0.08),
+    inset 0 0 0 1px rgba(36, 26, 18, 0.05);
+}
+
+.mapInner {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(47, 111, 103, 0.08), transparent 45%),
+    radial-gradient(circle at 76% 78%, rgba(180, 91, 62, 0.08), transparent 45%),
+    linear-gradient(160deg, #fbf6ec, #f3e7d2);
+  box-shadow: inset 0 0 0 1px rgba(36, 26, 18, 0.06);
+}
+
+.mapArt {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  animation: map-drift 24s ease-in-out infinite;
+}
+
+.mapBlocks rect {
+  fill: rgba(120, 102, 78, 0.1);
+  stroke: rgba(120, 102, 78, 0.18);
+  stroke-width: 1;
+}
+
+.mapStreets path {
+  fill: none;
+  stroke: rgba(120, 102, 78, 0.22);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.mapHighway {
+  fill: none;
+  stroke: rgba(180, 91, 62, 0.32);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.mapRiver {
+  fill: none;
+  stroke: rgba(47, 111, 103, 0.32);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.mapPark {
+  fill: rgba(47, 111, 103, 0.16);
+  stroke: rgba(47, 111, 103, 0.26);
+  stroke-width: 1;
+}
+
+/* خط اسکن افقی نازک */
+.mapScan {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  z-index: 2;
+  block-size: 28%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(47, 111, 103, 0.1) 60%,
+    rgba(47, 111, 103, 0.22)
+  );
+  border-block-end: 1px solid rgba(47, 111, 103, 0.4);
+  animation: scan-move 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* جاروی رادار چرخان */
+.mapSweep {
+  position: absolute;
+  inset: -20%;
+  z-index: 1;
+  border-radius: 999px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(226, 162, 62, 0.28) 0deg,
+    rgba(226, 162, 62, 0.06) 26deg,
+    transparent 60deg,
+    transparent 360deg
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  animation: sweep-rotate 7s linear infinite;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ پین‌ها --- */
+.pinLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+.pin {
+  position: absolute;
+  inline-size: 0;
+  block-size: 0;
+  transform: translate(50%, -50%);
+  animation: pin-float 5s ease-in-out infinite;
+  animation-delay: var(--pin-float-delay, 0s);
+}
+
+.pinDot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 0.66rem;
+  block-size: 0.66rem;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 50% 50% 50% 0;
+  background: var(--pin-color, #b45b3e);
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.85),
+    0 2px 4px rgba(36, 26, 18, 0.3),
+    0 0 6px var(--pin-glow, rgba(180, 91, 62, 0.5));
+  animation: pin-blink var(--pin-blink-duration, 5s) ease-in-out infinite;
+  animation-delay: var(--pin-blink-delay, 0s);
+}
+
+.pinPing {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 0.66rem;
+  block-size: 0.66rem;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--pin-color, #b45b3e);
+  opacity: 0;
+  animation: pin-ping var(--pin-blink-duration, 5s) ease-out infinite;
+  animation-delay: var(--pin-blink-delay, 0s);
+}
+
+.pinSelected .pinDot {
+  inline-size: 0.82rem;
+  block-size: 0.82rem;
+  z-index: 2;
+}
+
+/* کالوت پروژه انتخاب‌شده */
+.callout {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.26rem 0.42rem;
+  border-radius: 0.55rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 0.5rem 1rem rgba(36, 26, 18, 0.22);
+  white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 0.75rem));
+  transform-origin: 50% 120%;
+  animation: callout-pop 9s ease-in-out infinite;
+}
+
+.callout::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -3px;
+  inset-inline-start: 50%;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  background: inherit;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 0 0.3rem 0.4rem rgba(36, 26, 18, 0.1);
+}
+
+.calloutDot {
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+.calloutBody {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.calloutTitle {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--ink-900, #171512);
+}
+
+.calloutMeta {
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: var(--ink-400, #86745f);
+}
+
+/* راهنمای رنگ مراحل */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  padding-inline: 0.2rem;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.52rem;
+  font-weight: 600;
+  color: var(--ink-600, #574a3f);
+}
+
+.legendDot {
+  inline-size: 0.45rem;
+  block-size: 0.45rem;
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------- کارت‌های نتایج --- */
+.results {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.resultsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.25rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--ink-900, #171512);
+}
+
+.resultsCount {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(180, 91, 62, 0.14);
+  color: var(--clay-600, #8f3f2a);
+  font-size: 0.55rem;
+}
+
+.resultCard {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.55rem;
+  border-radius: 0.8rem;
+  background: #fffdf8;
+  box-shadow: inset 0 0 0 1px rgba(36, 26, 18, 0.06);
+}
+
+.resultPin {
+  flex: none;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin-inline-end: auto;
+}
+
+.resultTitle {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ink-900, #171512);
+}
+
+.resultMeta {
+  font-size: 0.52rem;
+  color: var(--ink-400, #86745f);
+}
+
+.resultTag {
+  font-size: 0.52rem;
+  font-weight: 700;
+}
+
+/* نوار پایین */
+.tabBar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 1.2rem 0.7rem;
+  background: linear-gradient(0deg, rgba(255, 253, 247, 0.98), rgba(255, 253, 247, 0.72));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 -0.4rem 0.9rem rgba(36, 26, 18, 0.05);
+}
+
+.tab {
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: 0.32rem;
+  background: rgba(36, 26, 18, 0.16);
+}
+
+.tabActive {
+  background: var(--clay-500, #b45b3e);
+  box-shadow: 0 0 8px rgba(180, 91, 62, 0.5);
+}
+
+/* سایه کف */
+.floorShadow {
+  position: absolute;
+  inset-block-end: 2%;
+  inset-inline: 18%;
+  z-index: 1;
+  block-size: 1.6rem;
+  border-radius: 999px;
+  background: radial-gradient(ellipse, rgba(36, 26, 18, 0.28), transparent 70%);
+  filter: blur(10px);
+  animation: shadow-breathe 11s ease-in-out infinite;
+}
+
+/* =============================================================== انیمیشن‌ها === */
+@keyframes phone-float {
+  0%,
+  100% {
+    transform: translateY(0) rotateX(4deg) rotateY(-6deg) rotateZ(-0.5deg);
+  }
+  50% {
+    transform: translateY(-0.9rem) rotateX(2deg) rotateY(-2deg) rotateZ(0.5deg);
+  }
+}
+
+@keyframes shadow-breathe {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleX(0.82);
+    opacity: 0.32;
+  }
+}
+
+@keyframes aura-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes glare-sweep {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-14%);
+  }
+}
+
+@keyframes track-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes map-drift {
+  0%,
+  100% {
+    transform: scale(1.04) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-1.5%, -1.5%);
+  }
+}
+
+@keyframes scan-move {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(360%);
+    opacity: 0;
+  }
+}
+
+@keyframes sweep-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(47, 111, 103, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(47, 111, 103, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 111, 103, 0);
+  }
+}
+
+@keyframes pin-float {
+  0%,
+  100% {
+    transform: translate(50%, -50%);
+  }
+  50% {
+    transform: translate(50%, -64%);
+  }
+}
+
+@keyframes pin-blink {
+  0%,
+  55%,
+  100% {
+    filter: brightness(1);
+  }
+  62% {
+    filter: brightness(1.7);
+  }
+  70% {
+    filter: brightness(1);
+  }
+  78% {
+    filter: brightness(1.7);
+  }
+}
+
+@keyframes pin-ping {
+  0%,
+  55% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.4);
+    opacity: 0;
+  }
+}
+
+@keyframes callout-pop {
+  0%,
+  18%,
+  82%,
+  100% {
+    transform: translate(-50%, calc(-100% - 0.75rem)) scale(0.94);
+    opacity: 0;
+  }
+  28%,
+  72% {
+    transform: translate(-50%, calc(-100% - 0.85rem)) scale(1);
+    opacity: 1;
+  }
+}
+
+/* اندازه فشرده (در صورت نیاز در بخش‌های دیگر) */
+.compact .phone {
+  inline-size: min(100%, 13.5rem);
+}
+
+/* احترام به ترجیح کاهش حرکت کاربر */
+@media (prefers-reduced-motion: reduce) {
+  .phone,
+  .glare,
+  .ambientGlow,
+  .floorShadow,
+  .track,
+  .mapArt,
+  .mapScan,
+  .mapSweep,
+  .pin,
+  .pinDot,
+  .pinPing,
+  .liveDot,
+  .callout {
+    animation: none !important;
+  }
+
+  .track {
+    transform: translateY(0);
+  }
+
+  .callout {
+    opacity: 1;
+    transform: translate(-50%, calc(-100% - 0.75rem));
+  }
+
+  .pinPing {
+    display: none;
+  }
+}
