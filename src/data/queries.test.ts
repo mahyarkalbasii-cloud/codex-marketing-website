@@ -78,7 +78,7 @@ test("getStagesForSubcategory resolves typed stages by journey kind", () => {
   assert.ok(subcategory);
   assert.deepEqual(
     getStagesForSubcategory(subcategory, "execution").map((stage) => stage.id),
-    ["foundation", "wall-building", "plaster"],
+    ["foundation", "wall-building"],
   );
 });
 
@@ -132,12 +132,20 @@ test("stage insight helpers derive active subcategories and redirects", () => {
   const foundationGroups = getActiveParentGroupsForStage("foundation");
   const dominantSaleStyle = getDominantSaleStyleForStage(foundationSubs);
 
-  assert.equal(foundationSubs.length, 74);
+  assert.equal(foundationSubs.length, 77);
   assert.equal(foundationGroups.length, 13);
   assert.equal(dominantSaleStyle.style, "mixed");
   assert.equal(getStageByRouteSlug("masonry").stage?.id, "wall-building");
   assert.ok(getRelatedStages("foundation").length <= 2);
   assert.ok(getRelatedStages("foundation").some((stage) => stage.id === "structure"));
+  assert.notEqual(
+    getActiveSubcategoriesForStage("wall-building").length,
+    getActiveSubcategoriesForStage("plaster").length,
+  );
+  assert.notEqual(
+    getActiveSubcategoriesForStage("early-finishing").length,
+    getActiveSubcategoriesForStage("finishing").length,
+  );
   assert.ok(foundationGroups.every((group) => !group.parent.excludeFromPages));
 });
 
@@ -148,6 +156,20 @@ test("navigation helpers expose the visible taxonomy in editorial order", () => 
   assert.equal(visibleCategories.length, 20);
   assert.equal(visibleCategories[0].slug, "building-materials");
   assert.equal(getVisibleSubcategoryCount(), 270);
-  assert.equal(mainStages.length, 10);
+  assert.equal(mainStages.length, 9);
+  assert.deepEqual(
+    mainStages.map((stage) => stage.faLabel),
+    [
+      "پیش از اخذ جواز",
+      "تخریب و گودبرداری",
+      "فونداسیون",
+      "اسکلت بندی",
+      "دیوارچینی و سفت کاری",
+      "گچ و خاک و تاسیسات",
+      "ابتدای نازک کاری",
+      "نازک کاری و نما",
+      "ظریف کاری و پایان کار",
+    ],
+  );
   assert.ok(visibleCategories.every((category) => !category.excludeFromPages));
 });

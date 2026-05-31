@@ -72,13 +72,13 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     strategicFactors:
       "عامل کلیدی: سرعت بالای بستن آرماتورها، تراز دقیق صفحات بیس‌پلیت، قالب‌بندی بدون شکم‌دادگی. توصیه استراتژیک: تمرکز بر اجرای هم‌زمان عایق‌کاری‌های رطوبتی پیشرفته (جی‌سی‌ال یا ممبران) زیر فونداسیون در گودهای مرطوب.",
   },
-  "اسکلت‌بندی": {
+  "اسکلت بندی": {
     matchedRows: 27,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {
       negotiation: "فونداسیون",
       purchase: "فونداسیون",
-      execution: "اسکلت‌بندی",
+      execution: "اسکلت بندی",
     },
     sourceField: "اجرای اسکلت فلزی",
     categories: [
@@ -100,11 +100,11 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     matchedRows: 39,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {
-      negotiation: "اسکلت‌بندی",
-      purchase: "اسکلت‌بندی",
+      negotiation: "اسکلت بندی",
+      purchase: "اسکلت بندی",
       execution: "دیوارچینی",
     },
-    sourceField: "دیوارچینی و سفت‌کاری",
+    sourceField: "دیوارچینی و سفت کاری",
     categories: [
       "پیمانکاری و خدمات اجرایی",
       "تاسیسات مکانیکی",
@@ -112,7 +112,7 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
       "مصالح ساختمانی",
     ],
     exampleFields: [
-      "دیوارچینی و سفت‌کاری",
+      "دیوارچینی و سفت کاری",
       "اجرای تاسیسات مکانیکی",
       "بلوک سبک و مصالح دیوار",
       "در و پنجره",
@@ -120,13 +120,13 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     strategicFactors:
       "عامل کلیدی: شاقول و گونیا بودن اتاق‌ها، اجرای دقیق وال‌پست و مهار لرزه‌ای دیوار طبق پیوست ۶ آیین‌نامه ۲۸۰۰. توصیه استراتژیک: استفاده از ملات‌های چسبی استاندارد به جای ملات سنتی در بلوک‌های AAC جهت کاهش وزن بار مرده و تمیزی کارگاه.",
   },
-  "گچ و خاک": {
+  "گچ و خاک و تاسیسات": {
     matchedRows: 41,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {
       negotiation: "دیوارچینی",
-      purchase: "گچ و خاک",
-      execution: "گچ و خاک",
+      purchase: "گچ و خاک و تاسیسات",
+      execution: "گچ و خاک و تاسیسات",
     },
     sourceField: "گچ‌کاری و سفیدکاری",
     categories: [
@@ -144,12 +144,12 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     strategicFactors:
       "عامل کلیدی: شاقول بودن کامل دیوارها بدون هیچ‌گونه موج، گونیا کردن کنج‌ها با نبشی‌های فلزی گالوانیزه توکار. توصیه استراتژیک: تحویل سطوح گچی کاملاً صیقلی (پرداخت‌شده با ماله مخصوص) جهت کاهش مصرف رنگ بتونه در فاز بعدی.",
   },
-  "ابتدای نازک‌کاری": {
+  "ابتدای نازک کاری": {
     matchedRows: 19,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {
-      negotiation: "ابتدای نازک‌کاری",
-      purchase: "ابتدای نازک‌کاری",
+      negotiation: "ابتدای نازک کاری",
+      purchase: "ابتدای نازک کاری",
       execution: "نازک‌کاری",
     },
     sourceField: "کاشی‌کاری و سرامیک",
@@ -168,13 +168,13 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     strategicFactors:
       "عامل کلیدی: مهارت نصب اسلب‌های سایز بزرگ پرسلان با چسب‌های پودری دو جزیی، تسطیح تراز با همترازکننده‌ها. توصیه استراتژیک: استفاده از بندکشی‌های ضدباکتری اپوکسی در حمام‌ها جهت ممانعت از جرم‌گیری و نفوذ رطوبت در درازمدت.",
   },
-  نازک‌کاری: {
+  "نازک کاری و نما": {
     matchedRows: 68,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {
-      negotiation: "نازک‌کاری",
-      purchase: "ظریف‌کاری",
-      execution: "ظریف‌کاری",
+      negotiation: "نازک کاری و نما",
+      purchase: "ظریف کاری و پایان کار",
+      execution: "ظریف کاری و پایان کار",
     },
     sourceField: "نقاشی و پوشش‌های دکوراتیو",
     categories: [
@@ -192,7 +192,7 @@ export const taxonomyStageInsights: Record<string, TaxonomyStageInsight> = {
     strategicFactors:
       "عامل کلیدی: زیرسازی فوق‌العاده با بتونه چندلایه، مهارت فنی در پتینه‌کاری، میکروسمنت و ورق طلا، تمیزی لبه‌ها بدون پاشش رنگ. توصیه استراتژیک: استفاده از رنگ‌های اکریلیک پایه آب بی‌بو و قابل شستشو که سرعت تحویل واحدها را دو برابر می‌کند.",
   },
-  "ظریف‌کاری و پایان کار": {
+  "ظریف کاری و پایان کار": {
     matchedRows: 45,
     dominantSaleType: "فروش مشاوره‌ای",
     timing: {

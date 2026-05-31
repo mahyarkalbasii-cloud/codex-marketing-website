@@ -5,7 +5,6 @@ export type StageId =
   | "structure"
   | "wall-building"
   | "plaster"
-  | "installations"
   | "early-finishing"
   | "finishing"
   | "completion";
