@@ -6,9 +6,9 @@ type SchemaOptions = {
   withContext?: boolean;
 };
 
-const organizationId = `${site.url}/#organization`;
-const localBusinessId = `${site.url}/#localbusiness`;
-const websiteId = `${site.url}/#website`;
+export const organizationId = `${site.url}/#organization`;
+export const localBusinessId = `${site.url}/#localbusiness`;
+export const websiteId = `${site.url}/#website`;
 
 function withOptionalContext<T extends Record<string, unknown>>(
   schema: T,

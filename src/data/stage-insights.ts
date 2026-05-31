@@ -61,10 +61,7 @@ export function getStageByRouteSlug(slug: string) {
 }
 
 export function getStageStaticParams() {
-  return [
-    ...getMainStages().map((stage) => ({ stageSlug: stage.slug })),
-    ...Object.keys(STAGE_ROUTE_ALIASES).map((stageSlug) => ({ stageSlug })),
-  ];
+  return getMainStages().map((stage) => ({ stageSlug: stage.slug }));
 }
 
 export function getActiveSubcategoriesForStage(stageId: StageId) {

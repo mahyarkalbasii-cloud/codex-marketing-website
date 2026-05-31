@@ -9,6 +9,7 @@ import {
 } from "@/components/marketing/suppliers/shared";
 import { GUIDES } from "@/data/guides";
 import { CategoryLayout } from "@/layouts/CategoryLayout";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     url: absoluteUrl("/guides/"),
     locale: "fa_IR",
     type: "website",
+    images: routeOgImage("/guides/"),
   },
 };
 

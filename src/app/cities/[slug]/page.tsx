@@ -5,6 +5,7 @@ import { ArrowLeft, MapPinned } from "lucide-react";
 
 import { CityInternalLinks } from "@/components/city/CityInternalLinks";
 import { AnswerBox } from "@/components/marketing/answer-box";
+import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
 import { RoutePageVisual } from "@/components/marketing/route-page-visual";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
@@ -72,12 +73,30 @@ export default async function CityPage({ params }: PageProps) {
       name: city.name,
     },
   };
+  const faqSchema = cityInsight.faqItems.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: cityInsight.faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      }
+    : null;
 
   return (
     <main>
-      <StructuredData data={schema} />
+      <StructuredData data={faqSchema ? [schema, faqSchema] : schema} />
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-        <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <Breadcrumbs
+          items={[
+            { label: "خانه", href: "/" },
+            { label: "شهرها", href: "/cities/" },
+            { label: city.name, href: `/cities/${city.slug}/` },
+          ]}
+        />
+        <div className="mt-10 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
           <div>
             <Badge variant="signal">صفحه محلی</Badge>
             <h1 className="mt-5 text-4xl font-black leading-tight tracking-tight md:text-6xl">

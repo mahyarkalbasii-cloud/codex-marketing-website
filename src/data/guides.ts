@@ -5,6 +5,8 @@ export type Guide = {
   slug: string;
   title: string;
   description: string;
+  datePublished: string;
+  dateModified?: string;
   sections: { title: string; body: string }[];
   relatedLinks: { label: string; href: string }[];
 };
@@ -31,6 +33,7 @@ function exampleList(
 export const GUIDES: Guide[] = [
   {
     slug: "reliable-construction-supplier-checklist",
+    datePublished: "2026-05-31",
     title: "چطور یک تأمین‌کننده ساختمانی قابل اعتماد انتخاب کنیم؟",
     description:
       "راهنمای کوتاه برای ارزیابی تأمین‌کننده بر اساس استاندارد، تحویل به‌موقع، انعطاف مالی و خدمات پس از فروش.",
@@ -55,6 +58,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "barter-construction-materials-property",
+    datePublished: "2026-05-31",
     title: "تهاتر مصالح ساختمانی با ملک: راهنمای کامل",
     description:
       "تهاتر مصالح یا خدمات با ملک در پروژه‌های ساختمانی کجا معنا دارد و چطور باید ریسک آن را کنترل کرد؟",
@@ -81,6 +85,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "when-to-buy-construction-materials",
+    datePublished: "2026-05-31",
     title: "چه زمانی هر مصالح در پروژه خریداری می‌شود؟",
     description:
       "مدل زمان‌بندی پرشین‌سازه نشان می‌دهد هر محصول در چه فازی مذاکره، خرید یا اجرا می‌شود.",

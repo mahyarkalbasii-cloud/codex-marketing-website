@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Building2, Clock3, Target } from "lucide-react";
 
 import { ActiveSubcategoriesInStage } from "@/components/stage/ActiveSubcategoriesInStage";
@@ -77,14 +77,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function StagePage({ params }: PageProps) {
   const { stageSlug } = await params;
-  const { isAlias, stage } = getStageByRouteSlug(stageSlug);
+  const { stage } = getStageByRouteSlug(stageSlug);
 
   if (!stage) {
     notFound();
-  }
-
-  if (isAlias) {
-    permanentRedirect(getStageHref(stage));
   }
 
   const activeSubcategories = getActiveSubcategoriesForStage(stage.id);
