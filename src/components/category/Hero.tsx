@@ -22,7 +22,7 @@ export function Hero({ category, saleMotion, subtitle }: HeroProps) {
           <span className="category-badge mb-5">
             {saleMotion.label}
           </span>
-          <h1 className="text-4xl font-black leading-tight text-[#2a241d] md:text-6xl dark:text-white">
+          <h1 className="text-4xl font-black leading-tight text-[#2a241d] md:text-6xl">
             {category.faTitle} برای پروژه‌های در حال ساخت
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">

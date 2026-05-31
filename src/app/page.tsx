@@ -326,21 +326,21 @@ function SolutionPillarCard({
 
 function DemoClosingVisual() {
   return (
-    <div className="relative overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5 dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="relative overflow-hidden rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-5">
       <div className="absolute inset-0 map-parcel-pattern opacity-70" />
-      <div className="relative rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/90 p-4 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
+      <div className="relative rounded-[1.2rem] border border-[#e4d8c8] bg-[#fffaf1]/90 p-4 shadow-sm backdrop-blur">
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="text-xs text-zinc-500">نمونه مسیر دمو</div>
             <div className="mt-1 text-base font-bold">نقشه پروژه‌ها تا پیگیری فروش</div>
           </div>
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950">
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-zinc-950 text-white">
             <Route className="h-5 w-5" />
           </span>
         </div>
         <div className="mt-5 grid gap-3">
           {["مشاهده مسیر پیدا کردن پروژه", "بررسی فیلترها و مرحله ساخت", "مرور پیگیری فروش"].map((item, index) => (
-            <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-3 dark:border-zinc-800 dark:bg-zinc-950">
+            <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#e4d8c8] bg-[#fbf6ed] p-3">
               <span className={cn("h-2.5 w-2.5 rounded-full", index === 1 ? "bg-[#CC785C]" : "bg-[#d8c7b2]")} />
               <span className="text-sm font-medium">{item}</span>
             </div>
@@ -423,7 +423,7 @@ function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="section-gradient section-gradient-how relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
+      className="section-gradient section-gradient-how relative overflow-hidden border-b border-[#e4d8c8]"
       aria-labelledby="how-it-works-title"
     >
       <HowItWorksRevealController />
@@ -513,7 +513,7 @@ function SalesFlowSection() {
   return (
     <section
       id="sales-flow"
-      className="section-gradient section-gradient-sales relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
+      className="section-gradient section-gradient-sales relative overflow-hidden border-b border-[#e4d8c8]"
       aria-labelledby="sales-flow-title"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
@@ -605,17 +605,17 @@ function SalesFlowSection() {
 
 function DemoRequestSection() {
   return (
-    <section id="demo" className="section-gradient section-gradient-demo relative overflow-hidden border-t border-[#e4d8c8] dark:border-zinc-800">
+    <section id="demo" className="section-gradient section-gradient-demo relative overflow-hidden border-t border-[#e4d8c8]">
       <div className="absolute inset-0 map-parcel-pattern opacity-10" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 pb-32 pt-12 md:px-6 md:py-16">
-        <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07] dark:border-zinc-800 dark:bg-zinc-900/90">
+        <div className="relative overflow-hidden rounded-[1.6rem] border border-[#e4d8c8] bg-[#fffaf1]/90 shadow-xl shadow-[#2a241d]/[0.07]">
           <div className="relative grid gap-8 p-7 md:grid-cols-[1fr_.72fr] md:p-10">
             <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(198,106,90,0.08),transparent_42%,rgba(47,111,103,0.08))]" aria-hidden="true" />
             <div className="relative">
               <h2 className="text-3xl font-semibold md:text-5xl">
                 برای دیدن نمونه اطلاعات پروژه‌ها، دمو بگیرید
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-zinc-600 md:text-lg dark:text-zinc-400">
+              <p className="mt-4 max-w-2xl text-base leading-8 text-zinc-600 md:text-lg">
                 در دمو، مسیر پیدا کردن پروژه، بررسی فیلترها و مرحله ساخت و
                 مرور پیگیری فروش را با هم جلو می‌بریم.
               </p>
@@ -624,7 +624,7 @@ function DemoRequestSection() {
               </div>
             </div>
             <div className="relative grid gap-4">
-              <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6 dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="rounded-[1.4rem] border border-[#e4d8c8] bg-[#fbf6ed] p-6">
                 <DemoRequestForm />
                 <div className="mt-5 grid gap-3">
                   <a
@@ -686,7 +686,7 @@ export default function Home() {
   };
 
   return (
-    <main className="behance-background home-sections min-h-screen text-[#2a241d] antialiased dark:bg-zinc-950 dark:text-white">
+    <main className="behance-background home-sections min-h-screen text-[#2a241d] antialiased">
       <StructuredData data={[faqSchema, softwareSchema, webPageSchema]} />
 
       <section id="hero" className="hero-surface hero-section">

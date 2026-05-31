@@ -84,7 +84,7 @@ export default function CitiesIndexPage() {
               <p className="mt-3 line-clamp-2 text-sm leading-7 text-muted-foreground">
                 {city.description}
               </p>
-              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-[#7a4a22]">
                 مشاهده شهر
                 <ArrowLeft className="h-4 w-4" />
               </span>

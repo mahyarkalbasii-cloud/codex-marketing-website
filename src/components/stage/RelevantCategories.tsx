@@ -37,7 +37,7 @@ export function RelevantCategories({ groups }: { groups: ActiveStageParentGroup[
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
               این دسته در این مرحله با مذاکره، خرید یا اجرای زیرگروه‌های مرتبط فعال می‌شود.
             </p>
-            <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22]">
               مشاهده دسته
               <ArrowLeft className="h-4 w-4" />
             </span>

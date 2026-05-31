@@ -204,7 +204,7 @@ export default async function StagePage({ params }: PageProps) {
         <h2 className="text-2xl font-black">تعریف مرحله</h2>
         <p className="mt-3 leading-8 text-muted-foreground">{copy.definition}</p>
         {copy.marketStat ? (
-          <p className="mt-5 rounded-2xl border border-[#e4d8c8] bg-white/60 px-4 py-3 text-sm font-bold leading-7 text-[#6f4a28] dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200">
+          <p className="mt-5 rounded-2xl border border-[#e4d8c8] bg-white/60 px-4 py-3 text-sm font-bold leading-7 text-[#6f4a28]">
             {copy.marketStat}
           </p>
         ) : null}
@@ -224,9 +224,9 @@ export default async function StagePage({ params }: PageProps) {
             return (
               <div
                 key={key}
-                className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+                className="rounded-3xl border border-white/70 bg-white/76 p-5"
               >
-                <Icon className="h-6 w-6 text-[#7a4a22] dark:text-zinc-200" />
+                <Icon className="h-6 w-6 text-[#7a4a22]" />
                 <h3 className="mt-5 text-xl font-bold">{action.title}</h3>
                 <p className="mt-3 text-sm leading-8 text-muted-foreground">
                   {action.body}
@@ -247,7 +247,7 @@ export default async function StagePage({ params }: PageProps) {
           ].map(([title, body]) => (
             <div
               key={title}
-              className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+              className="rounded-3xl border border-white/70 bg-white/76 p-5"
             >
               <h3 className="font-extrabold">{title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
@@ -276,7 +276,7 @@ export default async function StagePage({ params }: PageProps) {
             return (
               <div
                 key={role}
-                className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+                className="rounded-3xl border border-white/70 bg-white/76 p-5"
               >
                 <h3 className="font-extrabold">{STAGE_ROLE_LABELS[role]}</h3>
                 <div className="mt-4 grid gap-2">
@@ -284,7 +284,7 @@ export default async function StagePage({ params }: PageProps) {
                     <Link
                       key={`${role}-${item.parent.slug}-${item.subcategory.id}`}
                       href={`/suppliers/${item.parent.slug}/${item.subcategory.slug}/`}
-                      className="rounded-2xl border border-[#eadfce] bg-white/70 px-3 py-2 text-sm font-bold leading-6 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/50"
+                      className="rounded-2xl border border-[#eadfce] bg-white/70 px-3 py-2 text-sm font-bold leading-6 hover:bg-white"
                     >
                       {item.subcategory.faTitle}
                       <span className="block text-xs font-medium text-muted-foreground">

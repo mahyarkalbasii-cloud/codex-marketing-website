@@ -27,7 +27,7 @@ export function CityInternalLinks({
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           <Card className="p-6">
-            <Building2 className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
+            <Building2 className="h-6 w-6 text-zinc-900" />
             <h3 className="mt-5 text-xl font-bold">دسته‌های پرارزش برای این شهر</h3>
             <div className="mt-5 grid gap-3">
               {categories.map((category) => (
@@ -50,7 +50,7 @@ export function CityInternalLinks({
             </div>
           </Card>
           <Card className="p-6">
-            <Target className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
+            <Target className="h-6 w-6 text-zinc-900" />
             <h3 className="mt-5 text-xl font-bold">مراحل ساخت</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
               در {cityName}، مرحله ساخت باید کنار محدوده پروژه و نوع محصول خوانده شود؛

@@ -28,7 +28,7 @@ export function RelatedCategories({ categories }: { categories: Category[] }) {
             >
               <span className="category-badge mb-4">{motion.label}</span>
               <h3 className="text-lg font-black leading-8">{category.faTitle}</h3>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22]">
                 مشاهده دسته
                 <ArrowLeft className="h-4 w-4" />
               </span>

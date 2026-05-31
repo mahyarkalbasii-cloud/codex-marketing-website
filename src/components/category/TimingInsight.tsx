@@ -37,7 +37,7 @@ export function TimingInsight({
             {override ?? fallback}
           </p>
           {marketStat ? (
-            <p className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/60 px-4 py-3 text-sm font-bold leading-7 text-[#6f4a28] dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200">
+            <p className="mt-4 rounded-2xl border border-[#e4d8c8] bg-white/60 px-4 py-3 text-sm font-bold leading-7 text-[#6f4a28]">
               {marketStat}
             </p>
           ) : null}

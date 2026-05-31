@@ -34,7 +34,7 @@ export function ActiveSubcategoriesInStage({
         {groups.map((group) => (
           <div
             key={group.parent.id}
-            className="rounded-3xl border border-[#e4d8c8] bg-white/58 p-4 dark:border-zinc-800 dark:bg-zinc-900/58"
+            className="rounded-3xl border border-[#e4d8c8] bg-white/58 p-4"
           >
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <Link
@@ -59,7 +59,7 @@ export function ActiveSubcategoriesInStage({
                     className="category-pill gap-2"
                   >
                     <span>{item.subcategory.faTitle}</span>
-                    <span className="rounded-full bg-[#f1e4d3] px-2 py-0.5 text-[11px] font-black text-[#7a4a22] dark:bg-white/10 dark:text-zinc-200">
+                    <span className="rounded-full bg-[#f1e4d3] px-2 py-0.5 text-[11px] font-black text-[#7a4a22]">
                       {roleLabel}
                     </span>
                   </Link>

@@ -51,7 +51,7 @@ export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
             className={cn(
               "relative overflow-hidden p-6",
               plan.featured &&
-                "border-zinc-950 bg-zinc-950 text-white shadow-xl shadow-zinc-950/15 dark:border-[#CC785C]/35 dark:bg-zinc-900 dark:text-white",
+                "border-zinc-950 bg-zinc-950 text-white shadow-xl shadow-zinc-950/15",
             )}
           >
             {plan.featured ? (
