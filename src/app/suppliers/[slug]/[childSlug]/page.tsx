@@ -188,7 +188,7 @@ export default async function SubcategoryPage({ params }: PageProps) {
           {timingRows.map(([title, key]) => (
             <div
               key={key}
-              className="rounded-3xl border border-white/70 bg-white/76 p-5 dark:border-zinc-800 dark:bg-zinc-900/76"
+              className="rounded-3xl border border-white/70 bg-white/76 p-5"
             >
               <h3 className="font-extrabold">{title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted-foreground">

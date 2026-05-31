@@ -30,12 +30,12 @@ function StyleCard({
   return (
     <Link
       href={href}
-      className="rounded-3xl border border-[#e4d8c8] bg-white/68 p-5 transition hover:-translate-y-0.5 hover:bg-white dark:border-zinc-800 dark:bg-zinc-900/68"
+      className="rounded-3xl border border-[#e4d8c8] bg-white/68 p-5 transition hover:-translate-y-0.5 hover:bg-white"
     >
       <span className="category-badge mb-4">{count} زیرگروه مرتبط</span>
       <h3 className="text-xl font-black">{label}</h3>
       <p className="mt-3 text-sm leading-8 text-muted-foreground">{description}</p>
-      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22]">
         مشاهده مسیر فروش
         <ArrowLeft className="h-4 w-4" />
       </span>

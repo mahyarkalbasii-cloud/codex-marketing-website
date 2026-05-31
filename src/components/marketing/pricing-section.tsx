@@ -336,8 +336,8 @@ function PricingPlanCard({
       style={{ "--pricing-delay": cardDelay } as CSSProperties}
       className={cn(
         "pricing-card relative flex min-h-[34rem] w-full max-w-[22.5rem] flex-col overflow-hidden rounded-[1.6rem] border p-5 text-center transition duration-200 md:w-auto md:max-w-none md:p-6 motion-safe:hover:-translate-y-0.5",
-        "border-[#e4d8c8] bg-[#fffaf1]/86 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.035]",
-        recommended && "bg-[#F6EDE4] border-[#CC785C]/60 shadow-md shadow-[#CC785C]/8 motion-safe:-translate-y-0.5",
+        "border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-900)] shadow-sm shadow-[#2a241d]/[0.035]",
+        recommended && "border-[var(--clay-400)] bg-[var(--surface-2)] shadow-lg shadow-[#C16B4E]/10 ring-2 ring-[var(--clay-400)] lg:scale-[1.03]",
         isActive && "ring-1 ring-[#CC785C] shadow-md shadow-[#CC785C]/15 motion-safe:-translate-y-1",
         recommended && "pricing-card-recommended",
         isPulsing && "pricing-card-pulse",
@@ -406,7 +406,7 @@ function PricingPlanCard({
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          buttonVariants({ variant: "default" }),
+          buttonVariants({ variant: "strong" }),
           "pricing-plan-cta mt-auto w-full",
         )}
       >
@@ -603,7 +603,7 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
       data-pricing-ready={isReady ? "true" : undefined}
       data-pricing-revealed={isRevealed || prefersReducedMotion ? "true" : "false"}
       data-active-plan-id={activePlan?.id ?? ""}
-      className="section-gradient section-gradient-pricing relative overflow-hidden border-b border-[#e4d8c8] dark:border-zinc-800"
+      className="section-gradient section-gradient-pricing relative overflow-hidden border-b border-[#e4d8c8]"
     >
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 md:px-6 md:py-20">
         <div className="pricing-reveal-header">

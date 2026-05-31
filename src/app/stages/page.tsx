@@ -93,7 +93,7 @@ export default function StagesIndexPage() {
               <p className="mt-3 line-clamp-3 text-sm leading-7 text-muted-foreground">
                 {getStagePageContent(stage).heroSubtitle}
               </p>
-              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-[#7a4a22]">
                 مشاهده مرحله
                 <ArrowLeft className="h-4 w-4" />
               </span>

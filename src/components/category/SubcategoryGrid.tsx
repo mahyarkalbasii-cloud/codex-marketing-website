@@ -48,7 +48,7 @@ function SubcategoryPill({
           {subcategory.faTitle}
         </Link>
         {subcategory.saleType === "both" ? (
-          <span className="shrink-0 rounded-full bg-[#f3e7d8] px-2 py-0.5 text-[11px] font-bold text-[#7a5b38] dark:bg-white/10 dark:text-zinc-200">
+          <span className="shrink-0 rounded-full bg-[#f3e7d8] px-2 py-0.5 text-[11px] font-bold text-[#7a5b38]">
             دوگانه
           </span>
         ) : null}
@@ -66,7 +66,7 @@ function SubcategoryPill({
       </p>
       <Link
         href={`/suppliers/${category.slug}/${subcategory.slug}/`}
-        className="text-xs font-bold text-[#7a4a22] dark:text-zinc-200"
+        className="text-xs font-bold text-[#7a4a22]"
       >
         مشاهده صفحه مستقل زیرگروه
         <span aria-hidden="true">←</span>

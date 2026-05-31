@@ -88,7 +88,7 @@ export default async function CityPage({ params }: PageProps) {
   return (
     <main>
       <StructuredData data={faqSchema ? [schema, faqSchema] : schema} />
-      <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
+      <section className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-6 md:pb-24 md:pt-12">
         <Breadcrumbs
           items={[
             { label: "خانه", href: "/" },
@@ -125,7 +125,7 @@ export default async function CityPage({ params }: PageProps) {
               priority
             />
             <Card className="p-6">
-              <MapPinned className="h-7 w-7 text-zinc-900 dark:text-zinc-100" />
+              <MapPinned className="h-7 w-7 text-zinc-900" />
               <h2 className="mt-5 text-2xl font-bold">محدوده‌های قابل هدف‌گیری</h2>
               <div className="mt-5 flex flex-wrap gap-2">
                 {city.areas.map((area) => (

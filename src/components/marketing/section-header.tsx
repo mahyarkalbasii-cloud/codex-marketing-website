@@ -9,6 +9,7 @@ type SectionHeaderProps = {
 };
 
 export function SectionHeader({
+  eyebrow,
   title,
   description,
   className,
@@ -19,6 +20,7 @@ export function SectionHeader({
   return (
     <header className={cn("mx-auto max-w-3xl text-center", className)}>
       <div className="space-y-3">
+        <p className="section-eyebrow">{eyebrow}</p>
         <TitleTag className="text-2xl font-bold leading-[1.32] text-foreground md:text-4xl md:leading-[1.28] lg:text-[2.35rem]">
           {title}
         </TitleTag>

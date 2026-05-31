@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-[calc(100dvh-5rem)] px-4 py-10 text-zinc-950 dark:bg-zinc-950 dark:text-white">
+    <main className="min-h-[calc(100dvh-5rem)] px-4 py-10 text-zinc-950">
       <section className="mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[1fr_.85fr] md:px-6 md:py-12">
         <div>
           <Badge>
@@ -40,7 +40,7 @@ export default function LoginPage() {
           <h1 className="mt-5 text-4xl font-bold leading-[1.2] tracking-tight md:text-5xl">
             ورود به سامانه پرشین‌سازه
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-600 md:text-lg dark:text-zinc-400">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-600 md:text-lg">
             اگر دسترسی شما فعال شده است، از همین مسیر وارد سامانه شوید. اگر هنوز
             حساب کاربری ندارید، درخواست دسترسی را ثبت کنید تا تیم فروش وضعیت
             اشتراک و دسترسی شما را بررسی کند.
@@ -59,11 +59,11 @@ export default function LoginPage() {
           </div>
         </div>
         <Card className="p-6 md:p-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-950 text-white">
             <PhoneCall className="h-5 w-5" />
           </div>
           <h2 className="mt-5 text-2xl font-semibold">دسترسی فعال ندارید؟</h2>
-          <p className="mt-3 text-sm leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="mt-3 text-sm leading-8 text-zinc-600">
             برای فعال‌سازی دسترسی یا بازیابی مسیر ورود، با تیم فروش تماس بگیرید.
           </p>
           <div className="mt-5 text-2xl font-bold" dir="ltr">

@@ -15,7 +15,7 @@ export function AnswerBox({
   return (
     <section
       className={cn(
-        "rounded-3xl border border-zinc-200 bg-white/80 p-6 text-zinc-950 shadow-sm shadow-zinc-950/[0.03] backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-white",
+        "rounded-3xl border border-zinc-200 bg-white/80 p-6 text-zinc-950 shadow-sm shadow-zinc-950/[0.03] backdrop-blur",
         className,
       )}
     >

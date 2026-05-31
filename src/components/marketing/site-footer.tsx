@@ -87,7 +87,7 @@ export function SiteFooter() {
   return (
     <footer
       dir={direction}
-      className="border-t border-[#3b3128] bg-[#241f1a] text-[#fffaf1] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
+      className="border-t border-[#3b3128] bg-[#241f1a] text-[#fffaf1]"
     >
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-9 md:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] md:gap-10 md:px-6 md:py-12">
         <section

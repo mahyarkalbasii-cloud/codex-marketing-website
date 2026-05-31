@@ -120,7 +120,7 @@ export default async function SubscriptionPage({ params }: PageProps) {
     <main>
       <StructuredData data={serviceSchema} />
       <section className="border-b border-[#e4d8c8] bg-[var(--page-bg)]">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
+        <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 md:px-6 md:pb-14 md:pt-12">
           <Breadcrumbs
             items={[
               { label: "خانه", href: "/" },

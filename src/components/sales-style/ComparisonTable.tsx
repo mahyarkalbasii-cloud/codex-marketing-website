@@ -53,7 +53,7 @@ export function ComparisonTable({ copy }: { copy: SalesStyleCopy }) {
         </p>
         <Link
           href={copy.comparisonNote.href}
-          className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22] dark:text-zinc-200"
+          className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22]"
         >
           {SALES_STYLE_LABELS.comparisonLink}
           <ArrowLeft className="h-4 w-4" />

@@ -182,18 +182,18 @@ export function RadarMapVisual({ className, compact = false, idPrefix = "radar-m
           <defs>
             <radialGradient id={`${idPrefix}-core`} cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#E18868" />
-              <stop offset="58%" stopColor="#CC785C" />
-              <stop offset="100%" stopColor="#9E4F38" />
+              <stop offset="58%" stopColor="var(--clay-500)" />
+              <stop offset="100%" stopColor="var(--clay-600)" />
             </radialGradient>
             <radialGradient id={`${idPrefix}-fade`} cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#CC785C" stopOpacity="0.28" />
-              <stop offset="52%" stopColor="#CC785C" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="#CC785C" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--clay-400)" stopOpacity="0.28" />
+              <stop offset="52%" stopColor="var(--clay-400)" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="var(--clay-400)" stopOpacity="0" />
             </radialGradient>
             <linearGradient id={`${idPrefix}-sweep-fill`} x1="350" x2="680" y1="350" y2="350" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#CC785C" stopOpacity="0.22" />
-              <stop offset="72%" stopColor="#CC785C" stopOpacity="0.1" />
-              <stop offset="100%" stopColor="#CC785C" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--clay-400)" stopOpacity="0.22" />
+              <stop offset="72%" stopColor="var(--clay-400)" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="var(--clay-400)" stopOpacity="0" />
             </linearGradient>
             <clipPath id={`${idPrefix}-clip`}>
               <circle cx="350" cy="350" r="292" />

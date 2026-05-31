@@ -133,7 +133,7 @@ export default function FeaturesPage() {
               >
                 <div className={cn(index % 2 === 1 && "md:order-2")}>
                   <Badge variant="outline">ویژگی {index + 1}</Badge>
-                  <feature.icon className="mt-5 h-8 w-8 text-zinc-900 dark:text-zinc-100" />
+                  <feature.icon className="mt-5 h-8 w-8 text-zinc-900" />
                   <h2 className="mt-5 text-2xl font-bold md:text-3xl">
                     {feature.title}
                   </h2>

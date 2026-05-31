@@ -63,12 +63,12 @@ export function SalesPathLink({ category, motion, split }: SalesPathLinkProps) {
 
           return (
             <Link key={path} href={item.href}>
-              <div className="category-card h-full p-5 transition hover:-translate-y-0.5 hover:bg-white dark:hover:bg-zinc-900">
+              <div className="category-card h-full p-5 transition hover:-translate-y-0.5 hover:bg-white">
                 <h3 className="font-black">{item.title}</h3>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
                   {getPathDescription(category, split, path)}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22] dark:text-zinc-200">
+                <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#7a4a22]">
                   مشاهده مسیر
                   <ArrowLeft className="h-4 w-4" />
                 </span>
