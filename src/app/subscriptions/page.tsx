@@ -54,8 +54,12 @@ export default function SubscriptionsPage() {
     itemListElement: subscriptions.map((subscription, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: subscription.name,
-      url: absoluteUrl(`/subscriptions/${subscription.slug}/`),
+      item: {
+        "@type": "Service",
+        "@id": absoluteUrl(`/subscriptions/${subscription.slug}/#service`),
+        name: subscription.name,
+        url: absoluteUrl(`/subscriptions/${subscription.slug}/`),
+      },
     })),
   };
 

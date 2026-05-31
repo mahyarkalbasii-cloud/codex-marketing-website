@@ -10,7 +10,8 @@ import {
 } from "@/components/marketing/suppliers/shared";
 import { GUIDES, getGuideBySlug } from "@/data/guides";
 import { CategoryLayout } from "@/layouts/CategoryLayout";
-import { absoluteUrl } from "@/lib/site-data";
+import { routeOgImage } from "@/lib/og-metadata";
+import { absoluteUrl, site } from "@/lib/site-data";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: absoluteUrl(`/guides/${guide.slug}/`),
       locale: "fa_IR",
       type: "article",
+      images: routeOgImage(`/guides/${guide.slug}/`, guide.title),
     },
   };
 }
@@ -57,8 +59,13 @@ export default async function GuidePage({ params }: PageProps) {
     description: guide.description,
     inLanguage: "fa-IR",
     mainEntityOfPage: absoluteUrl(`/guides/${guide.slug}/`),
+    image: absoluteUrl(`/guides/${guide.slug}/opengraph-image`),
+    datePublished: guide.datePublished,
+    dateModified: guide.dateModified ?? guide.datePublished,
+    author: { "@type": "Organization", name: site.name, url: site.url },
     publisher: {
       "@type": "Organization",
+      logo: { "@type": "ImageObject", url: absoluteUrl(site.logoPath) },
       name: "پرشین‌سازه",
     },
   };

@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Clock, Mail, MapPinned, PhoneCall, Send } from "lucide-react";
 
+import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { routeOgImage } from "@/lib/og-metadata";
+import {
+  getContactPointSchema,
+  getPostalAddressSchema,
+  organizationId,
+} from "@/lib/schema";
 import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -62,8 +68,21 @@ const contactItems = [
 ] as const;
 
 export default function ContactPage() {
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: absoluteUrl(canonicalPath),
+    inLanguage: "fa-IR",
+    mainEntity: { "@id": organizationId },
+    contactPoint: getContactPointSchema(),
+    address: getPostalAddressSchema(),
+  };
+
   return (
     <main>
+      <StructuredData data={contactPageSchema} />
       <section className="border-b border-[#e4d8c8] bg-[var(--page-bg)]">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>

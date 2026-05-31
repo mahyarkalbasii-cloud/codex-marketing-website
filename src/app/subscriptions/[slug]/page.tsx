@@ -14,6 +14,7 @@ import {
   subscriptions,
 } from "@/data/subscriptions";
 import { routeOgImage } from "@/lib/og-metadata";
+import { organizationId } from "@/lib/schema";
 import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -76,18 +77,20 @@ export default async function SubscriptionPage({ params }: PageProps) {
   const features = getSubscriptionFeatures(subscription);
   const demoHref = `/?plan=${subscription.slug}#demo`;
 
-  const productSchema = {
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `${canonicalUrl}#product`,
+    "@type": "Service",
+    "@id": `${canonicalUrl}#service`,
+    serviceType: "اشتراک داده پروژه‌های ساختمانی",
     name: `اشتراک ${subscription.name}`,
     description: subscription.metaDescription,
-    brand: {
-      "@type": "Brand",
-      name: site.name,
-    },
-    category: "Subscription",
     url: canonicalUrl,
+    provider: { "@id": organizationId },
+    areaServed: site.areaServed.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
+    inLanguage: "fa-IR",
     additionalProperty: [
       {
         "@type": "PropertyValue",
@@ -105,11 +108,17 @@ export default async function SubscriptionPage({ params }: PageProps) {
         value: feature.value,
       })),
     ],
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "IRR",
+      url: canonicalUrl,
+    },
   };
 
   return (
     <main>
-      <StructuredData data={productSchema} />
+      <StructuredData data={serviceSchema} />
       <section className="border-b border-[#e4d8c8] bg-[var(--page-bg)]">
         <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 md:px-6 md:pb-14 md:pt-12">
           <Breadcrumbs

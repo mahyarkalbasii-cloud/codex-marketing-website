@@ -35,7 +35,8 @@ import {
   getDominantSaleStyleForStage,
   getMainStages,
 } from "@/data/stage-insights";
-import { faqs, site } from "@/lib/site-data";
+import { organizationId, websiteId } from "@/lib/schema";
+import { absoluteUrl, faqs, site } from "@/lib/site-data";
 import { routeOgImage } from "@/lib/og-metadata";
 import { getStageHref } from "@/lib/stage-routes";
 import { cn } from "@/lib/utils";
@@ -660,12 +661,20 @@ export default function Home() {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": `${site.url}/#software`,
     name: site.name,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: site.url,
     inLanguage: "fa-IR",
     description: site.description,
+    publisher: { "@id": organizationId },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "IRR",
+      availability: "https://schema.org/InStock",
+      url: absoluteUrl("/subscriptions/"),
+    },
   };
 
   const webPageSchema = {
@@ -674,6 +683,11 @@ export default function Home() {
     name: "پرشین‌سازه | فروش پروژه‌محور برای تأمین‌کنندگان ساختمانی",
     url: site.url,
     inLanguage: "fa-IR",
+    isPartOf: { "@id": websiteId },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/opengraph-image"),
+    },
     description:
       "پرشین‌سازه به تأمین‌کنندگان محصولات و خدمات ساختمانی کمک می‌کند پروژه‌های در حال ساخت را روی نقشه ببینند، فیلتر کنند و پیگیری فروش را منظم کنند.",
     about: [
@@ -682,7 +696,7 @@ export default function Home() {
       "مرحله ساخت",
       "فروش پروژه‌محور",
       "پیگیری فروش",
-    ],
+    ].map((name) => ({ "@type": "Thing", name })),
   };
 
   return (
