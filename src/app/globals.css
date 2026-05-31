@@ -11356,75 +11356,131 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card="
 }
 
 .hero-tehran-motion {
-  filter: drop-shadow(0 22px 42px rgba(77, 55, 30, 0.14));
+  overflow: visible;
+  filter: drop-shadow(0 18px 34px rgba(77, 55, 30, 0.1));
 }
 
-.hero-tehran-panel {
-  fill: #fff1dc;
-  stroke: rgba(102, 75, 49, 0.18);
-  stroke-width: 1.5;
-}
-
-.hero-tehran-map path {
+.hero-tehran-plot path,
+.hero-tehran-route,
+.hero-tehran-constellation path {
   fill: none;
-  stroke: rgba(42, 36, 29, 0.17);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.45;
 }
 
-.hero-tehran-map .hero-tehran-boundary {
-  stroke: rgba(42, 36, 29, 0.25);
-  stroke-width: 2.05;
+.hero-tehran-plot path {
+  stroke: rgba(42, 36, 29, 0.2);
+  stroke-width: 1.55;
 }
 
-.hero-tehran-network {
-  --network-color: var(--clay-500);
-  --network-soft: rgba(193, 107, 78, 0.2);
+.hero-tehran-plot .hero-tehran-boundary {
+  stroke: rgba(42, 36, 29, 0.34);
+  stroke-width: 2.45;
 }
 
-.hero-tehran-network path {
-  fill: none;
-  stroke: var(--network-color);
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.hero-tehran-route {
+  stroke-width: 4.6;
+  stroke-dasharray: 10 12;
+  opacity: 0.74;
+}
+
+.hero-tehran-route--north {
+  stroke: #2f8ea0;
+}
+
+.hero-tehran-route--center {
+  stroke: #d89a25;
+}
+
+.hero-tehran-route--south {
+  stroke: #b86145;
+}
+
+.hero-tehran-route--cross {
+  stroke: #2f6f67;
+  stroke-width: 3.6;
+  stroke-dasharray: 7 10;
+}
+
+.hero-tehran-constellation path {
+  stroke: rgba(42, 36, 29, 0.18);
+  stroke-dasharray: 3 13;
   stroke-width: 1.8;
-  opacity: 0.66;
 }
 
-.hero-tehran-network circle {
-  fill: var(--network-color);
-  stroke: rgba(255, 248, 234, 0.86);
-  stroke-width: 1.9;
-  filter: drop-shadow(0 5px 12px var(--network-soft));
-}
-
-.hero-tehran-network--north {
-  --network-color: #2f8ea0;
-  --network-soft: rgba(47, 142, 160, 0.23);
-}
-
-.hero-tehran-network--center {
-  --network-color: #d79824;
-  --network-soft: rgba(215, 152, 36, 0.24);
-}
-
-.hero-tehran-network--east {
-  --network-color: #2f6f67;
-  --network-soft: rgba(47, 111, 103, 0.24);
-}
-
-.hero-tehran-network--south {
-  --network-color: #b45b3e;
-  --network-soft: rgba(180, 91, 62, 0.24);
-}
-
-.hero-tehran-sparks path {
-  fill: none;
-  stroke: #7d9f47;
-  stroke-linecap: round;
+.hero-tehran-node {
+  stroke: rgba(255, 248, 234, 0.88);
   stroke-width: 2;
-  opacity: 0.7;
+}
+
+.hero-tehran-node--north {
+  fill: #2f8ea0;
+}
+
+.hero-tehran-node--center {
+  fill: #d89a25;
+}
+
+.hero-tehran-node--south {
+  fill: #b86145;
+}
+
+.hero-tehran-node--cross {
+  fill: #2f6f67;
+}
+
+.hero-tehran-moving-pin,
+.hero-tehran-moving-dot {
+  pointer-events: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-tehran-pin-wave {
+  fill: rgba(255, 248, 234, 0.1);
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.22;
+}
+
+.hero-tehran-pin-body {
+  fill: color-mix(in srgb, currentColor 88%, #fff8ea);
+  stroke: rgba(255, 248, 234, 0.9);
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.hero-tehran-pin-core {
+  fill: #fff8ea;
+}
+
+.hero-tehran-moving-pin--north {
+  color: #2f8ea0;
+}
+
+.hero-tehran-moving-pin--center {
+  color: #d89a25;
+}
+
+.hero-tehran-moving-pin--south {
+  color: #b86145;
+}
+
+.hero-tehran-moving-dot--cross {
+  color: #2f6f67;
+}
+
+.hero-tehran-moving-dot--cross circle:first-of-type {
+  fill: currentColor;
+  stroke: rgba(255, 248, 234, 0.92);
+  stroke-width: 2;
+}
+
+.hero-tehran-moving-dot--cross circle:last-of-type {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  opacity: 0.24;
 }
 
 @media (max-width: 767px) {
@@ -11512,99 +11568,108 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card="
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-tehran-network {
-    animation: hero-tehran-drift 8.4s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-    will-change: transform;
+  .hero-tehran-plot path {
+    animation: hero-tehran-map-breathe 8s ease-in-out infinite;
   }
 
-  .hero-tehran-network--center {
-    animation-name: hero-tehran-pulse-drift;
-    animation-duration: 7.2s;
+  .hero-tehran-route {
+    animation: hero-tehran-route-flow 5.6s linear infinite;
   }
 
-  .hero-tehran-network--east {
-    animation-delay: -1.8s;
+  .hero-tehran-route--center {
+    animation-duration: 6.3s;
+    animation-delay: -1.4s;
   }
 
-  .hero-tehran-network--south {
-    animation-delay: -3.2s;
+  .hero-tehran-route--south {
+    animation-duration: 7s;
+    animation-delay: -2.2s;
   }
 
-  .hero-tehran-network path {
-    stroke-dasharray: 10 9;
-    animation: hero-tehran-line-flow 4.8s linear infinite;
+  .hero-tehran-route--cross {
+    animation-duration: 5.1s;
+    animation-delay: -0.8s;
   }
 
-  .hero-tehran-network circle {
+  .hero-tehran-constellation path {
+    animation: hero-tehran-constellation 7.4s ease-in-out infinite;
+  }
+
+  .hero-tehran-constellation path:nth-child(2) {
+    animation-delay: -2.1s;
+  }
+
+  .hero-tehran-constellation path:nth-child(3) {
+    animation-delay: -3.8s;
+  }
+
+  .hero-tehran-node {
     animation: hero-tehran-node-pulse 3.8s ease-in-out infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
 
-  .hero-tehran-network--north circle:nth-of-type(2n),
-  .hero-tehran-network--east circle:nth-of-type(2n) {
-    animation-delay: -1.1s;
+  .hero-tehran-node:nth-of-type(3n) {
+    animation-delay: -1.2s;
   }
 
-  .hero-tehran-network--center circle:nth-of-type(2n + 1),
-  .hero-tehran-network--south circle:nth-of-type(2n + 1) {
-    animation-delay: -2.1s;
+  .hero-tehran-node:nth-of-type(3n + 1) {
+    animation-delay: -2.35s;
   }
 
-  .hero-tehran-sparks path {
-    animation: hero-tehran-spark 5.4s ease-in-out infinite;
+  .hero-tehran-pin-body,
+  .hero-tehran-pin-core {
+    animation: hero-tehran-pin-float 1.8s ease-in-out infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
 
-  .hero-tehran-sparks path:nth-child(2) {
-    animation-delay: -1.3s;
-  }
-
-  .hero-tehran-sparks path:nth-child(3) {
-    animation-delay: -2.5s;
-  }
-
-  .hero-tehran-sparks path:nth-child(4) {
-    animation-delay: -3.2s;
+  .hero-tehran-pin-wave,
+  .hero-tehran-moving-dot--cross circle:last-of-type {
+    animation: hero-tehran-pin-wave 2.4s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
   }
 }
 
-@keyframes hero-tehran-drift {
+@keyframes hero-tehran-map-breathe {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.72;
   }
 
   50% {
-    transform: translate3d(0.45rem, -0.35rem, 0) rotate(0.8deg);
+    opacity: 0.98;
   }
 }
 
-@keyframes hero-tehran-pulse-drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate3d(-0.35rem, 0.28rem, 0) scale(1.025);
-  }
-}
-
-@keyframes hero-tehran-line-flow {
+@keyframes hero-tehran-route-flow {
   to {
-    stroke-dashoffset: -19;
+    stroke-dashoffset: -44;
+  }
+}
+
+@keyframes hero-tehran-constellation {
+  0%,
+  100% {
+    opacity: 0.18;
+    stroke-dashoffset: 0;
+  }
+
+  45% {
+    opacity: 0.52;
+  }
+
+  100% {
+    stroke-dashoffset: -48;
   }
 }
 
 @keyframes hero-tehran-node-pulse {
   0%,
   100% {
-    opacity: 0.9;
-    transform: scale(1);
+    opacity: 0.78;
+    transform: scale(0.96);
   }
 
   50% {
@@ -11613,15 +11678,30 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card="
   }
 }
 
-@keyframes hero-tehran-spark {
+@keyframes hero-tehran-pin-float {
   0%,
   100% {
-    opacity: 0.24;
-    transform: scale(0.88) rotate(0deg);
+    transform: translateY(0);
   }
 
   50% {
-    opacity: 0.92;
-    transform: scale(1.08) rotate(45deg);
+    transform: translateY(-0.18rem);
+  }
+}
+
+@keyframes hero-tehran-pin-wave {
+  0% {
+    opacity: 0.34;
+    transform: scale(0.7);
+  }
+
+  70% {
+    opacity: 0.08;
+    transform: scale(1.35);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
   }
 }
