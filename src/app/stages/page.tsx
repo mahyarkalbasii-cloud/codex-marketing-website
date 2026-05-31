@@ -4,14 +4,16 @@ import { ArrowLeft } from "lucide-react";
 
 import { CategorySection } from "@/components/category/CategorySection";
 import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
+import { RoutePageVisual } from "@/components/marketing/route-page-visual";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { STAGES } from "@/data/stages";
 import { getStagePageContent } from "@/data/stage-copy";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 import { getStageHref } from "@/lib/stage-routes";
 
 const canonicalPath = "/stages/";
-const pageTitle = "مراحل ساخت در پرشین‌سازه";
+const pageTitle = "مراحل ساخت پروژه‌های ساختمانی";
 const faNumber = new Intl.NumberFormat("fa-IR");
 const mainStages = STAGES.filter((stage) => stage.isMain);
 const pageDescription = `فهرست ${faNumber.format(
@@ -29,6 +31,7 @@ export function generateMetadata(): Metadata {
       url: absoluteUrl(canonicalPath),
       locale: "fa_IR",
       type: "website",
+      images: routeOgImage(canonicalPath, pageTitle),
     },
   };
 }
@@ -62,11 +65,20 @@ export default function StagesIndexPage() {
         ]}
       />
       <CategorySection>
-        <span className="category-badge mb-3">مراحل ساخت</span>
-        <h1 className="text-3xl font-black md:text-5xl">{pageTitle}</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">
-          {pageDescription}
-        </p>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-center">
+          <div>
+            <span className="category-badge mb-3">مراحل ساخت</span>
+            <h1 className="text-3xl font-black md:text-5xl">{pageTitle}</h1>
+            <p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">
+              {pageDescription}
+            </p>
+          </div>
+          <RoutePageVisual
+            alt="نمای نقشه پروژه‌های ساختمانی و مراحل ساخت برای زمان‌بندی فروش در پرشین‌سازه"
+            caption="تصویر نمونه از تفکیک پروژه‌ها بر اساس مرحله ساخت"
+            priority
+          />
+        </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {mainStages.map((stage, index) => (
             <Link

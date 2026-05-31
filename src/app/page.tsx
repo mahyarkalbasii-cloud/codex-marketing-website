@@ -36,13 +36,14 @@ import {
   getMainStages,
 } from "@/data/stage-insights";
 import { faqs, site } from "@/lib/site-data";
+import { routeOgImage } from "@/lib/og-metadata";
 import { getStageHref } from "@/lib/stage-routes";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "پرشین‌سازه | پروژه‌های ساختمانی فعال را زودتر پیدا کنید",
   description:
-    "پرشین‌سازه پروژه‌های در حال ساخت در تهران، کرج و لواسان را جمع‌آوری و دسته‌بندی می‌کند تا تأمین‌کنندگان محصولات و خدمات ساختمانی سریع‌تر پروژه‌های مرتبط را بررسی و پیگیری کنند.",
+    "پرشین‌سازه پروژه‌های فعال تهران، کرج و لواسان را با مرحله ساخت، موقعیت و ابزار پیگیری نشان می‌دهد تا فروش B2B ساختمانی دقیق‌تر شروع شود.",
   alternates: {
     canonical: "/",
     languages: {
@@ -57,6 +58,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "fa_IR",
     type: "website",
+    images: routeOgImage("/"),
   },
   twitter: {
     card: "summary_large_image",

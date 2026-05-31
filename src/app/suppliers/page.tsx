@@ -14,6 +14,7 @@ import {
   getVisibleSubcategoryCount,
 } from "@/data/navigation";
 import { CategoryLayout } from "@/layouts/CategoryLayout";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 
 const faNumber = new Intl.NumberFormat("fa-IR");
@@ -53,6 +54,7 @@ const barterCount = categories.reduce(
     ).length,
   0,
 );
+const pageTitle = "همه زمینه‌های کاری ساختمانی";
 
 const faqItems: SuppliersFAQItem[] = [
   {
@@ -78,17 +80,18 @@ const faqItems: SuppliersFAQItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: { absolute: "همه زمینه‌های کاری ساختمانی | پرشین‌سازه" },
+  title: pageTitle,
   description:
     "۲۰ دسته اصلی و ۲۷۰ زیرگروه ساختمانی از سند جامع محصولات، خدمات و زنجیره تأمین؛ با زمان مذاکره، خرید و اجرا برای هر زیرگروه.",
   alternates: { canonical: "/suppliers/" },
   openGraph: {
-    title: "همه زمینه‌های کاری ساختمانی | پرشین‌سازه",
+    title: pageTitle,
     description:
       "هاب دسته‌بندی تامین‌کنندگان ساختمانی، زمینه‌های فروش در ساختمان و مسیرهای فروش پروژه‌محور در پرشین‌سازه.",
     url: absoluteUrl("/suppliers/"),
     locale: "fa_IR",
     type: "website",
+    images: routeOgImage("/suppliers/", pageTitle),
   },
 };
 
@@ -106,7 +109,7 @@ export default function SuppliersIndexPage() {
   const collectionPageSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "همه زمینه‌های کاری در پرشین‌سازه",
+    name: pageTitle,
     url: absoluteUrl("/suppliers/"),
     inLanguage: "fa-IR",
     mainEntity: {

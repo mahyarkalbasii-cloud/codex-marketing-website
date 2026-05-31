@@ -104,15 +104,16 @@ export function SiteFooter() {
             {footerCopy.description}
           </p>
           <div className="space-y-2 text-sm text-[#cfc0af]">
-            <p>
-              <a href="tel:+982175425000" dir="ltr" className="transition hover:text-[#fffaf1]">
-                {site.phones[0]}
-              </a>
-              {" / "}
-              <a href="tel:+982172897000" dir="ltr" className="transition hover:text-[#fffaf1]">
-                {site.phones[1]}
-              </a>
-            </p>
+            <div className="space-y-1.5">
+              {site.contacts.map((contact) => (
+                <p key={contact.telephone} className="flex flex-wrap items-center gap-2">
+                  <span className="font-semibold text-[#fffaf1]">{contact.label}:</span>
+                  <a href={contact.href} dir="ltr" className="transition hover:text-[#fffaf1]">
+                    {contact.phone}
+                  </a>
+                </p>
+              ))}
+            </div>
             <p>{site.address}</p>
             <p>
               <a href={`mailto:${site.email}`} dir="ltr" className="transition hover:text-[#fffaf1]">

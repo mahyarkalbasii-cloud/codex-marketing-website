@@ -9,6 +9,7 @@ import { RelatedStagesNav } from "@/components/stage/RelatedStagesNav";
 import { RelevantCategories } from "@/components/stage/RelevantCategories";
 import { AnswerBox } from "@/components/marketing/answer-box";
 import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
+import { RoutePageVisual } from "@/components/marketing/route-page-visual";
 import { StructuredData } from "@/components/marketing/structured-data";
 import {
   FinalCTA,
@@ -28,6 +29,7 @@ import {
   type MainStageId,
   type StageRole,
 } from "@/data/stage-insights";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 import { getStageHref } from "@/lib/stage-routes";
 import { cn } from "@/lib/utils";
@@ -68,6 +70,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: absoluteUrl(getStageHref(stage)),
       locale: "fa_IR",
       type: "article",
+      images: routeOgImage(getStageHref(stage), stage.faLabel),
     },
   };
 }
@@ -149,42 +152,51 @@ export default async function StagePage({ params }: PageProps) {
       />
 
       <GradientSection>
-        <p className="text-sm font-bold text-muted-foreground">صفحه مرحله ساخت</p>
-        <h1 className="mt-3 text-4xl font-black md:text-6xl">
-          {copy.heroTitle}
-        </h1>
-        <p className="mt-4 max-w-4xl leading-8 text-muted-foreground">
-          {copy.heroSubtitle}
-        </p>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Link href="/#demo" className={cn(buttonVariants({ size: "lg" }))}>
-            درخواست دمو
-          </Link>
-          <Link
-            href="/pricing/"
-            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-          >
-            مشاهده پلن‌ها
-          </Link>
-        </div>
-        <div
-          className="mt-7"
-          itemScope
-          itemType="https://schema.org/Question"
-        >
-          <meta
-            itemProp="name"
-            content={`در مرحله ${stage.faLabel} چه اقدام فروشی باید انجام شود؟`}
-          />
-          <div
-            itemProp="acceptedAnswer"
-            itemScope
-            itemType="https://schema.org/Answer"
-          >
-            <AnswerBox>
-              <span itemProp="text">{copy.shortAnswer}</span>
-            </AnswerBox>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-center">
+          <div>
+            <p className="text-sm font-bold text-muted-foreground">صفحه مرحله ساخت</p>
+            <h1 className="mt-3 text-4xl font-black md:text-6xl">
+              {copy.heroTitle}
+            </h1>
+            <p className="mt-4 max-w-4xl leading-8 text-muted-foreground">
+              {copy.heroSubtitle}
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link href="/#demo" className={cn(buttonVariants({ size: "lg" }))}>
+                درخواست دمو
+              </Link>
+              <Link
+                href="/subscriptions/"
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              >
+                مشاهده پلن‌ها
+              </Link>
+            </div>
+            <div
+              className="mt-7"
+              itemScope
+              itemType="https://schema.org/Question"
+            >
+              <meta
+                itemProp="name"
+                content={`در مرحله ${stage.faLabel} چه اقدام فروشی باید انجام شود؟`}
+              />
+              <div
+                itemProp="acceptedAnswer"
+                itemScope
+                itemType="https://schema.org/Answer"
+              >
+                <AnswerBox>
+                  <span itemProp="text">{copy.shortAnswer}</span>
+                </AnswerBox>
+              </div>
+            </div>
           </div>
+          <RoutePageVisual
+            alt={`نمای نقشه پروژه‌های ساختمانی فعال در مرحله ${stage.faLabel} برای برنامه‌ریزی فروش`}
+            caption={`تصویر نمونه از پروژه‌های قابل رصد در مرحله ${stage.faLabel}`}
+            priority
+          />
         </div>
       </GradientSection>
 
