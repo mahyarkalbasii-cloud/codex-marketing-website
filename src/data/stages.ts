@@ -3,7 +3,7 @@ import type { Stage } from "./types";
 export const STAGES: Stage[] = [
   {
     id: "pre-construction",
-    faLabel: "پیش از اخذ جواز",
+    faLabel: "طراحی و اخذ جواز",
     slug: "pre-construction",
     isMain: true,
   },
