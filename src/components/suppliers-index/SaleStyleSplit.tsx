@@ -5,9 +5,11 @@ import { CategorySection } from "@/components/category/CategorySection";
 import { SALE_PATHS } from "@/data/category-insights";
 
 export function SaleStyleSplit({
+  barterCount,
   consultativeCount,
   fastCount,
 }: {
+  barterCount: string;
   consultativeCount: string;
   fastCount: string;
 }) {
@@ -26,6 +28,13 @@ export function SaleStyleSplit({
       path: SALE_PATHS.consultative.href,
       title: SALE_PATHS.consultative.title,
     },
+    {
+      count: barterCount,
+      description:
+        "برای مصالح و خدماتی که انعطاف مالی، تهاتر با ملک یا توافق مرحله‌ای بخشی از مزیت فروش است.",
+      path: "/sales-style/barter/",
+      title: "تهاتر مصالح و خدمات",
+    },
   ];
 
   return (
@@ -35,10 +44,10 @@ export function SaleStyleSplit({
         ابتدا مسیر فروش را درست تشخیص دهید
       </h2>
       <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-        تقسیم‌بندی اصلی پرشین‌سازه بر اساس این است که فرصت فروش شما سریع و
-        تراکنشی است یا به مسیر مشاوره‌ای و پیگیری عمیق‌تر نیاز دارد.
+        تقسیم‌بندی اصلی پرشین‌سازه بر اساس این است که فرصت فروش شما سریع،
+        مشاوره‌ای یا تهاتری است و در کدام مرحله باید پیگیری شود.
       </p>
-      <div className="mt-7 grid gap-4 md:grid-cols-2">
+      <div className="mt-7 grid gap-4 md:grid-cols-3">
         {cards.map((card) => (
           <Link key={card.path} href={card.path}>
             <article className="category-card h-full p-6 transition hover:-translate-y-0.5 hover:bg-white">

@@ -2,7 +2,7 @@ import { CATEGORIES } from "./categories";
 import { STAGES } from "./stages";
 import type { Category, Stage, StageId, SubCategory } from "./types";
 
-export type SalesStyleId = "fast" | "consultative";
+export type SalesStyleId = "fast" | "consultative" | "barter";
 
 export interface SalesStyleCategory {
   category: Category;
@@ -17,7 +17,13 @@ export function getSalesStyleCategories(style: SalesStyleId): SalesStyleCategory
       category,
       relevantSubs: category.subcategories.filter(
         (subcategory) =>
-          subcategory.saleType === style || subcategory.saleType === "both",
+          subcategory.salesTypes.includes(style) ||
+          (style !== "barter" && subcategory.saleType === style) ||
+          subcategory.saleType === "both" ||
+          (style === "consultative" &&
+            subcategory.salesTypes.some((type) =>
+              ["engineering", "custom", "rental"].includes(type),
+            )),
       ),
     }))
     .filter((item) => item.relevantSubs.length > 0);
@@ -32,9 +38,7 @@ export function getSalesStyleRelatedStages(style: SalesStyleId): Stage[] {
 
   for (const subcategory of getSalesStyleSubcategories(style)) {
     for (const stageId of subcategory.buyStages) {
-      if (stageId !== "pre-construction") {
-        stageIds.add(stageId);
-      }
+      stageIds.add(stageId);
     }
   }
 

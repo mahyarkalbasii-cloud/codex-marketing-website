@@ -4,7 +4,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import type { Category, SaleType, StageId, SubCategory } from "../src/data/types";
+import type {
+  Category,
+  SaleType,
+  SalesType,
+  StageId,
+  SubCategory,
+} from "../src/data/types";
 
 type CellValue = string | number | boolean | null | undefined;
 type RawRow = Record<string, CellValue>;
@@ -340,6 +346,7 @@ function buildCategories(rows: RawRow[]): Category[] {
         id: parentId,
         faTitle: parentTitle,
         slug: parentSlug,
+        intro: `دسته ${parentTitle} از فایل اکسل قدیمی تولید شده است.`,
         excludeFromPages: EXCLUDED_PARENT_IDS.has(parentId),
         subcategories: [],
       } satisfies Category);
@@ -350,24 +357,45 @@ function buildCategories(rows: RawRow[]): Category[] {
       );
     }
 
+    const saleType = normalizeSaleType(row["نوع فروش"], `row ${rowNumber}`);
+    const negotiationStages = normalizeStageList(
+      row["مرحله مناسب مذاکره"],
+      `row ${rowNumber} negotiation stage`,
+    );
+    const buyStages = normalizeStageList(
+      row["مرحله مناسب خرید"],
+      `row ${rowNumber} buy stage`,
+    );
+    const executionStages = normalizeStageList(
+      row["مرحله مناسب اجرا"],
+      `row ${rowNumber} execution stage`,
+    );
+    const strategicAdvice = normalizeText(
+      row["عوامل کلیدی خرید برای سازنده و توصیه‌های استراتژیک"],
+    );
+    const salesTypes: SalesType[] =
+      saleType === "both" ? ["fast", "consultative"] : saleType ? [saleType] : [];
+
     const subcategory: SubCategory = {
-      id: childId,
+      id: String(childId),
       faTitle: normalizeText(row.ChildTitle),
       slug: `c-${childId}`,
       parentId,
-      saleType: normalizeSaleType(row["نوع فروش"], `row ${rowNumber}`),
-      negotiationStages: normalizeStageList(
-        row["مرحله مناسب مذاکره"],
-        `row ${rowNumber} negotiation stage`,
-      ),
-      buyStages: normalizeStageList(row["مرحله مناسب خرید"], `row ${rowNumber} buy stage`),
-      executionStages: normalizeStageList(
-        row["مرحله مناسب اجرا"],
-        `row ${rowNumber} execution stage`,
-      ),
-      strategicAdvice: normalizeText(
-        row["عوامل کلیدی خرید برای سازنده و توصیه‌های استراتژیک"],
-      ),
+      saleType,
+      salesTypes,
+      salesTypeRaw: normalizeText(row["نوع فروش"]),
+      negotiationStages,
+      buyStages,
+      executionStages,
+      stageTiming: {
+        negotiate: negotiationStages,
+        buy: buyStages,
+        execute: executionStages,
+      },
+      description: strategicAdvice,
+      strategicAdvice,
+      builderValues: strategicAdvice,
+      trustCriteria: strategicAdvice,
     };
 
     category.subcategories.push(subcategory);

@@ -12,10 +12,11 @@ import { getStageHref } from "@/lib/stage-routes";
 
 const canonicalPath = "/stages/";
 const pageTitle = "مراحل ساخت در پرشین‌سازه";
-const pageDescription =
-  "فهرست ۸ مرحله اصلی ساخت برای بررسی زمان مناسب فروش پروژه‌محور.";
 const faNumber = new Intl.NumberFormat("fa-IR");
 const mainStages = STAGES.filter((stage) => stage.isMain);
+const pageDescription = `فهرست ${faNumber.format(
+  mainStages.length,
+)} مرحله اصلی ساخت برای بررسی زمان مناسب مذاکره، خرید و اجرای هر زیرگروه ساختمانی.`;
 
 export function generateMetadata(): Metadata {
   return {

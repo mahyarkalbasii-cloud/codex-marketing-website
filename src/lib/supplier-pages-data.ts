@@ -1,80 +1,74 @@
-import parentCategoriesData from "@/data/supplier-parent-categories.json";
-import constructionStagesData from "@/data/supplier-construction-stages.json";
+import { CATEGORIES } from "@/data/categories";
+import { STAGES } from "@/data/stages";
 
-export const dataSource = "json" as const;
+export const dataSource = "taxonomy" as const;
 
 export type SaleType = "fast-sales" | "consultative-sales" | "hybrid-sales";
 
-export type ParentCategory = {
-  slug: string;
-  name: string;
-  title: string;
-  saleType: SaleType;
-  description: string;
-  answer: string;
-  timingHint: string;
-  examples: string[];
-  stageSlugs: string[];
-};
-
-export type ConstructionStage = {
-  slug: string;
-  name: string;
-  title: string;
-  description: string;
-  definition: string;
-  timing: {
-    negotiation: string;
-    purchase: string;
-    execution: string;
-  };
-};
-
-const parentCategories = parentCategoriesData as ParentCategory[];
-const constructionStages = constructionStagesData as ConstructionStage[];
-
-const parentCategorySlugAliases: Record<string, string> = {
-  "cement-and-basic-materials": "building-materials",
-  elevator: "elevators-escalators",
-  facade: "doors-windows-facade",
-  "doors-windows": "doors-windows-facade",
-  "mechanical-electrical": "mechanical-installations",
-  "interior-finishing": "interior-decoration",
-};
-
 export function getParentCategoryStaticSlugs() {
-  return Array.from(
-    new Set([
-      ...parentCategories.map((category) => category.slug),
-      ...Object.keys(parentCategorySlugAliases),
-    ]),
-  );
+  return CATEGORIES.map((category) => category.slug);
 }
 
 export function getParentCategories() {
-  return parentCategories;
+  return CATEGORIES.map((category) => ({
+    slug: category.slug,
+    name: category.faTitle,
+    title: category.faTitle,
+    saleType: "consultative-sales" as SaleType,
+    description: category.intro,
+    answer: category.intro,
+    timingHint: "زمان‌بندی از دیتاست taxonomy استخراج می‌شود.",
+    examples: category.subcategories.slice(0, 4).map((item) => item.faTitle),
+    stageSlugs: Array.from(
+      new Set(category.subcategories.flatMap((item) => item.buyStages)),
+    ).map(String),
+  }));
 }
 
 export function getParentCategoryBySlug(slug: string) {
-  const normalizedSlug = parentCategorySlugAliases[slug] ?? slug;
-
-  return parentCategories.find((category) => category.slug === normalizedSlug);
+  return getParentCategories().find((category) => category.slug === slug);
 }
 
 export function getConstructionStages() {
-  return constructionStages;
+  return STAGES.map((stage) => ({
+    slug: stage.slug,
+    name: stage.faLabel,
+    title: stage.faLabel,
+    description: `مرحله ${stage.faLabel} در دیتاست جدید پرشین‌سازه.`,
+    definition: `این مرحله از روی taxonomy و ردیف‌های مذاکره، خرید و اجرا ساخته می‌شود.`,
+    timing: {
+      negotiation: "بر اساس زیرگروه‌های دارای نقش مذاکره.",
+      purchase: "بر اساس زیرگروه‌های دارای نقش خرید.",
+      execution: "بر اساس زیرگروه‌های دارای نقش اجرا.",
+    },
+  }));
 }
 
 export function getConstructionStageBySlug(slug: string) {
-  return constructionStages.find((stage) => stage.slug === slug);
+  return getConstructionStages().find((stage) => stage.slug === slug);
 }
 
 export function getCategoriesBySaleType(saleType: SaleType) {
-  return parentCategories.filter((category) => category.saleType === saleType);
+  const style =
+    saleType === "fast-sales"
+      ? "fast"
+      : saleType === "consultative-sales"
+        ? "consultative"
+        : "barter";
+
+  return getParentCategories().filter((category) => {
+    const source = CATEGORIES.find((item) => item.slug === category.slug);
+
+    return source?.subcategories.some((subcategory) =>
+      subcategory.salesTypes.includes(style),
+    );
+  });
 }
 
 export function getCategoriesByStageSlug(stageSlug: string) {
-  return parentCategories.filter((category) => category.stageSlugs.includes(stageSlug));
+  return getParentCategories().filter((category) =>
+    category.stageSlugs.includes(stageSlug),
+  );
 }
 
 export const salesMotions: Record<
@@ -97,6 +91,6 @@ export const salesMotions: Record<
     name: "فروش ترکیبی",
     title: "فروش ترکیبی برای تأمین‌کنندگان ساختمانی",
     description:
-      "برای تیم‌هایی که هم فرصت‌های سریع و هم پیگیری‌های بلندمدت پروژه‌ای را در یک مسیر فروش مدیریت می‌کنند.",
+      "مسیر قدیمی فروش ترکیبی اکنون در هاب نوع فروش و برچسب‌های taxonomy پوشش داده می‌شود.",
   },
 };

@@ -3,13 +3,13 @@ import type { Stage } from "./types";
 export const STAGES: Stage[] = [
   {
     id: "pre-construction",
-    faLabel: "پیش از ساخت / مرحله وابسته به تصمیم",
+    faLabel: "طراحی و اخذ مجوزها",
     slug: "pre-construction",
-    isMain: false,
+    isMain: true,
   },
   {
     id: "demolition",
-    faLabel: "تخریب و گودبرداری",
+    faLabel: "گودبرداری و تجهیز کارگاه",
     slug: "demolition",
     isMain: true,
   },
@@ -27,7 +27,7 @@ export const STAGES: Stage[] = [
   },
   {
     id: "wall-building",
-    faLabel: "دیوارچینی",
+    faLabel: "دیوارچینی و سفت‌کاری",
     slug: "wall-building",
     isMain: true,
   },
@@ -38,6 +38,12 @@ export const STAGES: Stage[] = [
     isMain: true,
   },
   {
+    id: "installations",
+    faLabel: "تاسیسات مکانیکی و برقی",
+    slug: "installations",
+    isMain: true,
+  },
+  {
     id: "early-finishing",
     faLabel: "ابتدای نازک‌کاری",
     slug: "early-finishing",
@@ -45,13 +51,13 @@ export const STAGES: Stage[] = [
   },
   {
     id: "finishing",
-    faLabel: "نازک‌کاری",
+    faLabel: "نازک‌کاری و نما",
     slug: "finishing",
     isMain: true,
   },
   {
     id: "completion",
-    faLabel: "ظریف‌کاری و پایان کار",
+    faLabel: "تحویل و پایان‌کار",
     slug: "completion",
     isMain: true,
   },

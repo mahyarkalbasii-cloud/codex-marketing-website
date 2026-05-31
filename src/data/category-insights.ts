@@ -16,6 +16,7 @@ export interface SaleMotionSummary {
 export interface SaleTypeSplit {
   fast: SubCategory[];
   consultative: SubCategory[];
+  other: SubCategory[];
 }
 
 const stageOrder = new Map(STAGES.map((stage, index) => [stage.id, index]));
@@ -45,15 +46,28 @@ export function getVisibleCategories(categories: Category[] = []): Category[] {
 }
 
 export function getSaleTypeSplit(category: Category): SaleTypeSplit {
+  const fast = category.subcategories.filter(
+    (subcategory) =>
+      subcategory.salesTypes.includes("fast") ||
+      subcategory.saleType === "fast" ||
+      subcategory.saleType === "both",
+  );
+  const consultative = category.subcategories.filter(
+    (subcategory) =>
+      subcategory.salesTypes.some((type) =>
+        ["consultative", "engineering", "custom", "rental"].includes(type),
+      ) ||
+      subcategory.saleType === "consultative" ||
+      subcategory.saleType === "both",
+  );
+
   return {
-    fast: category.subcategories.filter(
-      (subcategory) =>
-        subcategory.saleType === "fast" || subcategory.saleType === "both",
-    ),
-    consultative: category.subcategories.filter(
-      (subcategory) =>
-        subcategory.saleType === "consultative" ||
-        subcategory.saleType === "both",
+    fast,
+    consultative,
+    other: category.subcategories.filter((subcategory) =>
+      subcategory.salesTypes.some((type) =>
+        ["barter", "custom", "rental"].includes(type),
+      ),
     ),
   };
 }
@@ -141,9 +155,7 @@ export function getRelatedBuyStages(category: Category): Stage[] {
 
   for (const subcategory of category.subcategories) {
     for (const stageId of subcategory.buyStages) {
-      if (stageId !== "pre-construction") {
-        stageIds.add(stageId);
-      }
+      stageIds.add(stageId);
     }
   }
 
@@ -159,9 +171,7 @@ function getActiveStageIds(category: Category): Set<StageId> {
       ...subcategory.buyStages,
       ...subcategory.executionStages,
     ]) {
-      if (stageId !== "pre-construction") {
-        stageIds.add(stageId);
-      }
+      stageIds.add(stageId);
     }
   }
 
@@ -223,7 +233,7 @@ export function getStrategicAdviceHighlights(
     .sort(
       (left, right) =>
         right.strategicAdvice.length - left.strategicAdvice.length ||
-        left.id - right.id,
+        left.id.localeCompare(right.id, "en", { numeric: true }),
     )
     .slice(0, limit);
 }

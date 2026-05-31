@@ -41,7 +41,7 @@ export function CategoryAccordion({ copy, categories }: CategoryAccordionProps) 
             {relevantSubs.map((sub) => (
               <a
                 key={sub.id}
-                href={`/suppliers/${category.slug}/#sub-${sub.id}`}
+                href={`/suppliers/${category.slug}/${sub.slug}/`}
                 className="sales-style-sub-card"
               >
                 <div className="ssc-head">
