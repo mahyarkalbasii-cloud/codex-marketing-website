@@ -9,13 +9,13 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-[#e4d8c8] bg-[#fffaf1]/78 text-[#5f5348] shadow-sm shadow-[#2a241d]/[0.03] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-white",
+          "border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-600)] shadow-sm shadow-[#2a241d]/[0.03] backdrop-blur",
         secondary:
-          "border-[#e4d8c8] bg-[#f5eadb] text-[#5f5348] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300",
+          "border-[var(--line)] bg-[var(--surface-1)] text-[var(--ink-600)]",
         outline:
-          "border-[#d8c7b2] bg-[#fffaf1]/72 text-[#5f5348] shadow-sm shadow-[#2a241d]/[0.03] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-white",
+          "border-[var(--line-strong)] bg-[var(--surface-2)] text-[var(--ink-600)] shadow-sm shadow-[#2a241d]/[0.03] backdrop-blur",
         signal:
-          "border-[#C16B4E] bg-[#C16B4E] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15",
+          "border-[var(--clay-500)] bg-[var(--clay-500)] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15",
       },
     },
     defaultVariants: {

@@ -63,7 +63,7 @@ export default function SubscriptionsPage() {
     <main>
       <StructuredData data={schema} />
       <section className="border-b border-[#e4d8c8] bg-[var(--page-bg)]">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-6 md:pb-24 md:pt-12">
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="signal">اشتراک‌ها</Badge>
             <h1 className="mt-5 text-3xl font-black leading-[1.35] tracking-normal text-[#171512] md:text-5xl">
@@ -77,7 +77,14 @@ export default function SubscriptionsPage() {
 
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {subscriptions.map((subscription) => (
-              <Card key={subscription.slug} className="flex flex-col p-5">
+              <Card
+                key={subscription.slug}
+                className={cn(
+                  "flex flex-col p-5 transition",
+                  subscription.slug === "taban" &&
+                    "border-[var(--clay-400)] shadow-lg shadow-[#C16B4E]/10 ring-2 ring-[var(--clay-400)] lg:scale-[1.03]",
+                )}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-xl font-black leading-8 text-[#171512]">
@@ -96,7 +103,12 @@ export default function SubscriptionsPage() {
                 </p>
                 <Link
                   href={`/subscriptions/${subscription.slug}/`}
-                  className={cn(buttonVariants({ variant: "outline" }), "mt-5 w-full")}
+                  className={cn(
+                    buttonVariants({
+                      variant: subscription.slug === "taban" ? "default" : "outline",
+                    }),
+                    "mt-5 w-full",
+                  )}
                 >
                   جزئیات
                   <ArrowLeft aria-hidden="true" className="h-4 w-4" />

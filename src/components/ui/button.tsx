@@ -4,17 +4,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CC785C]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fbf6ed] disabled:pointer-events-none disabled:opacity-50 active:translate-y-px",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clay-400)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface-0)] disabled:pointer-events-none disabled:opacity-50 active:translate-y-px",
   {
     variants: {
       variant: {
         default:
-          "bg-[#C16B4E] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15 hover:bg-[#A8573D] dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200",
+          "bg-[var(--clay-500)] text-[#FFF7EF] shadow-sm shadow-[#C16B4E]/15 hover:bg-[var(--clay-600)]",
+        strong:
+          "bg-[var(--surface-ink)] text-[var(--surface-2)] shadow-sm shadow-[#171512]/15 hover:bg-[#0f0d0b]",
         secondary:
-          "border border-[#e4d8c8] bg-[#fffaf1] text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.04] hover:bg-[#f5eadb] dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800",
+          "border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-900)] shadow-sm shadow-[#2a241d]/[0.04] hover:bg-[var(--surface-1)]",
         outline:
-          "border border-[#d8c7b2] bg-[#fffaf1]/82 text-[#2a241d] shadow-sm shadow-[#2a241d]/[0.03] hover:border-[#c9a47f] hover:bg-[#f5eadb] dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900",
-        ghost: "text-[#5f5348] hover:bg-[#f3e7d8] hover:text-[#2a241d] dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white",
+          "border border-[var(--line-strong)] bg-[var(--surface-2)] text-[var(--ink-900)] shadow-sm shadow-[#2a241d]/[0.03] hover:border-[var(--clay-400)] hover:bg-[var(--surface-1)]",
+        ghost: "text-[var(--ink-600)] hover:bg-[var(--surface-1)] hover:text-[var(--ink-900)]",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
