@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
 import { StructuredData } from "@/components/marketing/structured-data";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl, site } from "@/lib/site-data";
 
 const canonicalPath = "/rules/";
-const pageTitle = "قوانین و مقررات استفاده از خدمات و وب‌سایت پرشین‌سازه";
+const pageTitle = "قوانین استفاده از خدمات";
 const pageDescription =
   "قوانین استفاده از خدمات پرشین‌سازه، شامل شرایط اشتراک، مالکیت معنوی، امنیت حساب، پرداخت، محدودیت‌ها، حریم خصوصی و حل اختلاف.";
 
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "fa_IR",
     type: "website",
+    images: routeOgImage(canonicalPath, pageTitle),
   },
 };
 

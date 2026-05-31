@@ -4,13 +4,15 @@ import { ArrowLeft } from "lucide-react";
 
 import { CategorySection } from "@/components/category/CategorySection";
 import { Breadcrumbs } from "@/components/marketing/breadcrumbs";
+import { RoutePageVisual } from "@/components/marketing/route-page-visual";
 import { StructuredData } from "@/components/marketing/structured-data";
+import { routeOgImage } from "@/lib/og-metadata";
 import { cities, absoluteUrl } from "@/lib/site-data";
 
 const canonicalPath = "/cities/";
-const pageTitle = "شهرهای تحت پوشش پرشین‌سازه";
+const pageTitle = "شهرهای تحت پوشش پروژه‌های ساختمانی";
 const pageDescription =
-  "فهرست شهرهایی که پرشین‌سازه برای بررسی پروژه‌های ساختمانی فعال پوشش می‌دهد.";
+  "پرشین‌سازه پوشش شهرها را بر اساس ظرفیت پروژه‌های فعال، نزدیکی بازار و کیفیت داده می‌چیند تا تیم فروش بداند کجا باید رصد کند.";
 
 export function generateMetadata(): Metadata {
   return {
@@ -23,6 +25,7 @@ export function generateMetadata(): Metadata {
       url: absoluteUrl(canonicalPath),
       locale: "fa_IR",
       type: "website",
+      images: routeOgImage(canonicalPath, pageTitle),
     },
   };
 }
@@ -56,11 +59,20 @@ export default function CitiesIndexPage() {
         ]}
       />
       <CategorySection>
-        <span className="category-badge mb-3">شهرها</span>
-        <h1 className="text-3xl font-black md:text-5xl">{pageTitle}</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">
-          {pageDescription}
-        </p>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-center">
+          <div>
+            <span className="category-badge mb-3">شهرها</span>
+            <h1 className="text-3xl font-black md:text-5xl">{pageTitle}</h1>
+            <p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">
+              {pageDescription}
+            </p>
+          </div>
+          <RoutePageVisual
+            alt="نمای نقشه پروژه‌های ساختمانی تهران، کرج و لواسان برای پوشش شهری پرشین‌سازه"
+            caption="تصویر نمونه از پوشش شهرها و محدوده‌های هدف فروش"
+            priority
+          />
+        </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {cities.map((city) => (
             <Link

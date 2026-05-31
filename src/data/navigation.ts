@@ -29,6 +29,10 @@ export const SALE_STYLE_NAV_LINKS = [
     title: "فروش مشاوره‌ای",
     href: "/sales-style/consultative/",
   },
+  {
+    title: "فروش ترکیبی",
+    href: "/sales-style/hybrid/",
+  },
 ] as const;
 
 export const CITY_NAV_LINKS = [
@@ -56,8 +60,16 @@ export const FOOTER_MAIN_LINKS = [
     href: "/features/",
   },
   {
-    title: "قیمت‌گذاری",
-    href: "/pricing/",
+    title: "اشتراک‌ها",
+    href: "/subscriptions/",
+  },
+  {
+    title: "درباره ما",
+    href: "/about/",
+  },
+  {
+    title: "تماس با ما",
+    href: "/contact/",
   },
   {
     title: "سوالات متداول",

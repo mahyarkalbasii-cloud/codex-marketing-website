@@ -5,12 +5,14 @@ import { ArrowLeft, MapPinned } from "lucide-react";
 
 import { CityInternalLinks } from "@/components/city/CityInternalLinks";
 import { AnswerBox } from "@/components/marketing/answer-box";
+import { RoutePageVisual } from "@/components/marketing/route-page-visual";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getHighValueCategoriesForCity } from "@/data/category-insights";
 import { getCityInsight } from "@/data/city-insights";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl, cities } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: absoluteUrl(`/cities/${city.slug}`),
       locale: "fa_IR",
       type: "article",
+      images: routeOgImage(`/cities/${city.slug}/`, city.title),
     },
   };
 }
@@ -89,24 +92,31 @@ export default async function CityPage({ params }: PageProps) {
                 <ArrowLeft className="h-4 w-4" />
               </Link>
               <Link
-                href="/pricing"
+                href="/subscriptions/"
                 className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
               >
                 مشاهده پلن‌ها
               </Link>
             </div>
           </div>
-          <Card className="p-6">
-            <MapPinned className="h-7 w-7 text-zinc-900 dark:text-zinc-100" />
-            <h2 className="mt-5 text-2xl font-bold">محدوده‌های قابل هدف‌گیری</h2>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {city.areas.map((area) => (
-                <Badge key={area} variant="secondary">
-                  {area}
-                </Badge>
-              ))}
-            </div>
-          </Card>
+          <div className="space-y-4">
+            <RoutePageVisual
+              alt={`نمای نقشه پروژه‌های ساختمانی فعال ${city.name} برای فروش پروژه‌محور در پرشین‌سازه`}
+              caption={`تصویر نمونه از پوشش پروژه‌های فعال و محدوده‌های هدف در ${city.name}`}
+              priority
+            />
+            <Card className="p-6">
+              <MapPinned className="h-7 w-7 text-zinc-900 dark:text-zinc-100" />
+              <h2 className="mt-5 text-2xl font-bold">محدوده‌های قابل هدف‌گیری</h2>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {city.areas.map((area) => (
+                  <Badge key={area} variant="secondary">
+                    {area}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
+          </div>
         </div>
         <div className="mt-10">
           <AnswerBox>{city.answer}</AnswerBox>

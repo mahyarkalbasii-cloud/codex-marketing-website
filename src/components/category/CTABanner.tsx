@@ -26,7 +26,7 @@ export function CTABanner({ category }: { category: Category }) {
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <Link
-          href="/pricing"
+          href="/subscriptions/"
           className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
         >
           مشاهده پلن‌ها

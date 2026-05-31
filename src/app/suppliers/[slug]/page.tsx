@@ -28,6 +28,7 @@ import { CATEGORIES } from "@/data/categories";
 import { getCategoryBySlug } from "@/data/queries";
 import type { Category } from "@/data/types";
 import { CategoryLayout } from "@/layouts/CategoryLayout";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 
 function getVisibleCategory(slug: string): Category | undefined {
@@ -67,7 +68,7 @@ export async function generateMetadata({
   const canonicalPath = `/suppliers/${category.slug}/`;
 
   return {
-    title: `${category.faTitle} | فروش پروژه‌محور با پرشین‌سازه`,
+    title: category.faTitle,
     description,
     alternates: { canonical: canonicalPath },
     openGraph: {
@@ -76,6 +77,7 @@ export async function generateMetadata({
       url: absoluteUrl(canonicalPath),
       locale: "fa_IR",
       type: "article",
+      images: routeOgImage(canonicalPath, category.faTitle),
     },
   };
 }

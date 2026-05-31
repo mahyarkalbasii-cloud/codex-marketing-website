@@ -60,7 +60,7 @@ export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
               </Badge>
             ) : null}
             <div className="space-y-2">
-              <h3 className="text-2xl font-bold">{plan.name}</h3>
+              <h2 className="text-2xl font-bold">{plan.name}</h2>
               <p className="text-sm leading-7 text-muted-foreground">
                 {plan.subtitle}
               </p>
@@ -81,7 +81,7 @@ export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
               {plan.extra}
             </div>
             <Link
-              href={localizeHref("/#demo", locale)}
+              href={localizeHref("/contact/", locale)}
               className={cn(
                 buttonVariants({ variant: plan.featured ? "default" : "outline" }),
                 "mt-6 w-full",
@@ -96,7 +96,7 @@ export function PricingTabs({ locale = "fa" }: { locale?: Locale }) {
       <Card className="grid gap-5 p-6 md:grid-cols-[1fr_1.4fr] md:items-center">
         <div>
           <Badge variant="outline">{copy.addon}</Badge>
-          <h3 className="mt-3 text-xl font-bold">{karajAddon.title}</h3>
+          <h2 className="mt-3 text-xl font-bold">{karajAddon.title}</h2>
           <p className="mt-2 text-sm leading-7 text-muted-foreground">
             {karajAddon.description}
           </p>

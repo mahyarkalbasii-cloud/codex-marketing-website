@@ -4,7 +4,9 @@ import { MobileActionBar } from "@/components/marketing/mobile-action-bar";
 import { StructuredData } from "@/components/marketing/structured-data";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
-import { absoluteUrl, site } from "@/lib/site-data";
+import { routeOgImage } from "@/lib/og-metadata";
+import { getLocalBusinessSchema, getOrganizationSchema, getWebsiteSchema } from "@/lib/schema";
+import { site } from "@/lib/site-data";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -47,14 +49,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "پرشین‌سازه | پروژه درست، زمان درست، پیگیری منظم‌تر",
     description: site.description,
-    images: [
-      {
-        url: "/opengraph-image.png",
-        width: 1200,
-        height: 630,
-        alt: "پرشین‌سازه | فروش پروژه‌محور برای بازار ساختمان",
-      },
-    ],
+    images: routeOgImage("/"),
   },
   twitter: {
     card: "summary_large_image",
@@ -78,40 +73,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${site.url}/#organization`,
-    name: site.name,
-    alternateName: "PersianSaze",
-    url: site.url,
-    logo: absoluteUrl(site.logoPath),
-    description: "زیرساخت فروش پروژه‌محور برای تامین‌کنندگان صنعت ساختمان",
-    email: site.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "میدان شهید حسن تهرانی مقدم",
-      addressLocality: "تهران",
-      addressCountry: "IR",
-    },
-    contactPoint: [{
-      "@type": "ContactPoint",
-      telephone: "+98-21-75425000",
-      contactType: "sales",
-      areaServed: "IR",
-      availableLanguage: "Persian",
-    }],
-    sameAs: site.sameAs,
-  };
-
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: site.name,
-    url: site.url,
-    inLanguage: "fa-IR",
-    publisher: { "@id": `${site.url}/#organization` },
-  };
+  const organizationSchema = getOrganizationSchema();
+  const localBusinessSchema = getLocalBusinessSchema();
+  const websiteSchema = getWebsiteSchema();
 
   return (
     <html
@@ -121,7 +85,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} brand-palette`}
     >
       <head>
-        <StructuredData data={[organizationSchema, websiteSchema]} />
+        <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
       </head>
       <body
         className="flex flex-col overflow-hidden bg-background text-foreground antialiased [height:100dvh]"

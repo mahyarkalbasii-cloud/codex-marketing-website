@@ -15,13 +15,14 @@ import { StructuredData } from "@/components/marketing/structured-data";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl, site } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const canonicalPath = "/features/";
-const pageTitle = "ویژگی‌های پرشین‌سازه";
+const pageTitle = "ویژگی‌های فروش پروژه‌محور";
 const pageDescription =
-  "نقشه پروژه‌ها، فیلتر مرحله ساخت، CRM فروش پروژه‌ای، پیامک هدفمند و AI تصمیم‌یار در پرشین‌سازه.";
+  "با نقشه پروژه‌ها، فیلتر مرحله ساخت، CRM فروش، پیامک هدفمند و AI تصمیم‌یار، تیم فروش پروژه مناسب را سریع‌تر پیدا و پیگیری می‌کند.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -39,6 +40,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "fa_IR",
     type: "website",
+    images: routeOgImage(canonicalPath, pageTitle),
   },
 };
 
@@ -104,7 +106,8 @@ export default function FeaturesPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
         <SectionHeader
           eyebrow="ویژگی‌ها"
-          title="ابزارهایی که داده پروژه را به اقدام فروش وصل می‌کنند."
+          title="ویژگی‌های پرشین‌سازه برای فروش پروژه‌های ساختمانی"
+          titleAs="h1"
           description="پرشین‌سازه قرار نیست فقط اطلاعات بیشتری نشان بدهد؛ هر ویژگی باید فاصله دیدن فرصت تا اقدام فروش را کم کند."
         />
         <div className="mt-8">
@@ -162,7 +165,7 @@ export default function FeaturesPage() {
               پلن‌ها بر اساس میدان فروش، متراژ پروژه، مراحل ساخت و مدت دسترسی تعریف شده‌اند.
             </p>
           </div>
-          <Link href="/pricing" className={cn(buttonVariants())}>
+          <Link href="/subscriptions/" className={cn(buttonVariants())}>
             مشاهده قیمت‌ها
             <ArrowLeft className="h-4 w-4" />
           </Link>

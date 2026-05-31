@@ -1,2 +1,5 @@
-import { redirect } from "next/navigation";
-export default function Page(){redirect('/suppliers/motions/hybrid-sales');}
+import { permanentRedirect } from "next/navigation";
+
+export default function LegacyHybridSalesPage() {
+  permanentRedirect("/sales-style/hybrid/");
+}

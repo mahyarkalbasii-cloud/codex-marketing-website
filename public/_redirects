@@ -1,3 +1,5 @@
+/pricing /subscriptions/ 301
+/pricing/ /subscriptions/ 301
 /suppliers/cement-and-basic-materials /suppliers/building-materials/ 301
 /suppliers/cement-and-basic-materials/ /suppliers/building-materials/ 301
 /suppliers/elevator /suppliers/lobby-and-common-area-equipment/ 301
@@ -42,10 +44,14 @@
 /suppliers/fast-sales/ /sales-style/fast/ 301
 /suppliers/consultative-sales /sales-style/consultative/ 301
 /suppliers/consultative-sales/ /sales-style/consultative/ 301
+/suppliers/hybrid-sales /sales-style/hybrid/ 301
+/suppliers/hybrid-sales/ /sales-style/hybrid/ 301
 /suppliers/motions/fast-sales /sales-style/fast/ 301
 /suppliers/motions/fast-sales/ /sales-style/fast/ 301
 /suppliers/motions/consultative-sales /sales-style/consultative/ 301
 /suppliers/motions/consultative-sales/ /sales-style/consultative/ 301
+/suppliers/motions/hybrid-sales /sales-style/hybrid/ 301
+/suppliers/motions/hybrid-sales/ /sales-style/hybrid/ 301
 /stages/demolition-excavation /stages/demolition/ 301
 /stages/demolition-excavation/ /stages/demolition/ 301
 /stages/masonry /stages/wall-building/ 301

@@ -19,18 +19,62 @@ import {
 
 export const site = {
   name: "پرشین‌سازه",
+  legalName: "پرشین‌سازه",
+  alternateName: "PersianSaze",
   url: "https://persiansaze.com",
   logoPath: "/logo.svg",
   description:
     "پرشین‌سازه به تأمین‌کنندگان صنعت ساختمان کمک می‌کند پروژه‌های در حال ساخت تهران، کرج و لواسان را زودتر پیدا کنند، بهتر ارزیابی کنند و منظم‌تر پیگیری کنند.",
+  foundingDate: "2007-05",
   phones: ["۰۲۱-۷۵۴۲۵۰۰۰", "۰۲۱-۷۲۸۹۷۰۰۰"],
+  contacts: [
+    {
+      label: "فروش",
+      phone: "۰۲۱-۷۵۴۲۵۰۰۰",
+      href: "tel:+982175425000",
+      telephone: "+98-21-75425000",
+      contactType: "sales",
+    },
+    {
+      label: "دفتر/پشتیبانی",
+      phone: "۰۲۱-۷۲۸۹۷۰۰۰",
+      href: "tel:+982172897000",
+      telephone: "+98-21-72897000",
+      contactType: "customer support",
+    },
+  ],
   salesExpert: "مهیار کلباسی",
   extension: "۱۰۸",
   email: "info@persiansaze.com",
   address: "تهران، میدان شهید حسن تهرانی مقدم",
+  postalAddress: {
+    streetAddress: "میدان شهید حسن تهرانی مقدم",
+    addressLocality: "تهران",
+    addressRegion: "تهران",
+    addressCountry: "IR",
+  },
   openingHours: "Sa-Th 09:00-18:00",
+  openingHoursSpecification: [
+    {
+      dayOfWeek: [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+      ],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  areaServed: ["تهران", "کرج", "لواسان"],
   handle: "@persiansaze",
-  sameAs: ["https://instagram.com/persiansaze"],
+  sameAs: [
+    "https://instagram.com/persiansaze",
+    "https://www.linkedin.com/company/persiansaze",
+    "https://about.me/persiansaze",
+  ],
 };
 
 export const authLinks = {
@@ -42,13 +86,15 @@ export const navItems = [
   { label: "محصول", href: "/features" },
   { label: "اشتراک‌ها", href: "/#plans" },
   { label: "آموزش", href: "/#how-it-works" },
-  { label: "درباره ما", href: "/#solution" },
-  { label: "تماس با ما", href: "/#demo" },
+  { label: "درباره ما", href: "/about/" },
+  { label: "تماس با ما", href: "/contact/" },
 ];
 
 export const seoPages = [
   { title: "ویژگی‌ها", href: "/features" },
-  { title: "قیمت‌گذاری", href: "/pricing" },
+  { title: "اشتراک‌ها", href: "/subscriptions/" },
+  { title: "درباره ما", href: "/about/" },
+  { title: "تماس با ما", href: "/contact/" },
   { title: "سوالات متداول", href: "/faq" },
   { title: "پروژه‌های ساختمانی تهران", href: "/cities/tehran" },
   { title: "پروژه‌های ساختمانی کرج", href: "/cities/karaj" },
@@ -241,7 +287,7 @@ export const cities = [
     name: "تهران",
     title: "پروژه‌های ساختمانی در حال ساخت تهران",
     description:
-      "برای فروش محصولات ساختمانی در تهران، سرعت رسیدن به پروژه مناسب و شناخت مرحله ساخت تعیین‌کننده است. پرشین‌سازه بازار پراکنده تهران را روی نقشه، فیلتر و CRM قابل پیگیری می‌کند.",
+      "تهران بازار بزرگ اما پراکنده‌ای دارد؛ پرشین‌سازه پروژه‌های فعال را با موقعیت، مرحله ساخت و مسیر پیگیری فروش روی نقشه قابل اقدام می‌کند.",
     answer:
       "پرشین‌سازه برای تأمین‌کنندگان ساختمانی، پروژه‌های فعال تهران را با موقعیت، مرحله ساخت، تصویر و مسیر پیگیری فروش قابل استفاده می‌کند.",
     areas: ["شمال تهران", "غرب تهران", "شرق تهران", "مرکز تهران", "جنوب تهران"],
