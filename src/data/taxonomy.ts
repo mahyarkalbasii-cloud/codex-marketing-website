@@ -7095,7 +7095,7 @@ export const TAXONOMY_SUBCATEGORIES = TAXONOMY_CATEGORIES.flatMap(
 );
 
 export const TAXONOMY_STAGE_RECONCILIATION = [
-  { sourcePhase: "پیش از اخذ جواز", stageSlugs: ["pre-construction"] },
+  { sourcePhase: "طراحی و اخذ جواز", stageSlugs: ["pre-construction"] },
   { sourcePhase: "تخریب و گودبرداری", stageSlugs: ["demolition"] },
   { sourcePhase: "فونداسیون", stageSlugs: ["foundation"] },
   { sourcePhase: "اسکلت بندی", stageSlugs: ["structure"] },

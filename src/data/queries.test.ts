@@ -160,7 +160,7 @@ test("navigation helpers expose the visible taxonomy in editorial order", () => 
   assert.deepEqual(
     mainStages.map((stage) => stage.faLabel),
     [
-      "پیش از اخذ جواز",
+      "طراحی و اخذ جواز",
       "تخریب و گودبرداری",
       "فونداسیون",
       "اسکلت بندی",
