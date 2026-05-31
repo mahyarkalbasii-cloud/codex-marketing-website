@@ -16,7 +16,6 @@ export type StageSlug =
   | "structure"
   | "wall-building"
   | "plaster"
-  | "installations"
   | "early-finishing"
   | "finishing"
   | "completion";
@@ -69,13 +68,11 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "buy": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "تطابق با استاندارد ملی، عدم کلوخه شدن و قیمت رقابتی",
@@ -120,15 +117,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -201,13 +195,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "buy": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "دانه‌بندی دقیق، فقدان خاک رس مضر، حجم دقیق بار",
@@ -225,15 +219,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations",
-            "early-finishing",
+            "plaster",
             "finishing"
           ]
         },
@@ -256,12 +248,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "وزن مخصوص بسیار پایین، عایق حرارتی",
@@ -279,14 +269,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -305,15 +293,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -356,15 +341,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (خرید تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -446,7 +428,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -458,7 +439,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -589,14 +569,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "مقاومت در برابر زنگ‌زدگی (کوتینگ استاندارد)",
@@ -618,12 +597,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ثبات رنگ، عدم تاب‌خوردگی در طول فرمینگ",
@@ -645,12 +622,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "گوشه‌های گونیا، ضخامت واقعی",
@@ -672,12 +647,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ابعاد دقیق هندسی، تاب نداشتن",
@@ -695,14 +668,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "اجاره‌ای / خدماتی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -747,14 +718,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -887,12 +856,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "demolition"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "پخت کامل، مقاومت فشاری بالا، ابعاد گونیا",
@@ -914,12 +881,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "وزن سبک، عدم وجود شوره، ابعاد استاندارد",
@@ -937,15 +902,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (انتخاب طرح)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -964,8 +926,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -993,12 +954,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "تراکم مناسب بتن، لبه‌های سالم",
@@ -1021,12 +980,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "عایق حرارتی بالا، وزن بسیار سبک، دقت ابعادی",
@@ -1049,12 +1006,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "مقاومت حرارتی، عایق صوت، عدم شکستگی",
@@ -1182,11 +1137,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1206,15 +1159,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (طراحی دکور)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1233,14 +1183,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (دکوراتیو)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1293,15 +1241,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (برندمحور)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1320,15 +1265,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1347,15 +1289,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (حجم بالا)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1374,14 +1313,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "جوش سرد کامل پلاستیک، آب‌بندی قطعی",
@@ -1399,15 +1337,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1426,15 +1361,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1481,12 +1413,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تخصصی (تراکنشی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -1507,15 +1437,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تخصصی و مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1560,8 +1487,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای و پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -1585,12 +1511,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (فنی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -1611,15 +1535,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1638,15 +1559,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای / پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1674,7 +1592,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -1686,7 +1603,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -1715,15 +1631,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1742,16 +1655,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "غیرقابل اشتعال بودن (کلاس A1)، دانسیته بالا",
@@ -1769,14 +1679,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1796,14 +1704,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (محاسبات بار)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضریب انتقال حرارت پایین، مقاومت در برابر پارگی",
@@ -1821,16 +1728,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "خدمات پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "پوشش بدون درز، سرعت اجرای بالا",
@@ -1848,15 +1752,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1900,14 +1801,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1926,15 +1825,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -1953,14 +1849,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "چسبندگی بالا در دمای متفاوت",
@@ -1981,11 +1876,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -2004,14 +1897,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (سایزینگ)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "نصب سریع و آسان، کلاس حریق مناسب",
@@ -2056,13 +1948,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "آب‌بندی 100%، دوام در محیط‌های مرطوب",
@@ -2084,12 +1976,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ضریب انعکاس بالا، مقاومت پارگی",
@@ -2114,14 +2004,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (برندمحور)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "مقاومت فشاری و دمایی، عدم رسوب‌گیری",
@@ -2139,14 +2028,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "جوش‌پذیری عالی، استاندارد آب شرب",
@@ -2164,14 +2052,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (آنالیز نقشه)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "عایق صوت (سوپرسایلنت)، نصب بدون چسب",
@@ -2189,14 +2076,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضخامت استاندارد، مقاومت ضربه‌ای",
@@ -2240,14 +2126,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی کلان / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "تحمل فشار بالا (آتش‌نشانی)، کوتینگ قوی",
@@ -2265,13 +2150,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "کیفیت آب‌بند، متریال بدنه (چدن/برنج)",
@@ -2289,11 +2174,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (محاسبه هد)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -2314,11 +2198,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (حجم و ابعاد)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -2342,10 +2225,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "نسوز بودن (کلاس A)، عایق صوت عالی",
@@ -2364,13 +2247,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (فنی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "آلیاژ برنج باکیفیت، دقت در رزوه‌ها",
@@ -2388,13 +2271,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضریب عایق بالا، عمر طولانی",
@@ -2412,16 +2295,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ضخامت ورق مناسب، رنگ الکترواستاتیک",
@@ -2439,10 +2319,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تاسیساتی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "completion"
@@ -2463,13 +2343,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضخامت استاندارد، رزوه‌کاری دقیق",
@@ -2498,8 +2378,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
             "completion"
@@ -2521,14 +2400,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (محاسبات بار)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضخامت ورق کوره، راندمان حرارتی",
@@ -2547,14 +2425,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (برندمحور)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -2574,15 +2450,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (مهندسی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations",
-            "early-finishing",
+            "plaster",
             "finishing"
           ]
         },
@@ -2602,8 +2476,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -2627,8 +2500,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -2655,11 +2527,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "فیلتراسیون قوی، بدنه دوجداره عایق",
@@ -2677,14 +2548,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری (ساخت در محل)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "عایق‌بندی صحیح، عدم نشتی هوا، ورق باکیفیت",
@@ -2702,14 +2572,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (محاسبه CFM)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -2728,14 +2596,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -2754,10 +2620,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "completion"
@@ -2778,13 +2644,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "کیفیت سیل مکانیکی، کارکرد بدون لرزش",
@@ -2802,13 +2668,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "صفحات استیل ۳، راندمان بالا",
@@ -2826,14 +2692,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (هوشمندسازی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -2852,12 +2716,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (ابعادبرداری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -2886,14 +2748,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی کلان / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "خلوص مس، روکش عایق استاندارد (نسوز)",
@@ -2911,14 +2772,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (قرقره‌ای)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "سطح مقطع واقعی، انعطاف‌پذیری",
@@ -2936,15 +2796,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "خاصیت نسوز بودن، مقاومت ضربه‌ای",
@@ -2966,10 +2824,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "ضخامت ورق گالوانیزه گرم، لبه‌های بدون پلیسه",
@@ -2989,14 +2847,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "کاملاً سفارشی و مهندسی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3015,14 +2871,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (برندمحور)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3043,12 +2897,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی معماری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3069,12 +2921,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3095,12 +2945,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (دکوراتیو)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3122,12 +2970,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (طراحی نور)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3148,12 +2994,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3204,10 +3048,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3229,7 +3072,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "completion"
@@ -3250,15 +3093,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3284,11 +3124,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (پیمانکاری)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "completion"
@@ -3312,10 +3151,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3337,10 +3175,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "حساسیت دقیق دمایی (بالب)، عدم نشتی",
@@ -3358,14 +3196,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "کیفیت ورق جعبه، شیلنگ مقاوم",
@@ -3387,7 +3224,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "completion"
@@ -3408,11 +3245,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3433,12 +3269,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (پکیج)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3459,11 +3293,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (پیمانکاری)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3485,14 +3318,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (تخصصی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "پهنای باند بالا (Cat6/Cat7)، شیلد مقاوم",
@@ -3510,12 +3342,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3536,14 +3366,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "عدم نویزپذیری",
@@ -3561,11 +3390,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (ایمنی الزامی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3586,11 +3414,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3611,8 +3438,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (اجرایی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -3636,8 +3462,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -3669,15 +3494,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "کاملاً سفارشی (تهاتری)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3697,15 +3519,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی / تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3726,12 +3545,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (طراحی دکور)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3752,15 +3569,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تاییدیه آتش‌نشانی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3780,12 +3594,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی و پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -3808,15 +3620,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (تهاتری) / پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3839,11 +3648,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3862,15 +3669,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3892,11 +3696,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3915,8 +3717,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (اکسسوری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -3964,15 +3765,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری (آهنگری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -3991,12 +3789,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (متراژ)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -4018,15 +3814,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی کلان / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4047,15 +3840,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4082,14 +3872,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی کلان / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4109,14 +3897,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4135,12 +3921,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / دکوراسیون",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -4162,14 +3946,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4188,8 +3970,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4213,8 +3994,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری / مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4240,8 +4020,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4265,8 +4044,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4290,8 +4068,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4315,8 +4092,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4340,8 +4116,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4369,11 +4144,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4392,15 +4165,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4419,8 +4189,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4444,12 +4213,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -4477,15 +4244,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4504,8 +4268,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (دکوراسیون)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4529,14 +4292,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری / مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4555,15 +4316,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4582,15 +4340,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (ابعادبرداری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4609,15 +4364,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (دکوراسیون)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4638,15 +4390,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4665,15 +4414,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4692,15 +4438,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4719,8 +4462,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (تراش لیزری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -4744,15 +4486,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4774,11 +4513,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4824,15 +4561,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4851,15 +4585,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -4886,12 +4617,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی / تهاتری",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -4914,12 +4643,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -4941,13 +4668,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (تهاتری)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations",
+            "plaster",
             "completion"
           ]
         },
@@ -4966,16 +4693,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ضخامت بدنه (تحمل وزن دیوار در توکار)، بی‌صدا بودن",
@@ -4994,11 +4718,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی / مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5019,8 +4742,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5044,11 +4766,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5069,8 +4790,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5094,14 +4814,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -5120,11 +4838,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (تاسیساتی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5145,8 +4862,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5170,8 +4886,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5196,8 +4911,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای / تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5221,8 +4935,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5246,13 +4959,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "قدرت تصفیه، موتور کم‌صدا، دوام در کلر",
@@ -5278,12 +4991,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (پیمانکاری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5305,12 +5016,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (مشاوره‌ای)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5355,12 +5064,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5383,8 +5090,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی (طراحی‌محور)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5409,12 +5115,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (پیمانکاری)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5435,8 +5139,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5484,8 +5187,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5510,8 +5212,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی (مشاوره‌ای)",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
             "completion"
@@ -5546,11 +5247,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -5569,12 +5268,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5596,12 +5293,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (مهندسی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5627,12 +5322,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "ماشین‌کاری دقیق سرد (بدون تاب)، استحکام فولاد",
@@ -5650,15 +5343,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -5677,16 +5367,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سفارشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "بسته شدن روان و بی‌صدا، سنسور پرده‌ای ایمن",
@@ -5708,8 +5395,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "pre-construction"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "completion"
@@ -5788,6 +5474,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "demolition",
+            "foundation",
+            "structure",
+            "wall-building",
+            "plaster",
             "early-finishing",
             "finishing"
           ]
@@ -5826,7 +5516,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -5849,10 +5538,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "stageTiming": {
           "negotiate": [
             "demolition",
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
             "pre-construction",
@@ -5861,7 +5550,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -5889,7 +5577,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "installations"
+            "structure",
+            "wall-building",
+            "plaster"
           ]
         },
         "builderValues": "آمپر واقعی، چرخه کاری بالا، سبکی",
@@ -5909,7 +5599,17 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           "negotiate": [
             "demolition"
           ],
-          "buy": [],
+          "buy": [
+            "pre-construction",
+            "demolition",
+            "foundation",
+            "structure",
+            "wall-building",
+            "plaster",
+            "early-finishing",
+            "finishing",
+            "completion"
+          ],
           "execute": [
             "pre-construction",
             "demolition",
@@ -5917,7 +5617,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -5938,15 +5637,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing",
             "completion"
           ]
@@ -5979,7 +5675,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6000,14 +5695,21 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
-          "buy": [],
-          "execute": [
+          "buy": [
+            "pre-construction",
+            "demolition",
+            "foundation",
+            "structure",
             "wall-building",
             "plaster",
             "early-finishing",
+            "finishing",
+            "completion"
+          ],
+          "execute": [
+            "wall-building",
             "finishing"
           ]
         },
@@ -6038,7 +5740,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6059,13 +5760,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "آلیاژ کروم‌وانادیوم، فک‌های مقاوم و ضدسایش",
@@ -6083,15 +5784,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -6110,13 +5808,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "لقمه‌های نچسب (تفلون عالی)، پرس دقیق فک‌ها",
@@ -6134,15 +5832,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -6187,17 +5882,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
             "wall-building",
-            "plaster",
-            "early-finishing",
             "finishing"
           ]
         },
@@ -6217,13 +5908,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "تخصصی (تراکنشی)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "installations",
+            "plaster",
             "completion"
           ]
         },
@@ -6306,8 +5997,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "طول فلش مناسب، تناژ باربرداری مطمئن، ایمنی مطلق",
@@ -6339,7 +6030,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6369,8 +6059,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "چرخش مداوم جهت جلوگیری از گیرش بتن",
@@ -6397,8 +6087,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "فشار پمپاژ بالا، عدم گرفتگی لوله‌ها، طول دکل",
@@ -6425,8 +6115,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "فرکانس لرزش بالا، شیلنگ مقاوم به سایش",
@@ -6456,7 +6146,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6489,7 +6178,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6520,8 +6208,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "تراز کردن بی‌نقص بتن، ماله صیقلی",
@@ -6558,7 +6246,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6591,7 +6278,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6614,7 +6300,17 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           "negotiate": [
             "demolition"
           ],
-          "buy": [],
+          "buy": [
+            "pre-construction",
+            "demolition",
+            "foundation",
+            "structure",
+            "wall-building",
+            "plaster",
+            "early-finishing",
+            "finishing",
+            "completion"
+          ],
           "execute": [
             "pre-construction",
             "demolition",
@@ -6622,7 +6318,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6652,6 +6347,9 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
+            "structure",
+            "wall-building",
+            "plaster",
             "early-finishing",
             "finishing"
           ]
@@ -6683,7 +6381,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6704,12 +6401,10 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "سریع و تراکنشی",
         "stageTiming": {
           "negotiate": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "buy": [
-            "early-finishing",
-            "finishing"
+            "early-finishing"
           ],
           "execute": [
             "pre-construction",
@@ -6718,7 +6413,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6751,7 +6445,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6784,7 +6477,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6817,7 +6509,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -6847,8 +6538,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "مقاومت کششی بالا، دوام در برابر آفتاب",
@@ -6977,6 +6668,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "demolition",
+            "foundation",
+            "structure",
+            "wall-building",
+            "plaster",
+            "early-finishing",
+            "finishing",
             "completion"
           ]
         },
@@ -7031,7 +6728,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -7064,7 +6760,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -7085,15 +6780,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "مشاوره‌ای (هنری)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -7156,7 +6848,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -7189,7 +6880,6 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure",
             "wall-building",
             "plaster",
-            "installations",
             "early-finishing",
             "finishing",
             "completion"
@@ -7217,8 +6907,8 @@ export const TAXONOMY_CATEGORIES: Category[] = [
           ],
           "execute": [
             "foundation",
-            "wall-building",
-            "plaster"
+            "structure",
+            "wall-building"
           ]
         },
         "builderValues": "صحت نتایج، صدور سریع شیت آزمایشگاهی",
@@ -7342,8 +7032,7 @@ export const TAXONOMY_CATEGORIES: Category[] = [
             "structure"
           ],
           "execute": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ]
         },
         "builderValues": "دیوارهای تراز، رعایت هشت‌گیر و وال‌پست",
@@ -7361,15 +7050,13 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری (آیتمی)",
         "stageTiming": {
           "negotiate": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "buy": [
-            "wall-building",
-            "plaster"
+            "wall-building"
           ],
           "execute": [
-            "installations"
+            "plaster"
           ]
         },
         "builderValues": "اجرای آب‌بند، شیب‌بندی صحیح فاضلاب، لوله‌کشی تمیز",
@@ -7387,13 +7074,12 @@ export const TAXONOMY_CATEGORIES: Category[] = [
         "salesTypeRaw": "پیمانکاری (متری)",
         "stageTiming": {
           "negotiate": [
-            "installations"
+            "plaster"
           ],
           "buy": [
-            "installations"
+            "plaster"
           ],
           "execute": [
-            "early-finishing",
             "finishing"
           ]
         },
@@ -7409,13 +7095,15 @@ export const TAXONOMY_SUBCATEGORIES = TAXONOMY_CATEGORIES.flatMap(
 );
 
 export const TAXONOMY_STAGE_RECONCILIATION = [
-  { sourcePhase: "طراحی و اخذ مجوزها", stageSlugs: ["pre-construction"] },
-  { sourcePhase: "گودبرداری و تجهیز کارگاه", stageSlugs: ["demolition"] },
-  { sourcePhase: "فونداسیون و اسکلت", stageSlugs: ["foundation", "structure"] },
-  { sourcePhase: "سفت‌کاری", stageSlugs: ["wall-building", "plaster"] },
-  { sourcePhase: "تاسیسات", stageSlugs: ["installations"] },
-  { sourcePhase: "نازک‌کاری و نما", stageSlugs: ["early-finishing", "finishing"] },
-  { sourcePhase: "تحویل و پایان‌کار", stageSlugs: ["completion"] },
+  { sourcePhase: "پیش از اخذ جواز", stageSlugs: ["pre-construction"] },
+  { sourcePhase: "تخریب و گودبرداری", stageSlugs: ["demolition"] },
+  { sourcePhase: "فونداسیون", stageSlugs: ["foundation"] },
+  { sourcePhase: "اسکلت بندی", stageSlugs: ["structure"] },
+  { sourcePhase: "دیوارچینی و سفت کاری", stageSlugs: ["wall-building"] },
+  { sourcePhase: "گچ و خاک و تاسیسات", stageSlugs: ["plaster"] },
+  { sourcePhase: "ابتدای نازک کاری", stageSlugs: ["early-finishing"] },
+  { sourcePhase: "نازک کاری و نما", stageSlugs: ["finishing"] },
+  { sourcePhase: "ظریف کاری و پایان کار", stageSlugs: ["completion"] },
 ] as const;
 
 export const TAXONOMY_CATEGORY_RECONCILIATION = [

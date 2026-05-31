@@ -49,11 +49,12 @@ ALL_MAIN_STAGES = [
     "structure",
     "wall-building",
     "plaster",
-    "installations",
     "early-finishing",
     "finishing",
     "completion",
 ]
+
+STAGE_ORDER = {stage: index for index, stage in enumerate(ALL_MAIN_STAGES)}
 
 TRANSLIT = {
     "آ": "a",
@@ -165,26 +166,65 @@ def ordered_unique(items: list[str]) -> list[str]:
     return result
 
 
-def map_stage_phrase(phrase: str) -> list[str]:
+def stage_range(start: str, end: str) -> list[str]:
+    start_index = STAGE_ORDER[start]
+    end_index = STAGE_ORDER[end]
+
+    if start_index > end_index:
+        return [start, end]
+
+    return ALL_MAIN_STAGES[start_index : end_index + 1]
+
+
+def normalize_stage_phrase(phrase: str) -> str:
+    return (
+        phrase.replace("ي", "ی")
+        .replace("ك", "ک")
+        .replace("‌", " ")
+        .replace("\u200c", " ")
+    )
+
+
+def map_stage_phrase(phrase: str, role: str | None = None) -> list[str]:
+    normalized_phrase = normalize_stage_phrase(phrase)
+
     if "کلیه مراحل" in phrase or "همه مراحل" in phrase:
         return ALL_MAIN_STAGES
+    if "مستمر" in normalized_phrase:
+        return ALL_MAIN_STAGES
+
+    if "تا" in normalized_phrase:
+        if "گودبرداری" in normalized_phrase and "نازک" in normalized_phrase:
+            return stage_range("demolition", "finishing")
+        if "گودبرداری" in normalized_phrase and "پایان" in normalized_phrase:
+            return stage_range("demolition", "completion")
+        if "فونداسیون" in normalized_phrase and "سفت" in normalized_phrase:
+            return stage_range("foundation", "wall-building")
+        if "فونداسیون" in normalized_phrase and "تاسیسات" in normalized_phrase:
+            return stage_range("foundation", "plaster")
+        if "فونداسیون" in normalized_phrase and "نما" in normalized_phrase:
+            return stage_range("foundation", "finishing")
+        if "نازک" in normalized_phrase and "پایان" in normalized_phrase:
+            return stage_range("finishing", "completion")
 
     stages: list[str] = []
-    if "طراحی" in phrase or "مجوز" in phrase or "فاز صفر" in phrase:
+    if "طراحی" in phrase or "مجوز" in phrase or "جواز" in phrase or "فاز صفر" in phrase:
         stages.append("pre-construction")
-    if "گودبرداری" in phrase or "خاک" in phrase or "تجهیز کارگاه" in phrase:
+    if "تخریب" in phrase or "گودبرداری" in phrase or "تجهیز کارگاه" in phrase:
         stages.append("demolition")
     if "فونداسیون" in phrase or "پی" in phrase:
         stages.append("foundation")
     if "اسکلت" in phrase or "ستون" in phrase:
         stages.append("structure")
     if "سفت" in phrase or "دیوار" in phrase:
-        stages.extend(["wall-building", "plaster"])
-    if "تاسیسات" in phrase or "تأسیسات" in phrase:
-        stages.append("installations")
+        stages.append("wall-building")
+    if "گچ" in phrase or "تاسیسات" in phrase or "تأسیسات" in phrase:
+        stages.append("plaster")
+    if "ابتدای نازک" in normalized_phrase:
+        stages.append("early-finishing")
     if "نازک" in phrase or "نما" in phrase:
-        stages.extend(["early-finishing", "finishing"])
-    if "پایان" in phrase or "تحویل" in phrase:
+        stages.append("finishing" if role == "execute" else "early-finishing")
+    if "پایان" in phrase or "تحویل" in phrase or "ظریف" in phrase:
         stages.append("completion")
 
     return ordered_unique(stages)
@@ -203,7 +243,7 @@ def parse_stage_timing(raw: str) -> dict[str, list[str]]:
         label, phrase = part.split(":", 1)
         role = next((value for key, value in role_map.items() if key in label), None)
         if role:
-            timing[role] = map_stage_phrase(phrase)
+            timing[role] = map_stage_phrase(phrase, role)
     return timing
 
 
@@ -316,7 +356,6 @@ export type StageSlug =
   | "structure"
   | "wall-building"
   | "plaster"
-  | "installations"
   | "early-finishing"
   | "finishing"
   | "completion";
@@ -354,13 +393,15 @@ export const TAXONOMY_SUBCATEGORIES = TAXONOMY_CATEGORIES.flatMap(
 );
 
 export const TAXONOMY_STAGE_RECONCILIATION = [
-  {{ sourcePhase: "طراحی و اخذ مجوزها", stageSlugs: ["pre-construction"] }},
-  {{ sourcePhase: "گودبرداری و تجهیز کارگاه", stageSlugs: ["demolition"] }},
-  {{ sourcePhase: "فونداسیون و اسکلت", stageSlugs: ["foundation", "structure"] }},
-  {{ sourcePhase: "سفت‌کاری", stageSlugs: ["wall-building", "plaster"] }},
-  {{ sourcePhase: "تاسیسات", stageSlugs: ["installations"] }},
-  {{ sourcePhase: "نازک‌کاری و نما", stageSlugs: ["early-finishing", "finishing"] }},
-  {{ sourcePhase: "تحویل و پایان‌کار", stageSlugs: ["completion"] }},
+  {{ sourcePhase: "پیش از اخذ جواز", stageSlugs: ["pre-construction"] }},
+  {{ sourcePhase: "تخریب و گودبرداری", stageSlugs: ["demolition"] }},
+  {{ sourcePhase: "فونداسیون", stageSlugs: ["foundation"] }},
+  {{ sourcePhase: "اسکلت بندی", stageSlugs: ["structure"] }},
+  {{ sourcePhase: "دیوارچینی و سفت کاری", stageSlugs: ["wall-building"] }},
+  {{ sourcePhase: "گچ و خاک و تاسیسات", stageSlugs: ["plaster"] }},
+  {{ sourcePhase: "ابتدای نازک کاری", stageSlugs: ["early-finishing"] }},
+  {{ sourcePhase: "نازک کاری و نما", stageSlugs: ["finishing"] }},
+  {{ sourcePhase: "ظریف کاری و پایان کار", stageSlugs: ["completion"] }},
 ] as const;
 
 export const TAXONOMY_CATEGORY_RECONCILIATION = [

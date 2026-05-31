@@ -53,7 +53,7 @@ export function ActiveSubcategoriesInStage({
 
                 return (
                   <Link
-                    key={item.subcategory.id}
+                    key={`${group.parent.slug}-${item.subcategory.slug}`}
                     href={`/suppliers/${group.parent.slug}/${item.subcategory.slug}/`}
                     title={roleLabel}
                     className="category-pill gap-2"

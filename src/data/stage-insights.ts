@@ -33,7 +33,8 @@ export const STAGE_ROUTE_ALIASES: Record<string, MainStageId> = {
   "design-permit": "pre-construction",
   "demolition-excavation": "demolition",
   masonry: "wall-building",
-  mep: "installations",
+  installations: "plaster",
+  mep: "plaster",
   "final-work": "completion",
 };
 
