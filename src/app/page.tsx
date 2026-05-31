@@ -723,6 +723,9 @@ export default function Home() {
                   سریع‌تر بررسی و پیگیری کنند.
                 </p>
               </div>
+              <div className="hero-visual-slot">
+                <HeroMapVisual />
+              </div>
               <div className="hero-actions">
                 <Link href="#demo" className="marketing-cta marketing-cta--primary">
                   مشاهده دمو
@@ -731,10 +734,6 @@ export default function Home() {
                   چرا پرشین‌سازه؟
                 </Link>
               </div>
-            </div>
-
-            <div className="hero-visual-slot">
-              <HeroMapVisual />
             </div>
           </div>
         </div>
