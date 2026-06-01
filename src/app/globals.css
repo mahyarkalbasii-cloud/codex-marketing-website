@@ -11832,3 +11832,32 @@ html.brand-palette body main section#plans article.pricing-card[data-plan-card="
     transform: scale(1.55);
   }
 }
+
+/* ==========================================================================
+   Flat homepage background (#EDE6D7)
+   The whole homepage uses a single flat background color, except the audience
+   section (#audiences) — which presents the construction stages ("مراحل ساخت")
+   and the sales types ("انواع فروش") — and therefore keeps its own surface.
+   Scoped to `.home-sections` so other pages are unaffected.
+   ========================================================================== */
+html main.home-sections,
+html .home-sections.behance-background {
+  background: #EDE6D7 !important;
+  background-color: #EDE6D7 !important;
+  background-image: none !important;
+}
+
+html .home-sections > #hero.hero-section,
+html .home-sections > :is(
+  .section-gradient-problem,
+  .section-gradient-solution,
+  .section-gradient-how,
+  .section-gradient-sales,
+  .section-gradient-pricing,
+  .section-gradient-faq,
+  .section-gradient-demo
+) {
+  background: #EDE6D7 !important;
+  background-color: #EDE6D7 !important;
+  background-image: none !important;
+}
