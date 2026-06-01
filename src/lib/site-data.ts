@@ -78,27 +78,27 @@ export const site = {
 };
 
 export const authLinks = {
-  login: "/login",
-  signup: "/signup",
+  login: "/login/",
+  signup: "/signup/",
 };
 
 export const navItems = [
-  { label: "محصول", href: "/features" },
-  { label: "اشتراک‌ها", href: "/#plans" },
+  { label: "محصول", href: "/features/" },
+  { label: "اشتراک‌ها", href: "/subscriptions/" },
   { label: "آموزش", href: "/#how-it-works" },
   { label: "درباره ما", href: "/about/" },
   { label: "تماس با ما", href: "/contact/" },
 ];
 
 export const seoPages = [
-  { title: "ویژگی‌ها", href: "/features" },
+  { title: "ویژگی‌ها", href: "/features/" },
   { title: "اشتراک‌ها", href: "/subscriptions/" },
   { title: "درباره ما", href: "/about/" },
   { title: "تماس با ما", href: "/contact/" },
-  { title: "سوالات متداول", href: "/faq" },
-  { title: "پروژه‌های ساختمانی تهران", href: "/cities/tehran" },
-  { title: "پروژه‌های ساختمانی کرج", href: "/cities/karaj" },
-  { title: "پروژه‌های ساختمانی لواسان", href: "/cities/lavasan" },
+  { title: "سوالات متداول", href: "/faq/" },
+  { title: "پروژه‌های ساختمانی تهران", href: "/cities/tehran/" },
+  { title: "پروژه‌های ساختمانی کرج", href: "/cities/karaj/" },
+  { title: "پروژه‌های ساختمانی لواسان", href: "/cities/lavasan/" },
 ];
 
 export const pillars = [
@@ -317,25 +317,25 @@ export const cities = [
 export const featurePages = [
   {
     title: "نقشه پروژه‌ها",
-    href: "/features#map",
+    href: "/features/#map",
     description:
       "بازار پراکنده پروژه‌های ساختمانی را روی یک نمای قابل فهم ببینید.",
   },
   {
     title: "فیلتر مرحله ساخت",
-    href: "/features#filters",
+    href: "/features/#filters",
     description:
       "فرصت‌ها را بر اساس مرحله، شهر، مقیاس و تناسب فروش محدود کنید.",
   },
   {
     title: "CRM سبک فروش پروژه‌ای",
-    href: "/features#crm",
+    href: "/features/#crm",
     description:
       "تماس‌ها، پیامک‌ها، وضعیت فرصت و پیگیری بعدی را ثبت کنید.",
   },
   {
     title: "AI تصمیم‌یار",
-    href: "/features#ai",
+    href: "/features/#ai",
     description:
       "از خلاصه پروژه، اولویت‌بندی و پیشنهاد اقدام بعدی کمک بگیرید.",
   },

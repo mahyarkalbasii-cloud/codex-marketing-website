@@ -19,6 +19,7 @@ import {
   stageLinks,
 } from "@/data/taxonomy-helpers";
 import { CategoryLayout } from "@/layouts/CategoryLayout";
+import { routeOgImage } from "@/lib/og-metadata";
 import { absoluteUrl } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   );
 
   return {
-    title: `${subcategory.faTitle} | ${category.faTitle}`,
+    title: { absolute: `${subcategory.faTitle} | ${category.faTitle}` },
     description,
     alternates: { canonical: canonicalPath },
     openGraph: {
@@ -64,6 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: absoluteUrl(canonicalPath),
       locale: "fa_IR",
       type: "article",
+      images: routeOgImage(`/suppliers/${category.slug}/`),
     },
   };
 }

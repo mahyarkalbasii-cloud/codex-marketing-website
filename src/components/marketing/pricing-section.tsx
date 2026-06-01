@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type CSSProperties,
@@ -174,8 +173,6 @@ const pricingCopy = {
     coverage: "پوشش بازار",
     from: "از",
     currency: "تومان",
-    whatsappMessage: (plan: string, duration: string) =>
-      `علاقمندم به پلن ${plan} (${duration}) پرشین‌سازه`,
   },
 } as const;
 
@@ -186,9 +183,6 @@ const axisTickLabels: Record<PlanId, string> = {
   taban: "تا ۷۰۰ متر",
   "taban-plus": "+۷۰۰ متر",
 };
-// TODO: Replace 98TODO with PersianSaze WhatsApp Business number before launch.
-const WHATSAPP_NUMBER = "98TODO";
-
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -227,20 +221,6 @@ function getVerticalAxisPosition(ratio: number) {
   const operator = offset < 0 ? "-" : "+";
 
   return `calc(${ratio * 100}% ${operator} ${Math.abs(offset).toFixed(3)}rem)`;
-}
-
-function getWhatsappHref(
-  plan: PricingPlan,
-  duration: Duration,
-  durationById: Record<Duration, (typeof durations)[number]>,
-  locale: Locale,
-) {
-  const message = pricingCopy[locale].whatsappMessage(
-    plan.name,
-    durationById[duration].label,
-  );
-
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 function PricingCoverage({
@@ -310,7 +290,6 @@ function PricingCoverage({
 function PricingPlanCard({
   plan,
   duration,
-  durationById,
   isActive,
   isPulsing,
   cardDelay,
@@ -318,7 +297,6 @@ function PricingPlanCard({
 }: {
   plan: PricingPlan;
   duration: Duration;
-  durationById: Record<Duration, (typeof durations)[number]>;
   isActive: boolean;
   isPulsing: boolean;
   cardDelay: string;
@@ -402,9 +380,7 @@ function PricingPlanCard({
       </div>
 
       <Link
-        href={getWhatsappHref(plan, duration, durationById, locale)}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={`/subscriptions/${plan.id}/`}
         className={cn(
           buttonVariants({ variant: "default" }),
           "pricing-plan-cta mt-auto w-full",
@@ -421,14 +397,6 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
   const plans = pricingPlans;
   const durationOptions = durations;
   const tickLabels = axisTickLabels;
-  const durationById = useMemo(
-    () =>
-      durationOptions.reduce(
-        (result, item) => ({ ...result, [item.id]: item }),
-        {} as Record<Duration, (typeof durations)[number]>,
-      ),
-    [durationOptions],
-  );
   const copy = pricingCopy[locale];
   const [duration, setDuration] = useState<Duration>("12");
   const [activePlanIndex, setActivePlanIndex] = useState<number | null>(null);
@@ -800,7 +768,6 @@ export function PricingSection({ locale = "fa" }: { locale?: Locale }) {
               key={plan.id}
               plan={plan}
               duration={duration}
-              durationById={durationById}
               isActive={activePlanIndex === index}
               isPulsing={pulsingPlan === plan.id}
               cardDelay={plan.featured ? "1120ms" : `${760 + index * 120}ms`}
