@@ -16,6 +16,8 @@ type DemoFormState = {
   plan: string;
 };
 
+type DemoFormError = "validation" | "submission";
+
 const initialState: DemoFormState = {
   name: "",
   phone: "",
@@ -30,28 +32,32 @@ function persistLocalRequest(request: DemoFormState) {
   }
 
   const key = "persiansaze-demo-requests";
-  const current = window.localStorage.getItem(key);
-  let parsed: unknown[] = [];
+  try {
+    const current = window.localStorage.getItem(key);
+    let parsed: unknown[] = [];
 
-  if (current) {
-    try {
-      const stored = JSON.parse(current);
-      parsed = Array.isArray(stored) ? stored : [];
-    } catch {
-      parsed = [];
+    if (current) {
+      try {
+        const stored = JSON.parse(current);
+        parsed = Array.isArray(stored) ? stored : [];
+      } catch {
+        parsed = [];
+      }
     }
-  }
 
-  window.localStorage.setItem(
-    key,
-    JSON.stringify([
-      ...parsed,
-      {
-        ...request,
-        createdAt: new Date().toISOString(),
-      },
-    ]),
-  );
+    window.localStorage.setItem(
+      key,
+      JSON.stringify([
+        ...parsed,
+        {
+          ...request,
+          createdAt: new Date().toISOString(),
+        },
+      ]),
+    );
+  } catch {
+    // Local persistence is only a backup; it should never block the fallback UI.
+  }
 }
 
 export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
@@ -65,6 +71,8 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
     success:
       "درخواست دمو ثبت شد. تیم فروش برای هماهنگی زمان دمو پیام تأیید ارسال می‌کند.",
     error: "لطفاً هر چهار فیلد فرم را کامل کنید.",
+    submitError:
+      "درخواست آنلاین ثبت نشد. برای هماهنگی دمو با فروش تماس بگیرید:",
   };
   const { suppliers } = getSiteContent(locale);
   const supplierOptions = useMemo(
@@ -77,6 +85,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
   );
   const [form, setForm] = useState<DemoFormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorKind, setErrorKind] = useState<DemoFormError>("validation");
 
   useEffect(() => {
     const plan = new URLSearchParams(window.location.search).get("plan");
@@ -94,6 +103,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
     setForm((current) => ({ ...current, [field]: value }));
     if (status !== "idle") {
       setStatus("idle");
+      setErrorKind("validation");
     }
   };
 
@@ -101,6 +111,7 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
     event.preventDefault();
 
     if (!form.name || !form.phone || !form.company || !form.supplier) {
+      setErrorKind("validation");
       setStatus("error");
       return;
     }
@@ -108,26 +119,27 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
     setStatus("submitting");
 
     try {
-      const endpoint = process.env.NEXT_PUBLIC_DEMO_REQUEST_ENDPOINT;
+      const endpoint = process.env.NEXT_PUBLIC_DEMO_REQUEST_ENDPOINT?.trim();
 
-      if (endpoint) {
-        const response = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        });
+      if (!endpoint) {
+        throw new Error("Demo request endpoint is not configured");
+      }
 
-        if (!response.ok) {
-          throw new Error("Demo request failed");
-        }
-      } else {
-        persistLocalRequest(form);
-        await new Promise((resolve) => window.setTimeout(resolve, 350));
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Demo request failed");
       }
 
       setStatus("success");
       setForm((current) => ({ ...initialState, plan: current.plan }));
     } catch {
+      persistLocalRequest(form);
+      setErrorKind("submission");
       setStatus("error");
     }
   };
@@ -211,7 +223,15 @@ export function DemoRequestForm({ locale = "fa" }: { locale?: Locale }) {
 
       {status === "error" ? (
         <p className="rounded-2xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold leading-6 text-red-700">
-          {copy.error}
+          {errorKind === "validation" ? copy.error : copy.submitError}
+          {errorKind === "submission" ? (
+            <>
+              {" "}
+              <a href="tel:+982175425000" className="underline underline-offset-4">
+                ۰۲۱-۷۵۴۲۵۰۰۰۰
+              </a>
+            </>
+          ) : null}
         </p>
       ) : null}
     </form>
